@@ -1,0 +1,48 @@
+{
+	"manifest_version": 3,
+	"version": "1.0",
+	"name": "Extension - Get Started",
+	"description": "Extension - Get Started",
+	"author": "Vanden Bergh Gaëtan",
+	"action": {
+		"default_title": "Extension - Get Started",
+		"default_popup": "popup/index.html",
+		"default_icon": "images/icon128.png"
+	},
+	"icons": {
+		"16": "images/icon128.png",
+		"32": "images/icon128.png",
+		"48": "images/icon128.png",
+		"128": "images/icon128.png"
+	},
+	"background": {
+		"service_worker": "background/index.js",
+		"type": "module"
+	},
+	"options_ui": {
+		"page": "options/index.html",
+		"open_in_tab": true
+	},
+	"content_scripts": [
+		{
+			"matches": [
+				"*://*/*"
+			],
+			"js": [
+				"content/index.js"
+			],
+			"run_at": "document_start"
+		}
+	],
+	"web_accessible_resources": [
+		{
+			"resources": [],
+			"matches": []
+		}
+	],
+	"permissions": [],
+	"host_permissions": [
+		"http://*/*",
+		"https://*/*"
+	]
+}
