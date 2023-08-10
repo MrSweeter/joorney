@@ -1,19 +1,20 @@
 {
 	"manifest_version": 3,
-	"version": "1.0",
-	"name": "Extension - Get Started",
-	"description": "Extension - Get Started",
+	"version": "0.0.1",
+	"name": "Odoo - Quality of Life & Fun",
+	"description": "Odoo - Quality of Life & Fun",
 	"author": "Vanden Bergh Gaëtan",
+	"homepage_url": "https://github.com/MrSweeter/odoo-qol",
 	"action": {
-		"default_title": "Extension - Get Started",
+		"default_title": "Odoo - QoL & Fun",
 		"default_popup": "popup/index.html",
-		"default_icon": "images/icon128.png"
+		"default_icon": "images/icon_c_128.png"
 	},
 	"icons": {
-		"16": "images/icon128.png",
-		"32": "images/icon128.png",
-		"48": "images/icon128.png",
-		"128": "images/icon128.png"
+		"16": "images/icon_128.png",
+		"32": "images/icon_128.png",
+		"48": "images/icon_128.png",
+		"128": "images/icon_128.png"
 	},
 	"background": {
 		"service_worker": "background/index.js",
@@ -29,6 +30,15 @@
 				"*://*/*"
 			],
 			"js": [
+				"utils/confetti_qol.js",
+				"content/src/task/task_setup.js",
+				"content/src/task/assign_me.js",
+				"content/src/save_knowledge.js",
+				"content/src/awesome_loading_large.js",
+				"content/src/awesome_loading_small.js",
+				"content/src/task/starring_effect.js",
+				"content/src/awesome_style.js",
+				"content/src/unfocus_app.js",
 				"content/index.js"
 			],
 			"run_at": "document_start"
@@ -40,7 +50,13 @@
 			"matches": []
 		}
 	],
-	"permissions": [],
+	"permissions": [
+		"tabs",
+		"webNavigation",
+		"cookies",
+		"storage",
+		"contextMenus"
+	],
 	"host_permissions": [
 		"http://*/*",
 		"https://*/*"
