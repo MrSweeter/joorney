@@ -7,6 +7,7 @@ window.onload = async () => {
     loadSaveKnowledge(configuration);
     loadAwesomeStyle(configuration);
     loadUnfocusApp(configuration);
+    loadSmartLogin(configuration);
 
     loadTabFeatures(configuration);
 

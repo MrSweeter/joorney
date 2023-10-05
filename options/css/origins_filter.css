@@ -1,0 +1,16 @@
+#qol_origins_filter_type {
+    text-decoration: underline;
+    text-decoration-color: var(--qol-secondary);
+    cursor: pointer;
+    transition: all 200ms ease-out;
+}
+
+#qol_origins_filter_table.qol_blacklist input[type='checkbox']:checked {
+    background-color: red !important;
+    border-color: darkred !important;
+}
+
+#qol_origins_filter_table.qol_whitelist input[type='checkbox']:checked {
+    background-color: green !important;
+    border-color: darkgreen !important;
+}

@@ -42,6 +42,16 @@ export const defaultUnfocusAppSetting = {
     unfocusAppOrigins: {},
 };
 
+export const defaultSmartLoginRunbotSetting = {
+    adminDebugLoginRunbotEnabled: false,
+    adminDebugLoginRunbotLimitedOrigins: [
+        'https://runbot.odoo.com',
+        'regex://.*\\.runbot\\d{3}\\.odoo\\.com',
+    ],
+    impersonateLoginRunbotEnabled: false,
+    impersonateLoginRunbotLimitedOrigins: ['regex://.*\\.runbot\\d{3}\\.odoo\\.com'],
+};
+
 export const QOL_DEFAULT_CONFIGURATION = {
     ...defaultThemeSwitchSetting,
     ...defaultAwesomeLoadingSetting,
@@ -50,4 +60,5 @@ export const QOL_DEFAULT_CONFIGURATION = {
     ...defaultOriginsFilterSetting,
     ...defaultAwesomeStyleSetting,
     ...defaultUnfocusAppSetting,
+    ...defaultSmartLoginRunbotSetting,
 };

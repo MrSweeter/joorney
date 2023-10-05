@@ -9,6 +9,8 @@ const features_enabled_configuration = {
     originsFilterIsBlacklist: false,
     awesomeStyleEnabled: false,
     unfocusAppEnabled: false,
+    adminDebugLoginRunbotEnabled: false,
+    impersonateLoginRunbotEnabled: false,
 };
 
 async function loadTabFeatures(configuration) {

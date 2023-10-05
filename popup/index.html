@@ -21,6 +21,7 @@
         <script src="src/tab_features.js"></script>
         <script src="src/awesome_style.js"></script>
         <script src="src/unfocus_app.js"></script>
+        <script src="src/runbot_smart_login.js"></script>
         <script src="index.js"></script>
     </head>
 
@@ -28,6 +29,27 @@
         <button id="popupIcon" class="btn btn-floating">
             <i class="fa-solid fa-wrench" title="Options"></i>
         </button>
+
+        <div class="col-12 d-flex align-items-center">
+            <label title="Runbot limited features">
+                <div class="icon-wrapper no-input limited-feature">
+                    <!--<i class="fa-brands fa-bots"></i>-->
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+            </label>
+            <label title="[Limited Feature] Admin-Debug Login" for="adminDebugLoginRunbotFeature" class="ms-2">
+                <input id="adminDebugLoginRunbotFeature" type="checkbox" />
+                <div class="icon-wrapper-sm limited-feature">
+                    <i class="fa-solid fa-rocket"></i>
+                </div>
+            </label>
+            <label title="[Limited Feature] Impersonate Login" for="impersonateLoginRunbotFeature" class="ms-2">
+                <input id="impersonateLoginRunbotFeature" type="checkbox" />
+                <div class="icon-wrapper-sm limited-feature">
+                    <i class="fa-solid fa-people-arrows"></i>
+                </div>
+            </label>
+        </div>
 
         <div class="col-12 d-flex align-items-center">
             <label title="Task (project.task) features">

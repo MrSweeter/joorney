@@ -10,6 +10,9 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.css" rel="stylesheet" />
 
         <link href="./index.css" rel="stylesheet" />
+        <link href="./css/features.css" rel="stylesheet" />
+        <link href="./css/limited_features.css" rel="stylesheet" />
+        <link href="./css/origins_filter.css" rel="stylesheet" />
         <link href="./css/theme_switch.css" rel="stylesheet" />
         <link href="./css/awesome_loading.css" rel="stylesheet" />
         <link href="./css/task_setup.css" rel="stylesheet" />
@@ -41,6 +44,24 @@
 
         <pre id="qol-debug-configuration"></pre>
 
+        <!--#region Limited Features -->
+        <div class="pt-3 d-flex flex-wrap justify-content-center ">
+            <label title="[Limited Feature] Admin-Debug login on Runbot" for="qol_adminDebugLoginRunbot_limited_feature">
+                <input id="qol_adminDebugLoginRunbot_limited_feature" class="input-hide" type="checkbox" />
+                <div class="limited-feature-wrapper d-flex">
+                    <i class="qol-font-icon-size fa-regular me-2"></i>
+                    <p>Runbot/Admin-Debug Login</p>
+                </div>
+            </label>
+            <label title="[Limited Feature] Impersonate login on Runbot" for="qol_impersonateLoginRunbot_limited_feature">
+                <input id="qol_impersonateLoginRunbot_limited_feature" class="input-hide" type="checkbox" />
+                <div class="limited-feature-wrapper d-flex">
+                    <i class="qol-font-icon-size fa-regular me-2"></i>
+                    <p>Runbot/Impersonate Login</p>
+                </div>
+            </label>
+        </div>
+        <!--#endregion-->
         <!--#region Features -->
         <div class="pt-3 d-flex flex-wrap justify-content-center ">
             <label title="[Feature] Loading Fullscreen" for="qol_awesomeLoadingLarge_feature">

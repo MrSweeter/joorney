@@ -1,0 +1,75 @@
+.feature-wrapper {
+    background-color: var(--qol-primary-bg);
+    display: grid;
+    place-items: center;
+    border-radius: 21px;
+    border: solid 2px var(--qol-primary-bg);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0);
+    transition: all 200ms ease-out;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    margin: 2px;
+}
+
+/*https://fontawesome.com/icons/circle?f=classic&s=regular*/
+.feature-wrapper i::before {
+    content: '\f111';
+}
+
+.feature-wrapper:hover {
+    box-shadow: 0 0 6px var(--qol-secondary);
+}
+
+.feature-wrapper p {
+    color: var(--qol-primary);
+    transition: color 0.3s;
+    margin: 0;
+}
+
+input:checked + .feature-wrapper {
+    border: solid 2px var(--qol-secondary);
+}
+/*https://fontawesome.com/icons/circle-check?f=classic&s=solid*/
+input:checked + .feature-wrapper i::before {
+    content: '\f058';
+    font-weight: 900;
+    color: var(--qol-secondary);
+}
+
+input:disabled + .feature-wrapper {
+    opacity: 0.5;
+}
+
+.action-head {
+    width: 5%;
+}
+
+.icon-wrapper-head {
+    width: 3%;
+}
+
+.icon-wrapper {
+    display: grid;
+    place-items: center;
+}
+
+.icon-wrapper i {
+    color: var(--qol-primary);
+    font-size: 18px;
+}
+
+.double-fa {
+    font-size: 8px !important;
+    position: absolute !important;
+}
+
+.double-fa-mask {
+    font-size: 10px !important;
+    position: absolute !important;
+}
+
+.double-fa-bicolor {
+    color: whitesmoke !important;
+}

@@ -15,6 +15,7 @@ window.addEventListener('load', () => {
     appendSmallLoading(url);
     appendAwesomeStyle(url);
     appendUnfocusApp(url);
+    appendSmartLogin(url);
 });
 
 // Experimental: This is an experimental technology - firefox not compatible
@@ -88,6 +89,26 @@ async function authorizeFeature(featureName, origin) {
     }
 
     return true;
+}
+
+async function authorizeLimitedFeature(featureName, origin) {
+    configKey = `${featureName}LimitedOrigins`;
+    const configuration = await chrome.storage.sync.get({
+        [configKey]: [],
+    });
+
+    // Check URL
+    if (configuration[configKey].includes(origin)) {
+        return true;
+    }
+
+    // Check Regex
+    const activeRegex = configuration[configKey]
+        .filter((o) => o.startsWith('regex://'))
+        .map((o) => new RegExp(o.replace('regex://', '')));
+    const validRegex = activeRegex.some((r) => r.test(origin));
+
+    return validRegex;
 }
 
 //#endregion

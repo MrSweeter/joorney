@@ -3,6 +3,7 @@
     --qol-primary-bg: #e5e5e5;
     --qol-secondary: #fca311;
     --qol-secondary-bg: #e5e5e5;
+    --qol-limited-secondary: #a75000;
 }
 
 .qol-body-background {
@@ -61,7 +62,7 @@ input:checked + .icon-wrapper {
     cursor: default;
     background-color: var(--qol-primary-bg) !important;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0) !important;
-    border-radius: 4px !important;
+    border-radius: 4px;
     border: 1px solid var(--qol-primary-bg) !important;
 }
 
@@ -146,4 +147,29 @@ input:checked.whitelist + .icon-wrapper-tab i {
 
 input:disabled + .icon-wrapper-tab {
     cursor: default;
+}
+
+.limited-feature.icon-wrapper-sm i {
+    color: var(--qol-limited-secondary);
+    font-size: 20px;
+    transition: color 0.3s;
+}
+
+input:checked + .limited-feature.icon-wrapper-sm i {
+    color: var(--qol-secondary-bg);
+}
+input:checked + .limited-feature.icon-wrapper-sm {
+    background-color: var(--qol-limited-secondary);
+}
+
+.limited-feature.icon-wrapper-sm {
+    border: 1px solid var(--qol-limited-secondary);
+}
+
+.limited-feature.icon-wrapper-sm:hover {
+    box-shadow: 0 0 4px var(--qol-limited-secondary);
+}
+
+.limited-feature {
+    border-radius: 48px !important;
 }

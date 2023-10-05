@@ -5,6 +5,7 @@ import { load as loadKnowledge } from './src/save_knowledge.js';
 import { load as loadOriginsFilter } from './src/origins_filter.js';
 import { load as loadAwesomeStyle } from './src/awesome_style.js';
 import { load as loadUnfocusApp } from './src/unfocus_app.js';
+import { load as loadSmartLogin } from './src/runbot_smart_login.js';
 import { initImportExport } from './import_export.js';
 import { StorageSync } from '../utils/browser.js';
 import { QOL_DEFAULT_CONFIGURATION } from '../utils/feature_default_configuration.js';
@@ -21,6 +22,7 @@ async function onDOMContentLoaded() {
     loadKnowledge();
     loadAwesomeStyle();
     loadUnfocusApp();
+    loadSmartLogin();
     initImportExport();
 
     const searchParams = new URLSearchParams(window.location.search);
