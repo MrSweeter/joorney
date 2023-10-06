@@ -2,23 +2,14 @@
 
 ---
 
-### Features list
-
--   Assign Me button for 'project.task' (form).
--   Save Knowledge article during edition without leaving the page.
--   Switch Odoo Theme automatically.
--   Stars Effect for 'project.task.priority' (form).
--   Awesome Loading (Large & Small).
--   Awesome Style
--   Unfocus App
-
----
-
 ## Installation Guides
 
 ### On Chrome:
 
--   Clone the repo anywhere
+-   Clone the repo anywhere (with a terminal)
+    -   git clone https://github.com/MrSweeter/vigilant-potato.git odoo-qol
+    -   cd odoo-qol
+    -   git checkout initial-version
 -   Open page chrome://extensions
 -   Activate developer mode
 -   Load unpacked extension
@@ -40,56 +31,3 @@ Just don't forget the few points below:
 -   **Stay consistent**: If your feature must be present in multiple contexts (ex: background + options), then keep the same file name for each context.
 -   **Keep it accessible**: This extension can be used by non-tech or people outside the Support,
     hence every technical / invasive features should be hidden/disabled by default.
-
----
-
-## Technical
-
-**Features names**:
-
--   originsFilter (whitelist management) not a real feature
-
--   `awesomeLoadingLarge`
--   `awesomeLoadingSmall`
--   `assignMeTask`
--   `starringTaskEffect`
--   `saveKnowledge`
--   `themeSwitch`
--   `awesomeStyle`
--   `unfocusApp`
-
-**Contextual Features**:
-
--   Background
-    -   originsFilter (contextMenus)
-    -   themeSwitch
--   Content
-    -   assignMeTask
-    -   starringTaskEffect
-    -   awesomeLoadingLarge
-    -   awesomeLoadingSmall
-    -   awesomeStyle
-    -   saveKnowledge
-    -   unfocusApp
--   Options
-    -   originsFilter
-        -   assignMeTask
-        -   starringTaskEffect
-        -   awesomeLoadingLarge
-        -   awesomeLoadingSmall
-        -   awesomeStyle
-        -   saveKnowledge
-        -   themeSwitch
-        -   unfocusApp
-    -   awesomeLoadingLarge (dedicated UI)
-    -   awesomeLoadingSmall(dedicated UI)
--   Popup
-    -   originsFilter
-    -   assignMeTask
-    -   starringTaskEffect
-    -   awesomeLoadingLarge
-    -   awesomeLoadingSmall
-    -   awesomeStyle
-    -   saveKnowledge
-    -   themeSwitch
-    -   unfocusApp
