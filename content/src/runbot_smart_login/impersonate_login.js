@@ -4,6 +4,16 @@ function loginWithForm(login) {
     document.getElementsByClassName('oe_login_form')[0].submit();
 }
 
+function isRunbotSelectorPageWithLogin(url) {
+    return url.pathname === '/web/database/selector' && url.hash === '#qol-auto-login';
+}
+
+function updateSelectorLink() {
+    Array.from(document.querySelectorAll('div.list-group-item a')).forEach((e) => {
+        e.href = getAdminDebugURL(e.href);
+    });
+}
+
 async function appendRunbotLogin(currentUrl) {
     const url = new URL(currentUrl);
 
@@ -11,6 +21,12 @@ async function appendRunbotLogin(currentUrl) {
         'adminDebugLoginRunbot',
         url.origin
     );
+
+    if (authorizedSideFeature && isRunbotSelectorPageWithLogin(url)) {
+        updateSelectorLink();
+        return;
+    }
+
     if (authorizedSideFeature && url.hash === '#qol-auto-login') {
         return loginWithForm('admin');
     }

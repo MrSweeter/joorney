@@ -26,7 +26,7 @@ async function appendRunbotAdminDebugLogin(currentUrl) {
 function getAdminDebugURL(href) {
     const url = new URL(href);
     url.pathname = '/web/login';
-    url.search = 'debug=1';
+    url.search = url.search ? `${url.search}&debug=1` : 'debug=1';
     url.hash = 'qol-auto-login';
     return url.toString();
 }
