@@ -7,8 +7,11 @@
 
 //#region Navigation Event
 
-window.addEventListener('load', () => {
+window.addEventListener('load', async () => {
     const url = window.location.href;
+
+    await updateTabState(url);
+
     checkTaskPage(url);
     checkKnowledge(url);
     appendLargeLoading(url);
@@ -58,42 +61,31 @@ function getActiveFeatureOrigins(originsFilterOrigins, featureName) {
 }
 
 async function authorizeFeature(featureName, origin) {
+    let { offs } = await chrome.storage.local.get({ offs: [] });
+    if (offs.includes(origin)) {
+        return false;
+    }
+
     const { originsFilterOrigins, originsFilterIsBlacklist } = await chrome.storage.sync.get({
         originsFilterOrigins: {},
         originsFilterIsBlacklist: false,
     });
-    const isWhitelist = !originsFilterIsBlacklist;
 
     const activeOrigins = getActiveFeatureOrigins(originsFilterOrigins, featureName);
     const activeRegex = activeOrigins
         .filter((o) => o.startsWith('regex://'))
         .map((o) => new RegExp(o.replace('regex://', '')));
 
-    // Check URL
-    const blacklistBlock = originsFilterIsBlacklist && activeOrigins.includes(origin);
-    if (blacklistBlock && activeRegex.length == 0) {
+    const originExist = activeOrigins.includes(origin) || activeRegex.some((r) => r.test(origin));
+
+    if (originsFilterIsBlacklist && originExist) {
         return false;
     }
 
-    if (isWhitelist && activeOrigins.includes(origin)) {
-        return true;
-    }
-    // Check Regex
-    const validRegex = activeRegex.some((r) => r.test(origin));
-
-    if (originsFilterIsBlacklist && validRegex) {
-        return false;
-    }
-
-    if (isWhitelist && validRegex) {
+    if (!originsFilterIsBlacklist && originExist) {
         return true;
     }
 
-    if (blacklistBlock) {
-        return false;
-    }
-
-    // If blacklist enabled, default authorization is true else false
     return originsFilterIsBlacklist;
 }
 

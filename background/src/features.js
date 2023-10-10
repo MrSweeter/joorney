@@ -1,3 +1,5 @@
+import { StorageLocal } from '../../utils/browser.js';
+
 function getActiveFeatureOrigins(originsFilterOrigins, featureName) {
     const enabledOrigins = Object.entries(originsFilterOrigins)
         .filter((origin) => origin[1][featureName] === true)
@@ -6,6 +8,11 @@ function getActiveFeatureOrigins(originsFilterOrigins, featureName) {
 }
 
 export async function authorizeFeature(featureName, origin) {
+    let { offs } = await StorageLocal.get({ offs: [] });
+    if (offs.includes(origin)) {
+        return false;
+    }
+
     const { originsFilterOrigins, originsFilterIsBlacklist } = await chrome.storage.sync.get({
         originsFilterOrigins: {},
         originsFilterIsBlacklist: false,
@@ -16,30 +23,15 @@ export async function authorizeFeature(featureName, origin) {
         .filter((o) => o.startsWith('regex://'))
         .map((o) => new RegExp(o.replace('regex://', '')));
 
-    // Check URL
-    const blacklistBlock = originsFilterIsBlacklist && activeOrigins.includes(origin);
-    if (blacklistBlock && activeRegex.length == 0) {
+    const originExist = activeOrigins.includes(origin) || activeRegex.some((r) => r.test(origin));
+
+    if (originsFilterIsBlacklist && originExist) {
         return false;
     }
 
-    if (isWhitelist && activeOrigins.includes(origin)) {
-        return true;
-    }
-    // Check Regex
-    const validRegex = activeRegex.some((r) => r.test(origin));
-
-    if (originsFilterIsBlacklist && validRegex) {
-        return false;
-    }
-
-    if (isWhitelist && validRegex) {
+    if (!originsFilterIsBlacklist && originExist) {
         return true;
     }
 
-    if (blacklistBlock) {
-        return false;
-    }
-
-    // If blacklist enabled, default authorization is true else false
     return originsFilterIsBlacklist;
 }

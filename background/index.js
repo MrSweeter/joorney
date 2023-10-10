@@ -3,6 +3,7 @@ import { QOL_DEFAULT_CONFIGURATION } from '../utils/feature_default_configuratio
 import { checkVersion } from './src/check_version.js';
 import { switchThemeIfNeeded } from './src/theme_switch.js';
 import { getFinalRunbotURL } from './src/runbot_smart_login.js';
+import { updateTabState } from './src/keyboard_shortcut.js';
 
 // On page # path change
 WebNavigation.onReferenceFragmentUpdated.addListener((e) => {
@@ -22,6 +23,7 @@ Runtime.onInstalled.addListener(async (details) => {
 
 const AVAILABLE_ACTION_MESSAGES_HANDLERS = {
     GET_FINAL_RUNBOT_URL: getFinalRunbotURL,
+    UPDATE_EXT_STATUS: updateTabState,
 };
 
 // Triggers when a message is received (from the content script)
