@@ -11,30 +11,35 @@ export async function authorizeFeature(featureName, origin) {
         originsFilterIsBlacklist: false,
     });
 
-    // Check URL
     const activeOrigins = getActiveFeatureOrigins(originsFilterOrigins, featureName);
-
-    if (originsFilterIsBlacklist && activeOrigins.includes(origin)) {
-        return false;
-    }
-
-    if (!originsFilterIsBlacklist && !activeOrigins.includes(origin)) {
-        return false;
-    }
-
-    // Check Regex
     const activeRegex = activeOrigins
         .filter((o) => o.startsWith('regex://'))
         .map((o) => new RegExp(o.replace('regex://', '')));
+
+    // Check URL
+    const blacklistBlock = originsFilterIsBlacklist && activeOrigins.includes(origin);
+    if (blacklistBlock && activeRegex.length == 0) {
+        return false;
+    }
+
+    if (isWhitelist && activeOrigins.includes(origin)) {
+        return true;
+    }
+    // Check Regex
     const validRegex = activeRegex.some((r) => r.test(origin));
 
     if (originsFilterIsBlacklist && validRegex) {
         return false;
     }
 
-    if (!originsFilterIsBlacklist && !validRegex) {
+    if (isWhitelist && validRegex) {
+        return true;
+    }
+
+    if (blacklistBlock) {
         return false;
     }
 
-    return true;
+    // If blacklist enabled, default authorization is true else false
+    return originsFilterIsBlacklist;
 }

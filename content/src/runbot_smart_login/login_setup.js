@@ -5,10 +5,13 @@ async function appendSmartLogin(urlStr) {
             impersonateLoginRunbotEnabled: false,
         });
 
+    let autologin = false;
     if (adminDebugLoginRunbotEnabled) {
         appendRunbotAdminDebugLogin(urlStr);
+        autologin = await checkAdminDebug(urlStr);
     }
-    if (impersonateLoginRunbotEnabled) {
+
+    if (!autologin && impersonateLoginRunbotEnabled) {
         appendRunbotLogin(urlStr);
     }
 }

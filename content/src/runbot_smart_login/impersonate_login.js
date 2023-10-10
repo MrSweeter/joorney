@@ -14,7 +14,7 @@ function updateSelectorLink() {
     });
 }
 
-async function appendRunbotLogin(currentUrl) {
+async function checkAdminDebug(currentUrl) {
     const url = new URL(currentUrl);
 
     const authorizedSideFeature = await authorizeLimitedFeature(
@@ -24,12 +24,17 @@ async function appendRunbotLogin(currentUrl) {
 
     if (authorizedSideFeature && isRunbotSelectorPageWithLogin(url)) {
         updateSelectorLink();
-        return;
+        return true;
     }
 
     if (authorizedSideFeature && url.hash === '#qol-auto-login') {
-        return loginWithForm('admin');
+        loginWithForm('admin');
+        return true;
     }
+}
+
+async function appendRunbotLogin(currentUrl) {
+    const url = new URL(currentUrl);
 
     const authorizedFeature = await authorizeLimitedFeature('impersonateLoginRunbot', url.origin);
     if (!authorizedFeature) return;
