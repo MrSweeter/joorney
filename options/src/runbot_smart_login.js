@@ -4,4 +4,5 @@ import { loadLimitedFeature } from './limited_features.js';
 export async function load() {
     await loadLimitedFeature('impersonateLoginRunbot', defaultSmartLoginRunbotSetting);
     await loadLimitedFeature('adminDebugLoginRunbot', defaultSmartLoginRunbotSetting);
+    await loadLimitedFeature('autoOpenRunbot', defaultSmartLoginRunbotSetting);
 }

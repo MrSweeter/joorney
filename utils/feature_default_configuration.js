@@ -50,6 +50,8 @@ export const defaultSmartLoginRunbotSetting = {
     ],
     impersonateLoginRunbotEnabled: false,
     impersonateLoginRunbotLimitedOrigins: ['regex://.*\\.runbot\\d{3}\\.odoo\\.com'],
+    autoOpenRunbotEnabled: false,
+    autoOpenRunbotLimitedOrigins: ['https://runbot.odoo.com'],
 };
 
 export const QOL_DEFAULT_CONFIGURATION = {

@@ -1,6 +1,10 @@
 export async function getFinalRunbotURL(request) {
-    const response = await fetch(request.href, {
-        method: 'HEAD',
-    });
-    return { url: response.url };
+    try {
+        const response = await fetch(request.href, {
+            method: 'HEAD',
+        });
+        return { url: response.url };
+    } catch (ex) {
+        return {};
+    }
 }

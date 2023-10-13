@@ -1,8 +1,9 @@
 async function appendSmartLogin(urlStr) {
-    const { adminDebugLoginRunbotEnabled, impersonateLoginRunbotEnabled } =
+    const { adminDebugLoginRunbotEnabled, impersonateLoginRunbotEnabled, autoOpenRunbotEnabled } =
         await chrome.storage.sync.get({
             adminDebugLoginRunbotEnabled: false,
             impersonateLoginRunbotEnabled: false,
+            autoOpenRunbotEnabled: false,
         });
 
     let autologin = false;
@@ -12,6 +13,10 @@ async function appendSmartLogin(urlStr) {
     }
 
     if (!autologin && impersonateLoginRunbotEnabled) {
-        appendRunbotLogin(urlStr);
+        await appendRunbotLogin(urlStr);
+    }
+
+    if (autoOpenRunbotEnabled && isRunbotPageWithAutoOpenHash(urlStr)) {
+        await autoOpenRunbot(urlStr);
     }
 }
