@@ -15,20 +15,17 @@ async function updateThemeSwitch(e) {
 }
 
 async function updateRenderThemeSwitch(checked) {
-    const themeSwitcher = document.getElementById('qol_theme_switch_switcher');
+    const themeModeSwitcher = document.getElementById('qol_theme_switch_mode_switcher');
 
-    const { themeSwitchDarkModeEnabled } = await chrome.storage.sync.get({
-        themeSwitchDarkModeEnabled: false,
+    const { themeSwitchMode } = await chrome.storage.sync.get({
+        themeSwitchMode: 'autoDark',
     });
 
-    const themeModeInput = document.getElementById('qol_theme_switch_input');
-    themeModeInput.checked = themeSwitchDarkModeEnabled;
-    themeModeInput.setAttribute('indeterminate', !checked);
-    themeModeInput.onchange = onThemeSwitchModeChange;
+    themeModeSwitcher.value = themeSwitchMode;
+    themeModeSwitcher.onchange = onThemeSwitchModeChange;
 
-    themeSwitcher.disabled = !checked;
-    themeModeInput.disabled = !checked;
-    themeSwitcher.style.opacity = checked ? 1 : 0.5;
+    themeModeSwitcher.disabled = !checked;
+    themeModeSwitcher.style.opacity = checked ? 1 : 0.5;
 }
 
 function onThemeSwitchModeChange(event) {
@@ -36,7 +33,7 @@ function onThemeSwitchModeChange(event) {
     const enabled = themeSwitchFeature.checked;
     if (enabled)
         chrome.storage.sync.set({
-            themeSwitchDarkModeEnabled: event.currentTarget.checked,
+            themeSwitchMode: event.currentTarget.value,
         });
     else event.preventDefault();
 }
