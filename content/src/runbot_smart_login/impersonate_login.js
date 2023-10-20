@@ -1,3 +1,5 @@
+const hashes = ['#qol-auto-login', '#qol-autoopen-login'];
+
 function loginWithForm(login) {
     document.getElementById('login').value = login;
     document.getElementById('password').value = login;
@@ -5,7 +7,7 @@ function loginWithForm(login) {
 }
 
 function isRunbotSelectorPageWithLogin(url) {
-    return url.pathname === '/web/database/selector' && url.hash === '#qol-auto-login';
+    return url.pathname === '/web/database/selector' && hashes.includes(url.hash);
 }
 
 function updateSelectorLink() {
@@ -17,17 +19,20 @@ function updateSelectorLink() {
 async function checkAdminDebug(currentUrl) {
     const url = new URL(currentUrl);
 
-    const authorizedSideFeature = await authorizeLimitedFeature(
+    const authorizedAdminDebugFeature = await authorizeLimitedFeature(
         'adminDebugLoginRunbot',
         url.origin
     );
 
-    if (authorizedSideFeature && isRunbotSelectorPageWithLogin(url)) {
+    const authorizedAutoOpenFeature = await authorizeLimitedFeature('autoOpenRunbot', url.origin);
+    const authorized = authorizedAdminDebugFeature || authorizedAutoOpenFeature;
+
+    if (authorized && isRunbotSelectorPageWithLogin(url)) {
         updateSelectorLink();
         return true;
     }
 
-    if (authorizedSideFeature && url.hash === '#qol-auto-login') {
+    if (authorized && hashes.includes(url.hash)) {
         loginWithForm('admin');
         return true;
     }

@@ -1,20 +1,152 @@
 :root {
-    --qol-primary: #13213c;
-    --qol-primary-bg: #e5e5e5;
-    --qol-secondary: #fca311;
-    --qol-secondary-bg: #e5e5e5;
-    --qol-limited-secondary: #a75000;
+    --qol-primary: #fca311;
+    --qol-primary-text: #13213c;
+    --odoo-primary: #714b67;
 }
 
 html,
 body {
     margin: 0;
+    color: var(--qol-primary-text);
 }
 
 body {
-    background-image: url('./assets/background.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color: var(--odoo-primary);
     min-height: 100vh;
+}
+
+.geometric-background {
+    background-image: url('./assets/background.png');
+    background-position: top;
+    background-size: 100% 100%;
+}
+
+/* https://www.odoo.com/page/brand-assets */
+.odoo {
+    color: var(--odoo-primary);
+}
+
+.text-primary {
+    color: var(--qol-primary) !important;
+}
+
+.navbar-qol-brand {
+    top: var(--mdb-navbar-padding-top);
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.background-amico {
+    opacity: 0.1;
+    z-index: -1;
+}
+
+.switch-feature {
+    cursor: pointer;
+}
+
+/* Feature Box */
+.feature-group-box {
+    border: solid 0.25rem var(--qol-primary-text);
+    border-radius: 0.5rem;
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: 0.5rem;
+}
+
+.feature-group-box.active {
+    border: solid 0.25rem var(--qol-primary);
+}
+
+.feature-box {
+    background-color: var(--qol-primary);
+    border-radius: 1rem;
+    width: 8rem;
+    height: 8rem;
+    cursor: pointer;
+}
+
+/* lg */
+@media (max-width: 992px) {
+    .feature-box {
+        width: 7rem;
+        height: 7rem;
+    }
+}
+
+.feature-box.disable {
+    opacity: 0.25;
+}
+
+.svg-image-primary {
+    filter: invert(81%) sepia(44%) saturate(4660%) hue-rotate(350deg) brightness(100%) contrast(98%);
+}
+
+.svg-image-primary-text {
+    filter: invert(9%) sepia(12%) saturate(6667%) hue-rotate(195deg) brightness(95%) contrast(92%);
+}
+
+/* HTML Override */
+h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+h6 {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+h5 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+ol {
+    line-height: 200%;
+}
+
+/* MDB Override */
+.btn {
+    --mdb-btn-border-radius: 0.5rem;
+}
+.btn-warning {
+    --mdb-btn-bg: var(--qol-primary);
+    --mdb-btn-color: var(--qol-primary-text);
+    --mdb-btn-box-shadow: 0 4px 9px -4px var(--qol-primary);
+    --mdb-btn-hover-bg: #e6930e;
+    --mdb-btn-hover-color: var(--qol-primary-text);
+    --mdb-btn-focus-bg: #e6930e;
+    --mdb-btn-focus-color: var(--qol-primary-text);
+    --mdb-btn-active-bg: #d58d1a;
+    --mdb-btn-active-color: var(--qol-primary-text);
+}
+.btn-outline-secondary {
+    border: 1px solid rgb(218, 220, 224);
+    --mdb-btn-border-radius: 4px;
+    --mdb-btn-bg: whitesmoke;
+    --mdb-btn-hover-bg: whitesmoke;
+    --mdb-btn-focus-bg: whitesmoke;
+    --mdb-btn-active-bg: whitesmoke;
+}
+
+.vw-100 {
+    width: calc(100vw - (100vw - 100%)) !important;
+}
+
+.navbar-nav .nav-link.active {
+    color: var(--qol-primary-text);
+    font-weight: bolder;
+}
+
+.accordion-borderless .accordion-item .accordion-button:not(.collapsed) {
+    background-color: color-mix(in oklab, var(--qol-primary), transparent 75%);
+    color: var(--qol-primary-text);
+    box-shadow: none;
+}
+
+.accordion-button:not(.collapsed):after {
+    filter: invert(81%) sepia(44%) saturate(4660%) hue-rotate(350deg) brightness(100%) contrast(98%);
 }

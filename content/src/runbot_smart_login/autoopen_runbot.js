@@ -47,5 +47,5 @@ async function autoOpenRunbot(urlStr) {
     if (!authorizedFeature) return;
 
     const path = await getRunbotPath(url);
-    await openRunbot('https://runbot.odoo.com/' + (path ?? ''), false);
+    await openRunbot('https://runbot.odoo.com/' + (path ?? ''), false, true);
 }
