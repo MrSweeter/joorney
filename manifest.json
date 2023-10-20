@@ -8,7 +8,7 @@
 	"action": {
 		"default_title": "Odoo - QoL & Fun",
 		"default_popup": "popup/index.html",
-		"default_icon": "images/icon_c_128.png"
+		"default_icon": "images/icon_128.png"
 	},
 	"icons": {
 		"16": "images/icon_128.png",
