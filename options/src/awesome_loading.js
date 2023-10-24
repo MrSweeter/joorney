@@ -61,8 +61,8 @@ function onImageChange(event) {
 //#endregion
 
 export async function load() {
-    await loadFeature('awesomeLoadingLarge', defaultAwesomeLoadingSetting);
-    await loadFeature('awesomeLoadingSmall', defaultAwesomeLoadingSetting);
+    await loadFeature('awesomeLoadingLarge');
+    await loadFeature('awesomeLoadingSmall');
 
     const awesomeLoadingNewImage = document.getElementById('qol_awe_loading_new_image');
     awesomeLoadingNewImage.onkeydown = onKeydownHost;

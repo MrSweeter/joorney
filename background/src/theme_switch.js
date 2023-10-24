@@ -8,7 +8,7 @@ const themeCookieName = 'color_scheme';
 export async function switchThemeIfNeeded(tab) {
     if (!tab.url) return;
     const origin = new URL(tab.url).origin;
-    if (!origin) return;
+    if (!origin || !origin.startsWith('http')) return;
 
     const {
         themeSwitchEnabled,

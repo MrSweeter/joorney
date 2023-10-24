@@ -13,11 +13,6 @@
     margin: 2px;
 }
 
-/*https://fontawesome.com/icons/circle?f=classic&s=regular*/
-.feature-wrapper i::before {
-    content: '\f111';
-}
-
 .feature-wrapper:hover {
     box-shadow: 0 0 6px var(--qol-secondary);
 }
@@ -26,20 +21,6 @@
     color: var(--qol-primary);
     transition: color 0.3s;
     margin: 0;
-}
-
-input:checked + .feature-wrapper {
-    border: solid 2px var(--qol-secondary);
-}
-/*https://fontawesome.com/icons/circle-check?f=classic&s=solid*/
-input:checked + .feature-wrapper i::before {
-    content: '\f058';
-    font-weight: 900;
-    color: var(--qol-secondary);
-}
-
-input:disabled + .feature-wrapper {
-    opacity: 0.5;
 }
 
 .action-head {
@@ -73,3 +54,52 @@ input:disabled + .feature-wrapper {
 .double-fa-bicolor {
     color: whitesmoke !important;
 }
+
+/*#region Drag and Drop (https://github.com/flowforfrank/drag-n-drop/tree/master)*/
+.draggable-feature {
+    cursor: grab;
+}
+
+.draggable-feature:active {
+    cursor: grabbing;
+}
+
+.draggable-feature.feature-dragging {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.5;
+    transform: scale(0.8);
+    animation: feature-shaking 0.5s infinite;
+}
+
+@keyframes feature-shaking {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(1deg);
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+    75% {
+        transform: rotate(-1deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+#qol-whitelist-feature label .feature-wrapper {
+    background-color: rgba(0, 128, 0, 0.1);
+    border-color: rgba(0, 128, 0, 0.1);
+}
+
+#qol-blacklist-feature label .feature-wrapper {
+    background-color: rgba(255, 0, 0, 0.1);
+    border-color: rgba(255, 0, 0, 0.1);
+}
+
+#qol-disable-feature label {
+    opacity: 0.5;
+}
+/*#endregion*/

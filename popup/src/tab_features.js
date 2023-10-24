@@ -5,12 +5,23 @@ const features_enabled_configuration = {
     awesomeLoadingLargeEnabled: false,
     awesomeLoadingSmallEnabled: false,
     starringTaskEffectEnabled: false,
-    originsFilterOrigins: {},
-    originsFilterIsBlacklist: false,
     awesomeStyleEnabled: false,
     unfocusAppEnabled: false,
     adminDebugLoginRunbotEnabled: false,
     impersonateLoginRunbotEnabled: false,
+
+    assignMeTaskWhitelistMode: true,
+    saveKnowledgeWhitelistMode: true,
+    themeSwitchWhitelistMode: true,
+    awesomeLoadingLargeWhitelistMode: true,
+    awesomeLoadingSmallWhitelistMode: true,
+    starringTaskEffectWhitelistMode: true,
+    awesomeStyleWhitelistMode: true,
+    unfocusAppWhitelistMode: true,
+    adminDebugLoginRunbotWhitelistMode: true,
+    impersonateLoginRunbotWhitelistMode: true,
+
+    originsFilterOrigins: {},
 };
 
 async function loadTabFeatures(configuration) {
@@ -24,7 +35,7 @@ async function loadTabFeatures(configuration) {
 
     const origins = configuration.originsFilterOrigins;
 
-    setupFilterButton(configuration, currentTab.id, origins, originString);
+    setupSaveOriginButton(configuration, currentTab.id, origins, originString);
 }
 
 async function reloadTabFeatures() {
@@ -33,20 +44,9 @@ async function reloadTabFeatures() {
     loadTabFeatures(configuration);
 }
 
-function setupFilterButton(configuration, currentTabID, origins, originString) {
-    const filterButton = document.getElementById('filterButton');
+function setupSaveOriginButton(configuration, currentTabID, origins, originString) {
+    const saveOriginButton = document.getElementById('saveOriginButton');
     const tabFeaturesList = document.getElementById('tabFeaturesList');
-
-    function updateButton(isBlacklist, existing) {
-        filterButton.innerHTML = isBlacklist ? 'Blacklist' : 'Whitelist';
-        if (existing) filterButton.innerHTML = isBlacklist ? 'Unblacklist' : 'Unwhitelist';
-
-        filterButton.classList.remove('btn-success');
-        filterButton.classList.remove('btn-danger');
-        filterButton.classList.add(
-            (isBlacklist && !existing) || (!isBlacklist && existing) ? 'btn-danger' : 'btn-success'
-        );
-    }
 
     const regexes = Object.keys(origins)
         .filter((o) => o.startsWith('regex://'))
@@ -57,32 +57,23 @@ function setupFilterButton(configuration, currentTabID, origins, originString) {
     }
 
     if (Object.keys(origins).includes(originString)) {
-        updateButton(configuration.originsFilterIsBlacklist, true);
-        filterButton.onclick = async () => {
-            delete origins[originString];
-            await chrome.storage.sync.set({ originsFilterOrigins: origins });
-            reloadTabFeatures();
-            chrome.tabs.reload(currentTabID);
-        };
-        setupFeatures(configuration, origins[originString], currentTabID, origins, originString);
-        tabFeaturesList.classList.remove('d-none');
-        tabFeaturesList.classList.add('d-flex');
-
-        document.getElementById('currentTabUrl').innerHTML = originString;
-    } else {
-        updateButton(configuration.originsFilterIsBlacklist, false);
-        filterButton.onclick = async () => {
-            origins[originString] = {};
-            await chrome.storage.sync.set({ originsFilterOrigins: origins });
-            reloadTabFeatures();
-        };
-        tabFeaturesList.classList.remove('d-flex');
-        tabFeaturesList.classList.add('d-none');
+        setupFeatures(configuration, currentTabID, origins, originString);
+        saveOriginButton.style.display = 'none';
+        tabFeaturesList.style.display = 'flex';
+        return;
     }
-    filterButton.disabled = false;
+    saveOriginButton.style.display = 'flex';
+    tabFeaturesList.style.display = 'none';
+    saveOriginButton.onclick = async () => {
+        origins[originString] = {};
+        await chrome.storage.sync.set({ originsFilterOrigins: origins });
+        reloadTabFeatures();
+    };
+    saveOriginButton.disabled = false;
 }
 
-function setupFeatures(configuration, tabConfiguration, currentTabID, origins, originString) {
+function setupFeatures(configuration, currentTabID, origins, originString) {
+    const tabConfiguration = origins[originString];
     const features = [
         'awesomeLoadingLarge',
         'awesomeLoadingSmall',
@@ -100,9 +91,7 @@ function setupFeatures(configuration, tabConfiguration, currentTabID, origins, o
         featureInput.disabled = !configuration[`${f}Enabled`];
         featureInput.classList.remove('blacklist');
         featureInput.classList.remove('whitelist');
-        featureInput.classList.add(
-            configuration.originsFilterIsBlacklist ? 'blacklist' : 'whitelist'
-        );
+        featureInput.classList.add(configuration[`${f}WhitelistMode`] ? 'whitelist' : 'blacklist');
     });
 
     const saveButton = document.getElementById('saveButton');

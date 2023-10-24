@@ -47,94 +47,123 @@
         <pre id="qol-debug-configuration"></pre>
 
         <!--#region Limited Features -->
-        <div class="pt-3 d-flex flex-wrap justify-content-center ">
-            <label title="[Limited Feature] Admin-Debug login on Runbot" for="qol_adminDebugLoginRunbot_limited_feature">
-                <input id="qol_adminDebugLoginRunbot_limited_feature" class="input-hide" type="checkbox" />
-                <div class="limited-feature-wrapper d-flex">
-                    <i class="qol-font-icon-size fa-regular me-2"></i>
-                    <p>Runbot/Admin-Debug Login</p>
-                </div>
-            </label>
-            <label title="[Limited Feature] Impersonate login on Runbot" for="qol_impersonateLoginRunbot_limited_feature">
-                <input id="qol_impersonateLoginRunbot_limited_feature" class="input-hide" type="checkbox" />
-                <div class="limited-feature-wrapper d-flex">
-                    <i class="qol-font-icon-size fa-regular me-2"></i>
-                    <p>Runbot/Impersonate Login</p>
-                </div>
-            </label>
-            <label title="[Limited Feature] AutoOpen Runbot" for="qol_autoOpenRunbot_limited_feature">
-                <input id="qol_autoOpenRunbot_limited_feature" class="input-hide" type="checkbox" />
-                <div class="limited-feature-wrapper d-flex">
-                    <i class="qol-font-icon-size fa-regular me-2"></i>
-                    <p>Runbot/AutoSelect And Open</p>
-                </div>
-            </label>
+        <div class="row mt-3 px-5">
+            <h4 class="text-start mt-3">Limited Features</h4>
+            <div class="pt-3 d-flex flex-wrap justify-content-start ">
+                <label title="[Limited Feature] Admin-Debug login on Runbot" for="qol_adminDebugLoginRunbot_limited_feature">
+                    <input id="qol_adminDebugLoginRunbot_limited_feature" class="input-hide" type="checkbox" />
+                    <div class="limited-feature-wrapper d-flex">
+                        <i class="qol-font-icon-size fa-regular me-2"></i>
+                        <p>Runbot/Admin-Debug Login</p>
+                    </div>
+                </label>
+                <label title="[Limited Feature] Impersonate login on Runbot" for="qol_impersonateLoginRunbot_limited_feature">
+                    <input id="qol_impersonateLoginRunbot_limited_feature" class="input-hide" type="checkbox" />
+                    <div class="limited-feature-wrapper d-flex">
+                        <i class="qol-font-icon-size fa-regular me-2"></i>
+                        <p>Runbot/Impersonate Login</p>
+                    </div>
+                </label>
+                <label title="[Limited Feature] AutoOpen Runbot" for="qol_autoOpenRunbot_limited_feature">
+                    <input id="qol_autoOpenRunbot_limited_feature" class="input-hide" type="checkbox" />
+                    <div class="limited-feature-wrapper d-flex">
+                        <i class="qol-font-icon-size fa-regular me-2"></i>
+                        <p>Runbot/AutoSelect And Open</p>
+                    </div>
+                </label>
+            </div>
         </div>
         <!--#endregion-->
+
         <!--#region Features -->
-        <div class="pt-3 d-flex flex-wrap justify-content-center ">
-            <label title="[Feature] Loading Fullscreen" for="qol_awesomeLoadingLarge_feature">
-                <input id="qol_awesomeLoadingLarge_feature" class="input-hide" type="checkbox" />
-                <div class="feature-wrapper d-flex">
-                    <i class="qol-font-icon-size fa-regular me-2"></i>
-                    <p>Awesome Loading/Large</p>
+        <div class="row mt-3 px-5">
+            <h4 class="text-start mt-3">Features</h4>
+            <h6 class="col-4 text-success">Whitelist</h6>
+            <h6 class="col-4 text-danger">Blacklist</h6>
+            <h6 class="col-4">Disable</h6>
+            <div class="col-4">
+                <div id="qol-whitelist-feature" class="qol-state-feature pb-5 h-100 border border-2 border-success rounded d-flex flex-wrap align-content-start justify-content-center"></div>
+            </div>
+            <div class="col-4">
+                <div id="qol-blacklist-feature" class="qol-state-feature pb-5 h-100 border border-2 border-danger rounded d-flex flex-wrap align-content-start justify-content-center"></div>
+            </div>
+            <div class="col-4">
+                <div id="qol-disable-feature" class="qol-state-feature pb-5 h-100 border border-2 rounded d-flex flex-wrap align-content-start justify-content-center">
+                    <label title="[Feature] Loading Fullscreen" id="qol_awesomeLoadingLarge_feature" data-feature="awesomeLoadingLarge" class="draggable-feature" draggable="true">
+                        <div class="feature-wrapper d-flex">
+                            <div class="icon-wrapper pe-1">
+                                <i class="fa-solid fa-circle-notch"></i>
+                            </div>
+                            <p>Awesome Loading/Large</p>
+                        </div>
+                    </label>
+                    <label title="[Feature] Loading bottom right" id="qol_awesomeLoadingSmall_feature" data-feature="awesomeLoadingSmall" class="draggable-feature" draggable="true">
+                        <div class="feature-wrapper d-flex">
+                            <div class="icon-wrapper pe-1">
+                                <i class="fa-solid fa-spinner"></i>
+                            </div>
+                            <p>Awesome Loading/Small</p>
+                        </div>
+                    </label>
+                    <label title="[Feature] Assign me" id="qol_assignMeTask_feature" data-feature="assignMeTask" class="draggable-feature" draggable="true">
+                        <div class="feature-wrapper d-flex">
+                            <div class="icon-wrapper pe-1">
+                                <i class="fa-solid fa-user-plus"></i>
+                            </div>
+                            <p>Task/Assign Me</p>
+                        </div>
+                    </label>
+                    <label title="[Feature] Stars effect" id="qol_starringTaskEffect_feature" data-feature="starringTaskEffect" class="draggable-feature" draggable="true">
+                        <div class="feature-wrapper d-flex">
+                            <div class="icon-wrapper pe-1">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <p>Task/Stars Effect</p>
+                        </div>
+                    </label>
+                    <label title="[Feature] Save Knowledge" id="qol_saveKnowledge_feature" data-feature="saveKnowledge" class="draggable-feature" draggable="true">
+                        <div class="feature-wrapper d-flex">
+                            <div class="icon-wrapper pe-1">
+                                <i class="fa-regular fa-bookmark"></i>
+                                <i class="fa-solid fa-floppy-disk double-fa"></i>
+                            </div>
+                            <p>Save Knowledge</p>
+                        </div>
+                    </label>
+                    <label title="[Feature] Switch Odoo Theme" id="qol_themeSwitch_feature" data-feature="themeSwitch" class="draggable-feature" draggable="true">
+                        <div class="feature-wrapper d-flex">
+                            <div class="icon-wrapper pe-1">
+                                <i class="fa-solid fa-sun"></i>
+                                <i class="fa-solid fa-circle double-fa-mask double-fa-bicolor"></i>
+                                <i class="fa-solid fa-moon double-fa"></i>
+                            </div>
+                            <p>Theme Switch</p>
+                        </div>
+                    </label>
+                    <label title="[Feature] Awesome Style" id="qol_awesomeStyle_feature" data-feature="awesomeStyle" class="draggable-feature" draggable="true">
+                        <div class="feature-wrapper d-flex">
+                            <div class="icon-wrapper pe-1">
+                                <i class="fa-brands fa-css3-alt"></i>
+                            </div>
+                            <p>Awesome Style</p>
+                        </div>
+                    </label>
+                    <label title="[Feature] Unfocus App" id="qol_unfocusApp_feature" data-feature="unfocusApp" class="draggable-feature" draggable="true">
+                        <div class="feature-wrapper d-flex">
+                            <div class="icon-wrapper pe-1">
+                                <i class="fa-solid fa-ghost"></i>
+                            </div>
+                            <p>Unfocus App</p>
+                        </div>
+                    </label>
                 </div>
-            </label>
-            <label title="[Feature] Loading bottom right" for="qol_awesomeLoadingSmall_feature">
-                <input id="qol_awesomeLoadingSmall_feature" class="input-hide" type="checkbox" />
-                <div class="feature-wrapper d-flex">
-                    <i class="qol-font-icon-size fa-regular me-2"></i>
-                    <p>Awesome Loading/Small</p>
-                </div>
-            </label>
-            <label title="[Feature] Assign me" for="qol_assignMeTask_feature">
-                <input id="qol_assignMeTask_feature" class="input-hide" type="checkbox" />
-                <div class="feature-wrapper d-flex">
-                    <i class="qol-font-icon-size fa-regular me-2"></i>
-                    <p>Task/Assign Me</p>
-                </div>
-            </label>
-            <label title="[Feature] Stars effect" for="qol_starringTaskEffect_feature">
-                <input id="qol_starringTaskEffect_feature" class="input-hide" type="checkbox" />
-                <div class="feature-wrapper d-flex">
-                    <i class="qol-font-icon-size fa-regular me-2"></i>
-                    <p>Task/Stars Effect</p>
-                </div>
-            </label>
-            <label title="[Feature] Save Knowledge" for="qol_saveKnowledge_feature">
-                <input id="qol_saveKnowledge_feature" class="input-hide" type="checkbox" />
-                <div class="feature-wrapper d-flex">
-                    <i class="qol-font-icon-size fa-regular me-2"></i>
-                    <p>Save Knowledge</p>
-                </div>
-            </label>
-            <label title="[Feature] Switch Odoo Theme" for="qol_themeSwitch_feature">
-                <input id="qol_themeSwitch_feature" class="input-hide" type="checkbox" />
-                <div class="feature-wrapper d-flex">
-                    <i class="qol-font-icon-size fa-regular me-2"></i>
-                    <p>Theme Switch</p>
-                </div>
-            </label>
-            <label title="[Feature] Awesome Style" for="qol_awesomeStyle_feature">
-                <input id="qol_awesomeStyle_feature" class="input-hide" type="checkbox" />
-                <div class="feature-wrapper d-flex">
-                    <i class="qol-font-icon-size fa-regular me-2"></i>
-                    <p>Awesome Style</p>
-                </div>
-            </label>
-            <label title="[Feature] Unfocus App" for="qol_unfocusApp_feature">
-                <input id="qol_unfocusApp_feature" class="input-hide" type="checkbox" />
-                <div class="feature-wrapper d-flex">
-                    <i class="qol-font-icon-size fa-regular me-2"></i>
-                    <p>Unfocus App</p>
-                </div>
-            </label>
+            </div>
         </div>
         <!--#endregion -->
 
-        <div class="row m-0 py-5 text-center">
+        <div class="row pt-3 p-5 text-center">
             <!--#region Origins Filter -->
-            <h4 class="text-start mt-3" id="odoo_theme_anchor">Origins <span id="qol_origins_filter_type">Whitelist</span></h4>
+            <h6 class="text-start" id="odoo_theme_anchor">Origins</h6>
             <table id="qol_origins_filter_table" class="table table-striped bg-light">
                 <thead class="shadow-2">
                     <tr>

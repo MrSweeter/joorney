@@ -2,5 +2,5 @@ import { defaultSaveKnowledgeSetting } from '../../utils/feature_default_configu
 import { loadFeature } from './features.js';
 
 export async function load() {
-    await loadFeature('saveKnowledge', defaultSaveKnowledgeSetting);
+    await loadFeature('saveKnowledge');
 }

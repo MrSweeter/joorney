@@ -70,35 +70,11 @@ export async function load() {
 async function restore() {
     const configuration = await StorageSync.get(defaultOriginsFilterSetting);
 
-    renderWhiteOrBlacklist(configuration);
-
     await renderOriginsObject(configuration.originsFilterOrigins);
 }
 //#endregion
 
 //#region UI
-function renderWhiteOrBlacklist(configuration) {
-    const filterType = document.getElementById('qol_origins_filter_type');
-
-    function updateInputStyle(isBlacklist) {
-        const tableEl = document.getElementById('qol_origins_filter_table');
-        tableEl.classList.remove('qol_whitelist');
-        tableEl.classList.remove('qol_blacklist');
-        tableEl.classList.add(isBlacklist ? 'qol_blacklist' : 'qol_whitelist');
-    }
-
-    updateInputStyle(configuration.originsFilterIsBlacklist);
-
-    filterType.innerHTML = configuration.originsFilterIsBlacklist ? 'Blacklist' : 'Whitelist';
-    filterType.onclick = async (e) => {
-        const isNotBlacklist = e.target.innerHTML !== 'Blacklist';
-        await StorageSync.set({ originsFilterIsBlacklist: isNotBlacklist });
-        filterType.innerHTML = isNotBlacklist ? 'Blacklist' : 'Whitelist';
-
-        updateInputStyle(isNotBlacklist);
-    };
-}
-
 function renderOriginsFilterError(errorMessage) {
     const container = document.getElementById('qol_origins_filter_error_footer');
     container.textContent = errorMessage;

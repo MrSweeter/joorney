@@ -7,6 +7,7 @@ import { load as loadAwesomeStyle } from './src/awesome_style.js';
 import { load as loadUnfocusApp } from './src/unfocus_app.js';
 import { load as loadSmartLogin } from './src/runbot_smart_login.js';
 import { load as loadKeyboardShortcut } from './src/keyboard_shortcut.js';
+import { setupDragAndDrop } from './src/features.js';
 import { initImportExport } from './import_export.js';
 import { StorageSync } from '../utils/browser.js';
 import { QOL_DEFAULT_CONFIGURATION } from '../utils/feature_default_configuration.js';
@@ -14,6 +15,8 @@ import { QOL_DEFAULT_CONFIGURATION } from '../utils/feature_default_configuratio
 async function onDOMContentLoaded() {
     document.getElementById('copyright-year').innerText = new Date().getFullYear();
     //document.getElementById('copyright-link').href = Runtime.getManifest().homepage_url; Not public API
+
+    setupDragAndDrop();
 
     await loadOriginsFilter();
 

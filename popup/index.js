@@ -1,4 +1,11 @@
 window.onload = async () => {
+    const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+    const currentTab = tabs[0];
+    if (!currentTab.url.startsWith('http')) return;
+
+    document.getElementById('qol-invalid-website').remove();
+    document.getElementById('qol-popup-configuration').classList.remove('d-none');
+
     const configuration = await chrome.storage.sync.get(features_enabled_configuration);
 
     loadAwesomeLoading(configuration);

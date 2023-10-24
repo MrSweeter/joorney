@@ -3,7 +3,7 @@ import { defaultAwesomeStyleSetting } from '../../utils/feature_default_configur
 import { loadFeature } from './features.js';
 
 export async function load() {
-    await loadFeature('awesomeStyle', defaultAwesomeStyleSetting);
+    await loadFeature('awesomeStyle');
 
     document.getElementById('qol_awe_style_save').onclick = saveAwesomeStyle;
 

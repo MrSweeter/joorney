@@ -135,17 +135,24 @@ input:disabled + .icon-wrapper-sm {
     transition: color 0.3s;
 }
 
-input:checked.blacklist + .icon-wrapper-tab i {
+input:not([disabled]).blacklist + .icon-wrapper-tab i {
+    opacity: 0.25;
     color: red;
+}
+input:not([disabled]):checked.blacklist + .icon-wrapper-tab i {
     opacity: 1;
 }
 
-input:checked.whitelist + .icon-wrapper-tab i {
+input:not([disabled]).whitelist + .icon-wrapper-tab i {
+    opacity: 0.25;
     color: green;
+}
+input:not([disabled]):checked.whitelist + .icon-wrapper-tab i {
     opacity: 1;
 }
 
 input:disabled + .icon-wrapper-tab {
+    opacity: 0.25;
     cursor: default;
 }
 

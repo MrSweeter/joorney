@@ -69,27 +69,31 @@ async function authorizeFeature(featureName, origin) {
         return false;
     }
 
-    const { originsFilterOrigins, originsFilterIsBlacklist } = await chrome.storage.sync.get({
+    const configuration = await chrome.storage.sync.get({
         originsFilterOrigins: {},
-        originsFilterIsBlacklist: false,
+        [`${featureName}Enabled`]: false,
+        [`${featureName}WhitelistMode`]: true,
     });
 
-    const activeOrigins = getActiveFeatureOrigins(originsFilterOrigins, featureName);
+    if (!configuration[`${featureName}Enabled`]) return false;
+
+    const activeOrigins = getActiveFeatureOrigins(configuration.originsFilterOrigins, featureName);
     const activeRegex = activeOrigins
         .filter((o) => o.startsWith('regex://'))
         .map((o) => new RegExp(o.replace('regex://', '')));
 
     const originExist = activeOrigins.includes(origin) || activeRegex.some((r) => r.test(origin));
 
-    if (originsFilterIsBlacklist && originExist) {
-        return false;
+    const isWhitelistMode = configuration[`${featureName}WhitelistMode`];
+    if (isWhitelistMode) {
+        return originExist;
     }
 
-    if (!originsFilterIsBlacklist && originExist) {
-        return true;
+    if (!isWhitelistMode) {
+        return !originExist;
     }
 
-    return originsFilterIsBlacklist;
+    return false;
 }
 
 async function authorizeLimitedFeature(featureName, origin) {

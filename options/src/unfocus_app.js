@@ -21,7 +21,7 @@ export async function deleteUnfocusAppOrigin(origin) {
 
 //#region Event
 export async function load() {
-    await loadFeature('unfocusApp', defaultUnfocusAppSetting);
+    await loadFeature('unfocusApp');
 
     await restore();
 }

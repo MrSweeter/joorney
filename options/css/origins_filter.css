@@ -1,16 +1,14 @@
-#qol_origins_filter_type {
-    text-decoration: underline;
-    text-decoration-color: var(--qol-secondary);
-    cursor: pointer;
-    transition: all 200ms ease-out;
-}
-
-#qol_origins_filter_table.qol_blacklist input[type='checkbox']:checked {
+#qol_origins_filter_table input[type='checkbox']:checked.qol_f_blacklist {
     background-color: red !important;
     border-color: darkred !important;
 }
 
-#qol_origins_filter_table.qol_whitelist input[type='checkbox']:checked {
+#qol_origins_filter_table input[type='checkbox']:checked.qol_f_whitelist {
     background-color: green !important;
     border-color: darkgreen !important;
+}
+
+#qol_origins_filter_table input[type='checkbox']:checked.qol_f_disable {
+    background-color: gray !important;
+    border-color: darkgrey !important;
 }

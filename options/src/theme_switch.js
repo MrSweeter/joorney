@@ -3,7 +3,7 @@ import { defaultThemeSwitchSetting } from '../../utils/feature_default_configura
 import { loadFeature } from './features.js';
 
 export async function load() {
-    await loadFeature('themeSwitch', defaultThemeSwitchSetting);
+    await loadFeature('themeSwitch');
 
     restore();
 }

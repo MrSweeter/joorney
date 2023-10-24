@@ -1,3 +1,9 @@
+export const defaultOriginsFilterSetting = {
+    // [LIMITATION] Object is loaded by default even if values exists - 'https://www.odoo.com': {},
+    originsFilterOrigins: {},
+    originsFilterIsBlacklist: false,
+};
+
 export const defaultThemeSwitchSetting = {
     themeSwitchEnabled: false,
     themeSwitchMode: 'autoDark' /* "autoDark", "autoLight", "dynamicLocation", "dynamicTime" */,
@@ -9,7 +15,9 @@ export const defaultThemeSwitchSetting = {
 
 export const defaultAwesomeLoadingSetting = {
     awesomeLoadingLargeEnabled: false,
+    awesomeLoadingLargeWhitelistMode: true,
     awesomeLoadingSmallEnabled: false,
+    awesomeLoadingSmallWhitelistMode: true,
     awesomeLoadingLargeImage: 'https://media.tenor.com/nBt6RZkFJh8AAAAi/never-gonna.gif',
     awesomeLoadingSmallImage: '',
     awesomeLoadingImages: [
@@ -21,26 +29,25 @@ export const defaultAwesomeLoadingSetting = {
 
 export const defaultAwesomeStyleSetting = {
     awesomeStyleEnabled: false,
+    awesomeStyleWhitelistMode: true,
     awesomeStyleCSS: '',
 };
 
 export const defaultSaveKnowledgeSetting = {
     saveKnowledgeEnabled: false,
+    saveKnowledgeWhitelistMode: true,
 };
 
 export const defaultTaskSetupSetting = {
     assignMeTaskEnabled: false,
+    assignMeTaskWhitelistMode: true,
     starringTaskEffectEnabled: false,
-};
-
-export const defaultOriginsFilterSetting = {
-    // [LIMITATION] Object is loaded by default even if values exists - 'https://www.odoo.com': {},
-    originsFilterOrigins: {},
-    originsFilterIsBlacklist: false,
+    starringTaskEffectWhitelistMode: true,
 };
 
 export const defaultUnfocusAppSetting = {
     unfocusAppEnabled: false,
+    unfocusAppWhitelistMode: true,
     unfocusAppReorderEnabled: false,
     unfocusAppShareEnabled: false,
     unfocusAppOrigins: {},
