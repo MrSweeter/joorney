@@ -11,7 +11,9 @@ WebNavigation.onReferenceFragmentUpdated.addListener((e) => {
 });
 
 Tabs.onUpdated.addListener((_1, _2, tabInfo) => {
-    switchThemeIfNeeded(tabInfo);
+    if (tabInfo.url.startsWith('http')) {
+        switchThemeIfNeeded(tabInfo);
+    }
 });
 
 Runtime.onInstalled.addListener(async (details) => {

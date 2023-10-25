@@ -262,6 +262,37 @@
             </table>
             <!--#endregion-->
 
+            <!--#region Theme Switch -->
+            <h4 class="text-start mt-3">Theme Switch</h4>
+            <table class="table table-striped bg-light">
+                <thead class="shadow-2">
+                    <tr>
+                        <th style="width: 50%;">Latitude / Longitude</th>
+                        <th style="width: 50%;">Dark Mode: Start / Stop</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="input-group">
+                                <input id="qol_theme_switch_latitude" type="text" class="form-control border border-0" />
+                                <span class="input-group-text border border-0">/</span>
+                                <input id="qol_theme_switch_longitude" type="text" class="form-control border border-0" />
+                                <button id="qol_theme_switch_get_location_button" class="btn btn-secondary" title="Get current location"><i class="fa-solid fa-lg fa-location-crosshairs"></i></button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-group">
+                                <input id="qol_theme_switch_dark_start" type="time" class="form-control border border-0" />
+                                <span class="input-group-text border border-0">/</span>
+                                <input id="qol_theme_switch_dark_stop" type="time" class="form-control border border-0" />
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!--#endregion-->
+
             <!--#region Keyboard Shortcut App -->
             <h4 class="text-start mt-3">Keyboard Shortcut</h4>
             <div class="col-12">
@@ -288,6 +319,7 @@
                 All rights reserved :
                 <a id="copyright-link" class="text-dark" href="https://github.com/MrSweeter/odoo-qol">Odoo QoL</a>
             </div>
+            <div>Theme Switch base on Location is powered by <a href="https://sunrisesunset.io/">SunriseSunset.io</a></div>
         </footer>
     </body>
 </html>

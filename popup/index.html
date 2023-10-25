@@ -99,10 +99,12 @@
                     <i class="fa-solid fa-moon double-fa"></i>
                 </div>
             </label>
-            <label id="qol_theme_switch_switcher" class="ts-switch text-center" title="Change of theme">
-                <input id="qol_theme_switch_input" type="checkbox" />
-                <i class="ts-slider ts-round"></i>
-            </label>
+            <select id="qol_theme_switch_mode_switcher" class="ms-2 my-1 form-select">
+                <option value="autoDark" selected>Dark mode</option>
+                <option value="autoLight" selected>Light Mode</option>
+                <option value="dynamicLocation" selected>Based on configured location (sunrise/sunset)</option>
+                <option value="dynamicTime" selected>Dark mode based on configured time</option>
+            </select>
         </div>
 
         <div class="col-12">

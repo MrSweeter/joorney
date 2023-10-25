@@ -1,6 +1,10 @@
 export const defaultThemeSwitchSetting = {
     themeSwitchEnabled: false,
-    themeSwitchDarkModeEnabled: false,
+    themeSwitchMode: 'autoDark' /* "autoDark", "autoLight", "dynamicLocation", "dynamicTime" */,
+    themeSwitchLocationLatitude: '51.477928',
+    themeSwitchLocationLongitude: '-0.001545',
+    themeSwitchDarkStartTime: '20:30',
+    themeSwitchDarkStopTime: '07:30',
 };
 
 export const defaultAwesomeLoadingSetting = {
