@@ -6,17 +6,20 @@ async function appendSmartLogin(urlStr) {
             autoOpenRunbotEnabled: false,
         });
 
+    if (adminDebugLoginRunbotEnabled && isRunbotPage(urlStr)) {
+        await appendRunbotAdminDebugLogin(urlStr);
+    }
+
+    if (autoOpenRunbotEnabled && isRunbotPageWithAutoOpenHash(urlStr)) {
+        await autoOpenRunbot(urlStr);
+    }
+
     let autologin = false;
-    if (adminDebugLoginRunbotEnabled) {
-        appendRunbotAdminDebugLogin(urlStr);
+    if (adminDebugLoginRunbotEnabled || autoOpenRunbotEnabled) {
         autologin = await checkAdminDebug(urlStr);
     }
 
     if (!autologin && impersonateLoginRunbotEnabled) {
         await appendRunbotLogin(urlStr);
-    }
-
-    if (autoOpenRunbotEnabled && isRunbotPageWithAutoOpenHash(urlStr)) {
-        await autoOpenRunbot(urlStr);
     }
 }

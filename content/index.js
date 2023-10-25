@@ -10,6 +10,8 @@
 window.addEventListener('load', async () => {
     const url = window.location.href;
 
+    updateLandingPage();
+
     await updateTabState(url);
 
     checkTaskPage(url);
@@ -110,4 +112,12 @@ async function authorizeLimitedFeature(featureName, origin) {
     return validRegex;
 }
 
+//#endregion
+
+//#region landing page
+function updateLandingPage() {
+    Array.from(document.getElementsByClassName('odoo-qol-landing-extension-state')).forEach(
+        (el) => (el.style.color = '#fca311')
+    );
+}
 //#endregion

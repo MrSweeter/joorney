@@ -1,3 +1,8 @@
+function isRunbotPage(urlStr) {
+    const url = new URL(urlStr);
+    return url.host === 'runbot.odoo.com';
+}
+
 async function appendRunbotAdminDebugLogin(currentUrl) {
     const url = new URL(currentUrl);
     const authorizedFeature = await authorizeLimitedFeature('adminDebugLoginRunbot', url.origin);
@@ -23,12 +28,12 @@ async function appendRunbotAdminDebugLogin(currentUrl) {
     });
 }
 
-function getAdminDebugURL(href) {
+function getAdminDebugURL(href, fromAutoOpen = false) {
     if (!href) return undefined;
     const url = new URL(href);
     url.pathname = '/web/login';
     url.search = url.search ? `${url.search}&debug=1` : 'debug=1';
-    url.hash = 'qol-auto-login';
+    url.hash = fromAutoOpen ? 'qol-autoopen-login' : 'qol-auto-login';
     return url.toString();
 }
 
@@ -37,7 +42,7 @@ async function openEventRunbot(e, newTab) {
     openRunbot(e.target.href, newTab);
 }
 
-async function openRunbot(href, newTab) {
+async function openRunbot(href, newTab, fromAutoOpen = false) {
     let finalURL = 'https://runbot.odoo.com/';
     if (href != finalURL) {
         // Messaging flow require due to CORS on runbot
@@ -45,7 +50,7 @@ async function openRunbot(href, newTab) {
             action: 'GET_FINAL_RUNBOT_URL',
             href: href,
         });
-        finalURL = getAdminDebugURL(response.url) ?? finalURL;
+        finalURL = getAdminDebugURL(response.url, fromAutoOpen) ?? finalURL;
     }
 
     const finalLink = document.createElement('a');
