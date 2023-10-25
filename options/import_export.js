@@ -49,6 +49,16 @@ function setupImportExport() {
     exportButton.onclick = exportOptions;
 }
 
+async function checkConfigurationVersion() {
+    const { configurationVersion } = await StorageSync.get({ configurationVersion: 0 });
+    if (configurationVersion < QOL_DEFAULT_CONFIGURATION.configurationVersion) {
+        document.getElementById('qol_migrate_configuration').classList.remove('d-none');
+        document.getElementById('qol_import_storage_sync_file').disabled = true;
+        document.getElementById('qol_import_storage_sync').disabled = true;
+    }
+}
+
 export function initImportExport() {
     setupImportExport();
+    checkConfigurationVersion();
 }

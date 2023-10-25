@@ -1,11 +1,11 @@
 export const defaultOriginsFilterSetting = {
     // [LIMITATION] Object is loaded by default even if values exists - 'https://www.odoo.com': {},
     originsFilterOrigins: {},
-    originsFilterIsBlacklist: false,
 };
 
 export const defaultThemeSwitchSetting = {
     themeSwitchEnabled: false,
+    themeSwitchWhitelistMode: true,
     themeSwitchMode: 'autoDark' /* "autoDark", "autoLight", "dynamicLocation", "dynamicTime" */,
     themeSwitchLocationLatitude: '51.477928',
     themeSwitchLocationLongitude: '-0.001545',
@@ -71,10 +71,16 @@ export const defaultKeyboardShortcutLocalSetting = {
     kbsCtrlKey: true,
     kbsShiftKey: false,
     kbsCodeKey: 'Period',
-    kbsDisplayKey: 'Period (:)'
+    kbsDisplayKey: 'Period (:)',
+};
+
+export const configurationInternalVersion = {
+    configurationVersion: 1,
 };
 
 export const QOL_DEFAULT_CONFIGURATION = {
+    ...configurationInternalVersion,
+
     ...defaultThemeSwitchSetting,
     ...defaultAwesomeLoadingSetting,
     ...defaultSaveKnowledgeSetting,
@@ -83,5 +89,5 @@ export const QOL_DEFAULT_CONFIGURATION = {
     ...defaultAwesomeStyleSetting,
     ...defaultUnfocusAppSetting,
     ...defaultSmartLoginRunbotSetting,
-    ...defaultKeyboardShortcutLocalSetting
+    ...defaultKeyboardShortcutLocalSetting,
 };
