@@ -1,0 +1,103 @@
+/* https://www.cssscript.com/demo/keyboard-style-buttons/ */
+
+.btn-kbs {
+    font-size: inherit;
+    line-height: inherit;
+    margin: 0.25rem 0.25rem 0.4375rem;
+    padding: 0.1rem 0.4rem;
+    box-shadow: 0 0 #d9d9d9, 0 0 #d9d9d9, 0 1px #d9d9d9, 0 2px #d9d9d9, 0 3px #d9d9d9, 0 4px #d9d9d9,
+        0 5px #d9d9d9, 2px 2.5px 4px #adb5bd, 0 -1px 2.5px #adb5bd;
+    background-color: #fff;
+    color: #343a40;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border: 1px solid #e6e6e6;
+    border-radius: 0.25rem;
+    display: inline-block;
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+    font-weight: 400;
+    text-align: left;
+    transform: translateZ(5px);
+    transform-style: preserve-3d;
+    transition: all 0.25s cubic-bezier(0.2, 1, 0.2, 1);
+}
+
+.btn-kbs::after {
+    border-style: solid;
+    box-sizing: content-box;
+    content: '';
+    display: block;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: all 0.25s cubic-bezier(0.2, 1, 0.2, 1);
+    border-radius: 0.5rem;
+    border-width: 0.125rem;
+    bottom: -10px;
+    left: -0.3125rem;
+    right: -0.3125rem;
+    top: 0;
+    transform: translateZ(-5px);
+    border-color: #ccc;
+}
+
+/*
+.btn-kbs:hover {
+    transform: translate3d(0, 1px, 5px);
+    box-shadow: 0 0 #d9d9d9, 0 0 #d9d9d9, 0 1px #d9d9d9, 0 2px #d9d9d9, 0 3px #d9d9d9, 0 4px #d9d9d9,
+        2px 2px 4px #adb5bd, 0 -1px 2px #adb5bd;
+    background-color: #e6e6e6;
+    color: #343a40;
+    outline: none;
+}
+
+.btn-kbs:hover::after {
+    transform: translate3d(0, -1px, -5px);
+}
+
+.btn-kbs:active,
+.btn-kbs.active {
+    border-color: transparent;
+    box-shadow: none;
+    transform: translate3d(0, 5px, 0);
+    background-color: #e6e6e6;
+    box-shadow: 0 0 1px 1px #b3b3b3;
+    color: #343a40;
+}
+
+.btn-kbs:active::after,
+.btn-kbs.active::after {
+    transform: translate3d(0, -5px, 0);
+}
+
+.btn-kbs-success {
+    box-shadow: 0 0 #48d368, 0 0 #48d368, 0 1px #48d368, 0 2px #48d368, 0 3px #48d368, 0 4px #48d368,
+        0 5px #48d368, 2px 2.5px 4px #adb5bd, 0 -1px 2.5px #adb5bd;
+    background-color: #28a745;
+    border-color: #34ce57;
+    color: #f8f9fa;
+}
+
+.btn-kbs-success:hover {
+    box-shadow: 0 0 #48d368, 0 0 #48d368, 0 1px #48d368, 0 2px #48d368, 0 3px #48d368, 0 4px #48d368,
+        2px 2px 4px #adb5bd, 0 -1px 2px #adb5bd;
+    background-color: #34ce57;
+    color: #f8f9fa;
+}
+
+.btn-kbs-success:active,
+.btn-kbs-success.active {
+    background-color: #34ce57;
+    box-shadow: 0 0 1px 1px #86e29b;
+    color: #f8f9fa;
+}
+
+.btn-kbs-success:active::after,
+.btn-kbs-success.active::after {
+    border-color: #5dd879;
+}
+
+.btn-kbs.disabled,
+.btn-kbs:disabled {
+    opacity: 0.65;
+}
+*/

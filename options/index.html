@@ -20,6 +20,7 @@
         <link href="./css/save_knowledge.css" rel="stylesheet" />
         <link href="./css/awesome_style.css" rel="stylesheet" />
         <link href="./css/unfocus_app.css" rel="stylesheet" />
+        <link href="./css/keyboard_shortcut.css" rel="stylesheet" />
 
         <script src="index.js" type="module"></script>
     </head>
@@ -259,6 +260,25 @@
                 </thead>
                 <tbody id="qol_unfocus_app_table_body"></tbody>
             </table>
+            <!--#endregion-->
+
+            <!--#region Keyboard Shortcut App -->
+            <h4 class="text-start mt-3">Keyboard Shortcut</h4>
+            <div class="col-12">
+                <div id="keyboard_shortcut_preview" class="text-start">
+                    <div id="keyboard_shortcut_preview_ctrl" class="btn-kbs">Ctrl</div>
+                    <div id="keyboard_shortcut_preview_alt" class="btn-kbs">Alt</div>
+                    <div id="keyboard_shortcut_preview_shift" class="btn-kbs">Shift</div>
+                    <!--<div class="btn-kbs">Command</div>-->
+                    <div id="keyboard_shortcut_preview_key" class="btn-kbs">$</div>
+                    <button id="keyboard_shortcut_modify_button" class="btn btn-success">Modify</button>
+                </div>
+                <div id="keyboard_shortcut_editor" class="input-group">
+                    <input id="keyboard_shortcut_editor_input" type="text" class="form-control border border-0" />
+                    <button id="keyboard_shortcut_save_button" class="btn btn-success">Save</button>
+                    <button id="keyboard_shortcut_close_button" class="btn btn-outline"><i class="fa-solid fa-lg fa-xmark"></i></button>
+                </div>
+            </div>
             <!--#endregion-->
         </div>
 
