@@ -19,14 +19,16 @@ function analyzeConfiguration(jsonFile) {
     const resume = document.getElementById('migration_resume');
 
     if (migrateVersion > currentVersion) {
-        document.getElementById('error_message').innerHTML =
-            'Configuration cannot be migrate to a lower version';
+        document.getElementById('error_message').innerHTML = chrome.i18n.getMessage(
+            'migration_Error_LowerVersion'
+        );
         if (!resume.classList.contains('d-none')) resume.classList.add('d-none');
         return;
     }
     if (migrateVersion == currentVersion) {
-        document.getElementById('error_message').innerHTML =
-            'Configuration cannot be migrate to the same version';
+        document.getElementById('error_message').innerHTML = chrome.i18n.getMessage(
+            'migration_Error_SameVersion'
+        );
 
         if (!resume.classList.contains('d-none')) resume.classList.add('d-none');
         return;
@@ -42,7 +44,7 @@ function analyzeConfiguration(jsonFile) {
     document.getElementById('migration_list').innerHTML = migrateListString;
 
     const runButton = document.getElementById('run_migration');
-    runButton.innerHTML = 'Execute migration';
+    runButton.innerHTML = chrome.i18n.getMessage('migration_Options_RunMigrationButtonLabel');
     runButton.onclick = async (e) => {
         e.preventDefault();
         document.getElementById('qol_import_storage_sync_file').value = null;
@@ -50,7 +52,7 @@ function analyzeConfiguration(jsonFile) {
         button.disabled = true;
         button.innerHTML = '<i class="fa-solid fa-spin fa-spinner"></i>';
         const finalConfiguration = runMigration(jsonFile, migrateVersion, currentVersion);
-        button.innerHTML = 'Download new configuration';
+        button.innerHTML = chrome.i18n.getMessage('migration_Options_DownloadMigrationButtonLabel');
         runButton.onclick = (e) => {
             downloadNewMigration(finalConfiguration);
         };
@@ -69,7 +71,6 @@ function runMigration(configuration, fromVersion, toVersion) {
 }
 
 function runOneMigration(configuration, version) {
-    console.log(version);
     const result = configuration;
 
     switch (version) {

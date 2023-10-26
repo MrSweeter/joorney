@@ -1,0 +1,50 @@
+{
+	"keyboardShortcut_Content_ConfirmReload": {
+		"message": "L'onglet actuel sera rechargé.\nConfirmez-vous votre action ?"
+	},
+	"adminDebugLogin_Content_SignInButtonTitle": {
+		"message": "Ouvrez un runbot en tant qu'admin et avec le mode debug activé"
+	},
+	"impersonateLogin_Content_LoginAsAdminTitle": {
+		"message": "Se connecter en tant que 'admin'"
+	},
+	"impersonateLogin_Content_LoginAsAdminLabel": {
+		"message": "Admin"
+	},
+	"impersonateLogin_Content_LoginAsDemoTitle": {
+		"message": "Se connecter en tant que 'demo'"
+	},
+	"impersonateLogin_Content_LoginAsDemoLabel": {
+		"message": "Demo"
+	},
+	"impersonateLogin_Content_LoginAsPortalTitle": {
+		"message": "Se connecter en tant que 'portail'"
+	},
+	"impersonateLogin_Content_LoginAsPortalLabel": {
+		"message": "Portail"
+	},
+	"assignMe_Content_ButtonLabel": {
+		"message": "Me l'assigner"
+	},
+	"saveKnowledge_Content_ButtonLabel": {
+		"message": "Enregistrer"
+	},
+	"migration_Options_SelectFileSectionLabel": {
+		"message": "Choissisez la configuration à migrer"
+	},
+	"migration_Options_MigrationSectionLabel": {
+		"message": "Migration"
+	},
+	"migration_Options_RunMigrationButtonLabel": {
+		"message": "Exécuter la migration"
+	},
+	"migration_Options_DownloadMigrationButtonLabel": {
+		"message": "Télécharger la nouvelle configuration"
+	},
+	"migration_Error_LowerVersion": {
+		"message": "La configuration ne peut pas être migrée vers une version inférieure"
+	},
+	"migration_Error_SameVersion": {
+		"message": "La configuration ne peut pas être migrée vers la même version"
+	}
+}

@@ -1,8 +1,7 @@
-import { Cookies, Runtime, StorageLocal, StorageSync, Tabs } from '../../utils/browser.js';
+import { Cookies, StorageLocal, StorageSync, Tabs } from '../../utils/browser.js';
 import { defaultThemeSwitchSetting } from '../../utils/feature_default_configuration.js';
 import { authorizeFeature } from './features.js';
 
-const dateFormat = 'MM-DD-YYYY';
 const themeCookieName = 'color_scheme';
 
 export async function switchThemeIfNeeded(tab) {

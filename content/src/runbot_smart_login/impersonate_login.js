@@ -55,9 +55,17 @@ async function appendRunbotLogin(currentUrl) {
     loginsTemplate.innerHTML = `
         <div id="${loginsIdentifier}" class="form-group mb-2 text-center">
             <div class="btn-group-sm d-flex justify-content-center">
-                <button class="btn btn-warning mx-1 flex-fill" data-login="admin" title="Login as admin">Admin</button>
-                <button class="btn btn-warning mx-1 flex-fill" data-login="demo" title="Login as demo">Demo</button>
-                <button class="btn btn-warning mx-1 flex-fill" data-login="portal" title="Login as portal">Portal</button>
+                <button class="btn btn-warning mx-1 flex-fill" data-login="admin" 
+                title="${chrome.i18n.getMessage('impersonateLogin_Content_LoginAsAdminTitle')}">
+                ${chrome.i18n.getMessage('impersonateLogin_Content_LoginAsAdminLabel')}</button>
+                
+                <button class="btn btn-warning mx-1 flex-fill" data-login="demo" 
+                title="${chrome.i18n.getMessage('impersonateLogin_Content_LoginAsDemoTitle')}">
+                ${chrome.i18n.getMessage('impersonateLogin_Content_LoginAsDemoLabel')}</button>
+                
+                <button class="btn btn-warning mx-1 flex-fill" data-login="portal" 
+                title="${chrome.i18n.getMessage('impersonateLogin_Content_LoginAsPortalTitle')}">
+                ${chrome.i18n.getMessage('impersonateLogin_Content_LoginAsPortalLabel')}</button>
             </div>
         </div>
     `.trim();

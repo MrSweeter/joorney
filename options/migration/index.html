@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Odoo - QoL & Fun Migration</title>
+        <title data-i18n="migration_Options_PageTitle"></title>
         <link rel="icon" type="image/x+icon" href="./../../images/icon_128.svg" />
         <!-- Font Awesome -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
@@ -18,15 +18,17 @@
             <p id="error_message" class="text-danger"></p>
 
             <div class="mb-5">
-                <h4>Select your configuration to migrate</h4>
+                <h4 data-i18n="migration_Options_SelectFileSectionLabel"></h4>
                 <input type="file" accept=".json" class="form-control form-control-sm" id="qol_import_storage_sync_file" />
             </div>
 
             <div id="migration_resume" class="d-none">
-                <h4>Migration</h4>
+                <h4 data-i18n="migration_Options_MigrationSectionLabel"></h4>
                 <div id="migration_list" class="d-flex justify-content-center align-items-center"></div>
-                <button id="run_migration" class="btn btn-success w-100">Execute migration</button>
+                <button id="run_migration" class="btn btn-success w-100" data-i18n="migration_Options_RunMigrationButtonLabel"></button>
             </div>
         </div>
     </body>
+
+    <script src="../i18n.js"></script>
 </html>

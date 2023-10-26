@@ -5,7 +5,7 @@ const defaultShortcut = {
     //kbsMetaKey: false, Mac OS
     kbsShiftKey: false,
     kbsCodeKey: 'Period',
-    kbsDisplayKey: 'Period (:)'
+    kbsDisplayKey: 'Period (:)',
 };
 
 async function updateTabState(url) {
@@ -17,11 +17,9 @@ async function updateTabState(url) {
         if (shortcut.kbsCtrlKey && !e.ctrlKey) return;
         //if (shortcut.kbsMetaKey && !e.metaKey) return;
         if (shortcut.kbsShiftKey && !e.shiftKey) return;
-        console.log(e.code)
-        console.log(shortcut.kbsCodeKey)
         if (shortcut.kbsCodeKey !== e.code) return;
 
-        if (confirm('The current tab will be reload.\nDo you confirm your action?')) {
+        if (confirm(chrome.i18n.getMessage('keyboardShortcut_Content_ConfirmReload'))) {
             sendUpdate();
         }
     };

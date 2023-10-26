@@ -1,10 +1,12 @@
-import { Action, StorageLocal, Tabs } from '../../utils/browser.js';
+import { Action, StorageLocal, Tabs, I18N } from '../../utils/browser.js';
 
 export async function updateTabState(request) {
     const tabs = await Tabs.query({ active: true, currentWindow: true });
     const tabId = tabs[0].id;
     const origin = new URL(tabs[0].url).origin;
-    let isOFF = (await Action.getBadgeText({ tabId: tabId })) === 'OFF';
+    const offText_i18n = I18N.getMessage('keyboardShortcut_Background_StateOff');
+
+    let isOFF = (await Action.getBadgeText({ tabId: tabId })) === offText_i18n;
     if (request.forceSwitchToOFF) {
         isOFF = false;
     }
@@ -12,7 +14,7 @@ export async function updateTabState(request) {
     let { offs } = await StorageLocal.get({ offs: [] });
     offs = new Set(offs);
 
-    const badgeText = { tabId: tabId, text: isOFF ? '' : 'OFF' };
+    const badgeText = { tabId: tabId, text: isOFF ? '' : offText_i18n };
 
     if (isOFF) {
         Action.enable(tabId);

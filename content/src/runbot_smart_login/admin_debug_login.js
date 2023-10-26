@@ -22,7 +22,7 @@ async function appendRunbotAdminDebugLogin(currentUrl) {
             newBtn.onclick = (e) => openEventRunbot(e, false);
             newBtn.onauxclick = (e) => openEventRunbot(e, true);
             newBtn.href = btn.href;
-            newBtn.title = 'Open runbot as admin and with debug mode enabled';
+            newBtn.title = chrome.i18n.getMessage('adminDebugLogin_Content_SignInButtonTitle');
             btn.after(newBtn);
         }
     });
