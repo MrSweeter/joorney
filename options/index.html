@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Odoo - QoL & Fun Configuration</title>
+        <title data-i18n="options_PageTitle">Odoo - QoL & Fun Configuration</title>
         <link rel="icon" type="image/x+icon" href="./../images/icon_128.svg" />
         <!-- Font Awesome -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
@@ -27,20 +27,20 @@
     <body class="qol-body-background">
         <nav class="navbar navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" title="Debug mode" href="?debug=1">
-                    <img loading="lazy" src="/images/icon_128.png" class="mx-2" height="20" alt="Odoo - QoL Logo" loading="lazy" />
-                    <small>Odoo - QoL & Fun Configuration</small>
+                <a class="navbar-brand" href="?debug=1">
+                    <img loading="lazy" src="/images/icon_128.png" class="mx-2" height="20" loading="lazy" />
+                    <small data-i18n="options_Title">Odoo - QoL & Fun Configuration</small>
                 </a>
 
                 <div class="d-flex align-items-center">
                     <input type="file" accept=".json" class="form-control form-control-sm" id="qol_import_storage_sync_file" />
-                    <button class="btn" id="qol_import_storage_sync" title="Import settings">
+                    <button class="btn" id="qol_import_storage_sync" data-i18n-title="options_importButton_Title">
                         <i class="fas fa-cloud-arrow-up"></i>
                     </button>
-                    <button class="btn" id="qol_export_storage_sync" title="Export settings">
+                    <button class="btn" id="qol_export_storage_sync" data-i18n-title="options_exportButton_Title">
                         <i class="fas fa-cloud-arrow-down"></i>
                     </button>
-                    <a class="btn btn-success d-none" id="qol_migrate_configuration" href="./migration/index.html" target="_blank">MIGRATE</a>
+                    <a class="btn btn-success d-none" id="qol_migrate_configuration" href="./migration/index.html" target="_blank" data-i18n="options_migrateButton">MIGRATE</a>
                 </div>
             </div>
         </nav>
@@ -48,28 +48,28 @@
         <pre id="qol-debug-configuration"></pre>
 
         <!--#region Limited Features -->
-        <div class="row mt-3 px-5">
-            <h4 class="text-start mt-3">Limited Features</h4>
+        <div class="row m-0 mt-3 px-5">
+            <h4 class="text-start mt-3" data-i18n="runbotLimitedFeature_Options_SectionLabel">Limited Features</h4>
             <div class="pt-3 d-flex flex-wrap justify-content-start ">
-                <label title="[Limited Feature] Admin-Debug login on Runbot" for="qol_adminDebugLoginRunbot_limited_feature">
+                <label for="qol_adminDebugLoginRunbot_limited_feature">
                     <input id="qol_adminDebugLoginRunbot_limited_feature" class="input-hide" type="checkbox" />
                     <div class="limited-feature-wrapper d-flex">
                         <i class="qol-font-icon-size fa-regular me-2"></i>
-                        <p>Runbot/Admin-Debug Login</p>
+                        <p data-i18n="adminDebugLogin_Options_EnableButton">Runbot/Admin-Debug Login</p>
                     </div>
                 </label>
-                <label title="[Limited Feature] Impersonate login on Runbot" for="qol_impersonateLoginRunbot_limited_feature">
+                <label for="qol_impersonateLoginRunbot_limited_feature">
                     <input id="qol_impersonateLoginRunbot_limited_feature" class="input-hide" type="checkbox" />
                     <div class="limited-feature-wrapper d-flex">
                         <i class="qol-font-icon-size fa-regular me-2"></i>
-                        <p>Runbot/Impersonate Login</p>
+                        <p data-i18n="impersonateLogin_Options_EnableButton">Runbot/Impersonate Login</p>
                     </div>
                 </label>
-                <label title="[Limited Feature] AutoOpen Runbot" for="qol_autoOpenRunbot_limited_feature">
+                <label for="qol_autoOpenRunbot_limited_feature">
                     <input id="qol_autoOpenRunbot_limited_feature" class="input-hide" type="checkbox" />
                     <div class="limited-feature-wrapper d-flex">
                         <i class="qol-font-icon-size fa-regular me-2"></i>
-                        <p>Runbot/AutoSelect And Open</p>
+                        <p data-i18n="autoOpenRunbot_Options_EnableButton">Runbot/AutoSelect And Open</p>
                     </div>
                 </label>
             </div>
@@ -77,11 +77,11 @@
         <!--#endregion-->
 
         <!--#region Features -->
-        <div class="row mt-3 px-5">
-            <h4 class="text-start mt-3">Features</h4>
-            <h6 class="col-4 text-success">Whitelist</h6>
-            <h6 class="col-4 text-danger">Blacklist</h6>
-            <h6 class="col-4">Disable</h6>
+        <div class="row m-0 mt-3 px-5">
+            <h4 class="text-start mt-3" data-i18n="options_features_SectionLabel">Features</h4>
+            <h6 class="col-4 text-success" data-i18n="options_features_Whitelist">Whitelist</h6>
+            <h6 class="col-4 text-danger" data-i18n="options_features_Blacklist">Blacklist</h6>
+            <h6 class="col-4" data-i18n="options_features_Disable">Disable</h6>
             <div class="col-4">
                 <div id="qol-whitelist-feature" class="qol-state-feature pb-5 h-100 border border-2 border-success rounded d-flex flex-wrap align-content-start justify-content-center"></div>
             </div>
@@ -90,71 +90,71 @@
             </div>
             <div class="col-4">
                 <div id="qol-disable-feature" class="qol-state-feature pb-5 h-100 border border-2 rounded d-flex flex-wrap align-content-start justify-content-center">
-                    <label title="[Feature] Loading Fullscreen" id="qol_awesomeLoadingLarge_feature" data-feature="awesomeLoadingLarge" class="draggable-feature" draggable="true">
+                    <label id="qol_awesomeLoadingLarge_feature" data-feature="awesomeLoadingLarge" class="draggable-feature" draggable="true">
                         <div class="feature-wrapper d-flex">
                             <div class="icon-wrapper pe-1">
                                 <i class="fa-solid fa-circle-notch"></i>
                             </div>
-                            <p>Awesome Loading/Large</p>
+                            <p data-i18n="awesomeLoadingLarge_Options_EnableButton">Awesome Loading/Large</p>
                         </div>
                     </label>
-                    <label title="[Feature] Loading bottom right" id="qol_awesomeLoadingSmall_feature" data-feature="awesomeLoadingSmall" class="draggable-feature" draggable="true">
+                    <label id="qol_awesomeLoadingSmall_feature" data-feature="awesomeLoadingSmall" class="draggable-feature" draggable="true">
                         <div class="feature-wrapper d-flex">
                             <div class="icon-wrapper pe-1">
                                 <i class="fa-solid fa-spinner"></i>
                             </div>
-                            <p>Awesome Loading/Small</p>
+                            <p data-i18n="awesomeLoadingSmall_Options_EnableButton">Awesome Loading/Small</p>
                         </div>
                     </label>
-                    <label title="[Feature] Assign me" id="qol_assignMeTask_feature" data-feature="assignMeTask" class="draggable-feature" draggable="true">
+                    <label id="qol_assignMeTask_feature" data-feature="assignMeTask" class="draggable-feature" draggable="true">
                         <div class="feature-wrapper d-flex">
                             <div class="icon-wrapper pe-1">
                                 <i class="fa-solid fa-user-plus"></i>
                             </div>
-                            <p>Task/Assign Me</p>
+                            <p data-i18n="assignMe_Popup_Options_EnableButton">Task/Assign Me</p>
                         </div>
                     </label>
-                    <label title="[Feature] Stars effect" id="qol_starringTaskEffect_feature" data-feature="starringTaskEffect" class="draggable-feature" draggable="true">
+                    <label id="qol_starringTaskEffect_feature" data-feature="starringTaskEffect" class="draggable-feature" draggable="true">
                         <div class="feature-wrapper d-flex">
                             <div class="icon-wrapper pe-1">
                                 <i class="fa-solid fa-star"></i>
                             </div>
-                            <p>Task/Stars Effect</p>
+                            <p data-i18n="starringTaskEffect_Options_EnableButton">Task/Stars Effect</p>
                         </div>
                     </label>
-                    <label title="[Feature] Save Knowledge" id="qol_saveKnowledge_feature" data-feature="saveKnowledge" class="draggable-feature" draggable="true">
+                    <label id="qol_saveKnowledge_feature" data-feature="saveKnowledge" class="draggable-feature" draggable="true">
                         <div class="feature-wrapper d-flex">
                             <div class="icon-wrapper pe-1">
                                 <i class="fa-regular fa-bookmark"></i>
                                 <i class="fa-solid fa-floppy-disk double-fa"></i>
                             </div>
-                            <p>Save Knowledge</p>
+                            <p data-i18n="saveKnowledge_Options_EnableButton">Save Knowledge</p>
                         </div>
                     </label>
-                    <label title="[Feature] Switch Odoo Theme" id="qol_themeSwitch_feature" data-feature="themeSwitch" class="draggable-feature" draggable="true">
+                    <label id="qol_themeSwitch_feature" data-feature="themeSwitch" class="draggable-feature" draggable="true">
                         <div class="feature-wrapper d-flex">
                             <div class="icon-wrapper pe-1">
                                 <i class="fa-solid fa-sun"></i>
                                 <i class="fa-solid fa-circle double-fa-mask double-fa-bicolor"></i>
                                 <i class="fa-solid fa-moon double-fa"></i>
                             </div>
-                            <p>Theme Switch</p>
+                            <p data-i18n="themeSwitch_Options_EnableButton">Theme Switch</p>
                         </div>
                     </label>
-                    <label title="[Feature] Awesome Style" id="qol_awesomeStyle_feature" data-feature="awesomeStyle" class="draggable-feature" draggable="true">
+                    <label id="qol_awesomeStyle_feature" data-feature="awesomeStyle" class="draggable-feature" draggable="true">
                         <div class="feature-wrapper d-flex">
                             <div class="icon-wrapper pe-1">
                                 <i class="fa-brands fa-css3-alt"></i>
                             </div>
-                            <p>Awesome Style</p>
+                            <p data-i18n="awesomeStyle_Options_EnableButton">Awesome Style</p>
                         </div>
                     </label>
-                    <label title="[Feature] Unfocus App" id="qol_unfocusApp_feature" data-feature="unfocusApp" class="draggable-feature" draggable="true">
+                    <label id="qol_unfocusApp_feature" data-feature="unfocusApp" class="draggable-feature" draggable="true">
                         <div class="feature-wrapper d-flex">
                             <div class="icon-wrapper pe-1">
                                 <i class="fa-solid fa-ghost"></i>
                             </div>
-                            <p>Unfocus App</p>
+                            <p data-i18n="unfocusApp_Options_EnableButton">Unfocus App</p>
                         </div>
                     </label>
                 </div>
@@ -162,52 +162,52 @@
         </div>
         <!--#endregion -->
 
-        <div class="row pt-3 p-5 text-center">
+        <div class="row m-0 pt-3 p-5 text-center">
             <!--#region Origins Filter -->
-            <h6 class="text-start" id="odoo_theme_anchor">Origins</h6>
+            <h6 class="text-start" id="odoo_theme_anchor" data-i18n="options_origins_SectionLabel">Origins</h6>
             <table id="qol_origins_filter_table" class="table table-striped bg-light">
                 <thead class="shadow-2">
                     <tr>
-                        <th class="qol-origins_filter-origin-input" title="Odoo Database Origin">Origins</th>
-                        <th title="[Feature Origin] Loading Fullscreen" class="icon-wrapper-head">
-                            <div class="icon-wrapper" id="qol_origins_filter_feature_header_awesomeLoadingLarge">
-                                <i class="fa-solid fa-circle-notch"></i>
-                            </div>
-                        </th>
-                        <th title="[Feature Origin] Loading bottom right" class="icon-wrapper-head">
-                            <div class="icon-wrapper" id="qol_origins_filter_feature_header_awesomeLoadingSmall">
-                                <i class="fa-solid fa-spinner"></i>
-                            </div>
-                        </th>
-                        <th title="[Feature Origin] Assign me" class="icon-wrapper-head">
+                        <th class="qol-origins_filter-origin-input" data-i18n="options_features_OriginsColumn">Origins</th>
+                        <th data-i18n-title="assignMe_Options_Column_Title" class="icon-wrapper-head">
                             <div class="icon-wrapper" id="qol_origins_filter_feature_header_assignMeTask">
                                 <i class="fa-solid fa-user-plus"></i>
                             </div>
                         </th>
-                        <th title="[Feature Origin] Stars effect" class="icon-wrapper-head">
+                        <th data-i18n-title="starringTaskEffect_Options_Column_Title" class="icon-wrapper-head">
                             <div class="icon-wrapper" id="qol_origins_filter_feature_header_starringTaskEffect">
                                 <i class="fa-solid fa-star"></i>
                             </div>
                         </th>
-                        <th title="[Feature Origin] Save knowledge" class="icon-wrapper-head">
+                        <th data-i18n-title="saveKnowledge_Popup_Options_Column_Title" class="icon-wrapper-head">
                             <div class="icon-wrapper" id="qol_origins_filter_feature_header_saveKnowledge">
                                 <i class="fa-regular fa-bookmark"></i>
                                 <i class="fa-solid fa-floppy-disk double-fa"></i>
                             </div>
                         </th>
-                        <th title="[Feature Origin] Switch Odoo theme" class="icon-wrapper-head">
+                        <th data-i18n-title="themeSwitch_Popup_Options_Column_Title" class="icon-wrapper-head">
                             <div class="icon-wrapper" id="qol_origins_filter_feature_header_themeSwitch">
                                 <i class="fa-solid fa-sun"></i>
                                 <i class="fa-solid fa-circle double-fa-mask double-fa-bicolor"></i>
                                 <i class="fa-solid fa-moon double-fa"></i>
                             </div>
                         </th>
-                        <th title="[Feature Origin] Awesome Style" class="icon-wrapper-head">
+                        <th data-i18n-title="awesomeStyle_Popup_Options_Column_Title" class="icon-wrapper-head">
                             <div class="icon-wrapper" id="qol_origins_filter_feature_header_awesomeStyle">
                                 <i class="fa-brands fa-css3-alt"></i>
                             </div>
                         </th>
-                        <th title="[Feature Origin] Unfocus App" class="icon-wrapper-head">
+                        <th data-i18n-title="awesomeLoadingLarge_Popup_Options_Column_Title" class="icon-wrapper-head">
+                            <div class="icon-wrapper" id="qol_origins_filter_feature_header_awesomeLoadingLarge">
+                                <i class="fa-solid fa-circle-notch"></i>
+                            </div>
+                        </th>
+                        <th data-i18n-title="awesomeLoadingSmall_Options_Column_Title" class="icon-wrapper-head">
+                            <div class="icon-wrapper" id="qol_origins_filter_feature_header_awesomeLoadingSmall">
+                                <i class="fa-solid fa-spinner"></i>
+                            </div>
+                        </th>
+                        <th data-i18n-title="unfocusApp_Options_Column_Title" class="icon-wrapper-head">
                             <div class="icon-wrapper" id="qol_origins_filter_feature_header_unfocusApp">
                                 <i class="fa-solid fa-ghost"></i>
                             </div>
@@ -222,10 +222,10 @@
                     </tr>
                     <tr class="table-secondary">
                         <td class="p-1 qol-valign-middle" colspan="9">
-                            <input type="text" class="form-control border border-0" id="qol_origins_filter_new_origin" placeholder="www.odoo.com" aria-label="Origin filter" />
+                            <input type="text" class="form-control border border-0" id="qol_origins_filter_new_origin" placeholder="www.odoo.com" />
                         </td>
                         <td class="p-1 qol-valign-middle">
-                            <button title="Add origin" id="qol_origins_filter_new_origin_save" class="btn btn-success btn-floating">
+                            <button data-i18n-title="options_origins_addOrigin_Title" id="qol_origins_filter_new_origin_save" class="btn btn-success btn-floating">
                                 <i class="fa fa-plus"></i>
                             </button>
                         </td>
@@ -238,12 +238,12 @@
             <!--#endregion-->
 
             <!--#region Awesome Loading -->
-            <h4 class="text-start mt-3">Awesome Loading</h4>
+            <h4 class="text-start mt-3" data-i18n="options_awesomeLoading_SectionLabel">Awesome Loading</h4>
             <table id="qol_awe_loading_images_table" class="table table-striped bg-light">
                 <thead class="shadow-2">
                     <tr>
                         <th><i class="fa fa-eye"></i></th>
-                        <th class="qol-awe-loading-switch-origin-input" title="Image URL">Image URL</th>
+                        <th class="qol-awe-loading-switch-origin-input" data-i18n="options_awesomeLoading_ImageUrlColumn">Image URL</th>
                         <th class="py-0 qol-valign-middle action-head"></th>
                     </tr>
                 </thead>
@@ -255,10 +255,10 @@
                     <tr class="table-secondary">
                         <td class="py-0"><img loading="lazy" id="qol_awe_loading_new_image_preview" class="qol-awe-loading-preview" src="" /></td>
                         <td class="p-1 qol-valign-middle">
-                            <input type="text" class="form-control border border-0" id="qol_awe_loading_new_image" placeholder="" aria-label="Image URL" />
+                            <input type="text" class="form-control border border-0" id="qol_awe_loading_new_image" placeholder="" />
                         </td>
                         <td class="p-1 qol-valign-middle">
-                            <button title="Add image" id="qol_awe_loading_new_image_save" class="btn btn-success btn-floating">
+                            <button data-i18n-title="options_origins_addImage_Title" id="qol_awe_loading_new_image_save" class="btn btn-success btn-floating">
                                 <i class="fa fa-plus"></i>
                             </button>
                         </td>
@@ -271,25 +271,27 @@
             <!--#endregion-->
 
             <!--#region Awesome Style -->
-            <h4 class="text-start mt-3">Awesome Style <span style="opacity: .5;">(beta)</span></h4>
+            <h4 class="text-start mt-3" data-i18n="options_awesomeStyle_SectionLabel">Awesome Style <span style="opacity: .5;">(beta)</span></h4>
             <div id="qol_awe_style_container" class="col-12">
-                <textarea id="qol_awe_style_css" class="form-control col-12" rows="10" placeholder="Type CSS code here" spellcheck="false"></textarea>
-                <button title="Save" id="qol_awe_style_save" class="btn btn-success"><i class="fa fa-floppy-disk me-1"></i> Save (ctrl+s)</button>
+                <textarea id="qol_awe_style_css" class="form-control col-12" rows="10" data-i18n-placeholder="options_awesomeStyle_AreaPlaceholder" spellcheck="false"></textarea>
+                <button id="qol_awe_style_save" class="btn btn-success" data-i18n="options_awesomeStyle_SaveButton"><i class="fa fa-floppy-disk me-1"></i> Save (ctrl+s)</button>
             </div>
             <!--#endregion-->
 
             <!--#region Unfocus App -->
-            <h4 class="text-start mt-3">Unfocus App</h4>
-            <table id="qol_unfocus_app_table" class="table table-striped bg-light">
-                <thead class="shadow-2">
-                    <tr>
-                        <th class="qol-unfocus_app-origin" title="Origins">Origins</th>
-                        <th class="" title="Unfocus count">Unfocus Count</th>
-                        <th class="py-0 qol-valign-middle action-head"></th>
-                    </tr>
-                </thead>
-                <tbody id="qol_unfocus_app_table_body"></tbody>
-            </table>
+            <div id="unfocus_app_section" class="d-none">
+                <h4 class="text-start mt-3" data-i18n="options_unfocusApp_SectionLabel">Unfocus App</h4>
+                <table id="qol_unfocus_app_table" class="table table-striped bg-light">
+                    <thead class="shadow-2">
+                        <tr>
+                            <th class="qol-unfocus_app-origin" data-i18n="options_unfocusApp_OriginsColumn">Origins</th>
+                            <th class="" data-i18n="options_unfocusApp_CountColumn">Unfocus Count</th>
+                            <th class="py-0 qol-valign-middle action-head"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="qol_unfocus_app_table_body"></tbody>
+                </table>
+            </div>
             <!--#endregion-->
 
             <!--#region Theme Switch -->
@@ -297,8 +299,8 @@
             <table class="table table-striped bg-light">
                 <thead class="shadow-2">
                     <tr>
-                        <th style="width: 50%;">Latitude / Longitude</th>
-                        <th style="width: 50%;">Dark Mode: Start / Stop</th>
+                        <th style="width: 50%;" data-i18n="options_themeSwitch_LocationColumn">Latitude / Longitude</th>
+                        <th style="width: 50%;" data-i18n="options_themeSwitch_TimeRangeColumn">Dark Mode: Start / Stop</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -308,7 +310,9 @@
                                 <input id="qol_theme_switch_latitude" type="text" class="form-control border border-0" />
                                 <span class="input-group-text border border-0">/</span>
                                 <input id="qol_theme_switch_longitude" type="text" class="form-control border border-0" />
-                                <button id="qol_theme_switch_get_location_button" class="btn btn-secondary" title="Get current location"><i class="fa-solid fa-lg fa-location-crosshairs"></i></button>
+                                <button id="qol_theme_switch_get_location_button" class="btn btn-secondary" data-i18n-title="options_themeSwitch_GetLocationButton_Title">
+                                    <i class="fa-solid fa-lg fa-location-crosshairs"></i>
+                                </button>
                             </div>
                         </td>
                         <td>
@@ -324,7 +328,7 @@
             <!--#endregion-->
 
             <!--#region Keyboard Shortcut App -->
-            <h4 class="text-start mt-3">Keyboard Shortcut</h4>
+            <h4 class="text-start mt-3" data-i18n="options_keyboardShortcut_SectionLabel">Keyboard Shortcut</h4>
             <div class="col-12">
                 <div id="keyboard_shortcut_preview" class="text-start">
                     <div id="keyboard_shortcut_preview_ctrl" class="btn-kbs">Ctrl</div>
@@ -332,11 +336,11 @@
                     <div id="keyboard_shortcut_preview_shift" class="btn-kbs">Shift</div>
                     <!--<div class="btn-kbs">Command</div>-->
                     <div id="keyboard_shortcut_preview_key" class="btn-kbs">$</div>
-                    <button id="keyboard_shortcut_modify_button" class="btn btn-success">Modify</button>
+                    <button id="keyboard_shortcut_modify_button" class="btn btn-success" data-i18n="options_keyboardShortcut_ModifyButton">Modify</button>
                 </div>
                 <div id="keyboard_shortcut_editor" class="input-group">
                     <input id="keyboard_shortcut_editor_input" type="text" class="form-control border border-0" />
-                    <button id="keyboard_shortcut_save_button" class="btn btn-success">Save</button>
+                    <button id="keyboard_shortcut_save_button" class="btn btn-success" data-i18n="options_keyboardShortcut_SaveButton">Save</button>
                     <button id="keyboard_shortcut_close_button" class="btn btn-outline"><i class="fa-solid fa-lg fa-xmark"></i></button>
                 </div>
             </div>
@@ -346,10 +350,12 @@
         <footer class="text-center">
             <div class="text-center p-3">
                 &copy; <span id="copyright-year">2023</span>
-                All rights reserved :
+                <span data-i18n="extension_copyright">All rights reserved :</span>
                 <a id="copyright-link" class="text-dark" href="https://github.com/MrSweeter/odoo-qol">Odoo QoL</a>
             </div>
-            <div>Theme Switch base on Location is powered by <a href="https://sunrisesunset.io/">SunriseSunset.io</a></div>
+            <div data-i18n="extension_credits_sunrisesunset">Theme Switch base on Location is powered by <a href="https://sunrisesunset.io/">SunriseSunset.io</a></div>
         </footer>
     </body>
+
+    <script src="../utils/i18n.js"></script>
 </html>

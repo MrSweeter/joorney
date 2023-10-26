@@ -2,6 +2,8 @@ export function isFirefox() {
     return typeof chrome !== 'undefined' && typeof browser !== 'undefined';
 }
 
+export const I18N = isFirefox() ? browser.i18n : chrome.i18n;
+
 //export const BrowserAction = isFirefox() ? browser?.browserAction : chrome.action;
 export const Tabs = isFirefox() ? browser.tabs : chrome.tabs;
 export const ContextMenus = isFirefox() ? browser.contextMenus : chrome.contextMenus;

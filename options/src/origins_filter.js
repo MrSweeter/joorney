@@ -1,4 +1,4 @@
-import { StorageSync } from '../../utils/browser.js';
+import { I18N, StorageSync } from '../../utils/browser.js';
 import { defaultOriginsFilterSetting } from '../../utils/feature_default_configuration.js';
 
 //#region CRUD
@@ -6,7 +6,7 @@ export async function createOriginsFilterOrigin() {
     const origin = document.getElementById('qol_origins_filter_new_origin');
     let originString = origin.value.trim();
     if (!originString) {
-        renderOriginsFilterError('Missing origin');
+        renderOriginsFilterError(I18N.getMessage('options_Error_MissingUrl'));
         return;
     }
 
@@ -45,7 +45,7 @@ async function readOriginsFilterOrigins() {
 }
 
 export async function deleteOriginsFilterOrigin(origin) {
-    if (confirm(`Are you sure you want to remove origin: ${origin}?`)) {
+    if (confirm(I18N.getMessage('options_originsFilter_ConfirmRemoval', [origin]))) {
         const origins = await readOriginsFilterOrigins();
         delete origins[origin];
         await renderOriginsObject(origins);
@@ -167,7 +167,7 @@ function renderOrigin(idx, origin, blacklist) {
 			<td class="p-1 qol-valign-middle">
 				<button
 					class="qol_origins_filter_origin_delete_${idx} btn btn-outline-danger border-0 btn-floating"
-					title="Delete origin"
+					title="${I18N.getMessage('originsFilter_DeleteOriginButton')}"
 				>
 					<i class="qol-font-icon-size fa fa-trash"></i>
 				</button>

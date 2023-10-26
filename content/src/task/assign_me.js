@@ -7,7 +7,10 @@ async function addUserToTaskAssignees(task, userID) {
     const ticketID = getTaskIDFromUrl(hrefFragmentToURLParameters(window.location.href));
     if (task.id != ticketID)
         throw new Error(
-            `Button context is not the same as the url context: '${task.id}' vs '${ticketID}'`
+            chrome.i18n.getMessage('assignMe_Error_InvalidButtonContext', [
+                `${task.id}`,
+                `${ticketID}`,
+            ])
         );
 
     const newUsers = task.user_ids.concat(userID);
@@ -34,20 +37,23 @@ async function addUserToTaskAssignees(task, userID) {
 
     if (data?.error || data?.result === false) {
         // TODO Display error to user
-        throw new Error(data.error?.data?.message, "'Assign to me' call failed !");
+        throw new Error(
+            data.error?.data?.message,
+            chrome.i18n.getMessage('assignMe_Error_CallFailed')
+        );
     }
     if (data?.result === true) {
         window.location.reload();
         return;
     }
-    throw new Error(data?.result || "Unknown response from 'Assign to me' call...");
+    throw new Error(data?.result || chrome.i18n.getMessage('assignMe_Error_UnknownReponse'));
 }
 
 function appendAssignMeTaskButtonToDom(task, currentUser) {
     const buttonTemplate = document.createElement('template');
     buttonTemplate.innerHTML = `
 		<button class="btn btn-warning" name="qol_action_assign_to_me" type="object">
-			<span>Assign to me</span>
+			<span>${chrome.i18n.getMessage('assignMe_Content_ButtonLabel')}</span>
 		</button>
 	`.trim();
 

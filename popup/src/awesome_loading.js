@@ -50,7 +50,9 @@ async function updateRenderAwesomeLoading(checked, large) {
         ? configuration.awesomeLoadingLargeImage
         : configuration.awesomeLoadingSmallImage;
 
-    awesomeLoadingImage.innerHTML = '<option value="" selected>Default</option>';
+    awesomeLoadingImage.innerHTML = `<option value="" selected>${chrome.i18n.getMessage(
+        'generic_default'
+    )}</option>`;
     awesomeLoadingImage.disabled = !checked;
     awesomeLoadingImagePreview.src = configurationImage;
     awesomeLoadingImagePreview.style.opacity = checked ? 1 : 0.25;

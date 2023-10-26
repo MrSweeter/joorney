@@ -1,4 +1,4 @@
-import { StorageSync } from '../../utils/browser.js';
+import { I18N, StorageSync } from '../../utils/browser.js';
 import { defaultUnfocusAppSetting } from '../../utils/feature_default_configuration.js';
 import { loadFeature } from './features.js';
 
@@ -11,7 +11,7 @@ async function readUnfocusAppOrigins() {
 }
 
 export async function deleteUnfocusAppOrigin(origin) {
-    if (confirm(`Are you sure you want to remove origin: ${origin}?`)) {
+    if (confirm(I18N.getMessage('unfocusApp_ConfirmRemoval', [origin]))) {
         const origins = await readUnfocusAppOrigins();
         delete origins[origin];
         await renderOriginsObject(origins);
@@ -39,11 +39,15 @@ async function renderOriginsObject(origins) {
 
     const container = document.getElementById('qol_unfocus_app_table_body');
     container.innerHTML = '';
-    Object.keys(origins).forEach((o, id) => {
-        container.appendChild(
-            renderOrigin(id, o, Object.values(origins[o]).filter((v) => v).length)
-        );
-    });
+    const keys = Object.keys(origins);
+    if (keys.length > 0) {
+        document.getElementById('unfocus_app_section').classList.remove('d-none');
+        keys.forEach((o, id) => {
+            container.appendChild(
+                renderOrigin(id, o, Object.values(origins[o]).filter((v) => v).length)
+            );
+        });
+    }
 }
 
 function renderOrigin(idx, origin, unfocusCount) {
@@ -64,7 +68,7 @@ function renderOrigin(idx, origin, unfocusCount) {
 			<td class="p-1 qol-valign-middle">
 				<button
 					class="qol_unfocus_app_origin_delete_${idx} btn btn-outline-danger border-0 btn-floating"
-					title="Delete origin"
+					title="${I18N.getMessage('unfocusApp_DeleteOriginButton')}"
 				>
 					<i class="qol-font-icon-size fa fa-trash"></i>
 				</button>

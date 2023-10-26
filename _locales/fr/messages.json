@@ -1,0 +1,381 @@
+{
+	"extension_Name": {
+		"message": "Odoo - Quality of Life & Fun"
+	},
+	"extension_Description": {
+		"message": "Odoo - Quality of Life & Fun"
+	},
+	"extension_copyright": {
+		"message": "All rights reserved :"
+	},
+	"extension_credits_sunrisesunset": {
+		"message": "Theme Switch base on Location is powered by <a href='https: //sunrisesunset.io/'>SunriseSunset.io</a>"
+	},
+	"extension_ActionTitle": {
+		"message": "Odoo - QoL & Fun"
+	},
+	"keyboardShortcut_Background_StateOff": {
+		"message": "OFF"
+	},
+	"keyboardShortcut_Content_ConfirmReload": {
+		"message": "The current tab will be reload.\nDo you confirm your action?"
+	},
+	"runbotLimitedFeature_Popup_Title": {
+		"message": "Runbot limited features"
+	},
+	"runbotLimitedFeature_Options_SectionLabel": {
+		"message": "Limited Features"
+	},
+	"adminDebugLogin_Content_SignInButton_Title": {
+		"message": "Open runbot as admin and with debug mode enabled"
+	},
+	"adminDebugLogin_Popup_EnableButton_Title": {
+		"message": "[Limited Feature] Admin-Debug Login"
+	},
+	"adminDebugLogin_Options_EnableButton": {
+		"message": "Runbot/Admin-Debug Login"
+	},
+	"impersonateLogin_Content_LoginAsAdmin_Title": {
+		"message": "Login as admin"
+	},
+	"impersonateLogin_Content_LoginAsAdminLabel": {
+		"message": "Admin"
+	},
+	"impersonateLogin_Content_LoginAsDemo_Title": {
+		"message": "Login as demo"
+	},
+	"impersonateLogin_Content_LoginAsDemoLabel": {
+		"message": "Demo"
+	},
+	"impersonateLogin_Content_LoginAsPortal_Title": {
+		"message": "Login as portal"
+	},
+	"impersonateLogin_Content_LoginAsPortalLabel": {
+		"message": "Portal"
+	},
+	"impersonateLogin_Popup_EnableButton_Title": {
+		"message": "[Limited Feature] Impersonate Login"
+	},
+	"impersonateLogin_Options_EnableButton": {
+		"message": "Runbot/Impersonate Login"
+	},
+	"autoOpenRunbot_Popup_EnableButton_Title": {
+		"message": "[Limited Feature] AutoOpen Runbot"
+	},
+	"autoOpenRunbot_Options_EnableButton": {
+		"message": "Runbot/AutoSelect And Open"
+	},
+	"projectTaskFeature_Popup_Title": {
+		"message": "Task (project.task) features"
+	},
+	"assignMe_Error_InvalidButtonContext": {
+		"message": "Button context is not the same as the url context: '$1' vs '$2'",
+		"placeholders": {
+			"contextTaskID": {
+				"content": "$1"
+			},
+			"urlTaskID": {
+				"content": "$2"
+			}
+		}
+	},
+	"assignMe_Error_CallFailed": {
+		"message": "'Assign to me' call failed !"
+	},
+	"assignMe_Error_UnknownReponse": {
+		"message": "Unknown response from 'Assign to me' call..."
+	},
+	"assignMe_Content_ButtonLabel": {
+		"message": "Assign to me"
+	},
+	"assignMe_Popup_EnableButton_Title": {
+		"message": "[Feature] Assign me button"
+	},
+	"assignMe_Popup_OriginEnableButton_Title": {
+		"message": "[Feature Origin] Assign me button"
+	},
+	"assignMe_Options_Column_Title": {
+		"message": "[Feature Origin] Assign me button"
+	},
+	"assignMe_Popup_Options_EnableButton": {
+		"message": "Task/Assign Me"
+	},
+	"starringTaskEffect_Popup_EnableButton_Title": {
+		"message": "[Feature] Stars effect"
+	},
+	"starringTaskEffect_Popup_OriginEnableButton_Title": {
+		"message": "[Feature Origin] Stars effect"
+	},
+	"starringTaskEffect_Options_Column_Title": {
+		"message": "[Feature Origin] Stars effect"
+	},
+	"starringTaskEffect_Options_EnableButton": {
+		"message": "Task/Stars Effect"
+	},
+	"saveKnowledge_Error_InvalidButtonContext": {
+		"message": "Button context is not the same as the url context: '$1' vs '$2'",
+		"placeholders": {
+			"contextArticleID": {
+				"content": "$1"
+			},
+			"urlArticleID": {
+				"content": "$2"
+			}
+		}
+	},
+	"saveKnowledge_Error_CallFailed": {
+		"message": "'Save article' call failed !"
+	},
+	"saveKnowledge_Error_UnknownReponse": {
+		"message": "Unknown response from 'Save article' call..."
+	},
+	"saveKnowledge_Content_ButtonLabel": {
+		"message": "Save"
+	},
+	"saveKnowledge_Popup_EnableButton_Title": {
+		"message": "[Feature] Save knowledge button"
+	},
+	"saveKnowledge_Popup_OriginEnableButton_Title": {
+		"message": "[Feature Origin] Save knowledge button"
+	},
+	"saveKnowledge_Popup_Options_Column_Title": {
+		"message": "[Feature Origin] Save knowledge button"
+	},
+	"saveKnowledge_Options_EnableButton": {
+		"message": "Save Knowledge"
+	},
+	"themeSwitch_Popup_EnableButton_Title": {
+		"message": "[Feature] Switch Odoo theme"
+	},
+	"themeSwitch_Popup_OriginEnableButton_Title": {
+		"message": "[Feature Origin] Switch Odoo theme"
+	},
+	"themeSwitch_Popup_Options_Column_Title": {
+		"message": "[Feature Origin] Switch Odoo theme"
+	},
+	"themeSwitch_Options_EnableButton": {
+		"message": "Theme Switch"
+	},
+	"themeSwitch_Popup_DarkMode": {
+		"message": "Dark mode"
+	},
+	"themeSwitch_Popup_LightMode": {
+		"message": "Light Mode"
+	},
+	"themeSwitch_Popup_SunriseMode": {
+		"message": "Based on configured location (sunrise/sunset)"
+	},
+	"themeSwitch_Popup_TimeRangeMode": {
+		"message": "Dark mode based on configured time"
+	},
+	"awesomeStyle_Popup_EnableButton_Title": {
+		"message": "[Feature] Awesome Style button"
+	},
+	"awesomeStyle_Popup_OriginEnableButton_Title": {
+		"message": "[Feature Origin] Awesome Style button"
+	},
+	"awesomeStyle_Popup_Options_Column_Title": {
+		"message": "[Feature Origin] Awesome Style button"
+	},
+	"awesomeStyle_Options_EnableButton": {
+		"message": "Awesome Style"
+	},
+	"awesomeLoadingLarge_Popup_EnableButton_Title": {
+		"message": "[Feature] Loading Fullscreen"
+	},
+	"awesomeLoadingLarge_Popup_OriginEnableButton_Title": {
+		"message": "[Feature Origin] Loading Fullscreen"
+	},
+	"awesomeLoadingLarge_Popup_Options_Column_Title": {
+		"message": "[Feature Origin] Loading Fullscreen"
+	},
+	"awesomeLoadingLarge_Options_EnableButton": {
+		"message": "Awesome Loading/Large"
+	},
+	"awesomeLoadingSmall_Popup_EnableButton_Title": {
+		"message": "[Feature] Loading bottom right"
+	},
+	"awesomeLoadingSmall_Popup_OriginEnableButton_Title": {
+		"message": "[Feature Origin] Loading bottom right"
+	},
+	"awesomeLoadingSmall_Options_Column_Title": {
+		"message": "[Feature Origin] Loading bottom right"
+	},
+	"awesomeLoadingSmall_Options_EnableButton": {
+		"message": "Awesome Loading/Small"
+	},
+	"awesomeLoading_ConfirmRemoval": {
+		"message": "Are you sure you want to remove image: $1?",
+		"placeholders": {
+			"imageUrl": {
+				"content": "$1"
+			}
+		}
+	},
+	"awesomeLoading_DeleteImageButton": {
+		"message": "Delete image"
+	},
+	"unfocusApp_Popup_EnableButton_Title": {
+		"message": "[Feature] Unfocus App button"
+	},
+	"unfocusApp_Popup_OriginEnableButton_Title": {
+		"message": "[Feature Origin] Unfocus App button"
+	},
+	"unfocusApp_Options_Column_Title": {
+		"message": "[Feature Origin] Unfocus App button"
+	},
+	"unfocusApp_Options_EnableButton": {
+		"message": "Unfocus App"
+	},
+	"unfocusApp_Popup_EnableReOrdering_Title": {
+		"message": "Enable unfocus app reorder"
+	},
+	"unfocusApp_Popup_EnableSharing_Title": {
+		"message": "Enable unfocus app configuration share between host"
+	},
+	"unfocusApp_ConfirmRemoval": {
+		"message": "Are you sure you want to remove origin: $1?",
+		"placeholders": {
+			"originUrl": {
+				"content": "$1"
+			}
+		}
+	},
+	"unfocusApp_DeleteOriginButton": {
+		"message": "Delete origin"
+	},
+	"migration_Options_Page_Title": {
+		"message": "Odoo - QoL & Fun Migration"
+	},
+	"migration_Options_SelectFileSectionLabel": {
+		"message": "Select your configuration to migrate"
+	},
+	"migration_Options_MigrationSectionLabel": {
+		"message": "Migration"
+	},
+	"migration_Options_RunMigrationButtonLabel": {
+		"message": "Execute Migration"
+	},
+	"migration_Options_DownloadMigrationButtonLabel": {
+		"message": "Download new configuration"
+	},
+	"migration_Error_LowerVersion": {
+		"message": "Configuration cannot be migrate to the a lower version"
+	},
+	"migration_Error_SameVersion": {
+		"message": "Configuration cannot be migrate to the same version"
+	},
+	"popup_openOption": {
+		"message": "Options"
+	},
+	"popup_invalidWebsite": {
+		"message": "This website is not compatible with Odoo-QoL extension"
+	},
+	"popup_saveOrigin": {
+		"message": "Save this origin"
+	},
+	"popup_saveAndReloadOrigin": {
+		"message": "Save & Reload"
+	},
+	"options_PageTitle": {
+		"message": "Odoo - QoL & Fun Configuration"
+	},
+	"options_Title": {
+		"message": "Odoo - QoL & Fun Configuration"
+	},
+	"options_importButton_Title": {
+		"message": "Import settings"
+	},
+	"options_exportButton_Title": {
+		"message": "Export settings"
+	},
+	"options_migrateButton": {
+		"message": "MIGRATE"
+	},
+	"options_features_SectionLabel": {
+		"message": "Features"
+	},
+	"options_features_Whitelist": {
+		"message": "Whitelist"
+	},
+	"options_features_Blacklist": {
+		"message": "Blacklist"
+	},
+	"options_features_Disable": {
+		"message": "Disable"
+	},
+	"options_origins_SectionLabel": {
+		"message": "Origins"
+	},
+	"options_origins_OriginsColumn": {
+		"message": "Odoo database origins"
+	},
+	"options_origins_addOrigin_Title": {
+		"message": "Add origin"
+	},
+	"options_awesomeLoading_SectionLabel": {
+		"message": "Awesome Loading"
+	},
+	"options_awesomeLoading_ImageUrlColumn": {
+		"message": "Image URL"
+	},
+	"options_origins_addImage_Title": {
+		"message": "Add image"
+	},
+	"options_awesomeStyle_SectionLabel": {
+		"message": "Awesome Style"
+	},
+	"options_awesomeStyle_AreaPlaceholder": {
+		"message": "Type CSS code here"
+	},
+	"options_awesomeStyle_SaveButton": {
+		"message": "<i class='fa fa-floppy-disk me-1'></i> Save (ctrl+s)"
+	},
+	"options_unfocusApp_SectionLabel": {
+		"message": "Unfocus App"
+	},
+	"options_unfocusApp_OriginsColumn": {
+		"message": "Odoo database origins"
+	},
+	"options_unfocusApp_CountColumn": {
+		"message": "Unfocus count"
+	},
+	"options_themeSwitch_SectionLabel": {
+		"message": "Theme Switch"
+	},
+	"options_themeSwitch_LocationColumn": {
+		"message": "Latitude / Longitude"
+	},
+	"options_themeSwitch_TimeRangeColumn": {
+		"message": "Dark Mode: Start / Stop"
+	},
+	"options_themeSwitch_GetLocationButton_Title": {
+		"message": "Get current location"
+	},
+	"options_keyboardShortcut_SectionLabel": {
+		"message": "Keyboard shortcut"
+	},
+	"options_keyboardShortcut_ModifyButton": {
+		"message": "Modify"
+	},
+	"options_keyboardShortcut_SaveButton": {
+		"message": "Save"
+	},
+	"options_Error_MissingUrl": {
+		"message": "Missing URL"
+	},
+	"options_originsFilter_ConfirmRemoval": {
+		"message": "Are you sure you want to remove origin: $1?",
+		"placeholders": {
+			"originUrl": {
+				"content": "$1"
+			}
+		}
+	},
+	"originsFilter_DeleteOriginButton": {
+		"message": "Delete origin"
+	},
+	"generic_default": {
+		"message": "Default"
+	}
+}

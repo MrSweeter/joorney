@@ -1,4 +1,4 @@
-import { Runtime, StorageSync } from '../../utils/browser.js';
+import { I18N, StorageSync } from '../../utils/browser.js';
 import { defaultAwesomeLoadingSetting } from '../../utils/feature_default_configuration.js';
 import { loadFeature } from './features.js';
 
@@ -7,7 +7,7 @@ export async function createAwesomeLoadingImage() {
     const imageInput = document.getElementById('qol_awe_loading_new_image');
     let imageUrl = imageInput.value;
     if (!imageUrl) {
-        renderAwesomeLoadingError('Missing url');
+        renderAwesomeLoadingError(I18N.getMessage('options_Error_MissingUrl'));
         return;
     }
 
@@ -33,7 +33,7 @@ async function readAwesomeLoadingImages() {
 }
 
 export async function deleteAwesomeLoadingImage(imageUrl) {
-    if (confirm(`Are you sure you want to remove image: ${imageUrl}?`)) {
+    if (confirm(I18N.getMessage('awesomeLoading_ConfirmRemoval', [imageUrl]))) {
         const images = await readAwesomeLoadingImages();
         await renderImagesList(images.filter((img) => img !== imageUrl));
     }
@@ -115,7 +115,7 @@ function renderImage(idx, image) {
 			<td class="p-1 qol-valign-middle">
 				<button
 					class="qol_awe_loading_image_delete_${idx} btn btn-outline-danger border-0 btn-floating"
-					title="Delete image"
+					title="${I18N.getMessage('awesomeLoading_DeleteImageButton')}"
 				>
 					<i class="qol-font-icon-size fa fa-trash"></i>
 				</button>
