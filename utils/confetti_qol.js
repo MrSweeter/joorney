@@ -1,3 +1,7 @@
+function randomInRange(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
 // Based on: https://github.com/catdad/canvas-confetti/blob/master/src/confetti.js
 
 const global = globalThis;
@@ -35,13 +39,15 @@ function confettiCannon(canvas, globalOpts) {
         var spread = prop(options, 'spread', Number);
         var startVelocity = prop(options, 'startVelocity', Number);
         var decay = prop(options, 'decay', Number);
-        var gravity = prop(options, 'gravity', Number);
-        var drift = prop(options, 'drift', Number);
+        var gravity = prop(options, 'gravity');
+        var drift = prop(options, 'drift');
         var colors = prop(options, 'colors', colorsToRgb);
         var ticks = prop(options, 'ticks', Number);
         var shapes = prop(options, 'shapes');
         var scalar = prop(options, 'scalar');
+        var flat = !!prop(options, 'flat');
         var origin = getOrigin(options);
+        var alpha = getAlpha(options);
 
         var temp = particleCount;
         var fettis = [];
@@ -57,13 +63,18 @@ function confettiCannon(canvas, globalOpts) {
                     angle: angle,
                     spread: spread,
                     startVelocity: startVelocity,
-                    color: colors[temp % colors.length],
+                    color:
+                        colors.length <= particleCount
+                            ? colors[temp % colors.length]
+                            : colors[Math.round(randomInRange(0, colors.length - 1))],
                     shape: shapes[randomInt(0, shapes.length)],
                     ticks: ticks,
                     decay: decay,
                     gravity: gravity,
                     drift: drift,
                     scalar: scalar,
+                    flat: flat,
+                    alpha: alpha,
                 })
             );
         }
@@ -139,6 +150,18 @@ function confettiCannon(canvas, globalOpts) {
 function randomPhysics(opts) {
     var radAngle = opts.angle * (Math.PI / 180);
     var radSpread = opts.spread * (Math.PI / 180);
+    var scalar = opts.scalar;
+    if (typeof scalar === 'function') {
+        scalar = scalar() ?? 1;
+    }
+    var gravity = opts.gravity;
+    if (typeof gravity === 'function') {
+        gravity = gravity() ?? 1;
+    }
+    var drift = opts.drift;
+    if (typeof drift === 'function') {
+        drift = drift() ?? 1;
+    }
 
     return {
         x: opts.x,
@@ -153,15 +176,17 @@ function randomPhysics(opts) {
         tick: 0,
         totalTicks: opts.ticks,
         decay: opts.decay,
-        drift: opts.drift,
+        drift: drift,
         random: Math.random() + 2,
         tiltSin: 0,
         tiltCos: 0,
         wobbleX: 0,
         wobbleY: 0,
-        gravity: opts.gravity * 3,
+        gravity: gravity * 3,
         ovalScalar: 0.6,
-        scalar: opts.scalar,
+        scalar: scalar,
+        flat: opts.flat,
+        alpha: opts.alpha,
     };
 }
 //#endregion
@@ -270,6 +295,34 @@ function ellipse(context, x, y, radiusX, radiusY, rotation, startAngle, endAngle
     context.restore();
 }
 
+function updateFettiBitmap(context, fetti, x1, x2, y1, y2, alpha) {
+    var rotation = (Math.PI / 10) * fetti.wobble;
+    var scaleX = Math.abs(x2 - x1) * 0.1;
+    var scaleY = Math.abs(y2 - y1) * 0.1;
+    var width = fetti.shape.bitmap.width * fetti.scalar;
+    var height = fetti.shape.bitmap.height * fetti.scalar;
+
+    var matrix = new DOMMatrix([
+        Math.cos(rotation) * scaleX,
+        Math.sin(rotation) * scaleX,
+        -Math.sin(rotation) * scaleY,
+        Math.cos(rotation) * scaleY,
+        fetti.x,
+        fetti.y,
+    ]);
+
+    // apply the transform matrix from the confetti shape
+    matrix.multiplySelf(new DOMMatrix(fetti.shape.matrix));
+
+    var pattern = context.createPattern(fetti.shape.bitmap, 'no-repeat');
+    pattern.setTransform(matrix);
+
+    context.globalAlpha = alpha;
+    context.fillStyle = pattern;
+    context.fillRect(fetti.x - width / 2, fetti.y - height / 2, width, height);
+    context.globalAlpha = 1;
+}
+
 function updateFettiCircle(context, fetti, x1, x2, y1, y2) {
     context.ellipse
         ? context.ellipse(
@@ -318,14 +371,26 @@ function updateFettiStar(context, fetti) {
 function updateFetti(context, fetti) {
     fetti.x += Math.cos(fetti.angle2D) * fetti.velocity + fetti.drift;
     fetti.y += Math.sin(fetti.angle2D) * fetti.velocity + fetti.gravity;
-    fetti.wobble += fetti.wobbleSpeed;
     fetti.velocity *= fetti.decay;
-    fetti.tiltAngle += 0.1;
-    fetti.tiltSin = Math.sin(fetti.tiltAngle);
-    fetti.tiltCos = Math.cos(fetti.tiltAngle);
-    fetti.random = Math.random() + 2;
-    fetti.wobbleX = fetti.x + 10 * fetti.scalar * Math.cos(fetti.wobble);
-    fetti.wobbleY = fetti.y + 10 * fetti.scalar * Math.sin(fetti.wobble);
+
+    if (fetti.flat) {
+        fetti.wobble = 0;
+        fetti.wobbleX = fetti.x + 10 * fetti.scalar;
+        fetti.wobbleY = fetti.y + 10 * fetti.scalar;
+
+        fetti.tiltSin = 0;
+        fetti.tiltCos = 0;
+        fetti.random = 1;
+    } else {
+        fetti.wobble += fetti.wobbleSpeed;
+        fetti.wobbleX = fetti.x + 10 * fetti.scalar * Math.cos(fetti.wobble);
+        fetti.wobbleY = fetti.y + 10 * fetti.scalar * Math.sin(fetti.wobble);
+
+        fetti.tiltAngle += 0.1;
+        fetti.tiltSin = Math.sin(fetti.tiltAngle);
+        fetti.tiltCos = Math.cos(fetti.tiltAngle);
+        fetti.random = Math.random() + 2;
+    }
 
     var progress = fetti.tick++ / fetti.totalTicks;
 
@@ -334,19 +399,23 @@ function updateFetti(context, fetti) {
     var x2 = fetti.wobbleX + fetti.random * fetti.tiltCos;
     var y2 = fetti.wobbleY + fetti.random * fetti.tiltSin;
 
+    var alpha = 1 - progress;
+    if (fetti.alpha.invert) {
+        alpha = progress;
+    } else if (fetti.alpha.double) {
+        alpha = progress < 0.5 ? progress / 0.5 : progress > 0.5 ? 1 - (progress / 0.5 - 1) : 1;
+    }
+    if (fetti.alpha.max) {
+        alpha *= fetti.alpha.max;
+    }
+
     context.fillStyle =
-        'rgba(' +
-        fetti.color.r +
-        ', ' +
-        fetti.color.g +
-        ', ' +
-        fetti.color.b +
-        ', ' +
-        (1 - progress) +
-        ')';
+        'rgba(' + fetti.color.r + ', ' + fetti.color.g + ', ' + fetti.color.b + ', ' + alpha + ')';
     context.beginPath();
 
-    if (fetti.shape === 'circle') {
+    if (fetti.shape.type === 'bitmap') {
+        updateFettiBitmap(context, fetti, x1, x2, y1, y2, alpha);
+    } else if (fetti.shape === 'circle') {
         updateFettiCircle(context, fetti, x1, x2, y1, y2);
     } else if (fetti.shape === 'star') {
         updateFettiStar(context, fetti);
@@ -390,6 +459,15 @@ function getOrigin(options) {
     origin.y = prop(origin, 'y', Number);
 
     return origin;
+}
+
+function getAlpha(options) {
+    var alpha = prop(options, 'alpha', Object);
+    alpha.max = prop(alpha, 'max', Number);
+    alpha.double = prop(alpha, 'double', Boolean);
+    alpha.invert = prop(alpha, 'invert', Boolean);
+
+    return alpha;
 }
 
 function convert(val, transform) {
@@ -464,4 +542,52 @@ function hexToRgb(str) {
         b: toDecimal(val.substring(4, 6)),
     };
 }
+
+function shapeFromText(textData) {
+    var text,
+        scalar = 1,
+        color = '#000000',
+        // see https://nolanlawson.com/2022/04/08/the-struggle-of-using-native-emoji-on-the-web/
+        fontFamily =
+            '"Twemoji Mozilla", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", "EmojiOne Color", "Android Emoji", "system emoji", sans-serif';
+
+    if (typeof textData === 'string') {
+        text = textData;
+    } else {
+        text = textData.text;
+        scalar = 'scalar' in textData ? textData.scalar : scalar;
+        fontFamily = 'fontFamily' in textData ? textData.fontFamily : fontFamily;
+        color = 'color' in textData ? textData.color : color;
+    }
+
+    // all other confetti are 10 pixels,
+    // so this pixel size is the de-facto 100% scale confetti
+    var fontSize = 10 * scalar;
+    var font = '' + fontSize + 'px ' + fontFamily;
+
+    var canvas = new OffscreenCanvas(fontSize, fontSize);
+    var ctx = canvas.getContext('2d');
+
+    ctx.font = font;
+    var size = ctx.measureText(text);
+    var width = Math.floor(size.width);
+    var height = Math.floor(size.fontBoundingBoxAscent + size.fontBoundingBoxDescent);
+
+    canvas = new OffscreenCanvas(width, height);
+    ctx = canvas.getContext('2d');
+    ctx.font = font;
+    ctx.fillStyle = color;
+
+    ctx.fillText(text, 0, fontSize);
+
+    var scale = 1 / scalar;
+
+    return {
+        type: 'bitmap',
+        // TODO these probably need to be transfered for workers
+        bitmap: canvas.transferToImageBitmap(),
+        matrix: [scale, 0, 0, scale, (-width * scale) / 2, (-height * scale) / 2],
+    };
+}
+
 //#endregion

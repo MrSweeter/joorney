@@ -21,6 +21,10 @@ window.addEventListener('load', async () => {
     appendAwesomeStyle(url);
     appendUnfocusApp(url);
     appendSmartLogin(url);
+
+    await new Promise((r) => setTimeout(r, 2000));
+
+    loadAmbient();
 });
 
 // Experimental: This is an experimental technology - firefox not compatible

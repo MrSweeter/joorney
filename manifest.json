@@ -45,6 +45,8 @@
 				"content/src/runbot_smart_login/login_setup.js",
 				"content/src/runbot_smart_login/autoopen_runbot.js",
 				"content/src/keyboard_shortcut.js",
+				"content/src/ambient/ambient_loader.js",
+				"content/src/ambient/ambient.js",
 				"content/index.js"
 			],
 			"run_at": "document_start"
