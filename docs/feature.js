@@ -1,9 +1,13 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', loadHash);
+window.addEventListener('hashchange', loadHash);
+
+function loadHash() {
+    console.log('loadhash');
     const currentHash = window.location.hash.slice(1);
     if (currentHash) {
         loadFeature(currentHash);
     }
-});
+}
 
 function loadFeature(featureName) {
     const feature = features[featureName];
@@ -17,23 +21,27 @@ function loadFeature(featureName) {
         el.src = `./assets/storyset-amico/${feature.amico}.svg`;
     });
 
+    feature.customUILoader?.();
+
     const currentFeatureIndex = featuresName.indexOf(featureName);
-    document.getElementById('qol-previous-feature').onclick = (e) =>
+    document.getElementById('qol-previous-feature').onclick = (e) => {
+        feature.customUIReset?.();
         previousFeature(currentFeatureIndex - 1);
-    document.getElementById('qol-next-feature').onclick = (e) =>
+    };
+    document.getElementById('qol-next-feature').onclick = (e) => {
+        feature.customUIReset?.();
         nextFeature(currentFeatureIndex + 1);
+    };
 }
 
 function previousFeature(index) {
     if (index < 0) index = featuresName.length - 1;
     window.location.hash = featuresName[index];
-    loadFeature(featuresName[index]);
 }
 
 function nextFeature(index) {
     if (index >= featuresName.length) index = 0;
     window.location.hash = featuresName[index];
-    loadFeature(featuresName[index]);
 }
 
 const features = {
@@ -109,7 +117,60 @@ const features = {
         description:
             '<span class="fw-bold">Stars effect</span> is a feature that will trigger stars particles effect when you prioritize a task.',
         amico: 'launching_with_balloons-amico',
+        customUILoader: () => {
+            const icon = document.getElementById('feature-icon');
+            icon.onclick = starringTaskEffectUI;
+            icon.style.cursor = 'pointer';
+        },
+        customUIReset: () => {
+            const icon = document.getElementById('feature-icon');
+            icon.onclick = null;
+            icon.style.cursor = 'inherit';
+        },
     },
 };
 
 const featuresName = Object.keys(features);
+
+function starringTaskEffectUI(event) {
+    async function shoot(x, y) {
+        // From utils/confetti_qol.js
+        confetti({
+            ...defaultsStar,
+            particleCount: 2,
+            scalar: 0.8,
+            shapes: ['star'],
+            origin: { x: x, y: y },
+        });
+
+        confetti({
+            ...defaultsStar,
+            particleCount: 4,
+            scalar: 0.75,
+            shapes: ['circle'],
+            origin: { x: x, y: y },
+        });
+    }
+
+    const defaultsStar = {
+        spread: 360,
+        ticks: 50,
+        gravity: 0,
+        decay: 0.94,
+        startVelocity: 5,
+        shapes: ['star'],
+        colors: ['FFE400', 'FFBD00', 'E89400', 'FFCA6C', 'FDFFB8'],
+        disableForReducedMotion: true,
+    };
+
+    const element = event.target;
+    const rect = element.getBoundingClientRect();
+    const sizeX = rect.right - rect.left;
+    const sizeY = rect.bottom - rect.top;
+
+    const x = (rect.left + sizeX / 2) / window.innerWidth;
+    const y = (rect.top + sizeY / 2) / window.innerHeight;
+    setTimeout(() => shoot(x, y), 0);
+    setTimeout(() => shoot(x, y), 100);
+    setTimeout(() => shoot(x, y), 200);
+}
