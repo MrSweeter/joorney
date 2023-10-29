@@ -71,7 +71,10 @@ async function saveArticle(article) {
     const articleID = getArticleIDFromUrl(hrefFragmentToURLParameters(window.location.href));
     if (article.id != articleID)
         throw new Error(
-            `Button context is not the same as the url context: '${article.id}' vs '${articleID}'`
+            chrome.i18n.getMessage('saveKnowledge_Error_InvalidButtonContext', [
+                `${article.id}`,
+                `${articleID}`,
+            ])
         );
 
     const body = document.getElementById('body_0').innerHTML;
@@ -98,11 +101,11 @@ async function saveArticle(article) {
     const data = await writeResponse.json();
 
     if (data?.error || data?.result === false)
-        throw new Error(data.error, "'Save article' call failed !");
+        throw new Error(data.error, chrome.i18n.getMessage('saveKnowledge_Error_CallFailed'));
 
     if (data?.result === true) return;
 
-    throw new Error(data?.result || "Unknown response from 'Save article' call...");
+    throw new Error(data?.result || chrome.i18n.getMessage('saveKnowledge_Error_UnknownReponse'));
 }
 
 function updateSaveEvent(btn, article) {
@@ -115,7 +118,7 @@ function appendSaveButtonToDom(article) {
     const buttonTemplate = document.createElement('template');
     buttonTemplate.innerHTML = `
 		<button class="btn btn-warning" name="qol_action_save_article" type="object">
-			<span>Save</span>
+			<span>${chrome.i18n.getMessage('saveKnowledge_Content_ButtonLabel')}</span>
 		</button>
 	`.trim();
 

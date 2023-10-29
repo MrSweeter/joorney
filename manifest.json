@@ -1,12 +1,13 @@
 {
 	"manifest_version": 3,
 	"version": "0.0.5",
-	"name": "Odoo - Quality of Life & Fun",
-	"description": "Odoo - Quality of Life & Fun",
+	"default_locale": "en",
+	"name": "__MSG_extension_Name__",
+	"description": "__MSG_extension_Description__",
 	"author": "Vanden Bergh Gaëtan",
 	"homepage_url": "https://github.com/MrSweeter/odoo-qol",
 	"action": {
-		"default_title": "Odoo - QoL & Fun",
+		"default_title": "__MSG_extension_ActionTitle__",
 		"default_popup": "popup/index.html",
 		"default_icon": "images/icon_128.png"
 	},

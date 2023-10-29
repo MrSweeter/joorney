@@ -1,0 +1,99 @@
+{
+	"extension_Name": {
+		"message": "Odoo - Quality of Life & Fun"
+	},
+	"extension_Description": {
+		"message": "Odoo - Quality of Life & Fun"
+	},
+	"extension_ActionTitle": {
+		"message": "Odoo - QoL & Fun"
+	},
+	"keyboardShortcut_Background_StateOff": {
+		"message": "OFF"
+	},
+	"keyboardShortcut_Content_ConfirmReload": {
+		"message": "The current tab will be reload.\nDo you confirm your action?"
+	},
+	"adminDebugLogin_Content_SignInButtonTitle": {
+		"message": "Open runbot as admin and with debug mode enabled"
+	},
+	"impersonateLogin_Content_LoginAsAdminTitle": {
+		"message": "Login as admin"
+	},
+	"impersonateLogin_Content_LoginAsAdminLabel": {
+		"message": "Admin"
+	},
+	"impersonateLogin_Content_LoginAsDemoTitle": {
+		"message": "Login as demo"
+	},
+	"impersonateLogin_Content_LoginAsDemoLabel": {
+		"message": "Demo"
+	},
+	"impersonateLogin_Content_LoginAsPortalTitle": {
+		"message": "Login as portal"
+	},
+	"impersonateLogin_Content_LoginAsPortalLabel": {
+		"message": "Portal"
+	},
+	"assignMe_Error_InvalidButtonContext": {
+		"message": "Button context is not the same as the url context: '$1' vs '$2'",
+		"placeholders": {
+			"contextTaskID": {
+				"content": "$1"
+			},
+			"urlTaskID": {
+				"content": "$2"
+			}
+		}
+	},
+	"assignMe_Error_CallFailed": {
+		"message": "'Assign to me' call failed !"
+	},
+	"assignMe_Error_UnknownReponse": {
+		"message": "Unknown response from 'Assign to me' call..."
+	},
+	"assignMe_Content_ButtonLabel": {
+		"message": "Assign to me"
+	},
+	"saveKnowledge_Error_InvalidButtonContext": {
+		"message": "Button context is not the same as the url context: '$1' vs '$2'",
+		"placeholders": {
+			"contextArticleID": {
+				"content": "$1"
+			},
+			"urlArticleID": {
+				"content": "$2"
+			}
+		}
+	},
+	"saveKnowledge_Error_CallFailed": {
+		"message": "'Save article' call failed !"
+	},
+	"saveKnowledge_Error_UnknownReponse": {
+		"message": "Unknown response from 'Save article' call..."
+	},
+	"saveKnowledge_Content_ButtonLabel": {
+		"message": "Save"
+	},
+	"migration_Options_PageTitle": {
+		"message": "Odoo - QoL & Fun Migration"
+	},
+	"migration_Options_SelectFileSectionLabel": {
+		"message": "Select your configuration to migrate"
+	},
+	"migration_Options_MigrationSectionLabel": {
+		"message": "Migration"
+	},
+	"migration_Options_RunMigrationButtonLabel": {
+		"message": "Execute Migration"
+	},
+	"migration_Options_DownloadMigrationButtonLabel": {
+		"message": "Download new configuration"
+	},
+	"migration_Error_LowerVersion": {
+		"message": "Configuration cannot be migrate to the a lower version"
+	},
+	"migration_Error_SameVersion": {
+		"message": "Configuration cannot be migrate to the same version"
+	}
+}
