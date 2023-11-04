@@ -22,11 +22,9 @@ export async function deleteUnfocusAppOrigin(origin) {
 //#region Event
 export async function load() {
     await loadFeature('unfocusApp');
-
-    await restore();
 }
 
-async function restore() {
+export async function restore() {
     const origins = await readUnfocusAppOrigins();
 
     await renderOriginsObject(origins);

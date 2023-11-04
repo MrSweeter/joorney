@@ -14,23 +14,21 @@
         <link href="./css/features.css" rel="stylesheet" />
         <link href="./css/limited_features.css" rel="stylesheet" />
         <link href="./css/origins_filter.css" rel="stylesheet" />
-        <link href="./css/theme_switch.css" rel="stylesheet" />
-        <link href="./css/awesome_loading.css" rel="stylesheet" />
-        <link href="./css/task_setup.css" rel="stylesheet" />
-        <link href="./css/save_knowledge.css" rel="stylesheet" />
-        <link href="./css/awesome_style.css" rel="stylesheet" />
-        <link href="./css/unfocus_app.css" rel="stylesheet" />
         <link href="./css/keyboard_shortcut.css" rel="stylesheet" />
 
         <script src="index.js" type="module"></script>
     </head>
     <body class="qol-body-background">
-        <nav class="navbar navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" title="Debug mode" href="?debug=1">
                     <img loading="lazy" src="/images/icon_128.png" class="mx-2" height="20" alt="Odoo - QoL Logo" loading="lazy" />
                     <small>Odoo - QoL & Fun Configuration</small>
                 </a>
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#">Website filter</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./configuration.html">Feature configurations</a></li>
+                </ul>
 
                 <div class="d-flex align-items-center">
                     <input type="file" accept=".json" class="form-control form-control-sm" id="qol_import_storage_sync_file" />
@@ -47,8 +45,29 @@
 
         <pre id="qol-debug-configuration"></pre>
 
+        <!--#region Keyboard Shortcut App -->
+        <div class="row pt-1 pb-0 p-5 mx-0 text-center">
+            <h4 class="text-start mt-3">Keyboard Shortcut</h4>
+            <div class="col-12">
+                <div id="keyboard_shortcut_preview" class="text-start">
+                    <div id="keyboard_shortcut_preview_ctrl" class="btn-kbs">Ctrl</div>
+                    <div id="keyboard_shortcut_preview_alt" class="btn-kbs">Alt</div>
+                    <div id="keyboard_shortcut_preview_shift" class="btn-kbs">Shift</div>
+                    <!--<div class="btn-kbs">Command</div>-->
+                    <div id="keyboard_shortcut_preview_key" class="btn-kbs">$</div>
+                    <button id="keyboard_shortcut_modify_button" class="btn btn-success">Modify</button>
+                </div>
+                <div id="keyboard_shortcut_editor" class="input-group">
+                    <input id="keyboard_shortcut_editor_input" type="text" class="form-control border border-0" />
+                    <button id="keyboard_shortcut_save_button" class="btn btn-success">Save</button>
+                    <button id="keyboard_shortcut_close_button" class="btn btn-outline"><i class="fa-solid fa-lg fa-xmark"></i></button>
+                </div>
+            </div>
+        </div>
+        <!--#endregion-->
+
         <!--#region Limited Features -->
-        <div class="row mt-3 px-5">
+        <div class="row pt-3 pb-0 p-5 mx-0">
             <h4 class="text-start mt-3">Limited Features</h4>
             <div class="pt-3 d-flex flex-wrap justify-content-start ">
                 <label title="[Limited Feature] Admin-Debug login on Runbot" for="qol_adminDebugLoginRunbot_limited_feature">
@@ -77,7 +96,7 @@
         <!--#endregion-->
 
         <!--#region Features -->
-        <div class="row mt-3 px-5">
+        <div class="row pt-3 pb-0 p-5  mx-0">
             <h4 class="text-start mt-3">Features</h4>
             <h6 class="col-4 text-success">Whitelist</h6>
             <h6 class="col-4 text-danger">Blacklist</h6>
@@ -162,8 +181,8 @@
         </div>
         <!--#endregion -->
 
-        <div class="row pt-3 p-5 text-center">
-            <!--#region Origins Filter -->
+        <!--#region Origins Filter -->
+        <div class="row pt-3 pb-0 p-5  mx-0 text-center">
             <h6 class="text-start" id="odoo_theme_anchor">Origins</h6>
             <table id="qol_origins_filter_table" class="table table-striped bg-light">
                 <thead class="shadow-2">
@@ -235,113 +254,8 @@
                     </tr>
                 </tfoot>
             </table>
-            <!--#endregion-->
-
-            <!--#region Awesome Loading -->
-            <h4 class="text-start mt-3">Awesome Loading</h4>
-            <table id="qol_awe_loading_images_table" class="table table-striped bg-light">
-                <thead class="shadow-2">
-                    <tr>
-                        <th><i class="fa fa-eye"></i></th>
-                        <th class="qol-awe-loading-switch-origin-input" title="Image URL">Image URL</th>
-                        <th class="py-0 qol-valign-middle action-head"></th>
-                    </tr>
-                </thead>
-                <tbody id="qol_awe_loading_images_table_body"></tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="3"></td>
-                    </tr>
-                    <tr class="table-secondary">
-                        <td class="py-0"><img loading="lazy" id="qol_awe_loading_new_image_preview" class="qol-awe-loading-preview" src="" /></td>
-                        <td class="p-1 qol-valign-middle">
-                            <input type="text" class="form-control border border-0" id="qol_awe_loading_new_image" placeholder="" aria-label="Image URL" />
-                        </td>
-                        <td class="p-1 qol-valign-middle">
-                            <button title="Add image" id="qol_awe_loading_new_image_save" class="btn btn-success btn-floating">
-                                <i class="fa fa-plus"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td id="qol_awe_loading_error_footer" class="text-danger" colspan="3"></td>
-                    </tr>
-                </tfoot>
-            </table>
-            <!--#endregion-->
-
-            <!--#region Awesome Style -->
-            <h4 class="text-start mt-3">Awesome Style <span style="opacity: .5;">(beta)</span></h4>
-            <div id="qol_awe_style_container" class="col-12">
-                <textarea id="qol_awe_style_css" class="form-control col-12" rows="10" placeholder="Type CSS code here" spellcheck="false"></textarea>
-                <button title="Save" id="qol_awe_style_save" class="btn btn-success"><i class="fa fa-floppy-disk me-1"></i> Save (ctrl+s)</button>
-            </div>
-            <!--#endregion-->
-
-            <!--#region Unfocus App -->
-            <h4 class="text-start mt-3">Unfocus App</h4>
-            <table id="qol_unfocus_app_table" class="table table-striped bg-light">
-                <thead class="shadow-2">
-                    <tr>
-                        <th class="qol-unfocus_app-origin" title="Origins">Origins</th>
-                        <th class="" title="Unfocus count">Unfocus Count</th>
-                        <th class="py-0 qol-valign-middle action-head"></th>
-                    </tr>
-                </thead>
-                <tbody id="qol_unfocus_app_table_body"></tbody>
-            </table>
-            <!--#endregion-->
-
-            <!--#region Theme Switch -->
-            <h4 class="text-start mt-3">Theme Switch</h4>
-            <table class="table table-striped bg-light">
-                <thead class="shadow-2">
-                    <tr>
-                        <th style="width: 50%;">Latitude / Longitude</th>
-                        <th style="width: 50%;">Dark Mode: Start / Stop</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <div class="input-group">
-                                <input id="qol_theme_switch_latitude" type="text" class="form-control border border-0" />
-                                <span class="input-group-text border border-0">/</span>
-                                <input id="qol_theme_switch_longitude" type="text" class="form-control border border-0" />
-                                <button id="qol_theme_switch_get_location_button" class="btn btn-secondary" title="Get current location"><i class="fa-solid fa-lg fa-location-crosshairs"></i></button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="input-group">
-                                <input id="qol_theme_switch_dark_start" type="time" class="form-control border border-0" />
-                                <span class="input-group-text border border-0">/</span>
-                                <input id="qol_theme_switch_dark_stop" type="time" class="form-control border border-0" />
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <!--#endregion-->
-
-            <!--#region Keyboard Shortcut App -->
-            <h4 class="text-start mt-3">Keyboard Shortcut</h4>
-            <div class="col-12">
-                <div id="keyboard_shortcut_preview" class="text-start">
-                    <div id="keyboard_shortcut_preview_ctrl" class="btn-kbs">Ctrl</div>
-                    <div id="keyboard_shortcut_preview_alt" class="btn-kbs">Alt</div>
-                    <div id="keyboard_shortcut_preview_shift" class="btn-kbs">Shift</div>
-                    <!--<div class="btn-kbs">Command</div>-->
-                    <div id="keyboard_shortcut_preview_key" class="btn-kbs">$</div>
-                    <button id="keyboard_shortcut_modify_button" class="btn btn-success">Modify</button>
-                </div>
-                <div id="keyboard_shortcut_editor" class="input-group">
-                    <input id="keyboard_shortcut_editor_input" type="text" class="form-control border border-0" />
-                    <button id="keyboard_shortcut_save_button" class="btn btn-success">Save</button>
-                    <button id="keyboard_shortcut_close_button" class="btn btn-outline"><i class="fa-solid fa-lg fa-xmark"></i></button>
-                </div>
-            </div>
-            <!--#endregion-->
         </div>
+        <!--#endregion-->
 
         <footer class="text-center">
             <div class="text-center p-3">

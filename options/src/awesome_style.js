@@ -4,13 +4,11 @@ import { loadFeature } from './features.js';
 
 export async function load() {
     await loadFeature('awesomeStyle');
-
-    document.getElementById('qol_awe_style_save').onclick = saveAwesomeStyle;
-
-    restore();
 }
 
-async function restore() {
+export async function restore() {
+    document.getElementById('qol_awe_style_save').onclick = saveAwesomeStyle;
+
     const configuration = await StorageSync.get(defaultAwesomeStyleSetting);
 
     const textareaInput = document.getElementById('qol_awe_style_css');

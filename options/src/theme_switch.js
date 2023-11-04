@@ -4,11 +4,9 @@ import { loadFeature } from './features.js';
 
 export async function load() {
     await loadFeature('themeSwitch');
-
-    restore();
 }
 
-async function restore() {
+export async function restore() {
     const configuration = await StorageSync.get(defaultThemeSwitchSetting);
 
     const latitudeElement = document.getElementById('qol_theme_switch_latitude');

@@ -112,11 +112,8 @@ async function dropElement(e, enable, isWhitelist) {
         [`${dataFeature}Enabled`]: enable,
         [`${dataFeature}WhitelistMode`]: isWhitelist,
     });
-    if (enable) {
-        enableFeatureInput(dataFeature);
-    } else {
-        disableFeatureInput(dataFeature);
-    }
+    if (enable) enableFeatureInput(dataFeature);
+    else disableFeatureInput(dataFeature);
     const element = document.getElementById(dataID);
     if (container.id == element.parentElement.id) return;
     container.appendChild(document.getElementById(dataID));

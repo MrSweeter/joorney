@@ -63,17 +63,15 @@ function onImageChange(event) {
 export async function load() {
     await loadFeature('awesomeLoadingLarge');
     await loadFeature('awesomeLoadingSmall');
+}
 
+export async function restore() {
     const awesomeLoadingNewImage = document.getElementById('qol_awe_loading_new_image');
     awesomeLoadingNewImage.onkeydown = onKeydownHost;
     awesomeLoadingNewImage.oninput = onImageChange;
 
     document.getElementById('qol_awe_loading_new_image_save').onclick = createAwesomeLoadingImage;
 
-    restore();
-}
-
-async function restore() {
     const configuration = await StorageSync.get(defaultAwesomeLoadingSetting);
 
     renderImagesList(configuration.awesomeLoadingImages);
