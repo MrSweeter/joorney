@@ -65,15 +65,6 @@ export const defaultSmartLoginRunbotSetting = {
     autoOpenRunbotLimitedOrigins: ['https://runbot.odoo.com'],
 };
 
-export const defaultKeyboardShortcutLocalSetting = {
-    kbsEnabled: true,
-    kbsAltKey: true,
-    kbsCtrlKey: true,
-    kbsShiftKey: false,
-    kbsCodeKey: 'Period',
-    kbsDisplayKey: 'Period (:)',
-};
-
 export const configurationInternalVersion = {
     configurationVersion: 1,
 };
@@ -89,5 +80,4 @@ export const QOL_DEFAULT_CONFIGURATION = {
     ...defaultAwesomeStyleSetting,
     ...defaultUnfocusAppSetting,
     ...defaultSmartLoginRunbotSetting,
-    ...defaultKeyboardShortcutLocalSetting,
 };

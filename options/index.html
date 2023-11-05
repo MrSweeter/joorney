@@ -14,7 +14,6 @@
         <link href="./css/features.css" rel="stylesheet" />
         <link href="./css/limited_features.css" rel="stylesheet" />
         <link href="./css/origins_filter.css" rel="stylesheet" />
-        <link href="./css/keyboard_shortcut.css" rel="stylesheet" />
 
         <script src="index.js" type="module"></script>
     </head>
@@ -44,27 +43,6 @@
         </nav>
 
         <pre id="qol-debug-configuration"></pre>
-
-        <!--#region Keyboard Shortcut App -->
-        <div class="row pt-1 pb-0 p-5 mx-0 text-center">
-            <h4 class="text-start mt-3">Keyboard Shortcut</h4>
-            <div class="col-12">
-                <div id="keyboard_shortcut_preview" class="text-start">
-                    <div id="keyboard_shortcut_preview_ctrl" class="btn-kbs">Ctrl</div>
-                    <div id="keyboard_shortcut_preview_alt" class="btn-kbs">Alt</div>
-                    <div id="keyboard_shortcut_preview_shift" class="btn-kbs">Shift</div>
-                    <!--<div class="btn-kbs">Command</div>-->
-                    <div id="keyboard_shortcut_preview_key" class="btn-kbs">$</div>
-                    <button id="keyboard_shortcut_modify_button" class="btn btn-success">Modify</button>
-                </div>
-                <div id="keyboard_shortcut_editor" class="input-group">
-                    <input id="keyboard_shortcut_editor_input" type="text" class="form-control border border-0" />
-                    <button id="keyboard_shortcut_save_button" class="btn btn-success">Save</button>
-                    <button id="keyboard_shortcut_close_button" class="btn btn-outline"><i class="fa-solid fa-lg fa-xmark"></i></button>
-                </div>
-            </div>
-        </div>
-        <!--#endregion-->
 
         <!--#region Limited Features -->
         <div class="row pt-3 pb-0 p-5 mx-0">
@@ -253,6 +231,22 @@
                         <td id="qol_origins_filter_error_footer" class="text-danger" colspan="10"></td>
                     </tr>
                 </tfoot>
+            </table>
+        </div>
+        <!--#endregion-->
+
+        <!--#region Keyboard Shortcut App -->
+        <div class="row pt-1 pb-0 p-5 mx-0 text-center">
+            <h4 class="text-start mt-3">
+                Keyboard Shortcut <button id="open-extension-shortcut" class="btn btn-floating" title="Modify via Chrome"><i class="fa-brands fa-chrome"></i></button>
+            </h4>
+
+            <table class="table table-striped bg-light text-start">
+                <thead class="shadow-2">
+                    <th>Shortcut</th>
+                    <th>Description</th>
+                </thead>
+                <tbody id="shortcut_table_body"></tbody>
             </table>
         </div>
         <!--#endregion-->

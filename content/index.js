@@ -9,6 +9,7 @@
 
 window.addEventListener('load', async () => {
     const url = window.location.href;
+    if (!url.startsWith('http')) return;
 
     updateLandingPage();
 
@@ -30,6 +31,7 @@ window.addEventListener('load', async () => {
 // Chrome & Firefox compatible
 chrome.runtime.onMessage.addListener((msg) => {
     const url = msg.url;
+    if (!url.startsWith('http')) return;
     if (url) {
         checkTaskPage(url);
         checkKnowledge(url);
