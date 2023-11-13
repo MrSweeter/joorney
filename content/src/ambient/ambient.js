@@ -116,6 +116,10 @@ function loadAmbient() {
             _loadAmbient(winterSeasonLoader, 30000);
             break;
         }
+        case 'rain': {
+            _loadAmbient(rainWeatherLoader, 30000);
+            _loadAmbient(rainWeatherLoader, 30000);
+        }
     }
 }
 

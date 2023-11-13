@@ -165,3 +165,18 @@ const winterSeasonLoader = emojisLoader({
 });
 
 //#endregion
+
+//#region WEATHER
+
+const rainWeatherLoader = emojisLoader({
+    emojis: ['💧'],
+    alpha: { max: 1 },
+    size: { min: 0.1, max: 0.6, dynamic: true },
+    gravity: { min: 4, max: 5, dynamic: true },
+    drift: { min: -0.4, max: 0.4, dynamic: true },
+    yRange: { min: -0.1, max: 0 },
+    color: '#4a6583',
+    flat: true,
+});
+
+//#endregion
