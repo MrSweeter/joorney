@@ -35,7 +35,6 @@ chrome.runtime.onMessage.addListener((msg) => {
         checkKnowledge(url);
         appendUnfocusApp(url);
     }
-    return true;
 });
 
 //#endregion

@@ -45,7 +45,7 @@ export async function loadFeature(feature) {
     return restoreFeatureName(feature, defaultConfiguration);
 }
 
-async function restoreFeatureName(feature, defaultConfiguration) {
+function restoreFeatureName(feature, defaultConfiguration) {
     restoreFeature(
         feature,
         defaultConfiguration[`${feature}Enabled`],

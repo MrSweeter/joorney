@@ -30,7 +30,12 @@ const AVAILABLE_ACTION_MESSAGES_HANDLERS = {
 
 // Triggers when a message is received (from the content script)
 Runtime.onMessage.addListener((request, _, sendResponse) => {
-    AVAILABLE_ACTION_MESSAGES_HANDLERS[request.action]?.(request).then(sendResponse);
+    AVAILABLE_ACTION_MESSAGES_HANDLERS[request.action]?.(request)
+        .then(sendResponse)
+        .catch((ex) => {
+            console.log(ex);
+            sendResponse();
+        });
     return true; // Needed for asynchronous
 });
 
