@@ -31,11 +31,14 @@ async function onDOMContentLoaded() {
     initImportExport();
 
     const searchParams = new URLSearchParams(window.location.search);
+    let htmlDebug = 1;
     if (searchParams.get('debug') == 1) {
+        htmlDebug = 0;
         const debug = document.getElementById('qol-debug-configuration');
         const config = await StorageSync.get(QOL_DEFAULT_CONFIGURATION);
         debug.innerHTML = JSON.stringify(config, null, 4);
     }
+    document.getElementById('qol-brand-debug').href = `?debug=${htmlDebug}`;
 }
 
 document.removeEventListener('DOMContentLoaded', onDOMContentLoaded);
