@@ -119,6 +119,12 @@ function loadAmbient() {
         case 'rain': {
             _loadAmbient(rainWeatherLoader, 30000);
             _loadAmbient(rainWeatherLoader, 30000);
+            break;
+        }
+        case 'snow': {
+            _loadAmbient(snowWeatherLoader, 30000);
+            _loadAmbient(snowWeatherLoader, 30000);
+            break;
         }
     }
 }
@@ -136,6 +142,10 @@ function getTodayAmbient() {
             (k) => (computedPeriods[ambientPeriods.compute[k]()] = k)
         );
         ambient = computedPeriods[`${mm}-${dd}`];
+    }
+
+    if (!ambient) {
+        // TODO WITH WEATHER CHECKBOX
     }
 
     if (!ambient) {
