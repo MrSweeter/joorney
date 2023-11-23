@@ -15,24 +15,24 @@ async function getRunbotPath(tabURL) {
 
     // FOR EACH VERSION ROW
     for (let i = 0; i < rows.length; i++) {
-        let row = rows[i];
-        let version = row.querySelector('div.one_line a b').textContent.replace('saas-', '');
+        const row = rows[i];
+        const version = row.querySelector('div.one_line a b').textContent.replace('saas-', '');
         if (version != openVersion) continue;
 
-        let groups = Array.from(row.querySelectorAll('div.slot_button_group'));
+        const groups = Array.from(row.querySelectorAll('div.slot_button_group'));
 
         // FOR EACH SUBGROUP BUILD OF VERSION
         for (let j = 0; j < groups.length; j++) {
-            let group = groups[j];
-            let type = group.querySelector('a.slot_name span').textContent;
+            const group = groups[j];
+            const type = group.querySelector('a.slot_name span').textContent;
             if (type != 'enterprise') continue;
 
-            let signInButtons = group.getElementsByClassName('fa fa-sign-in btn btn-info');
-            let spinGearIcons = group.getElementsByClassName('fa-cog fa-spin');
-            //let refreshingIcon = group.querySelector('span i.fa-refresh');
+            const signInButtons = group.getElementsByClassName('fa fa-sign-in btn btn-info');
+            const spinGearIcons = group.getElementsByClassName('fa-cog fa-spin');
+            const refreshingIcons = group.querySelector('span i.fa-refresh');
 
             // SIGN IN exist and runbot not in a refresh state
-            if (signInButtons.length > 0 && spinGearIcons.length == 0 /*&& refreshingIcon*/) {
+            if (signInButtons.length > 0 && spinGearIcons.length == 0 && !refreshingIcons) {
                 return signInButtons.item(0).getAttribute('href');
             }
         }

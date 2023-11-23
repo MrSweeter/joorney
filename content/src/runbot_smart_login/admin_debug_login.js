@@ -44,9 +44,9 @@ async function openEventRunbot(e, newTab) {
 
 async function openRunbot(href, newTab, fromAutoOpen = false) {
     let finalURL = 'https://runbot.odoo.com/';
-    if (href != finalURL) {
+    if (href !== finalURL) {
         // Messaging flow require due to CORS on runbot
-        let response = await chrome.runtime.sendMessage({
+        const response = await chrome.runtime.sendMessage({
             action: 'GET_FINAL_RUNBOT_URL',
             href: href,
         });
