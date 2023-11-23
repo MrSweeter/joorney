@@ -10,6 +10,12 @@
 		"default_popup": "popup/index.html",
 		"default_icon": "images/icon_128.png"
 	},
+	"commands": {
+		"enable-disable-temporary": {
+			"suggested_key": "Alt+Shift+F",
+			"description": "Enable or Disable extension features on the current origin"
+		}
+	},
 	"icons": {
 		"16": "images/icon_128.png",
 		"32": "images/icon_128.png",

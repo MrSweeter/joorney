@@ -1,11 +1,48 @@
-import { Action, StorageLocal, Tabs } from '../../utils/browser.js';
+import { Action, Commands, StorageLocal, Tabs } from '../../utils/browser.js';
+
+// Only use this function during the initial install phase. After
+// installation the user may have intentionally unassigned commands.
+export function checkCommandShortcuts() {
+    Commands.getAll((commands) => {
+        let missingShortcuts = [];
+
+        for (let { name, shortcut } of commands) {
+            if (shortcut === '') {
+                missingShortcuts.push(name);
+            }
+        }
+
+        if (missingShortcuts.length > 0) {
+            // Update the extension UI to inform the user that one or more
+            // commands are currently unassigned.
+        }
+    });
+}
+
+export function handleCommands() {
+    Commands.onCommand.addListener((command, tab) => {
+        switch (command) {
+            case 'enable-disable-temporary':
+                if (!tab) return;
+                enableDisableTabExtension(tab);
+                break;
+        }
+    });
+}
 
 export async function updateTabState(request) {
     const tabs = await Tabs.query({ active: true, currentWindow: true });
-    const tabId = tabs[0].id;
-    const origin = new URL(tabs[0].url).origin;
+    if (!tabs) return;
+    const tab = tabs[0];
+    enableDisableTabExtension(tab, request.forceSwitchToOFF);
+}
+
+async function enableDisableTabExtension(tab, forceOff = undefined) {
+    const tabId = tab.id;
+    const origin = new URL(tab.url).origin;
+
     let isOFF = (await Action.getBadgeText({ tabId: tabId })) === 'OFF';
-    if (request.forceSwitchToOFF) {
+    if (forceOff) {
         isOFF = false;
     }
 
@@ -30,7 +67,7 @@ export async function updateTabState(request) {
 
     await StorageLocal.set({ offs: Array.from(offs) });
 
-    if (request.forceSwitchToOFF === undefined) {
+    if (forceOff === undefined) {
         Tabs.reload(tabId);
     }
 }

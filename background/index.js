@@ -3,7 +3,7 @@ import { QOL_DEFAULT_CONFIGURATION } from '../utils/feature_default_configuratio
 import { checkVersion } from './src/check_version.js';
 import { switchThemeIfNeeded } from './src/theme_switch.js';
 import { getFinalRunbotURL } from './src/runbot_smart_login.js';
-import { updateTabState } from './src/keyboard_shortcut.js';
+import { checkCommandShortcuts, handleCommands, updateTabState } from './src/keyboard_shortcut.js';
 
 // On page # path change
 WebNavigation.onReferenceFragmentUpdated.addListener((e) => {
@@ -17,9 +17,10 @@ Tabs.onUpdated.addListener((_1, _2, tabInfo) => {
 });
 
 Runtime.onInstalled.addListener(async (details) => {
-    if (details.reason === 'install') {
+    if (details.reason === Runtime.OnInstalledReason.INSTALL) {
         const configurationOrDefault = await StorageSync.get(QOL_DEFAULT_CONFIGURATION);
-        StorageSync.set(configurationOrDefault);
+        await StorageSync.set(configurationOrDefault);
+        checkCommandShortcuts();
     }
 });
 
@@ -40,3 +41,4 @@ Runtime.onMessage.addListener((request, _, sendResponse) => {
 });
 
 checkVersion();
+handleCommands();

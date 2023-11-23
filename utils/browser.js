@@ -12,3 +12,4 @@ export const StorageLocal = isFirefox() ? browser.storage.local : chrome.storage
 export const WebNavigation = isFirefox() ? browser.webNavigation : chrome.webNavigation;
 export const Cookies = isFirefox() ? browser.cookies : chrome.cookies;
 export const Action = isFirefox() ? browser.action : chrome.action;
+export const Commands = isFirefox() ? browser.commands : chrome.commands;
