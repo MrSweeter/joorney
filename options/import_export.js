@@ -26,7 +26,7 @@ async function exportOptions() {
 }
 
 function confirmImport(file) {
-    if (confirm(`Do you confirm file upload?`)) {
+    if (file && confirm(`Do you confirm file upload?`)) {
         importOptions(file);
     }
 }
