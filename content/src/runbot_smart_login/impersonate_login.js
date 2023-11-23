@@ -3,7 +3,10 @@ const hashes = ['#qol-auto-login', '#qol-autoopen-login'];
 function loginWithForm(login) {
     document.getElementById('login').value = login;
     document.getElementById('password').value = login;
-    document.getElementsByClassName('oe_login_form')[0].submit();
+    const form = document.getElementsByClassName('oe_login_form')[0];
+    form.setAttribute('onsubmit', "this.action = '/web/login?debug=1'");
+    // form.submit() will not trigger "onsubmit"
+    form.requestSubmit();
 }
 
 function isRunbotSelectorPageWithLogin(url) {
@@ -55,9 +58,9 @@ async function appendRunbotLogin(currentUrl) {
     loginsTemplate.innerHTML = `
         <div id="${loginsIdentifier}" class="form-group mb-2 text-center">
             <div class="btn-group-sm d-flex justify-content-center">
-                <button class="btn btn-warning mx-1 flex-fill" data-login="admin" title="Login as admin">Admin</button>
-                <button class="btn btn-warning mx-1 flex-fill" data-login="demo" title="Login as demo">Demo</button>
-                <button class="btn btn-warning mx-1 flex-fill" data-login="portal" title="Login as portal">Portal</button>
+                <button type="button" class="btn btn-warning mx-1 flex-fill" data-login="admin" title="Login as admin">Admin</button>
+                <button type="button" class="btn btn-warning mx-1 flex-fill" data-login="demo" title="Login as demo">Demo</button>
+                <button type="button" class="btn btn-warning mx-1 flex-fill" data-login="portal" title="Login as portal">Portal</button>
             </div>
         </div>
     `.trim();
