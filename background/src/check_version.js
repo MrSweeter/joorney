@@ -1,7 +1,7 @@
 import { Action, Runtime } from '../../utils/browser.js';
 
 const fetchVersion =
-    'https://raw.githubusercontent.com/MrSweeter/vigilant-potato/initial-version/manifest.json';
+    'https://raw.githubusercontent.com/MrSweeter/vigilant-potato/master/manifest.json';
 
 export async function checkVersion() {
     const res = await fetch(fetchVersion);
