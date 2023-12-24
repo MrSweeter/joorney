@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Odoo - QoL & Fun Configuration</title>
+        <link rel="icon" type="image/x+icon" href="./../images/icon_128.svg" />
+        <!-- Font Awesome -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+        <!-- MDB -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.css" rel="stylesheet" />
+
+        <link href="./index.css" rel="stylesheet" />
+        <link href="./css/features.css" rel="stylesheet" />
+        <link href="./css/limited_features.css" rel="stylesheet" />
+        <link href="./css/origins_filter.css" rel="stylesheet" />
+
+        <script src="index.js" type="module"></script>
+    </head>
+    <body class="qol-body-background">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a id="qol-brand-debug" class="navbar-brand" title="Debug mode" href="?debug=1">
+                    <img loading="lazy" src="/images/icon_128.png" class="mx-2" height="20" alt="Odoo - QoL Logo" loading="lazy" />
+                    <small>Odoo - QoL & Fun Configuration</small>
+                </a>
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#">Website filter</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./configuration.html">Feature configurations</a></li>
+                </ul>
+
+                <div class="d-flex align-items-center">
+                    <input type="file" accept=".json" class="form-control form-control-sm" id="qol_import_storage_sync_file" />
+                    <button class="btn" id="qol_import_storage_sync" title="Import settings">
+                        <i class="fas fa-cloud-arrow-up"></i>
+                    </button>
+                    <button class="btn" id="qol_export_storage_sync" title="Export settings">
+                        <i class="fas fa-cloud-arrow-down"></i>
+                    </button>
+                    <a class="btn btn-success d-none" id="qol_migrate_configuration" href="./migration/index.html" target="_blank">MIGRATE</a>
+                </div>
+            </div>
+        </nav>
+
+        <pre id="qol-debug-configuration"></pre>
+
+        <!--#region Limited Features -->
+        <div class="row pt-3 pb-0 p-5 mx-0">
+            <h4 class="text-start mt-3">Limited Features</h4>
+            <div class="pt-3 d-flex flex-wrap justify-content-start ">
+                <label title="[Limited Feature] Admin-Debug login on Runbot" for="qol_adminDebugLoginRunbot_limited_feature">
+                    <input id="qol_adminDebugLoginRunbot_limited_feature" class="input-hide" type="checkbox" />
+                    <div class="limited-feature-wrapper d-flex">
+                        <i class="qol-font-icon-size fa-regular me-2"></i>
+                        <p>Runbot/Admin-Debug Login</p>
+                    </div>
+                </label>
+                <label title="[Limited Feature] Impersonate login on Runbot" for="qol_impersonateLoginRunbot_limited_feature">
+                    <input id="qol_impersonateLoginRunbot_limited_feature" class="input-hide" type="checkbox" />
+                    <div class="limited-feature-wrapper d-flex">
+                        <i class="qol-font-icon-size fa-regular me-2"></i>
+                        <p>Runbot/Impersonate Login</p>
+                    </div>
+                </label>
+                <label title="[Limited Feature] AutoOpen Runbot" for="qol_autoOpenRunbot_limited_feature">
+                    <input id="qol_autoOpenRunbot_limited_feature" class="input-hide" type="checkbox" />
+                    <div class="limited-feature-wrapper d-flex">
+                        <i class="qol-font-icon-size fa-regular me-2"></i>
+                        <p>Runbot/AutoSelect And Open</p>
+                    </div>
+                </label>
+            </div>
+        </div>
+        <!--#endregion-->
+
+        <!--#region Features -->
+        <div class="row pt-3 pb-0 p-5  mx-0">
+            <h4 class="text-start mt-3">Features</h4>
+            <h6 class="col-4 text-success">Whitelist</h6>
+            <h6 class="col-4 text-danger">Blacklist</h6>
+            <h6 class="col-4">Disable</h6>
+            <div class="col-4">
+                <div id="qol-whitelist-feature" class="qol-state-feature pb-5 h-100 border border-2 border-success rounded d-flex flex-wrap align-content-start justify-content-center"></div>
+            </div>
+            <div class="col-4">
+                <div id="qol-blacklist-feature" class="qol-state-feature pb-5 h-100 border border-2 border-danger rounded d-flex flex-wrap align-content-start justify-content-center"></div>
+            </div>
+            <div class="col-4">
+                <div id="qol-disable-feature" class="qol-state-feature pb-5 h-100 border border-2 rounded d-flex flex-wrap align-content-start justify-content-center">
+                    <label title="[Feature] Loading Fullscreen" id="qol_awesomeLoadingLarge_feature" data-feature="awesomeLoadingLarge" class="draggable-feature" draggable="true">
+                        <div class="feature-wrapper d-flex">
+                            <div class="icon-wrapper pe-1">
+                                <i class="fa-solid fa-circle-notch"></i>
+                            </div>
+                            <p>Awesome Loading/Large</p>
+                        </div>
+                    </label>
+                    <label title="[Feature] Loading bottom right" id="qol_awesomeLoadingSmall_feature" data-feature="awesomeLoadingSmall" class="draggable-feature" draggable="true">
+                        <div class="feature-wrapper d-flex">
+                            <div class="icon-wrapper pe-1">
+                                <i class="fa-solid fa-spinner"></i>
+                            </div>
+                            <p>Awesome Loading/Small</p>
+                        </div>
+                    </label>
+                    <label title="[Feature] Assign me" id="qol_assignMeTask_feature" data-feature="assignMeTask" class="draggable-feature" draggable="true">
+                        <div class="feature-wrapper d-flex">
+                            <div class="icon-wrapper pe-1">
+                                <i class="fa-solid fa-user-plus"></i>
+                            </div>
+                            <p>Task/Assign Me</p>
+                        </div>
+                    </label>
+                    <label title="[Feature] Stars effect" id="qol_starringTaskEffect_feature" data-feature="starringTaskEffect" class="draggable-feature" draggable="true">
+                        <div class="feature-wrapper d-flex">
+                            <div class="icon-wrapper pe-1">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <p>Task/Stars Effect</p>
+                        </div>
+                    </label>
+                    <label title="[Feature] Save Knowledge" id="qol_saveKnowledge_feature" data-feature="saveKnowledge" class="draggable-feature" draggable="true">
+                        <div class="feature-wrapper d-flex">
+                            <div class="icon-wrapper pe-1">
+                                <i class="fa-regular fa-bookmark"></i>
+                                <i class="fa-solid fa-floppy-disk double-fa"></i>
+                            </div>
+                            <p>Save Knowledge</p>
+                        </div>
+                    </label>
+                    <label title="[Feature] Switch Odoo Theme" id="qol_themeSwitch_feature" data-feature="themeSwitch" class="draggable-feature" draggable="true">
+                        <div class="feature-wrapper d-flex">
+                            <div class="icon-wrapper pe-1">
+                                <i class="fa-solid fa-sun"></i>
+                                <i class="fa-solid fa-circle double-fa-mask double-fa-bicolor"></i>
+                                <i class="fa-solid fa-moon double-fa"></i>
+                            </div>
+                            <p>Theme Switch</p>
+                        </div>
+                    </label>
+                    <label title="[Feature] Awesome Style" id="qol_awesomeStyle_feature" data-feature="awesomeStyle" class="draggable-feature" draggable="true">
+                        <div class="feature-wrapper d-flex">
+                            <div class="icon-wrapper pe-1">
+                                <i class="fa-brands fa-css3-alt"></i>
+                            </div>
+                            <p>Awesome Style</p>
+                        </div>
+                    </label>
+                    <label title="[Feature] Unfocus App" id="qol_unfocusApp_feature" data-feature="unfocusApp" class="draggable-feature" draggable="true">
+                        <div class="feature-wrapper d-flex">
+                            <div class="icon-wrapper pe-1">
+                                <i class="fa-solid fa-ghost"></i>
+                            </div>
+                            <p>Unfocus App</p>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <!--#endregion -->
+
+        <!--#region Origins Filter -->
+        <div class="row pt-3 pb-0 p-5  mx-0 text-center">
+            <h6 class="text-start" id="odoo_theme_anchor">Origins</h6>
+            <table id="qol_origins_filter_table" class="table table-striped bg-light">
+                <thead class="shadow-2">
+                    <tr>
+                        <th class="qol-origins_filter-origin-input" title="Odoo Database Origin">Origins</th>
+                        <th title="[Feature Origin] Loading Fullscreen" class="icon-wrapper-head">
+                            <div class="icon-wrapper" id="qol_origins_filter_feature_header_awesomeLoadingLarge">
+                                <i class="fa-solid fa-circle-notch"></i>
+                            </div>
+                        </th>
+                        <th title="[Feature Origin] Loading bottom right" class="icon-wrapper-head">
+                            <div class="icon-wrapper" id="qol_origins_filter_feature_header_awesomeLoadingSmall">
+                                <i class="fa-solid fa-spinner"></i>
+                            </div>
+                        </th>
+                        <th title="[Feature Origin] Assign me" class="icon-wrapper-head">
+                            <div class="icon-wrapper" id="qol_origins_filter_feature_header_assignMeTask">
+                                <i class="fa-solid fa-user-plus"></i>
+                            </div>
+                        </th>
+                        <th title="[Feature Origin] Stars effect" class="icon-wrapper-head">
+                            <div class="icon-wrapper" id="qol_origins_filter_feature_header_starringTaskEffect">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                        </th>
+                        <th title="[Feature Origin] Save knowledge" class="icon-wrapper-head">
+                            <div class="icon-wrapper" id="qol_origins_filter_feature_header_saveKnowledge">
+                                <i class="fa-regular fa-bookmark"></i>
+                                <i class="fa-solid fa-floppy-disk double-fa"></i>
+                            </div>
+                        </th>
+                        <th title="[Feature Origin] Switch Odoo theme" class="icon-wrapper-head">
+                            <div class="icon-wrapper" id="qol_origins_filter_feature_header_themeSwitch">
+                                <i class="fa-solid fa-sun"></i>
+                                <i class="fa-solid fa-circle double-fa-mask double-fa-bicolor"></i>
+                                <i class="fa-solid fa-moon double-fa"></i>
+                            </div>
+                        </th>
+                        <th title="[Feature Origin] Awesome Style" class="icon-wrapper-head">
+                            <div class="icon-wrapper" id="qol_origins_filter_feature_header_awesomeStyle">
+                                <i class="fa-brands fa-css3-alt"></i>
+                            </div>
+                        </th>
+                        <th title="[Feature Origin] Unfocus App" class="icon-wrapper-head">
+                            <div class="icon-wrapper" id="qol_origins_filter_feature_header_unfocusApp">
+                                <i class="fa-solid fa-ghost"></i>
+                            </div>
+                        </th>
+                        <th class="py-0 qol-valign-middle action-head"></th>
+                    </tr>
+                </thead>
+                <tbody id="qol_origins_filter_table_body"></tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="10"></td>
+                    </tr>
+                    <tr class="table-secondary">
+                        <td class="p-1 qol-valign-middle" colspan="9">
+                            <input type="text" class="form-control border border-0" id="qol_origins_filter_new_origin" placeholder="www.odoo.com" aria-label="Origin filter" />
+                        </td>
+                        <td class="p-1 qol-valign-middle">
+                            <button title="Add origin" id="qol_origins_filter_new_origin_save" class="btn btn-success btn-floating">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="qol_origins_filter_error_footer" class="text-danger" colspan="10"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <!--#endregion-->
+
+        <!--#region Keyboard Shortcut App -->
+        <div class="row pt-1 pb-0 p-5 mx-0 text-center">
+            <h4 class="text-start mt-3">
+                Keyboard Shortcut <button id="open-extension-shortcut" class="btn btn-floating" title="Modify via Chrome"><i class="fa-brands fa-chrome"></i></button>
+            </h4>
+
+            <table class="table table-striped bg-light text-start">
+                <thead class="shadow-2">
+                    <th>Shortcut</th>
+                    <th>Description</th>
+                </thead>
+                <tbody id="shortcut_table_body"></tbody>
+            </table>
+        </div>
+        <!--#endregion-->
+
+        <footer class="text-center">
+            <div class="text-center p-3">
+                &copy; <span id="copyright-year">2023</span>
+                All rights reserved :
+                <a id="copyright-link" class="text-dark" href="https://github.com/MrSweeter/odoo-qol">Odoo QoL</a>
+            </div>
+            <div>Theme Switch base on Location is powered by <a href="https://sunrisesunset.io/">SunriseSunset.io</a></div>
+        </footer>
+    </body>
+</html>

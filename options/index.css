@@ -1,0 +1,40 @@
+:root {
+    --qol-primary: #13213c;
+    --qol-primary-bg: #e5e5e5;
+    --qol-secondary: #fca311;
+    --qol-secondary-bg: #e5e5e5;
+    --qol-limited-secondary: #a75000;
+}
+
+html,
+body {
+    margin: 0;
+}
+
+.qol-body-background {
+    background-image: url('/images/background.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+.qol-valign-middle {
+    vertical-align: middle;
+}
+
+.qol-bg-white {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.qol-font-icon-size {
+    font-size: 1.2em;
+}
+
+.qol-modified-input {
+    background-color: #fffdaf !important;
+}
+
+.input-hide {
+    display: none;
+}

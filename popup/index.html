@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Odoo - Quality of Life & Fun</title>
+        <!-- Font Awesome -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+        <!-- MDB -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css" rel="stylesheet" />
+
+        <link href="index.css" rel="stylesheet" />
+        <link href="css/awesome_loading.css" rel="stylesheet" />
+        <link href="css/theme_switch.css" rel="stylesheet" />
+        <link href="css/unfocus_app.css" rel="stylesheet" />
+
+        <script src="src/task_setup.js"></script>
+        <script src="src/awesome_loading.js"></script>
+        <script src="src/theme_switch.js"></script>
+        <script src="src/save_knowledge.js"></script>
+        <script src="src/tab_features.js"></script>
+        <script src="src/awesome_style.js"></script>
+        <script src="src/unfocus_app.js"></script>
+        <script src="src/runbot_smart_login.js"></script>
+        <script src="index.js"></script>
+    </head>
+
+    <body class="p-3 qol-body-background" style="width: 780px;">
+        <button id="popupIcon" class="btn btn-floating">
+            <i class="fa-solid fa-wrench" title="Options"></i>
+        </button>
+
+        <div id="qol-invalid-website" class="d-flex p-5 justify-content-center align-items-center">
+            <h6 class="m-0">This website is not compatible with Odoo-QoL extension</h6>
+        </div>
+
+        <div id="qol-popup-configuration" class="d-none row gap-1 ">
+            <div class="col-12 d-flex align-items-center">
+                <label title="Runbot limited features">
+                    <div class="icon-wrapper no-input limited-feature">
+                        <!--<i class="fa-brands fa-bots"></i>-->
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                </label>
+                <label title="[Limited Feature] Admin-Debug Login" for="adminDebugLoginRunbotFeature" class="ms-2">
+                    <input id="adminDebugLoginRunbotFeature" type="checkbox" />
+                    <div class="icon-wrapper-sm limited-feature">
+                        <i class="fa-solid fa-rocket"></i>
+                    </div>
+                </label>
+                <label title="[Limited Feature] Impersonate Login" for="impersonateLoginRunbotFeature" class="ms-2">
+                    <input id="impersonateLoginRunbotFeature" type="checkbox" />
+                    <div class="icon-wrapper-sm limited-feature">
+                        <!--<i class="fa-solid fa-people-arrows"></i>-->
+                        <i class="fa-solid fa-masks-theater"></i>
+                    </div>
+                </label>
+                <label title="[Limited Feature] AutoOpen Runbot" for="autoOpenRunbotFeature" class="ms-2">
+                    <input id="autoOpenRunbotFeature" type="checkbox" />
+                    <div class="icon-wrapper-sm limited-feature">
+                        <!--<i class="fa-solid fa-door-open"></i>-->
+                        <!--<i class="fa-solid fa-dungeon"></i>-->
+                        <i class="fa-solid fa-fighter-jet"></i>
+                    </div>
+                </label>
+            </div>
+
+            <div class="col-12 d-flex align-items-center">
+                <label title="Task (project.task) features">
+                    <div class="icon-wrapper no-input">
+                        <i class="fa-solid fa-clipboard-list"></i>
+                    </div>
+                </label>
+                <label title="[Feature] Assign me button" for="assignMeTaskFeature" class="ms-2">
+                    <input id="assignMeTaskFeature" type="checkbox" />
+                    <div class="icon-wrapper-sm">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </div>
+                </label>
+                <label title="[Feature] Stars effect " for="starringTaskEffectFeature" class="ms-2">
+                    <input id="starringTaskEffectFeature" type="checkbox" />
+                    <div class="icon-wrapper-sm">
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                </label>
+            </div>
+
+            <div class="col-12">
+                <label title="[Feature] Save knowledge button" for="saveKnowledgeFeature">
+                    <input id="saveKnowledgeFeature" type="checkbox" />
+                    <div class="icon-wrapper">
+                        <i class="fa-regular fa-bookmark"></i>
+                        <i class="fa-solid fa-floppy-disk double-fa"></i>
+                    </div>
+                </label>
+            </div>
+
+            <div class="col-12 d-flex align-items-center">
+                <label title="[Feature] Switch Odoo theme" for="themeSwitchFeature" class="me-2">
+                    <input id="themeSwitchFeature" type="checkbox" />
+                    <div class="icon-wrapper">
+                        <i class="fa-solid fa-sun"></i>
+                        <i class="fa-solid fa-circle double-fa-mask double-fa-bicolor"></i>
+                        <i class="fa-solid fa-moon double-fa"></i>
+                    </div>
+                </label>
+                <select id="qol_theme_switch_mode_switcher" class="ms-2 my-1 form-select">
+                    <option value="autoDark" selected>Dark mode</option>
+                    <option value="autoLight" selected>Light Mode</option>
+                <option value="dynamicLocation" selected>Based on configured location (sunrise/sunset)</option>
+                <option value="dynamicTime" selected>Dark mode based on configured time</option>
+            </select>
+            </div>
+
+            <div class="col-12">
+                <label title="[Feature] Awesome Style button" for="awesomeStyleFeature">
+                    <input id="awesomeStyleFeature" type="checkbox" />
+                    <div class="icon-wrapper">
+                        <i class="fa-brands fa-css3-alt"></i>
+                    </div>
+                </label>
+            </div>
+
+            <div class="col-12 d-flex align-items-center">
+                <label title="[Feature] Loading Fullscreen" for="awesomeLoadingLargeFeature">
+                    <input id="awesomeLoadingLargeFeature" type="checkbox" />
+                    <div class="icon-wrapper">
+                        <i class="fa-solid fa-circle-notch"></i>
+                    </div>
+                </label>
+                <select class="ms-2 my-1 form-select" id="updateAwesomeLoadingLargeImage">
+                    <option value="" disabled selected>Default</option>
+                </select>
+                <img id="awesomeLoadingLargeImagePreview" class="ms-2 qol-awe-loading-preview" loading="lazy" src="https://i.imgur.com/zTauRWm.gif" />
+            </div>
+
+            <div class="col-12 d-flex align-items-center">
+                <label title="[Feature] Loading bottom right" for="awesomeLoadingSmallFeature">
+                    <input id="awesomeLoadingSmallFeature" type="checkbox" />
+                    <div class="icon-wrapper">
+                        <i class="fa-solid fa-spinner"></i>
+                    </div>
+                </label>
+                <select class="ms-2 my-1 form-select" id="updateAwesomeLoadingSmallImage">
+                    <option value="" disabled selected>Default</option>
+                </select>
+                <img id="awesomeLoadingSmallImagePreview" class="ms-2 qol-awe-loading-preview" loading="lazy" src="https://i.imgur.com/zTauRWm.gif" />
+            </div>
+
+            <div class="col-12 d-flex align-items-center">
+                <label title="[Feature] Unfocus App button" for="unfocusAppFeature" class="me-2">
+                    <input id="unfocusAppFeature" type="checkbox" />
+                    <div class="icon-wrapper">
+                        <i class="fa-solid fa-ghost"></i>
+                    </div>
+                </label>
+                <label id="qol_unfocus_app_order_switcher" class="ua-switch text-center me-2" title="Enable unfocus app reorder">
+                    <input id="qol_unfocus_app_order_input" type="checkbox" />
+                    <i class="ua-slider ua-round ua-order"></i>
+                </label>
+                <label id="qol_unfocus_app_share_switcher" class="ua-switch text-center" title="Enable unfocus app configuration share between host">
+                    <input id="qol_unfocus_app_share_input" type="checkbox" />
+                    <i class="ua-slider ua-round ua-share"></i>
+                </label>
+            </div>
+
+            <hr class="my-4" />
+
+            <div class="col-12">
+                <div class="d-flex align-items-center">
+                    <p id="currentTabUrl" class="m-0" style="flex: 1; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">Odoo - QoL & Fun</p>
+                    <button title="Save this origin" id="saveOriginButton" disabled class="float-end ms-2 btn btn-success btn-sm">Save this origin</button>
+                </div>
+                <div id="tabFeaturesList" class="mt-1">
+                    <div style="flex: 1;">
+                        <label title="[Feature Origin] Assign me button" for="assignMeTaskFeatureTab" class="mx-1">
+                            <input id="assignMeTaskFeatureTab" type="checkbox" />
+                            <div class="icon-wrapper-tab">
+                                <i class="fa-solid fa-user-plus"></i>
+                            </div>
+                        </label>
+                        <label title="[Feature Origin] Stars effect" for="starringTaskEffectFeatureTab" class="mx-1">
+                            <input id="starringTaskEffectFeatureTab" type="checkbox" />
+                            <div class="icon-wrapper-tab">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                        </label>
+                        <label title="[Feature Origin] Save knowledge button" for="saveKnowledgeFeatureTab" class="mx-1">
+                            <input id="saveKnowledgeFeatureTab" type="checkbox" />
+                            <div class="icon-wrapper-tab">
+                                <i class="fa-regular fa-bookmark"></i>
+                                <i class="fa-solid fa-floppy-disk double-fa"></i>
+                            </div>
+                        </label>
+                        <label title="[Feature Origin] Switch Odoo theme" for="themeSwitchFeatureTab" class="mx-1">
+                            <input id="themeSwitchFeatureTab" type="checkbox" />
+                            <div class="icon-wrapper-tab">
+                                <i class="fa-solid fa-sun"></i>
+                                <i class="fa-solid fa-circle double-fa-mask double-fa-bicolor"></i>
+                                <i class="fa-solid fa-moon double-fa"></i>
+                            </div>
+                        </label>
+                        <label title="[Feature Origin] Loading Fullscreen" for="awesomeLoadingLargeFeatureTab" class="mx-1">
+                            <input id="awesomeLoadingLargeFeatureTab" type="checkbox" />
+                            <div class="icon-wrapper-tab">
+                                <i class="fa-solid fa-circle-notch"></i>
+                            </div>
+                        </label>
+                        <label title="[Feature Origin] Loading bottom right" for="awesomeLoadingSmallFeatureTab" class="mx-1">
+                            <input id="awesomeLoadingSmallFeatureTab" type="checkbox" />
+                            <div class="icon-wrapper-tab">
+                                <i class="fa-solid fa-spinner"></i>
+                            </div>
+                        </label>
+                        <label title="[Feature Origin] Awesome Style" for="awesomeStyleFeatureTab" class="mx-1">
+                            <input id="awesomeStyleFeatureTab" type="checkbox" />
+                            <div class="icon-wrapper-tab">
+                                <i class="fa-brands fa-css3-alt"></i>
+                            </div>
+                        </label>
+                        <label title="[Feature Origin] Unfocus App" for="unfocusAppFeatureTab" class="mx-1">
+                            <input id="unfocusAppFeatureTab" type="checkbox" />
+                            <div class="icon-wrapper-tab">
+                                <i class="fa-solid fa-ghost"></i>
+                            </div>
+                        </label>
+                    </div>
+
+                    <button title="Save Origin configuration button" id="saveButton" disabled class="float-end ms-2 btn btn-success btn-sm">Save & Reload</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

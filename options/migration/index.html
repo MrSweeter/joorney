@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Odoo - QoL & Fun Migration</title>
+        <link rel="icon" type="image/x+icon" href="./../../images/icon_128.svg" />
+        <!-- Font Awesome -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+        <!-- MDB -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.css" rel="stylesheet" />
+
+        <link href="./index.css" rel="stylesheet" />
+        <script src="./index.js" type="module"></script>
+    </head>
+    <body class="qol-body-background d-flex justify-content-center align-items-center vh-100 vw-100">
+        <div class="">
+            <p id="error_message" class="text-danger"></p>
+
+            <div class="mb-5">
+                <h4>Select your configuration to migrate</h4>
+                <input type="file" accept=".json" class="form-control form-control-sm" id="qol_import_storage_sync_file" />
+            </div>
+
+            <div id="migration_resume" class="d-none">
+                <h4>Migration</h4>
+                <div id="migration_list" class="d-flex justify-content-center align-items-center"></div>
+                <button id="run_migration" class="btn btn-success w-100">Execute migration</button>
+            </div>
+        </div>
+    </body>
+</html>

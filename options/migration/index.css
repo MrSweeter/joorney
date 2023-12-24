@@ -1,0 +1,12 @@
+html,
+body {
+    margin: 0;
+}
+
+.qol-body-background {
+    background-image: url('/images/background.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+}

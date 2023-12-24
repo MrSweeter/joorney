@@ -1,0 +1,76 @@
+{
+	"manifest_version": 3,
+	"version": "1.0.0",
+	"name": "Odoo - Quality of Life & Fun",
+	"description": "Odoo - Quality of Life & Fun",
+	"author": "Vanden Bergh Gaëtan",
+	"homepage_url": "https://github.com/MrSweeter/odoo-qol",
+	"action": {
+		"default_title": "Odoo - QoL & Fun",
+		"default_popup": "popup/index.html",
+		"default_icon": "images/icon_128.png"
+	},
+	"commands": {
+		"enable-disable-temporary": {
+			"suggested_key": "Alt+Shift+F",
+			"description": "Enable or Disable extension features on the current origin"
+		}
+	},
+	"icons": {
+		"16": "images/icon_128.png",
+		"32": "images/icon_128.png",
+		"48": "images/icon_128.png",
+		"128": "images/icon_128.png"
+	},
+	"background": {
+		"service_worker": "background/index.js",
+		"type": "module"
+	},
+	"options_ui": {
+		"page": "options/index.html",
+		"open_in_tab": true
+	},
+	"content_scripts": [
+		{
+			"matches": [
+				"http://*/*",
+				"https://*/*"
+			],
+			"js": [
+				"utils/confetti_qol.js",
+				"content/src/task/task_setup.js",
+				"content/src/task/assign_me.js",
+				"content/src/save_knowledge.js",
+				"content/src/awesome_loading_large.js",
+				"content/src/awesome_loading_small.js",
+				"content/src/task/starring_effect.js",
+				"content/src/awesome_style.js",
+				"content/src/unfocus_app.js",
+				"content/src/runbot_smart_login/admin_debug_login.js",
+				"content/src/runbot_smart_login/impersonate_login.js",
+				"content/src/runbot_smart_login/login_setup.js",
+				"content/src/runbot_smart_login/autoopen_runbot.js",
+				"content/src/keyboard_shortcut.js",
+				"content/index.js"
+			],
+			"run_at": "document_start"
+		}
+	],
+	"web_accessible_resources": [
+		{
+			"resources": [],
+			"matches": []
+		}
+	],
+	"permissions": [
+		"tabs",
+		"webNavigation",
+		"cookies",
+		"storage",
+		"contextMenus"
+	],
+	"host_permissions": [
+		"http://*/*",
+		"https://*/*"
+	]
+}
