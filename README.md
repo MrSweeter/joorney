@@ -8,8 +8,6 @@
 
 -   Clone the repo anywhere (with a terminal)
     -   git clone https://github.com/MrSweeter/vigilant-potato.git odoo-qol
-    -   cd odoo-qol
-    -   git checkout initial-version
 -   Open page chrome://extensions
 -   Activate developer mode
 -   Load unpacked extension
