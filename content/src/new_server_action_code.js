@@ -1,4 +1,4 @@
-function checkNewServerActionPage(currentUrl) {
+async function checkNewServerActionPage(currentUrl) {
     const url = new URL(currentUrl);
     if (url.searchParams.has('id')) return;
 
@@ -7,6 +7,14 @@ function checkNewServerActionPage(currentUrl) {
     if (idRegex.test(hash)) return;
     if (!hash.includes('model=ir.actions.server')) return;
     if (!hash.includes('view_type=form')) return;
+
+    const { newServerActionCodeEnabled } = await chrome.storage.sync.get({
+        newServerActionCodeEnabled: false,
+    });
+    if (!newServerActionCodeEnabled) return;
+
+    const authorizedFeature = await authorizeFeature('newServerActionCode', url.origin);
+    if (!authorizedFeature) return undefined;
 
     selectExecuteCode();
 }

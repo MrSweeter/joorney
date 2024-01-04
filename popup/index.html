@@ -21,6 +21,7 @@
         <script src="src/tab_features.js"></script>
         <script src="src/awesome_style.js"></script>
         <script src="src/unfocus_app.js"></script>
+        <script src="src/new_server_action_code.js"></script>
         <script src="src/runbot_smart_login.js"></script>
         <script src="index.js"></script>
     </head>
@@ -95,6 +96,15 @@
                 </label>
             </div>
 
+            <div class="col-12">
+                <label title="[Feature] New Server Action Code button" for="newServerActionCodeFeature">
+                    <input id="newServerActionCodeFeature" type="checkbox" />
+                    <div class="icon-wrapper">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                </label>
+            </div>
+
             <div class="col-12 d-flex align-items-center">
                 <label title="[Feature] Switch Odoo theme" for="themeSwitchFeature" class="me-2">
                     <input id="themeSwitchFeature" type="checkbox" />
@@ -107,9 +117,9 @@
                 <select id="qol_theme_switch_mode_switcher" class="ms-2 my-1 form-select">
                     <option value="autoDark" selected>Dark mode</option>
                     <option value="autoLight" selected>Light Mode</option>
-                <option value="dynamicLocation" selected>Based on configured location (sunrise/sunset)</option>
-                <option value="dynamicTime" selected>Dark mode based on configured time</option>
-            </select>
+                    <option value="dynamicLocation" selected>Based on configured location (sunrise/sunset)</option>
+                    <option value="dynamicTime" selected>Dark mode based on configured time</option>
+                </select>
             </div>
 
             <div class="col-12">
@@ -190,6 +200,12 @@
                             <div class="icon-wrapper-tab">
                                 <i class="fa-regular fa-bookmark"></i>
                                 <i class="fa-solid fa-floppy-disk double-fa"></i>
+                            </div>
+                        </label>
+                        <label title="[Feature Origin] New Server Action Code button" for="newServerActionCodeFeatureTab" class="mx-1">
+                            <input id="newServerActionCodeFeatureTab" type="checkbox" />
+                            <div class="icon-wrapper-tab">
+                                <i class="fa-solid fa-code"></i>
                             </div>
                         </label>
                         <label title="[Feature Origin] Switch Odoo theme" for="themeSwitchFeatureTab" class="mx-1">
