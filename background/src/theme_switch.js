@@ -1,9 +1,6 @@
-import { Cookies, Runtime, StorageLocal, StorageSync, Tabs } from '../../utils/browser.js';
+import { Cookies, StorageLocal, StorageSync, Tabs } from '../../utils/browser.js';
 import { defaultThemeSwitchSetting } from '../../utils/feature_default_configuration.js';
 import { authorizeFeature } from './features.js';
-
-const dateFormat = 'MM-DD-YYYY';
-const themeCookieName = 'color_scheme';
 
 export async function switchThemeIfNeeded(tab) {
     if (!tab.url) return;
@@ -54,18 +51,10 @@ export async function switchThemeIfNeeded(tab) {
 
     if (!expectedMode) return;
 
-    const setCookie = await Cookies.get({
-        name: themeCookieName,
-        url: origin,
-    });
-    const currentMode = setCookie?.value ?? 'light';
+    const currentMode = await getThemeModeCookie(origin);
 
     if (currentMode != expectedMode) {
-        await Cookies.set({
-            name: themeCookieName,
-            value: expectedMode,
-            url: origin,
-        });
+        await setThemeModeCookie(expectedMode, origin);
         Tabs.reload(tab.id);
     }
 }
@@ -107,4 +96,33 @@ async function getSunRiseSunSet(latitude, longitude) {
 
     await StorageLocal.set(data);
     return data;
+}
+
+async function setThemeModeCookie(expectedMode, origin) {
+    if (!origin.startsWith('http')) return;
+    await Cookies.set({
+        name: 'color_scheme',
+        value: expectedMode,
+        url: origin,
+    });
+    await Cookies.set({
+        name: 'configured_color_scheme',
+        value: expectedMode,
+        url: origin,
+    });
+}
+
+async function getThemeModeCookie(origin) {
+    if (!origin.startsWith('http')) return 'light';
+    const cookies = await Promise.all([
+        Cookies.get({
+            name: 'configured_color_scheme',
+            url: origin,
+        }),
+        Cookies.get({
+            name: 'color_scheme',
+            url: origin,
+        }),
+    ]);
+    return cookies[0]?.value || cookies[1]?.value || 'light';
 }
