@@ -49,6 +49,7 @@ async function appendUnfocusApp(url, count = 0) {
         const app = element.getAttribute('data-menu-xmlid');
         let state = unfocusAppList[app];
         if (state === undefined) state = UNFOCUS_STATE.DEFAULT;
+        if (state === true) state = UNFOCUS_STATE.UNFOCUS;
         updateAppElement(element, state);
 
         const divElement = element.getElementsByClassName('o_caption')[0];

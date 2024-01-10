@@ -38,13 +38,19 @@ async function renderOriginsObject(origins) {
     const container = document.getElementById('qol_unfocus_app_table_body');
     container.innerHTML = '';
     Object.keys(origins).forEach((o, id) => {
+        const values = Object.values(origins[o]);
         container.appendChild(
-            renderOrigin(id, o, Object.values(origins[o]).filter((v) => v).length)
+            renderOrigin(
+                id,
+                o,
+                values.filter((v) => v === 2).length,
+                values.filter((v) => v === true || v === 0).length
+            )
         );
     });
 }
 
-function renderOrigin(idx, origin, unfocusCount) {
+function renderOrigin(idx, origin, superfocusCount, unfocusCount) {
     const originTemplate = document.createElement('template');
 
     originTemplate.innerHTML = `
@@ -58,7 +64,8 @@ function renderOrigin(idx, origin, unfocusCount) {
 					value="${origin}"
 				/>
 			</td>
-			<td>${unfocusCount}</td>
+			<td>${superfocusCount}</td>
+            <td>${unfocusCount}</td>
 			<td class="p-1 qol-valign-middle">
 				<button
 					class="qol_unfocus_app_origin_delete_${idx} btn btn-outline-danger border-0 btn-floating"
