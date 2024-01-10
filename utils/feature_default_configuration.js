@@ -50,6 +50,8 @@ export const defaultUnfocusAppSetting = {
     unfocusAppWhitelistMode: true,
     unfocusAppReorderEnabled: false,
     unfocusAppShareEnabled: false,
+    unfocusAppLightImageURL: 'https://i.imgur.com/AkTvOga.png',
+    unfocusAppDarkImageURL: 'https://i.imgur.com/YzShNtH.png',
     unfocusAppOrigins: {},
 };
 

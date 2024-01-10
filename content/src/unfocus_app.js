@@ -12,13 +12,15 @@ const FOCUS_ICON = 'fa-star';
 const UNFOCUS_ICON = 'fa-star-o';
 const SHARED_ORIGIN = 'unfocus_app_shared';
 
-let currentTheme = 'light';
+let superfocusImageURL = '';
 
 async function appendUnfocusApp(url, count = 0) {
     const configuration = await chrome.storage.sync.get({
         unfocusAppEnabled: false,
         unfocusAppReorderEnabled: false,
         unfocusAppShareEnabled: false,
+        unfocusAppLightImageURL: '',
+        unfocusAppDarkImageURL: '',
         unfocusAppOrigins: {},
     });
     if (!configuration.unfocusAppEnabled) return;
@@ -29,7 +31,10 @@ async function appendUnfocusApp(url, count = 0) {
 
     if (window.location.origin !== origin) return;
 
-    currentTheme = await getThemeModeCookie(origin);
+    superfocusImageURL =
+        (await getThemeModeCookie(origin)) === 'light'
+            ? configuration.unfocusAppLightImageURL
+            : configuration.unfocusAppDarkImageURL;
 
     const elements = document.getElementsByClassName('o_app');
     if (elements.length == 0 && count == 0) {
@@ -155,16 +160,10 @@ function updateAppElement(element, state, starElement) {
 
     const isSuperfocus = state === UNFOCUS_STATE.SUPER;
     const parent = element.parentElement;
-    parent.style.backgroundImage = isSuperfocus
-        ? `url("${
-              currentTheme === 'light'
-                  ? 'https://i.imgur.com/4ycbXUW.png'
-                  : 'https://i.imgur.com/QL7wm9b.png'
-          }")`
-        : null;
+    parent.style.backgroundImage = isSuperfocus ? `url("${superfocusImageURL}")` : null;
     parent.style.backgroundSize = isSuperfocus ? 'contain' : null;
     parent.style.backgroundRepeat = isSuperfocus ? 'no-repeat' : null;
-    parent.style.backgroundPosition = 'center';
+    parent.style.backgroundPosition = 'center top';
 }
 
 async function getThemeModeCookie(origin) {

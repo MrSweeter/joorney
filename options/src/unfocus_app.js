@@ -27,6 +27,8 @@ export async function load() {
 export async function restore() {
     const origins = await readUnfocusAppOrigins();
 
+    await restoreImage();
+
     await renderOriginsObject(origins);
 }
 //#endregion
@@ -85,5 +87,63 @@ function renderOrigin(idx, origin, superfocusCount, unfocusCount) {
     deleteButton.onclick = (e) => deleteUnfocusAppOrigin(origin);
 
     return originElement;
+}
+//#endregion
+
+//#region Image
+async function restoreImage() {
+    const { unfocusAppLightImageURL, unfocusAppDarkImageURL } = await StorageSync.get({
+        unfocusAppLightImageURL: '',
+        unfocusAppDarkImageURL: '',
+    });
+
+    document.getElementById('qol_unfocus_app_light_image').src = unfocusAppLightImageURL;
+    document.getElementById('qol_unfocus_app_dark_image').src = unfocusAppDarkImageURL;
+
+    loadImageInput(
+        'qol_unfocus_app_light_image_input',
+        'qol_unfocus_app_light_image',
+        'unfocusAppLightImageURL',
+        unfocusAppLightImageURL
+    );
+
+    loadImageInput(
+        'qol_unfocus_app_dark_image_input',
+        'qol_unfocus_app_dark_image',
+        'unfocusAppDarkImageURL',
+        unfocusAppDarkImageURL
+    );
+}
+
+function loadImageInput(inputKey, imageKey, configKey, value) {
+    const imageInput = document.getElementById(inputKey);
+    imageInput.value = value;
+
+    imageInput.oninput = async (e) => {
+        let imageUrl = e.target.value.trim().replace(/\s/g, '');
+        if (imageUrl.length === 0) {
+            await StorageSync.set({ [configKey]: '' });
+            return;
+        }
+
+        try {
+            imageUrl = new URL(imageUrl);
+            if (!isImageUrlPath(imageUrl.pathname))
+                throw new Error('Invalid image extension in the url path');
+
+            await StorageSync.set({ [configKey]: `${imageUrl}` });
+            imageInput.value = imageUrl;
+            document.getElementById(imageKey).src = imageUrl;
+        } catch (ex) {
+            console.warn(ex);
+        }
+    };
+}
+
+function isImageUrlPath(path) {
+    const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.svg']; // Add more extensions if needed
+    const lowercaseUrl = path.toLowerCase();
+
+    return imageExtensions.some((extension) => lowercaseUrl.endsWith(extension));
 }
 //#endregion
