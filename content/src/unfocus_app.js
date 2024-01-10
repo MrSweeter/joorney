@@ -47,7 +47,8 @@ async function appendUnfocusApp(url, count = 0) {
     // Append "star" before app name
     for (let element of elements) {
         const app = element.getAttribute('data-menu-xmlid');
-        const state = unfocusAppList[app];
+        let state = unfocusAppList[app];
+        if (state === undefined) state = UNFOCUS_STATE.DEFAULT;
         updateAppElement(element, state);
 
         const divElement = element.getElementsByClassName('o_caption')[0];
@@ -57,7 +58,7 @@ async function appendUnfocusApp(url, count = 0) {
 
         const isUnfocus = state === UNFOCUS_STATE.UNFOCUS;
         divElement.innerHTML = `<i class="qol-focus-app fa
-            ${isUnfocus ? UNFOCUS_ICON : FOCUS_ICON} me-1">
+            ${isUnfocus ? UNFOCUS_ICON : FOCUS_ICON} me-1" data-qol-state="${state}">
         </i>${divElement.innerHTML}`.trim();
     }
 
@@ -65,18 +66,34 @@ async function appendUnfocusApp(url, count = 0) {
 
     // Manage "star" click
     const apps = Array.from(document.getElementsByClassName(STAR_ELEMENT_CLASS));
+    const defaultApps = [];
+    const unfocusApps = [];
     apps.forEach((app) => {
         app.onclick = (e) => onStarClick(app, e);
 
-        if (configuration.unfocusAppReorderEnabled && app.className.includes('fa-star-o')) {
+        if (configuration.unfocusAppReorderEnabled) {
             let parent = app.parentElement.parentElement;
             // 16.4+ introduce draggable feature, a new parent has been added
             if (parent.parentElement.classList.contains('o_draggable')) {
                 parent = parent.parentElement;
             }
-            container.appendChild(parent);
+
+            const state = app.getAttribute('data-qol-state');
+
+            switch (state) {
+                case `${UNFOCUS_STATE.DEFAULT}`: {
+                    // MAYBE defaultApps.push(parent);
+                    break;
+                }
+                case `${UNFOCUS_STATE.UNFOCUS}`: {
+                    unfocusApps.push(parent);
+                    break;
+                }
+            }
         }
     });
+    defaultApps.forEach((p) => container.appendChild(p));
+    unfocusApps.forEach((p) => container.appendChild(p));
 }
 
 let clickCount = 0;
