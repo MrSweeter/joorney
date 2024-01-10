@@ -1,9 +1,18 @@
+const UNFOCUS_STATE = {
+    UNFOCUS: 0,
+    DEFAULT: 1,
+    SUPER: 2,
+};
+UNFOCUS_STATE.MAX = UNFOCUS_STATE.SUPER;
+
 const FOCUS_OPACITY = 1;
 const UNFOCUS_OPACITY = 0.1;
 const STAR_ELEMENT_CLASS = 'qol-focus-app';
 const FOCUS_ICON = 'fa-star';
 const UNFOCUS_ICON = 'fa-star-o';
 const SHARED_ORIGIN = 'unfocus_app_shared';
+
+let currentTheme = 'light';
 
 async function appendUnfocusApp(url, count = 0) {
     const configuration = await chrome.storage.sync.get({
@@ -19,6 +28,8 @@ async function appendUnfocusApp(url, count = 0) {
     if (!authorizedFeature) return;
 
     if (window.location.origin !== origin) return;
+
+    currentTheme = await getThemeModeCookie(origin);
 
     const elements = document.getElementsByClassName('o_app');
     if (elements.length == 0 && count == 0) {
@@ -36,14 +47,15 @@ async function appendUnfocusApp(url, count = 0) {
     // Append "star" before app name
     for (let element of elements) {
         const app = element.getAttribute('data-menu-xmlid');
-        const isUnfocus = unfocusAppList[app];
-        element.style.opacity = isUnfocus ? UNFOCUS_OPACITY : FOCUS_OPACITY;
+        const state = unfocusAppList[app];
+        updateAppElement(element, state);
 
         const divElement = element.getElementsByClassName('o_caption')[0];
         for (let star of divElement.getElementsByClassName(STAR_ELEMENT_CLASS)) {
             star.remove();
         }
 
+        const isUnfocus = state === UNFOCUS_STATE.UNFOCUS;
         divElement.innerHTML = `<i class="qol-focus-app fa
             ${isUnfocus ? UNFOCUS_ICON : FOCUS_ICON} me-1">
         </i>${divElement.innerHTML}`.trim();
@@ -67,10 +79,17 @@ async function appendUnfocusApp(url, count = 0) {
     });
 }
 
+let clickCount = 0;
 async function onStarClick(element, event) {
     event.preventDefault();
     event.stopPropagation();
     event.stopImmediatePropagation();
+
+    // debounce
+    clickCount += 1;
+    currentClickCount = clickCount;
+    await new Promise((r) => setTimeout(r, 200));
+    if (clickCount != currentClickCount || clickCount === 0) return;
 
     let origin = window.location.origin;
     const parent = event.target.parentElement.parentElement;
@@ -87,23 +106,71 @@ async function onStarClick(element, event) {
 
     unfocusAppOrigins[origin] = unfocusAppOrigins[origin] || {};
 
-    if (unfocusAppOrigins[origin][app]) {
-        unfocusAppOrigins[origin][app] = false;
+    const currentState = unfocusAppOrigins[origin][app];
+    const newState = clickCount > UNFOCUS_STATE.MAX ? UNFOCUS_STATE.MAX : clickCount;
+    if (
+        currentState === true || // true was the previous version logic
+        currentState === UNFOCUS_STATE.UNFOCUS ||
+        (currentState !== newState &&
+            (currentState > UNFOCUS_STATE.UNFOCUS || currentState === undefined)) // undefined === default state(1)
+    ) {
+        unfocusAppOrigins[origin][app] =
+            clickCount > UNFOCUS_STATE.MAX ? UNFOCUS_STATE.MAX : clickCount;
     } else {
-        unfocusAppOrigins[origin][app] = true;
+        unfocusAppOrigins[origin][app] = UNFOCUS_STATE.UNFOCUS;
     }
 
     await chrome.storage.sync.set({ unfocusAppOrigins: unfocusAppOrigins });
 
-    if (unfocusAppOrigins[origin][app]) {
-        parent.style.opacity = UNFOCUS_OPACITY;
-        element.classList.remove(FOCUS_ICON);
-        element.classList.add(UNFOCUS_ICON);
-    } else {
-        parent.style.opacity = FOCUS_OPACITY;
-        element.classList.remove(UNFOCUS_ICON);
-        element.classList.add(FOCUS_ICON);
+    updateAppElement(parent, unfocusAppOrigins[origin][app], element);
+
+    clickCount = 0;
+}
+
+function updateAppElement(element, state, starElement) {
+    const isUnfocus = state === UNFOCUS_STATE.UNFOCUS;
+    if (starElement) {
+        starElement.classList.remove(isUnfocus ? FOCUS_ICON : UNFOCUS_ICON);
+        starElement.classList.add(isUnfocus ? UNFOCUS_ICON : FOCUS_ICON);
     }
+    element.style.opacity = isUnfocus ? UNFOCUS_OPACITY : FOCUS_OPACITY;
+
+    const isSuperfocus = state === UNFOCUS_STATE.SUPER;
+    const parent = element.parentElement;
+    parent.style.backgroundImage = isSuperfocus
+        ? `url("${
+              currentTheme === 'light'
+                  ? 'https://i.imgur.com/4ycbXUW.png'
+                  : 'https://i.imgur.com/QL7wm9b.png'
+          }")`
+        : null;
+    parent.style.backgroundSize = isSuperfocus ? 'contain' : null;
+    parent.style.backgroundRepeat = isSuperfocus ? 'no-repeat' : null;
+    parent.style.backgroundPosition = 'center';
+}
+
+async function getThemeModeCookie(origin) {
+    if (!origin.startsWith('http')) return 'light';
+
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let cookieName = decodedCookie.includes('configured_color_scheme')
+        ? 'configured_color_scheme'
+        : decodedCookie.includes('color_scheme')
+        ? 'color_scheme'
+        : null;
+
+    if (!cookieName) return 'light';
+
+    let cookies = decodedCookie.split(';');
+
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.indexOf(cookieName) === 0) {
+            return cookie.substring(cookieName.length + 1, cookie.length);
+        }
+    }
+
+    return 'light';
 }
 
 chrome.runtime.onMessage.addListener((msg) => {
