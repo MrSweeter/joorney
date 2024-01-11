@@ -1,9 +1,14 @@
+const ASSIGN_TYPE = {
+    RELOAD: 'reload',
+    REDIRECT: 'redirect',
+};
+
 function preloadAssignMeTask() {
     const exist = document.getElementsByName('qol_action_assign_to_me');
     exist.forEach((e) => (e.disabled = true));
 }
 
-async function addUserToTaskAssignees(task, userID) {
+async function addUserToTaskAssignees(task, userID, callback) {
     const ticketID = getTaskIDFromUrl(hrefFragmentToURLParameters(window.location.href));
     if (task.id != ticketID)
         throw new Error(
@@ -37,7 +42,16 @@ async function addUserToTaskAssignees(task, userID) {
         throw new Error(data.error?.data?.message, "'Assign to me' call failed !");
     }
     if (data?.result === true) {
-        window.location.reload();
+        switch (callback) {
+            case ASSIGN_TYPE.RELOAD: {
+                window.location.reload();
+                return;
+            }
+            case ASSIGN_TYPE.REDIRECT: {
+                window.open(window.location.href);
+                return;
+            }
+        }
         return;
     }
     throw new Error(data?.result || "Unknown response from 'Assign to me' call...");
@@ -60,7 +74,11 @@ function appendAssignMeTaskButtonToDom(task, currentUser) {
 
 function updateAssignMeTaskEvent(btn, task, currentUser) {
     btn.onclick = () => {
-        addUserToTaskAssignees(task, currentUser);
+        addUserToTaskAssignees(task, currentUser, ASSIGN_TYPE.RELOAD);
+    };
+
+    btn.onauxclick = () => {
+        addUserToTaskAssignees(task, currentUser, ASSIGN_TYPE.REDIRECT);
     };
 }
 
