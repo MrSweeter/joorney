@@ -7,6 +7,7 @@ const features_enabled_configuration = {
     starringTaskEffectEnabled: false,
     awesomeStyleEnabled: false,
     unfocusAppEnabled: false,
+    newServerActionCodeEnabled: false,
     adminDebugLoginRunbotEnabled: false,
     impersonateLoginRunbotEnabled: false,
 
@@ -18,6 +19,7 @@ const features_enabled_configuration = {
     starringTaskEffectWhitelistMode: true,
     awesomeStyleWhitelistMode: true,
     unfocusAppWhitelistMode: true,
+    newServerActionCodeWhitelistMode: false,
     adminDebugLoginRunbotWhitelistMode: true,
     impersonateLoginRunbotWhitelistMode: true,
 

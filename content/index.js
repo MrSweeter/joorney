@@ -36,6 +36,7 @@ chrome.runtime.onMessage.addListener((msg) => {
         checkTaskPage(url);
         checkKnowledge(url);
         appendUnfocusApp(url);
+        checkNewServerActionPage(url);
     }
 });
 

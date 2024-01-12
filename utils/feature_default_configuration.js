@@ -38,6 +38,11 @@ export const defaultSaveKnowledgeSetting = {
     saveKnowledgeWhitelistMode: true,
 };
 
+export const defaultNewServerActionCodeSetting = {
+    newServerActionCodeEnabled: false,
+    newServerActionCodeWhitelistMode: false,
+};
+
 export const defaultTaskSetupSetting = {
     assignMeTaskEnabled: false,
     assignMeTaskWhitelistMode: true,
@@ -82,4 +87,5 @@ export const QOL_DEFAULT_CONFIGURATION = {
     ...defaultAwesomeStyleSetting,
     ...defaultUnfocusAppSetting,
     ...defaultSmartLoginRunbotSetting,
+    ...defaultNewServerActionCodeSetting,
 };

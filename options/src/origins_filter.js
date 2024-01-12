@@ -131,6 +131,7 @@ function renderOrigin(idx, origin, blacklist) {
         'themeSwitch',
         'awesomeStyle',
         'unfocusApp',
+        'newServerActionCode',
     ];
     const featuresUI = features
         .map((f) =>
