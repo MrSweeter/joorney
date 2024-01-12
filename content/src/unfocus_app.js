@@ -159,7 +159,9 @@ function updateAppElement(element, state, starElement) {
     element.style.opacity = isUnfocus ? UNFOCUS_OPACITY : FOCUS_OPACITY;
 
     const isSuperfocus = state === UNFOCUS_STATE.SUPER;
-    const parent = element.parentElement;
+    const parent = element.parentElement.classList.contains('o_draggable')
+        ? element.parentElement
+        : element;
     parent.style.backgroundImage = isSuperfocus ? `url("${superfocusImageURL}")` : null;
     parent.style.backgroundSize = isSuperfocus ? 'contain' : null;
     parent.style.backgroundRepeat = isSuperfocus ? 'no-repeat' : null;
