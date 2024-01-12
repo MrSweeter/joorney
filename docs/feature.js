@@ -5,6 +5,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+document.addEventListener('wheel', (e) => {
+    if (e.deltaX > 0) {
+        document.getElementById('qol-next-feature').click();
+    } else if (e.deltaX < 0) {
+        document.getElementById('qol-previous-feature').click();
+    }
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.code == 'ArrowRight') {
+        document.getElementById('qol-next-feature').click();
+    } else if (e.code == 'ArrowLeft') {
+        document.getElementById('qol-previous-feature').click();
+    }
+});
+
 function loadFeature(featureName) {
     const feature = features[featureName];
     if (!feature) return;
@@ -56,8 +72,15 @@ const features = {
         icon: 'ghost-solid',
         title: 'Unfocus apps',
         description:
-            '<span class="fw-bold">Unfocus App</span> is a feature that allows you to hide the apps that you are not using frequently, so you can focus on the ones that are more relevant to your work. It adds a small star next to the app name on the odoo home page that you can toggle to unfocus the apps.',
+            '<span class="fw-bold">Unfocus App</span> is a feature that allows you to hide the apps that you are not using frequently, so you can focus on the ones that are more relevant to your work. It adds a small star next to the app name on the odoo home page that you can toggle to unfocus the apps.<br/><br/>You prefer to highlight an apps, double click on the star to put a background image around the app icon.',
         amico: 'social_strategy-amico',
+    },
+    newServerActionCode: {
+        icon: 'code-solid',
+        title: 'Server Action Code',
+        description:
+            '<span class="fw-bold">Server Action Code App</span> is a feature that will automatically select "Execute code" as type for Server Action, so you can focus on writing code directly.',
+        amico: 'hand_coding-amico',
     },
     /* Runbot */
     autoOpenRunbot: {

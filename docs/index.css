@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Inter:300,400,500,600&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Caveat:700&display=swap');
+
 :root {
     --qol-primary: #fca311;
     --qol-primary-text: #13213c;
@@ -8,6 +11,7 @@ html,
 body {
     margin: 0;
     color: var(--qol-primary-text);
+    font-family: 'Roboto', sans-serif;
 }
 
 body {
@@ -24,6 +28,7 @@ body {
 /* https://www.odoo.com/page/brand-assets */
 .odoo {
     color: var(--odoo-primary);
+    /*font-family: 'Inter', 'Roboto', sans-serif;*/
 }
 
 .text-primary {
@@ -40,7 +45,6 @@ body {
 
 .background-amico {
     opacity: 0.1;
-    z-index: -1;
 }
 
 .switch-feature {
@@ -149,4 +153,28 @@ ol {
 
 .accordion-button:not(.collapsed):after {
     filter: invert(81%) sepia(44%) saturate(4660%) hue-rotate(350deg) brightness(100%) contrast(98%);
+}
+
+/* Odoo Style */
+body.odoo-style .caveat {
+    font-family: 'Caveat', 'Roboto', sans-serif;
+    font-weight: 700;
+}
+
+body.odoo-style .text-paint {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+body.odoo-style .text-paint-yellow {
+    background-image: url('./assets/text-paint-odoo/text-paint-yellow.svg');
+}
+
+body.odoo-style .text-paint-red {
+    background-image: url('./assets/text-paint-odoo/text-paint-red.svg');
+}
+
+body.odoo-style .text-paint-blue {
+    background-image: url('./assets/text-paint-odoo/text-paint-blue.svg');
 }
