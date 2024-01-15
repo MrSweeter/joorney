@@ -53,6 +53,13 @@ input:checked + .icon-wrapper i {
 input:checked + .icon-wrapper {
     background-color: var(--qol-primary);
 }
+input:disabled + .icon-wrapper {
+    opacity: 0.5;
+    cursor: default;
+}
+input:disabled + .icon-wrapper:hover {
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+}
 
 .icon-wrapper.no-input i {
     color: var(--qol-primary) !important;
@@ -113,6 +120,13 @@ input:checked + .icon-wrapper-sm i {
 input:checked + .icon-wrapper-sm {
     background-color: var(--qol-secondary);
 }
+input:disabled + .icon-wrapper-sm {
+    opacity: 0.5;
+    cursor: default;
+}
+input:disabled + .icon-wrapper-sm:hover {
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+}
 
 input:disabled + .icon-wrapper-sm {
     opacity: 0.5;
@@ -167,6 +181,13 @@ input:checked + .limited-feature.icon-wrapper-sm i {
 }
 input:checked + .limited-feature.icon-wrapper-sm {
     background-color: var(--qol-limited-secondary);
+}
+input:disabled + .limited-feature.icon-wrapper-sm {
+    opacity: 0.5;
+    cursor: default;
+}
+input:disabled + .limited-feature.icon-wrapper-sm:hover {
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
 }
 
 .limited-feature.icon-wrapper-sm {

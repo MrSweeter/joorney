@@ -129,13 +129,15 @@ async function onStarClick(element, event) {
 
     unfocusAppOrigins[origin] = unfocusAppOrigins[origin] || {};
 
-    const currentState = unfocusAppOrigins[origin][app];
+    let currentState = unfocusAppOrigins[origin][app];
+    if (currentState === undefined) currentState = UNFOCUS_STATE.DEFAULT;
+    if (currentState === true) currentState = UNFOCUS_STATE.UNFOCUS; // true was the previous version logic
+
     const newState = clickCount > UNFOCUS_STATE.MAX ? UNFOCUS_STATE.MAX : clickCount;
+
     if (
-        currentState === true || // true was the previous version logic
         currentState === UNFOCUS_STATE.UNFOCUS ||
-        (currentState !== newState &&
-            (currentState > UNFOCUS_STATE.UNFOCUS || currentState === undefined)) // undefined === default state(1)
+        (currentState !== newState && currentState > UNFOCUS_STATE.UNFOCUS)
     ) {
         unfocusAppOrigins[origin][app] =
             clickCount > UNFOCUS_STATE.MAX ? UNFOCUS_STATE.MAX : clickCount;
