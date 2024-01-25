@@ -7,7 +7,9 @@ import { checkCommandShortcuts, handleCommands, updateTabState } from './src/key
 
 // On page # path change
 WebNavigation.onReferenceFragmentUpdated.addListener((e) => {
-    Tabs.sendMessage(e.tabId, { url: e.url });
+    if (e.url.startsWith('http')) {
+        Tabs.sendMessage(e.tabId, { url: e.url });
+    }
 });
 
 Tabs.onUpdated.addListener((_1, _2, tabInfo) => {
