@@ -24,6 +24,10 @@ async function getKnowledgeArticle(href) {
     const authorizedFeature = await authorizeFeature('saveKnowledge', url.origin);
     if (!authorizedFeature) return undefined;
 
+    // Odoo 17 introduce the save manually in article
+    const odooSaveExist = document.getElementsByClassName('o_form_button_save');
+    if (odooSaveExist.length > 0) return undefined;
+
     // body_0 is the ID use when you can edit an article body
     const exist = document.getElementById('body_0');
     if (!exist) return undefined;
