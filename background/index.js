@@ -1,9 +1,14 @@
-import { Runtime, StorageSync, Tabs, WebNavigation } from '../utils/browser.js';
-import { QOL_DEFAULT_CONFIGURATION } from '../utils/feature_default_configuration.js';
+import { Runtime, StorageSync, Tabs, WebNavigation } from '../src/utils/browser.js';
+
 import { checkVersion } from './src/check_version.js';
-import { switchThemeIfNeeded } from './src/theme_switch.js';
-import { getFinalRunbotURL } from './src/runbot_smart_login.js';
-import { checkCommandShortcuts, handleCommands, updateTabState } from './src/keyboard_shortcut.js';
+import { checkCommandShortcuts, handleCommands } from './src/keyboard_shortcut.js';
+import {
+    loadFeaturesConfiguration,
+    getCurrentSettings,
+    features,
+    importFeatureBackgroundFile,
+} from '../configuration.js';
+import { handleMessage } from './src/messaging.js';
 
 // On page # path change, pre 17.2
 WebNavigation.onReferenceFragmentUpdated.addListener((e) => {
@@ -19,35 +24,41 @@ WebNavigation.onHistoryStateUpdated.addListener((e) => {
     }
 });
 
-Tabs.onUpdated.addListener((_1, _2, tabInfo) => {
-    if (tabInfo.url.startsWith('http')) {
-        switchThemeIfNeeded(tabInfo);
+Tabs.onUpdated.addListener(async (_1, _2, tab) => {
+    if (tab.url.startsWith('http')) {
+        features
+            .filter((f) => f.trigger.background)
+            .forEach((feature) => {
+                importFeatureBackgroundFile(feature.id).then((featureModule) => {
+                    featureModule.load(tab);
+                });
+            });
     }
 });
 
 Runtime.onInstalled.addListener(async (details) => {
     if (details.reason === Runtime.OnInstalledReason.INSTALL) {
-        const configurationOrDefault = await StorageSync.get(QOL_DEFAULT_CONFIGURATION);
-        await StorageSync.set(configurationOrDefault);
+        const settingsOrDefault = getCurrentSettings(features);
+        await StorageSync.set(settingsOrDefault);
         checkCommandShortcuts();
     }
 });
 
-const AVAILABLE_ACTION_MESSAGES_HANDLERS = {
-    GET_FINAL_RUNBOT_URL: getFinalRunbotURL,
-    UPDATE_EXT_STATUS: updateTabState,
-};
-
 // Triggers when a message is received (from the content script)
-Runtime.onMessage.addListener((request, _, sendResponse) => {
-    AVAILABLE_ACTION_MESSAGES_HANDLERS[request.action]?.(request)
-        .then(sendResponse)
+Runtime.onMessage.addListener((message, _, sendResponse) => {
+    handleMessage(message, _, sendResponse)
+        .then(async (r) => {
+            console.log(r);
+            sendResponse(r);
+        })
         .catch((ex) => {
-            console.warn(ex);
+            console.log(ex);
             sendResponse();
         });
-    return true; // Needed for asynchronous
+    return true;
 });
 
 checkVersion();
 handleCommands();
+
+loadFeaturesConfiguration();

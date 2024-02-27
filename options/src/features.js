@@ -1,4 +1,4 @@
-import { Runtime, StorageSync } from '../../utils/browser.js';
+import { Runtime, StorageSync } from '../../src/utils/browser.js';
 
 function disableFeatureInput(feature) {
     const inputs = Array.from(

@@ -94,7 +94,7 @@ const features = {
         icon: 'jet-fighter-solid',
         title: 'Automatic Open runbot',
         description:
-            '<span class="fw-bold">AutoOpen Runbot</span> is a feature that allows you to open a runbot instance in a specific version as an admin user in debug mode, by adding a hash parameter to the url. For example, if you want to open a runbot in 16.3, you can use this url: <a target="_blank" href="https://runbot.odoo.com#qol-open-16.3">https://runbot.odoo.com#qol-open-16.3</a>.',
+            '<span class="fw-bold">AutoOpen Runbot</span> is a feature that allows you to open a runbot instance in a specific version as an admin user in debug mode, by adding a hash parameter to the url. For example, if you want to open a runbot in 16.3, you can use this url: <a target="_blank" href="https://runbot.odoo.com?qol-runbot=16.3">https://runbot.odoo.com?qol-runbot=16.3</a>.',
         amico: 'product_tour-amico',
     },
     impersonateLoginRunbot: {

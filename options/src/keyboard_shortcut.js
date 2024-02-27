@@ -1,4 +1,4 @@
-import { Commands, Tabs } from '../../utils/browser.js';
+import { Commands, Tabs } from '../../src/utils/browser.js';
 
 export async function load() {
     const tableBody = document.getElementById('shortcut_table_body');

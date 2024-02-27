@@ -1,4 +1,4 @@
-import { configurationInternalVersion } from '../../utils/feature_default_configuration.js';
+import { baseSettings } from '../../configuration.js';
 
 function setupInput() {
     const importInput = document.getElementById('qol_import_storage_sync_file');
@@ -14,7 +14,7 @@ function setupInput() {
 
 function analyzeConfiguration(jsonFile) {
     const migrateVersion = jsonFile.configurationVersion ?? 0;
-    const currentVersion = configurationInternalVersion.configurationVersion;
+    const currentVersion = baseSettings.configurationVersion;
 
     const resume = document.getElementById('migration_resume');
 
@@ -105,4 +105,9 @@ function downloadNewMigration(data) {
     downloadAnchorNode.remove();
 }
 
-setupInput();
+async function onDOMContentLoaded() {
+    setupInput();
+}
+
+document.removeEventListener('DOMContentLoaded', onDOMContentLoaded);
+document.addEventListener('DOMContentLoaded', onDOMContentLoaded);

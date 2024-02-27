@@ -1,5 +1,7 @@
-import { StorageSync } from '../../utils/browser.js';
-import { defaultOriginsFilterSetting } from '../../utils/feature_default_configuration.js';
+import { baseSettings } from '../../configuration.js';
+import { generateFeatureOptionTableHeadItem, stringToHTML } from '../../src/html_generator.js';
+import { Runtime, StorageSync } from '../../src/utils/browser.js';
+import { MESSAGE_ACTION } from '../../src/utils/messaging.js';
 
 //#region CRUD
 export async function createOriginsFilterOrigin() {
@@ -38,9 +40,7 @@ export async function createOriginsFilterOrigin() {
 }
 
 async function readOriginsFilterOrigins() {
-    const { originsFilterOrigins } = await StorageSync.get({
-        originsFilterOrigins: defaultOriginsFilterSetting.originsFilterOrigins,
-    });
+    const { originsFilterOrigins } = await StorageSync.get(baseSettings);
     return originsFilterOrigins;
 }
 
@@ -68,7 +68,7 @@ export async function load() {
 }
 
 async function restore() {
-    const configuration = await StorageSync.get(defaultOriginsFilterSetting);
+    const configuration = await StorageSync.get(baseSettings);
 
     await renderOriginsObject(configuration.originsFilterOrigins);
 }
@@ -79,6 +79,13 @@ function renderOriginsFilterError(errorMessage) {
     const container = document.getElementById('qol_origins_filter_error_footer');
     container.textContent = errorMessage;
     container.style.display = errorMessage ? 'table-cell' : 'none';
+}
+
+function updateColSpan(count) {
+    const footers = document.querySelectorAll('tfoot tr td:first-child');
+    footers[0].colSpan = `${count + 2}`;
+    footers[1].colSpan = `${count + 1}`;
+    footers[2].colSpan = `${count + 2}`;
 }
 
 async function renderOriginsObject(origins) {
@@ -92,10 +99,34 @@ async function renderOriginsObject(origins) {
 
     await StorageSync.set({ originsFilterOrigins: origins });
 
+    const response = await Runtime.sendMessage({
+        action: MESSAGE_ACTION.GET_FEATURES_LIST,
+    });
+    const features = response.features.filter((f) => !f.limited);
+
+    const tableHeader = document.querySelector('#qol_origins_filter_table thead tr');
+    tableHeader.innerHTML = '';
+    tableHeader.appendChild(
+        stringToHTML(
+            `<th class="qol-origins_filter-origin-input" title="Odoo Database Origin">Origins</th>`
+        )
+    );
+    features.forEach((f) => tableHeader.appendChild(generateFeatureOptionTableHeadItem(f)));
+    tableHeader.appendChild(stringToHTML(`<th class="py-0 qol-valign-middle action-head"></th>`));
+
     const container = document.getElementById('qol_origins_filter_table_body');
     container.innerHTML = '';
-    originsArray.forEach((o, id) => container.appendChild(renderOrigin(id, o)));
+    originsArray.forEach((o, id) =>
+        container.appendChild(
+            renderOrigin(
+                id,
+                o,
+                features.map((f) => f.id)
+            )
+        )
+    );
     renderOriginsFilterError();
+    updateColSpan(features.length);
 }
 
 function setupOriginFeature(container, idx, feature, origin) {
@@ -119,21 +150,9 @@ async function updateOriginFeature(idx, origin, feature, checked) {
     rowInputs.forEach((i) => (i.disabled = false));
 }
 
-function renderOrigin(idx, origin, blacklist) {
+function renderOrigin(idx, origin, features) {
     const originTemplate = document.createElement('template');
 
-    const features = [
-        'awesomeLoadingLarge',
-        'awesomeLoadingSmall',
-        'assignMeTask',
-        'starringTaskEffect',
-        'saveKnowledge',
-        'themeSwitch',
-        'awesomeStyle',
-        'unfocusApp',
-        'newServerActionCode',
-        'tooltipMetadata',
-    ];
     const featuresUI = features
         .map((f) =>
             `

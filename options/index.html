@@ -15,7 +15,7 @@
         <link href="./css/limited_features.css" rel="stylesheet" />
         <link href="./css/origins_filter.css" rel="stylesheet" />
 
-        <script src="index.js" type="module"></script>
+        <script src="index.js"></script>
     </head>
     <body class="qol-body-background">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -181,70 +181,18 @@
             <table id="qol_origins_filter_table" class="table table-striped bg-light">
                 <thead class="shadow-2">
                     <tr>
-                        <th class="qol-origins_filter-origin-input" title="Odoo Database Origin">Origins</th>
-                        <th title="[Feature Origin] Loading Fullscreen" class="icon-wrapper-head">
-                            <div class="icon-wrapper" id="qol_origins_filter_feature_header_awesomeLoadingLarge">
-                                <i class="fa-solid fa-circle-notch"></i>
-                            </div>
-                        </th>
-                        <th title="[Feature Origin] Loading bottom right" class="icon-wrapper-head">
-                            <div class="icon-wrapper" id="qol_origins_filter_feature_header_awesomeLoadingSmall">
-                                <i class="fa-solid fa-spinner"></i>
-                            </div>
-                        </th>
-                        <th title="[Feature Origin] Assign me" class="icon-wrapper-head">
-                            <div class="icon-wrapper" id="qol_origins_filter_feature_header_assignMeTask">
-                                <i class="fa-solid fa-user-plus"></i>
-                            </div>
-                        </th>
-                        <th title="[Feature Origin] Stars effect" class="icon-wrapper-head">
-                            <div class="icon-wrapper" id="qol_origins_filter_feature_header_starringTaskEffect">
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                        </th>
-                        <th title="[Feature Origin] Save knowledge" class="icon-wrapper-head">
-                            <div class="icon-wrapper" id="qol_origins_filter_feature_header_saveKnowledge">
-                                <i class="fa-regular fa-bookmark"></i>
-                                <i class="fa-solid fa-floppy-disk double-fa"></i>
-                            </div>
-                        </th>
-                        <th title="[Feature Origin] Switch Odoo theme" class="icon-wrapper-head">
-                            <div class="icon-wrapper" id="qol_origins_filter_feature_header_themeSwitch">
-                                <i class="fa-solid fa-sun"></i>
-                                <i class="fa-solid fa-circle double-fa-mask double-fa-bicolor"></i>
-                                <i class="fa-solid fa-moon double-fa"></i>
-                            </div>
-                        </th>
-                        <th title="[Feature Origin] Awesome Style" class="icon-wrapper-head">
-                            <div class="icon-wrapper" id="qol_origins_filter_feature_header_awesomeStyle">
-                                <i class="fa-brands fa-css3-alt"></i>
-                            </div>
-                        </th>
-                        <th title="[Feature Origin] Unfocus App" class="icon-wrapper-head">
-                            <div class="icon-wrapper" id="qol_origins_filter_feature_header_unfocusApp">
-                                <i class="fa-solid fa-ghost"></i>
-                            </div>
-                        </th>
-                        <th title="[Feature Origin] New Server Action Code" class="icon-wrapper-head">
-                            <div class="icon-wrapper" id="qol_origins_filter_feature_header_newServerActionCode">
-                                <i class="fa-solid fa-code"></i>
-                            </div>
-                        </th>
-                        <th title="[Feature Origin] Tooltip Metadata" class="icon-wrapper-head">
-                            <div class="icon-wrapper" id="qol_origins_filter_feature_header_tooltipMetadata">
-                                <i class="fa-solid fa-file-lines"></i>
-                            </div>
-                        </th>
-                        <th class="py-0 qol-valign-middle action-head"></th>
+                        <!-- DYNAMIC HEADER -->
                     </tr>
                 </thead>
-                <tbody id="qol_origins_filter_table_body"></tbody>
+                <tbody id="qol_origins_filter_table_body">
+                    <!-- DYNAMIC CONTENT -->
+                </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="12"></td>
+                        <td></td>
                     </tr>
                     <tr class="table-secondary">
-                        <td class="p-1 qol-valign-middle" colspan="9">
+                        <td class="p-1 qol-valign-middle">
                             <input type="text" class="form-control border border-0" id="qol_origins_filter_new_origin" placeholder="www.odoo.com" aria-label="Origin filter" />
                         </td>
                         <td class="p-1 qol-valign-middle">
@@ -254,7 +202,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td id="qol_origins_filter_error_footer" class="text-danger" colspan="10"></td>
+                        <td id="qol_origins_filter_error_footer" class="text-danger"></td>
                     </tr>
                 </tfoot>
             </table>

@@ -1,3 +1,5 @@
+import { StorageSync, Tabs } from '../../utils/browser.js';
+
 const features_enabled_configuration = {
     assignMeTaskEnabled: false,
     saveKnowledgeEnabled: false,
@@ -28,8 +30,8 @@ const features_enabled_configuration = {
     originsFilterOrigins: {},
 };
 
-async function loadTabFeatures(configuration) {
-    const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+export async function loadTabFeatures(configuration) {
+    const tabs = await Tabs.query({ active: true, currentWindow: true });
     const currentTab = tabs[0];
 
     const originString = new URL(currentTab.url).origin;
@@ -42,8 +44,8 @@ async function loadTabFeatures(configuration) {
     setupSaveOriginButton(configuration, currentTab.id, origins, originString);
 }
 
-async function reloadTabFeatures() {
-    const configuration = await chrome.storage.sync.get(features_enabled_configuration);
+export async function reloadTabFeatures() {
+    const configuration = await StorageSync.get(features_enabled_configuration);
 
     loadTabFeatures(configuration);
 }
@@ -70,7 +72,7 @@ function setupSaveOriginButton(configuration, currentTabID, origins, originStrin
     tabFeaturesList.style.display = 'none';
     saveOriginButton.onclick = async () => {
         origins[originString] = {};
-        await chrome.storage.sync.set({ originsFilterOrigins: origins });
+        await StorageSync.set({ originsFilterOrigins: origins });
         reloadTabFeatures();
     };
     saveOriginButton.disabled = false;
@@ -106,8 +108,8 @@ function setupFeatures(configuration, currentTabID, origins, originString) {
             originConfiguration[f] = featureInput.checked;
         });
         origins[originString] = originConfiguration;
-        await chrome.storage.sync.set({ originsFilterOrigins: origins });
-        chrome.tabs.reload(currentTabID);
+        await StorageSync.set({ originsFilterOrigins: origins });
+        Tabs.reload(currentTabID);
     };
     saveButton.disabled = false;
 }

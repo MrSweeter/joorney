@@ -1,4 +1,4 @@
-import { Action, Runtime } from '../../utils/browser.js';
+import { Action, Runtime } from '../../src/utils/browser.js';
 
 const fetchVersion =
     'https://raw.githubusercontent.com/MrSweeter/vigilant-potato/master/manifest.json';

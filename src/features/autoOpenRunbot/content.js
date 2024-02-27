@@ -1,0 +1,56 @@
+import LimitedRunbotContentFeature from '../../shared/limitedRunbot/content.js';
+import configuration from './configuration.js';
+
+export default class AutoOpenRunbotContentFeature extends LimitedRunbotContentFeature {
+    constructor() {
+        super(configuration);
+    }
+
+    async loadFeature(url) {
+        if (!this.isRunbotPageWithAutoOpenHash(url)) return;
+
+        const path = await this.getRunbotPath(url);
+        await this.openRunbot('https://runbot.odoo.com/' + (path ?? ''), false);
+    }
+
+    async getRunbotPath(tabURL) {
+        const urlVersion = this.getOpenData(tabURL);
+        if (!urlVersion) return;
+
+        let openVersion = parseFloat(urlVersion).toFixed(1);
+        if (isNaN(openVersion)) {
+            openVersion = urlVersion;
+        }
+
+        const rows = document.getElementsByClassName('bundle_row');
+
+        // FOR EACH VERSION ROW
+        for (let i = 0; i < rows.length; i++) {
+            const row = rows[i];
+            const version = row.querySelector('div.one_line a b').textContent.replace('saas-', '');
+            if (version != openVersion) continue;
+
+            const groups = Array.from(row.querySelectorAll('div.slot_button_group'));
+
+            // FOR EACH SUBGROUP BUILD OF VERSION
+            for (let j = 0; j < groups.length; j++) {
+                const group = groups[j];
+                const type = group.querySelector('a.slot_name span').textContent.toLowerCase();
+
+                if (!type.startsWith('enterprise')) continue;
+
+                console.log(group.innerHTML);
+
+                const signInButtons = group.getElementsByClassName('fa fa-sign-in btn btn-info');
+                const spinGearIcons = group.getElementsByClassName('fa-cog fa-spin');
+                const refreshingIcons = group.querySelector('span i.fa-refresh');
+
+                // SIGN IN exist and runbot not in a refresh state
+                if (signInButtons.length > 0 && spinGearIcons.length == 0 && !refreshingIcons) {
+                    return signInButtons.item(0).getAttribute('href');
+                }
+            }
+        }
+        return undefined;
+    }
+}

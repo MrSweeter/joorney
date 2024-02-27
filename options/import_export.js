@@ -1,5 +1,5 @@
-import { Tabs, StorageSync } from '../utils/browser.js';
-import { QOL_DEFAULT_CONFIGURATION } from '../utils/feature_default_configuration.js';
+import { baseSettings } from '../configuration.js';
+import { Tabs, StorageSync } from '../src/utils/browser.js';
 
 function importOptions(file) {
     const reader = new FileReader();
@@ -12,8 +12,8 @@ function importOptions(file) {
     reader.readAsText(file);
 }
 
-async function exportOptions() {
-    const items = await StorageSync.get(QOL_DEFAULT_CONFIGURATION);
+async function exportOptions(currentSettings) {
+    const items = await StorageSync.get(currentSettings);
 
     const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(items));
     const downloadAnchorNode = document.createElement('a');
@@ -31,7 +31,7 @@ function confirmImport(file) {
     }
 }
 
-function setupImportExport() {
+function setupImportExport(currentSettings) {
     const importInput = document.getElementById('qol_import_storage_sync_file');
     importInput.onchange = (e) => confirmImport(e.target.files[0]);
 
@@ -46,19 +46,21 @@ function setupImportExport() {
     };
 
     const exportButton = document.getElementById('qol_export_storage_sync');
-    exportButton.onclick = exportOptions;
+    exportButton.onclick = (e) => exportOptions(currentSettings);
 }
 
-async function checkConfigurationVersion() {
-    const { configurationVersion } = await StorageSync.get({ configurationVersion: 0 });
-    if (configurationVersion < QOL_DEFAULT_CONFIGURATION.configurationVersion) {
+async function checkConfigurationVersion(currentSettings) {
+    const { configurationVersion } = await StorageSync.get({
+        configurationVersion: baseSettings.configurationVersion,
+    });
+    if (configurationVersion < currentSettings.configurationVersion) {
         document.getElementById('qol_migrate_configuration').classList.remove('d-none');
         document.getElementById('qol_import_storage_sync_file').disabled = true;
         document.getElementById('qol_import_storage_sync').disabled = true;
     }
 }
 
-export function initImportExport() {
-    setupImportExport();
-    checkConfigurationVersion();
+export function initImportExport(currentSettings) {
+    setupImportExport(currentSettings);
+    checkConfigurationVersion(currentSettings);
 }
