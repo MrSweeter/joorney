@@ -36,6 +36,18 @@ async function checkAdminDebug(currentUrl) {
     }
 
     if (authorized && hashes.includes(url.hash)) {
+        // 16+
+        let front_to_back_button = document.getElementsByClassName(
+            'o_frontend_to_backend_apps_btn'
+        );
+        // < 16
+        if (front_to_back_button.length == 0)
+            front_to_back_button = document.getElementsByClassName('o_menu_toggle');
+        if (front_to_back_button.length > 0) {
+            window.location.href = `${window.location.origin}/web`;
+            return;
+        }
+
         loginWithForm('admin');
         return true;
     }
