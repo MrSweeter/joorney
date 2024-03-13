@@ -132,6 +132,7 @@ function renderOrigin(idx, origin, blacklist) {
         'awesomeStyle',
         'unfocusApp',
         'newServerActionCode',
+        'tooltipMetadata',
     ];
     const featuresUI = features
         .map((f) =>

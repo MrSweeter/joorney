@@ -7,6 +7,7 @@ import { load as loadAwesomeStyle } from './src/awesome_style.js';
 import { load as loadUnfocusApp } from './src/unfocus_app.js';
 import { load as loadSmartLogin } from './src/runbot_smart_login.js';
 import { load as loadNewServerActionCode } from './src/new_server_action_code.js';
+import { load as loadTooltipMetadata } from './src/tooltip_metadata.js';
 import { load as loadKeyboardShortcut } from './src/keyboard_shortcut.js';
 import { setupDragAndDrop } from './src/features.js';
 import { initImportExport } from './import_export.js';
@@ -29,6 +30,7 @@ async function onDOMContentLoaded() {
     loadUnfocusApp();
     loadSmartLogin();
     loadNewServerActionCode();
+    loadTooltipMetadata();
     loadKeyboardShortcut();
     initImportExport();
 

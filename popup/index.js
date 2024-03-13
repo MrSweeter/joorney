@@ -16,6 +16,7 @@ window.onload = async () => {
     loadUnfocusApp(configuration);
     loadSmartLogin(configuration);
     loadNewServerActionCode(configuration);
+    loadTooltipMetadata(configuration);
 
     loadTabFeatures(configuration);
 
