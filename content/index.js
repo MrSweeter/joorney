@@ -22,6 +22,7 @@ window.addEventListener('load', async () => {
     appendAwesomeStyle(url);
     appendUnfocusApp(url);
     appendSmartLogin(url);
+    appendTooltipMetadata(url);
 });
 
 // Experimental: This is an experimental technology - firefox not compatible
@@ -37,6 +38,7 @@ chrome.runtime.onMessage.addListener((msg) => {
         checkKnowledge(url);
         appendUnfocusApp(url);
         checkNewServerActionPage(url);
+        appendTooltipMetadata(url);
     }
 });
 

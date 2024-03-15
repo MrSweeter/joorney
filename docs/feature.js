@@ -82,6 +82,13 @@ const features = {
             '<span class="fw-bold">Server Action Code App</span> is a feature that will automatically select "Execute code" as type for Server Action, so you can focus on writing code directly.',
         amico: 'hand_coding-amico',
     },
+    tooltipMetadata: {
+        icon: 'file-lines-solid',
+        title: 'Tooltip Metadata',
+        description:
+            '<span class="fw-bold">Tooltip Metadata</span> is a feature that will show you current record metadata by hovering the debug icon.',
+        amico: 'static_assets-amico',
+    },
     /* Runbot */
     autoOpenRunbot: {
         icon: 'jet-fighter-solid',

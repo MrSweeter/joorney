@@ -8,6 +8,7 @@ const features_enabled_configuration = {
     awesomeStyleEnabled: false,
     unfocusAppEnabled: false,
     newServerActionCodeEnabled: false,
+    tooltipMetadataEnabled: false,
     adminDebugLoginRunbotEnabled: false,
     impersonateLoginRunbotEnabled: false,
 
@@ -20,6 +21,7 @@ const features_enabled_configuration = {
     awesomeStyleWhitelistMode: true,
     unfocusAppWhitelistMode: true,
     newServerActionCodeWhitelistMode: false,
+    tooltipMetadataWhitelistMode: false,
     adminDebugLoginRunbotWhitelistMode: true,
     impersonateLoginRunbotWhitelistMode: true,
 

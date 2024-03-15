@@ -43,6 +43,11 @@ export const defaultNewServerActionCodeSetting = {
     newServerActionCodeWhitelistMode: false,
 };
 
+export const defaultTooltipMetadataSetting = {
+    tooltipMetadataEnabled: false,
+    tooltipMetadataWhitelistMode: false,
+};
+
 export const defaultTaskSetupSetting = {
     assignMeTaskEnabled: false,
     assignMeTaskWhitelistMode: true,
@@ -88,4 +93,5 @@ export const QOL_DEFAULT_CONFIGURATION = {
     ...defaultUnfocusAppSetting,
     ...defaultSmartLoginRunbotSetting,
     ...defaultNewServerActionCodeSetting,
+    ...defaultTooltipMetadataSetting,
 };
