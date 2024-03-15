@@ -11,14 +11,9 @@ async function appendTooltipMetadata(href) {
     const currentURL = hrefFragmentToURLParameters(window.location.href);
     if (currentURL.href !== url.href) return;
 
-    const search = url.searchParams;
-    const viewType = search.get('view_type');
-    if (viewType !== 'form') return undefined;
-
-    const model = search.get('model');
-    if (!model) return;
-    const id = parseInt(search.get('id'));
-    if (!id) return;
+    const model_id = await getModelAndID_fromURL(url);
+    if (!model_id) return;
+    const { id, model } = model_id;
 
     const { tooltipMetadataEnabled } = await chrome.storage.sync.get({
         tooltipMetadataEnabled: false,
@@ -28,14 +23,14 @@ async function appendTooltipMetadata(href) {
     const authorizedFeature = await authorizeFeature('tooltipMetadata', url.origin);
     if (!authorizedFeature) return undefined;
 
-    const metadata = await getMetadata(url, model, id);
+    const metadata = await getMetadata(model, id);
     appendTooltip(metadata);
 }
 
-async function getMetadata(url, model, ids) {
+async function getMetadata(model, ids) {
     ids = Array.isArray(ids) ? ids : [ids];
     const metadataResponse = await fetch(
-        new Request(`${url.origin}/web/dataset/call_kw/${model}/get_metadata`, {
+        new Request(`/web/dataset/call_kw/${model}/get_metadata`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -95,7 +90,7 @@ function appendTooltip(metadata) {
                     display: flex;
 				}
                 .o_debug_manager:hover button {
-                    border-color: rgba(252, 163, 17, 1)
+                    border-color: rgba(252, 163, 17, 1) !important
                 }
 			</style>
             <table class="table table-sm table-striped">
@@ -131,4 +126,5 @@ function appendTooltip(metadata) {
 		</div>
 	`.trim();
     debugManager.appendChild(template.content.firstChild);
+    debugManager.style.position = 'relative';
 }

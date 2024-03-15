@@ -144,7 +144,7 @@ async function getCurrentUserID() {
     const partner = partnerData.result[0];
 
     return partner.user_id
-        ? partner.id
+        ? partner.user_id[0]
         : partner.user_ids.length > 0
         ? partner.user_ids[0]
         : undefined;

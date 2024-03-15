@@ -37,14 +37,14 @@ async function isModelCreateView_V2(pathname, model) {
 
 //#region Get model ID
 async function getProjectTaskID_fromURL(url) {
-    return await getModelID_fromURL(url, 'project.task');
+    return (await getModelAndID_fromURL(url, 'project.task'))?.id;
 }
 
 async function getKnowledgeArticleID_fromURL(url) {
-    return await getModelID_fromURL(url, 'knowledge.article');
+    return (await getModelAndID_fromURL(url, 'knowledge.article'))?.id;
 }
 
-async function getModelID_fromURL(url, model) {
+async function getModelAndID_fromURL(url, model = undefined) {
     url = typeof url === 'object' ? url : new URL(url);
 
     // 17.2 URL doesn't contains the model anymore, only the path of an action
@@ -54,22 +54,22 @@ async function getModelID_fromURL(url, model) {
     if (pathname.startsWith('/odoo')) {
         // Remove "/odoo" prefix
         pathname = pathname.replace(/^\/odoo/, ''); // ^ for start of string
-        return await getModelID_V2(pathname, model);
+        return await getModelAndID_V2(pathname, model);
     }
 
-    return getModelID_V1(url, model);
+    return getModelAndID_V1(url, model);
 }
 
-function getModelID_V1(url, model) {
+function getModelAndID_V1(url, model) {
     const search = url.searchParams;
-    if (!search.has('model') || search.get('model') !== model) return undefined;
+    if (model && (!search.has('model') || search.get('model') !== model)) return undefined;
     if (!search.has('view_type') || search.get('view_type') != 'form') return undefined;
     if (!search.has('id')) return undefined;
     const id = parseInt(search.get('id'));
-    return isNaN(id) ? undefined : id;
+    return { id: isNaN(id) ? undefined : id, model: model || search.get('model') };
 }
 
-async function getModelID_V2(pathname, model) {
+async function getModelAndID_V2(pathname, model) {
     const endWithDigitsPattern = /\/.+\/\d+$/; // $ for end of string
     if (!endWithDigitsPattern.test(pathname)) return undefined;
 
@@ -79,8 +79,9 @@ async function getModelID_V2(pathname, model) {
 
     const actionWindow = await getActionWindowFromPath(pathAction);
     if (!actionWindow) return undefined;
-    if (actionWindow.res_model !== model) return undefined;
-    return isNaN(pathID) ? undefined : pathID;
+    if (model && actionWindow.res_model !== model) return undefined;
+
+    return { id: isNaN(pathID) ? undefined : pathID, model: model || actionWindow.res_model };
 }
 //#endregion
 
