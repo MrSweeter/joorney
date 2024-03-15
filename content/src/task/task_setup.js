@@ -59,25 +59,16 @@ async function getProjectTask(url, preload) {
     const task = await getTask(url);
     if (!task) return undefined;
 
-    task.qol_origin = url.origin;
     return task;
 }
 
-function getTaskIDFromUrl(url) {
-    const search = url.searchParams;
-    if (!search.has('model') || search.get('model') != 'project.task') return undefined;
-    if (!search.has('view_type') || search.get('view_type') != 'form') return undefined;
-    if (!search.has('id')) return undefined;
-    return search.get('id');
-}
-
 async function getTask(url) {
-    const ticketID = getTaskIDFromUrl(url);
+    const ticketID = await getProjectTaskID_fromURL(url);
     if (ticketID === undefined) return undefined;
 
     // Get task
     const taskResponse = await fetch(
-        new Request(`${url.origin}/web/dataset/call_kw/project.task/search_read`, {
+        new Request(`/web/dataset/call_kw/project.task/search_read`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -124,7 +115,7 @@ async function getCurrentUserID() {
     const partnerIDRegex = /res.partner\/(\d+)\//g;
     const partnerID = partnerIDRegex.exec(avatarURL)[1];
     const partnerResponse = await fetch(
-        new Request(`${window.location.origin}/web/dataset/call_kw/res.partner/search_read`, {
+        new Request(`/web/dataset/call_kw/res.partner/search_read`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

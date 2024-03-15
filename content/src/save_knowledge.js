@@ -35,25 +35,12 @@ async function getKnowledgeArticle(href) {
     const article = await getArticle(url);
     if (!article) return undefined;
 
-    article.qol_origin = url.origin;
     return article;
 }
 
-function getArticleIDFromUrl(url) {
-    const search = url.searchParams;
-    const model = search.get('model');
-    if (model !== 'knowledge.article') return undefined;
-    const viewType = search.get('view_type');
-    if (viewType !== 'form') return undefined;
-    const articleID = search.get('id');
-    if (!articleID) return undefined;
-    return articleID;
-}
-
 async function getArticle(url) {
-    const articleID = getArticleIDFromUrl(url);
+    const articleID = await getKnowledgeArticleID_fromURL(url);
     if (articleID === undefined) return undefined;
-
     return { id: articleID };
 }
 
@@ -72,7 +59,9 @@ async function appendSaveButton(article) {
 }
 
 async function saveArticle(article) {
-    const articleID = getArticleIDFromUrl(hrefFragmentToURLParameters(window.location.href));
+    const articleID = await getKnowledgeArticleID_fromURL(
+        hrefFragmentToURLParameters(window.location.href)
+    );
     if (article.id != articleID)
         throw new Error(
             `Button context is not the same as the url context: '${article.id}' vs '${articleID}'`
@@ -82,7 +71,7 @@ async function saveArticle(article) {
     if (!body) return;
 
     const writeResponse = await fetch(
-        new Request(`${article.qol_origin}/web/dataset/call_kw/knowledge.article/write`, {
+        new Request(`/web/dataset/call_kw/knowledge.article/write`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

@@ -1,10 +1,8 @@
 async function checkNewServerActionPage(currentUrl) {
     const url = hrefFragmentToURLParameters(new URL(currentUrl).href);
-    const search = url.searchParams;
 
-    if (search.has('id')) return;
-    if (!search.has('model') || search.get('model') != 'ir.actions.server') return;
-    if (!search.has('view_type') || search.get('view_type') != 'form') return;
+    const isNew = await isServerActionCreateView_fromURL(url);
+    if (!isNew) return;
 
     const { newServerActionCodeEnabled } = await chrome.storage.sync.get({
         newServerActionCodeEnabled: false,

@@ -18,7 +18,7 @@ async function addUserToTaskAssignees(task, userID, callback) {
     const newUsers = task.user_ids.concat(userID);
 
     const writeResponse = await fetch(
-        new Request(`${task.qol_origin}/web/dataset/call_kw/project.task/write`, {
+        new Request(`/web/dataset/call_kw/project.task/write`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
