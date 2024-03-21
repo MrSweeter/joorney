@@ -89,6 +89,13 @@ const features = {
             '<span class="fw-bold">Tooltip Metadata</span> is a feature that will show you current record metadata by hovering the debug icon.',
         amico: 'static_assets-amico',
     },
+    composerSwitch: {
+        icon: 'paste-xmark-solid',
+        title: 'Composer Switch with Data',
+        description:
+            '<span class="fw-bold">Switch</span> from Full composer to Chatter composer without losing text',
+        amico: 'notes-amico',
+    },
     /* Runbot */
     autoOpenRunbot: {
         icon: 'jet-fighter-solid',

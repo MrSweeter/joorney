@@ -9,6 +9,7 @@ const features_enabled_configuration = {
     unfocusAppEnabled: false,
     newServerActionCodeEnabled: false,
     tooltipMetadataEnabled: false,
+    composerSwitchEnabled: false,
     adminDebugLoginRunbotEnabled: false,
     impersonateLoginRunbotEnabled: false,
 
@@ -22,6 +23,7 @@ const features_enabled_configuration = {
     unfocusAppWhitelistMode: true,
     newServerActionCodeWhitelistMode: false,
     tooltipMetadataWhitelistMode: false,
+    composerSwitchWhitelistMode: false,
     adminDebugLoginRunbotWhitelistMode: true,
     impersonateLoginRunbotWhitelistMode: true,
 

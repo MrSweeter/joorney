@@ -23,6 +23,7 @@ window.addEventListener('load', async () => {
     appendUnfocusApp(url);
     appendSmartLogin(url);
     appendTooltipMetadata(url);
+    appendComposerSwitch(url);
 });
 
 // Experimental: This is an experimental technology - firefox not compatible
@@ -39,6 +40,7 @@ chrome.runtime.onMessage.addListener((msg) => {
         appendUnfocusApp(url);
         checkNewServerActionPage(url);
         appendTooltipMetadata(url);
+        appendComposerSwitch(url);
     }
 });
 

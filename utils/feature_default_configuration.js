@@ -48,6 +48,11 @@ export const defaultTooltipMetadataSetting = {
     tooltipMetadataWhitelistMode: false,
 };
 
+export const defaultComposerSwitchSetting = {
+    composerSwitchEnabled: false,
+    composerSwitchWhitelistMode: false,
+};
+
 export const defaultTaskSetupSetting = {
     assignMeTaskEnabled: false,
     assignMeTaskWhitelistMode: true,

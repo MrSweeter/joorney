@@ -17,6 +17,7 @@ window.onload = async () => {
     loadSmartLogin(configuration);
     loadNewServerActionCode(configuration);
     loadTooltipMetadata(configuration);
+    loadComposerSwitch(configuration);
 
     loadTabFeatures(configuration);
 

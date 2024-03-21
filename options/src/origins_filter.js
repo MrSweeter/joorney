@@ -133,6 +133,7 @@ function renderOrigin(idx, origin, blacklist) {
         'unfocusApp',
         'newServerActionCode',
         'tooltipMetadata',
+        'composerSwitch',
     ];
     const featuresUI = features
         .map((f) =>
