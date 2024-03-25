@@ -63,9 +63,9 @@ function appendCopyPaster(node) {
     if (!body) return;
 
     // Disconnect if the only way to close is to copy/paste, no standard close button - with settings ?
-    composerSwitchObserver.disconnect();
-    node.style.display = 'none';
-    //node.classList.toggle(node.classList.contains('btn-close') ? 'btn-danger' : 'text-danger');
+    //composerSwitchObserver.disconnect();
+    //node.style.display = 'none';
+    node.classList.toggle(node.classList.contains('btn-close') ? 'btn-danger' : 'text-danger');
 
     const parentNode = node.parentNode;
 
@@ -103,7 +103,7 @@ async function copyAndPaste(node) {
     }
     const lineCount = lines.length;
     node.click();
-    observe();
+    //observe();
 
     if (!lineCount) return;
     text = lines.join('\n');
