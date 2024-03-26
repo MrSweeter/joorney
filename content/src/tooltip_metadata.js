@@ -30,8 +30,8 @@ async function appendTooltipMetadata(href) {
 }
 
 async function loadRecordMetadata(model_id) {
-    const { id, model } = model_id;
-    const metadata = await getMetadata(model, id);
+    const { resId, model } = model_id;
+    const metadata = await getMetadata(model, resId);
     appendRecordMetadataTooltip(metadata);
 }
 
@@ -66,12 +66,15 @@ async function getMetadata(model, ids) {
 
 function appendActionWindowTooltip(actionWindow) {
     appendTooltip([
-        { label: 'ID', value: actionWindow.id },
+        { label: 'Window Action ID', value: actionWindow.id },
         { label: 'XML ID', value: actionWindow.xmlid },
         { label: 'Name', value: actionWindow.name },
         { label: 'Model', value: actionWindow.res_model },
-        { label: '[Filters] Domain', value: actionWindow.domain.trim() },
-        { label: '[Filters] Context', value: actionWindow.context.trim() },
+        {
+            label: '[Filters] Domain',
+            value: actionWindow.domain ? actionWindow.domain.trim() : false,
+        },
+        { label: '[Filters] Context', value: actionWindow.context?.trim() },
         { label: '[Filters] Limit', value: actionWindow.limit },
         { label: '[Filters] Filter', value: actionWindow.filter },
     ]);
@@ -116,7 +119,7 @@ function appendTooltip(datas) {
                     border: 1px solid rgba(252, 163, 17, 0.2);
                     border-radius: 0.5rem;
                     box-shadow: 0 0.125rem 0.25rem rgba(252, 163, 17, 0.075);
-                    transform: translateX(-10%);
+                    transform: translateX(-90%);
                 }
                 #odoo-qol-tooltip-metadata th, #odoo-qol-tooltip-metadata td {
                     padding-right: 50px;

@@ -1,157 +1,154 @@
-//#region Check model new form
-async function isServerActionCreateView_fromURL(url) {
-    return await isModelCreateView_fromURL(url, 'ir.actions.server');
-}
+// https://github.com/odoo/odoo/blob/master/addons/web/static/src/core/browser/router.js#L173
 
-async function isModelCreateView_fromURL(url, model) {
+const defaultState = {
+    resId: undefined,
+    view_type: undefined,
+    action: undefined,
+    active_id: undefined,
+    model: undefined,
+};
+
+/**
+ *
+ * @param {*} url: string|URL
+ * @param {*} actionWindowFields: StringArray
+ * @returns { resId: string|int, active_id: int, view_type: string, action: int, model: string, actionWindow: OdooActionWindow }
+ */
+async function parseURL(url, actionWindowFields = ['res_model']) {
     url = typeof url === 'object' ? url : new URL(url);
 
-    let pathname = url.pathname;
-    if (pathname.startsWith('/odoo')) {
-        pathname = pathname.replace(/^\/odoo/, ''); // ^ for start of string
-        return await isModelCreateView_V2(pathname, model);
+    const sanitizedURL = sanitizedHrefToUrl(url.href);
+
+    const { pathname, searchParams } = sanitizedURL;
+
+    let state = {};
+
+    if (pathname === '/web') {
+        state = parseURL_V1(searchParams);
+        return state;
     }
 
-    return isModelCreateView_V1(url, model);
+    state = parseURL_V2(pathname);
+
+    if (state.action === 'studio') return defaultState;
+
+    if (state.action && !state.model) {
+        let actionWindow = await getActionWindowWithState(state.action, actionWindowFields);
+        if (actionWindow) {
+            state.model = actionWindow.res_model;
+            state.actionWindow = actionWindow;
+        }
+    }
+    return state;
 }
 
-async function isModelCreateView_V1(url, model) {
-    const search = url.searchParams;
-    if (!search.has('model') || search.get('model') !== model) return false;
-    if (!search.has('view_type') || search.get('view_type') != 'form') return false;
-    return true;
+function parseURL_V1(searchParams) {
+    const state = { ...defaultState };
+
+    if (searchParams.has('id')) {
+        const id = searchParams.get('id');
+        if (isNumeric(id)) state.resId = parseInt(id);
+        state.view_type = searchParams.get('view_type');
+    } else if (searchParams.get('view_type') === 'form') {
+        state.resId = 'new';
+        state.view_type = 'form';
+    }
+
+    if (searchParams.has('action')) {
+        state.action = searchParams.get('action');
+    }
+
+    if (searchParams.has('active_id')) {
+        const active_id = searchParams.get('active_id');
+        if (isNumeric(active_id)) state.active_id = parseInt(active_id);
+    }
+
+    if (searchParams.has('model')) {
+        state.model = searchParams.get('model');
+    }
+
+    return state;
 }
-async function isModelCreateView_V2(pathname, model) {
-    const endWithNewPattern = /\/.+\/new$/; // $ for end of string
-    if (!endWithNewPattern.test(pathname)) return false;
 
-    const paths = pathname.split('/');
-    const pathAction = paths[paths.length - 2];
+function parseURL_V2(pathname) {
+    const [prefix, ...splitPath] = pathname.split('/').filter(Boolean);
+    if (prefix !== 'odoo') return {};
 
-    const actionWindow = await getActionWindowFromPath(pathAction);
-    if (!actionWindow) return false;
-    if (actionWindow.res_model !== model) return false;
-    return true;
+    const actionParts = [...splitPath.entries()].filter(
+        ([_, part]) => !isNumeric(part) && part !== 'new'
+    );
+    let lastAction = defaultState;
+
+    for (const [i, part] of actionParts) {
+        const action = {};
+        const [left, right] = [splitPath[i - 1], splitPath[i + 1]];
+
+        if (isNumeric(left)) {
+            action.active_id = parseInt(left);
+        }
+
+        if (right === 'new') {
+            action.resId = 'new';
+        } else if (isNumeric(right)) {
+            action.resId = parseInt(right);
+        }
+
+        if (part.startsWith('action-')) {
+            // Ignore xml_id, Odoo override it with ID
+            const actionId = part.slice(7);
+            if (isNumeric(actionId)) action.action = parseInt(actionId);
+        } else if (part.startsWith('m-')) {
+            action.model = part.slice(2);
+        } else if (part.includes('.')) {
+            action.model = part;
+        } else {
+            action.action = part;
+        }
+
+        if (action.resId && action.action) {
+            const act = { ...action };
+            delete act.resId;
+            lastAction = act;
+        }
+
+        if (action.action || action.resId || i === splitPath.length - 1) {
+            lastAction = action;
+        }
+    }
+
+    return lastAction;
+}
+
+//#region Utils
+function sanitizedHrefToUrl(href) {
+    href = typeof href === 'object' ? href.href : href;
+    const url = new URL(href.replace(/#/g, href.includes('?') ? '&' : '?'));
+    return url;
+}
+
+function isNumeric(value) {
+    return Boolean(value?.match(/^\d+$/));
 }
 //#endregion
 
-//#region Get model ID
-async function getProjectTaskID_fromURL(url) {
-    return (await getModelAndID_fromURL(url, 'project.task'))?.id;
-}
-
-async function getKnowledgeArticleID_fromURL(url) {
-    return (await getModelAndID_fromURL(url, 'knowledge.article'))?.id;
-}
-
-async function getModelAndID_fromURL(url, model = undefined) {
-    url = typeof url === 'object' ? url : new URL(url);
-
-    // 17.2 URL doesn't contains the model anymore, only the path of an action
-    // /odoo/act-824/66
-    // /odoo/project/10/tasks/66
-    let pathname = url.pathname;
-    if (pathname.startsWith('/odoo')) {
-        // Remove "/odoo" prefix
-        pathname = pathname.replace(/^\/odoo/, ''); // ^ for start of string
-        return await getModelAndID_V2(pathname, model);
-    }
-
-    return getModelAndID_V1(url, model);
-}
-
-function getModelAndID_V1(url, model) {
-    const search = url.searchParams;
-    if (model && (!search.has('model') || search.get('model') !== model)) return undefined;
-    if (!search.has('view_type') || search.get('view_type') != 'form') return undefined;
-    if (!search.has('id')) return undefined;
-    const id = parseInt(search.get('id'));
-    return { id: isNaN(id) ? undefined : id, model: model || search.get('model') };
-}
-
-async function getModelAndID_V2(pathname, model) {
-    const endWithDigitsPattern = /\/.+\/\d+$/; // $ for end of string
-    if (!endWithDigitsPattern.test(pathname)) return undefined;
-
-    const paths = pathname.split('/');
-    const pathID = parseInt(paths[paths.length - 1]);
-    const pathAction = paths[paths.length - 2];
-
-    const actionWindow = await getActionWindowFromPath(pathAction);
-    if (!actionWindow) return undefined;
-    if (model && actionWindow.res_model !== model) return undefined;
-
-    return { id: isNaN(pathID) ? undefined : pathID, model: model || actionWindow.res_model };
-}
-//#endregion
-
-const actionWindowFields = [
-    'id',
-    'name',
-    'xml_id',
-    'domain',
-    'context',
-    'limit',
-    'filter',
-    'res_model',
-];
-async function getActionWindow_fromURL(url) {
-    url = typeof url === 'object' ? url : new URL(url);
-
-    // 17.2 URL doesn't contains the model anymore, only the path of an action
-    // /odoo/act-824/66
-    // /odoo/project/10/tasks/66
-    let pathname = url.pathname;
-    if (pathname.startsWith('/odoo')) {
-        // Remove "/odoo" prefix
-        pathname = pathname.replace(/^\/odoo/, ''); // ^ for start of string
-        return await getActionWindow_V2(pathname);
-    }
-
-    return getActionWindow_V1(url);
-}
-async function getActionWindow_V1(url) {
-    const search = url.searchParams;
-
-    if (!search.has('action')) return undefined;
-    const id = parseInt(search.get('action'));
-    if (isNaN(id)) return undefined;
-
-    const actionWindow = await getActionWindowWithID(id, actionWindowFields);
-    if (!actionWindow) return undefined;
-    return actionWindow;
-}
-async function getActionWindow_V2(pathname) {
-    const paths = pathname.split('/');
-    const pathAction = paths[paths.length - 1];
-
-    const actionWindow = await getActionWindowFromPath(pathAction, actionWindowFields);
-    if (!actionWindow) return undefined;
-    return actionWindow;
-}
-
-//#region Get Action Window
-async function getActionWindowFromPath(pathAction, fields = ['res_model']) {
-    const windowActionPathPattern = /^act-\d+$/; // $ for end of string
-    let actionWindow = false;
-
-    if (windowActionPathPattern.test(pathAction)) {
-        const pathActionID = parseInt(pathAction.replace(/^act-/, ''));
-        actionWindow = await getActionWindowWithID(pathActionID, fields);
+//#region Window Action
+async function getActionWindowWithState(action, fields) {
+    // TODO CACHE SYSTEM TO AVOID SPAMMING REQUEST
+    if (isNumeric(`${action}`)) {
+        return getActionWindowWithID(action, fields);
     } else {
-        actionWindow = await getActionWindowWithPath(pathAction, fields);
+        return getActionWindowWithPath(action, fields);
     }
-
-    if (!actionWindow) return undefined;
-    return actionWindow;
 }
 async function getActionWindowWithPath(path, fields) {
     if (!path) return undefined;
     return await getActionWindow([['path', '=', path]], fields);
 }
 async function getActionWindowWithID(id, fields) {
+    if (!id) return undefined;
     return await getActionWindow([['id', '=', id]], fields);
 }
+
 async function getActionWindow(domain, fields) {
     const response = await fetch(
         new Request(`/web/dataset/call_kw/ir.actions.act_window/search_read`, {
@@ -182,4 +179,5 @@ async function getActionWindow(domain, fields) {
 
     return data.result[0];
 }
+
 //#endregion

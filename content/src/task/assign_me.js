@@ -12,7 +12,6 @@ async function addUserToTaskAssignees(task, userID, callback) {
     const ticketID = await getProjectTaskID_fromURL(
         hrefFragmentToURLParameters(window.location.href)
     );
-    console.log(ticketID);
     if (task.id != ticketID)
         throw new Error(
             `Button context is not the same as the url context: '${task.id}' vs '${ticketID}'`

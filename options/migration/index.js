@@ -69,7 +69,6 @@ function runMigration(configuration, fromVersion, toVersion) {
 }
 
 function runOneMigration(configuration, version) {
-    console.log(version);
     const result = configuration;
 
     switch (version) {
