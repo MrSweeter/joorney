@@ -85,28 +85,74 @@ async function getModelAndID_V2(pathname, model) {
 }
 //#endregion
 
+const actionWindowFields = [
+    'id',
+    'name',
+    'xml_id',
+    'domain',
+    'context',
+    'limit',
+    'filter',
+    'res_model',
+];
+async function getActionWindow_fromURL(url) {
+    url = typeof url === 'object' ? url : new URL(url);
+
+    // 17.2 URL doesn't contains the model anymore, only the path of an action
+    // /odoo/act-824/66
+    // /odoo/project/10/tasks/66
+    let pathname = url.pathname;
+    if (pathname.startsWith('/odoo')) {
+        // Remove "/odoo" prefix
+        pathname = pathname.replace(/^\/odoo/, ''); // ^ for start of string
+        return await getActionWindow_V2(pathname);
+    }
+
+    return getActionWindow_V1(url);
+}
+async function getActionWindow_V1(url) {
+    const search = url.searchParams;
+
+    if (!search.has('action')) return undefined;
+    const id = parseInt(search.get('action'));
+    if (isNaN(id)) return undefined;
+
+    const actionWindow = await getActionWindowWithID(id, actionWindowFields);
+    if (!actionWindow) return undefined;
+    return actionWindow;
+}
+async function getActionWindow_V2(pathname) {
+    const paths = pathname.split('/');
+    const pathAction = paths[paths.length - 1];
+
+    const actionWindow = await getActionWindowFromPath(pathAction, actionWindowFields);
+    if (!actionWindow) return undefined;
+    return actionWindow;
+}
+
 //#region Get Action Window
-async function getActionWindowFromPath(pathAction) {
+async function getActionWindowFromPath(pathAction, fields = ['res_model']) {
     const windowActionPathPattern = /^act-\d+$/; // $ for end of string
     let actionWindow = false;
 
     if (windowActionPathPattern.test(pathAction)) {
         const pathActionID = parseInt(pathAction.replace(/^act-/, ''));
-        actionWindow = await getActionWindowWithID(pathActionID);
+        actionWindow = await getActionWindowWithID(pathActionID, fields);
     } else {
-        actionWindow = await getActionWindowWithPath(pathAction);
+        actionWindow = await getActionWindowWithPath(pathAction, fields);
     }
 
     if (!actionWindow) return undefined;
     return actionWindow;
 }
-async function getActionWindowWithPath(path) {
-    return await getActionWindow([['path', '=', path]]);
+async function getActionWindowWithPath(path, fields) {
+    if (!path) return undefined;
+    return await getActionWindow([['path', '=', path]], fields);
 }
-async function getActionWindowWithID(id) {
-    return await getActionWindow([['id', '=', id]]);
+async function getActionWindowWithID(id, fields) {
+    return await getActionWindow([['id', '=', id]], fields);
 }
-async function getActionWindow(domain) {
+async function getActionWindow(domain, fields) {
     const response = await fetch(
         new Request(`/web/dataset/call_kw/ir.actions.act_window/search_read`, {
             method: 'POST',
@@ -118,7 +164,7 @@ async function getActionWindow(domain) {
                     args: [],
                     kwargs: {
                         context: { active_test: false },
-                        fields: ['res_model'],
+                        fields: fields,
                         domain: domain,
                         limit: 1,
                     },
