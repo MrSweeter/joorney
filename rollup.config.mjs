@@ -24,7 +24,12 @@ export default () => {
         },
         {
             input: 'content/index.js',
-            output: { file: `${dist}/content.js`, format: 'iife', inlineDynamicImports: true },
+            output: {
+                file: `${dist}/content.js`,
+                format: 'iife',
+                inlineDynamicImports: true,
+                name: 'qol_content',
+            },
             plugins: [...defaultPlugins],
         },
         {
