@@ -6,7 +6,7 @@ function loginWithForm(login) {
     const form = document.getElementsByClassName('oe_login_form')[0];
     form.setAttribute('onsubmit', "this.action = '/web/login?debug=1'");
     // form.submit() will not trigger "onsubmit"
-    form.requestSubmit();
+    setTimeout(() => form.requestSubmit(), 250);
 }
 
 function isRunbotSelectorPageWithLogin(url) {

@@ -59,28 +59,16 @@ async function getProjectTask(url, preload) {
     const task = await getTask(url);
     if (!task) return undefined;
 
-    task.qol_origin = url.origin;
     return task;
 }
 
-function getTaskIDFromUrl(url) {
-    const search = url.searchParams;
-    const model = search.get('model');
-    if (model !== 'project.task') return undefined;
-    const viewType = search.get('view_type');
-    if (viewType !== 'form') return undefined;
-    const ticketID = search.get('id');
-    if (!ticketID) return undefined;
-    return ticketID;
-}
-
 async function getTask(url) {
-    const ticketID = getTaskIDFromUrl(url);
+    const ticketID = await getProjectTaskID_fromURL(url);
     if (ticketID === undefined) return undefined;
 
     // Get task
     const taskResponse = await fetch(
-        new Request(`${url.origin}/web/dataset/call_kw/project.task/search_read`, {
+        new Request(`/web/dataset/call_kw/project.task/search_read`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -92,6 +80,7 @@ async function getTask(url) {
                         context: { lang: 'en_US' },
                         fields: ['id', 'project_id', 'user_ids', 'priority'],
                         domain: [['id', '=', ticketID]],
+                        limit: 1,
                     },
                     model: 'project.task',
                     method: 'search_read',
@@ -110,13 +99,55 @@ async function getTask(url) {
 
 async function getCurrentUserID() {
     // TODO IMPROVE, settings page field ? web request ?
+
     const avatarEl = document.getElementsByClassName('o_avatar o_user_avatar rounded')[0];
     if (!avatarEl) return undefined;
     const avatarURL = new URL(avatarEl.src);
+
+    // pre 17.2
     const search = avatarURL.searchParams;
-    const userID = parseInt(search.get('id'));
-    if (isNaN(userID)) return undefined;
-    return userID;
+    if (search.has('id')) {
+        const userID = parseInt(search.get('id'));
+        if (isNaN(userID)) return undefined;
+        return userID;
+    }
+    // 17.2
+    const partnerIDRegex = /res.partner\/(\d+)\//g;
+    const partnerID = partnerIDRegex.exec(avatarURL)[1];
+    const partnerResponse = await fetch(
+        new Request(`/web/dataset/call_kw/res.partner/search_read`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                jsonrpc: '2.0',
+                method: 'call',
+                params: {
+                    args: [],
+                    kwargs: {
+                        context: { lang: 'en_US' },
+                        fields: ['id', 'user_id', 'user_ids'],
+                        domain: [['id', '=', partnerID]],
+                        limit: 1,
+                    },
+                    model: 'res.partner',
+                    method: 'search_read',
+                },
+            }),
+        })
+    );
+
+    const partnerData = await partnerResponse.json();
+
+    if (partnerData.result?.length === 0) return undefined;
+    if (partnerData.result === undefined) return undefined;
+
+    const partner = partnerData.result[0];
+
+    return partner.user_id
+        ? partner.user_id[0]
+        : partner.user_ids.length > 0
+        ? partner.user_ids[0]
+        : undefined;
 }
 
 //#endregion

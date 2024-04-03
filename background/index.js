@@ -5,8 +5,15 @@ import { switchThemeIfNeeded } from './src/theme_switch.js';
 import { getFinalRunbotURL } from './src/runbot_smart_login.js';
 import { checkCommandShortcuts, handleCommands, updateTabState } from './src/keyboard_shortcut.js';
 
-// On page # path change
+// On page # path change, pre 17.2
 WebNavigation.onReferenceFragmentUpdated.addListener((e) => {
+    if (e.url.startsWith('http')) {
+        Tabs.sendMessage(e.tabId, { url: e.url });
+    }
+});
+
+// 17.2
+WebNavigation.onHistoryStateUpdated.addListener((e) => {
     if (e.url.startsWith('http')) {
         Tabs.sendMessage(e.tabId, { url: e.url });
     }
@@ -36,7 +43,7 @@ Runtime.onMessage.addListener((request, _, sendResponse) => {
     AVAILABLE_ACTION_MESSAGES_HANDLERS[request.action]?.(request)
         .then(sendResponse)
         .catch((ex) => {
-            console.log(ex);
+            console.warn(ex);
             sendResponse();
         });
     return true; // Needed for asynchronous

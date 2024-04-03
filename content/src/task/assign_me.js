@@ -9,7 +9,9 @@ function preloadAssignMeTask() {
 }
 
 async function addUserToTaskAssignees(task, userID, callback) {
-    const ticketID = getTaskIDFromUrl(hrefFragmentToURLParameters(window.location.href));
+    const ticketID = await getProjectTaskID_fromURL(
+        hrefFragmentToURLParameters(window.location.href)
+    );
     if (task.id != ticketID)
         throw new Error(
             `Button context is not the same as the url context: '${task.id}' vs '${ticketID}'`
@@ -18,7 +20,7 @@ async function addUserToTaskAssignees(task, userID, callback) {
     const newUsers = task.user_ids.concat(userID);
 
     const writeResponse = await fetch(
-        new Request(`${task.qol_origin}/web/dataset/call_kw/project.task/write`, {
+        new Request(`/web/dataset/call_kw/project.task/write`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
