@@ -170,6 +170,14 @@
                             <p>Tooltip Metadata</p>
                         </div>
                     </label>
+                    <label title="[Feature] Show My Badge" id="qol_showMyBadge_feature" data-feature="showMyBadge" class="draggable-feature" draggable="true">
+                        <div class="feature-wrapper d-flex">
+                            <div class="icon-wrapper pe-1">
+                                <i class="fa-solid fa-certificate"></i>
+                            </div>
+                            <p>Show My Badge</p>
+                        </div>
+                    </label>
                 </div>
             </div>
         </div>
@@ -235,16 +243,21 @@
                                 <i class="fa-solid fa-file-lines"></i>
                             </div>
                         </th>
+                        <th title="[Feature Origin] Show My Badge" class="icon-wrapper-head">
+                            <div class="icon-wrapper" id="qol_origins_filter_feature_header_showMyBadge">
+                                <i class="fa-solid fa-certificate"></i>
+                            </div>
+                        </th>
                         <th class="py-0 qol-valign-middle action-head"></th>
                     </tr>
                 </thead>
                 <tbody id="qol_origins_filter_table_body"></tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="12"></td>
+                        <td colspan="13"></td>
                     </tr>
                     <tr class="table-secondary">
-                        <td class="p-1 qol-valign-middle" colspan="9">
+                        <td class="p-1 qol-valign-middle" colspan="12">
                             <input type="text" class="form-control border border-0" id="qol_origins_filter_new_origin" placeholder="www.odoo.com" aria-label="Origin filter" />
                         </td>
                         <td class="p-1 qol-valign-middle">
@@ -254,7 +267,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td id="qol_origins_filter_error_footer" class="text-danger" colspan="10"></td>
+                        <td id="qol_origins_filter_error_footer" class="text-danger" colspan="13"></td>
                     </tr>
                 </tfoot>
             </table>

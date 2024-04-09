@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "version": "1.4.0",
+    "version": "1.5.0",
     "name": "Odoo - Quality of Life & Fun",
     "description": "Odoo - Quality of Life & Fun",
     "author": "Vanden Bergh Gaëtan",
@@ -52,6 +52,7 @@
                 "content/src/keyboard_shortcut.js",
                 "content/src/new_server_action_code.js",
                 "content/src/tooltip_metadata.js",
+                "content/src/show_my_badge.js",
                 "content/index.js"
             ],
             "run_at": "document_start"

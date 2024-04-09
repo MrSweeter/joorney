@@ -133,6 +133,7 @@ function renderOrigin(idx, origin, blacklist) {
         'unfocusApp',
         'newServerActionCode',
         'tooltipMetadata',
+        'showMyBadge',
     ];
     const featuresUI = features
         .map((f) =>
