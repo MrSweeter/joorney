@@ -122,11 +122,15 @@ function getBadgesNode(badges) {
 
     const badgesHTML = badges
         .map((b) =>
-            `<img class="rounded" title="${b.display_name || b.badge_name}\n${
+            `<a href="${createFormURL(
+                window.location,
+                'gamification.badge',
+                b.badge_id[0]
+            )}"><img class="rounded" title="${b.display_name || b.badge_name}\n${
                 b.comment || ''
             }" style="height: 30px" src="https://${
                 window.location.host
-            }/web/image?model=gamification.badge&id=${b.badge_id[0]}&field=image_128">`.trim()
+            }/web/image?model=gamification.badge&id=${b.badge_id[0]}&field=image_128"></a>`.trim()
         )
         .join('\n');
 
@@ -138,4 +142,19 @@ function getBadgesNode(badges) {
 	`.trim();
 
     return template.content.firstChild;
+}
+
+function createFormURL(url, model, id) {
+    url = typeof url === 'object' ? url : new URL(url);
+
+    const sanitizedURL = sanitizedHrefToUrl(url.href);
+
+    const { pathname } = sanitizedURL;
+
+    if (pathname === '/web') {
+        console.log(url.host);
+        return `${url.origin}/${url.pathname}#id=${id}&model=${model}&view_type=form`;
+    }
+
+    return `${url.origin}/${url.pathname}/${model}/${id}`;
 }
