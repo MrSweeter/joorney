@@ -25,7 +25,7 @@ export async function isAuthorizedFeature(feature, url) {
     if (!configuration[key]) return false;
 
     const authorizedFeature = await authorizeFeature(feature, url.origin);
-    if (!authorizedFeature) return false;
+    return authorizedFeature;
 }
 
 export async function isAuthorizedLimitedFeature(featureName, url) {

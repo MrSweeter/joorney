@@ -48,11 +48,10 @@ Runtime.onInstalled.addListener(async (details) => {
 Runtime.onMessage.addListener((message, _, sendResponse) => {
     handleMessage(message, _, sendResponse)
         .then(async (r) => {
-            console.log(r);
             sendResponse(r);
         })
         .catch((ex) => {
-            console.log(ex);
+            console.warn(ex);
             sendResponse();
         });
     return true;

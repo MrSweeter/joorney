@@ -1,14 +1,11 @@
 import AwesomeLoadingShareContentFeature from '../../shared/awesomeLoadingShare/content.js';
+import { StorageSync } from '../../utils/browser.js';
 import configuration from './configuration.js';
 
 export default class AwesomeLoadingSmallContentFeature extends AwesomeLoadingShareContentFeature {
     constructor() {
         super(configuration);
         this.loadingID = 'odoo-qol-awesome-loading-small';
-    }
-
-    async loadFeature(url) {
-        throw new Error('Not yet implemented');
     }
 
     getInnerStyle(image) {

@@ -14,7 +14,7 @@ export default class ProjectTaskShareContentFeature extends ContentFeature {
     loadFeatureWithTask(task) {}
 
     async getProjectTask(url) {
-        const task = await getTask(url);
+        const task = await this.getTask(url);
         if (!task) return undefined;
         return task;
     }

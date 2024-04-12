@@ -1,4 +1,5 @@
 import AwesomeLoadingSharePopupFeature from '../../shared/awesomeLoadingShare/popup.js';
+import { StorageSync } from '../../utils/browser.js';
 import configuration from './configuration.js';
 
 export default class AwesomeLoadingLargePopupFeature extends AwesomeLoadingSharePopupFeature {

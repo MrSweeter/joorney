@@ -15,10 +15,6 @@ export default class LimitedRunbotContentFeature extends ContentFeature {
         this.loadFeature(url);
     }
 
-    async loadFeature(url) {
-        throw new Error('Not yet implemented');
-    }
-
     getOpenData(url) {
         if (!url.searchParams.has(openVersionKey)) return false;
         const value = url.searchParams.get(openVersionKey);

@@ -4,7 +4,7 @@ export default {
     icon: ['<i class="fa-solid fa-ghost"></i>'],
     trigger: {
         content: {
-            load: false,
+            load: true,
             navigate: true,
         },
         option: true,

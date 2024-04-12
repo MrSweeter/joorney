@@ -1,5 +1,6 @@
 import { sanitizeURL } from '../utils/url_manager.js';
 import { isAuthorizedFeature } from '../utils/authorize.js';
+import { NotYetImplemented } from '../utils/error.js';
 
 export default class ContentFeature {
     constructor(configuration) {
@@ -15,5 +16,7 @@ export default class ContentFeature {
         this.loadFeature(url);
     }
 
-    async loadFeature(url) {}
+    async loadFeature(url) {
+        throw NotYetImplemented;
+    }
 }

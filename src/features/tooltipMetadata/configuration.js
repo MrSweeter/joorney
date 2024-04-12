@@ -4,8 +4,8 @@ export default {
     icon: ['<i class="fa-solid fa-file-lines"></i>'],
     trigger: {
         content: {
-            load: false,
-            navigate: false,
+            load: true,
+            navigate: true,
         },
         option: true,
         popup: true,

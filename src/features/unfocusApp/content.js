@@ -65,7 +65,7 @@ export default class UnfocusApp extends ContentFeature {
             let state = unfocusAppList[app];
             if (state === undefined) state = UNFOCUS_STATE.DEFAULT;
             if (state === true) state = UNFOCUS_STATE.UNFOCUS;
-            this.updateAppElement(element, state, configuration);
+            this.updateAppElement(element, state, null, configuration);
 
             const divElement = element.getElementsByClassName('o_caption')[0];
             for (let star of divElement.getElementsByClassName(STAR_ELEMENT_CLASS)) {
@@ -120,9 +120,9 @@ export default class UnfocusApp extends ContentFeature {
 
         // debounce
         this.clickCount += 1;
-        currentthis.clickCount = this.clickCount;
+        const currentClickCount = this.clickCount;
         await new Promise((r) => setTimeout(r, 200));
-        if (this.clickCount != currentthis.clickCount || this.clickCount === 0) return;
+        if (this.clickCount != currentClickCount || this.clickCount === 0) return;
 
         let origin = window.location.origin;
         const parent = event.target.parentElement.parentElement;

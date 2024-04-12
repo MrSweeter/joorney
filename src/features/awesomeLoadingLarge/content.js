@@ -1,4 +1,5 @@
 import AwesomeLoadingShareContentFeature from '../../shared/awesomeLoadingShare/content.js';
+import { StorageSync } from '../../utils/browser.js';
 import configuration from './configuration.js';
 
 export default class AwesomeLoadingLargeContentFeature extends AwesomeLoadingShareContentFeature {

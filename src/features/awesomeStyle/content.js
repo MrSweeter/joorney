@@ -19,7 +19,7 @@ export default class AwesomeStyleContentFeature extends ContentFeature {
 
     async appendAwesomeStyle() {
         const { awesomeStyleCSS } = await StorageSync.get({
-            awesomeStyleCSS: this.configuration.awesomeStyleCSS,
+            awesomeStyleCSS: this.configuration.defaultSettings.awesomeStyleCSS,
         });
 
         if (awesomeStyleCSS) {

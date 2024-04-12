@@ -53,7 +53,7 @@ export default class AwesomeLoadingSharePopupFeature extends PopupFeature {
             notifyTabs(value);
         };
 
-        notifyTabs(checked ? selected : false);
+        this.notifyTabs(checked ? selected : false);
     }
 
     getNotificationMessage(img, url) {
