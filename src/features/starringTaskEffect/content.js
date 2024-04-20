@@ -16,6 +16,8 @@ const defaultsStar = {
 export default class StarringTaskEffectContentFeature extends ProjectTaskShareContentFeature {
     constructor() {
         super(configuration);
+        this.addStarsGenerator = this.addStarsGenerator.bind(this);
+        this.generateStars = this.generateStars.bind(this);
     }
 
     async loadFeatureWithTask(task) {

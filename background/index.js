@@ -46,7 +46,7 @@ Runtime.onInstalled.addListener(async (details) => {
 
 // Triggers when a message is received (from the content script)
 Runtime.onMessage.addListener((message, _, sendResponse) => {
-    handleMessage(message, _, sendResponse)
+    handleMessage(message)
         .then(async (r) => {
             sendResponse(r);
         })

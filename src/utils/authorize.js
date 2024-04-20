@@ -18,6 +18,8 @@ export async function isStillSameWebsite(timeout, url) {
 }
 
 export async function isAuthorizedFeature(feature, url) {
+    // TODO[VERSION_CHECK] CHECK VERSION COMPATIBILITY FROM features_state.json
+    // TODO[VERSION_CHECK] ALLOW USER TO DISABLE EXTENSION ON VERSION X
     const key = `${feature}Enabled`;
     const configuration = await StorageSync.get({
         [key]: false,

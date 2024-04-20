@@ -32,7 +32,7 @@ export default class UnfocusAppPopupFeature extends PopupFeature {
             appOrderInput,
             unfocusAppReorderEnabled,
             checked,
-            onUnfocusAppReorderModeChange
+            this.onUnfocusAppReorderModeChange
         );
 
         const appShareSwitcher = document.getElementById('qol_unfocus_app_share_switcher');
@@ -43,7 +43,7 @@ export default class UnfocusAppPopupFeature extends PopupFeature {
             appShareInput,
             unfocusAppShareEnabled,
             checked,
-            onUnfocusAppShareModeChange
+            this.onUnfocusAppShareModeChange
         );
     }
 

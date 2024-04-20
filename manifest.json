@@ -38,8 +38,8 @@
     ],
     "web_accessible_resources": [
         {
-            "resources": [],
-            "matches": []
+            "resources": ["inject.js"],
+            "matches": ["*://*/*"]
         }
     ],
     "permissions": ["tabs", "webNavigation", "cookies", "storage", "contextMenus"],

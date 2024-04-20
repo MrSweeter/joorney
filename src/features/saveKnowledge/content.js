@@ -29,7 +29,7 @@ export default class SaveKnowledgeContentFeature extends ContentFeature {
         saveExist.forEach((e) => (e.disabled = true));
 
         // body_0 is the ID use when you can edit an article body
-        const exist = document.getElementById('body_0');
+        const exist = document.getElementById('body_0') ?? document.getElementById('body');
         if (!exist) return undefined;
 
         const article = await this.getArticle(url);
@@ -113,7 +113,15 @@ export default class SaveKnowledgeContentFeature extends ContentFeature {
         const saveButton = buttonTemplate.content.firstChild;
         this.updateSaveEvent(saveButton, article);
 
-        const statusBarButtons = document.getElementsByClassName('o_knowledge_add_buttons')[0];
-        if (statusBarButtons) statusBarButtons.appendChild(saveButton);
+        let statusBarButtons = document.getElementsByClassName('o_knowledge_add_buttons')[0];
+        if (statusBarButtons) {
+            statusBarButtons.appendChild(saveButton);
+            return;
+        }
+
+        statusBarButtons = document.getElementsByClassName('o_knowledge_header')[0]?.childNodes[1];
+        if (statusBarButtons) {
+            statusBarButtons.prepend(saveButton);
+        }
     }
 }

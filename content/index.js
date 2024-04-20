@@ -19,6 +19,14 @@ window.addEventListener('load', async () => {
 
     await updateTabState(url);
     await loadFeatures(url, (f) => f.trigger.content.load);
+
+    const script = document.createElement('script');
+    script.src = Runtime.getURL('inject.js');
+    script.onload = function () {
+        this.remove();
+    };
+
+    document.documentElement.appendChild(script);
 });
 
 // Experimental: This is an experimental technology - firefox not compatible

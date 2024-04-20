@@ -9,11 +9,23 @@ export default class AutoOpenRunbotContentFeature extends LimitedRunbotContentFe
     async loadFeature(url) {
         if (!this.isRunbotPageWithAutoOpenHash(url)) return;
 
-        const path = await this.getRunbotPath(url);
-        await this.openRunbot('https://runbot.odoo.com/' + (path ?? ''), false);
+        this.loadPath(url);
     }
 
-    async getRunbotPath(tabURL) {
+    async loadPath(url, batchOffset = 0) {
+        const path = await this.getRunbotPath(url, batchOffset);
+        try {
+            await this.openRunbot('https://runbot.odoo.com/' + (path ?? ''), false);
+        } catch (error) {
+            if (batchOffset) {
+                console.warn(error);
+                return;
+            }
+            this.loadPath(url, 1);
+        }
+    }
+
+    async getRunbotPath(tabURL, batchOffset = 0) {
         const urlVersion = this.getOpenData(tabURL);
         if (!urlVersion) return;
 
@@ -30,24 +42,30 @@ export default class AutoOpenRunbotContentFeature extends LimitedRunbotContentFe
             const version = row.querySelector('div.one_line a b').textContent.replace('saas-', '');
             if (version != openVersion) continue;
 
-            const groups = Array.from(row.querySelectorAll('div.slot_button_group'));
+            const batches = row.querySelectorAll('div.batch_slots');
 
-            // FOR EACH SUBGROUP BUILD OF VERSION
-            for (let j = 0; j < groups.length; j++) {
-                const group = groups[j];
-                const type = group.querySelector('a.slot_name span').textContent.toLowerCase();
+            // FOR EACH BATCH OF DATABASE OF VERSION
+            for (let j = batchOffset; j < batches.length; j++) {
+                const batch = batches[j];
+                const groups = Array.from(batch.querySelectorAll('div.slot_button_group'));
 
-                if (!type.startsWith('enterprise')) continue;
+                // FOR EACH SUBGROUP BUILD OF BATCH
+                for (let k = 0; k < groups.length; k++) {
+                    const group = groups[k];
+                    const type = group.querySelector('a.slot_name span').textContent.toLowerCase();
 
-                console.log(group.innerHTML);
+                    if (!type.startsWith('enterprise')) continue;
 
-                const signInButtons = group.getElementsByClassName('fa fa-sign-in btn btn-info');
-                const spinGearIcons = group.getElementsByClassName('fa-cog fa-spin');
-                const refreshingIcons = group.querySelector('span i.fa-refresh');
+                    const signInButtons = group.getElementsByClassName(
+                        'fa fa-sign-in btn btn-info'
+                    );
+                    const spinGearIcons = group.getElementsByClassName('fa-cog fa-spin');
+                    const refreshingIcons = group.querySelector('span i.fa-refresh');
 
-                // SIGN IN exist and runbot not in a refresh state
-                if (signInButtons.length > 0 && spinGearIcons.length == 0 && !refreshingIcons) {
-                    return signInButtons.item(0).getAttribute('href');
+                    // SIGN IN exist and runbot not in a refresh state
+                    if (signInButtons.length > 0 && spinGearIcons.length == 0 && !refreshingIcons) {
+                        return signInButtons.item(0).getAttribute('href');
+                    }
                 }
             }
         }

@@ -37,6 +37,13 @@ export default class AdminDebugLoginRunbotContentFeature extends LimitedRunbotCo
 
     async openEventRunbot(e, newTab) {
         e.preventDefault();
-        this.openRunbot(e.target.href, newTab);
+        try {
+            await this.openRunbot(e.target.href, newTab);
+        } catch (error) {
+            console.warn(error);
+            e.target.classList.remove('btn-warning');
+            e.target.classList.add('btn-danger');
+            e.target.title = error;
+        }
     }
 }

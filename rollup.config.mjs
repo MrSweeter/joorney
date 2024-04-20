@@ -30,7 +30,10 @@ export default () => {
                 inlineDynamicImports: true,
                 name: 'qol_content',
             },
-            plugins: [...defaultPlugins],
+            plugins: [
+                ...defaultPlugins,
+                copy({ targets: [{ src: 'content/inject.js', dest: dist }] }),
+            ],
         },
         {
             input: 'popup/index.js',

@@ -3,6 +3,7 @@ import ContentFeature from '../../generic/content.js';
 import { isAuthorizedLimitedFeature } from '../../utils/authorize.js';
 import { sanitizeURL } from '../../utils/url_manager.js';
 import { MESSAGE_ACTION } from '../../utils/messaging.js';
+import { RunbotException } from '../../utils/error.js';
 
 export const openVersionKey = 'qol-runbot';
 
@@ -60,6 +61,9 @@ export default class LimitedRunbotContentFeature extends ContentFeature {
                 action: MESSAGE_ACTION.GET_FINAL_RUNBOT_URL,
                 href: href,
             });
+            if (response.error) {
+                throw RunbotException(response.error);
+            }
             finalURL = this.getAdminDebugURL(response.url) ?? finalURL;
         }
 

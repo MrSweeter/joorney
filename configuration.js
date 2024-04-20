@@ -9,7 +9,10 @@ export const baseSettings = {
     originsFilterOrigins: {},
 };
 
-const activeFeaturesList = Object.keys(FeaturesState).filter((k) => FeaturesState[k]);
+// TODO[VERSION_CHECK]
+const activeFeaturesList = Object.keys(FeaturesState).filter(
+    (k) => FeaturesState[k].enable && FeaturesState[k].supported_version.length > 0
+);
 
 export let features = [];
 export async function loadFeaturesConfiguration() {

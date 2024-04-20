@@ -94,9 +94,8 @@ export default class ImpersonateLoginRunbotContentFeature extends LimitedRunbotC
         document.getElementById('login').value = login;
         document.getElementById('password').value = login;
         const form = document.getElementsByClassName('oe_login_form')[0];
-        form.setAttribute('onsubmit', "this.action = '/web/login?debug=1'");
-        // form.submit() will not trigger "onsubmit"
-        setTimeout(() => form.requestSubmit(), 250);
+        form.action += '?debug=1'
+        form.submit()
     }
 
     updateSelectorLink() {

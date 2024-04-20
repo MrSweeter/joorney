@@ -3,9 +3,8 @@ import { updateTabState } from './keyboard_shortcut.js';
 import { getFinalRunbotURL } from './runbot.js';
 import { MESSAGE_ACTION } from '../../src/utils/messaging.js';
 
-export async function handleMessage(message, _, sendResponse) {
+export async function handleMessage(message) {
     let callback = undefined;
-    console.log(message);
 
     switch (message.action) {
         case MESSAGE_ACTION.GET_FEATURES_LIST: {
@@ -21,8 +20,6 @@ export async function handleMessage(message, _, sendResponse) {
             break;
         }
     }
-
-    console.log(callback);
 
     return callback;
 }

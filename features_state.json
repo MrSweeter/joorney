@@ -1,15 +1,15 @@
 {
-    "awesomeLoadingLarge": true,
-    "awesomeLoadingSmall": true,
-    "assignMeTask": true,
-    "starringTaskEffect": true,
-    "saveKnowledge": true,
-    "themeSwitch": true,
-    "awesomeStyle": true,
-    "unfocusApp": true,
-    "newServerActionCode": true,
-    "tooltipMetadata": true,
-    "impersonateLoginRunbot": true,
-    "adminDebugLoginRunbot": true,
-    "autoOpenRunbot": true
+    "awesomeLoadingLarge": { "enable": true, "supported_version": ["TODO[VERSION_CHECK]"] },
+    "awesomeLoadingSmall": { "enable": true, "supported_version": ["TODO[VERSION_CHECK]"] },
+    "assignMeTask": { "enable": true, "supported_version": ["TODO[VERSION_CHECK]"] },
+    "starringTaskEffect": { "enable": true, "supported_version": ["TODO[VERSION_CHECK]"] },
+    "saveKnowledge": { "enable": true, "supported_version": ["TODO[VERSION_CHECK]"] },
+    "themeSwitch": { "enable": true, "supported_version": ["TODO[VERSION_CHECK]"] },
+    "awesomeStyle": { "enable": true, "supported_version": ["TODO[VERSION_CHECK]"] },
+    "unfocusApp": { "enable": true, "supported_version": ["TODO[VERSION_CHECK]"] },
+    "newServerActionCode": { "enable": true, "supported_version": ["TODO[VERSION_CHECK]"] },
+    "tooltipMetadata": { "enable": true, "supported_version": ["TODO[VERSION_CHECK]"] },
+    "impersonateLoginRunbot": { "enable": true, "supported_version": ["TODO[VERSION_CHECK]"] },
+    "adminDebugLoginRunbot": { "enable": true, "supported_version": ["TODO[VERSION_CHECK]"] },
+    "autoOpenRunbot": { "enable": true, "supported_version": ["TODO[VERSION_CHECK]"] }
 }

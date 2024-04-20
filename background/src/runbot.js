@@ -5,6 +5,7 @@ export async function getFinalRunbotURL(request) {
         });
         return { url: response.url };
     } catch (ex) {
-        return {};
+        console.warn(ex);
+        return { url: null, error: ex.toString() };
     }
 }
