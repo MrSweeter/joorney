@@ -1,6 +1,6 @@
 import { initImportExport } from './import_export.js';
 import { StorageSync } from '../src/utils/browser.js';
-import { getFeaturesAndCurrentSettings, importFeatureOptionFile } from '../configuration.js';
+import { getFeaturesAndCurrentSettings, importFeatureCustomizationFile } from '../configuration.js';
 
 async function onDOMContentLoaded() {
     document.getElementById('copyright-year').innerText = new Date().getFullYear();
@@ -21,9 +21,11 @@ async function onDOMContentLoaded() {
 
 async function loadFeatures(features) {
     features
-        .filter((f) => f.trigger.option)
+        .filter((f) => f.customization.option)
         .forEach((feature) => {
-            importFeatureOptionFile(feature.id).then((featureModule) => featureModule.restore());
+            importFeatureCustomizationFile(feature.id).then((featureModule) =>
+                featureModule.load()
+            );
         });
 }
 

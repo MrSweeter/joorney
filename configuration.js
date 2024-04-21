@@ -9,10 +9,7 @@ export const baseSettings = {
     originsFilterOrigins: {},
 };
 
-// TODO[VERSION_CHECK]
-const activeFeaturesList = Object.keys(FeaturesState).filter(
-    (k) => FeaturesState[k].enable && FeaturesState[k].supported_version.length > 0
-);
+const activeFeaturesList = Object.keys(FeaturesState).filter((k) => FeaturesState[k]);
 
 export let features = [];
 export async function loadFeaturesConfiguration() {
@@ -34,6 +31,10 @@ export function importFeatureBackgroundFile(featureID) {
 
 export function importFeatureOptionFile(featureID) {
     return import(`./src/features/${featureID}/option.js`).then((f) => new f.default());
+}
+
+export function importFeatureCustomizationFile(featureID) {
+    return import(`./src/features/${featureID}/customization.js`).then((f) => new f.default());
 }
 
 export function importFeaturePopupFile(featureID) {

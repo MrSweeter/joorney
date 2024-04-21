@@ -1,7 +1,7 @@
-import AwesomeLoadingShareOptionFeature from '../../shared/awesomeLoadingShare/option.js';
+import OptionFeature from '../../generic/option.js';
 import configuration from './configuration.js';
 
-export default class AwesomeLoadingSmallOptionFeature extends AwesomeLoadingShareOptionFeature {
+export default class AwesomeLoadingSmallOptionFeature extends OptionFeature {
     constructor() {
         super(configuration);
     }

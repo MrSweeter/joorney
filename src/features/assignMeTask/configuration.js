@@ -7,12 +7,15 @@ export default {
             load: true,
             navigate: true,
         },
-        option: true,
-        popup: true,
         background: false,
+    },
+    customization: {
+        popup: true,
+        option: false,
     },
     defaultSettings: {
         assignMeTaskEnabled: false,
         assignMeTaskWhitelistMode: false,
     },
+    supported_version: ['TODO[VERSION_CHECK]'],
 };

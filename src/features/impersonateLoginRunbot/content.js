@@ -1,4 +1,4 @@
-import LimitedRunbotContentFeature from '../../shared/limitedRunbot/content.js';
+import LimitedRunbotContentFeature from '../../shared/limited/runbot_content.js';
 import { StorageSync } from '../../utils/browser.js';
 import { isAuthorizedLimitedFeature } from '../../utils/authorize.js';
 import { sanitizeURL } from '../../utils/url_manager.js';
@@ -94,8 +94,8 @@ export default class ImpersonateLoginRunbotContentFeature extends LimitedRunbotC
         document.getElementById('login').value = login;
         document.getElementById('password').value = login;
         const form = document.getElementsByClassName('oe_login_form')[0];
-        form.action += '?debug=1'
-        form.submit()
+        form.action += '?debug=1';
+        form.submit();
     }
 
     updateSelectorLink() {

@@ -7,13 +7,16 @@ export default {
             load: true,
             navigate: true,
         },
-        option: true,
-        popup: true,
         background: false,
+    },
+    customization: {
+        popup: true,
+        option: true,
     },
     defaultSettings: {
         awesomeStyleEnabled: false,
         awesomeStyleWhitelistMode: false,
         awesomeStyleCSS: '',
     },
+    supported_version: ['TODO[VERSION_CHECK]'],
 };

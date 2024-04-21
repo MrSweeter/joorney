@@ -1,6 +1,6 @@
-import { Runtime, StorageSync } from '../../src/utils/browser.js';
+import { StorageSync } from '../../src/utils/browser.js';
 
-function disableFeatureInput(feature) {
+export function disableFeatureInput(feature) {
     const inputs = Array.from(
         document.getElementsByClassName(`qol_origins_filter_feature_input_${feature}`)
     );
@@ -12,7 +12,7 @@ function disableFeatureInput(feature) {
     document.getElementById(`qol_origins_filter_feature_header_${feature}`).style.opacity = 0.5;
 }
 
-function enableFeatureInput(feature) {
+export function enableFeatureInput(feature) {
     const inputs = Array.from(
         document.getElementsByClassName(`qol_origins_filter_feature_input_${feature}`)
     );
@@ -22,55 +22,6 @@ function enableFeatureInput(feature) {
     });
 
     document.getElementById(`qol_origins_filter_feature_header_${feature}`).style.opacity = 1;
-}
-
-export async function loadFeature(feature) {
-    async function getDefaultConfiguration() {
-        const configuration = await StorageSync.get({
-            [`${feature}Enabled`]: false,
-            [`${feature}WhitelistMode`]: true,
-        });
-        return configuration;
-    }
-
-    Runtime.onMessage.addListener(async (msg) => {
-        const enableFeature = msg[`enable${feature.charAt(0).toUpperCase()}${feature.slice(1)}`];
-        if (enableFeature === true || enableFeature === false) {
-            const defaultConfiguration = await getDefaultConfiguration(feature);
-            restoreFeatureName(feature, defaultConfiguration);
-        }
-    });
-
-    const defaultConfiguration = await getDefaultConfiguration(feature);
-    return restoreFeatureName(feature, defaultConfiguration);
-}
-
-function restoreFeatureName(feature, defaultConfiguration) {
-    restoreFeature(
-        feature,
-        defaultConfiguration[`${feature}Enabled`],
-        defaultConfiguration[`${feature}WhitelistMode`]
-    );
-    return defaultConfiguration;
-}
-
-function restoreFeature(feature, enabled, isWhitelist) {
-    if (enabled) enableFeatureInput(feature);
-    else disableFeatureInput(feature);
-
-    const featureElement = document.getElementById(`qol_${feature}_feature`);
-    let container = document.getElementById('qol-disable-feature');
-    if (enabled) {
-        if (isWhitelist) {
-            container = document.getElementById('qol-whitelist-feature');
-        } else {
-            container = document.getElementById('qol-blacklist-feature');
-        }
-    }
-
-    container.appendChild(featureElement);
-    featureElement.ondragstart = startDrag;
-    updateInputColor(feature, enabled, isWhitelist);
 }
 
 //#region Drag and Drop
@@ -98,7 +49,7 @@ function allowDropInArea(e) {
     e.preventDefault();
 }
 
-function startDrag(e) {
+export function startDrag(e) {
     e.dataTransfer.setData('text/feature', e.currentTarget.getAttribute('data-feature'));
     e.dataTransfer.setData('text/id', e.currentTarget.id);
 }
@@ -138,7 +89,7 @@ document.querySelectorAll('.qol-state-feature').forEach((column) => {
 //#endregion
 
 //#region Update Origins
-function updateInputColor(feature, isEnable, isWhitelist) {
+export function updateInputColor(feature, isEnable, isWhitelist) {
     Array.from(
         document.getElementsByClassName(`qol_origins_filter_feature_input_${feature}`)
     ).forEach((el) => {

@@ -11,9 +11,11 @@ export default {
             load: false,
             navigate: false,
         },
-        option: true,
-        popup: true,
         background: true,
+    },
+    customization: {
+        popup: true,
+        option: true,
     },
     __comment__: "themeSwitchMode: 'autoDark', 'autoLight', 'dynamicLocation', 'dynamicTime'",
     defaultSettings: {
@@ -25,4 +27,5 @@ export default {
         themeSwitchDarkStartTime: '20:30',
         themeSwitchDarkStopTime: '07:30',
     },
+    supported_version: ['TODO[VERSION_CHECK]'],
 };

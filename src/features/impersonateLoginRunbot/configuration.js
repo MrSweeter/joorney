@@ -7,9 +7,11 @@ export default {
             load: true,
             navigate: true,
         },
-        option: true,
-        popup: true,
         background: false,
+    },
+    customization: {
+        popup: true,
+        option: false,
     },
     defaultSettings: {
         impersonateLoginRunbotEnabled: false,

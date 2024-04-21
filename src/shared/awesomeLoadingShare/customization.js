@@ -1,8 +1,14 @@
-import OptionFeature from '../../generic/option.js';
+import OptionCustomizationFeature from '../../generic/customization.js';
 import { StorageSync } from '../../utils/browser.js';
 
-export default class AwesomeLoadingShareOptionFeature extends OptionFeature {
-    async restore() {
+export default class AwesomeLoadingShareOptionCustomizationFeature extends OptionCustomizationFeature {
+    async load() {
+        const container = document.querySelector(
+            `div[data-feature-customization="awesomeLoading"]`
+        );
+        if (!container) throw new Error(`Invalid state for feature: ${this.configuration.id}`);
+        container.classList.remove('d-none');
+
         const awesomeLoadingNewImage = document.getElementById('qol_awe_loading_new_image');
         awesomeLoadingNewImage.onkeydown = this.onKeydownHost;
         awesomeLoadingNewImage.oninput = this.onImageChange;

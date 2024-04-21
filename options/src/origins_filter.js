@@ -164,7 +164,7 @@ function renderOrigin(idx, origin, features) {
                         qol_origins_filter_origin_${idx}_${f}
                         m-0 form-check-input
                     "
-                    ${!document.getElementById(`qol_${f}_feature`).checked ? 'disabled' : ''}
+                    ${!document.getElementById(`qol_${f}_feature`)?.checked ? 'disabled' : ''}
 					type="checkbox"
 					${origin[f] === true ? 'checked' : ''}
 				/>

@@ -1,4 +1,4 @@
-import LimitedRunbotContentFeature from '../../shared/limitedRunbot/content.js';
+import LimitedRunbotContentFeature from '../../shared/limited/runbot_content.js';
 import configuration from './configuration.js';
 
 export default class AutoOpenRunbotContentFeature extends LimitedRunbotContentFeature {

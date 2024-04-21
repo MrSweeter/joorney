@@ -9,8 +9,6 @@ async function onDOMContentLoaded() {
     document.getElementById('copyright-year').innerText = new Date().getFullYear();
     //document.getElementById('copyright-link').href = Runtime.getManifest().homepage_url; Not public API
 
-    setupDragAndDrop();
-
     const { features, currentSettings } = await getFeaturesAndCurrentSettings();
 
     loadKeyboardShortcut();
@@ -20,7 +18,7 @@ async function onDOMContentLoaded() {
     loadFeatures(features);
     initImportExport(currentSettings);
 
-    // TODO DYNAMIC HTML
+    setupDragAndDrop();
 
     const searchParams = new URLSearchParams(window.location.search);
     let htmlDebug = 1;
@@ -34,13 +32,9 @@ async function onDOMContentLoaded() {
 }
 
 async function loadFeatures(features) {
-    console.log(features);
-    features
-        .filter((f) => f.trigger.option)
-        .forEach((feature) => {
-            console.log(feature);
-            importFeatureOptionFile(feature.id).then((featureModule) => featureModule.load());
-        });
+    features.forEach((feature) => {
+        importFeatureOptionFile(feature.id).then((featureModule) => featureModule.load());
+    });
 }
 
 document.removeEventListener('DOMContentLoaded', onDOMContentLoaded);

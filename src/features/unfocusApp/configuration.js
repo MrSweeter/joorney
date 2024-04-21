@@ -7,9 +7,11 @@ export default {
             load: true,
             navigate: true,
         },
-        option: true,
-        popup: true,
         background: false,
+    },
+    customization: {
+        popup: true,
+        option: true,
     },
     defaultSettings: {
         unfocusAppEnabled: false,
@@ -20,4 +22,5 @@ export default {
         unfocusAppDarkImageURL: 'https://i.imgur.com/YzShNtH.png',
         unfocusAppOrigins: {},
     },
+    supported_version: ['TODO[VERSION_CHECK]'],
 };

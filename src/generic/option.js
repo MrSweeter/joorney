@@ -1,4 +1,12 @@
-import { loadFeature } from '../../options/src/features.js';
+import {
+    disableFeatureInput,
+    enableFeatureInput,
+    startDrag,
+    updateInputColor,
+} from '../../options/src/features.js';
+import { generateFeatureOptionListItem } from '../html_generator.js';
+import { Runtime, StorageSync } from '../utils/browser.js';
+import { featureIDToPascalCase } from '../utils/features.js';
 
 export default class OptionFeature {
     constructor(configuration) {
@@ -7,8 +15,60 @@ export default class OptionFeature {
     }
 
     async load() {
-        await loadFeature(this.configuration.id);
+        this.appendHTMLFeatureElement();
+
+        this.handleUpdateMessage();
+
+        return this.restore();
     }
 
-    async restore() {}
+    appendHTMLFeatureElement() {
+        let disabledContainer = document.getElementById('qol-disable-feature');
+        disabledContainer.appendChild(generateFeatureOptionListItem(this.configuration));
+    }
+
+    handleUpdateMessage() {
+        Runtime.onMessage.addListener((msg) => {
+            const enableFeature = msg[`enable${featureIDToPascalCase(this.configuration.id)}`];
+            if (enableFeature === true || enableFeature === false) {
+                restore();
+            }
+        });
+    }
+
+    async restore() {
+        const defaultConfiguration = await this.getDefaultConfiguration();
+        this.moveElementToHTMLContainer(defaultConfiguration);
+    }
+
+    async getDefaultConfiguration() {
+        const configuration = await StorageSync.get({
+            [`${this.configuration.id}Enabled`]: false,
+            [`${this.configuration.id}WhitelistMode`]: true,
+        });
+        return configuration;
+    }
+
+    moveElementToHTMLContainer(defaultConfiguration) {
+        const enabled = defaultConfiguration[`${this.configuration.id}Enabled`];
+        const isWhitelist = defaultConfiguration[`${this.configuration.id}WhitelistMode`];
+
+        const featureElement = document.getElementById(`qol_${this.configuration.id}_feature`);
+        let container = document.getElementById('qol-disable-feature');
+        if (enabled) {
+            if (isWhitelist) {
+                container = document.getElementById('qol-whitelist-feature');
+            } else {
+                container = document.getElementById('qol-blacklist-feature');
+            }
+        }
+
+        container.appendChild(featureElement);
+        updateInputColor(this.configuration.id, enabled, isWhitelist);
+
+        if (enabled) enableFeatureInput(this.configuration.id);
+        else disableFeatureInput(this.configuration.id);
+
+        featureElement.ondragstart = startDrag;
+    }
 }

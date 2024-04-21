@@ -7,9 +7,11 @@ export default {
             load: true,
             navigate: true,
         },
-        option: true,
-        popup: true,
         background: false,
+    },
+    customization: {
+        popup: true,
+        option: true,
     },
     __comment__: 'awesomeLoadingImages is shared with awesomeLoadingLarge',
     defaultSettings: {
@@ -22,4 +24,5 @@ export default {
             'https://static.wikia.nocookie.net/fbbc7304-c0ac-44dc-9ccd-a839ee627a9a/scale-to-width/370',
         ],
     },
+    supported_version: ['TODO[VERSION_CHECK]'],
 };
