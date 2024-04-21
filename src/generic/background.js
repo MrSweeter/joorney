@@ -8,6 +8,7 @@ export default class BackgroundFeature {
     }
 
     async load(tab) {
+        // TODO Maybe useless as background trigger has been moved to content script side
         if (!tab.url) return;
         const url = sanitizeURL(tab.url);
         const origin = url.origin;

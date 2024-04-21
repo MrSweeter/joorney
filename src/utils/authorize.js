@@ -1,5 +1,6 @@
 import { StorageLocal, StorageSync } from './browser.js';
 import { sanitizeURL } from './url_manager.js';
+import { getOdooVersion } from './version.js';
 
 export function isOdooWebsite(url) {
     const regex = /^https?:\/\/(.+?\.odoo\.com|localhost|127\.0\.0\.\d+)(:\d+)?.*$/;
@@ -17,9 +18,17 @@ export async function isStillSameWebsite(timeout, url) {
     return window.location.origin === url.origin;
 }
 
-export async function isAuthorizedFeature(feature, url) {
-    // TODO[VERSION_CHECK] CHECK VERSION COMPATIBILITY
+export async function isSupportedFeature(supportedVersion) {
     // TODO[VERSION_CHECK] ALLOW USER TO DISABLE EXTENSION ON VERSION X
+    const { isOdoo, version } = getOdooVersion();
+    if (!isOdoo) return false;
+    if (!version) return false;
+    if (supportedVersion.length === 0) return true;
+
+    return supportedVersion.includes(version);
+}
+
+export async function isAuthorizedFeature(feature, url) {
     const key = `${feature}Enabled`;
     const configuration = await StorageSync.get({
         [key]: false,

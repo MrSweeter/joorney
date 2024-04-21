@@ -3,11 +3,8 @@ export default {
     display_name: 'Impersonate Login Runbot',
     icon: ['<i class="qol-font-icon-size fa-regular me-2"></i>'],
     trigger: {
-        content: {
-            load: true,
-            navigate: true,
-        },
-        background: false,
+        load: true,
+        navigate: true,
     },
     customization: {
         popup: true,

@@ -2,12 +2,7 @@ import { Runtime, StorageSync, Tabs, WebNavigation } from '../src/utils/browser.
 
 import { checkVersion } from './src/check_version.js';
 import { checkCommandShortcuts, handleCommands } from './src/keyboard_shortcut.js';
-import {
-    loadFeaturesConfiguration,
-    getCurrentSettings,
-    features,
-    importFeatureBackgroundFile,
-} from '../configuration.js';
+import { loadFeaturesConfiguration, getCurrentSettings, features } from '../configuration.js';
 import { handleMessage } from './src/messaging.js';
 
 // On page # path change, pre 17.2
@@ -24,18 +19,6 @@ WebNavigation.onHistoryStateUpdated.addListener((e) => {
     }
 });
 
-Tabs.onUpdated.addListener(async (_1, _2, tab) => {
-    if (tab.url.startsWith('http')) {
-        features
-            .filter((f) => f.trigger.background)
-            .forEach((feature) => {
-                importFeatureBackgroundFile(feature.id).then((featureModule) => {
-                    featureModule.load(tab);
-                });
-            });
-    }
-});
-
 Runtime.onInstalled.addListener(async (details) => {
     if (details.reason === Runtime.OnInstalledReason.INSTALL) {
         const settingsOrDefault = getCurrentSettings(features);
@@ -45,8 +28,8 @@ Runtime.onInstalled.addListener(async (details) => {
 });
 
 // Triggers when a message is received (from the content script)
-Runtime.onMessage.addListener((message, _, sendResponse) => {
-    handleMessage(message)
+Runtime.onMessage.addListener((message, sender, sendResponse) => {
+    handleMessage(message, sender)
         .then(async (r) => {
             sendResponse(r);
         })

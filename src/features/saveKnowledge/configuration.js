@@ -6,11 +6,8 @@ export default {
         '<i class="fa-solid fa-floppy-disk double-fa"></i>',
     ],
     trigger: {
-        content: {
-            load: true,
-            navigate: true,
-        },
-        background: false,
+        load: true,
+        navigate: true,
     },
     customization: {
         popup: true,
@@ -20,5 +17,5 @@ export default {
         saveKnowledgeEnabled: false,
         saveKnowledgeWhitelistMode: false,
     },
-    supported_version: ['TODO[VERSION_CHECK]'],
+    supported_version: [],
 };

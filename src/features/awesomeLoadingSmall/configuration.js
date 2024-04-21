@@ -3,11 +3,8 @@ export default {
     display_name: 'Awesome Loading Small',
     icon: ['<i class="fa-solid fa-spinner"></i>'],
     trigger: {
-        content: {
-            load: true,
-            navigate: true,
-        },
-        background: false,
+        load: true,
+        navigate: true,
     },
     customization: {
         popup: true,
@@ -24,5 +21,5 @@ export default {
             'https://static.wikia.nocookie.net/fbbc7304-c0ac-44dc-9ccd-a839ee627a9a/scale-to-width/370',
         ],
     },
-    supported_version: ['TODO[VERSION_CHECK]'],
+    supported_version: [],
 };

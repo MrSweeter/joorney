@@ -18,7 +18,7 @@ window.addEventListener('load', async () => {
     updateLandingPage();
 
     await updateTabState(url);
-    await loadFeatures(url, (f) => f.trigger.content.load);
+    await loadFeatures(url, (f) => f.trigger.load);
 
     const script = document.createElement('script');
     script.src = Runtime.getURL('inject.js');
@@ -37,7 +37,7 @@ window.addEventListener('load', async () => {
 Runtime.onMessage.addListener(async (msg) => {
     const url = msg.url;
     if (!url || !url.startsWith('http')) return;
-    loadFeatures(url, (f) => f.trigger.content.navigate);
+    loadFeatures(url, (f) => f.trigger.navigate);
 });
 
 async function loadFeatures(url, filter) {

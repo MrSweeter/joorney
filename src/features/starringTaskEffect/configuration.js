@@ -3,11 +3,8 @@ export default {
     display_name: 'Starring Task Effect',
     icon: ['<i class="fa-solid fa-star"></i>'],
     trigger: {
-        content: {
-            load: true,
-            navigate: true,
-        },
-        background: false,
+        load: true,
+        navigate: true,
     },
     customization: {
         popup: true,
@@ -17,5 +14,5 @@ export default {
         starringTaskEffectEnabled: false,
         starringTaskEffectWhitelistMode: false,
     },
-    supported_version: ['TODO[VERSION_CHECK]'],
+    supported_version: [],
 };

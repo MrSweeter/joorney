@@ -1,5 +1,5 @@
 import { sanitizeURL } from '../utils/url_manager.js';
-import { isAuthorizedFeature } from '../utils/authorize.js';
+import { isAuthorizedFeature, isSupportedFeature } from '../utils/authorize.js';
 import { NotYetImplemented } from '../utils/error.js';
 
 export default class ContentFeature {
@@ -9,6 +9,8 @@ export default class ContentFeature {
     }
 
     async load(urlArg) {
+        if (!isSupportedFeature(this.configuration.supported_version)) return;
+
         const url = sanitizeURL(urlArg);
 
         if (!(await isAuthorizedFeature(this.configuration.id, url))) return;

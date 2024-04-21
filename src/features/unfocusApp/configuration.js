@@ -3,11 +3,8 @@ export default {
     display_name: 'Unfocus App',
     icon: ['<i class="fa-solid fa-ghost"></i>'],
     trigger: {
-        content: {
-            load: true,
-            navigate: true,
-        },
-        background: false,
+        load: true,
+        navigate: true,
     },
     customization: {
         popup: true,
@@ -22,5 +19,5 @@ export default {
         unfocusAppDarkImageURL: 'https://i.imgur.com/YzShNtH.png',
         unfocusAppOrigins: {},
     },
-    supported_version: ['TODO[VERSION_CHECK]'],
+    supported_version: [],
 };

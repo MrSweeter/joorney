@@ -19,7 +19,7 @@ async function loadFeatures() {
     const { features, currentSettings } = await getFeaturesAndCurrentSettings();
 
     features
-        .filter((f) => f.trigger.popup)
+        .filter((f) => f.customization.popup)
         .forEach((feature) => {
             importFeaturePopupFile(feature.id).then((featureModule) =>
                 featureModule.load(currentSettings)

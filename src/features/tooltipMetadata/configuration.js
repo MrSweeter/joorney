@@ -3,11 +3,8 @@ export default {
     display_name: 'Tooltip Metadata',
     icon: ['<i class="fa-solid fa-file-lines"></i>'],
     trigger: {
-        content: {
-            load: true,
-            navigate: true,
-        },
-        background: false,
+        load: true,
+        navigate: true,
     },
     customization: {
         popup: true,
@@ -17,5 +14,5 @@ export default {
         tooltipMetadataEnabled: false,
         tooltipMetadataWhitelistMode: false,
     },
-    supported_version: ['TODO[VERSION_CHECK]'],
+    supported_version: [],
 };

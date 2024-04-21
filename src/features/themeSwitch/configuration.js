@@ -7,11 +7,8 @@ export default {
         '<i class="fa-solid fa-moon double-fa"></i>',
     ],
     trigger: {
-        content: {
-            load: false,
-            navigate: false,
-        },
-        background: true,
+        load: true,
+        navigate: false,
     },
     customization: {
         popup: true,
@@ -27,5 +24,5 @@ export default {
         themeSwitchDarkStartTime: '20:30',
         themeSwitchDarkStopTime: '07:30',
     },
-    supported_version: ['TODO[VERSION_CHECK]'],
+    supported_version: [],
 };

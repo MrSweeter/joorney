@@ -3,11 +3,8 @@ export default {
     display_name: 'Admin Debug Login Runbot',
     icon: ['<i class="fa-solid fa-rocket"></i>'],
     trigger: {
-        content: {
-            load: true,
-            navigate: true,
-        },
-        background: false,
+        load: true,
+        navigate: true,
     },
     customization: {
         popup: true,

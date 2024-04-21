@@ -3,11 +3,8 @@ export default {
     display_name: 'Awesome Style',
     icon: ['<i class="fa-brands fa-css3-alt"></i>'],
     trigger: {
-        content: {
-            load: true,
-            navigate: true,
-        },
-        background: false,
+        load: true,
+        navigate: true,
     },
     customization: {
         popup: true,
@@ -18,5 +15,5 @@ export default {
         awesomeStyleWhitelistMode: false,
         awesomeStyleCSS: '',
     },
-    supported_version: ['TODO[VERSION_CHECK]'],
+    supported_version: [],
 };
