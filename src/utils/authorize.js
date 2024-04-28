@@ -2,6 +2,8 @@ import { StorageLocal, StorageSync } from './browser.js';
 import { sanitizeURL } from './url_manager.js';
 import { getOdooVersion } from './version.js';
 
+export const regexSchemePrefix = 'regex://';
+
 export function isOdooWebsite(url) {
     const regex = /^https?:\/\/(.+?\.odoo\.com|localhost|127\.0\.0\.\d+)(:\d+)?.*$/;
     return regex.test(url);
@@ -56,8 +58,8 @@ export async function isAuthorizedLimitedFeature(featureName, url) {
 
     // Check Regex
     const activeRegex = configuration[configKey]
-        .filter((o) => o.startsWith('regex://'))
-        .map((o) => new RegExp(o.replace('regex://', '')));
+        .filter((o) => o.startsWith(regexSchemePrefix))
+        .map((o) => new RegExp(o.replace(regexSchemePrefix, '')));
     const validRegex = activeRegex.some((r) => r.test(origin));
 
     return validRegex;
@@ -79,8 +81,8 @@ async function authorizeFeature(featureName, origin) {
 
     const activeOrigins = getActiveFeatureOrigins(configuration.originsFilterOrigins, featureName);
     const activeRegex = activeOrigins
-        .filter((o) => o.startsWith('regex://'))
-        .map((o) => new RegExp(o.replace('regex://', '')));
+        .filter((o) => o.startsWith(regexSchemePrefix))
+        .map((o) => new RegExp(o.replace(regexSchemePrefix, '')));
 
     const originExist = activeOrigins.includes(origin) || activeRegex.some((r) => r.test(origin));
 

@@ -2,6 +2,7 @@ import {
     disableFeatureInput,
     enableFeatureInput,
     startDrag,
+    updateFeatureOriginInputs,
     updateInputColor,
 } from '../../options/src/features.js';
 import { generateFeatureOptionListItem } from '../html_generator.js';
@@ -31,7 +32,7 @@ export default class OptionFeature {
         Runtime.onMessage.addListener((msg) => {
             const enableFeature = msg[`enable${featureIDToPascalCase(this.configuration.id)}`];
             if (enableFeature === true || enableFeature === false) {
-                restore();
+                this.restore();
             }
         });
     }
@@ -64,10 +65,7 @@ export default class OptionFeature {
         }
 
         container.appendChild(featureElement);
-        updateInputColor(this.configuration.id, enabled, isWhitelist);
-
-        if (enabled) enableFeatureInput(this.configuration.id);
-        else disableFeatureInput(this.configuration.id);
+        updateFeatureOriginInputs(this.configuration.id, enabled, isWhitelist);
 
         featureElement.ondragstart = startDrag;
     }

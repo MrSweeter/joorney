@@ -16,12 +16,12 @@ export async function isModelCreateView_fromURL(url, model) {
 //#endregion
 
 //#region Get model ID
-// TODO MOVE IF USED ONCE
+// TODO[ROLLUP] MOVE IF USED ONCE
 export async function getProjectTaskID_fromURL(url) {
     return (await getModelAndID_fromURL(url, 'project.task'))?.resId;
 }
 
-// TODO MOVE IF USED ONCE
+// TODO[ROLLUP] MOVE IF USED ONCE
 export async function getKnowledgeArticleID_fromURL(url) {
     return (await getModelAndID_fromURL(url, 'knowledge.article'))?.resId;
 }

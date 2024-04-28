@@ -1,5 +1,5 @@
 import ContentFeature from '../../generic/content.js';
-import { Runtime, Tabs } from '../../utils/browser.js';
+import { Runtime } from '../../utils/browser.js';
 import configuration from './configuration.js';
 
 export default class ThemeSwitchContentFeature extends ContentFeature {
@@ -9,5 +9,9 @@ export default class ThemeSwitchContentFeature extends ContentFeature {
 
     async loadFeature(url) {
         Runtime.sendMessage({ feature: this.configuration.id });
+    }
+
+    handleUpdateMessage() {
+        /* No message */
     }
 }

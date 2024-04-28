@@ -18,6 +18,8 @@
     position: absolute;
     right: 16px;
     top: 16px;
+    width: 38px; /*≃ 2.3125rem*/
+    height: 38px;
 }
 
 input {

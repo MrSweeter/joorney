@@ -8,6 +8,6 @@ export default class AwesomeStylePopupFeature extends PopupFeature {
 
     updateFeature(e) {
         super.updateFeature(e);
-        notifyTabs(e.target.checked);
+        this.notifyTabs({ checked: e.target.checked });
     }
 }

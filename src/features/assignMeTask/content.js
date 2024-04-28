@@ -69,7 +69,7 @@ export default class AssignMeTaskContentFeature extends ProjectTaskShareContentF
         const data = await writeResponse.json();
 
         if (data?.error || data?.result === false) {
-            // TODO Display error to user
+            // TODO[IMP] Display error to user
             throw new Error(data.error?.data?.message, "'Assign to me' call failed !");
         }
         if (data?.result === true) {

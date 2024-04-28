@@ -7,10 +7,8 @@ export default class AdminDebugLoginRunbotContentFeature extends LimitedRunbotCo
     }
 
     async loadFeature(url) {
-        console.log('loadFeature');
         if (!this.isRunbotPage(url)) return;
 
-        console.log(url);
         this.appendRunbotAdminDebugLogin();
     }
 

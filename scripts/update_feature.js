@@ -48,7 +48,7 @@ function updateFeature() {
 function createTemplateIfNotExist(template) {
     const dirPath = `${featureSrc}/${template}.js`;
     if (fs.existsSync(dirPath)) {
-        console.log(`Update cannot override: ${template}`);
+        console.warn(`Update cannot override: ${template}`);
         return;
     }
     const templatePascalCase = template.charAt(0).toUpperCase() + template.slice(1);

@@ -8,14 +8,14 @@ import { handleMessage } from './src/messaging.js';
 // On page # path change, pre 17.2
 WebNavigation.onReferenceFragmentUpdated.addListener((e) => {
     if (e.url.startsWith('http')) {
-        Tabs.sendMessage(e.tabId, { url: e.url });
+        Tabs.sendMessage(e.tabId, { url: e.url, navigator: true });
     }
 });
 
 // 17.2
 WebNavigation.onHistoryStateUpdated.addListener((e) => {
     if (e.url.startsWith('http')) {
-        Tabs.sendMessage(e.tabId, { url: e.url });
+        Tabs.sendMessage(e.tabId, { url: e.url, navigator: true });
     }
 });
 

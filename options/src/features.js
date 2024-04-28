@@ -1,3 +1,4 @@
+import { getCurrentSettings } from '../../configuration.js';
 import { StorageSync } from '../../src/utils/browser.js';
 
 export function disableFeatureInput(feature) {
@@ -89,6 +90,13 @@ document.querySelectorAll('.qol-state-feature').forEach((column) => {
 //#endregion
 
 //#region Update Origins
+export async function updateFeatureOriginInputs(featureID, isEnable, isWhitelist) {
+    updateInputColor(featureID, isEnable, isWhitelist);
+
+    if (isEnable) enableFeatureInput(featureID);
+    else disableFeatureInput(featureID);
+}
+
 export function updateInputColor(feature, isEnable, isWhitelist) {
     Array.from(
         document.getElementsByClassName(`qol_origins_filter_feature_input_${feature}`)

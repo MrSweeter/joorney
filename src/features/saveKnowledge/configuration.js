@@ -10,7 +10,7 @@ export default {
         navigate: true,
     },
     customization: {
-        popup: true,
+        popup: false,
         option: false,
     },
     defaultSettings: {

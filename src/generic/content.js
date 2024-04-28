@@ -16,9 +16,14 @@ export default class ContentFeature {
         if (!(await isAuthorizedFeature(this.configuration.id, url))) return;
 
         this.loadFeature(url);
+        this.handleUpdateMessage();
     }
 
     async loadFeature(url) {
         throw NotYetImplemented;
+    }
+
+    async handleUpdateMessage() {
+        if (this.configuration.customization.popup) throw NotYetImplemented;
     }
 }

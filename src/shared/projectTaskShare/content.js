@@ -6,7 +6,7 @@ export default class ProjectTaskShareContentFeature extends ContentFeature {
     async loadFeature(url) {
         this.preloadFeature();
         if (!(await isStillSamePage(2500, url))) return;
-        const task = await this.getProjectTask(url); // TODO Setup a caching system, and move Odoo API call to dedicated folder
+        const task = await this.getProjectTask(url); // TODO[ROLLUP] Setup a caching system, and move Odoo API call to dedicated folder
         if (task) this.loadFeatureWithTask(task);
     }
 

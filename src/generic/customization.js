@@ -2,6 +2,8 @@ export default class OptionCustomizationFeature {
     constructor(configuration) {
         this.configuration = configuration;
         this.defaultSettings = configuration.defaultSettings;
+        if (!configuration.customization.option)
+            throw new Error(`Invalid state for feature: ${this.configuration.id}`);
     }
 
     async load() {

@@ -1,25 +1,13 @@
-import PopupFeature from '../../generic/popup.js';
+import { PopupCustomizableFeature } from '../../generic/popup.js';
 import { StorageSync } from '../../utils/browser.js';
 import configuration from './configuration.js';
 
-export default class UnfocusAppPopupFeature extends PopupFeature {
+export default class UnfocusAppPopupFeature extends PopupCustomizableFeature {
     constructor() {
         super(configuration);
     }
 
-    load(configurationArg) {
-        super.load(configurationArg);
-        this.updateRenderUnfocusApp(configurationArg.unfocusAppEnabled);
-    }
-
-    updateFeature(e) {
-        super.updateFeature(e);
-        const checked = e.target.checked;
-        this.updateRenderUnfocusApp(checked);
-        this.notifyTabs(checked);
-    }
-
-    async updateRenderUnfocusApp(checked) {
+    async render(enabled) {
         const { unfocusAppReorderEnabled, unfocusAppShareEnabled } = await StorageSync.get({
             unfocusAppReorderEnabled: this.defaultSettings.unfocusAppReorderEnabled,
             unfocusAppShareEnabled: this.defaultSettings.unfocusAppShareEnabled,
@@ -31,7 +19,7 @@ export default class UnfocusAppPopupFeature extends PopupFeature {
             appOrderSwitcher,
             appOrderInput,
             unfocusAppReorderEnabled,
-            checked,
+            enabled,
             this.onUnfocusAppReorderModeChange
         );
 
@@ -42,7 +30,7 @@ export default class UnfocusAppPopupFeature extends PopupFeature {
             appShareSwitcher,
             appShareInput,
             unfocusAppShareEnabled,
-            checked,
+            enabled,
             this.onUnfocusAppShareModeChange
         );
     }

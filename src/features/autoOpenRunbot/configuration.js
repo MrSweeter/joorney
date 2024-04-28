@@ -1,13 +1,17 @@
 export default {
     id: 'autoOpenRunbot',
     display_name: 'Auto Open Runbot',
-    icon: ['<i class="qol-font-icon-size fa-regular me-2"></i>'],
+    icon: [
+        '<!--<i class="fa-solid fa-door-open"></i>-->',
+        '<!--<i class="fa-solid fa-dungeon"></i>-->',
+        '<i class="fa-solid fa-fighter-jet"></i>',
+    ],
     trigger: {
         load: true,
         navigate: true,
     },
     customization: {
-        popup: true,
+        popup: false,
         option: false,
     },
     defaultSettings: {

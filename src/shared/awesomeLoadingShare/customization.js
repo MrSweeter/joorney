@@ -74,7 +74,7 @@ export default class AwesomeLoadingShareOptionCustomizationFeature extends Optio
             const imagePreview = document.getElementById('qol_awe_loading_new_image_preview');
             imagePreview.src = imageUrl;
         } catch (ex) {
-            console.log(ex);
+            console.warn(ex);
         }
     }
     //#endregion

@@ -4,7 +4,7 @@ export function stringToHTML(str) {
     return template.content.firstChild;
 }
 
-export function generateLimiteFeatureOptionButtonItem(feature) {
+export function generateLimitedFeatureOptionButtonItem(feature) {
     return stringToHTML(`
 		<label
 			title="[Limited Feature] ${feature.display_name ?? feature.id}"
@@ -48,5 +48,39 @@ export function generateFeatureOptionTableHeadItem(feature) {
 				${icon}
 			</div>
 		</th>
+	`);
+}
+
+export function generateFeaturePopupToggleItem(feature) {
+    const icon = feature.icon.join('\n');
+
+    return stringToHTML(`
+		<label
+			title="[Feature] ${feature.display_name ?? feature.id}"
+			for="${feature.id}Feature"
+			class="m-2 d-flex justify-content-center align-items-center"
+		>
+			<input id="${feature.id}Feature" type="checkbox" />
+			<div class="icon-wrapper ${feature.limited ? 'limited-feature' : ''}">
+				${icon}
+			</div>
+		</label>
+	`);
+}
+
+export function generateTabFeaturePopupToggleItem(feature) {
+    const icon = feature.icon.join('\n');
+
+    return stringToHTML(`
+		<label
+			title="[Feature Origin] ${feature.display_name ?? feature.id}"
+			for="${feature.id}FeatureTab"
+			class="mx-1"
+		>
+			<input id="${feature.id}FeatureTab" type="checkbox" />
+			<div class="icon-wrapper-tab">
+				${icon}
+			</div>
+		</label>
 	`);
 }

@@ -23,7 +23,6 @@ export default class UnfocusApp extends ContentFeature {
     constructor() {
         super(configuration);
         this.clickCount = 0;
-        this.handleUpdateMessage();
     }
 
     async loadFeature(url) {
@@ -99,7 +98,7 @@ export default class UnfocusApp extends ContentFeature {
 
                 switch (state) {
                     case `${UNFOCUS_STATE.DEFAULT}`: {
-                        // TODO Why not: defaultApps.push(parent);
+                        // TODO[IMP] Why not: defaultApps.push(parent);
                         break;
                     }
                     case `${UNFOCUS_STATE.UNFOCUS}`: {
@@ -199,6 +198,7 @@ export default class UnfocusApp extends ContentFeature {
                 if (exist)
                     exist.forEach((e) => {
                         e.parentElement.parentElement.style.opacity = FOCUS_OPACITY;
+                        e.parentElement.parentElement.parentElement.style.backgroundImage = null;
                         e.remove();
                     });
                 if (checked && isOdooWebsite(msg.url)) this.appendUnfocusApp(msg.url);

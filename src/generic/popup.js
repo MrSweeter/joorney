@@ -1,3 +1,4 @@
+import { reloadTabFeatures } from '../../popup/src/tab_features.js';
 import { StorageSync, Tabs, Runtime } from '../utils/browser.js';
 import { featureIDToPascalCase } from '../utils/features.js';
 
@@ -5,32 +6,52 @@ export default class PopupFeature {
     constructor(configuration) {
         this.configuration = configuration;
         this.defaultSettings = configuration.defaultSettings;
+        this.updateFeature = this.updateFeature.bind(this);
     }
 
-    load(configurationArg) {
+    load() {
+        this.restore();
+    }
+
+    async restore() {
+        const defaultConfiguration = await this.getDefaultConfiguration();
         const feature = document.getElementById(`${this.configuration.id}Feature`);
         feature.onchange = this.updateFeature;
 
-        feature.checked = configurationArg[`${this.configuration.id}Enabled`];
+        feature.checked = defaultConfiguration[`${this.configuration.id}Enabled`];
+    }
+
+    async getDefaultConfiguration() {
+        const configuration = await StorageSync.get({
+            [`${this.configuration.id}Enabled`]: false,
+        });
+        return configuration;
     }
 
     updateFeature(e) {
         const checked = e.target.checked;
         StorageSync.set({ [`${this.configuration.id}Enabled`]: checked });
-        notifyOptionPage({ [`enable${featureIDToPascalCase(this.configuration.id)}`]: checked });
+        this.notifyOptionPage({
+            [`enable${featureIDToPascalCase(this.configuration.id)}`]: checked,
+        });
     }
 
-    // TODO SWITCH TO MESSAGE CONTENT, not only "checked"
-    notifyTabs(checked) {
+    getNotificationMessage(data) {
+        return {
+            [`enable${featureIDToPascalCase(this.configuration.id)}`]: data.checked,
+        };
+    }
+
+    notifyTabs(data) {
         // The wildcard * for scheme only matches http or https
         // Same url pattern than content_scripts in manifest
-        Tabs.query({ url: '*://*/*' }).then((tabs) => {
-            tabs.forEach((t) =>
-                Tabs.sendMessage(t.id, {
-                    [`enable${featureIDToPascalCase(this.configuration.id)}`]: checked,
-                    url: t.url,
-                })
-            );
+        Tabs.query({ url: '*://*/*' }).then(async (tabs) => {
+            const message = this.getNotificationMessage(data);
+            if (Object.keys(message).length) {
+                tabs.forEach((t) => {
+                    Tabs.sendMessage(t.id, { ...message, url: t.url });
+                });
+            }
         });
     }
 
@@ -43,4 +64,34 @@ export default class PopupFeature {
             );
         });
     }
+}
+
+export class PopupCustomizableFeature extends PopupFeature {
+    constructor(configuration) {
+        super(configuration);
+        if (!configuration.customization.popup)
+            throw new Error(`Invalid state for feature: ${this.configuration.id}`);
+    }
+
+    load(currentSettings) {
+        super.load();
+        const container = document.querySelector(
+            `div[data-feature-customization="${this.configuration.id}"]`
+        );
+        if (!container) throw new Error(`Invalid state for feature: ${this.configuration.id}`);
+        container.classList.remove('d-none');
+        document.getElementById(`qol-popup-feature-${this.configuration.id}-label`).innerHTML =
+            this.configuration.display_name;
+
+        this.render(currentSettings[`${this.configuration.id}Enabled`]);
+    }
+
+    updateFeature(e) {
+        super.updateFeature(e);
+        const checked = e.target.checked;
+        this.render(checked);
+        this.notifyTabs({ checked: checked });
+    }
+
+    render(enabled) {}
 }

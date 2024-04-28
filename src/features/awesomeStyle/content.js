@@ -8,8 +8,8 @@ const awesomeStyleID = 'odoo-qol-awesome-style';
 export default class AwesomeStyleContentFeature extends ContentFeature {
     constructor() {
         super(configuration);
-        this.handleUpdateMessage();
     }
+
     async loadFeature(url) {
         if (!isOdooWebsite(url)) return;
         const exist = document.getElementsByName(awesomeStyleID);
@@ -45,7 +45,7 @@ export default class AwesomeStyleContentFeature extends ContentFeature {
             if (typeof css === 'boolean') {
                 const exist = Array.from(document.getElementsByName(awesomeStyleID));
                 if (exist) exist.forEach((e) => e.remove());
-                if (css && isOdooWebsite(msg.url)) appendAwesomeStyle(msg.url);
+                if (css && isOdooWebsite(msg.url)) this.appendAwesomeStyle(msg.url);
             }
         });
     }

@@ -37,7 +37,7 @@ export default class AwesomeLoadingShareContentFeature extends ContentFeature {
         Runtime.onMessage.addListener((msg) => {
             const img = this.getImageFromNavigationMessage(msg);
             if (img || img === false) {
-                const exist = Array.from(document.getElementsByName(smallLoadingID));
+                const exist = Array.from(document.getElementsByName(this.loadingID));
                 if (exist) exist.forEach((e) => e.remove());
                 if (img && isOdooWebsite(msg.url)) this.appendLoadingToDOM(img);
             }

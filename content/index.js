@@ -35,30 +35,20 @@ window.addEventListener('load', async () => {
 // });
 // Chrome & Firefox compatible
 Runtime.onMessage.addListener(async (msg) => {
+    if (!msg.navigator) return;
     const url = msg.url;
     if (!url || !url.startsWith('http')) return;
     loadFeatures(url, (f) => f.trigger.navigate);
 });
 
 async function loadFeatures(url, filter) {
-    Runtime.sendMessage(
-        {
-            action: MESSAGE_ACTION.GET_FEATURES_LIST,
-        },
-        (r) => console.log(r)
-    );
-
     const response = await Runtime.sendMessage({
         action: MESSAGE_ACTION.GET_FEATURES_LIST,
     });
-    console.log(response);
     const features = response.features;
-
-    console.log(features);
 
     features.filter(filter).forEach((feature) => {
         importFeatureContentFile(feature.id).then((featureModule) => {
-            console.log(featureModule);
             featureModule.load(url);
         });
     });

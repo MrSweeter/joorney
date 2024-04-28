@@ -1,5 +1,5 @@
 export async function getCurrentUserID() {
-    // TODO IMPROVE, settings page field ? web request ?
+    // TODO[IMP] IMPROVE, settings page field ? web request ?
     const avatarEl = document.getElementsByClassName('o_avatar o_user_avatar rounded')[0];
     if (!avatarEl) return undefined;
     const avatarURL = new URL(avatarEl.src);

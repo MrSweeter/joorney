@@ -1,13 +1,16 @@
 export default {
     id: 'impersonateLoginRunbot',
     display_name: 'Impersonate Login Runbot',
-    icon: ['<i class="qol-font-icon-size fa-regular me-2"></i>'],
+    icon: [
+        '<!--<i class="fa-solid fa-people-arrows"></i>-->',
+        '<i class="fa-solid fa-masks-theater"></i>',
+    ],
     trigger: {
         load: true,
         navigate: true,
     },
     customization: {
-        popup: true,
+        popup: false,
         option: false,
     },
     defaultSettings: {

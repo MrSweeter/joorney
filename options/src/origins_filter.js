@@ -1,7 +1,9 @@
-import { baseSettings } from '../../configuration.js';
+import { baseSettings, getCurrentSettings } from '../../configuration.js';
 import { generateFeatureOptionTableHeadItem, stringToHTML } from '../../src/html_generator.js';
+import { regexSchemePrefix } from '../../src/utils/authorize.js';
 import { Runtime, StorageSync } from '../../src/utils/browser.js';
 import { MESSAGE_ACTION } from '../../src/utils/messaging.js';
+import { updateFeatureOriginInputs, updateInputColor } from './features.js';
 
 //#region CRUD
 export async function createOriginsFilterOrigin() {
@@ -14,10 +16,10 @@ export async function createOriginsFilterOrigin() {
 
     const origins = await readOriginsFilterOrigins();
 
-    if (originString.startsWith('regex://')) {
-        let regexString = originString.replace('regex://', '');
+    if (originString.startsWith(regexSchemePrefix)) {
+        let regexString = originString.replace(regexSchemePrefix, '');
         try {
-            regexString = 'regex://' + new RegExp(regexString).source;
+            regexString = regexSchemePrefix + new RegExp(regexString).source;
             origins[regexString] = {};
             await renderOriginsObject(origins);
             origin.value = '';
@@ -127,6 +129,15 @@ async function renderOriginsObject(origins) {
     );
     renderOriginsFilterError();
     updateColSpan(features.length);
+
+    const defaultConfiguration = await getCurrentSettings(features);
+
+    features.forEach((feature) => {
+        const enabled = defaultConfiguration[`${feature.id}Enabled`];
+        const isWhitelist = defaultConfiguration[`${feature.id}WhitelistMode`];
+
+        updateFeatureOriginInputs(feature.id, enabled, isWhitelist);
+    });
 }
 
 function setupOriginFeature(container, idx, feature, origin) {
@@ -160,7 +171,7 @@ function renderOrigin(idx, origin, features) {
 				<input
 					class="
 					    qol_origins_filter_feature_input_${idx}
-                        qol_origins_filter_feature_input_${f} 
+                        qol_origins_filter_feature_input_${f}
                         qol_origins_filter_origin_${idx}_${f}
                         m-0 form-check-input
                     "

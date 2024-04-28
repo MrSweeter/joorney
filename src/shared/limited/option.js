@@ -1,11 +1,11 @@
 import OptionFeature from '../../generic/option.js';
-import { generateLimiteFeatureOptionButtonItem } from '../../html_generator.js';
+import { generateLimitedFeatureOptionButtonItem } from '../../html_generator.js';
 import { StorageSync } from '../../utils/browser.js';
 
 export default class LimitedShareOptionFeature extends OptionFeature {
     appendHTMLFeatureElement() {
         let limitedContainer = document.getElementById('qol-limited-feature');
-        limitedContainer.appendChild(generateLimiteFeatureOptionButtonItem(this.configuration));
+        limitedContainer.appendChild(generateLimitedFeatureOptionButtonItem(this.configuration));
     }
 
     moveElementToHTMLContainer(defaultConfiguration) {

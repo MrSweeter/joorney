@@ -5,20 +5,12 @@ import configuration from './configuration.js';
 export default class AwesomeLoadingLargePopupFeature extends AwesomeLoadingSharePopupFeature {
     constructor() {
         super(configuration);
-    }
-
-    load(configurationArg) {
-        super.load(configurationArg);
         this.htmlID = 'updateAwesomeLoadingLargeImage';
         this.previewHtmlID = 'awesomeLoadingLargeImagePreview';
-
-        this.updateRenderAwesomeLoadingLarge(configurationArg.awesomeLoadingLargeEnabled);
     }
 
-    updateFeature(e) {
-        super.updateFeature(e);
-        const checked = e.target.checked;
-        this.updateRenderAwesomeLoadingLarge(checked);
+    getNotificationMessage(data) {
+        return { awesomeLoadingLargeImage: data.image };
     }
 
     async getImagesConfiguration() {
@@ -34,13 +26,5 @@ export default class AwesomeLoadingLargePopupFeature extends AwesomeLoadingShare
 
     async saveSelectedImage(value) {
         await StorageSync.set({ awesomeLoadingLargeImage: value });
-    }
-
-    getNotificationMessage(img, url) {
-        return { awesomeLoadingLargeImage: img, url: url };
-    }
-
-    updateRenderAwesomeLoadingLarge(checked) {
-        this.updateRenderAwesomeLoading(checked);
     }
 }

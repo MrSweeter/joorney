@@ -1,29 +1,23 @@
-import PopupFeature from '../../generic/popup.js';
+import { PopupCustomizableFeature } from '../../generic/popup.js';
 import { Tabs } from '../../utils/browser.js';
 
-export default class AwesomeLoadingSharePopupFeature extends PopupFeature {
+export default class AwesomeLoadingSharePopupFeature extends PopupCustomizableFeature {
     constructor(configuration) {
         super(configuration);
         this.htmlID = '';
         this.previewHtmlID = '';
     }
 
-    async getImagesConfiguration() {
-        return { images: [], selected: '' };
-    }
-
-    async saveSelectedImage(value) {}
-
-    async updateRenderAwesomeLoading(checked) {
+    async render(enabled) {
         const awesomeLoadingImage = document.getElementById(this.htmlID);
         const awesomeLoadingImagePreview = document.getElementById(this.previewHtmlID);
 
         const { images, selected } = await this.getImagesConfiguration();
 
         awesomeLoadingImage.innerHTML = '<option value="" selected>Default</option>';
-        awesomeLoadingImage.disabled = !checked;
+        awesomeLoadingImage.disabled = !enabled;
         awesomeLoadingImagePreview.src = selected;
-        awesomeLoadingImagePreview.style.opacity = checked ? 1 : 0.25;
+        awesomeLoadingImagePreview.style.opacity = enabled ? 1 : 0.25;
 
         images.forEach((img) => {
             const opt = document.createElement('option');
@@ -50,21 +44,19 @@ export default class AwesomeLoadingSharePopupFeature extends PopupFeature {
             await this.saveSelectedImage(value);
             const preview = document.getElementById(this.previewHtmlID);
             preview.src = value;
-            notifyTabs(value);
+            this.notifyTabs({ image: value });
         };
 
-        this.notifyTabs(checked ? selected : false);
+        this.notifyTabs({ image: enabled ? selected : false });
     }
 
-    getNotificationMessage(img, url) {
+    getNotificationMessage(data) {
         return {};
     }
 
-    notifyTabs(img) {
-        // The wildcard * for scheme only matches http or https
-        // Same url pattern than content_scripts in manifest
-        Tabs.query({ url: '*://*/*' }, (tabs) => {
-            tabs.forEach((t) => Tabs.sendMessage(t.id, this.getNotificationMessage(img, t.url)));
-        });
+    async getImagesConfiguration() {
+        return { images: [], selected: '' };
     }
+
+    async saveSelectedImage(value) {}
 }
