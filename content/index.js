@@ -1,6 +1,8 @@
 import { importFeatureContentFile } from '../configuration.js';
+import { isSupportedOdoo } from '../src/utils/authorize.js';
 import { Runtime } from '../src/utils/browser.js';
 import { MESSAGE_ACTION } from '../src/utils/messaging.js';
+import { getOdooVersion } from '../src/utils/version.js';
 
 /**
  * Entry point for content scripts.
@@ -12,34 +14,48 @@ import { MESSAGE_ACTION } from '../src/utils/messaging.js';
 //#region Navigation Event
 
 window.addEventListener('load', async () => {
+    const script = document.createElement('script');
+    script.src = Runtime.getURL('inject.js');
+    script.onload = function () {
+        onVersionLoaded();
+        this.remove();
+    };
+    document.documentElement.appendChild(script);
+});
+
+async function onVersionLoaded() {
+    console.log('on Version loaded');
     const url = window.location.href;
-    if (!url || !url.startsWith('http')) return;
+    if (!canContinue(url)) return;
 
     updateLandingPage();
 
     await updateTabState(url);
     await loadFeatures(url, (f) => f.trigger.load);
 
-    const script = document.createElement('script');
-    script.src = Runtime.getURL('inject.js');
-    script.onload = function () {
-        this.remove();
-    };
+    addNavigationListener();
+}
 
-    document.documentElement.appendChild(script);
-});
+function addNavigationListener() {
+    // Experimental: This is an experimental technology - firefox not compatible
+    // navigation.addEventListener('navigate', (e) => {
+    //     checkTaskPage(e.destination.url);
+    // });
+    // Chrome & Firefox compatible
+    Runtime.onMessage.addListener(async (msg) => {
+        if (!msg.navigator) return;
+        const url = msg.url;
+        loadFeatures(url, (f) => f.trigger.navigate);
+    });
+}
 
-// Experimental: This is an experimental technology - firefox not compatible
-// navigation.addEventListener('navigate', (e) => {
-//     checkTaskPage(e.destination.url);
-// });
-// Chrome & Firefox compatible
-Runtime.onMessage.addListener(async (msg) => {
-    if (!msg.navigator) return;
-    const url = msg.url;
-    if (!url || !url.startsWith('http')) return;
-    loadFeatures(url, (f) => f.trigger.navigate);
-});
+function canContinue(url) {
+    if (!url || !url.startsWith('http')) return false;
+    return true;
+    // Limited feature like runbot, can work without version check
+    const { isOdoo, version } = getOdooVersion();
+    return isOdoo && isSupportedOdoo(version);
+}
 
 async function loadFeatures(url, filter) {
     const response = await Runtime.sendMessage({

@@ -1,9 +1,33 @@
-import { load as loadOriginsFilter } from './src/origins_filter.js';
-import { load as loadKeyboardShortcut } from './src/keyboard_shortcut.js';
-import { setupDragAndDrop } from './src/features.js';
+import { loadPage as loadWebsitePage } from './pages/website/index.js';
+import { loadPage as loadConfigurationPage } from './pages/configuration/index.js';
+import { loadPage as loadVersionPage } from './pages/version/index.js';
 import { initImportExport } from './import_export.js';
+import { getFeaturesAndCurrentSettings } from '../configuration.js';
 import { StorageSync } from '../src/utils/browser.js';
-import { getFeaturesAndCurrentSettings, importFeatureOptionFile } from '../configuration.js';
+
+const MENU_ITEMS_CONTAINER = 'qol-menu-items-container';
+const PAGE_CONTAINER = 'qol-page-container';
+const MENUS = [
+    {
+        id: 'page-website',
+        label: 'Website filter',
+        path: './pages/website/index.html',
+        loader: loadWebsitePage,
+        default: true,
+    },
+    {
+        id: 'page-configuration',
+        label: 'Configuration',
+        path: './pages/configuration/index.html',
+        loader: loadConfigurationPage,
+    },
+    {
+        id: 'page-version',
+        label: 'Supported versions',
+        path: './pages/version/index.html',
+        loader: loadVersionPage,
+    },
+];
 
 async function onDOMContentLoaded() {
     document.getElementById('copyright-year').innerText = new Date().getFullYear();
@@ -11,14 +35,7 @@ async function onDOMContentLoaded() {
 
     const { features, currentSettings } = await getFeaturesAndCurrentSettings();
 
-    loadKeyboardShortcut();
-
-    await loadOriginsFilter();
-
-    loadFeatures(features);
     initImportExport(currentSettings);
-
-    setupDragAndDrop();
 
     const searchParams = new URLSearchParams(window.location.search);
     let htmlDebug = 1;
@@ -29,13 +46,47 @@ async function onDOMContentLoaded() {
         debug.innerHTML = JSON.stringify(config, null, 4);
     }
     document.getElementById('qol-brand-debug').href = `?debug=${htmlDebug}`;
-}
 
-async function loadFeatures(features) {
-    for (const feature of features) {
-        importFeatureOptionFile(feature.id).then((featureModule) => featureModule.load());
-    }
+    loadMenus(features, currentSettings);
 }
 
 document.removeEventListener('DOMContentLoaded', onDOMContentLoaded);
 document.addEventListener('DOMContentLoaded', onDOMContentLoaded);
+
+function loadMenus(features, currentSettings) {
+    const container = document.getElementById(MENU_ITEMS_CONTAINER);
+    container.innerHTML = '';
+    MENUS.forEach((menu) => {
+        loadMenu(features, currentSettings, menu, container);
+    });
+
+    const defaultMenu = MENUS.find((m) => m.default);
+    document.getElementById(defaultMenu.id).click();
+}
+
+function loadMenu(features, currentSettings, menu, container) {
+    const template = document.createElement('template');
+    template.innerHTML = `
+        <li id="${menu.id}" class="qol-menu-item nav-item nav-link">${menu.label}</li>
+    `.trim();
+
+    template.content.firstChild.onclick = (e) => {
+        fetch(menu.path)
+            .then((response) => response.text())
+            .then((data) => {
+                document.getElementById(PAGE_CONTAINER).innerHTML = data;
+                menu.loader(features, currentSettings);
+                updateActiveMenu(menu);
+            })
+            .catch((error) => console.error(error));
+    };
+
+    container.appendChild(template.content.firstChild);
+}
+
+function updateActiveMenu(menu) {
+    Array.from(document.getElementsByClassName('qol-menu-item')).forEach((e) => {
+        if (e.id === menu.id) e.classList.add('active');
+        else e.classList.remove('active');
+    });
+}

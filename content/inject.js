@@ -1,5 +1,6 @@
 function guessOdooVersion(windowArg) {
-    const result = { isOdoo: false };
+    const result = { isOdoo: windowArg?.odoo != undefined };
+    // "info" is only available when logged in
     if (!windowArg?.odoo?.info) return result;
 
     const serverVersionInfo = windowArg.odoo.info.server_version_info;

@@ -11,10 +11,6 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.css" rel="stylesheet" />
 
         <link href="./index.css" rel="stylesheet" />
-        <link href="./css/features.css" rel="stylesheet" />
-        <link href="./css/limited_features.css" rel="stylesheet" />
-        <link href="./css/origins_filter.css" rel="stylesheet" />
-
         <script src="index.js"></script>
     </head>
     <body class="qol-body-background">
@@ -24,10 +20,7 @@
                     <img loading="lazy" src="/images/icon_128.png" class="mx-2" height="20" alt="Odoo - QoL Logo" loading="lazy" />
                     <small>Odoo - QoL & Fun Configuration</small>
                 </a>
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link active" href="#">Website filter</a></li>
-                    <li class="nav-item"><a class="nav-link" href="./configuration.html">Feature configurations</a></li>
-                </ul>
+                <ul id="qol-menu-items-container" class="navbar-nav me-auto"></ul>
 
                 <div class="d-flex align-items-center">
                     <input type="file" accept=".json" class="form-control form-control-sm" id="qol_import_storage_sync_file" />
@@ -44,88 +37,7 @@
 
         <pre id="qol-debug-configuration"></pre>
 
-        <!--#region Limited Features -->
-        <div class="row pt-3 pb-0 p-5 mx-0">
-            <h4 class="text-start mt-3">Limited Features</h4>
-            <div id="qol-limited-feature" class="pt-3 d-flex flex-wrap justify-content-start">
-                <!-- DYNAMIC CONTENT -->
-            </div>
-        </div>
-        <!--#endregion-->
-
-        <!--#region Features -->
-        <div class="row pt-3 pb-0 p-5  mx-0">
-            <h4 class="text-start mt-3">Features</h4>
-            <h6 class="col-4 text-success">Whitelist</h6>
-            <h6 class="col-4 text-danger">Blacklist</h6>
-            <h6 class="col-4">Disable</h6>
-            <div class="col-4">
-                <div id="qol-whitelist-feature" class="qol-state-feature pb-5 h-100 border border-2 border-success rounded d-flex flex-wrap align-content-start justify-content-center">
-                    <!-- DYNAMIC CONTENT -->
-                </div>
-            </div>
-            <div class="col-4">
-                <div id="qol-blacklist-feature" class="qol-state-feature pb-5 h-100 border border-2 border-danger rounded d-flex flex-wrap align-content-start justify-content-center">
-                    <!-- DYNAMIC CONTENT -->
-                </div>
-            </div>
-            <div class="col-4">
-                <div id="qol-disable-feature" class="qol-state-feature pb-5 h-100 border border-2 rounded d-flex flex-wrap align-content-start justify-content-center">
-                    <!-- DYNAMIC CONTENT -->
-                </div>
-            </div>
-        </div>
-        <!--#endregion -->
-
-        <!--#region Origins Filter -->
-        <div class="row pt-3 pb-0 p-5  mx-0 text-center">
-            <h6 class="text-start" id="odoo_theme_anchor">Origins</h6>
-            <table id="qol_origins_filter_table" class="table table-striped bg-light">
-                <thead class="shadow-2">
-                    <tr>
-                        <!-- DYNAMIC HEADER -->
-                    </tr>
-                </thead>
-                <tbody id="qol_origins_filter_table_body">
-                    <!-- DYNAMIC CONTENT -->
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td></td>
-                    </tr>
-                    <tr class="table-secondary">
-                        <td class="p-1 qol-valign-middle">
-                            <input type="text" class="form-control border border-0" id="qol_origins_filter_new_origin" placeholder="www.odoo.com" aria-label="Origin filter" />
-                        </td>
-                        <td class="p-1 qol-valign-middle">
-                            <button title="Add origin" id="qol_origins_filter_new_origin_save" class="btn btn-success btn-floating">
-                                <i class="fa fa-plus"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td id="qol_origins_filter_error_footer" class="text-danger"></td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-        <!--#endregion-->
-
-        <!--#region Keyboard Shortcut App -->
-        <div class="row pt-1 pb-0 p-5 mx-0 text-center">
-            <h4 class="text-start mt-3">
-                Keyboard Shortcut <button id="open-extension-shortcut" class="btn btn-floating" title="Modify via Chrome"><i class="fa-brands fa-chrome"></i></button>
-            </h4>
-
-            <table class="table table-striped bg-light text-start">
-                <thead class="shadow-2">
-                    <th>Shortcut</th>
-                    <th>Description</th>
-                </thead>
-                <tbody id="shortcut_table_body"></tbody>
-            </table>
-        </div>
-        <!--#endregion-->
+        <div id="qol-page-container"></div>
 
         <footer class="text-center">
             <div class="text-center p-3">

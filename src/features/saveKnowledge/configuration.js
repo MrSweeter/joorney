@@ -17,5 +17,14 @@ export default {
         saveKnowledgeEnabled: false,
         saveKnowledgeWhitelistMode: false,
     },
-    supported_version: [],
+    supported_version: [
+        '14.0',
+        '15.0',
+        'saas-15.2',
+        '16.0',
+        'saas-16.1',
+        'saas-16.2',
+        'saas-16.3',
+        'saas-16.4',
+    ],
 };

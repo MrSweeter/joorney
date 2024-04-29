@@ -7,5 +7,5 @@ export function getOdooVersion() {
 
     const element = document.querySelector(`meta[name="${META_GUESS_ELEMENT_NAME}"]`);
     if (!element) return DEFAULT_VERSION;
-    return element.getAttribute('content') ?? DEFAULT_VERSION;
+    return JSON.parse(element.getAttribute('content')) ?? DEFAULT_VERSION;
 }

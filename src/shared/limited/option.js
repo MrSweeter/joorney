@@ -19,7 +19,6 @@ export default class LimitedShareOptionFeature extends OptionFeature {
         featureInput.onchange = async (e) => {
             const checked = e.target.checked;
             await StorageSync.set({ [`${this.configuration.id}Enabled`]: checked });
-            //this.loadLimitedFeature(feature, checked);
         };
     }
 }

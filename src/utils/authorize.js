@@ -1,3 +1,4 @@
+import { baseSettings } from '../../configuration.js';
 import { StorageLocal, StorageSync } from './browser.js';
 import { sanitizeURL } from './url_manager.js';
 import { getOdooVersion } from './version.js';
@@ -20,14 +21,20 @@ export async function isStillSameWebsite(timeout, url) {
     return window.location.origin === url.origin;
 }
 
-export async function isSupportedFeature(supportedVersion) {
-    // TODO[VERSION_CHECK] ALLOW USER TO DISABLE EXTENSION ON VERSION X
+export async function isSupportedFeature(featureSupportedVersion) {
     const { isOdoo, version } = getOdooVersion();
     if (!isOdoo) return false;
     if (!version) return false;
-    if (supportedVersion.length === 0) return true;
+    if (featureSupportedVersion.length === 0) return true;
 
-    return supportedVersion.includes(version);
+    const odooSupported = await isSupportedOdoo(version);
+
+    return odooSupported && featureSupportedVersion.includes(version);
+}
+
+export async function isSupportedOdoo(version) {
+    const { supportedVersions } = await StorageSync.get(baseSettings);
+    return supportedVersions.includes(version);
 }
 
 export async function isAuthorizedFeature(feature, url) {

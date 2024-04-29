@@ -9,6 +9,26 @@ function getESMOutput(file) {
     return { file: file, format: 'esm', inlineDynamicImports: true };
 }
 
+function getOptionPages(dist, pages) {
+    return pages.map((page) => {
+        return {
+            input: `options/pages/${page}/index.js`,
+            output: getESMOutput(`${dist}/options/pages/${page}/index.js`),
+            plugins: [
+                ...defaultPlugins,
+                copy({
+                    targets: [
+                        {
+                            src: [`options/pages/${page}/index.html`],
+                            dest: `${dist}/options/pages/${page}`,
+                        },
+                    ],
+                }),
+            ],
+        };
+    });
+}
+
 export default () => {
     const dist = `dist`;
 
@@ -68,21 +88,7 @@ export default () => {
                 copy({ targets: [{ src: 'options/css/*', dest: `${dist}/options/css` }] }),
             ],
         },
-        {
-            input: 'options/configuration.js',
-            output: getESMOutput(`${dist}/options/configuration.js`),
-            plugins: [
-                ...defaultPlugins,
-                copy({
-                    targets: [
-                        {
-                            src: ['options/configuration.html', 'options/configuration.css'],
-                            dest: `${dist}/options`,
-                        },
-                    ],
-                }),
-            ],
-        },
+        ...getOptionPages(dist, ['website', 'configuration', 'version']),
         {
             input: 'options/migration/index.js',
             output: getESMOutput(`${dist}/options/migration/index.js`),

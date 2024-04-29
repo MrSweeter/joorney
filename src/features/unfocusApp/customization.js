@@ -39,7 +39,7 @@ export default class UnfocusAppOptionCustomizationFeature extends OptionCustomiz
 
         const container = document.getElementById('qol_unfocus_app_table_body');
         container.innerHTML = '';
-        for (const [id, o] of Object.keys(origins)) {
+        for (const [id, o] of Object.keys(origins).entries()) {
             const values = Object.values(origins[o]);
             container.appendChild(
                 this.renderOrigin(

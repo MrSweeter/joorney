@@ -1,10 +1,4 @@
-import {
-    disableFeatureInput,
-    enableFeatureInput,
-    startDrag,
-    updateFeatureOriginInputs,
-    updateInputColor,
-} from '../../options/src/features.js';
+import { startDrag, updateFeatureOriginInputs } from '../../options/src/features.js';
 import { generateFeatureOptionListItem } from '../html_generator.js';
 import { Runtime, StorageSync } from '../utils/browser.js';
 import { featureIDToPascalCase } from '../utils/features.js';

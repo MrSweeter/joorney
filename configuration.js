@@ -7,6 +7,8 @@ export const baseSettings = {
 
     // [LIMITATION] Object is loaded by default even if values exists - 'https://www.odoo.com': {},
     originsFilterOrigins: {},
+
+    supportedVersions: ['17.0'],
 };
 
 const activeFeaturesList = Object.keys(FeaturesState).filter((k) => FeaturesState[k]);

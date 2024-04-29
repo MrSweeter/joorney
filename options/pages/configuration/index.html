@@ -1,0 +1,118 @@
+<link href="./css/configuration/theme_switch.css" rel="stylesheet" />
+<link href="./css/configuration/awesome_loading.css" rel="stylesheet" />
+<link href="./css/configuration/task_setup.css" rel="stylesheet" />
+<link href="./css/configuration/save_knowledge.css" rel="stylesheet" />
+<link href="./css/configuration/awesome_style.css" rel="stylesheet" />
+<link href="./css/configuration/unfocus_app.css" rel="stylesheet" />
+
+<div class="row pt-1 pb-0 p-5 mx-0 text-center">
+    <!--#region Awesome Loading -->
+    <div data-feature-customization="awesomeLoading" class="d-none">
+        <h4 class="text-start mt-3">Awesome Loading</h4>
+        <table id="qol_awe_loading_images_table" class="table table-striped bg-light">
+            <thead class="shadow-2">
+                <tr>
+                    <th><i class="fa fa-eye"></i></th>
+                    <th class="qol-awe-loading-switch-origin-input" title="Image URL">Image URL</th>
+                    <th class="py-0 qol-valign-middle action-head"></th>
+                </tr>
+            </thead>
+            <tbody id="qol_awe_loading_images_table_body"></tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3"></td>
+                </tr>
+                <tr class="table-secondary">
+                    <td class="py-0"><img loading="lazy" id="qol_awe_loading_new_image_preview" class="qol-awe-loading-preview" src="" /></td>
+                    <td class="p-1 qol-valign-middle">
+                        <input type="text" class="form-control border border-0" id="qol_awe_loading_new_image" placeholder="" aria-label="Image URL" />
+                    </td>
+                    <td class="p-1 qol-valign-middle">
+                        <button title="Add image" id="qol_awe_loading_new_image_save" class="btn btn-success btn-floating">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="qol_awe_loading_error_footer" class="text-danger" colspan="3"></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <!--#endregion-->
+
+    <!--#region Awesome Style -->
+    <div data-feature-customization="awesomeStyle" class="d-none">
+        <h4 class="text-start mt-3">Awesome Style <span style="opacity: .5;">(beta)</span></h4>
+        <div id="qol_awe_style_container" class="col-12">
+            <textarea id="qol_awe_style_css" class="form-control col-12" rows="10" placeholder="Type CSS code here" spellcheck="false"></textarea>
+            <button title="Save" id="qol_awe_style_save" class="btn btn-success"><i class="fa fa-floppy-disk me-1"></i> Save (ctrl+s)</button>
+        </div>
+    </div>
+    <!--#endregion-->
+
+    <!--#region Unfocus App -->
+    <div data-feature-customization="unfocusApp" class="d-none">
+        <h4 class="text-start mt-3">Unfocus App</h4>
+        <div class="col-12 row mb-3">
+            <div class="col-6">
+                <h6 class="text-center">Light image URL for superfocus</h6>
+                <input type="text" class="form-control border border-0 mb-1" id="qol_unfocus_app_light_image_input" placeholder="" />
+                <img alt="Light Image for superfocus" id="qol_unfocus_app_light_image" />
+            </div>
+            <div class="col-6">
+                <h6 class="text-center">Dark image URL for superfocus</h6>
+                <input type="text" class="form-control border border-0 mb-1" id="qol_unfocus_app_dark_image_input" placeholder="" />
+                <img alt="Dark Image for superfocus" id="qol_unfocus_app_dark_image" />
+            </div>
+        </div>
+
+        <table id="qol_unfocus_app_table" class="table table-striped bg-light">
+            <thead class="shadow-2">
+                <tr>
+                    <th class="qol-unfocus_app-origin" title="Origins">Origins</th>
+                    <th class="" title="Superfocus count">Superfocus Count</th>
+                    <th class="" title="Unfocus count">Unfocus Count</th>
+                    <th class="py-0 qol-valign-middle action-head"></th>
+                </tr>
+            </thead>
+            <tbody id="qol_unfocus_app_table_body"></tbody>
+        </table>
+    </div>
+    <!--#endregion-->
+
+    <!--#region Theme Switch -->
+    <div data-feature-customization="themeSwitch" class="d-none">
+        <h4 class="text-start mt-3">Theme Switch</h4>
+        <table class="table table-striped bg-light">
+            <thead class="shadow-2">
+                <tr>
+                    <th style="width: 50%;">Latitude / Longitude</th>
+                    <th style="width: 50%;">Dark Mode: Start / Stop</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="input-group">
+                            <input id="qol_theme_switch_latitude" type="text" class="form-control border border-0" />
+                            <span class="input-group-text border border-0">/</span>
+                            <input id="qol_theme_switch_longitude" type="text" class="form-control border border-0" />
+                            <button id="qol_theme_switch_get_location_button" class="btn btn-secondary" title="Get current location">
+                                <i class="fa-solid fa-lg fa-location-crosshairs"></i>
+                            </button>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="input-group">
+                            <input id="qol_theme_switch_dark_start" type="time" class="form-control border border-0" />
+                            <span class="input-group-text border border-0">/</span>
+                            <input id="qol_theme_switch_dark_stop" type="time" class="form-control border border-0" />
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--#endregion-->
+</div>
