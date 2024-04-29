@@ -5,10 +5,10 @@ export function disableFeatureInput(feature) {
     const inputs = Array.from(
         document.getElementsByClassName(`qol_origins_filter_feature_input_${feature}`)
     );
-    inputs.forEach((i) => {
+    for (const i of inputs) {
         i.disabled = true;
         i.classList.add(`feature-disabled`);
-    });
+    }
 
     document.getElementById(`qol_origins_filter_feature_header_${feature}`).style.opacity = 0.5;
 }
@@ -17,10 +17,11 @@ export function enableFeatureInput(feature) {
     const inputs = Array.from(
         document.getElementsByClassName(`qol_origins_filter_feature_input_${feature}`)
     );
-    inputs.forEach((i) => {
+
+    for (const i of inputs) {
         i.disabled = false;
         i.classList.remove(`feature-disabled`);
-    });
+    }
 
     document.getElementById(`qol_origins_filter_feature_header_${feature}`).style.opacity = 1;
 }
@@ -76,17 +77,17 @@ async function dropElement(e, enable, isWhitelist) {
 //#region Element dragging
 const dragStart = (e) => e.currentTarget.classList.add('feature-dragging');
 const dragEnd = (e) => e.currentTarget.classList.remove('feature-dragging');
-document.querySelectorAll('.draggable-feature').forEach((card) => {
+for (const card of document.querySelectorAll('.draggable-feature')) {
     card.addEventListener('dragstart', dragStart);
     card.addEventListener('dragend', dragEnd);
-});
+}
 
 /*const dragEnter = (e) => e.currentTarget.classList.add('drop');
 const dragLeave = (e) => e.currentTarget.classList.remove('drop');
-document.querySelectorAll('.qol-state-feature').forEach((column) => {
+for (const column of document.querySelectorAll('.qol-state-feature')) {
     column.addEventListener('dragenter', dragEnter);
     column.addEventListener('dragleave', dragLeave);
-});*/
+};*/
 //#endregion
 
 //#region Update Origins
@@ -98,9 +99,9 @@ export async function updateFeatureOriginInputs(featureID, isEnable, isWhitelist
 }
 
 export function updateInputColor(feature, isEnable, isWhitelist) {
-    Array.from(
-        document.getElementsByClassName(`qol_origins_filter_feature_input_${feature}`)
-    ).forEach((el) => {
+    for (const el of document.getElementsByClassName(
+        `qol_origins_filter_feature_input_${feature}`
+    )) {
         el.classList.remove('qol_f_whitelist');
         el.classList.remove('qol_f_blacklist');
         el.classList.remove('qol_f_disable');
@@ -113,6 +114,6 @@ export function updateInputColor(feature, isEnable, isWhitelist) {
             }
         }
         el.classList.add(toAdd);
-    });
+    }
 }
 //#endregion

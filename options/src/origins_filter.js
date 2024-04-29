@@ -92,12 +92,7 @@ function updateColSpan(count) {
 
 async function renderOriginsObject(origins) {
     const originsArray = [];
-    Object.keys(origins).forEach((o) =>
-        originsArray.push({
-            ...origins[o],
-            origin: o,
-        })
-    );
+    for (const o of Object.keys(origins)) originsArray.push({ ...origins[o], origin: o });
 
     await StorageSync.set({ originsFilterOrigins: origins });
 
@@ -113,31 +108,31 @@ async function renderOriginsObject(origins) {
             `<th class="qol-origins_filter-origin-input" title="Odoo Database Origin">Origins</th>`
         )
     );
-    features.forEach((f) => tableHeader.appendChild(generateFeatureOptionTableHeadItem(f)));
+    for (const f of features) tableHeader.appendChild(generateFeatureOptionTableHeadItem(f));
     tableHeader.appendChild(stringToHTML(`<th class="py-0 qol-valign-middle action-head"></th>`));
 
     const container = document.getElementById('qol_origins_filter_table_body');
     container.innerHTML = '';
-    originsArray.forEach((o, id) =>
+    console.log(originsArray);
+    for (const [id, o] of originsArray.entries())
         container.appendChild(
             renderOrigin(
                 id,
                 o,
                 features.map((f) => f.id)
             )
-        )
-    );
+        );
     renderOriginsFilterError();
     updateColSpan(features.length);
 
     const defaultConfiguration = await getCurrentSettings(features);
 
-    features.forEach((feature) => {
+    for (const feature of features) {
         const enabled = defaultConfiguration[`${feature.id}Enabled`];
         const isWhitelist = defaultConfiguration[`${feature.id}WhitelistMode`];
 
         updateFeatureOriginInputs(feature.id, enabled, isWhitelist);
-    });
+    }
 }
 
 function setupOriginFeature(container, idx, feature, origin) {
@@ -152,13 +147,13 @@ async function updateOriginFeature(idx, origin, feature, checked) {
     const rowInputs = Array.from(
         document.getElementsByClassName(`qol_origins_filter_feature_input_${idx} `)
     ).filter((i) => !i.className.includes('feature-disabled'));
-    rowInputs.forEach((i) => (i.disabled = true));
+    for (const i of rowInputs) i.disabled = true;
 
     const origins = await readOriginsFilterOrigins();
     origins[origin][feature] = checked;
     await StorageSync.set({ originsFilterOrigins: origins });
 
-    rowInputs.forEach((i) => (i.disabled = false));
+    for (const i of rowInputs) i.disabled = false;
 }
 
 function renderOrigin(idx, origin, features) {
@@ -209,7 +204,7 @@ function renderOrigin(idx, origin, features) {
 
     const originElement = originTemplate.content.firstChild;
 
-    features.forEach((f) => setupOriginFeature(originElement, idx, f, origin.origin));
+    for (const f of features) setupOriginFeature(originElement, idx, f, origin.origin);
 
     const deleteButton = originElement.getElementsByClassName(
         `qol_origins_filter_origin_delete_${idx}`

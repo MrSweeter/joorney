@@ -34,20 +34,20 @@ async function renderFeatures() {
     const tabFeatureContainer = document.getElementById('tabFeaturesContainer');
     tabFeatureContainer.innerHTML = '';
 
-    features.forEach((f) => {
+    for (const f of features) {
         toggleContainer.appendChild(generateFeaturePopupToggleItem(f));
         if (!f.limited) tabFeatureContainer.appendChild(generateTabFeaturePopupToggleItem(f));
-    });
+    }
 }
 
 async function loadFeatures() {
     const { features, currentSettings } = await getFeaturesAndCurrentSettings();
 
-    features.forEach((feature) => {
+    for (const feature of features) {
         importFeaturePopupFile(feature.id).then((featureModule) => {
             featureModule.load(currentSettings);
         });
-    });
+    }
 
     reloadTabFeatures();
 }

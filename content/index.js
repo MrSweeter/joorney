@@ -47,11 +47,11 @@ async function loadFeatures(url, filter) {
     });
     const features = response.features;
 
-    features.filter(filter).forEach((feature) => {
+    for (const feature of features.filter(filter)) {
         importFeatureContentFile(feature.id).then((featureModule) => {
             featureModule.load(url);
         });
-    });
+    }
 }
 
 //#endregion
@@ -69,7 +69,7 @@ export async function updateTabState(url) {
 }
 
 function updateLandingPage() {
-    Array.from(document.getElementsByClassName('odoo-qol-landing-extension-state')).forEach(
-        (el) => (el.style.color = '#fca311')
-    );
+    for (const el of document.getElementsByClassName('odoo-qol-landing-extension-state')) {
+        el.style.color = '#fca311';
+    }
 }

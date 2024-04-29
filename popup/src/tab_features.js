@@ -57,22 +57,22 @@ function setupFeatures(features, configuration, currentTabID, origins, originStr
     const tabConfiguration = origins[originString];
     features = features.filter((f) => !f.limited).map((f) => f.id);
 
-    features.forEach((f) => {
+    for (const f of features) {
         const featureInput = document.getElementById(`${f}FeatureTab`);
         featureInput.checked = tabConfiguration[f];
         featureInput.disabled = !configuration[`${f}Enabled`];
         featureInput.classList.remove('blacklist');
         featureInput.classList.remove('whitelist');
         featureInput.classList.add(configuration[`${f}WhitelistMode`] ? 'whitelist' : 'blacklist');
-    });
+    }
 
     const saveButton = document.getElementById('saveButton');
     saveButton.onclick = async () => {
         const originConfiguration = {};
-        features.forEach((f) => {
+        for (const f of features) {
             const featureInput = document.getElementById(`${f}FeatureTab`);
             originConfiguration[f] = featureInput.checked;
-        });
+        }
         origins[originString] = originConfiguration;
         await StorageSync.set({ originsFilterOrigins: origins });
         Tabs.reload(currentTabID);

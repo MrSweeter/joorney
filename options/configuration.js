@@ -20,13 +20,9 @@ async function onDOMContentLoaded() {
 }
 
 async function loadFeatures(features) {
-    features
-        .filter((f) => f.customization.option)
-        .forEach((feature) => {
-            importFeatureCustomizationFile(feature.id).then((featureModule) =>
-                featureModule.load()
-            );
-        });
+    for (const feature of features.filter((f) => f.customization.option)) {
+        importFeatureCustomizationFile(feature.id).then((featureModule) => featureModule.load());
+    }
 }
 
 document.removeEventListener('DOMContentLoaded', onDOMContentLoaded);

@@ -26,7 +26,7 @@ export default class SaveKnowledgeContentFeature extends ContentFeature {
         // HTML not used in this method but need to return false is HTML is not "good"
         // TODO[IMP] Improve of find an way to be sure than HTML is loaded
         const saveExist = document.getElementsByName('qol_action_save_article');
-        saveExist.forEach((e) => (e.disabled = true));
+        for (const e of saveExist) e.disabled = true;
 
         // body_0 is the ID use when you can edit an article body
         const exist = document.getElementById('body_0') ?? document.getElementById('body');
@@ -48,10 +48,10 @@ export default class SaveKnowledgeContentFeature extends ContentFeature {
         const exist = document.getElementsByName('qol_action_save_article');
         // Avoid adding button if already added
         if (exist.length > 0) {
-            exist.forEach((e) => {
+            for (const e of exist) {
                 this.updateSaveEvent(e, article);
                 e.disabled = false;
-            });
+            }
             return;
         }
 

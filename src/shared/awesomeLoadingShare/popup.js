@@ -19,13 +19,13 @@ export default class AwesomeLoadingSharePopupFeature extends PopupCustomizableFe
         awesomeLoadingImagePreview.src = selected;
         awesomeLoadingImagePreview.style.opacity = enabled ? 1 : 0.25;
 
-        images.forEach((img) => {
+        for (const img of images) {
             const opt = document.createElement('option');
             opt.innerHTML = img;
             opt.value = img;
             opt.selected = selected === img;
             awesomeLoadingImage.appendChild(opt);
-        });
+        }
 
         if (images.length <= 0) {
             awesomeLoadingImage.disabled = true;

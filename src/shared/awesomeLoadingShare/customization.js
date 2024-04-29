@@ -92,7 +92,7 @@ export default class AwesomeLoadingShareOptionCustomizationFeature extends Optio
 
         const container = document.getElementById('qol_awe_loading_images_table_body');
         container.innerHTML = '';
-        images.forEach((image, id) => container.appendChild(this.renderImage(id, image)));
+        for (const [id, image] of images) container.appendChild(this.renderImage(id, image));
         this.renderAwesomeLoadingError();
     }
 

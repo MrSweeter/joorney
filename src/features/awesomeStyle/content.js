@@ -44,7 +44,7 @@ export default class AwesomeStyleContentFeature extends ContentFeature {
 
             if (typeof css === 'boolean') {
                 const exist = Array.from(document.getElementsByName(awesomeStyleID));
-                if (exist) exist.forEach((e) => e.remove());
+                if (exist) for (const e of exist) e.remove();
                 if (css && isOdooWebsite(msg.url)) this.appendAwesomeStyle(msg.url);
             }
         });

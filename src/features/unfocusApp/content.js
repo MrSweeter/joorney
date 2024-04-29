@@ -84,7 +84,7 @@ export default class UnfocusApp extends ContentFeature {
         const defaultApps = [];
         const unfocusApps = [];
 
-        apps.forEach((app) => {
+        for (const app of apps) {
             app.onclick = (e) => this.onStarClick(app, e);
 
             if (reorderEnabled) {
@@ -107,9 +107,9 @@ export default class UnfocusApp extends ContentFeature {
                     }
                 }
             }
-        });
-        defaultApps.forEach((p) => container.appendChild(p));
-        unfocusApps.forEach((p) => container.appendChild(p));
+        }
+        for (const p of defaultApps) container.appendChild(p);
+        for (const p of unfocusApps) container.appendChild(p);
     }
 
     async onStarClick(element, event) {
@@ -196,11 +196,11 @@ export default class UnfocusApp extends ContentFeature {
             if (typeof checked === 'boolean') {
                 const exist = Array.from(document.getElementsByClassName(STAR_ELEMENT_CLASS));
                 if (exist)
-                    exist.forEach((e) => {
+                    for (const e of exist) {
                         e.parentElement.parentElement.style.opacity = FOCUS_OPACITY;
                         e.parentElement.parentElement.parentElement.style.backgroundImage = null;
                         e.remove();
-                    });
+                    }
                 if (checked && isOdooWebsite(msg.url)) this.appendUnfocusApp(msg.url);
             }
         });

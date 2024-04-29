@@ -39,7 +39,7 @@ export default class UnfocusAppOptionCustomizationFeature extends OptionCustomiz
 
         const container = document.getElementById('qol_unfocus_app_table_body');
         container.innerHTML = '';
-        Object.keys(origins).forEach((o, id) => {
+        for (const [id, o] of Object.keys(origins)) {
             const values = Object.values(origins[o]);
             container.appendChild(
                 this.renderOrigin(
@@ -49,7 +49,7 @@ export default class UnfocusAppOptionCustomizationFeature extends OptionCustomiz
                     values.filter((v) => v === true || v === 0).length
                 )
             );
-        });
+        }
     }
 
     renderOrigin(idx, origin, superfocusCount, unfocusCount) {

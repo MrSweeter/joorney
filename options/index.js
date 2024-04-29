@@ -32,9 +32,9 @@ async function onDOMContentLoaded() {
 }
 
 async function loadFeatures(features) {
-    features.forEach((feature) => {
+    for (const feature of features) {
         importFeatureOptionFile(feature.id).then((featureModule) => featureModule.load());
-    });
+    }
 }
 
 document.removeEventListener('DOMContentLoaded', onDOMContentLoaded);

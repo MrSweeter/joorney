@@ -29,9 +29,9 @@ function loadFeature(featureName) {
     document.getElementById('feature-title').innerHTML = feature.title;
     document.getElementById('feature-description').innerHTML = feature.description;
 
-    Array.from(document.getElementsByClassName('feature-amico')).forEach((el) => {
+    for (const el of document.getElementsByClassName('feature-amico')) {
         el.src = `./assets/storyset-amico/${feature.amico}.svg`;
-    });
+    }
 
     const currentFeatureIndex = featuresName.indexOf(featureName);
     document.getElementById('qol-previous-feature').onclick = (e) =>

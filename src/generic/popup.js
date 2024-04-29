@@ -48,9 +48,9 @@ export default class PopupFeature {
         Tabs.query({ url: '*://*/*' }).then(async (tabs) => {
             const message = this.getNotificationMessage(data);
             if (Object.keys(message).length) {
-                tabs.forEach((t) => {
+                for (const t of tabs) {
                     Tabs.sendMessage(t.id, { ...message, url: t.url });
-                });
+                }
             }
         });
     }
@@ -59,9 +59,11 @@ export default class PopupFeature {
         reloadTabFeatures();
         // No query for the chrome-extension scheme
         Tabs.query({}).then((tabs) => {
-            tabs.filter((t) => t.url.startsWith(`chrome-extension://${Runtime.id}`)).forEach(
-                (tab) => Tabs.sendMessage(tab.id, message)
-            );
+            for (const tab of tabs.filter((t) =>
+                t.url.startsWith(`chrome-extension://${Runtime.id}`)
+            )) {
+                Tabs.sendMessage(tab.id, message);
+            }
         });
     }
 }

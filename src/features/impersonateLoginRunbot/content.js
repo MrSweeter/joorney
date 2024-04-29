@@ -83,9 +83,9 @@ export default class ImpersonateLoginRunbotContentFeature extends LimitedRunbotC
 
         const loginsElement = loginsTemplate.content.firstChild;
 
-        Array.from(loginsElement.getElementsByTagName('button')).forEach((btn) => {
+        for (const btn of loginsElement.getElementsByTagName('button')) {
             btn.onclick = (e) => this.loginWithForm(e.target.dataset.login);
-        });
+        }
 
         fieldLogin.before(loginsElement);
     }
@@ -99,9 +99,9 @@ export default class ImpersonateLoginRunbotContentFeature extends LimitedRunbotC
     }
 
     updateSelectorLink() {
-        Array.from(document.querySelectorAll('div.list-group-item a')).forEach((e) => {
+        for (const e of document.querySelectorAll('div.list-group-item a')) {
             e.href = this.getAdminDebugURL(e.href);
-        });
+        }
     }
 
     loginWithAdmin(url) {

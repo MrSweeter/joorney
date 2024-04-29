@@ -15,11 +15,11 @@ export default class AdminDebugLoginRunbotContentFeature extends LimitedRunbotCo
     async appendRunbotAdminDebugLogin() {
         const btnIdentifier = 'qol-admin-debug-login-runbot';
 
-        Array.from(document.getElementsByClassName(btnIdentifier)).forEach((e) => e.remove());
+        for (const e of document.getElementsByClassName(btnIdentifier)) e.remove();
 
         const signIn = Array.from(document.getElementsByClassName('fa fa-sign-in btn btn-info'));
 
-        signIn.forEach((btn) => {
+        for (const btn of signIn) {
             if (!btn.href.includes('static/build')) {
                 const newBtn = document.createElement('a');
                 newBtn.className = `${btnIdentifier} fa fa-rocket btn btn-warning`;
@@ -30,7 +30,7 @@ export default class AdminDebugLoginRunbotContentFeature extends LimitedRunbotCo
                 newBtn.title = 'Open runbot as admin and with debug mode enabled';
                 btn.after(newBtn);
             }
-        });
+        }
     }
 
     async openEventRunbot(e, newTab) {

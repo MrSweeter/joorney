@@ -21,11 +21,11 @@ export default class AssignMeTaskContentFeature extends ProjectTaskShareContentF
         const exist = document.getElementsByName('qol_action_assign_to_me');
         // Avoid adding button if already added, remove it if user already assigned
         if (exist.length > 0) {
-            if (userAssigned) exist.forEach((e) => e.remove());
-            exist.forEach((e) => {
+            if (userAssigned) for (const e of exist) e.remove();
+            for (const e of exist) {
                 this.updateAssignMeTaskEvent(e, task, currentUser);
                 e.disabled = false;
-            });
+            }
             return;
         }
 
@@ -36,7 +36,7 @@ export default class AssignMeTaskContentFeature extends ProjectTaskShareContentF
 
     preloadFeature() {
         const exist = document.getElementsByName('qol_action_assign_to_me');
-        exist.forEach((e) => (e.disabled = true));
+        for (const e of exist) e.disabled = true;
     }
 
     async addUserToTaskAssignees(task, userID, callback) {

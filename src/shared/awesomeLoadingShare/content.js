@@ -38,7 +38,7 @@ export default class AwesomeLoadingShareContentFeature extends ContentFeature {
             const img = this.getImageFromNavigationMessage(msg);
             if (img || img === false) {
                 const exist = Array.from(document.getElementsByName(this.loadingID));
-                if (exist) exist.forEach((e) => e.remove());
+                for (const e of exist) e.remove();
                 if (img && isOdooWebsite(msg.url)) this.appendLoadingToDOM(img);
             }
         });

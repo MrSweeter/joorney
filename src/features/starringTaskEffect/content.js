@@ -22,19 +22,19 @@ export default class StarringTaskEffectContentFeature extends ProjectTaskShareCo
 
     async loadFeatureWithTask(task) {
         const starred = parseInt(`${task.priority}`) === 1;
-        Array.from(document.getElementsByClassName('o_priority_star')).forEach((el) => {
+        for (const el of document.getElementsByClassName('o_priority_star')) {
             // No way to detect starred state dynamically due to hover effect on the star
             if (starred) el.addEventListener('click', this.addStarsGenerator);
             else el.addEventListener('click', this.generateStars);
-        });
+        }
     }
 
     preloadFeature() {
         const exist = Array.from(document.getElementsByClassName('o_priority_star'));
-        exist.forEach((el) => {
+        for (const el of exist) {
             el.removeEventListener('click', this.addStarsGenerator);
             el.removeEventListener('click', this.generateStars);
-        });
+        }
     }
 
     async shoot(x, y) {

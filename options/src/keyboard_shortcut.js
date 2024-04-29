@@ -4,7 +4,7 @@ export async function load() {
     const tableBody = document.getElementById('shortcut_table_body');
     const rowTemplate = document.createElement('template');
     const commands = await Commands.getAll();
-    commands.forEach((command) => {
+    for (const command of commands) {
         rowTemplate.innerHTML = `
 			<tr>
 				<td>${command.shortcut}</td>
@@ -12,7 +12,7 @@ export async function load() {
 			</tr>
 		`.trim();
         tableBody.appendChild(rowTemplate.content.firstChild);
-    });
+    }
 
     const openExtensionShortcut = document.getElementById('open-extension-shortcut');
     openExtensionShortcut.onclick = () => {
