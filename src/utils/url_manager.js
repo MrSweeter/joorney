@@ -1,4 +1,5 @@
-import { getActionWindowWithState, parseURL, sanitizedHrefToUrl } from './url_parser.js';
+import { parseURL, sanitizedHrefToUrl } from './url_parser.js';
+import { getActionWindowWithState } from '../api/odoo.js';
 
 export function sanitizeURL(url) {
     return sanitizedHrefToUrl(url);
@@ -16,16 +17,6 @@ export async function isModelCreateView_fromURL(url, model) {
 //#endregion
 
 //#region Get model ID
-// TODO[ROLLUP] MOVE IF USED ONCE
-export async function getProjectTaskID_fromURL(url) {
-    return (await getModelAndID_fromURL(url, 'project.task'))?.resId;
-}
-
-// TODO[ROLLUP] MOVE IF USED ONCE
-export async function getKnowledgeArticleID_fromURL(url) {
-    return (await getModelAndID_fromURL(url, 'knowledge.article'))?.resId;
-}
-
 export async function getModelAndID_fromURL(url, modelArg = undefined) {
     const state = await parseURL(url);
 

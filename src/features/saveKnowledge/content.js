@@ -1,6 +1,7 @@
+import { writeRecord } from '../../api/odoo.js';
 import ContentFeature from '../../generic/content.js';
 import { isStillSamePage } from '../../utils/authorize.js';
-import { getKnowledgeArticleID_fromURL } from '../../utils/url_manager.js';
+import { getModelAndID_fromURL } from '../../utils/url_manager.js';
 import configuration from './configuration.js';
 
 export default class SaveKnowledgeContentFeature extends ContentFeature {
@@ -39,7 +40,7 @@ export default class SaveKnowledgeContentFeature extends ContentFeature {
     }
 
     async getArticle(url) {
-        const articleID = await getKnowledgeArticleID_fromURL(url);
+        const articleID = await this.getKnowledgeArticleID_fromURL(url);
         if (!articleID) return undefined;
         return { id: articleID };
     }
@@ -59,7 +60,7 @@ export default class SaveKnowledgeContentFeature extends ContentFeature {
     }
 
     async saveArticle(article) {
-        const articleID = await getKnowledgeArticleID_fromURL(window.location.href);
+        const articleID = await this.getKnowledgeArticleID_fromURL(window.location.href);
         if (article.id != articleID)
             throw new Error(
                 `Button context is not the same as the url context: '${article.id}' vs '${articleID}'`
@@ -68,32 +69,9 @@ export default class SaveKnowledgeContentFeature extends ContentFeature {
         const body = document.getElementById('body_0').innerHTML;
         if (!body) return;
 
-        const writeResponse = await fetch(
-            new Request(`/web/dataset/call_kw/knowledge.article/write`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    id: 1,
-                    method: 'call',
-                    jsonrpc: '2.0',
-                    params: {
-                        args: [[parseInt(articleID)], { body: body }],
-                        kwargs: { context: {} },
-                        model: 'knowledge.article',
-                        method: 'write',
-                    },
-                }),
-            })
-        );
-
-        const data = await writeResponse.json();
-
-        if (data?.error || data?.result === false)
-            throw new Error(data.error, "'Save article' call failed !");
-
-        if (data?.result === true) return;
-
-        throw new Error(data?.result || "Unknown response from 'Save article' call...");
+        await writeRecord('knowledge.article', parseInt(articleID), {
+            body: body,
+        });
     }
 
     updateSaveEvent(btn, article) {
@@ -123,5 +101,9 @@ export default class SaveKnowledgeContentFeature extends ContentFeature {
         if (statusBarButtons) {
             statusBarButtons.prepend(saveButton);
         }
+    }
+
+    async getKnowledgeArticleID_fromURL(url) {
+        return (await getModelAndID_fromURL(url, 'knowledge.article'))?.resId;
     }
 }

@@ -1,5 +1,5 @@
+import { writeRecord } from '../../api/odoo.js';
 import ProjectTaskShareContentFeature from '../../shared/projectTaskShare/content.js';
-import { getProjectTaskID_fromURL } from '../../utils/url_manager.js';
 import { getCurrentUserID } from '../../utils/user.js';
 import configuration from './configuration.js';
 
@@ -40,7 +40,7 @@ export default class AssignMeTaskContentFeature extends ProjectTaskShareContentF
     }
 
     async addUserToTaskAssignees(task, userID, callback) {
-        const taskID = await getProjectTaskID_fromURL(window.location.href);
+        const taskID = await this.getProjectTaskID_fromURL(window.location.href);
         if (task.id != taskID)
             throw new Error(
                 `Button context is not the same as the url context: '${task.id}' vs '${taskID}'`
@@ -48,44 +48,19 @@ export default class AssignMeTaskContentFeature extends ProjectTaskShareContentF
 
         const newUsers = task.user_ids.concat(userID);
 
-        const writeResponse = await fetch(
-            new Request(`/web/dataset/call_kw/project.task/write`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    id: 1,
-                    method: 'call',
-                    jsonrpc: '2.0',
-                    params: {
-                        args: [task.id, { user_ids: newUsers }],
-                        kwargs: { context: {} },
-                        model: 'project.task',
-                        method: 'write',
-                    },
-                }),
-            })
-        );
-
-        const data = await writeResponse.json();
-
-        if (data?.error || data?.result === false) {
-            // TODO[IMP] Display error to user
-            throw new Error(data.error?.data?.message, "'Assign to me' call failed !");
-        }
-        if (data?.result === true) {
+        const response = await writeRecord('project.task', task.id, { user_ids: newUsers });
+        if (response) {
             switch (callback) {
                 case ASSIGN_TYPE.RELOAD: {
                     window.location.reload();
-                    return;
+                    break;
                 }
                 case ASSIGN_TYPE.REDIRECT: {
                     window.open(window.location.href);
-                    return;
+                    break;
                 }
             }
-            return;
         }
-        throw new Error(data?.result || "Unknown response from 'Assign to me' call...");
     }
 
     appendAssignMeTaskButtonToDom(task, currentUser) {

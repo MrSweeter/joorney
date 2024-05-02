@@ -2,6 +2,7 @@ import ContentFeature from '../../generic/content.js';
 import { getActionWindow_fromURL, getModelAndID_fromURL } from '../../utils/url_manager.js';
 import { isStillSamePage } from '../../utils/authorize.js';
 import configuration from './configuration.js';
+import { getMetadata } from '../../api/odoo.js';
 
 export default class TooltipMetadataContentFeature extends ContentFeature {
     constructor() {
@@ -34,37 +35,8 @@ export default class TooltipMetadataContentFeature extends ContentFeature {
 
     async loadRecordMetadata(model_id) {
         const { resId, model } = model_id;
-        const metadata = await this.getMetadata(model, resId);
+        const metadata = await getMetadata(model, resId);
         this.appendRecordMetadataTooltip(metadata);
-    }
-
-    async getMetadata(model, ids) {
-        ids = Array.isArray(ids) ? ids : [ids];
-        const metadataResponse = await fetch(
-            new Request(`/web/dataset/call_kw/${model}/get_metadata`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    jsonrpc: '2.0',
-                    method: 'call',
-                    params: {
-                        args: [ids],
-                        kwargs: {},
-                        model: model,
-                        method: 'get_metadata',
-                    },
-                }),
-            })
-        );
-
-        const metadataData = await metadataResponse.json();
-
-        if (metadataData.result?.length === 0) return undefined;
-        if (metadataData.result === undefined) return undefined;
-
-        return ids.length === 1 && metadataData.result?.length === 1
-            ? metadataData.result[0]
-            : metadataData.result;
     }
 
     appendActionWindowTooltip(actionWindow) {

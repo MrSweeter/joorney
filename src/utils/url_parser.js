@@ -1,5 +1,8 @@
 // https://github.com/odoo/odoo/blob/master/addons/web/static/src/core/browser/router.js#L173
 
+import { getActionWindowWithState } from '../api/odoo.js';
+import { isNumeric } from './util.js';
+
 const defaultState = {
     resId: undefined,
     view_type: undefined,
@@ -125,59 +128,4 @@ export function sanitizedHrefToUrl(href) {
     const url = new URL(href.replace(/#/g, href.includes('?') ? '&' : '?'));
     return url;
 }
-
-function isNumeric(value) {
-    return Boolean(value?.match(/^\d+$/));
-}
-//#endregion
-
-//#region Window Action
-export async function getActionWindowWithState(action, fields) {
-    // TODO[ROLLUP] CACHE SYSTEM TO AVOID SPAMMING REQUEST
-    if (isNumeric(`${action}`)) {
-        return getActionWindowWithID(action, fields);
-    } else {
-        return getActionWindowWithPath(action, fields);
-    }
-}
-async function getActionWindowWithPath(path, fields) {
-    if (!path) return undefined;
-    return await getActionWindow([['path', '=', path]], fields);
-}
-async function getActionWindowWithID(id, fields) {
-    if (!id) return undefined;
-    return await getActionWindow([['id', '=', id]], fields);
-}
-
-async function getActionWindow(domain, fields) {
-    const response = await fetch(
-        new Request(`/web/dataset/call_kw/ir.actions.act_window/search_read`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                jsonrpc: '2.0',
-                method: 'call',
-                params: {
-                    args: [],
-                    kwargs: {
-                        context: { active_test: false },
-                        fields: fields,
-                        domain: domain,
-                        limit: 1,
-                    },
-                    model: 'ir.actions.act_window',
-                    method: 'search_read',
-                },
-            }),
-        })
-    );
-
-    const data = await response.json();
-
-    if (data.result?.length === 0) return undefined;
-    if (data.result === undefined) return undefined;
-
-    return data.result[0];
-}
-
 //#endregion

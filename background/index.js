@@ -1,9 +1,11 @@
-import { Runtime, StorageSync, Tabs, WebNavigation } from '../src/utils/browser.js';
+import { ContextMenus, Runtime, StorageSync, Tabs, WebNavigation } from '../src/utils/browser.js';
 
 import { checkVersion } from './src/check_version.js';
 import { checkCommandShortcuts, handleCommands } from './src/keyboard_shortcut.js';
 import { loadFeaturesConfiguration, getCurrentSettings, features } from '../configuration.js';
 import { handleMessage } from './src/messaging.js';
+import { CLEAR_CACHE_HOST_ID_MENU, createClearHostCache } from './src/contextMenu.js';
+import { clearHost } from '../src/api/cache.js';
 
 // On page # path change, pre 17.2
 WebNavigation.onReferenceFragmentUpdated.addListener((e) => {
@@ -25,6 +27,7 @@ Runtime.onInstalled.addListener(async (details) => {
         await StorageSync.set(settingsOrDefault);
         checkCommandShortcuts();
     }
+    createClearHostCache();
 });
 
 // Triggers when a message is received (from the content script)
@@ -38,6 +41,12 @@ Runtime.onMessage.addListener((message, sender, sendResponse) => {
             sendResponse();
         });
     return true;
+});
+
+ContextMenus.onClicked.addListener((info, tab) => {
+    if (info.menuItemId === CLEAR_CACHE_HOST_ID_MENU) {
+        clearHost(new URL(tab.url).host);
+    }
 });
 
 checkVersion();
