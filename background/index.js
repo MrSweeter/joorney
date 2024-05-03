@@ -10,14 +10,14 @@ import { clearHost } from '../src/api/cache.js';
 // On page # path change, pre 17.2
 WebNavigation.onReferenceFragmentUpdated.addListener((e) => {
     if (e.url.startsWith('http')) {
-        Tabs.sendMessage(e.tabId, { url: e.url, navigator: true });
+        Tabs.sendMessage(e.tabId, { url: e.url, navigator: true, fragment: true });
     }
 });
 
 // 17.2
 WebNavigation.onHistoryStateUpdated.addListener((e) => {
     if (e.url.startsWith('http')) {
-        Tabs.sendMessage(e.tabId, { url: e.url, navigator: true });
+        Tabs.sendMessage(e.tabId, { url: e.url, navigator: true, history: true });
     }
 });
 

@@ -13,6 +13,9 @@ import { getOdooVersion } from '../src/utils/version.js';
 
 //#region Navigation Event
 
+let loaded = false;
+addNavigationListener();
+
 window.addEventListener('load', async () => {
     const script = document.createElement('script');
     script.src = Runtime.getURL('inject.js');
@@ -33,7 +36,7 @@ async function onVersionLoaded() {
     const versionInfo = await getOdooVersion();
     await loadFeatures(url, versionInfo, (f) => f.trigger.load);
 
-    addNavigationListener();
+    loaded = true;
 }
 
 function addNavigationListener() {
@@ -43,6 +46,7 @@ function addNavigationListener() {
     // });
     // Chrome & Firefox compatible
     Runtime.onMessage.addListener(async (msg) => {
+        if (!loaded) return;
         if (!msg.navigator) return;
         const url = msg.url;
         const versionInfo = await getOdooVersion();
