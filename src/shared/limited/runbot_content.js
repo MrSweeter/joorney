@@ -1,14 +1,14 @@
 import { Runtime } from '../../utils/browser.js';
 import ContentFeature from '../../generic/content.js';
 import { isAuthorizedLimitedFeature } from '../../utils/authorize.js';
-import { sanitizeURL } from '../../utils/url_manager.js';
+import { sanitizeURL } from '../../utils/util.js';
 import { MESSAGE_ACTION } from '../../utils/messaging.js';
 import { RunbotException } from '../../utils/error.js';
 
 export const openVersionKey = 'qol-runbot';
 
 export default class LimitedRunbotContentFeature extends ContentFeature {
-    async load(urlArg) {
+    async load(urlArg, versionInfo) {
         const url = sanitizeURL(urlArg);
 
         if (!(await isAuthorizedLimitedFeature(this.configuration.id, url))) return;

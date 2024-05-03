@@ -1,6 +1,6 @@
-import { sanitizeURL } from '../utils/url_manager.js';
 import { isAuthorizedFeature, isSupportedFeature } from '../utils/authorize.js';
 import { NotYetImplemented } from '../utils/error.js';
+import { sanitizeURL } from '../utils/util.js';
 
 export default class ContentFeature {
     constructor(configuration) {
@@ -8,8 +8,8 @@ export default class ContentFeature {
         this.defaultSettings = configuration.defaultSettings;
     }
 
-    async load(urlArg) {
-        if (!isSupportedFeature(this.configuration.supported_version)) return;
+    async load(urlArg, versionInfo) {
+        if (!isSupportedFeature(versionInfo, this.configuration.supported_version)) return;
 
         const url = sanitizeURL(urlArg);
 

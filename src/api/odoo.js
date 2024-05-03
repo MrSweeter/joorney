@@ -1,4 +1,4 @@
-import { isNumeric } from '../utils/util.js';
+import { isNumeric, sanitizeURL } from '../utils/util.js';
 import { readCacheCall, saveCacheCall } from './cache.js';
 
 //#region Window Action
@@ -23,6 +23,34 @@ async function getActionWindow(domain, fields) {
     return response;
 }
 //#endregion
+
+export async function getVersionInfo(urlArg) {
+    const url = sanitizeURL(urlArg);
+    if (url.protocol !== 'https:') return undefined;
+
+    function parseInfo(info) {
+        const version = info.server_version_info
+            .slice(0, 2)
+            .join('.')
+            .replace(/^saas~/, '');
+        return version;
+    }
+
+    const cacheResult = await readCacheCall('getVersionInfo', url.origin);
+    if (cacheResult) return parseInfo(cacheResult);
+
+    const response = await fetch(`${url.origin}/web/webclient/version_info`, {
+        headers: { 'Content-Type': 'application/json' },
+        body: '{}',
+        method: 'POST',
+    });
+
+    if (response.status !== 200) return undefined;
+
+    const { result } = await response.json();
+    saveCacheCall(15, 'getVersionInfo', result, url.origin);
+    return parseInfo(result);
+}
 
 export async function getDataset(model, domain, fields, limit, cachingTime = 1) {
     if (cachingTime > 0) {

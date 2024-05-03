@@ -24,14 +24,14 @@ window.addEventListener('load', async () => {
 });
 
 async function onVersionLoaded() {
-    console.log('on Version loaded');
     const url = window.location.href;
     if (!canContinue(url)) return;
 
     updateLandingPage();
 
     await updateTabState(url);
-    await loadFeatures(url, (f) => f.trigger.load);
+    const versionInfo = await getOdooVersion();
+    await loadFeatures(url, versionInfo, (f) => f.trigger.load);
 
     addNavigationListener();
 }
@@ -45,7 +45,8 @@ function addNavigationListener() {
     Runtime.onMessage.addListener(async (msg) => {
         if (!msg.navigator) return;
         const url = msg.url;
-        loadFeatures(url, (f) => f.trigger.navigate);
+        const versionInfo = await getOdooVersion();
+        loadFeatures(url, versionInfo, (f) => f.trigger.navigate);
     });
 }
 
@@ -57,7 +58,7 @@ function canContinue(url) {
     return isOdoo && isSupportedOdoo(version);
 }
 
-async function loadFeatures(url, filter) {
+async function loadFeatures(url, versionInfo, filter) {
     const response = await Runtime.sendMessage({
         action: MESSAGE_ACTION.GET_FEATURES_LIST,
     });
@@ -65,7 +66,7 @@ async function loadFeatures(url, filter) {
 
     for (const feature of features.filter(filter)) {
         importFeatureContentFile(feature.id).then((featureModule) => {
-            featureModule.load(url);
+            featureModule.load(url, versionInfo);
         });
     }
 }

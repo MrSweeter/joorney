@@ -1,7 +1,6 @@
 import { baseSettings } from '../../configuration.js';
 import { StorageLocal, StorageSync } from './browser.js';
-import { sanitizeURL } from './url_manager.js';
-import { getOdooVersion } from './version.js';
+import { sanitizeURL } from './util.js';
 
 export const regexSchemePrefix = 'regex://';
 
@@ -21,8 +20,8 @@ export async function isStillSameWebsite(timeout, url) {
     return window.location.origin === url.origin;
 }
 
-export async function isSupportedFeature(featureSupportedVersion) {
-    const { isOdoo, version } = getOdooVersion();
+export async function isSupportedFeature(versionInfo, featureSupportedVersion) {
+    const { isOdoo, version } = versionInfo;
     if (!isOdoo) return false;
     if (!version) return false;
     if (featureSupportedVersion.length === 0) return true;

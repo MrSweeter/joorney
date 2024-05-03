@@ -1,4 +1,4 @@
-import { sanitizeURL } from '../utils/url_manager.js';
+import { sanitizeURL } from '../utils/util.js';
 import { isAuthorizedFeature } from '../utils/authorize.js';
 
 export default class BackgroundFeature {

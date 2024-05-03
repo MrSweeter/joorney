@@ -1,7 +1,7 @@
 import LimitedRunbotContentFeature from '../../shared/limited/runbot_content.js';
 import { StorageSync } from '../../utils/browser.js';
 import { isAuthorizedLimitedFeature } from '../../utils/authorize.js';
-import { sanitizeURL } from '../../utils/url_manager.js';
+import { sanitizeURL } from '../../utils/util.js';
 import adminDebugLoginConfiguration from '../adminDebugLoginRunbot/configuration.js';
 import autoOpenRunbotConfiguration from '../autoOpenRunbot/configuration.js';
 import configuration from './configuration.js';
@@ -11,7 +11,7 @@ export default class ImpersonateLoginRunbotContentFeature extends LimitedRunbotC
         super(configuration);
     }
 
-    async load(urlArg) {
+    async load(urlArg, versionInfo) {
         const url = sanitizeURL(urlArg);
 
         if (!(await isAuthorizedLimitedFeature(this.configuration.id, url))) return;

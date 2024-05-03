@@ -1,7 +1,7 @@
 // https://github.com/odoo/odoo/blob/master/addons/web/static/src/core/browser/router.js#L173
 
 import { getActionWindowWithState } from '../api/odoo.js';
-import { isNumeric } from './util.js';
+import { isNumeric, sanitizeURL } from './util.js';
 
 const defaultState = {
     resId: undefined,
@@ -20,7 +20,7 @@ const defaultState = {
 export async function parseURL(url, actionWindowFields = ['res_model']) {
     url = typeof url === 'object' ? url : new URL(url);
 
-    const sanitizedURL = sanitizedHrefToUrl(url.href);
+    const sanitizedURL = sanitizeURL(url.href);
 
     const { pathname, searchParams } = sanitizedURL;
 
@@ -121,11 +121,3 @@ function parseURL_V2(pathname) {
 
     return lastAction;
 }
-
-//#region Utils
-export function sanitizedHrefToUrl(href) {
-    href = typeof href === 'object' ? href.href : href;
-    const url = new URL(href.replace(/#/g, href.includes('?') ? '&' : '?'));
-    return url;
-}
-//#endregion

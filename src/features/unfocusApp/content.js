@@ -1,5 +1,5 @@
 import ContentFeature from '../../generic/content.js';
-import { sanitizeURL } from '../../utils/url_manager.js';
+import { sanitizeURL } from '../../utils/util.js';
 import { isOdooWebsite, isStillSameWebsite } from '../../utils/authorize.js';
 import { Runtime, StorageSync } from '../../utils/browser.js';
 import { getThemeModeCookie } from '../../utils/cookies.js';

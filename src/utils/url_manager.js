@@ -1,9 +1,5 @@
-import { parseURL, sanitizedHrefToUrl } from './url_parser.js';
+import { parseURL } from './url_parser.js';
 import { getActionWindowWithState } from '../api/odoo.js';
-
-export function sanitizeURL(url) {
-    return sanitizedHrefToUrl(url);
-}
 
 //#region Check model new form
 export async function isServerActionCreateView_fromURL(url) {
