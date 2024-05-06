@@ -1,5 +1,7 @@
 import { isAuthorizedFeature } from '../utils/authorize.js';
+import { Runtime } from '../utils/browser.js';
 import { sanitizeURL } from '../utils/util.js';
+import ContentFeature from './content.js';
 
 export default class BackgroundFeature {
     constructor(configuration) {
@@ -20,4 +22,14 @@ export default class BackgroundFeature {
     }
 
     async loadFeature(_tab, _url) {}
+}
+
+export class BackgroundTriggerContentFeature extends ContentFeature {
+    async loadFeature(_url) {
+        Runtime.sendMessage({ feature: this.configuration.id });
+    }
+
+    handleUpdateMessage() {
+        /* No message */
+    }
 }

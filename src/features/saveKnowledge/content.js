@@ -19,10 +19,6 @@ export default class SaveKnowledgeContentFeature extends ContentFeature {
     }
 
     async getKnowledgeArticle(url) {
-        // TODO[VERSION] Odoo 17 introduce the save manually in article
-        const odooSaveExist = document.getElementsByClassName('o_form_button_save');
-        if (odooSaveExist.length > 0) return undefined;
-
         // Need to wait full page loaded to have access to the HTML
         // HTML not used in this method but need to return false if HTML is not "good"
         // TODO[IMP] Improve of find an way to be sure than HTML is loaded

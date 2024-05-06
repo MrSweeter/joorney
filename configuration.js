@@ -27,6 +27,10 @@ export function importFeatureContentFile(featureID) {
     return import(`./src/features/${featureID}/content.js`).then((f) => new f.default());
 }
 
+export function importFeatureBackgroundTriggerFile(featureID) {
+    return import(`./src/features/${featureID}/background_trigger.js`).then((f) => new f.default());
+}
+
 export function importFeatureBackgroundFile(featureID) {
     return import(`./src/features/${featureID}/background.js`).then((f) => new f.default());
 }
@@ -36,11 +40,15 @@ export function importFeatureOptionFile(featureID) {
 }
 
 export function importFeatureCustomizationFile(featureID) {
-    return import(`./src/features/${featureID}/customization.js`).then((f) => new f.default());
+    return import(`./src/features/${featureID}/option_customization.js`).then((f) => new f.default());
 }
 
 export function importFeaturePopupFile(featureID) {
     return import(`./src/features/${featureID}/popup.js`).then((f) => new f.default());
+}
+
+export function importMigratorFile(fromVersion) {
+    return import(`./options/migration/migrator/migrate_${fromVersion}.js`).then((f) => f.default);
 }
 
 export async function getFeaturesAndCurrentSettings() {

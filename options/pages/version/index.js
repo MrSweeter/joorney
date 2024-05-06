@@ -58,7 +58,7 @@ function loadSupportedOdoo(currentSettings) {
 function loadSupportedFeature(features) {
     const versionContainer = document.getElementById('qol-feature-versions');
 
-    for (const feature of features) {
+    for (const feature of features.filter((f) => !f.limited)) {
         const versionElement = stringToHTML(`
 			<div class="w-100 my-1">
 				<span><strong>${feature.display_name ?? feature.id}:</strong></span>

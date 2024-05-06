@@ -5,3 +5,5 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementsByTagName('body')[0].classList.add('odoo-style');
     }
 });
+// TODO[DOCS/DYNAMIC HTML]
+// TODO[DOCS/ONE PAGE WEBSITE]

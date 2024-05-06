@@ -7,7 +7,8 @@ export default {
         '<i class="fa-solid fa-moon double-fa"></i>',
     ],
     trigger: {
-        load: true,
+        background: true,
+        load: false,
         navigate: false,
     },
     customization: {

@@ -2,6 +2,7 @@
 !.gitignore
 !.gitignore
 !.eslintrc.json
+.eslintignore
 !.prettierrc.json
 !.pre-commit-config.yaml
 

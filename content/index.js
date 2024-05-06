@@ -1,4 +1,4 @@
-import { importFeatureContentFile } from '../configuration.js';
+import { importFeatureBackgroundTriggerFile, importFeatureContentFile } from '../configuration.js';
 import { Runtime } from '../src/utils/browser.js';
 import { MESSAGE_ACTION } from '../src/utils/messaging.js';
 import { getOdooVersion } from '../src/utils/version.js';
@@ -33,7 +33,8 @@ async function onVersionLoaded() {
 
     await updateTabState(url);
     const versionInfo = await getOdooVersion();
-    await loadFeatures(url, versionInfo, (f) => f.trigger.load);
+    await loadFeatures(url, versionInfo, 'background');
+    await loadFeatures(url, versionInfo, 'load');
 
     loaded = true;
 }
@@ -49,7 +50,7 @@ function addNavigationListener() {
         if (!msg.navigator) return;
         const url = msg.url;
         const versionInfo = await getOdooVersion();
-        loadFeatures(url, versionInfo, (f) => f.trigger.navigate);
+        loadFeatures(url, versionInfo, 'navigate');
     });
 }
 
@@ -61,16 +62,20 @@ function canContinue(url) {
     // return isOdoo && isSupportedOdoo(version);
 }
 
-async function loadFeatures(url, versionInfo, filter) {
+async function loadFeatures(url, versionInfo, trigger) {
     const response = await Runtime.sendMessage({
         action: MESSAGE_ACTION.GET_FEATURES_LIST,
     });
-    const features = response.features;
+    const features = response.features.filter((f) => f.trigger[trigger]);
 
-    for (const feature of features.filter(filter)) {
-        importFeatureContentFile(feature.id).then((featureModule) => {
-            featureModule.load(url, versionInfo);
-        });
+    let importer = async (feature) => await importFeatureContentFile(feature.id);
+    if (trigger === 'background') {
+        importer = async (feature) => await importFeatureBackgroundTriggerFile(feature.id);
+    }
+
+    for (const feature of features) {
+        const loader = await importer(feature);
+        loader.load(url, versionInfo);
     }
 }
 

@@ -1,4 +1,4 @@
-import { baseSettings } from '../../configuration.js';
+import { baseSettings, importMigratorFile } from '../../configuration.js';
 
 function setupInput() {
     const importInput = document.getElementById('qol_import_storage_sync_file');
@@ -25,7 +25,6 @@ function analyzeConfiguration(jsonFile) {
     }
     if (migrateVersion === currentVersion) {
         document.getElementById('error_message').innerHTML = 'Configuration cannot be migrate to the same version';
-
         if (!resume.classList.contains('d-none')) resume.classList.add('d-none');
         return;
     }
@@ -47,7 +46,7 @@ function analyzeConfiguration(jsonFile) {
         const button = e.currentTarget;
         button.disabled = true;
         button.innerHTML = '<i class="fa-solid fa-spin fa-spinner"></i>';
-        const finalConfiguration = runMigration(jsonFile, migrateVersion, currentVersion);
+        const finalConfiguration = await runMigration(jsonFile, migrateVersion, currentVersion);
         button.innerHTML = 'Download new configuration';
         runButton.onclick = () => {
             downloadNewMigration(finalConfiguration);
@@ -58,38 +57,17 @@ function analyzeConfiguration(jsonFile) {
     resume.classList.remove('d-none');
 }
 
-function runMigration(configuration, fromVersion, toVersion) {
+async function runMigration(configuration, fromVersion, toVersion) {
     let data = configuration;
     for (let i = fromVersion; i < toVersion; i++) {
-        data = runOneMigration(data, i);
+        data = await runOneMigration(data, i);
     }
     return data;
 }
 
-function runOneMigration(configuration, version) {
-    const result = configuration;
-
-    switch (version) {
-        case 0: {
-            const isWhitelist = !result.originsFilterIsBlacklist;
-
-            result.assignMeTaskWhitelistMode = isWhitelist;
-            result.saveKnowledgeWhitelistMode = isWhitelist;
-            result.awesomeLoadingLargeWhitelistMode = isWhitelist;
-            result.awesomeLoadingSmallWhitelistMode = isWhitelist;
-            result.awesomeStyleWhitelistMode = isWhitelist;
-            result.starringTaskEffectWhitelistMode = isWhitelist;
-            result.unfocusAppWhitelistMode = isWhitelist;
-            result.themeSwitchWhitelistMode = isWhitelist;
-
-            result.originsFilterIsBlacklist = undefined;
-
-            result.configurationVersion = 1;
-            break;
-        }
-    }
-
-    return result;
+async function runOneMigration(configuration, version) {
+    const migrator = await importMigratorFile(version);
+    return migrator(configuration);
 }
 
 function downloadNewMigration(data) {
