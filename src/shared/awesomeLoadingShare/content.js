@@ -1,6 +1,6 @@
 import ContentFeature from '../../generic/content.js';
-import { Runtime } from '../../utils/browser.js';
 import { isOdooWebsite } from '../../utils/authorize.js';
+import { Runtime } from '../../utils/browser.js';
 
 export default class AwesomeLoadingShareContentFeature extends ContentFeature {
     constructor(configuration) {

@@ -1,7 +1,7 @@
-import { load as loadOriginsFilter } from '../../src/origins_filter.js';
-import { load as loadKeyboardShortcut } from '../../src/keyboard_shortcut.js';
-import { setupDragAndDrop } from '../../src/features.js';
 import { importFeatureOptionFile } from '../../../configuration.js';
+import { setupDragAndDrop } from '../../src/features.js';
+import { load as loadKeyboardShortcut } from '../../src/keyboard_shortcut.js';
+import { load as loadOriginsFilter } from '../../src/origins_filter.js';
 
 export async function loadPage(features, currentSettings) {
     loadKeyboardShortcut();

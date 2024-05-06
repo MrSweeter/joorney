@@ -1,9 +1,9 @@
-import { Runtime } from '../../utils/browser.js';
 import ContentFeature from '../../generic/content.js';
 import { isAuthorizedLimitedFeature } from '../../utils/authorize.js';
-import { sanitizeURL } from '../../utils/util.js';
-import { MESSAGE_ACTION } from '../../utils/messaging.js';
+import { Runtime } from '../../utils/browser.js';
 import { RunbotException } from '../../utils/error.js';
+import { MESSAGE_ACTION } from '../../utils/messaging.js';
+import { sanitizeURL } from '../../utils/util.js';
 
 export const openVersionKey = 'qol-runbot';
 

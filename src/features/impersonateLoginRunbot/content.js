@@ -1,6 +1,6 @@
 import LimitedRunbotContentFeature from '../../shared/limited/runbot_content.js';
-import { StorageSync } from '../../utils/browser.js';
 import { isAuthorizedLimitedFeature } from '../../utils/authorize.js';
+import { StorageSync } from '../../utils/browser.js';
 import { sanitizeURL } from '../../utils/util.js';
 import adminDebugLoginConfiguration from '../adminDebugLoginRunbot/configuration.js';
 import autoOpenRunbotConfiguration from '../autoOpenRunbot/configuration.js';
@@ -33,8 +33,7 @@ export default class ImpersonateLoginRunbotContentFeature extends LimitedRunbotC
         const relatedConfiguration = await StorageSync.get({
             [adminDebugLoginConfiguration.id]:
                 adminDebugLoginConfiguration.defaultSettings.adminDebugLoginRunbotEnabled,
-            [autoOpenRunbotConfiguration.id]:
-                autoOpenRunbotConfiguration.defaultSettings.autoOpenRunbotEnabled,
+            [autoOpenRunbotConfiguration.id]: autoOpenRunbotConfiguration.defaultSettings.autoOpenRunbotEnabled,
         });
 
         let autologin = false;
@@ -50,8 +49,7 @@ export default class ImpersonateLoginRunbotContentFeature extends LimitedRunbotC
         const relatedConfiguration = await StorageSync.get({
             [adminDebugLoginConfiguration.id]:
                 adminDebugLoginConfiguration.defaultSettings.adminDebugLoginRunbotEnabled,
-            [autoOpenRunbotConfiguration.id]:
-                autoOpenRunbotConfiguration.defaultSettings.autoOpenRunbotEnabled,
+            [autoOpenRunbotConfiguration.id]: autoOpenRunbotConfiguration.defaultSettings.autoOpenRunbotEnabled,
         });
 
         if (
@@ -113,12 +111,9 @@ export default class ImpersonateLoginRunbotContentFeature extends LimitedRunbotC
         if (!this.getOpenData(url)) return false;
 
         // 16+
-        let front_to_back_button = document.getElementsByClassName(
-            'o_frontend_to_backend_apps_btn'
-        );
+        let front_to_back_button = document.getElementsByClassName('o_frontend_to_backend_apps_btn');
         // < 16
-        if (front_to_back_button.length == 0)
-            front_to_back_button = document.getElementsByClassName('o_menu_toggle');
+        if (front_to_back_button.length === 0) front_to_back_button = document.getElementsByClassName('o_menu_toggle');
         if (front_to_back_button.length > 0) {
             window.location.href = `${window.location.origin}/web`;
             return true;

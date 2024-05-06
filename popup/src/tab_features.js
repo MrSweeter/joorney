@@ -19,10 +19,11 @@ async function loadTabFeatures(features, configuration) {
     setupSaveOriginButton(features, configuration, currentTab.id, origins, originString);
 }
 
-function setupSaveOriginButton(features, configuration, currentTabID, origins, originString) {
+function setupSaveOriginButton(features, configuration, currentTabID, origins, originStringArg) {
     const saveOriginButton = document.getElementById('saveOriginButton');
     const tabFeaturesList = document.getElementById('tabFeaturesList');
 
+    let originString = originStringArg;
     const originKeys = Object.keys(origins);
     if (!originKeys.includes(originString)) {
         const regexes = originKeys
@@ -53,9 +54,9 @@ function setupSaveOriginButton(features, configuration, currentTabID, origins, o
     saveOriginButton.disabled = false;
 }
 
-function setupFeatures(features, configuration, currentTabID, origins, originString) {
+function setupFeatures(featuresArg, configuration, currentTabID, origins, originString) {
     const tabConfiguration = origins[originString];
-    features = features.filter((f) => !f.limited).map((f) => f.id);
+    const features = featuresArg.filter((f) => !f.limited).map((f) => f.id);
 
     for (const f of features) {
         const featureInput = document.getElementById(`${f}FeatureTab`);

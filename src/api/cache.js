@@ -5,7 +5,7 @@ function getHost() {
 }
 
 export async function clearHost(host) {
-    let { qolLocalCacheCall } = await StorageLocal.get('qolLocalCacheCall');
+    const { qolLocalCacheCall } = await StorageLocal.get('qolLocalCacheCall');
     if (!qolLocalCacheCall) return;
     delete qolLocalCacheCall[host];
     await StorageLocal.set({ qolLocalCacheCall });

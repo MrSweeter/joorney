@@ -5,9 +5,8 @@ import { readCacheCall, saveCacheCall } from './cache.js';
 export async function getActionWindowWithState(action, fields) {
     if (isNumeric(`${action}`)) {
         return getActionWindowWithID(action, fields);
-    } else {
-        return getActionWindowWithPath(action, fields);
     }
+    return getActionWindowWithPath(action, fields);
 }
 async function getActionWindowWithPath(path, fields) {
     if (!path) return undefined;
@@ -85,14 +84,13 @@ export async function getDataset(model, domain, fields, limit, cachingTime = 1) 
     if (data.result?.length === 0) return undefined;
     if (data.result === undefined) return undefined;
 
-    if (cachingTime > 0)
-        saveCacheCall(cachingTime, 'getDataset', data.result, model, domain, fields, limit);
+    if (cachingTime > 0) saveCacheCall(cachingTime, 'getDataset', data.result, model, domain, fields, limit);
 
     return limit === 1 ? data.result[0] : data.result;
 }
 
-export async function getMetadata(model, ids) {
-    ids = Array.isArray(ids) ? ids : [ids];
+export async function getMetadata(model, idsArg) {
+    const ids = Array.isArray(idsArg) ? idsArg : [idsArg];
     const metadataResponse = await fetch(
         new Request(`/web/dataset/call_kw/${model}/get_metadata`, {
             method: 'POST',

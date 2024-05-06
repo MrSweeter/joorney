@@ -40,7 +40,7 @@ export default class AwesomeLoadingSharePopupFeature extends PopupCustomizableFe
         }
 
         awesomeLoadingImage.onchange = async (e) => {
-            let value = e.target.value;
+            const value = e.target.value;
             await this.saveSelectedImage(value);
             const preview = document.getElementById(this.previewHtmlID);
             preview.src = value;

@@ -4,9 +4,9 @@ import { Action, Commands, StorageLocal, Tabs } from '../../src/utils/browser.js
 // installation the user may have intentionally unassigned commands.
 export function checkCommandShortcuts() {
     Commands.getAll((commands) => {
-        let missingShortcuts = [];
+        const missingShortcuts = [];
 
-        for (let { name, shortcut } of commands) {
+        for (const { name, shortcut } of commands) {
             if (shortcut === '') {
                 missingShortcuts.push(name);
             }

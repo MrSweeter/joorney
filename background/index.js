@@ -1,11 +1,11 @@
 import { ContextMenus, Runtime, StorageSync, Tabs, WebNavigation } from '../src/utils/browser.js';
 
-import { checkVersion } from './src/check_version.js';
-import { checkCommandShortcuts, handleCommands } from './src/keyboard_shortcut.js';
-import { loadFeaturesConfiguration, getCurrentSettings, features } from '../configuration.js';
-import { handleMessage } from './src/messaging.js';
-import { CLEAR_CACHE_HOST_ID_MENU, createClearHostCache } from './src/contextMenu.js';
+import { features, getCurrentSettings, loadFeaturesConfiguration } from '../configuration.js';
 import { clearHost } from '../src/api/cache.js';
+import { checkVersion } from './src/check_version.js';
+import { CLEAR_CACHE_HOST_ID_MENU, createClearHostCache } from './src/contextMenu.js';
+import { checkCommandShortcuts, handleCommands } from './src/keyboard_shortcut.js';
+import { handleMessage } from './src/messaging.js';
 
 // On page # path change, pre 17.2
 WebNavigation.onReferenceFragmentUpdated.addListener((e) => {

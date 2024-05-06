@@ -1,5 +1,5 @@
 import { reloadTabFeatures } from '../../popup/src/tab_features.js';
-import { StorageSync, Tabs, Runtime } from '../utils/browser.js';
+import { Runtime, StorageSync, Tabs } from '../utils/browser.js';
 import { featureIDToPascalCase } from '../utils/features.js';
 
 export default class PopupFeature {
@@ -59,9 +59,7 @@ export default class PopupFeature {
         reloadTabFeatures();
         // No query for the chrome-extension scheme
         Tabs.query({}).then((tabs) => {
-            for (const tab of tabs.filter((t) =>
-                t.url.startsWith(`chrome-extension://${Runtime.id}`)
-            )) {
+            for (const tab of tabs.filter((t) => t.url.startsWith(`chrome-extension://${Runtime.id}`))) {
                 Tabs.sendMessage(tab.id, message);
             }
         });
@@ -71,15 +69,12 @@ export default class PopupFeature {
 export class PopupCustomizableFeature extends PopupFeature {
     constructor(configuration) {
         super(configuration);
-        if (!configuration.customization.popup)
-            throw new Error(`Invalid state for feature: ${this.configuration.id}`);
+        if (!configuration.customization.popup) throw new Error(`Invalid state for feature: ${this.configuration.id}`);
     }
 
     load(currentSettings) {
         super.load();
-        const container = document.querySelector(
-            `div[data-feature-customization="${this.configuration.id}"]`
-        );
+        const container = document.querySelector(`div[data-feature-customization="${this.configuration.id}"]`);
         if (!container) throw new Error(`Invalid state for feature: ${this.configuration.id}`);
         container.classList.remove('d-none');
         document.getElementById(`qol-popup-feature-${this.configuration.id}-label`).innerHTML =

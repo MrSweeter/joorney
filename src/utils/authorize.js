@@ -72,7 +72,7 @@ export async function isAuthorizedLimitedFeature(featureName, url) {
 }
 
 async function authorizeFeature(featureName, origin) {
-    let { offs } = await StorageLocal.get({ offs: [] });
+    const { offs } = await StorageLocal.get({ offs: [] });
     if (offs.includes(origin)) {
         return false;
     }

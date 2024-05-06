@@ -2,25 +2,21 @@ import { getCurrentSettings } from '../../configuration.js';
 import { StorageSync } from '../../src/utils/browser.js';
 
 export function disableFeatureInput(feature) {
-    const inputs = Array.from(
-        document.getElementsByClassName(`qol_origins_filter_feature_input_${feature}`)
-    );
+    const inputs = Array.from(document.getElementsByClassName(`qol_origins_filter_feature_input_${feature}`));
     for (const i of inputs) {
         i.disabled = true;
-        i.classList.add(`feature-disabled`);
+        i.classList.add('feature-disabled');
     }
 
     document.getElementById(`qol_origins_filter_feature_header_${feature}`).style.opacity = 0.5;
 }
 
 export function enableFeatureInput(feature) {
-    const inputs = Array.from(
-        document.getElementsByClassName(`qol_origins_filter_feature_input_${feature}`)
-    );
+    const inputs = Array.from(document.getElementsByClassName(`qol_origins_filter_feature_input_${feature}`));
 
     for (const i of inputs) {
         i.disabled = false;
-        i.classList.remove(`feature-disabled`);
+        i.classList.remove('feature-disabled');
     }
 
     document.getElementById(`qol_origins_filter_feature_header_${feature}`).style.opacity = 1;
@@ -68,7 +64,7 @@ async function dropElement(e, enable, isWhitelist) {
     if (enable) enableFeatureInput(dataFeature);
     else disableFeatureInput(dataFeature);
     const element = document.getElementById(dataID);
-    if (container.id == element.parentElement.id) return;
+    if (container.id === element.parentElement.id) return;
     container.appendChild(document.getElementById(dataID));
     updateInputColor(dataFeature, enable, isWhitelist);
 }
@@ -99,9 +95,7 @@ export async function updateFeatureOriginInputs(featureID, isEnable, isWhitelist
 }
 
 export function updateInputColor(feature, isEnable, isWhitelist) {
-    for (const el of document.getElementsByClassName(
-        `qol_origins_filter_feature_input_${feature}`
-    )) {
+    for (const el of document.getElementsByClassName(`qol_origins_filter_feature_input_${feature}`)) {
         el.classList.remove('qol_f_whitelist');
         el.classList.remove('qol_f_blacklist');
         el.classList.remove('qol_f_disable');

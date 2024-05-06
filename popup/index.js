@@ -1,8 +1,5 @@
 import { getFeaturesAndCurrentSettings, importFeaturePopupFile } from '../configuration.js';
-import {
-    generateFeaturePopupToggleItem,
-    generateTabFeaturePopupToggleItem,
-} from '../src/html_generator.js';
+import { generateFeaturePopupToggleItem, generateTabFeaturePopupToggleItem } from '../src/html_generator.js';
 import { Runtime, Tabs } from '../src/utils/browser.js';
 import { MESSAGE_ACTION } from '../src/utils/messaging.js';
 import { reloadTabFeatures } from './src/tab_features.js';

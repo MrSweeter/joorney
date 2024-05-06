@@ -1,6 +1,6 @@
+import FeaturesState from './features_state.json';
 import { Runtime, StorageSync } from './src/utils/browser.js';
 import { MESSAGE_ACTION } from './src/utils/messaging.js';
-import FeaturesState from './features_state.json';
 
 export const baseSettings = {
     configurationVersion: 1,
@@ -55,7 +55,7 @@ export async function getFeaturesAndCurrentSettings() {
 
 export async function getCurrentSettings(features) {
     const defaultSettings = features.reduce((acc, obj) => {
-        return { ...acc, ...obj.defaultSettings };
+        return Object.assign(acc, obj.defaultSettings);
     }, {});
 
     const settings = await StorageSync.get({

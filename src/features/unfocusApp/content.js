@@ -1,8 +1,8 @@
 import ContentFeature from '../../generic/content.js';
-import { sanitizeURL } from '../../utils/util.js';
 import { isOdooWebsite, isStillSameWebsite } from '../../utils/authorize.js';
 import { Runtime, StorageSync } from '../../utils/browser.js';
 import { getThemeModeCookie } from '../../utils/cookies.js';
+import { sanitizeURL } from '../../utils/util.js';
 import configuration from './configuration.js';
 
 const UNFOCUS_STATE = Object.freeze({
@@ -59,7 +59,7 @@ export default class UnfocusApp extends ContentFeature {
     }
 
     appendStar(elements, unfocusAppList, configuration) {
-        for (let element of elements) {
+        for (const element of elements) {
             const app = element.getAttribute('data-menu-xmlid');
             let state = unfocusAppList[app];
             if (state === undefined) state = UNFOCUS_STATE.DEFAULT;
@@ -67,7 +67,7 @@ export default class UnfocusApp extends ContentFeature {
             this.updateAppElement(element, state, null, configuration);
 
             const divElement = element.getElementsByClassName('o_caption')[0];
-            for (let star of divElement.getElementsByClassName(STAR_ELEMENT_CLASS)) {
+            for (const star of divElement.getElementsByClassName(STAR_ELEMENT_CLASS)) {
                 star.remove();
             }
 
@@ -121,18 +121,14 @@ export default class UnfocusApp extends ContentFeature {
         this.clickCount += 1;
         const currentClickCount = this.clickCount;
         await new Promise((r) => setTimeout(r, 200));
-        if (this.clickCount != currentClickCount || this.clickCount === 0) return;
+        if (this.clickCount !== currentClickCount || this.clickCount === 0) return;
 
         let origin = window.location.origin;
         const parent = event.target.parentElement.parentElement;
         const app = parent.getAttribute('data-menu-xmlid');
 
-        const {
-            unfocusAppOrigins,
-            unfocusAppShareEnabled,
-            unfocusAppLightImageURL,
-            unfocusAppDarkImageURL,
-        } = await StorageSync.get(this.defaultSettings);
+        const { unfocusAppOrigins, unfocusAppShareEnabled, unfocusAppLightImageURL, unfocusAppDarkImageURL } =
+            await StorageSync.get(this.defaultSettings);
 
         if (unfocusAppShareEnabled) {
             origin = SHARED_ORIGIN;
@@ -150,8 +146,7 @@ export default class UnfocusApp extends ContentFeature {
             currentState === UNFOCUS_STATE.UNFOCUS ||
             (currentState !== newState && currentState > UNFOCUS_STATE.UNFOCUS)
         ) {
-            unfocusAppOrigins[origin][app] =
-                this.clickCount > UNFOCUS_STATE.MAX ? UNFOCUS_STATE.MAX : this.clickCount;
+            unfocusAppOrigins[origin][app] = this.clickCount > UNFOCUS_STATE.MAX ? UNFOCUS_STATE.MAX : this.clickCount;
         } else {
             unfocusAppOrigins[origin][app] = UNFOCUS_STATE.UNFOCUS;
         }
@@ -180,9 +175,7 @@ export default class UnfocusApp extends ContentFeature {
         element.style.opacity = isUnfocus ? UNFOCUS_OPACITY : FOCUS_OPACITY;
 
         const isSuperfocus = state === UNFOCUS_STATE.SUPER;
-        const parent = element.parentElement.classList.contains('o_draggable')
-            ? element.parentElement
-            : element;
+        const parent = element.parentElement.classList.contains('o_draggable') ? element.parentElement : element;
         parent.style.backgroundImage = isSuperfocus ? `url("${superfocusImageURL}")` : null;
         parent.style.backgroundSize = isSuperfocus ? 'contain' : null;
         parent.style.backgroundRepeat = isSuperfocus ? 'no-repeat' : null;

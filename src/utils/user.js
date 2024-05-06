@@ -9,26 +9,16 @@ export async function getCurrentUserID() {
     // pre 17.2
     const search = avatarURL.searchParams;
     if (search.has('id')) {
-        const userID = parseInt(search.get('id'));
-        if (isNaN(userID)) return undefined;
+        const userID = Number.parseInt(search.get('id'));
+        if (Number.isNaN(userID)) return undefined;
         return userID;
     }
     // 17.2
     const partnerIDRegex = /res.partner\/(\d+)\//g;
     const partnerID = partnerIDRegex.exec(avatarURL)[1];
 
-    const response = await getDataset(
-        'res.partner',
-        [['id', '=', partnerID]],
-        ['id', 'user_id', 'user_ids'],
-        1,
-        60
-    );
+    const response = await getDataset('res.partner', [['id', '=', partnerID]], ['id', 'user_id', 'user_ids'], 1, 60);
     const partner = response;
 
-    return partner.user_id
-        ? partner.user_id[0]
-        : partner.user_ids.length > 0
-        ? partner.user_ids[0]
-        : undefined;
+    return partner.user_id ? partner.user_id[0] : partner.user_ids.length > 0 ? partner.user_ids[0] : undefined;
 }

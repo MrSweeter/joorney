@@ -1,5 +1,5 @@
-import { sanitizeURL } from '../utils/util.js';
 import { isAuthorizedFeature } from '../utils/authorize.js';
+import { sanitizeURL } from '../utils/util.js';
 
 export default class BackgroundFeature {
     constructor(configuration) {

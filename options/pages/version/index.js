@@ -62,9 +62,7 @@ function loadSupportedFeature(features) {
         const versionElement = stringToHTML(`
 			<div class="w-100 my-1">
 				<span><strong>${feature.display_name ?? feature.id}:</strong></span>
-				<span>${feature.supported_version
-                    .map((v) => `<span class="badge badge-info">${v}</span>`)
-                    .join(' ')}</span>
+				<span>${feature.supported_version.map((v) => `<span class="badge badge-info">${v}</span>`).join(' ')}</span>
 			</div>
 		`);
         versionContainer.appendChild(versionElement);

@@ -1,5 +1,5 @@
-import { parseURL } from './url_parser.js';
 import { getActionWindowWithState } from '../api/odoo.js';
+import { parseURL } from './url_parser.js';
 
 //#region Check model new form
 export async function isServerActionCreateView_fromURL(url) {
@@ -23,16 +23,7 @@ export async function getModelAndID_fromURL(url, modelArg = undefined) {
 }
 //#endregion
 
-const actionWindowFields = [
-    'id',
-    'name',
-    'xml_id',
-    'domain',
-    'context',
-    'limit',
-    'filter',
-    'res_model',
-];
+const actionWindowFields = ['id', 'name', 'xml_id', 'domain', 'context', 'limit', 'filter', 'res_model'];
 export async function getActionWindow_fromURL(url) {
     const state = await parseURL(url, actionWindowFields);
     if (state.actionWindow) return state.actionWindow;

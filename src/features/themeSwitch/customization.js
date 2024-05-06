@@ -13,8 +13,7 @@ export default class ThemeSwitchOptionCustomizationFeature extends OptionCustomi
 
         const latitudeElement = document.getElementById('qol_theme_switch_latitude');
         latitudeElement.value = configuration.themeSwitchLocationLatitude;
-        latitudeElement.onchange = async (e) =>
-            await StorageSync.set({ themeSwitchLocationLatitude: e.target.value });
+        latitudeElement.onchange = async (e) => await StorageSync.set({ themeSwitchLocationLatitude: e.target.value });
 
         const longitudeElement = document.getElementById('qol_theme_switch_longitude');
         longitudeElement.value = configuration.themeSwitchLocationLongitude;
@@ -26,13 +25,11 @@ export default class ThemeSwitchOptionCustomizationFeature extends OptionCustomi
 
         const darkStartTime = document.getElementById('qol_theme_switch_dark_start');
         darkStartTime.value = configuration.themeSwitchDarkStartTime;
-        darkStartTime.onchange = async (e) =>
-            await StorageSync.set({ themeSwitchDarkStartTime: e.target.value });
+        darkStartTime.onchange = async (e) => await StorageSync.set({ themeSwitchDarkStartTime: e.target.value });
 
         const darkStopTime = document.getElementById('qol_theme_switch_dark_stop');
         darkStopTime.value = configuration.themeSwitchDarkStopTime;
-        darkStopTime.onchange = async (e) =>
-            await StorageSync.set({ themeSwitchDarkStopTime: e.target.value });
+        darkStopTime.onchange = async (e) => await StorageSync.set({ themeSwitchDarkStopTime: e.target.value });
     }
 
     async updateLocation(e) {

@@ -1,5 +1,5 @@
-import { confetti } from '../../utils/particle.js';
 import ProjectTaskShareContentFeature from '../../shared/projectTaskShare/content.js';
+import { confetti } from '../../utils/particle.js';
 import configuration from './configuration.js';
 
 const defaultsStar = {
@@ -21,7 +21,7 @@ export default class StarringTaskEffectContentFeature extends ProjectTaskShareCo
     }
 
     async loadFeatureWithTask(task) {
-        const starred = parseInt(`${task.priority}`) === 1;
+        const starred = Number.parseInt(`${task.priority}`) === 1;
         for (const el of document.getElementsByClassName('o_priority_star')) {
             // No way to detect starred state dynamically due to hover effect on the star
             if (starred) el.addEventListener('click', this.addStarsGenerator);

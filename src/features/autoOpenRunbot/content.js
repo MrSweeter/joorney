@@ -15,7 +15,7 @@ export default class AutoOpenRunbotContentFeature extends LimitedRunbotContentFe
     async loadPath(url, batchOffset = 0) {
         const path = await this.getRunbotPath(url, batchOffset);
         try {
-            await this.openRunbot('https://runbot.odoo.com/' + (path ?? ''), false);
+            await this.openRunbot(`https://runbot.odoo.com/${path ?? ''}`, false);
         } catch (error) {
             if (batchOffset) {
                 console.warn(error);
@@ -29,8 +29,8 @@ export default class AutoOpenRunbotContentFeature extends LimitedRunbotContentFe
         const urlVersion = this.getOpenData(tabURL);
         if (!urlVersion) return;
 
-        let openVersion = parseFloat(urlVersion).toFixed(1);
-        if (isNaN(openVersion)) {
+        let openVersion = Number.parseFloat(urlVersion).toFixed(1);
+        if (Number.isNaN(openVersion)) {
             openVersion = urlVersion;
         }
 
@@ -40,7 +40,7 @@ export default class AutoOpenRunbotContentFeature extends LimitedRunbotContentFe
         for (let i = 0; i < rows.length; i++) {
             const row = rows[i];
             const version = row.querySelector('div.one_line a b').textContent.replace('saas-', '');
-            if (version != openVersion) continue;
+            if (version !== openVersion) continue;
 
             const batches = row.querySelectorAll('div.batch_slots');
 
@@ -56,14 +56,12 @@ export default class AutoOpenRunbotContentFeature extends LimitedRunbotContentFe
 
                     if (!type.startsWith('enterprise')) continue;
 
-                    const signInButtons = group.getElementsByClassName(
-                        'fa fa-sign-in btn btn-info'
-                    );
+                    const signInButtons = group.getElementsByClassName('fa fa-sign-in btn btn-info');
                     const spinGearIcons = group.getElementsByClassName('fa-cog fa-spin');
                     const refreshingIcons = group.querySelector('span i.fa-refresh');
 
                     // SIGN IN exist and runbot not in a refresh state
-                    if (signInButtons.length > 0 && spinGearIcons.length == 0 && !refreshingIcons) {
+                    if (signInButtons.length > 0 && spinGearIcons.length === 0 && !refreshingIcons) {
                         return signInButtons.item(0).getAttribute('href');
                     }
                 }

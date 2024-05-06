@@ -57,9 +57,9 @@ function addNavigationListener() {
 function canContinue(url) {
     if (!url || !url.startsWith('http')) return false;
     return true;
-    // Limited feature like runbot, can work without version check
-    const { isOdoo, version } = getOdooVersion();
-    return isOdoo && isSupportedOdoo(version);
+    // TODO[VERSION] Limited feature like runbot, can work without version check
+    // const { isOdoo, version } = getOdooVersion();
+    // return isOdoo && isSupportedOdoo(version);
 }
 
 async function loadFeatures(url, versionInfo, filter) {

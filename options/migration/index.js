@@ -19,14 +19,12 @@ function analyzeConfiguration(jsonFile) {
     const resume = document.getElementById('migration_resume');
 
     if (migrateVersion > currentVersion) {
-        document.getElementById('error_message').innerHTML =
-            'Configuration cannot be migrate to a lower version';
+        document.getElementById('error_message').innerHTML = 'Configuration cannot be migrate to a lower version';
         if (!resume.classList.contains('d-none')) resume.classList.add('d-none');
         return;
     }
-    if (migrateVersion == currentVersion) {
-        document.getElementById('error_message').innerHTML =
-            'Configuration cannot be migrate to the same version';
+    if (migrateVersion === currentVersion) {
+        document.getElementById('error_message').innerHTML = 'Configuration cannot be migrate to the same version';
 
         if (!resume.classList.contains('d-none')) resume.classList.add('d-none');
         return;
@@ -84,7 +82,7 @@ function runOneMigration(configuration, version) {
             result.unfocusAppWhitelistMode = isWhitelist;
             result.themeSwitchWhitelistMode = isWhitelist;
 
-            delete result.originsFilterIsBlacklist;
+            result.originsFilterIsBlacklist = undefined;
 
             result.configurationVersion = 1;
             break;
@@ -95,7 +93,7 @@ function runOneMigration(configuration, version) {
 }
 
 function downloadNewMigration(data) {
-    const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(data));
+    const dataStr = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(data))}`;
     const downloadAnchorNode = document.createElement('a');
     downloadAnchorNode.setAttribute('href', dataStr);
     const fileName = `qol_storage_sync_${new Date().toLocaleDateString()}.json`;

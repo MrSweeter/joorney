@@ -1,8 +1,8 @@
-import resolve from '@rollup/plugin-node-resolve';
 import dynamicImportVars from '@rollup/plugin-dynamic-import-vars';
+import json from '@rollup/plugin-json';
+import resolve from '@rollup/plugin-node-resolve';
 import { defineConfig } from 'rollup';
 import copy from 'rollup-plugin-copy';
-import json from '@rollup/plugin-json';
 
 const defaultPlugins = [resolve(), json(), dynamicImportVars({ exclude: 'features_state.json' })];
 function getESMOutput(file) {
@@ -30,7 +30,7 @@ function getOptionPages(dist, pages) {
 }
 
 export default () => {
-    const dist = `dist`;
+    const dist = 'dist';
 
     return defineConfig([
         {
@@ -50,10 +50,7 @@ export default () => {
                 inlineDynamicImports: true,
                 name: 'qol_content',
             },
-            plugins: [
-                ...defaultPlugins,
-                copy({ targets: [{ src: 'content/inject.js', dest: dist }] }),
-            ],
+            plugins: [...defaultPlugins, copy({ targets: [{ src: 'content/inject.js', dest: dist }] })],
         },
         {
             input: 'popup/index.js',

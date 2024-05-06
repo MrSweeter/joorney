@@ -1,7 +1,7 @@
 import { features, importFeatureBackgroundFile } from '../../configuration.js';
+import { MESSAGE_ACTION } from '../../src/utils/messaging.js';
 import { updateTabState } from './keyboard_shortcut.js';
 import { getFinalRunbotURL } from './runbot.js';
-import { MESSAGE_ACTION } from '../../src/utils/messaging.js';
 
 export async function handleMessage(message, sender) {
     if (message.action) return handleAction(message);

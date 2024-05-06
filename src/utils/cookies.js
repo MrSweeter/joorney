@@ -35,21 +35,19 @@ export async function getThemeModeCookie(origin) {
 function getCookiesFromDocument() {
     if (!document) return 'light';
 
-    let decodedCookie = decodeURIComponent(document.cookie);
+    const decodedCookie = decodeURIComponent(document.cookie);
 
-    let cookieName = decodedCookie.includes('configured_color_scheme')
+    const cookieName = decodedCookie.includes('configured_color_scheme')
         ? 'configured_color_scheme'
         : decodedCookie.includes('color_scheme')
-        ? 'color_scheme'
-        : null;
+          ? 'color_scheme'
+          : null;
 
     if (!cookieName) return 'light';
 
-    let cookies = decodedCookie.split(';');
+    const cookies = decodedCookie.split(';');
 
-    const cookie = cookies
-        .find((c) => c.trim().indexOf(cookieName) === 0)
-        .substring(cookieName.length + 2);
+    const cookie = cookies.find((c) => c.trim().indexOf(cookieName) === 0).substring(cookieName.length + 2);
 
     return cookie || 'light';
 }

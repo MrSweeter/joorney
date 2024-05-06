@@ -41,10 +41,8 @@ export default class AssignMeTaskContentFeature extends ProjectTaskShareContentF
 
     async addUserToTaskAssignees(task, userID, callback) {
         const taskID = await this.getProjectTaskID_fromURL(window.location.href);
-        if (task.id != taskID)
-            throw new Error(
-                `Button context is not the same as the url context: '${task.id}' vs '${taskID}'`
-            );
+        if (task.id !== taskID)
+            throw new Error(`Button context is not the same as the url context: '${task.id}' vs '${taskID}'`);
 
         const newUsers = task.user_ids.concat(userID);
 

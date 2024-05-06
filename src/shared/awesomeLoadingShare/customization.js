@@ -3,9 +3,7 @@ import { StorageSync } from '../../utils/browser.js';
 
 export default class AwesomeLoadingShareOptionCustomizationFeature extends OptionCustomizationFeature {
     async load() {
-        const container = document.querySelector(
-            `div[data-feature-customization="awesomeLoading"]`
-        );
+        const container = document.querySelector(`div[data-feature-customization="awesomeLoading"]`);
         if (!container) throw new Error(`Invalid state for feature: ${this.configuration.id}`);
         container.classList.remove('d-none');
 
@@ -13,8 +11,7 @@ export default class AwesomeLoadingShareOptionCustomizationFeature extends Optio
         awesomeLoadingNewImage.onkeydown = this.onKeydownHost;
         awesomeLoadingNewImage.oninput = this.onImageChange;
 
-        document.getElementById('qol_awe_loading_new_image_save').onclick =
-            this.createAwesomeLoadingImage;
+        document.getElementById('qol_awe_loading_new_image_save').onclick = this.createAwesomeLoadingImage;
 
         const configuration = await StorageSync.get(this.configuration.defaultSettings);
 
@@ -86,14 +83,13 @@ export default class AwesomeLoadingShareOptionCustomizationFeature extends Optio
         container.style.display = errorMessage ? 'table-cell' : 'none';
     }
 
-    async renderImagesList(images) {
-        images = Array.from(new Set(images)).sort();
+    async renderImagesList(imagesArg) {
+        const images = Array.from(new Set(imagesArg)).sort();
         await StorageSync.set({ awesomeLoadingImages: images });
 
         const container = document.getElementById('qol_awe_loading_images_table_body');
         container.innerHTML = '';
-        for (const [id, image] of images.entries())
-            container.appendChild(this.renderImage(id, image));
+        for (const [id, image] of images.entries()) container.appendChild(this.renderImage(id, image));
         this.renderAwesomeLoadingError();
     }
 
@@ -125,9 +121,7 @@ export default class AwesomeLoadingShareOptionCustomizationFeature extends Optio
         `.trim();
 
         const imageElement = imageTemplate.content.firstChild;
-        const deleteButton = imageElement.getElementsByClassName(
-            `qol_awe_loading_image_delete_${idx}`
-        )[0];
+        const deleteButton = imageElement.getElementsByClassName(`qol_awe_loading_image_delete_${idx}`)[0];
         deleteButton.onclick = (e) => this.deleteAwesomeLoadingImage(image);
 
         return imageElement;

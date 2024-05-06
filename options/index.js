@@ -1,9 +1,9 @@
-import { loadPage as loadWebsitePage } from './pages/website/index.js';
-import { loadPage as loadConfigurationPage } from './pages/configuration/index.js';
-import { loadPage as loadVersionPage } from './pages/version/index.js';
-import { initImportExport } from './import_export.js';
 import { getFeaturesAndCurrentSettings } from '../configuration.js';
 import { StorageSync } from '../src/utils/browser.js';
+import { initImportExport } from './import_export.js';
+import { loadPage as loadConfigurationPage } from './pages/configuration/index.js';
+import { loadPage as loadVersionPage } from './pages/version/index.js';
+import { loadPage as loadWebsitePage } from './pages/website/index.js';
 
 const MENU_ITEMS_CONTAINER = 'qol-menu-items-container';
 const PAGE_CONTAINER = 'qol-page-container';
@@ -39,7 +39,7 @@ async function onDOMContentLoaded() {
 
     const searchParams = new URLSearchParams(window.location.search);
     let htmlDebug = 1;
-    if (searchParams.get('debug') == 1) {
+    if (searchParams.get('debug') === 1) {
         htmlDebug = 0;
         const debug = document.getElementById('qol-debug-configuration');
         const config = await StorageSync.get(currentSettings);
@@ -56,9 +56,9 @@ document.addEventListener('DOMContentLoaded', onDOMContentLoaded);
 function loadMenus(features, currentSettings) {
     const container = document.getElementById(MENU_ITEMS_CONTAINER);
     container.innerHTML = '';
-    MENUS.forEach((menu) => {
+    for (const menu of MENUS) {
         loadMenu(features, currentSettings, menu, container);
-    });
+    }
 
     const defaultMenu = MENUS.find((m) => m.default);
     document.getElementById(defaultMenu.id).click();
@@ -85,8 +85,8 @@ function loadMenu(features, currentSettings, menu, container) {
 }
 
 function updateActiveMenu(menu) {
-    Array.from(document.getElementsByClassName('qol-menu-item')).forEach((e) => {
+    for (const e of document.getElementsByClassName('qol-menu-item')) {
         if (e.id === menu.id) e.classList.add('active');
         else e.classList.remove('active');
-    });
+    }
 }

@@ -11,7 +11,7 @@ export function reset() {
 }
 
 // Make default export lazy to defer worker creation until called (worker logic removed for now).
-var defaultCanoon;
+let defaultCanoon;
 function getDefaultCanoon() {
     if (!defaultCanoon) {
         defaultCanoon = confettiCannon(null, { resize: true });
@@ -19,35 +19,35 @@ function getDefaultCanoon() {
     return defaultCanoon;
 }
 
-function confettiCannon(canvas, globalOpts) {
-    var isLibCanvas = !canvas;
-    var allowResize = !!prop(globalOpts || {}, 'resize');
-    var globalDisableForReducedMotion = prop(globalOpts, 'disableForReducedMotion', Boolean);
-    var resizer = isLibCanvas ? setCanvasWindowSize : setCanvasRectSize;
-    var initialized = false;
-    var preferLessMotion =
-        typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion)').matches;
-    var animationObj;
+function confettiCannon(canvasArg, globalOpts) {
+    let canvas = canvasArg;
+    const isLibCanvas = !canvas;
+    const allowResize = !!prop(globalOpts || {}, 'resize');
+    const globalDisableForReducedMotion = prop(globalOpts, 'disableForReducedMotion', Boolean);
+    const resizer = isLibCanvas ? setCanvasWindowSize : setCanvasRectSize;
+    let initialized = false;
+    const preferLessMotion = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion)').matches;
+    let animationObj;
 
     function fireLocal(options, size, done) {
-        var particleCount = prop(options, 'particleCount', onlyPositiveInt);
-        var angle = prop(options, 'angle', Number);
-        var spread = prop(options, 'spread', Number);
-        var startVelocity = prop(options, 'startVelocity', Number);
-        var decay = prop(options, 'decay', Number);
-        var gravity = prop(options, 'gravity', Number);
-        var drift = prop(options, 'drift', Number);
-        var colors = prop(options, 'colors', colorsToRgb);
-        var ticks = prop(options, 'ticks', Number);
-        var shapes = prop(options, 'shapes');
-        var scalar = prop(options, 'scalar');
-        var origin = getOrigin(options);
+        const particleCount = prop(options, 'particleCount', onlyPositiveInt);
+        const angle = prop(options, 'angle', Number);
+        const spread = prop(options, 'spread', Number);
+        const startVelocity = prop(options, 'startVelocity', Number);
+        const decay = prop(options, 'decay', Number);
+        const gravity = prop(options, 'gravity', Number);
+        const drift = prop(options, 'drift', Number);
+        const colors = prop(options, 'colors', colorsToRgb);
+        const ticks = prop(options, 'ticks', Number);
+        const shapes = prop(options, 'shapes');
+        const scalar = prop(options, 'scalar');
+        const origin = getOrigin(options);
 
-        var temp = particleCount;
-        var fettis = [];
+        let temp = particleCount;
+        const fettis = [];
 
-        var startX = canvas.width * origin.x;
-        var startY = canvas.height * origin.y;
+        const startX = canvas.width * origin.x;
+        const startY = canvas.height * origin.y;
 
         while (temp--) {
             fettis.push(
@@ -77,9 +77,9 @@ function confettiCannon(canvas, globalOpts) {
 
     const canoon = {};
     canoon.fire = (options) => {
-        var disableForReducedMotion =
+        const disableForReducedMotion =
             globalDisableForReducedMotion || prop(options, 'disableForReducedMotion', Boolean);
-        var zIndex = prop(options, 'zIndex', Number);
+        const zIndex = prop(options, 'zIndex', Number);
 
         if (disableForReducedMotion && preferLessMotion) {
             return promise((resolve) => resolve());
@@ -99,7 +99,7 @@ function confettiCannon(canvas, globalOpts) {
             resizer(canvas);
         }
 
-        var size = {
+        const size = {
             width: canvas.width,
             height: canvas.height,
         };
@@ -137,8 +137,8 @@ function confettiCannon(canvas, globalOpts) {
 }
 
 function randomPhysics(opts) {
-    var radAngle = opts.angle * (Math.PI / 180);
-    var radSpread = opts.spread * (Math.PI / 180);
+    const radAngle = opts.angle * (Math.PI / 180);
+    const radSpread = opts.spread * (Math.PI / 180);
 
     return {
         x: opts.x,
@@ -168,15 +168,16 @@ function randomPhysics(opts) {
 
 //#region Animate
 function requestAnimationFrameQoL() {
-    var TIME = Math.floor(1000 / 60);
-    var frame, cancel;
-    var frames = {};
-    var lastFrameTime = 0;
+    const TIME = Math.floor(1000 / 60);
+    let frame;
+    let cancel;
+    const frames = {};
+    let lastFrameTime = 0;
 
     if (typeof requestAnimationFrame === 'function' && typeof cancelAnimationFrame === 'function') {
         frame = (cb) => {
-            var id = Math.random();
-            var onFrame = (time) => {
+            const id = Math.random();
+            const onFrame = (time) => {
                 if (lastFrameTime === time || lastFrameTime + TIME - 1 < time) {
                     lastFrameTime = time;
                     delete frames[id];
@@ -203,10 +204,10 @@ function requestAnimationFrameQoL() {
 const raf = requestAnimationFrameQoL();
 
 function animate(canvas, fettis, resizer, size, done) {
-    var animatingFettis = fettis.slice();
-    var context = canvas.getContext('2d');
-    var animationFrame;
-    var destroy;
+    let animatingFettis = fettis.slice();
+    const context = canvas.getContext('2d');
+    let animationFrame;
+    let destroy;
 
     function getAnimatePromise() {
         return promise((resolve) => {
@@ -227,9 +228,7 @@ function animate(canvas, fettis, resizer, size, done) {
 
                 context.clearRect(0, 0, size.width, size.height);
 
-                animatingFettis = animatingFettis.filter(function (fetti) {
-                    return updateFetti(context, fetti);
-                });
+                animatingFettis = animatingFettis.filter((fetti) => updateFetti(context, fetti));
 
                 if (animatingFettis.length) {
                     animationFrame = raf.frame(update);
@@ -243,7 +242,7 @@ function animate(canvas, fettis, resizer, size, done) {
         });
     }
 
-    var prom = getAnimatePromise();
+    const prom = getAnimatePromise();
 
     return {
         canvas: canvas,
@@ -294,13 +293,13 @@ function updateFettiCircle(context, fetti, x1, x2, y1, y2) {
 }
 
 function updateFettiStar(context, fetti) {
-    var rot = (Math.PI / 2) * 3;
-    var innerRadius = 4 * fetti.scalar;
-    var outerRadius = 8 * fetti.scalar;
-    var x = fetti.x;
-    var y = fetti.y;
-    var spikes = 5;
-    var step = Math.PI / spikes;
+    let rot = (Math.PI / 2) * 3;
+    const innerRadius = 4 * fetti.scalar;
+    const outerRadius = 8 * fetti.scalar;
+    let x = fetti.x;
+    let y = fetti.y;
+    let spikes = 5;
+    const step = Math.PI / spikes;
 
     while (spikes--) {
         x = fetti.x + Math.cos(rot) * outerRadius;
@@ -327,23 +326,14 @@ function updateFetti(context, fetti) {
     fetti.wobbleX = fetti.x + 10 * fetti.scalar * Math.cos(fetti.wobble);
     fetti.wobbleY = fetti.y + 10 * fetti.scalar * Math.sin(fetti.wobble);
 
-    var progress = fetti.tick++ / fetti.totalTicks;
+    const progress = fetti.tick++ / fetti.totalTicks;
 
-    var x1 = fetti.x + fetti.random * fetti.tiltCos;
-    var y1 = fetti.y + fetti.random * fetti.tiltSin;
-    var x2 = fetti.wobbleX + fetti.random * fetti.tiltCos;
-    var y2 = fetti.wobbleY + fetti.random * fetti.tiltSin;
+    const x1 = fetti.x + fetti.random * fetti.tiltCos;
+    const y1 = fetti.y + fetti.random * fetti.tiltSin;
+    const x2 = fetti.wobbleX + fetti.random * fetti.tiltCos;
+    const y2 = fetti.wobbleY + fetti.random * fetti.tiltSin;
 
-    context.fillStyle =
-        'rgba(' +
-        fetti.color.r +
-        ', ' +
-        fetti.color.g +
-        ', ' +
-        fetti.color.b +
-        ', ' +
-        (1 - progress) +
-        ')';
+    context.fillStyle = `rgba(${fetti.color.r}, ${fetti.color.g}, ${fetti.color.b}, ${1 - progress})`;
     context.beginPath();
 
     if (fetti.shape === 'circle') {
@@ -365,7 +355,7 @@ function updateFetti(context, fetti) {
 //#endregion
 
 //#region Options
-var defaults = {
+const defaults = {
     particleCount: 50,
     angle: 90,
     spread: 45,
@@ -385,7 +375,7 @@ var defaults = {
 };
 
 function getOrigin(options) {
-    var origin = prop(options, 'origin', Object);
+    const origin = prop(options, 'origin', Object);
     origin.x = prop(origin, 'x', Number);
     origin.y = prop(origin, 'y', Number);
 
@@ -407,7 +397,7 @@ function prop(options, name, transform) {
 
 //#region Canvas
 function getCanvas(zIndex) {
-    var canvas = document.createElement('canvas');
+    const canvas = document.createElement('canvas');
 
     canvas.style.position = 'fixed';
     canvas.style.top = '0px';
@@ -419,7 +409,7 @@ function getCanvas(zIndex) {
 }
 
 function setCanvasRectSize(canvas) {
-    var rect = canvas.getBoundingClientRect();
+    const rect = canvas.getBoundingClientRect();
     canvas.width = rect.width;
     canvas.height = rect.height;
 }
@@ -444,7 +434,7 @@ function randomInt(min, max) {
 }
 
 function toDecimal(str) {
-    return parseInt(str, 16);
+    return Number.parseInt(str, 16);
 }
 
 function colorsToRgb(colors) {
@@ -452,7 +442,7 @@ function colorsToRgb(colors) {
 }
 
 function hexToRgb(str) {
-    var val = String(str).replace(/[^0-9a-f]/gi, '');
+    let val = String(str).replace(/[^0-9a-f]/gi, '');
 
     if (val.length < 6) {
         val = val[0] + val[0] + val[1] + val[1] + val[2] + val[2];

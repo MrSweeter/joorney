@@ -14,9 +14,9 @@ document.addEventListener('wheel', (e) => {
 });
 
 document.addEventListener('keydown', (e) => {
-    if (e.code == 'ArrowRight') {
+    if (e.code === 'ArrowRight') {
         document.getElementById('qol-next-feature').click();
-    } else if (e.code == 'ArrowLeft') {
+    } else if (e.code === 'ArrowLeft') {
         document.getElementById('qol-previous-feature').click();
     }
 });
@@ -34,19 +34,19 @@ function loadFeature(featureName) {
     }
 
     const currentFeatureIndex = featuresName.indexOf(featureName);
-    document.getElementById('qol-previous-feature').onclick = (e) =>
-        previousFeature(currentFeatureIndex - 1);
-    document.getElementById('qol-next-feature').onclick = (e) =>
-        nextFeature(currentFeatureIndex + 1);
+    document.getElementById('qol-previous-feature').onclick = (e) => previousFeature(currentFeatureIndex - 1);
+    document.getElementById('qol-next-feature').onclick = (e) => nextFeature(currentFeatureIndex + 1);
 }
 
-function previousFeature(index) {
+function previousFeature(indexArg) {
+    let index = indexArg;
     if (index < 0) index = featuresName.length - 1;
     window.location.hash = featuresName[index];
     loadFeature(featuresName[index]);
 }
 
-function nextFeature(index) {
+function nextFeature(indexArg) {
+    let index = indexArg;
     if (index >= featuresName.length) index = 0;
     window.location.hash = featuresName[index];
     loadFeature(featuresName[index]);

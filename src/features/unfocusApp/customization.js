@@ -81,9 +81,7 @@ export default class UnfocusAppOptionCustomizationFeature extends OptionCustomiz
 
         const originElement = originTemplate.content.firstChild;
 
-        const deleteButton = originElement.getElementsByClassName(
-            `qol_unfocus_app_origin_delete_${idx}`
-        )[0];
+        const deleteButton = originElement.getElementsByClassName(`qol_unfocus_app_origin_delete_${idx}`)[0];
         deleteButton.onclick = (e) => this.deleteUnfocusAppOrigin(origin);
 
         return originElement;
@@ -128,8 +126,7 @@ export default class UnfocusAppOptionCustomizationFeature extends OptionCustomiz
 
             try {
                 imageUrl = new URL(imageUrl);
-                if (!this.isImageUrlPath(imageUrl.pathname))
-                    throw new Error('Invalid image extension in the url path');
+                if (!this.isImageUrlPath(imageUrl.pathname)) throw new Error('Invalid image extension in the url path');
 
                 await StorageSync.set({ [configKey]: `${imageUrl}` });
                 imageInput.value = imageUrl;

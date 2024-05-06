@@ -18,7 +18,7 @@ export default class OptionFeature {
     }
 
     appendHTMLFeatureElement() {
-        let disabledContainer = document.getElementById('qol-disable-feature');
+        const disabledContainer = document.getElementById('qol-disable-feature');
         disabledContainer.appendChild(generateFeatureOptionListItem(this.configuration));
     }
 

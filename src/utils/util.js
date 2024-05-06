@@ -6,8 +6,8 @@ export function sanitizeURL(url) {
     return sanitizedHrefToUrl(url);
 }
 
-function sanitizedHrefToUrl(href) {
-    href = typeof href === 'object' ? href.href : href;
+function sanitizedHrefToUrl(hrefArg) {
+    const href = typeof hrefArg === 'object' ? hrefArg.href : hrefArg;
     const url = new URL(href.replace(/#/g, href.includes('?') ? '&' : '?'));
     return url;
 }

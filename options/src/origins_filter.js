@@ -63,8 +63,7 @@ export async function load() {
     const originsFilterNewOrigin = document.getElementById('qol_origins_filter_new_origin');
     originsFilterNewOrigin.onkeydown = onKeydownHost;
 
-    document.getElementById('qol_origins_filter_new_origin_save').onclick =
-        createOriginsFilterOrigin;
+    document.getElementById('qol_origins_filter_new_origin_save').onclick = createOriginsFilterOrigin;
 
     await restore();
 }
@@ -104,9 +103,7 @@ async function renderOriginsObject(origins) {
     const tableHeader = document.querySelector('#qol_origins_filter_table thead tr');
     tableHeader.innerHTML = '';
     tableHeader.appendChild(
-        stringToHTML(
-            `<th class="qol-origins_filter-origin-input" title="Odoo Database Origin">Origins</th>`
-        )
+        stringToHTML(`<th class="qol-origins_filter-origin-input" title="Odoo Database Origin">Origins</th>`)
     );
     for (const f of features) tableHeader.appendChild(generateFeatureOptionTableHeadItem(f));
     tableHeader.appendChild(stringToHTML(`<th class="py-0 qol-valign-middle action-head"></th>`));
@@ -136,17 +133,15 @@ async function renderOriginsObject(origins) {
 }
 
 function setupOriginFeature(container, idx, feature, origin) {
-    const checkInput = container.getElementsByClassName(
-        `qol_origins_filter_origin_${idx}_${feature}`
-    )[0];
+    const checkInput = container.getElementsByClassName(`qol_origins_filter_origin_${idx}_${feature}`)[0];
     checkInput.onchange = (e) => updateOriginFeature(idx, origin, feature, e.currentTarget.checked);
 }
 
 async function updateOriginFeature(idx, origin, feature, checked) {
     // Disable row on update to avoid spamming/inconsistency if StorageSync.set take time
-    const rowInputs = Array.from(
-        document.getElementsByClassName(`qol_origins_filter_feature_input_${idx} `)
-    ).filter((i) => !i.className.includes('feature-disabled'));
+    const rowInputs = Array.from(document.getElementsByClassName(`qol_origins_filter_feature_input_${idx} `)).filter(
+        (i) => !i.className.includes('feature-disabled')
+    );
     for (const i of rowInputs) i.disabled = true;
 
     const origins = await readOriginsFilterOrigins();
@@ -206,9 +201,7 @@ function renderOrigin(idx, origin, features) {
 
     for (const f of features) setupOriginFeature(originElement, idx, f, origin.origin);
 
-    const deleteButton = originElement.getElementsByClassName(
-        `qol_origins_filter_origin_delete_${idx}`
-    )[0];
+    const deleteButton = originElement.getElementsByClassName(`qol_origins_filter_origin_delete_${idx}`)[0];
     deleteButton.onclick = (e) => deleteOriginsFilterOrigin(origin.origin);
 
     return originElement;

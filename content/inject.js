@@ -1,5 +1,5 @@
 function guessOdooVersion(windowArg) {
-    const result = { isOdoo: windowArg?.odoo != undefined };
+    const result = { isOdoo: windowArg?.odoo !== undefined };
     // "info" is only available when logged in
     if (!windowArg?.odoo?.info) return result;
 
@@ -10,7 +10,7 @@ function guessOdooVersion(windowArg) {
         .slice(0, 2)
         .join('.')
         .replace(/^saas~/, '');
-    return { isOdoo: true, version: parseFloat(version) };
+    return { isOdoo: true, version: Number.parseFloat(version) };
 }
 
 function handleOdooGuess() {

@@ -1,5 +1,5 @@
 import { baseSettings } from '../configuration.js';
-import { Tabs, StorageSync } from '../src/utils/browser.js';
+import { StorageSync, Tabs } from '../src/utils/browser.js';
 
 function importOptions(file) {
     const reader = new FileReader();
@@ -15,7 +15,7 @@ function importOptions(file) {
 async function exportOptions(currentSettings) {
     const items = await StorageSync.get(currentSettings);
 
-    const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(items));
+    const dataStr = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(items))}`;
     const downloadAnchorNode = document.createElement('a');
     downloadAnchorNode.setAttribute('href', dataStr);
     const fileName = `qol_storage_sync_${new Date().toLocaleDateString()}.json`;
@@ -26,7 +26,7 @@ async function exportOptions(currentSettings) {
 }
 
 function confirmImport(file) {
-    if (file && confirm(`Do you confirm file upload?`)) {
+    if (file && confirm('Do you confirm file upload?')) {
         importOptions(file);
     }
 }
