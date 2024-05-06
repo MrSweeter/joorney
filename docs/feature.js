@@ -34,8 +34,8 @@ function loadFeature(featureName) {
     }
 
     const currentFeatureIndex = featuresName.indexOf(featureName);
-    document.getElementById('qol-previous-feature').onclick = (e) => previousFeature(currentFeatureIndex - 1);
-    document.getElementById('qol-next-feature').onclick = (e) => nextFeature(currentFeatureIndex + 1);
+    document.getElementById('qol-previous-feature').onclick = () => previousFeature(currentFeatureIndex - 1);
+    document.getElementById('qol-next-feature').onclick = () => nextFeature(currentFeatureIndex + 1);
 }
 
 function previousFeature(indexArg) {

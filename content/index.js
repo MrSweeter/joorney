@@ -1,5 +1,4 @@
 import { importFeatureContentFile } from '../configuration.js';
-import { isSupportedOdoo } from '../src/utils/authorize.js';
 import { Runtime } from '../src/utils/browser.js';
 import { MESSAGE_ACTION } from '../src/utils/messaging.js';
 import { getOdooVersion } from '../src/utils/version.js';

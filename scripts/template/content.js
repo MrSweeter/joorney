@@ -7,7 +7,7 @@ export default class FEATURE_CLASS_NAME extends ContentFeature {
         super(configuration);
     }
 
-    async loadFeature(url) {
+    async loadFeature(_url) {
         throw NotYetImplemented;
     }
 }

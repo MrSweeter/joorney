@@ -1,6 +1,6 @@
 import { importFeatureCustomizationFile } from '../../../configuration.js';
 
-export async function loadPage(features, currentSettings) {
+export async function loadPage(features, _currentSettings) {
     loadFeatures(features);
 }
 

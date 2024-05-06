@@ -19,7 +19,7 @@ export default class ContentFeature {
         this.handleUpdateMessage();
     }
 
-    async loadFeature(url) {
+    async loadFeature(_url) {
         throw NotYetImplemented;
     }
 

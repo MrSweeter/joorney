@@ -72,7 +72,3 @@ function loadSupportedFeature(features) {
 function sanitizeVersionID(version) {
     return version.replace('.', '_');
 }
-
-function sanitizeVersion(version) {
-    return version.replace('saas-', '');
-}

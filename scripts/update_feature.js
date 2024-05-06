@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import { exit } from 'node:process';
+import { exit, process } from 'node:process';
 import { featureIDToDisplayName, featureIDToPascalCase } from '../src/utils/features.js';
 
 import path from 'node:path';
@@ -15,7 +15,7 @@ if (args.length === 0) {
 }
 
 const featureID = args[0];
-const featureName = featureIDToDisplayName(featureID);
+const _featureName = featureIDToDisplayName(featureID);
 const featurePascalCase = featureIDToPascalCase(featureID);
 
 const featureSrc = `${__dirname}/../src/features/${featureID}`;

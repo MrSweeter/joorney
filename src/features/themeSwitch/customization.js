@@ -32,7 +32,7 @@ export default class ThemeSwitchOptionCustomizationFeature extends OptionCustomi
         darkStopTime.onchange = async (e) => await StorageSync.set({ themeSwitchDarkStopTime: e.target.value });
     }
 
-    async updateLocation(e) {
+    async updateLocation() {
         const coords = await this.getUserLocation();
         document.getElementById('qol_theme_switch_latitude').value = coords.latitude;
         document.getElementById('qol_theme_switch_longitude').value = coords.longitude;

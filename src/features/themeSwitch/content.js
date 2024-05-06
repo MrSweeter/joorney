@@ -7,7 +7,7 @@ export default class ThemeSwitchContentFeature extends ContentFeature {
         super(configuration);
     }
 
-    async loadFeature(url) {
+    async loadFeature(_url) {
         Runtime.sendMessage({ feature: this.configuration.id });
     }
 

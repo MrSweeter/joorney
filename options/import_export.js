@@ -46,7 +46,7 @@ function setupImportExport(currentSettings) {
     };
 
     const exportButton = document.getElementById('qol_export_storage_sync');
-    exportButton.onclick = (e) => exportOptions(currentSettings);
+    exportButton.onclick = () => exportOptions(currentSettings);
 }
 
 async function checkConfigurationVersion(currentSettings) {

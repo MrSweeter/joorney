@@ -1,4 +1,3 @@
-import { getCurrentSettings } from '../../configuration.js';
 import { StorageSync } from '../../src/utils/browser.js';
 
 export function disableFeatureInput(feature) {

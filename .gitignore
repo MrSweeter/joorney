@@ -1,6 +1,9 @@
 .*
 !.gitignore
-!.prettierrc
+!.gitignore
+!.eslintrc.json
+!.prettierrc.json
+!.pre-commit-config.yaml
 
 .DS_Store
 

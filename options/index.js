@@ -70,7 +70,7 @@ function loadMenu(features, currentSettings, menu, container) {
         <li id="${menu.id}" class="qol-menu-item nav-item nav-link">${menu.label}</li>
     `.trim();
 
-    template.content.firstChild.onclick = (e) => {
+    template.content.firstChild.onclick = () => {
         fetch(menu.path)
             .then((response) => response.text())
             .then((data) => {

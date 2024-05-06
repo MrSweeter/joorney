@@ -19,7 +19,7 @@ export default class AwesomeLoadingShareContentFeature extends ContentFeature {
         }
     }
 
-    getInnerStyle(image) {
+    getInnerStyle(_image) {
         return '';
     }
 
@@ -44,7 +44,7 @@ export default class AwesomeLoadingShareContentFeature extends ContentFeature {
         });
     }
 
-    getImageFromNavigationMessage(msg) {
+    getImageFromNavigationMessage(_msg) {
         return '';
     }
 }

@@ -49,7 +49,7 @@ function analyzeConfiguration(jsonFile) {
         button.innerHTML = '<i class="fa-solid fa-spin fa-spinner"></i>';
         const finalConfiguration = runMigration(jsonFile, migrateVersion, currentVersion);
         button.innerHTML = 'Download new configuration';
-        runButton.onclick = (e) => {
+        runButton.onclick = () => {
             downloadNewMigration(finalConfiguration);
         };
         button.disabled = false;

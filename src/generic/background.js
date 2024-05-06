@@ -19,5 +19,5 @@ export default class BackgroundFeature {
         this.loadFeature(tab, url);
     }
 
-    async loadFeature(tab, url) {}
+    async loadFeature(_tab, _url) {}
 }

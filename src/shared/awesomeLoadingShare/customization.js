@@ -122,7 +122,7 @@ export default class AwesomeLoadingShareOptionCustomizationFeature extends Optio
 
         const imageElement = imageTemplate.content.firstChild;
         const deleteButton = imageElement.getElementsByClassName(`qol_awe_loading_image_delete_${idx}`)[0];
-        deleteButton.onclick = (e) => this.deleteAwesomeLoadingImage(image);
+        deleteButton.onclick = () => this.deleteAwesomeLoadingImage(image);
 
         return imageElement;
     }

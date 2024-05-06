@@ -19,7 +19,7 @@
 
 ## Development Guidelines:
 
-You want to add a new feature / improve an existing one ? Go for it !!  
+You want to add a new feature / improve an existing one ? Go for it !!
 Just don't forget the few points below:
 
 -   **Extension contexts**: Each main folders (`background` / `content` / ... ) correspond to a context of the extension.

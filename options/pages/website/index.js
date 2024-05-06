@@ -3,7 +3,7 @@ import { setupDragAndDrop } from '../../src/features.js';
 import { load as loadKeyboardShortcut } from '../../src/keyboard_shortcut.js';
 import { load as loadOriginsFilter } from '../../src/origins_filter.js';
 
-export async function loadPage(features, currentSettings) {
+export async function loadPage(features, _currentSettings) {
     loadKeyboardShortcut();
 
     await loadOriginsFilter();

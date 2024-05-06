@@ -12,7 +12,7 @@ export default class ProjectTaskShareContentFeature extends ContentFeature {
     }
 
     preloadFeature() {}
-    loadFeatureWithTask(task) {}
+    loadFeatureWithTask(_task) {}
 
     async getProjectTask(url) {
         const task = await this.getTask(url);

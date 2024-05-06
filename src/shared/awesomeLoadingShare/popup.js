@@ -1,5 +1,5 @@
 import { PopupCustomizableFeature } from '../../generic/popup.js';
-import { Tabs } from '../../utils/browser.js';
+import { Runtime } from '../../utils/browser.js';
 
 export default class AwesomeLoadingSharePopupFeature extends PopupCustomizableFeature {
     constructor(configuration) {
@@ -50,7 +50,7 @@ export default class AwesomeLoadingSharePopupFeature extends PopupCustomizableFe
         this.notifyTabs({ image: enabled ? selected : false });
     }
 
-    getNotificationMessage(data) {
+    getNotificationMessage(_data) {
         return {};
     }
 
@@ -58,5 +58,5 @@ export default class AwesomeLoadingSharePopupFeature extends PopupCustomizableFe
         return { images: [], selected: '' };
     }
 
-    async saveSelectedImage(value) {}
+    async saveSelectedImage(_value) {}
 }

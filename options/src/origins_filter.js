@@ -3,7 +3,7 @@ import { generateFeatureOptionTableHeadItem, stringToHTML } from '../../src/html
 import { regexSchemePrefix } from '../../src/utils/authorize.js';
 import { Runtime, StorageSync } from '../../src/utils/browser.js';
 import { MESSAGE_ACTION } from '../../src/utils/messaging.js';
-import { updateFeatureOriginInputs, updateInputColor } from './features.js';
+import { updateFeatureOriginInputs } from './features.js';
 
 //#region CRUD
 export async function createOriginsFilterOrigin() {
@@ -202,7 +202,7 @@ function renderOrigin(idx, origin, features) {
     for (const f of features) setupOriginFeature(originElement, idx, f, origin.origin);
 
     const deleteButton = originElement.getElementsByClassName(`qol_origins_filter_origin_delete_${idx}`)[0];
-    deleteButton.onclick = (e) => deleteOriginsFilterOrigin(origin.origin);
+    deleteButton.onclick = () => deleteOriginsFilterOrigin(origin.origin);
 
     return originElement;
 }

@@ -1,7 +1,5 @@
 import LimitedRunbotContentFeature from '../../shared/limited/runbot_content.js';
 import { isAuthorizedLimitedFeature } from '../../utils/authorize.js';
-import { StorageSync } from '../../utils/browser.js';
-import { sanitizeURL } from '../../utils/util.js';
 import adminDebugLoginConfiguration from '../adminDebugLoginRunbot/configuration.js';
 import autoOpenRunbotConfiguration from '../autoOpenRunbot/configuration.js';
 import configuration from './configuration.js';
@@ -11,11 +9,7 @@ export default class ImpersonateLoginRunbotContentFeature extends LimitedRunbotC
         super(configuration);
     }
 
-    async load(urlArg, versionInfo) {
-        const url = sanitizeURL(urlArg);
-
-        if (!(await isAuthorizedLimitedFeature(this.configuration.id, url))) return;
-
+    async loadFeature(url) {
         let autologin = false;
         if (
             (await isAuthorizedLimitedFeature(adminDebugLoginConfiguration.id, url)) ||
@@ -26,37 +20,6 @@ export default class ImpersonateLoginRunbotContentFeature extends LimitedRunbotC
 
         if (!autologin) {
             this.appendImpersonateLogin();
-        }
-    }
-
-    async loadFeature(url) {
-        const relatedConfiguration = await StorageSync.get({
-            [adminDebugLoginConfiguration.id]:
-                adminDebugLoginConfiguration.defaultSettings.adminDebugLoginRunbotEnabled,
-            [autoOpenRunbotConfiguration.id]: autoOpenRunbotConfiguration.defaultSettings.autoOpenRunbotEnabled,
-        });
-
-        let autologin = false;
-        if (
-            relatedConfiguration[adminDebugLoginConfiguration.id] ||
-            relatedConfiguration[autoOpenRunbotConfiguration.id]
-        ) {
-            autologin = await this.checkAdminDebug(url);
-        }
-    }
-
-    async checkRelatedConfiguration() {
-        const relatedConfiguration = await StorageSync.get({
-            [adminDebugLoginConfiguration.id]:
-                adminDebugLoginConfiguration.defaultSettings.adminDebugLoginRunbotEnabled,
-            [autoOpenRunbotConfiguration.id]: autoOpenRunbotConfiguration.defaultSettings.autoOpenRunbotEnabled,
-        });
-
-        if (
-            relatedConfiguration[adminDebugLoginConfiguration.id] ||
-            relatedConfiguration[autoOpenRunbotConfiguration.id]
-        ) {
-            autologin = await this.checkAdminDebug(url);
         }
     }
 

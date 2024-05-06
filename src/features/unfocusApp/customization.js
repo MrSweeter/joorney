@@ -1,5 +1,4 @@
 import OptionCustomizationFeature from '../../generic/customization.js';
-import OptionFeature from '../../generic/option.js';
 import { StorageSync } from '../../utils/browser.js';
 import configuration from './configuration.js';
 
@@ -82,7 +81,7 @@ export default class UnfocusAppOptionCustomizationFeature extends OptionCustomiz
         const originElement = originTemplate.content.firstChild;
 
         const deleteButton = originElement.getElementsByClassName(`qol_unfocus_app_origin_delete_${idx}`)[0];
-        deleteButton.onclick = (e) => this.deleteUnfocusAppOrigin(origin);
+        deleteButton.onclick = () => this.deleteUnfocusAppOrigin(origin);
 
         return originElement;
     }

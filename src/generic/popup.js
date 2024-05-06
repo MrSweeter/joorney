@@ -90,5 +90,5 @@ export class PopupCustomizableFeature extends PopupFeature {
         this.notifyTabs({ checked: checked });
     }
 
-    render(enabled) {}
+    render(_enabled) {}
 }

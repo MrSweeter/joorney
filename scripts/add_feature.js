@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import { exit } from 'node:process';
+import { exit, process } from 'node:process';
 import { featureIDToDisplayName, featureIDToPascalCase } from '../src/utils/features.js';
 
 import path from 'node:path';
