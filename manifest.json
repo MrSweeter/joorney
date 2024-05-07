@@ -1,12 +1,12 @@
 {
     "manifest_version": 3,
     "version": "2.0.0",
-    "name": "Odoo - Quality of Life & Fun",
-    "description": "Odoo - Quality of Life & Fun",
+    "name": "Joorney",
+    "description": "Improve your Odoo Journey!",
     "author": "Vanden Bergh Gaëtan",
-    "homepage_url": "https://github.com/MrSweeter/odoo-qol",
+    "homepage_url": "https://github.com/MrSweeter/joorney",
     "action": {
-        "default_title": "Odoo - QoL & Fun",
+        "default_title": "Joorney",
         "default_popup": "popup/index.html",
         "default_icon": "images/icon_128.png"
     },
