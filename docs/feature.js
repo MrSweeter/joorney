@@ -140,6 +140,12 @@ const features = {
             '<span class="fw-bold">Stars effect</span> is a feature that will trigger stars particles effect when you prioritize a task.',
         amico: 'launching_with_balloons-amico',
     },
+    showMyBadge: {
+        icon: 'user-certificate-solid',
+        title: 'Show my Badge on user Card',
+        description: '<span class="fw-bold">Show My Badge</span> will show user\'s badges when showing user card.',
+        amico: 'brand_loyalty-amico',
+    },
 };
 
 const featuresName = Object.keys(features);

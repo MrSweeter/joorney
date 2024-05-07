@@ -67,7 +67,7 @@ function updateFeatureState(featureID, add) {
         return;
     }
     state[featureID] = add ? true : undefined;
-    fs.writeFileSync(stateFile, JSON.stringify(state, null, 4), 'utf8');
+    fs.writeFileSync(stateFile, `${JSON.stringify(state, null, 4)}\n`, 'utf8');
 }
 
 //#region CRUD
@@ -91,7 +91,7 @@ function createFeature(featureName, option) {
             [`${featureName.id}Enabled`]: false,
             [`${featureName.id}WhitelistMode`]: false,
         },
-        supported_version: option['<supported_version>'],
+        supported_version: option['<supported-version>'] ?? [],
     };
 
     const featureFolder = `${__dirname}/../src/features/${configuration.id}`;

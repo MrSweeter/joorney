@@ -11,5 +11,6 @@
     "tooltipMetadata": true,
     "impersonateLoginRunbot": true,
     "adminDebugLoginRunbot": true,
-    "autoOpenRunbot": true
+    "autoOpenRunbot": true,
+    "showMyBadge": true
 }

@@ -28,11 +28,8 @@ export async function getVersionInfo(urlArg) {
     if (url.protocol !== 'https:') return undefined;
 
     function parseInfo(info) {
-        const version = info.server_version_info
-            .slice(0, 2)
-            .join('.')
-            .replace(/^saas~/, '');
-        return version;
+        const version = info.server_version_info.slice(0, 2).join('.');
+        return sanitizeVersion(version);
     }
 
     const cacheResult = await readCacheCall('getVersionInfo', url.origin);
@@ -87,6 +84,33 @@ export async function getDataset(model, domain, fields, limit, cachingTime = 1) 
     if (cachingTime > 0) saveCacheCall(cachingTime, 'getDataset', data.result, model, domain, fields, limit);
 
     return limit === 1 ? data.result[0] : data.result;
+}
+
+export async function getDatasetWithID(model, ids) {
+    const recordIDs = Array.isArray(ids) ? ids : [ids];
+    const response = await fetch(
+        new Request(`/web/dataset/call_kw/${model}/read`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                jsonrpc: '2.0',
+                method: 'call',
+                params: {
+                    args: [recordIDs],
+                    kwargs: {},
+                    model: model,
+                    method: 'read',
+                },
+            }),
+        })
+    );
+
+    const data = await response.json();
+
+    if (data.result?.length === 0) return undefined;
+    if (data.result === undefined) return undefined;
+
+    return ids.length === 1 ? data.result[0] : data.result;
 }
 
 export async function getMetadata(model, idsArg) {
@@ -144,4 +168,8 @@ export async function writeRecord(model, recordID, writeData) {
         return true;
     }
     throw new Error(data?.result);
+}
+
+export function sanitizeVersion(version) {
+    return version.replace(/^saas~/, '');
 }
