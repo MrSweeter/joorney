@@ -15,5 +15,5 @@ export default {
         showMyBadgeEnabled: false,
         showMyBadgeWhitelistMode: false,
     },
-    supported_version: [],
+    supported_version: ['17+'],
 };

@@ -39,8 +39,8 @@ async function onDOMContentLoaded() {
 
     const searchParams = new URLSearchParams(window.location.search);
     let htmlDebug = 1;
-    if (searchParams.get('debug') === 1) {
-        htmlDebug = 0;
+    if (searchParams.get('debug')) {
+        htmlDebug = '';
         const debug = document.getElementById('qol-debug-configuration');
         const config = await StorageSync.get(currentSettings);
         debug.innerHTML = JSON.stringify(config, null, 4);

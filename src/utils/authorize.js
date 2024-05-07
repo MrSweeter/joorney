@@ -1,4 +1,5 @@
 import { baseSettings } from '../../configuration.js';
+import { sanitizeVersion } from '../api/odoo.js';
 import { StorageLocal, StorageSync } from './browser.js';
 import { sanitizeURL } from './util.js';
 
@@ -24,16 +25,16 @@ export async function isSupportedFeature(versionInfo, featureSupportedVersion) {
     const { isOdoo, version } = versionInfo;
     if (!isOdoo) return false;
     if (!version) return false;
-    if (featureSupportedVersion.length === 0) return true;
 
     const odooSupported = await isSupportedOdoo(version);
+    if (!odooSupported) return false;
 
-    return odooSupported && featureSupportedVersion.includes(version);
+    return includeVersion(featureSupportedVersion, version, true);
 }
 
 export async function isSupportedOdoo(version) {
     const { supportedVersions } = await StorageSync.get(baseSettings);
-    return supportedVersions.includes(version);
+    return includeVersion(supportedVersions, version);
 }
 
 export async function isAuthorizedFeature(feature, url) {
@@ -109,4 +110,49 @@ function getActiveFeatureOrigins(originsFilterOrigins, featureName) {
         .filter((origin) => origin[1][featureName] === true)
         .map((origin) => origin[0]);
     return enabledOrigins;
+}
+
+function includeVersion(versions, version, empty = false) {
+    const supportedVersions = Array.isArray(versions) ? versions : [versions];
+    if (supportedVersions.length === 0) return empty;
+    if (supportedVersions.includes(version)) return true;
+
+    const versionNum = Number.parseFloat(version);
+    if (Number.isNaN(versionNum)) return false;
+
+    const uniqueOperator = versions.length === 1;
+
+    for (const supportedVersion of supportedVersions) {
+        if (isVersionSupported(supportedVersion, versionNum, uniqueOperator)) return true;
+    }
+
+    return false;
+}
+
+function isVersionSupported(supportedVersion, versionNum, uniqueOperator) {
+    const sanitizedVersion = sanitizeVersion(supportedVersion);
+    if (!sanitizedVersion) return false;
+
+    const supportedVersionNum = Number.parseFloat(sanitizedVersion);
+    if (Number.isNaN(supportedVersionNum)) return false;
+
+    if (sanitizedVersion.endsWith('+')) {
+        if (uniqueOperator) return versionNum >= supportedVersionNum;
+        console.warn('Version operator "+" cannot be used with other values, with ":" for range');
+        return false;
+    }
+
+    if (sanitizedVersion.endsWith('-')) {
+        if (uniqueOperator) return versionNum < supportedVersionNum;
+        console.warn('Version operator "-" cannot be used with other values, with ":" for range');
+        return false;
+    }
+
+    if (sanitizedVersion.includes(':')) {
+        const minimum = Number.parseFloat(sanitizedVersion.split(':')[0]);
+        const maximum = Number.parseFloat(sanitizedVersion.split(':')[1]);
+        if (Number.isNaN(minimum) || Number.isNaN(maximum)) return false;
+        return versionNum >= minimum && versionNum < maximum;
+    }
+    return versionNum === supportedVersionNum;
 }

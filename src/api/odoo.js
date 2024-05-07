@@ -171,5 +171,5 @@ export async function writeRecord(model, recordID, writeData) {
 }
 
 export function sanitizeVersion(version) {
-    return version.replace(/^saas~/, '');
+    return `${version}`.replaceAll(/saas[~|-]/g, '');
 }
