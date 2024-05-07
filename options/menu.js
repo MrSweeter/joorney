@@ -1,3 +1,4 @@
+import { loadPage as loadAmbientPage } from './pages/ambient/index.js';
 import { loadPage as loadConfigurationPage } from './pages/configuration/index.js';
 import { loadPage as loadTechnicalPage } from './pages/technical/index.js';
 import { loadPage as loadToastPage } from './pages/toast/index.js';
@@ -37,6 +38,14 @@ export const PAGES = [
         label: 'Notifications',
         path: './pages/toast/index.html',
         loader: loadToastPage,
+    },
+    {
+        id: 'page-ambient',
+        menu: 'page-ambient',
+        tour: undefined,
+        label: 'Ambient',
+        path: './pages/ambient/index.html',
+        loader: loadAmbientPage,
     },
     {
         id: 'page-technical',
