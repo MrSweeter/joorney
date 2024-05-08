@@ -34,9 +34,6 @@ export default class ShowMyBadgeContentFeature extends ContentFeature {
             .find((n) => n.nodeName === 'DIV' && n.className.includes('o_avatar_card'));
         if (!avatarCardMutationNode) return;
 
-        console.log('handleMutation');
-        console.log(avatarCardMutationNode);
-
         const emailNode = avatarCardMutationNode.querySelector('div.o_card_user_infos a[href^="mailto:"]');
         const email = emailNode.href.replace('mailto:', '');
         const name = avatarCardMutationNode.querySelector('div.o_card_user_infos span').innerText;
@@ -83,7 +80,6 @@ export default class ShowMyBadgeContentFeature extends ContentFeature {
         for (const b of badges) {
             b.lvl = levelMapping[b.level] ?? 0;
         }
-        console.log(badges);
         return badges.sort((a, b) => b.lvl - a.lvl);
     }
 

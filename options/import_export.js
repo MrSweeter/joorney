@@ -12,10 +12,10 @@ function importOptions(file) {
     reader.readAsText(file);
 }
 
-async function exportOptions(currentSettings) {
-    const items = await StorageSync.get(currentSettings);
+async function exportOptions() {
+    const { currentSettings } = await getFeaturesAndCurrentSettings();
 
-    const dataStr = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(items))}`;
+    const dataStr = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(currentSettings))}`;
     const downloadAnchorNode = document.createElement('a');
     downloadAnchorNode.setAttribute('href', dataStr);
     const fileName = `qol_storage_sync_${new Date().toLocaleDateString()}.json`;
@@ -31,7 +31,7 @@ function confirmImport(file) {
     }
 }
 
-function setupImportExport(currentSettings) {
+function setupImportExport() {
     const importInput = document.getElementById('qol_import_storage_sync_file');
     importInput.onchange = (e) => confirmImport(e.target.files[0]);
 
@@ -46,21 +46,21 @@ function setupImportExport(currentSettings) {
     };
 
     const exportButton = document.getElementById('qol_export_storage_sync');
-    exportButton.onclick = () => exportOptions(currentSettings);
+    exportButton.onclick = () => exportOptions();
 }
 
-async function checkConfigurationVersion(currentSettings) {
+async function checkConfigurationVersion() {
     const { configurationVersion } = await StorageSync.get({
         configurationVersion: baseSettings.configurationVersion,
     });
-    if (configurationVersion < currentSettings.configurationVersion) {
+    if (configurationVersion < baseSettings.configurationVersion) {
         document.getElementById('qol_migrate_configuration').classList.remove('d-none');
         document.getElementById('qol_import_storage_sync_file').disabled = true;
         document.getElementById('qol_import_storage_sync').disabled = true;
     }
 }
 
-export function initImportExport(currentSettings) {
-    setupImportExport(currentSettings);
-    checkConfigurationVersion(currentSettings);
+export function initImportExport() {
+    setupImportExport();
+    checkConfigurationVersion();
 }

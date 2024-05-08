@@ -110,7 +110,6 @@ async function renderOriginsObject(origins) {
 
     const container = document.getElementById('qol_origins_filter_table_body');
     container.innerHTML = '';
-    console.log(originsArray);
     for (const [id, o] of originsArray.entries())
         container.appendChild(
             renderOrigin(

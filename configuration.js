@@ -16,7 +16,7 @@ const activeFeaturesList = Object.keys(FeaturesState).filter((k) => FeaturesStat
 export let features = [];
 export async function loadFeaturesConfiguration() {
     features = await Promise.all(activeFeaturesList.map((f) => importFeatureConfigurationFile(f)));
-    console.log(features);
+    console.info(features);
 }
 
 export function importFeatureConfigurationFile(featureID) {
