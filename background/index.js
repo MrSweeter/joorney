@@ -1,7 +1,7 @@
 import { ContextMenus, Runtime, StorageSync, Tabs, WebNavigation } from '../src/utils/browser.js';
 
 import { features, getCurrentSettings, loadFeaturesConfiguration } from '../configuration.js';
-import { clearHost } from '../src/api/cache.js';
+import { checkHostsExpiration, clearHost } from '../src/api/cache.js';
 import { checkVersion } from './src/check_version.js';
 import { CLEAR_CACHE_HOST_ID_MENU, createClearHostCache } from './src/contextMenu.js';
 import { checkCommandShortcuts, handleCommands } from './src/keyboard_shortcut.js';
@@ -49,7 +49,12 @@ ContextMenus.onClicked.addListener((info, tab) => {
     }
 });
 
-checkVersion();
-handleCommands();
+function main() {
+    checkVersion();
+    handleCommands();
+    checkHostsExpiration();
 
-loadFeaturesConfiguration();
+    loadFeaturesConfiguration();
+}
+
+main();
