@@ -1,4 +1,6 @@
+import { sanitizeVersion } from '../../api/odoo.js';
 import LimitedRunbotContentFeature from '../../shared/limited/runbot_content.js';
+import { ValueIsNaN } from '../../utils/util.js';
 import configuration from './configuration.js';
 
 export default class AutoOpenRunbotContentFeature extends LimitedRunbotContentFeature {
@@ -30,16 +32,17 @@ export default class AutoOpenRunbotContentFeature extends LimitedRunbotContentFe
         if (!urlVersion) return;
 
         let openVersion = Number.parseFloat(urlVersion).toFixed(1);
-        if (Number.isNaN(openVersion)) {
+        if (ValueIsNaN(openVersion)) {
             openVersion = urlVersion;
         }
+        openVersion = sanitizeVersion(openVersion);
 
         const rows = document.getElementsByClassName('bundle_row');
 
         // FOR EACH VERSION ROW
         for (let i = 0; i < rows.length; i++) {
             const row = rows[i];
-            const version = row.querySelector('div.one_line a b').textContent.replace('saas-', '');
+            const version = sanitizeVersion(row.querySelector('div.one_line a b').textContent);
             if (version !== openVersion) continue;
 
             const batches = row.querySelectorAll('div.batch_slots');

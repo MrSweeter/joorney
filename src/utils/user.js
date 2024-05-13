@@ -1,4 +1,5 @@
-import { getDataset } from '../api/odoo';
+import { getDataset } from '../api/odoo.js';
+import { ValueIsNaN } from './util.js';
 
 export async function getCurrentUserID() {
     // TODO[IMP] IMPROVE, settings page field ? web request ?
@@ -10,7 +11,7 @@ export async function getCurrentUserID() {
     const search = avatarURL.searchParams;
     if (search.has('id')) {
         const userID = Number.parseInt(search.get('id'));
-        if (Number.isNaN(userID)) return undefined;
+        if (ValueIsNaN(userID)) return undefined;
         return userID;
     }
     // 17.2

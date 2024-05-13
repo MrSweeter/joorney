@@ -1,7 +1,7 @@
 import { baseSettings } from '../../configuration.js';
 import { sanitizeVersion } from '../api/odoo.js';
 import { StorageLocal, StorageSync } from './browser.js';
-import { sanitizeURL } from './util.js';
+import { ValueIsNaN, sanitizeURL } from './util.js';
 
 export const regexSchemePrefix = 'regex://';
 
@@ -118,7 +118,7 @@ function includeVersion(versions, version, empty = false) {
     if (supportedVersions.includes(version)) return true;
 
     const versionNum = Number.parseFloat(version);
-    if (Number.isNaN(versionNum)) return false;
+    if (ValueIsNaN(versionNum)) return false;
 
     const uniqueOperator = versions.length === 1;
 
@@ -134,7 +134,7 @@ function isVersionSupported(supportedVersion, versionNum, uniqueOperator) {
     if (!sanitizedVersion) return false;
 
     const supportedVersionNum = Number.parseFloat(sanitizedVersion);
-    if (Number.isNaN(supportedVersionNum)) return false;
+    if (ValueIsNaN(supportedVersionNum)) return false;
 
     if (sanitizedVersion.endsWith('+')) {
         if (uniqueOperator) return versionNum >= supportedVersionNum;
@@ -151,7 +151,7 @@ function isVersionSupported(supportedVersion, versionNum, uniqueOperator) {
     if (sanitizedVersion.includes(':')) {
         const minimum = Number.parseFloat(sanitizedVersion.split(':')[0]);
         const maximum = Number.parseFloat(sanitizedVersion.split(':')[1]);
-        if (Number.isNaN(minimum) || Number.isNaN(maximum)) return false;
+        if (ValueIsNaN(minimum) || ValueIsNaN(maximum)) return false;
         return versionNum >= minimum && versionNum < maximum;
     }
     return versionNum === supportedVersionNum;

@@ -1,4 +1,4 @@
-import { getDataset, getDatasetWithID } from '../../api/odoo.js';
+import { getDataset, getDatasetWithIDs } from '../../api/odoo.js';
 import ContentFeature from '../../generic/content.js';
 import { createRecordFormURL } from '../../utils/url_manager.js';
 import configuration from './configuration.js';
@@ -13,7 +13,7 @@ export default class ShowMyBadgeContentFeature extends ContentFeature {
         overlayShowMyBadgeObserver = new MutationObserver(this.handleMutation);
     }
 
-    async loadFeature(url) {
+    async loadFeature(_) {
         this.observe();
     }
 
@@ -71,7 +71,7 @@ export default class ShowMyBadgeContentFeature extends ContentFeature {
     }
 
     async getBadges(ids) {
-        const badges = await getDatasetWithID('gamification.badge.user', ids);
+        const badges = await getDatasetWithIDs('gamification.badge.user', ids);
         const levelMapping = {
             bronze: 1,
             silver: 2,

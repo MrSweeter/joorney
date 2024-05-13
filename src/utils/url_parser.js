@@ -90,6 +90,7 @@ function parseURL_V2(pathname) {
 
         if (right === 'new') {
             action.resId = 'new';
+            action.view_type = 'form';
         } else if (isNumeric(right)) {
             action.resId = Number.parseInt(right);
         }

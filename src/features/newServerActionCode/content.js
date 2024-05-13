@@ -1,4 +1,5 @@
 import ContentFeature from '../../generic/content.js';
+import { isStillSamePage } from '../../utils/authorize.js';
 import { isModelCreateView_fromURL } from '../../utils/url_manager.js';
 import configuration from './configuration.js';
 
@@ -10,7 +11,7 @@ export default class NewServerActionCodeContentFeature extends ContentFeature {
     async loadFeature(url) {
         const isNew = await this.isServerActionCreateView_fromURL(url);
         if (!isNew) return;
-
+        if (!(await isStillSamePage(250, url))) return;
         this.selectExecuteCode();
     }
 

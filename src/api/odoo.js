@@ -78,15 +78,15 @@ export async function getDataset(model, domain, fields, limit, cachingTime = 1) 
 
     const data = await response.json();
 
-    if (data.result?.length === 0) return undefined;
-    if (data.result === undefined) return undefined;
+    if (data.result === undefined) return limit === 1 ? undefined : [];
+    if (data.result.length === 0) return limit === 1 ? undefined : [];
 
     if (cachingTime > 0) saveCacheCall(cachingTime, 'getDataset', data.result, model, domain, fields, limit);
 
     return limit === 1 ? data.result[0] : data.result;
 }
 
-export async function getDatasetWithID(model, ids) {
+export async function getDatasetWithIDs(model, ids) {
     const recordIDs = Array.isArray(ids) ? ids : [ids];
     const response = await fetch(
         new Request(`/web/dataset/call_kw/${model}/read`, {
@@ -107,14 +107,13 @@ export async function getDatasetWithID(model, ids) {
 
     const data = await response.json();
 
-    if (data.result?.length === 0) return undefined;
-    if (data.result === undefined) return undefined;
+    if (data.result === undefined) return [];
+    if (data.result.length === 0) return [];
 
-    return ids.length === 1 ? data.result[0] : data.result;
+    return data.result;
 }
 
-export async function getMetadata(model, idsArg) {
-    const ids = Array.isArray(idsArg) ? idsArg : [idsArg];
+export async function getMetadata(model, resId) {
     const metadataResponse = await fetch(
         new Request(`/web/dataset/call_kw/${model}/get_metadata`, {
             method: 'POST',
@@ -123,7 +122,7 @@ export async function getMetadata(model, idsArg) {
                 jsonrpc: '2.0',
                 method: 'call',
                 params: {
-                    args: [ids],
+                    args: [[resId]],
                     kwargs: {},
                     model: model,
                     method: 'get_metadata',
@@ -134,10 +133,10 @@ export async function getMetadata(model, idsArg) {
 
     const metadataData = await metadataResponse.json();
 
-    if (metadataData.result?.length === 0) return undefined;
-    if (metadataData.result === undefined) return undefined;
+    if (metadataData.result === undefined) return [];
+    if (metadataData.result.length === 0) return [];
 
-    return ids.length === 1 ? metadataData.result[0] : metadataData.result;
+    return metadataData.result[0];
 }
 
 export async function writeRecord(model, recordID, writeData) {

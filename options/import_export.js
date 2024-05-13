@@ -1,4 +1,4 @@
-import { baseSettings } from '../configuration.js';
+import { baseSettings, getFeaturesAndCurrentSettings } from '../configuration.js';
 import { StorageSync, Tabs } from '../src/utils/browser.js';
 
 function importOptions(file) {

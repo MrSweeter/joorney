@@ -11,3 +11,7 @@ function sanitizedHrefToUrl(hrefArg) {
     const url = new URL(href.replace(/#/g, href.includes('?') ? '&' : '?'));
     return url;
 }
+
+export function ValueIsNaN(value) {
+    return isNaN(value) || Number.isNaN(value);
+}
