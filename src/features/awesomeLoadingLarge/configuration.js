@@ -21,5 +21,5 @@ export default {
             'https://static.wikia.nocookie.net/fbbc7304-c0ac-44dc-9ccd-a839ee627a9a/scale-to-width/370',
         ],
     },
-    supported_version: [],
+    supported_version: ['16:17'],
 };

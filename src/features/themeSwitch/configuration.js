@@ -25,5 +25,5 @@ export default {
         themeSwitchDarkStartTime: '20:30',
         themeSwitchDarkStopTime: '07:30',
     },
-    supported_version: [],
+    supported_version: ['16+'],
 };

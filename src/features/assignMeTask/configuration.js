@@ -14,5 +14,5 @@ export default {
         assignMeTaskEnabled: false,
         assignMeTaskWhitelistMode: false,
     },
-    supported_version: [],
+    supported_version: ['16.3+'],
 };

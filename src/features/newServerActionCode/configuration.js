@@ -14,5 +14,5 @@ export default {
         newServerActionCodeEnabled: false,
         newServerActionCodeWhitelistMode: false,
     },
-    supported_version: [],
+    supported_version: ['15+'],
 };

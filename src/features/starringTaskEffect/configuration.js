@@ -14,5 +14,5 @@ export default {
         starringTaskEffectEnabled: false,
         starringTaskEffectWhitelistMode: false,
     },
-    supported_version: [],
+    supported_version: ['16+'],
 };

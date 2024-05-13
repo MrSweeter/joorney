@@ -14,5 +14,5 @@ export default {
         saveKnowledgeEnabled: false,
         saveKnowledgeWhitelistMode: false,
     },
-    supported_version: ['14:17'],
+    supported_version: ['16:17'],
 };
