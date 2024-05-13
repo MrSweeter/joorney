@@ -1,29 +1,14 @@
-import { baseSettings } from '../../../configuration.js';
+import { SUPPORTED_VERSION, baseSettings } from '../../../configuration.js';
 import { stringToHTML } from '../../../src/html_generator.js';
+import { includeVersion } from '../../../src/utils/authorize.js';
 import { StorageSync } from '../../../src/utils/browser.js';
 
-const SUPPORTED_VERSION = [
-    '14.0',
-    '15.0',
-    'saas-15.2',
-    '16.0',
-    'saas-16.1',
-    'saas-16.2',
-    'saas-16.3',
-    'saas-16.4',
-    '17.0',
-    'saas-17.1',
-    'saas-17.2',
-    //'saas-17.3',
-    //'18.0'
-];
-
 export async function loadPage(features, currentSettings) {
-    loadSupportedOdoo(currentSettings);
-    loadSupportedFeature(features);
+    loadSupportedOdoo(currentSettings, features);
+    loadSupportedFeature(features, currentSettings.supportedVersions);
 }
 
-function loadSupportedOdoo(currentSettings) {
+function loadSupportedOdoo(currentSettings, features) {
     const versionContainer = document.getElementById('qol-odoo-versions');
     const supported = currentSettings.supportedVersions;
 
@@ -48,24 +33,59 @@ function loadSupportedOdoo(currentSettings) {
         versionInput.checked = supported.includes(version);
         versionInput.onchange = async (e) => {
             const { supportedVersions } = await StorageSync.get(baseSettings);
-            const versions = new Set(supportedVersions);
+            let versions = new Set(supportedVersions);
             e.target.checked ? versions.add(version) : versions.delete(version);
-            await StorageSync.set({ supportedVersions: Array.from(versions) });
+            versions = Array.from(versions);
+            await StorageSync.set({ supportedVersions: versions });
+            await loadSupportedFeature(features, versions);
         };
     }
 }
 
-function loadSupportedFeature(features) {
-    const versionContainer = document.getElementById('qol-feature-versions');
+async function loadSupportedFeature(features, supportedVersions) {
+    const versionContainerHead = document.getElementById('qol-feature-versions-head');
+    versionContainerHead.innerHTML = '';
+
+    const header = stringToHTML(`
+        <tr>
+            <th class="text-end">Features</th>
+            <th class="text-center" style="width: 32px"><i class="fa-solid fa-icons"></i></th>
+            ${SUPPORTED_VERSION.map((v) => `<th class="text-center">${v}</th>`).join('')}
+        </tr>
+    `);
+    versionContainerHead.appendChild(header);
+
+    const versionContainerBody = document.getElementById('qol-feature-versions-body');
+    versionContainerBody.innerHTML = '';
 
     for (const feature of features.filter((f) => !f.limited)) {
-        const versionElement = stringToHTML(`
-			<div class="w-100 my-1">
-				<span><strong>${feature.display_name ?? feature.id}:</strong></span>
-				<span>${feature.supported_version.map((v) => `<span class="badge badge-info">${v}</span>`).join(' ')}</span>
-			</div>
+        const versions = SUPPORTED_VERSION.map((v) => {
+            return {
+                odoo: includeVersion(supportedVersions, v),
+                feature: includeVersion(feature.supported_version, v),
+            };
+        });
+        const versionRow = stringToHTML(`
+            <tr>
+                <th class="text-end">
+                    <span>${feature.display_name ?? feature.id}</span>
+                </th>
+                <th>
+                    <div class="icon-wrapper">
+                        ${feature.icon.join('\n')}
+                    </div>
+                </th>
+                ${versions
+                    .map(
+                        (v) =>
+                            `<td class="text-center table-${v.feature ? (v.odoo ? 'success' : 'warning') : 'danger'}">
+                                <span class="opacity-25">${v.feature}</span>
+                            </td>`
+                    )
+                    .join('')}
+            </tr>
 		`);
-        versionContainer.appendChild(versionElement);
+        versionContainerBody.appendChild(versionRow);
     }
 }
 

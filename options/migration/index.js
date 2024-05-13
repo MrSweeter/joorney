@@ -74,7 +74,7 @@ function downloadNewMigration(data) {
     const dataStr = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(data))}`;
     const downloadAnchorNode = document.createElement('a');
     downloadAnchorNode.setAttribute('href', dataStr);
-    const fileName = `qol_storage_sync_${new Date().toLocaleDateString()}.json`;
+    const fileName = `joorney_storage_sync_${new Date().toLocaleDateString()}.json`;
     downloadAnchorNode.setAttribute('download', fileName);
     document.body.appendChild(downloadAnchorNode); // required for firefox
     downloadAnchorNode.click();

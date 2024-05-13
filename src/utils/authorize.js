@@ -112,27 +112,26 @@ function getActiveFeatureOrigins(originsFilterOrigins, featureName) {
     return enabledOrigins;
 }
 
-function includeVersion(versions, version, empty = false) {
+export function includeVersion(versions, version, empty = false) {
     const supportedVersions = Array.isArray(versions) ? versions : [versions];
     if (supportedVersions.length === 0) return empty;
     if (supportedVersions.includes(version)) return true;
 
-    const versionNum = Number.parseFloat(version);
+    const versionNum = sanitizeVersion(version);
     if (ValueIsNaN(versionNum)) return false;
 
     const uniqueOperator = versions.length === 1;
 
     for (const supportedVersion of supportedVersions) {
-        if (isVersionSupported(supportedVersion, versionNum, uniqueOperator)) return true;
+        const sanitizedVersion = sanitizeVersion(supportedVersion);
+        if (!sanitizedVersion) continue;
+        if (isVersionSupported(sanitizedVersion, versionNum, uniqueOperator)) return true;
     }
 
     return false;
 }
 
-function isVersionSupported(supportedVersion, versionNum, uniqueOperator) {
-    const sanitizedVersion = sanitizeVersion(supportedVersion);
-    if (!sanitizedVersion) return false;
-
+function isVersionSupported(sanitizedVersion, versionNum, uniqueOperator) {
     const supportedVersionNum = Number.parseFloat(sanitizedVersion);
     if (ValueIsNaN(supportedVersionNum)) return false;
 
