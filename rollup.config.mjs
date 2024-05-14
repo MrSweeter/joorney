@@ -103,25 +103,25 @@ export default () => {
                 }),
             ],
         },
-        // {
-        //     input: 'docs/index.js',
-        //     output: getESMOutput(`${publicOutput}/index.js`),
-        //     plugins: [
-        //         ...defaultPlugins,
-        //         copy({
-        //             targets: [
-        //                 {
-        //                     src: ['docs/public/*'],
-        //                     dest: `${publicOutput}`,
-        //                 },
-        //             ],
-        //         }),
-        //     ],
-        // },
-        // {
-        //     input: 'docs/feature.js',
-        //     output: getESMOutput(`${publicOutput}/feature.js`),
-        //     plugins: [...defaultPlugins],
-        // },
+        {
+            input: 'docs/index.js',
+            output: getESMOutput(`${publicOutput}/index.js`),
+            plugins: [
+                ...defaultPlugins,
+                copy({
+                    targets: [
+                        {
+                            src: ['docs/public/*'],
+                            dest: `${publicOutput}`,
+                        },
+                    ],
+                }),
+            ],
+        },
+        {
+            input: 'docs/feature.js',
+            output: getESMOutput(`${publicOutput}/feature.js`),
+            plugins: [...defaultPlugins],
+        },
     ]);
 };

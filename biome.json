@@ -34,6 +34,6 @@
     },
     "overrides": [{ "include": ["*.html"], "formatter": { "lineWidth": 200 } }],
     "files": {
-        "ignore": ["dist", "node_modules"]
+        "ignore": ["bundle", "node_modules"]
     }
 }
