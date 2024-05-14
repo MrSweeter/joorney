@@ -6,11 +6,8 @@ function guessOdooVersion(windowArg) {
     const serverVersionInfo = windowArg.odoo.info.server_version_info;
     if (!Array.isArray(serverVersionInfo)) return result;
 
-    const version = serverVersionInfo
-        .slice(0, 2)
-        .join('.')
-        .replace(/^saas~/, '');
-    return { isOdoo: true, version: Number.parseFloat(version) };
+    const version = serverVersionInfo.slice(0, 2).join('.');
+    return { isOdoo: true, version: version };
 }
 
 function handleOdooGuess() {

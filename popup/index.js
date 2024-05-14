@@ -1,7 +1,6 @@
 import { getFeaturesAndCurrentSettings, importFeaturePopupFile } from '../configuration.js';
 import { generateFeaturePopupToggleItem, generateTabFeaturePopupToggleItem } from '../src/html_generator.js';
 import { Runtime, Tabs } from '../src/utils/browser.js';
-import { MESSAGE_ACTION } from '../src/utils/messaging.js';
 import { reloadTabFeatures } from './src/tab_features.js';
 
 window.onload = async () => {
@@ -14,17 +13,12 @@ window.onload = async () => {
 
     renderFeatures();
 
-    loadFeatures();
-
     const popupIcon = document.getElementById('popupIcon');
     popupIcon.onclick = () => Runtime.openOptionsPage();
 };
 
 async function renderFeatures() {
-    const response = await Runtime.sendMessage({
-        action: MESSAGE_ACTION.GET_FEATURES_LIST,
-    });
-    const features = response.features;
+    const { features, currentSettings } = await getFeaturesAndCurrentSettings();
 
     const toggleContainer = document.getElementById('qol-popup-feature-toggle');
     toggleContainer.innerHTML = '';
@@ -35,11 +29,11 @@ async function renderFeatures() {
         toggleContainer.appendChild(generateFeaturePopupToggleItem(f));
         if (!f.limited) tabFeatureContainer.appendChild(generateTabFeaturePopupToggleItem(f));
     }
+
+    loadFeatures(features, currentSettings);
 }
 
-async function loadFeatures() {
-    const { features, currentSettings } = await getFeaturesAndCurrentSettings();
-
+async function loadFeatures(features, currentSettings) {
     for (const feature of features) {
         importFeaturePopupFile(feature.id).then((featureModule) => {
             featureModule.load(currentSettings);

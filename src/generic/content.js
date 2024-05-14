@@ -9,7 +9,7 @@ export default class ContentFeature {
     }
 
     async load(urlArg, versionInfo) {
-        if (!isSupportedFeature(versionInfo, this.configuration.supported_version)) return;
+        if (!(await isSupportedFeature(versionInfo, this.configuration.supported_version))) return;
 
         const url = sanitizeURL(urlArg);
 
