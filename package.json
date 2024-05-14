@@ -14,6 +14,7 @@
         "@types/node": "^20.11.28",
         "docopt": "^0.6.2",
         "rollup": "^4.13.0",
-        "rollup-plugin-copy": "^3.5.0"
+        "rollup-plugin-copy": "^3.5.0",
+        "rollup-plugin-watch-assets": "^1.0.1"
     }
 }
