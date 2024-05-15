@@ -3,7 +3,6 @@ import json from '@rollup/plugin-json';
 import resolve from '@rollup/plugin-node-resolve';
 import { defineConfig } from 'rollup';
 import copy from 'rollup-plugin-copy';
-import watchAssets from 'rollup-plugin-watch-assets';
 
 const defaultPlugins = [resolve(), json(), dynamicImportVars({ exclude: 'features_state.json' })];
 function getESMOutput(file) {
@@ -30,6 +29,17 @@ function getOptionPages(bundleOutput, pages) {
     });
 }
 
+function getBuildDate() {
+    const now = new Date();
+    const yearStart = new Date(now.getFullYear(), 0, 0);
+    const currentYear = now.getFullYear().toString().slice(-2);
+    const currentDayOfYear = Math.floor((now - yearStart) / (24 * 60 * 60 * 1000))
+        .toString()
+        .padStart(3, '0');
+
+    return currentYear + currentDayOfYear;
+}
+
 export default () => {
     const bundleOutput = 'bundle/ext';
     const publicOutput = 'bundle/public';
@@ -40,7 +50,15 @@ export default () => {
             output: getESMOutput(`${bundleOutput}/background.js`),
             plugins: [
                 ...defaultPlugins,
-                copy({ targets: [{ src: 'manifest.json', dest: bundleOutput }] }),
+                copy({
+                    targets: [
+                        {
+                            src: 'manifest.json',
+                            dest: bundleOutput,
+                            transform: (contents, _) => contents.toString().replace('%BUILD%', getBuildDate()),
+                        },
+                    ],
+                }),
                 copy({ targets: [{ src: 'images', dest: bundleOutput }] }),
             ],
         },

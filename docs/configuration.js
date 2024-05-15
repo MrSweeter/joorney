@@ -4,21 +4,21 @@ export const categories = [
         label: 'Odoo Features',
         icon: 'cubes-stacked-solid',
         description:
-            '<span class="opacity-25">Odoo-QoL is a Chrome extension that makes your Odoo experience more enjoyable and productive by adding some cool features and effects.</span>',
+            '<span class="opacity-25">Joorney is a Chrome extension that makes your Odoo experience more enjoyable and productive by adding some cool features and effects.</span>',
     },
     {
         id: 'runbotFeature',
         label: 'Runbot',
         icon: 'robot-solid',
         description:
-            '<span class="opacity-25">Odoo-QoL is a Chrome extension that makes your Odoo experience more enjoyable and productive by adding some cool features and effects.</span>',
+            '<span class="opacity-25">Joorney is a Chrome extension that makes your Odoo experience more enjoyable and productive by adding some cool features and effects.</span>',
     },
     {
         id: 'designFeature',
         label: 'Design',
         icon: 'display-newspaper-solid',
         description:
-            '<span class="opacity-25">Odoo-QoL is a Chrome extension that makes your Odoo experience more enjoyable and productive by adding some cool features and effects.</span>',
+            '<span class="opacity-25">Joorney is a Chrome extension that makes your Odoo experience more enjoyable and productive by adding some cool features and effects.</span>',
     },
 ];
 
