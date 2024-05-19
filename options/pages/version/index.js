@@ -48,7 +48,7 @@ async function loadSupportedFeature(features, supportedVersions) {
 
     const header = stringToHTML(`
         <tr>
-            <th class="text-end">Features</th>
+            <th class="text-end opacity-50">Compatibility</th>
             <th class="text-center" style="width: 32px"><i class="fa-solid fa-icons"></i></th>
             ${SUPPORTED_VERSION.map((v) => `<th class="text-center">${v}</th>`).join('')}
         </tr>

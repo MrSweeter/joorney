@@ -1,1 +1,1 @@
-<img src="https://repository-images.githubusercontent.com/691932903/0e1bceb5-9382-4fd1-bd81-707732eb9150" />
+<img src="https://github.com/MrSweeter/joorney/assets/22725763/62e252c6-03ab-42f3-9075-e6f9ee527c40" />

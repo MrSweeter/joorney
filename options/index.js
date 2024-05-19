@@ -10,7 +10,7 @@ const PAGES = [
     {
         id: 'page-website',
         menu: 'page-website',
-        label: 'Website filter',
+        label: 'Hosts control',
         path: './pages/website/index.html',
         loader: loadWebsitePage,
         default: true,
@@ -18,14 +18,14 @@ const PAGES = [
     {
         id: 'page-configuration',
         menu: 'page-configuration',
-        label: 'Configuration',
+        label: 'Preferences',
         path: './pages/configuration/index.html',
         loader: loadConfigurationPage,
     },
     {
         id: 'page-version',
         menu: 'page-version',
-        label: 'Supported versions',
+        label: 'Versions',
         path: './pages/version/index.html',
         loader: loadVersionPage,
     },
