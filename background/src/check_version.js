@@ -1,6 +1,6 @@
 import { Action, Runtime } from '../../src/utils/browser.js';
 
-const fetchVersion = 'https://raw.githubusercontent.com/MrSweeter/vigilant-potato/master/manifest.json';
+const fetchVersion = 'https://raw.githubusercontent.com/MrSweeter/joorney/master/manifest.json';
 
 export async function checkVersion() {
     const res = await fetch(fetchVersion);
