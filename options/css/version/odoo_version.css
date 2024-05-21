@@ -1,9 +1,9 @@
 .odoo-version-wrapper {
-    background-color: var(--qol-primary-bg);
+    background-color: var(--joorney-primary-bg);
     display: grid;
     place-items: center;
     border-radius: 21px;
-    border: solid 2px var(--qol-primary-bg);
+    border: solid 2px var(--joorney-primary-bg);
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0);
     transition: all 200ms ease-out;
     padding-left: 12px;
@@ -19,23 +19,23 @@
 }
 
 .odoo-version-wrapper:hover {
-    box-shadow: 0 0 6px var(--qol-odoo-primary);
+    box-shadow: 0 0 6px var(--joorney-odoo-primary);
 }
 
 .odoo-version-wrapper p {
-    color: var(--qol-primary);
+    color: var(--joorney-primary);
     transition: color 0.3s;
     margin: 0;
 }
 
 input:checked + .odoo-version-wrapper {
-    border: solid 2px var(--qol-odoo-primary);
+    border: solid 2px var(--joorney-odoo-primary);
 }
 /*https://fontawesome.com/icons/circle-check?f=classic&s=solid*/
 input:checked + .odoo-version-wrapper i::before {
     content: '\f058';
     font-weight: 900;
-    color: var(--qol-odoo-primary);
+    color: var(--joorney-odoo-primary);
 }
 
 input:disabled + .odoo-version-wrapper {

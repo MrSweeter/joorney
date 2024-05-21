@@ -9,11 +9,11 @@ export default class AwesomeStyleOptionCustomizationFeature extends OptionCustom
 
     async load() {
         super.load();
-        document.getElementById('qol_awe_style_save').onclick = this.saveAwesomeStyle;
+        document.getElementById('joorney_awe_style_save').onclick = this.saveAwesomeStyle;
 
         const configuration = await StorageSync.get(this.configuration.defaultSettings);
 
-        const textareaInput = document.getElementById('qol_awe_style_css');
+        const textareaInput = document.getElementById('joorney_awe_style_css');
         textareaInput.value = configuration.awesomeStyleCSS;
         const linesCount = configuration.awesomeStyleCSS.split(/\r\n|\r|\n/).length;
         textareaInput.setAttribute('rows', Math.max(linesCount + 2, 10));
@@ -27,7 +27,7 @@ export default class AwesomeStyleOptionCustomizationFeature extends OptionCustom
     }
 
     async saveAwesomeStyle() {
-        const textareaInput = document.getElementById('qol_awe_style_css');
+        const textareaInput = document.getElementById('joorney_awe_style_css');
 
         textareaInput.disabled = true;
         await StorageSync.set({ awesomeStyleCSS: textareaInput.value });

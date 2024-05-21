@@ -11,31 +11,31 @@ export default class ThemeSwitchOptionCustomizationFeature extends OptionCustomi
         super.load();
         const configuration = await StorageSync.get(this.configuration.defaultSettings);
 
-        const latitudeElement = document.getElementById('qol_theme_switch_latitude');
+        const latitudeElement = document.getElementById('joorney_theme_switch_latitude');
         latitudeElement.value = configuration.themeSwitchLocationLatitude;
         latitudeElement.onchange = async (e) => await StorageSync.set({ themeSwitchLocationLatitude: e.target.value });
 
-        const longitudeElement = document.getElementById('qol_theme_switch_longitude');
+        const longitudeElement = document.getElementById('joorney_theme_switch_longitude');
         longitudeElement.value = configuration.themeSwitchLocationLongitude;
         longitudeElement.onchange = async (e) =>
             await StorageSync.set({ themeSwitchLocationLongitude: e.target.value });
 
-        const getLocationElement = document.getElementById('qol_theme_switch_get_location_button');
+        const getLocationElement = document.getElementById('joorney_theme_switch_get_location_button');
         getLocationElement.onclick = this.updateLocation;
 
-        const darkStartTime = document.getElementById('qol_theme_switch_dark_start');
+        const darkStartTime = document.getElementById('joorney_theme_switch_dark_start');
         darkStartTime.value = configuration.themeSwitchDarkStartTime;
         darkStartTime.onchange = async (e) => await StorageSync.set({ themeSwitchDarkStartTime: e.target.value });
 
-        const darkStopTime = document.getElementById('qol_theme_switch_dark_stop');
+        const darkStopTime = document.getElementById('joorney_theme_switch_dark_stop');
         darkStopTime.value = configuration.themeSwitchDarkStopTime;
         darkStopTime.onchange = async (e) => await StorageSync.set({ themeSwitchDarkStopTime: e.target.value });
     }
 
     async updateLocation() {
         const coords = await this.getUserLocation();
-        document.getElementById('qol_theme_switch_latitude').value = coords.latitude;
-        document.getElementById('qol_theme_switch_longitude').value = coords.longitude;
+        document.getElementById('joorney_theme_switch_latitude').value = coords.latitude;
+        document.getElementById('joorney_theme_switch_longitude').value = coords.longitude;
 
         await StorageSync.set({
             themeSwitchLocationLatitude: coords.latitude,

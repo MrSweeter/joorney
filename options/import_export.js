@@ -32,10 +32,10 @@ function confirmImport(file) {
 }
 
 function setupImportExport() {
-    const importInput = document.getElementById('qol_import_storage_sync_file');
+    const importInput = document.getElementById('joorney_import_storage_sync_file');
     importInput.onchange = (e) => confirmImport(e.target.files[0]);
 
-    const importButton = document.getElementById('qol_import_storage_sync');
+    const importButton = document.getElementById('joorney_import_storage_sync');
     importButton.onclick = () => {
         if (!importInput.value.length) {
             importInput.click();
@@ -45,7 +45,7 @@ function setupImportExport() {
         confirmImport(importInput.files[0]);
     };
 
-    const exportButton = document.getElementById('qol_export_storage_sync');
+    const exportButton = document.getElementById('joorney_export_storage_sync');
     exportButton.onclick = () => exportOptions();
 }
 
@@ -54,9 +54,9 @@ async function checkConfigurationVersion() {
         configurationVersion: baseSettings.configurationVersion,
     });
     if (configurationVersion < baseSettings.configurationVersion) {
-        document.getElementById('qol_migrate_configuration').classList.remove('d-none');
-        document.getElementById('qol_import_storage_sync_file').disabled = true;
-        document.getElementById('qol_import_storage_sync').disabled = true;
+        document.getElementById('joorney_migrate_configuration').classList.remove('d-none');
+        document.getElementById('joorney_import_storage_sync_file').disabled = true;
+        document.getElementById('joorney_import_storage_sync').disabled = true;
     }
 }
 

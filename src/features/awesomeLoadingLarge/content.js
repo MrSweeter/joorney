@@ -5,7 +5,7 @@ import configuration from './configuration.js';
 export default class AwesomeLoadingLargeContentFeature extends AwesomeLoadingShareContentFeature {
     constructor() {
         super(configuration);
-        this.loadingID = 'odoo-qol-awesome-loading-large';
+        this.loadingID = 'joorney-awesome-loading-large';
     }
 
     getInnerStyle(image) {

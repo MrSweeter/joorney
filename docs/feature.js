@@ -8,17 +8,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener('wheel', (e) => {
     if (e.deltaX > 0) {
-        document.getElementById('qol-next-feature').click();
+        document.getElementById('joorney-next-feature').click();
     } else if (e.deltaX < 0) {
-        document.getElementById('qol-previous-feature').click();
+        document.getElementById('joorney-previous-feature').click();
     }
 });
 
 document.addEventListener('keydown', (e) => {
     if (e.code === 'ArrowRight') {
-        document.getElementById('qol-next-feature').click();
+        document.getElementById('joorney-next-feature').click();
     } else if (e.code === 'ArrowLeft') {
-        document.getElementById('qol-previous-feature').click();
+        document.getElementById('joorney-previous-feature').click();
     }
 });
 
@@ -39,8 +39,8 @@ function loadFeature(featureName) {
     }
 
     const currentFeatureIndex = featuresName.indexOf(featureName);
-    document.getElementById('qol-previous-feature').onclick = () => previousFeature(currentFeatureIndex - 1);
-    document.getElementById('qol-next-feature').onclick = () => nextFeature(currentFeatureIndex + 1);
+    document.getElementById('joorney-previous-feature').onclick = () => previousFeature(currentFeatureIndex - 1);
+    document.getElementById('joorney-next-feature').onclick = () => nextFeature(currentFeatureIndex + 1);
 }
 
 function previousFeature(indexArg) {

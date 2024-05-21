@@ -1,9 +1,9 @@
 .limited-feature-wrapper {
-    background-color: var(--qol-primary-bg);
+    background-color: var(--joorney-primary-bg);
     display: grid;
     place-items: center;
     border-radius: 21px;
-    border: solid 2px var(--qol-primary-bg);
+    border: solid 2px var(--joorney-primary-bg);
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0);
     transition: all 200ms ease-out;
     padding-left: 12px;
@@ -19,23 +19,23 @@
 }
 
 .limited-feature-wrapper:hover {
-    box-shadow: 0 0 6px var(--qol-limited-secondary);
+    box-shadow: 0 0 6px var(--joorney-limited-secondary);
 }
 
 .limited-feature-wrapper p {
-    color: var(--qol-primary);
+    color: var(--joorney-primary);
     transition: color 0.3s;
     margin: 0;
 }
 
 input:checked + .limited-feature-wrapper {
-    border: solid 2px var(--qol-limited-secondary);
+    border: solid 2px var(--joorney-limited-secondary);
 }
 /*https://fontawesome.com/icons/circle-check?f=classic&s=solid*/
 input:checked + .limited-feature-wrapper i::before {
     content: '\f058';
     font-weight: 900;
-    color: var(--qol-limited-secondary);
+    color: var(--joorney-limited-secondary);
 }
 
 input:disabled + .limited-feature-wrapper {

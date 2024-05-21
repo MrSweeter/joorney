@@ -1,9 +1,9 @@
 .feature-wrapper {
-    background-color: var(--qol-primary-bg);
+    background-color: var(--joorney-primary-bg);
     display: grid;
     place-items: center;
     border-radius: 21px;
-    border: solid 2px var(--qol-primary-bg);
+    border: solid 2px var(--joorney-primary-bg);
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0);
     transition: all 200ms ease-out;
     padding-left: 12px;
@@ -14,11 +14,11 @@
 }
 
 .feature-wrapper:hover {
-    box-shadow: 0 0 6px var(--qol-secondary);
+    box-shadow: 0 0 6px var(--joorney-secondary);
 }
 
 .feature-wrapper p {
-    color: var(--qol-primary);
+    color: var(--joorney-primary);
     transition: color 0.3s;
     margin: 0;
 }
@@ -37,7 +37,7 @@
 }
 
 .icon-wrapper i {
-    color: var(--qol-primary);
+    color: var(--joorney-primary);
     font-size: 18px;
 }
 
@@ -89,17 +89,17 @@
     }
 }
 
-#qol-whitelist-feature label .feature-wrapper {
+#joorney-whitelist-feature label .feature-wrapper {
     background-color: rgba(0, 128, 0, 0.1);
     border-color: rgba(0, 128, 0, 0.1);
 }
 
-#qol-blacklist-feature label .feature-wrapper {
+#joorney-blacklist-feature label .feature-wrapper {
     background-color: rgba(255, 0, 0, 0.1);
     border-color: rgba(255, 0, 0, 0.1);
 }
 
-#qol-disable-feature label {
+#joorney-disable-feature label {
     opacity: 0.5;
 }
 /*#endregion*/

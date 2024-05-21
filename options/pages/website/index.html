@@ -6,7 +6,7 @@
 <!--#region Limited Features -->
 <div class="row pt-3 pb-0 p-5 mx-0">
     <h4 class="text-start mt-3">Limited Features</h4>
-    <div id="qol-limited-feature" class="pt-3 d-flex flex-wrap justify-content-start">
+    <div id="joorney-limited-feature" class="pt-3 d-flex flex-wrap justify-content-start">
         <!-- DYNAMIC CONTENT -->
     </div>
 </div>
@@ -16,24 +16,24 @@
 <div class="row pt-3 pb-0 p-5  mx-0">
     <h4 class="text-start mt-3">Features</h4>
     <h6 class="col-4 text-success">
-        Whitelist <br /><small class="text-muted"><small>Feature disabled by default, Unless listed below</small></small>
+        Whitelist <br /><small class="text-muted"><small>Feature disabled by default, Unless listed and checked in "Origins" section below</small></small>
     </h6>
     <h6 class="col-4 text-danger">
-        Blacklist <br /><small class="text-muted"><small>Feature enabled by default, Unless listed below</small></small>
+        Blacklist <br /><small class="text-muted"><small>Feature enabled by default, Unless listed and checked in "Origins" section below</small></small>
     </h6>
     <h6 class="col-4">Disable <br /></h6>
     <div class="col-4">
-        <div id="qol-whitelist-feature" class="qol-state-feature pb-5 h-100 border border-2 border-success rounded d-flex flex-wrap align-content-start justify-content-center">
+        <div id="joorney-whitelist-feature" class="joorney-state-feature pb-5 h-100 border border-2 border-success rounded d-flex flex-wrap align-content-start justify-content-center">
             <!-- DYNAMIC CONTENT -->
         </div>
     </div>
     <div class="col-4">
-        <div id="qol-blacklist-feature" class="qol-state-feature pb-5 h-100 border border-2 border-danger rounded d-flex flex-wrap align-content-start justify-content-center">
+        <div id="joorney-blacklist-feature" class="joorney-state-feature pb-5 h-100 border border-2 border-danger rounded d-flex flex-wrap align-content-start justify-content-center">
             <!-- DYNAMIC CONTENT -->
         </div>
     </div>
     <div class="col-4">
-        <div id="qol-disable-feature" class="qol-state-feature pb-5 h-100 border border-2 rounded d-flex flex-wrap align-content-start justify-content-center">
+        <div id="joorney-disable-feature" class="joorney-state-feature pb-5 h-100 border border-2 rounded d-flex flex-wrap align-content-start justify-content-center">
             <!-- DYNAMIC CONTENT -->
         </div>
     </div>
@@ -43,13 +43,13 @@
 <!--#region Origins Filter -->
 <div class="row pt-3 pb-0 p-5  mx-0 text-center">
     <h6 class="text-start" id="odoo_theme_anchor">Origins</h6>
-    <table id="qol_origins_filter_table" class="table table-striped bg-light">
+    <table id="joorney_origins_filter_table" class="table table-striped bg-light">
         <thead class="shadow-2">
             <tr>
                 <!-- DYNAMIC HEADER -->
             </tr>
         </thead>
-        <tbody id="qol_origins_filter_table_body">
+        <tbody id="joorney_origins_filter_table_body">
             <!-- DYNAMIC CONTENT -->
         </tbody>
         <tfoot>
@@ -57,35 +57,19 @@
                 <td></td>
             </tr>
             <tr class="table-secondary">
-                <td class="p-1 qol-valign-middle">
-                    <input type="text" class="form-control border border-0" id="qol_origins_filter_new_origin" placeholder="www.odoo.com" aria-label="Origin filter" />
+                <td class="p-1 joorney-valign-middle">
+                    <input type="text" class="form-control border border-0" id="joorney_origins_filter_new_origin" placeholder="www.odoo.com" aria-label="Origin filter" />
                 </td>
-                <td class="p-1 qol-valign-middle">
-                    <button title="Add origin" id="qol_origins_filter_new_origin_save" class="btn btn-success btn-floating">
+                <td class="p-1 joorney-valign-middle">
+                    <button title="Add origin" id="joorney_origins_filter_new_origin_save" class="btn btn-success btn-floating">
                         <i class="fa fa-plus"></i>
                     </button>
                 </td>
             </tr>
             <tr>
-                <td id="qol_origins_filter_error_footer" class="text-danger"></td>
+                <td id="joorney_origins_filter_error_footer" class="text-danger"></td>
             </tr>
         </tfoot>
-    </table>
-</div>
-<!--#endregion-->
-
-<!--#region Keyboard Shortcut App -->
-<div class="row pt-1 pb-0 p-5 mx-0 text-center">
-    <h4 class="text-start mt-3">
-        Keyboard Shortcut <button id="open-extension-shortcut" class="btn btn-floating" title="Modify via Chrome"><i class="fa-brands fa-chrome"></i></button>
-    </h4>
-
-    <table class="table table-striped bg-light text-start">
-        <thead class="shadow-2">
-            <th>Shortcut</th>
-            <th>Description</th>
-        </thead>
-        <tbody id="shortcut_table_body"></tbody>
     </table>
 </div>
 <!--#endregion-->

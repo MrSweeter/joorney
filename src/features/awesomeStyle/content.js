@@ -3,7 +3,7 @@ import { isOdooWebsite } from '../../utils/authorize.js';
 import { Runtime, StorageSync } from '../../utils/browser.js';
 import configuration from './configuration.js';
 
-const awesomeStyleID = 'odoo-qol-awesome-style';
+const awesomeStyleID = 'joorney-awesome-style';
 
 export default class AwesomeStyleContentFeature extends ContentFeature {
     constructor() {

@@ -18,7 +18,7 @@ export default class AssignMeTaskContentFeature extends ProjectTaskShareContentF
         if (currentUser === undefined) return;
         const userAssigned = task.user_ids.includes(currentUser);
 
-        const exist = document.getElementsByName('qol_action_assign_to_me');
+        const exist = document.getElementsByName('joorney_action_assign_to_me');
         // Avoid adding button if already added, remove it if user already assigned
         if (exist.length > 0) {
             if (userAssigned) for (const e of exist) e.remove();
@@ -35,7 +35,7 @@ export default class AssignMeTaskContentFeature extends ProjectTaskShareContentF
     }
 
     preloadFeature() {
-        const exist = document.getElementsByName('qol_action_assign_to_me');
+        const exist = document.getElementsByName('joorney_action_assign_to_me');
         for (const e of exist) e.disabled = true;
     }
 
@@ -64,7 +64,7 @@ export default class AssignMeTaskContentFeature extends ProjectTaskShareContentF
     appendAssignMeTaskButtonToDom(task, currentUser) {
         const buttonTemplate = document.createElement('template');
         buttonTemplate.innerHTML = `
-            <button class="btn btn-warning" name="qol_action_assign_to_me" type="object">
+            <button class="btn btn-warning" name="joorney_action_assign_to_me" type="object">
                 <span>Assign to me</span>
             </button>
         `.trim();

@@ -9,7 +9,7 @@ export async function loadPage(features, currentSettings) {
 }
 
 function loadSupportedOdoo(currentSettings, features) {
-    const versionContainer = document.getElementById('qol-odoo-versions');
+    const versionContainer = document.getElementById('joorney-odoo-versions');
     const supported = currentSettings.supportedVersions;
 
     for (const version of SUPPORTED_VERSION) {
@@ -17,19 +17,19 @@ function loadSupportedOdoo(currentSettings, features) {
         const versionElement = stringToHTML(`
 			<label
 				title="[Odoo Version] ${version}"
-				for="qol_${versionID}_version"
+				for="joorney_${versionID}_version"
 				style="width: 200px"
 			>
-				<input id="qol_${versionID}_version" class="input-hide" type="checkbox" />
+				<input id="joorney_${versionID}_version" class="input-hide" type="checkbox" />
 				<div class="odoo-version-wrapper d-flex align-items-center justify-content-center">
-					<i class="qol-font-icon-size fa-regular me-2"></i>
+					<i class="joorney-font-icon-size fa-regular me-2"></i>
 					<p>${version}</p>
 				</div>
 			</label>
 		`);
         versionContainer.appendChild(versionElement);
 
-        const versionInput = document.getElementById(`qol_${versionID}_version`);
+        const versionInput = document.getElementById(`joorney_${versionID}_version`);
         versionInput.checked = supported.includes(version);
         versionInput.onchange = async (e) => {
             const { supportedVersions } = await StorageSync.get(baseSettings);
@@ -43,7 +43,7 @@ function loadSupportedOdoo(currentSettings, features) {
 }
 
 async function loadSupportedFeature(features, supportedVersions) {
-    const versionContainerHead = document.getElementById('qol-feature-versions-head');
+    const versionContainerHead = document.getElementById('joorney-feature-versions-head');
     versionContainerHead.innerHTML = '';
 
     const header = stringToHTML(`
@@ -55,7 +55,7 @@ async function loadSupportedFeature(features, supportedVersions) {
     `);
     versionContainerHead.appendChild(header);
 
-    const versionContainerBody = document.getElementById('qol-feature-versions-body');
+    const versionContainerBody = document.getElementById('joorney-feature-versions-body');
     versionContainerBody.innerHTML = '';
 
     for (const feature of features.filter((f) => !f.limited)) {

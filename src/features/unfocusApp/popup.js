@@ -13,8 +13,8 @@ export default class UnfocusAppPopupFeature extends PopupCustomizableFeature {
             unfocusAppShareEnabled: this.defaultSettings.unfocusAppShareEnabled,
         });
 
-        const appOrderSwitcher = document.getElementById('qol_unfocus_app_order_switcher');
-        const appOrderInput = document.getElementById('qol_unfocus_app_order_input');
+        const appOrderSwitcher = document.getElementById('joorney_unfocus_app_order_switcher');
+        const appOrderInput = document.getElementById('joorney_unfocus_app_order_input');
         this.updateRenderUnfocusAppSwitcher(
             appOrderSwitcher,
             appOrderInput,
@@ -23,8 +23,8 @@ export default class UnfocusAppPopupFeature extends PopupCustomizableFeature {
             this.onUnfocusAppReorderModeChange
         );
 
-        const appShareSwitcher = document.getElementById('qol_unfocus_app_share_switcher');
-        const appShareInput = document.getElementById('qol_unfocus_app_share_input');
+        const appShareSwitcher = document.getElementById('joorney_unfocus_app_share_switcher');
+        const appShareInput = document.getElementById('joorney_unfocus_app_share_input');
 
         this.updateRenderUnfocusAppSwitcher(
             appShareSwitcher,

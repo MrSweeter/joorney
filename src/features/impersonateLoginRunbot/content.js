@@ -27,7 +27,7 @@ export default class ImpersonateLoginRunbotContentFeature extends LimitedRunbotC
         const fieldLogin = document.getElementsByClassName('field-login')[0];
         if (!fieldLogin) return;
 
-        const loginsIdentifier = 'qol-impersonate-login-runbot';
+        const loginsIdentifier = 'joorney-impersonate-login-runbot';
 
         document.getElementById(loginsIdentifier)?.remove();
 

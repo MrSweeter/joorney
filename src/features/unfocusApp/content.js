@@ -14,7 +14,7 @@ const UNFOCUS_STATE = Object.freeze({
 
 const FOCUS_OPACITY = 1;
 const UNFOCUS_OPACITY = 0.1;
-const STAR_ELEMENT_CLASS = 'qol-focus-app';
+const STAR_ELEMENT_CLASS = 'joorney-focus-app';
 const FOCUS_ICON = 'fa-star';
 const UNFOCUS_ICON = 'fa-star-o';
 const SHARED_ORIGIN = 'unfocus_app_shared';
@@ -72,8 +72,8 @@ export default class UnfocusApp extends ContentFeature {
             }
 
             const isUnfocus = state === UNFOCUS_STATE.UNFOCUS;
-            divElement.innerHTML = `<i class="qol-focus-app fa
-                ${isUnfocus ? UNFOCUS_ICON : FOCUS_ICON} me-1" data-qol-state="${state}">
+            divElement.innerHTML = `<i class="joorney-focus-app fa
+                ${isUnfocus ? UNFOCUS_ICON : FOCUS_ICON} me-1" data-joorney-state="${state}">
             </i>${divElement.innerHTML}`.trim();
         }
     }
@@ -94,7 +94,7 @@ export default class UnfocusApp extends ContentFeature {
                     parent = parent.parentElement;
                 }
 
-                const state = app.getAttribute('data-qol-state');
+                const state = app.getAttribute('data-joorney-state');
 
                 switch (state) {
                     case `${UNFOCUS_STATE.DEFAULT}`: {

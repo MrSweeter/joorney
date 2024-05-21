@@ -68,7 +68,7 @@ export default () => {
                 file: `${bundleOutput}/content.js`,
                 format: 'iife',
                 inlineDynamicImports: true,
-                name: 'qol_content',
+                name: 'joorney_content',
             },
             plugins: [...defaultPlugins, copy({ targets: [{ src: 'content/inject.js', dest: bundleOutput }] })],
         },

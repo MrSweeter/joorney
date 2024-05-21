@@ -8,7 +8,7 @@ export default class ThemeSwitchPopupFeature extends PopupCustomizableFeature {
     }
 
     async render(enabled) {
-        const themeModeSwitcher = document.getElementById('qol_theme_switch_mode_switcher');
+        const themeModeSwitcher = document.getElementById('joorney_theme_switch_mode_switcher');
 
         const { themeSwitchMode } = await StorageSync.get({
             themeSwitchMode: 'autoDark',

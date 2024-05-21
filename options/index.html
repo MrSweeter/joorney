@@ -13,37 +13,42 @@
         <link href="./index.css" rel="stylesheet" />
         <script src="index.js"></script>
     </head>
-    <body class="qol-body-background">
+    <body class="joorney-body-background">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a id="qol-brand-debug" class="navbar-brand" title="Debug mode" href="?debug=1">
-                    <img loading="lazy" src="/images/icon_128.png" class="mx-2" height="20" alt="Odoo - QoL Logo" />
+                <a id="joorney-brand-debug" class="navbar-brand" title="Debug mode" href="?debug=1">
+                    <img loading="lazy" src="/images/icon_128.png" class="mx-2" height="20" alt="Joorney Logo" />
                     <small>Joorney Configuration</small>
                 </a>
-                <ul id="qol-menu-items-container" class="navbar-nav me-auto"></ul>
+                <ul id="joorney-menu-items-container" class="navbar-nav"></ul>
+                <ul class="navbar-nav me-auto">
+                    <li id="open-extension-shortcut" class="joorney-menu-item nav-item nav-link" title="Keyboard Shortcuts">
+                        <i class="fa-regular fa-keyboard"></i>
+                    </li>
+                </ul>
 
                 <div class="d-flex align-items-center">
-                    <input type="file" accept=".json" class="form-control form-control-sm" id="qol_import_storage_sync_file" />
-                    <button class="btn" id="qol_import_storage_sync" title="Import settings">
+                    <input type="file" accept=".json" class="form-control form-control-sm" id="joorney_import_storage_sync_file" />
+                    <button class="btn" id="joorney_import_storage_sync" title="Import settings">
                         <i class="fas fa-cloud-arrow-up"></i>
                     </button>
-                    <button class="btn" id="qol_export_storage_sync" title="Export settings">
+                    <button class="btn" id="joorney_export_storage_sync" title="Export settings">
                         <i class="fas fa-cloud-arrow-down"></i>
                     </button>
-                    <a class="btn btn-success d-none" id="qol_migrate_configuration" href="./migration/index.html" target="_blank">MIGRATE</a>
+                    <a class="btn btn-success d-none" id="joorney_migrate_configuration" href="./migration/index.html" target="_blank">MIGRATE</a>
                 </div>
             </div>
         </nav>
 
-        <pre id="qol-debug-configuration"></pre>
+        <pre id="joorney-debug-configuration"></pre>
 
-        <div id="qol-page-container"></div>
+        <div id="joorney-page-container"></div>
 
         <footer class="text-center">
             <div class="text-center p-3">
                 &copy; <span id="copyright-year">2023</span>
                 All rights reserved :
-                <a id="copyright-link" class="text-dark" href="https://github.com/MrSweeter/odoo-qol">Odoo QoL</a>
+                <a id="copyright-link" class="text-dark" href="https://github.com/MrSweeter/joorney">Joorney</a>
             </div>
             <div>Theme Switch base on Location is powered by <a href="https://sunrisesunset.io/">SunriseSunset.io</a></div>
         </footer>

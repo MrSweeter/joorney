@@ -1,7 +1,7 @@
 // import { getVersionInfo } from '../api/odoo.js';
 
 // name hardcoded by inject.js
-export const META_GUESS_ELEMENT_NAME = 'odoo-qol-guess';
+export const META_GUESS_ELEMENT_NAME = 'joorney-guess';
 const DEFAULT_VERSION = { isOdoo: false };
 
 export async function getOdooVersion() {

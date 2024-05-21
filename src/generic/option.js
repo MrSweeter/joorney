@@ -18,7 +18,7 @@ export default class OptionFeature {
     }
 
     appendHTMLFeatureElement() {
-        const disabledContainer = document.getElementById('qol-disable-feature');
+        const disabledContainer = document.getElementById('joorney-disable-feature');
         disabledContainer.appendChild(generateFeatureOptionListItem(this.configuration));
     }
 
@@ -48,13 +48,13 @@ export default class OptionFeature {
         const enabled = defaultConfiguration[`${this.configuration.id}Enabled`];
         const isWhitelist = defaultConfiguration[`${this.configuration.id}WhitelistMode`];
 
-        const featureElement = document.getElementById(`qol_${this.configuration.id}_feature`);
-        let container = document.getElementById('qol-disable-feature');
+        const featureElement = document.getElementById(`joorney_${this.configuration.id}_feature`);
+        let container = document.getElementById('joorney-disable-feature');
         if (enabled) {
             if (isWhitelist) {
-                container = document.getElementById('qol-whitelist-feature');
+                container = document.getElementById('joorney-whitelist-feature');
             } else {
-                container = document.getElementById('qol-blacklist-feature');
+                container = document.getElementById('joorney-blacklist-feature');
             }
         }
 

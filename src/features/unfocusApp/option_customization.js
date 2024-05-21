@@ -36,7 +36,7 @@ export default class UnfocusAppOptionCustomizationFeature extends OptionCustomiz
     async renderOriginsObject(origins) {
         await StorageSync.set({ unfocusAppOrigins: origins });
 
-        const container = document.getElementById('qol_unfocus_app_table_body');
+        const container = document.getElementById('joorney_unfocus_app_table_body');
         container.innerHTML = '';
         for (const [id, o] of Object.keys(origins).entries()) {
             const values = Object.values(origins[o]);
@@ -56,10 +56,10 @@ export default class UnfocusAppOptionCustomizationFeature extends OptionCustomiz
 
         originTemplate.innerHTML = `
 		<tr>
-			<td class="p-1 qol-valign-middle">
+			<td class="p-1 joorney-valign-middle">
 				<input
-					id="qol_unfocus_app_origin_${idx}"
-					class="qol-bg-white form-control border border-0 qol_unfocus_app_origin_input"
+					id="joorney_unfocus_app_origin_${idx}"
+					class="joorney-bg-white form-control border border-0 joorney_unfocus_app_origin_input"
 					type="text"
 					disabled
 					value="${origin}"
@@ -67,12 +67,12 @@ export default class UnfocusAppOptionCustomizationFeature extends OptionCustomiz
 			</td>
 			<td>${superfocusCount}</td>
             <td>${unfocusCount}</td>
-			<td class="p-1 qol-valign-middle">
+			<td class="p-1 joorney-valign-middle">
 				<button
-					class="qol_unfocus_app_origin_delete_${idx} btn btn-outline-danger border-0 btn-floating"
+					class="joorney_unfocus_app_origin_delete_${idx} btn btn-outline-danger border-0 btn-floating"
 					title="Delete origin"
 				>
-					<i class="qol-font-icon-size fa fa-trash"></i>
+					<i class="joorney-font-icon-size fa fa-trash"></i>
 				</button>
 			</td>
 		</tr>
@@ -80,7 +80,7 @@ export default class UnfocusAppOptionCustomizationFeature extends OptionCustomiz
 
         const originElement = originTemplate.content.firstChild;
 
-        const deleteButton = originElement.getElementsByClassName(`qol_unfocus_app_origin_delete_${idx}`)[0];
+        const deleteButton = originElement.getElementsByClassName(`joorney_unfocus_app_origin_delete_${idx}`)[0];
         deleteButton.onclick = () => this.deleteUnfocusAppOrigin(origin);
 
         return originElement;
@@ -94,19 +94,19 @@ export default class UnfocusAppOptionCustomizationFeature extends OptionCustomiz
             unfocusAppDarkImageURL: this.defaultSettings.unfocusAppDarkImageURL,
         });
 
-        document.getElementById('qol_unfocus_app_light_image').src = unfocusAppLightImageURL;
-        document.getElementById('qol_unfocus_app_dark_image').src = unfocusAppDarkImageURL;
+        document.getElementById('joorney_unfocus_app_light_image').src = unfocusAppLightImageURL;
+        document.getElementById('joorney_unfocus_app_dark_image').src = unfocusAppDarkImageURL;
 
         this.loadImageInput(
-            'qol_unfocus_app_light_image_input',
-            'qol_unfocus_app_light_image',
+            'joorney_unfocus_app_light_image_input',
+            'joorney_unfocus_app_light_image',
             'unfocusAppLightImageURL',
             unfocusAppLightImageURL
         );
 
         this.loadImageInput(
-            'qol_unfocus_app_dark_image_input',
-            'qol_unfocus_app_dark_image',
+            'joorney_unfocus_app_dark_image_input',
+            'joorney_unfocus_app_dark_image',
             'unfocusAppDarkImageURL',
             unfocusAppDarkImageURL
         );

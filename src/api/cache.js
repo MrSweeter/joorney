@@ -5,12 +5,12 @@ function getHost() {
 }
 
 async function getCache() {
-    const { qolLocalCacheCall } = await StorageLocal.get('qolLocalCacheCall');
-    return qolLocalCacheCall ?? {};
+    const { joorneyLocalCacheCall } = await StorageLocal.get('joorneyLocalCacheCall');
+    return joorneyLocalCacheCall ?? {};
 }
 
 async function setCache(cache) {
-    await StorageLocal.set({ qolLocalCacheCall: cache ?? {} });
+    await StorageLocal.set({ joorneyLocalCacheCall: cache ?? {} });
 }
 
 async function _checkHostsExpiration(cache, now) {

@@ -22,7 +22,7 @@ export default class SaveKnowledgeContentFeature extends ContentFeature {
         // Need to wait full page loaded to have access to the HTML
         // HTML not used in this method but need to return false if HTML is not "good"
         // TODO[IMP] Improve of find an way to be sure than HTML is loaded
-        const saveExist = document.getElementsByName('qol_action_save_article');
+        const saveExist = document.getElementsByName('joorney_action_save_article');
         for (const e of saveExist) e.disabled = true;
 
         // body_0 is the ID use when you can edit an article body
@@ -42,7 +42,7 @@ export default class SaveKnowledgeContentFeature extends ContentFeature {
     }
 
     async appendSaveButton(article) {
-        const exist = document.getElementsByName('qol_action_save_article');
+        const exist = document.getElementsByName('joorney_action_save_article');
         // Avoid adding button if already added
         if (exist.length > 0) {
             for (const e of exist) {
@@ -77,7 +77,7 @@ export default class SaveKnowledgeContentFeature extends ContentFeature {
     appendSaveButtonToDom(article) {
         const buttonTemplate = document.createElement('template');
         buttonTemplate.innerHTML = `
-            <button class="btn btn-warning" name="qol_action_save_article" type="object">
+            <button class="btn btn-warning" name="joorney_action_save_article" type="object">
                 <span>Save</span>
             </button>
         `.trim();

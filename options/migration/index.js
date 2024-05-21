@@ -1,7 +1,7 @@
 import { baseSettings, importMigratorFile } from '../../configuration.js';
 
 function setupInput() {
-    const importInput = document.getElementById('qol_import_storage_sync_file');
+    const importInput = document.getElementById('joorney_import_storage_sync_file');
     importInput.onchange = (e) => {
         const reader = new FileReader();
         reader.onload = async (eventRead) => {
@@ -42,7 +42,7 @@ function analyzeConfiguration(jsonFile) {
     runButton.innerHTML = 'Execute migration';
     runButton.onclick = async (e) => {
         e.preventDefault();
-        document.getElementById('qol_import_storage_sync_file').value = null;
+        document.getElementById('joorney_import_storage_sync_file').value = null;
         const button = e.currentTarget;
         button.disabled = true;
         button.innerHTML = '<i class="fa-solid fa-spin fa-spinner"></i>';

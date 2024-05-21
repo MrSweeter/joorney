@@ -1,10 +1,10 @@
 :root {
-    --qol-primary: #13213c;
-    --qol-primary-bg: #e5e5e5;
-    --qol-secondary: #fca311;
-    --qol-secondary-bg: #e5e5e5;
-    --qol-limited-secondary: #a75000;
-    --qol-odoo-primary: #714b67;
+    --joorney-primary: #13213c;
+    --joorney-primary-bg: #e5e5e5;
+    --joorney-secondary: #fca311;
+    --joorney-secondary-bg: #e5e5e5;
+    --joorney-limited-secondary: #a75000;
+    --joorney-odoo-primary: #714b67;
 }
 
 html,
@@ -12,7 +12,7 @@ body {
     margin: 0;
 }
 
-.qol-body-background {
+.joorney-body-background {
     background-image: url('/images/background.png');
     background-position: center;
     background-repeat: no-repeat;
@@ -20,19 +20,19 @@ body {
     min-height: 100vh;
 }
 
-.qol-valign-middle {
+.joorney-valign-middle {
     vertical-align: middle;
 }
 
-.qol-bg-white {
+.joorney-bg-white {
     background-color: rgba(0, 0, 0, 0);
 }
 
-.qol-font-icon-size {
+.joorney-font-icon-size {
     font-size: 1.2em;
 }
 
-.qol-modified-input {
+.joorney-modified-input {
     background-color: #fffdaf !important;
 }
 

@@ -8,8 +8,8 @@ window.onload = async () => {
     const currentTab = tabs[0];
     if (!currentTab.url.startsWith('http')) return;
 
-    document.getElementById('qol-invalid-website').remove();
-    document.getElementById('qol-popup-configuration').classList.remove('d-none');
+    document.getElementById('joorney-invalid-website').remove();
+    document.getElementById('joorney-popup-configuration').classList.remove('d-none');
 
     renderFeatures();
 
@@ -20,7 +20,7 @@ window.onload = async () => {
 async function renderFeatures() {
     const { features, currentSettings } = await getFeaturesAndCurrentSettings();
 
-    const toggleContainer = document.getElementById('qol-popup-feature-toggle');
+    const toggleContainer = document.getElementById('joorney-popup-feature-toggle');
     toggleContainer.innerHTML = '';
     const tabFeatureContainer = document.getElementById('tabFeaturesContainer');
     tabFeatureContainer.innerHTML = '';

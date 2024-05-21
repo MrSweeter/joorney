@@ -1,41 +1,41 @@
 import { StorageSync } from '../../src/utils/browser.js';
 
 export function disableFeatureInput(feature) {
-    const inputs = Array.from(document.getElementsByClassName(`qol_origins_filter_feature_input_${feature}`));
+    const inputs = Array.from(document.getElementsByClassName(`joorney_origins_filter_feature_input_${feature}`));
     for (const i of inputs) {
         i.disabled = true;
         i.classList.add('feature-disabled');
     }
 
-    document.getElementById(`qol_origins_filter_feature_header_${feature}`).style.opacity = 0.5;
+    document.getElementById(`joorney_origins_filter_feature_header_${feature}`).style.opacity = 0.5;
 }
 
 export function enableFeatureInput(feature) {
-    const inputs = Array.from(document.getElementsByClassName(`qol_origins_filter_feature_input_${feature}`));
+    const inputs = Array.from(document.getElementsByClassName(`joorney_origins_filter_feature_input_${feature}`));
 
     for (const i of inputs) {
         i.disabled = false;
         i.classList.remove('feature-disabled');
     }
 
-    document.getElementById(`qol_origins_filter_feature_header_${feature}`).style.opacity = 1;
+    document.getElementById(`joorney_origins_filter_feature_header_${feature}`).style.opacity = 1;
 }
 
 //#region Drag and Drop
 export function setupDragAndDrop() {
-    const whitelistFeature = document.getElementById('qol-whitelist-feature');
+    const whitelistFeature = document.getElementById('joorney-whitelist-feature');
     whitelistFeature.ondrop = (e) => {
         dropElement(e, true, true);
     };
     whitelistFeature.ondragover = allowDropInArea;
 
-    const blacklistFeature = document.getElementById('qol-blacklist-feature');
+    const blacklistFeature = document.getElementById('joorney-blacklist-feature');
     blacklistFeature.ondrop = (e) => {
         dropElement(e, true, false);
     };
     blacklistFeature.ondragover = allowDropInArea;
 
-    const disableFeature = document.getElementById('qol-disable-feature');
+    const disableFeature = document.getElementById('joorney-disable-feature');
     disableFeature.ondrop = (e) => {
         dropElement(e, false, undefined);
     };
@@ -79,7 +79,7 @@ for (const card of document.querySelectorAll('.draggable-feature')) {
 
 /*const dragEnter = (e) => e.currentTarget.classList.add('drop');
 const dragLeave = (e) => e.currentTarget.classList.remove('drop');
-for (const column of document.querySelectorAll('.qol-state-feature')) {
+for (const column of document.querySelectorAll('.joorney-state-feature')) {
     column.addEventListener('dragenter', dragEnter);
     column.addEventListener('dragleave', dragLeave);
 };*/
@@ -94,16 +94,16 @@ export async function updateFeatureOriginInputs(featureID, isEnable, isWhitelist
 }
 
 export function updateInputColor(feature, isEnable, isWhitelist) {
-    for (const el of document.getElementsByClassName(`qol_origins_filter_feature_input_${feature}`)) {
-        el.classList.remove('qol_f_whitelist');
-        el.classList.remove('qol_f_blacklist');
-        el.classList.remove('qol_f_disable');
-        let toAdd = 'qol_f_disable';
+    for (const el of document.getElementsByClassName(`joorney_origins_filter_feature_input_${feature}`)) {
+        el.classList.remove('joorney_f_whitelist');
+        el.classList.remove('joorney_f_blacklist');
+        el.classList.remove('joorney_f_disable');
+        let toAdd = 'joorney_f_disable';
         if (isEnable) {
             if (isWhitelist) {
-                toAdd = 'qol_f_whitelist';
+                toAdd = 'joorney_f_whitelist';
             } else {
-                toAdd = 'qol_f_blacklist';
+                toAdd = 'joorney_f_blacklist';
             }
         }
         el.classList.add(toAdd);

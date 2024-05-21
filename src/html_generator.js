@@ -8,11 +8,11 @@ export function generateLimitedFeatureOptionButtonItem(feature) {
     return stringToHTML(`
 		<label
 			title="[Limited Feature] ${feature.display_name ?? feature.id}"
-			for="qol_${feature.id}_limited_feature"
+			for="joorney_${feature.id}_limited_feature"
 		>
-			<input id="qol_${feature.id}_limited_feature" class="input-hide" type="checkbox" />
+			<input id="joorney_${feature.id}_limited_feature" class="input-hide" type="checkbox" />
 			<div class="limited-feature-wrapper d-flex">
-				<i class="qol-font-icon-size fa-regular me-2"></i>
+				<i class="joorney-font-icon-size fa-regular me-2"></i>
 				<p>${feature.display_name ?? feature.id}</p>
 			</div>
 		</label>
@@ -24,7 +24,7 @@ export function generateFeatureOptionListItem(feature) {
 
     return stringToHTML(`
 		<label
-			id="qol_${feature.id}_feature"
+			id="joorney_${feature.id}_feature"
 			title="[Feature] ${feature.display_name ?? feature.id}"
 			data-feature="${feature.id}"
 			class="draggable-feature" draggable="true"
@@ -44,7 +44,7 @@ export function generateFeatureOptionTableHeadItem(feature) {
 
     return stringToHTML(`
 		<th title="[Feature Origin] ${feature.display_name ?? feature.id}" class="icon-wrapper-head">
-			<div class="icon-wrapper" id="qol_origins_filter_feature_header_${feature.id}">
+			<div class="icon-wrapper" id="joorney_origins_filter_feature_header_${feature.id}">
 				${icon}
 			</div>
 		</th>

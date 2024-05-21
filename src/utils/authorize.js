@@ -131,26 +131,33 @@ export function includeVersion(versions, version, empty = false) {
     return false;
 }
 
-function isVersionSupported(sanitizedVersion, versionNum, uniqueOperator) {
-    const supportedVersionNum = Number.parseFloat(sanitizedVersion);
+function isVersionSupported(supportedVersion, version, uniqueOperator) {
+    const supportedVersionNum = Number.parseFloat(supportedVersion);
     if (ValueIsNaN(supportedVersionNum)) return false;
 
-    if (sanitizedVersion.endsWith('+')) {
+    const versionNum = Number.parseFloat(version);
+    if (ValueIsNaN(versionNum)) return false;
+
+    if (supportedVersion.endsWith('+')) {
         if (uniqueOperator) return versionNum >= supportedVersionNum;
         console.warn('Version operator "+" cannot be used with other values, with ":" for range');
         return false;
     }
 
-    if (sanitizedVersion.endsWith('-')) {
+    if (supportedVersion.endsWith('-')) {
         if (uniqueOperator) return versionNum < supportedVersionNum;
         console.warn('Version operator "-" cannot be used with other values, with ":" for range');
         return false;
     }
 
-    if (sanitizedVersion.includes(':')) {
-        const minimum = Number.parseFloat(sanitizedVersion.split(':')[0]);
-        const maximum = Number.parseFloat(sanitizedVersion.split(':')[1]);
-        if (ValueIsNaN(minimum) || ValueIsNaN(maximum)) return false;
+    if (supportedVersion.includes(':')) {
+        const fromTo = supportedVersion.split(':');
+        const minimum = Number.parseFloat(fromTo[0]);
+        const maximum = Number.parseFloat(fromTo[1]);
+        if (ValueIsNaN(minimum) || ValueIsNaN(maximum)) {
+            console.warn(`Invalid range for operator ":" --> ${supportedVersion}`);
+            return false;
+        }
         return versionNum >= minimum && versionNum < maximum;
     }
     return versionNum === supportedVersionNum;

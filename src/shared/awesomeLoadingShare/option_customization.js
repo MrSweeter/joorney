@@ -7,11 +7,11 @@ export default class AwesomeLoadingShareOptionCustomizationFeature extends Optio
         if (!container) throw new Error(`Invalid state for feature: ${this.configuration.id}`);
         container.classList.remove('d-none');
 
-        const awesomeLoadingNewImage = document.getElementById('qol_awe_loading_new_image');
+        const awesomeLoadingNewImage = document.getElementById('joorney_awe_loading_new_image');
         awesomeLoadingNewImage.onkeydown = this.onKeydownHost;
         awesomeLoadingNewImage.oninput = this.onImageChange;
 
-        document.getElementById('qol_awe_loading_new_image_save').onclick = this.createAwesomeLoadingImage;
+        document.getElementById('joorney_awe_loading_new_image_save').onclick = this.createAwesomeLoadingImage;
 
         const configuration = await StorageSync.get(this.configuration.defaultSettings);
 
@@ -20,7 +20,7 @@ export default class AwesomeLoadingShareOptionCustomizationFeature extends Optio
 
     //#region CRUD
     async createAwesomeLoadingImage() {
-        const imageInput = document.getElementById('qol_awe_loading_new_image');
+        const imageInput = document.getElementById('joorney_awe_loading_new_image');
         let imageUrl = imageInput.value;
         if (!imageUrl) {
             this.renderAwesomeLoadingError('Missing url');
@@ -68,7 +68,7 @@ export default class AwesomeLoadingShareOptionCustomizationFeature extends Optio
 
         try {
             imageUrl = new URL(imageUrl).href;
-            const imagePreview = document.getElementById('qol_awe_loading_new_image_preview');
+            const imagePreview = document.getElementById('joorney_awe_loading_new_image_preview');
             imagePreview.src = imageUrl;
         } catch (ex) {
             console.warn(ex);
@@ -78,7 +78,7 @@ export default class AwesomeLoadingShareOptionCustomizationFeature extends Optio
 
     //#region UI
     renderAwesomeLoadingError(errorMessage) {
-        const container = document.getElementById('qol_awe_loading_error_footer');
+        const container = document.getElementById('joorney_awe_loading_error_footer');
         container.textContent = errorMessage;
         container.style.display = errorMessage ? 'table-cell' : 'none';
     }
@@ -87,7 +87,7 @@ export default class AwesomeLoadingShareOptionCustomizationFeature extends Optio
         const images = Array.from(new Set(imagesArg)).sort();
         await StorageSync.set({ awesomeLoadingImages: images });
 
-        const container = document.getElementById('qol_awe_loading_images_table_body');
+        const container = document.getElementById('joorney_awe_loading_images_table_body');
         container.innerHTML = '';
         for (const [id, image] of images.entries()) container.appendChild(this.renderImage(id, image));
         this.renderAwesomeLoadingError();
@@ -97,31 +97,31 @@ export default class AwesomeLoadingShareOptionCustomizationFeature extends Optio
         const imageTemplate = document.createElement('template');
         imageTemplate.innerHTML = `
             <tr>
-                <td class="p-1 qol-valign-middle">
-                    <img class="qol-awe-loading-preview" loading="lazy" src="${image}" />
+                <td class="p-1 joorney-valign-middle">
+                    <img class="joorney-awe-loading-preview" loading="lazy" src="${image}" />
                 </td>
-                <td class="p-1 qol-valign-middle">
+                <td class="p-1 joorney-valign-middle">
                     <input
-                        id="qol_awe_loading_image_key_${idx}"
-                        class="qol-bg-white form-control border border-0"
+                        id="joorney_awe_loading_image_key_${idx}"
+                        class="joorney-bg-white form-control border border-0"
                         type="text"
                         disabled
                         value="${image}"
                     />
                 </td>
-                <td class="p-1 qol-valign-middle">
+                <td class="p-1 joorney-valign-middle">
                     <button
-                        class="qol_awe_loading_image_delete_${idx} btn btn-outline-danger border-0 btn-floating"
+                        class="joorney_awe_loading_image_delete_${idx} btn btn-outline-danger border-0 btn-floating"
                         title="Delete image"
                     >
-                        <i class="qol-font-icon-size fa fa-trash"></i>
+                        <i class="joorney-font-icon-size fa fa-trash"></i>
                     </button>
                 </td>
             </tr>
         `.trim();
 
         const imageElement = imageTemplate.content.firstChild;
-        const deleteButton = imageElement.getElementsByClassName(`qol_awe_loading_image_delete_${idx}`)[0];
+        const deleteButton = imageElement.getElementsByClassName(`joorney_awe_loading_image_delete_${idx}`)[0];
         deleteButton.onclick = () => this.deleteAwesomeLoadingImage(image);
 
         return imageElement;

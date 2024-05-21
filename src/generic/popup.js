@@ -77,7 +77,7 @@ export class PopupCustomizableFeature extends PopupFeature {
         const container = document.querySelector(`div[data-feature-customization="${this.configuration.id}"]`);
         if (!container) throw new Error(`Invalid state for feature: ${this.configuration.id}`);
         container.classList.remove('d-none');
-        document.getElementById(`qol-popup-feature-${this.configuration.id}-label`).innerHTML =
+        document.getElementById(`joorney-popup-feature-${this.configuration.id}-label`).innerHTML =
             this.configuration.display_name;
 
         this.render(currentSettings[`${this.configuration.id}Enabled`]);

@@ -31,7 +31,7 @@ export default class ThemeSwitchBackgroundFeature extends BackgroundFeature {
             case 'dynamicLocation': {
                 const sunData = await this.getSunRiseSunSet(themeSwitchLocationLatitude, themeSwitchLocationLongitude);
 
-                expectedMode = time > sunData.qol_sunrise && time < sunData.qol_sunset ? 'light' : 'dark';
+                expectedMode = time > sunData.joorney_sunrise && time < sunData.joorney_sunset ? 'light' : 'dark';
                 break;
             }
             case 'dynamicTime': {
@@ -59,12 +59,12 @@ export default class ThemeSwitchBackgroundFeature extends BackgroundFeature {
         let today = new Date();
         today = `${today.getMonth() + 1}-${today.getDate()}-${today.getFullYear()}`;
         const cached = await StorageLocal.get({
-            qol_sunrise: 0,
-            qol_sunset: 23 * 60 + 59,
-            qol_date: '',
+            joorney_sunrise: 0,
+            joorney_sunset: 23 * 60 + 59,
+            joorney_date: '',
         });
 
-        if (cached.qol_sunrise && cached.qol_sunset && cached.qol_date === today) {
+        if (cached.joorney_sunrise && cached.joorney_sunset && cached.joorney_date === today) {
             return cached;
         }
 
@@ -81,9 +81,9 @@ export default class ThemeSwitchBackgroundFeature extends BackgroundFeature {
             Number.parseInt(sunset[0]) * 60 + Number.parseInt(sunset[1]) + (sunset[2].endsWith('PM') ? 12 * 60 : 0);
 
         const data = {
-            qol_sunrise: sunrise,
-            qol_sunset: sunset,
-            qol_date: today,
+            joorney_sunrise: sunrise,
+            joorney_sunset: sunset,
+            joorney_date: today,
         };
 
         await StorageLocal.set(data);

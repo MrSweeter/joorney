@@ -3,9 +3,10 @@ import { initImportExport } from './import_export.js';
 import { loadPage as loadConfigurationPage } from './pages/configuration/index.js';
 import { loadPage as loadVersionPage } from './pages/version/index.js';
 import { loadPage as loadWebsitePage } from './pages/website/index.js';
+import { load as loadShortcut } from './src/keyboard_shortcut.js';
 
-const MENU_ITEMS_CONTAINER = 'qol-menu-items-container';
-const PAGE_CONTAINER = 'qol-page-container';
+const MENU_ITEMS_CONTAINER = 'joorney-menu-items-container';
+const PAGE_CONTAINER = 'joorney-page-container';
 const PAGES = [
     {
         id: 'page-website',
@@ -41,13 +42,14 @@ async function onDOMContentLoaded() {
     let htmlDebug = 1;
     if (searchParams.get('debug')) {
         htmlDebug = '';
-        const debug = document.getElementById('qol-debug-configuration');
+        const debug = document.getElementById('joorney-debug-configuration');
         const config = await getFeaturesAndCurrentSettings();
         debug.innerHTML = JSON.stringify(config, null, 4);
     }
-    document.getElementById('qol-brand-debug').href = `?debug=${htmlDebug}`;
+    document.getElementById('joorney-brand-debug').href = `?debug=${htmlDebug}`;
 
     loadMenus();
+    loadShortcut();
 }
 
 document.removeEventListener('DOMContentLoaded', onDOMContentLoaded);
@@ -68,7 +70,7 @@ function loadMenus() {
 function loadMenu(page, container) {
     const template = document.createElement('template');
     template.innerHTML = `
-        <li id="${page.menu}" class="qol-menu-item nav-item nav-link">${page.label}</li>
+        <li id="${page.menu}" class="joorney-menu-item nav-item nav-link">${page.label}</li>
     `.trim();
 
     template.content.firstChild.onclick = () => {
@@ -88,7 +90,7 @@ async function loadPage(page) {
 }
 
 function updateActiveMenu(menu) {
-    for (const e of document.getElementsByClassName('qol-menu-item')) {
+    for (const e of document.getElementsByClassName('joorney-menu-item')) {
         if (e.id === menu) e.classList.add('active');
         else e.classList.remove('active');
     }

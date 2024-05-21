@@ -14,7 +14,7 @@ function handleOdooGuess() {
     const res = guessOdooVersion(window);
 
     const guess = document.createElement('meta');
-    guess.name = 'odoo-qol-guess';
+    guess.name = 'joorney-guess';
     guess.content = JSON.stringify(res);
     (document.head || document.documentElement).appendChild(guess);
 }

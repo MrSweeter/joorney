@@ -167,7 +167,7 @@ function randomPhysics(opts) {
 //#endregion
 
 //#region Animate
-function requestAnimationFrameQoL() {
+function requestAnimationFrameJoorney() {
     const TIME = Math.floor(1000 / 60);
     let frame;
     let cancel;
@@ -201,7 +201,7 @@ function requestAnimationFrameQoL() {
     return { frame: frame, cancel: cancel };
 }
 
-const raf = requestAnimationFrameQoL();
+const raf = requestAnimationFrameJoorney();
 
 function animate(canvas, fettis, resizer, size, done) {
     let animatingFettis = fettis.slice();

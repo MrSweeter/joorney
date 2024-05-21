@@ -5,7 +5,7 @@ import { RunbotException } from '../../utils/error.js';
 import { MESSAGE_ACTION } from '../../utils/messaging.js';
 import { sanitizeURL } from '../../utils/util.js';
 
-export const openVersionKey = 'qol-runbot';
+export const openVersionKey = 'joorney-runbot';
 
 export default class LimitedRunbotContentFeature extends ContentFeature {
     async load(urlArg, _versionInfo) {
@@ -49,7 +49,7 @@ export default class LimitedRunbotContentFeature extends ContentFeature {
 
         url.pathname = '/web/login';
         url.search = url.search ? `${url.search}&debug=1` : 'debug=1';
-        url.search = `${url.search}&qol-runbot=login`;
+        url.search = `${url.search}&joorney-runbot=login`;
         return url.toString();
     }
 

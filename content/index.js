@@ -94,7 +94,7 @@ export async function updateTabState(url) {
 }
 
 function updateLandingPage() {
-    for (const el of document.getElementsByClassName('odoo-qol-landing-extension-state')) {
+    for (const el of document.getElementsByClassName('joorney-landing-extension-state')) {
         el.style.color = '#fca311';
     }
 }

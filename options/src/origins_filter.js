@@ -7,7 +7,7 @@ import { updateFeatureOriginInputs } from './features.js';
 
 //#region CRUD
 export async function createOriginsFilterOrigin() {
-    const origin = document.getElementById('qol_origins_filter_new_origin');
+    const origin = document.getElementById('joorney_origins_filter_new_origin');
     let originString = origin.value.trim();
     if (!originString) {
         renderOriginsFilterError('Missing origin');
@@ -60,10 +60,10 @@ function onKeydownHost(event) {
     if (event.key === 'Enter') createOriginsFilterOrigin();
 }
 export async function load() {
-    const originsFilterNewOrigin = document.getElementById('qol_origins_filter_new_origin');
+    const originsFilterNewOrigin = document.getElementById('joorney_origins_filter_new_origin');
     originsFilterNewOrigin.onkeydown = onKeydownHost;
 
-    document.getElementById('qol_origins_filter_new_origin_save').onclick = createOriginsFilterOrigin;
+    document.getElementById('joorney_origins_filter_new_origin_save').onclick = createOriginsFilterOrigin;
 
     await restore();
 }
@@ -77,7 +77,7 @@ async function restore() {
 
 //#region UI
 function renderOriginsFilterError(errorMessage) {
-    const container = document.getElementById('qol_origins_filter_error_footer');
+    const container = document.getElementById('joorney_origins_filter_error_footer');
     container.textContent = errorMessage;
     container.style.display = errorMessage ? 'table-cell' : 'none';
 }
@@ -100,15 +100,15 @@ async function renderOriginsObject(origins) {
     });
     const features = response.features.filter((f) => !f.limited);
 
-    const tableHeader = document.querySelector('#qol_origins_filter_table thead tr');
+    const tableHeader = document.querySelector('#joorney_origins_filter_table thead tr');
     tableHeader.innerHTML = '';
     tableHeader.appendChild(
-        stringToHTML(`<th class="qol-origins_filter-origin-input" title="Odoo Database Origin">Origins</th>`)
+        stringToHTML(`<th class="joorney-origins_filter-origin-input" title="Odoo Database Origin">Origins</th>`)
     );
     for (const f of features) tableHeader.appendChild(generateFeatureOptionTableHeadItem(f));
-    tableHeader.appendChild(stringToHTML(`<th class="py-0 qol-valign-middle action-head"></th>`));
+    tableHeader.appendChild(stringToHTML(`<th class="py-0 joorney-valign-middle action-head"></th>`));
 
-    const container = document.getElementById('qol_origins_filter_table_body');
+    const container = document.getElementById('joorney_origins_filter_table_body');
     container.innerHTML = '';
     for (const [id, o] of originsArray.entries())
         container.appendChild(
@@ -132,15 +132,15 @@ async function renderOriginsObject(origins) {
 }
 
 function setupOriginFeature(container, idx, feature, origin) {
-    const checkInput = container.getElementsByClassName(`qol_origins_filter_origin_${idx}_${feature}`)[0];
+    const checkInput = container.getElementsByClassName(`joorney_origins_filter_origin_${idx}_${feature}`)[0];
     checkInput.onchange = (e) => updateOriginFeature(idx, origin, feature, e.currentTarget.checked);
 }
 
 async function updateOriginFeature(idx, origin, feature, checked) {
     // Disable row on update to avoid spamming/inconsistency if StorageSync.set take time
-    const rowInputs = Array.from(document.getElementsByClassName(`qol_origins_filter_feature_input_${idx} `)).filter(
-        (i) => !i.className.includes('feature-disabled')
-    );
+    const rowInputs = Array.from(
+        document.getElementsByClassName(`joorney_origins_filter_feature_input_${idx} `)
+    ).filter((i) => !i.className.includes('feature-disabled'));
     for (const i of rowInputs) i.disabled = true;
 
     const origins = await readOriginsFilterOrigins();
@@ -159,12 +159,12 @@ function renderOrigin(idx, origin, features) {
 			<td>
 				<input
 					class="
-					    qol_origins_filter_feature_input_${idx}
-                        qol_origins_filter_feature_input_${f}
-                        qol_origins_filter_origin_${idx}_${f}
+					    joorney_origins_filter_feature_input_${idx}
+                        joorney_origins_filter_feature_input_${f}
+                        joorney_origins_filter_origin_${idx}_${f}
                         m-0 form-check-input
                     "
-                    ${!document.getElementById(`qol_${f}_feature`)?.checked ? 'disabled' : ''}
+                    ${!document.getElementById(`joorney_${f}_feature`)?.checked ? 'disabled' : ''}
 					type="checkbox"
 					${origin[f] === true ? 'checked' : ''}
 				/>
@@ -175,22 +175,22 @@ function renderOrigin(idx, origin, features) {
 
     originTemplate.innerHTML = `
 		<tr>
-			<td class="p-1 qol-valign-middle">
+			<td class="p-1 joorney-valign-middle">
 				<input
-					id="qol_origins_filter_origin_${idx}"
-					class="qol-bg-white form-control border border-0 qol_origins_filter_origin_input"
+					id="joorney_origins_filter_origin_${idx}"
+					class="joorney-bg-white form-control border border-0 joorney_origins_filter_origin_input"
 					type="text"
 					disabled
 					value="${origin.origin}"
 				/>
 			</td>
 			${featuresUI}
-			<td class="p-1 qol-valign-middle">
+			<td class="p-1 joorney-valign-middle">
 				<button
-					class="qol_origins_filter_origin_delete_${idx} btn btn-outline-danger border-0 btn-floating"
+					class="joorney_origins_filter_origin_delete_${idx} btn btn-outline-danger border-0 btn-floating"
 					title="Delete origin"
 				>
-					<i class="qol-font-icon-size fa fa-trash"></i>
+					<i class="joorney-font-icon-size fa fa-trash"></i>
 				</button>
 			</td>
 		</tr>
@@ -200,7 +200,7 @@ function renderOrigin(idx, origin, features) {
 
     for (const f of features) setupOriginFeature(originElement, idx, f, origin.origin);
 
-    const deleteButton = originElement.getElementsByClassName(`qol_origins_filter_origin_delete_${idx}`)[0];
+    const deleteButton = originElement.getElementsByClassName(`joorney_origins_filter_origin_delete_${idx}`)[0];
     deleteButton.onclick = () => deleteOriginsFilterOrigin(origin.origin);
 
     return originElement;

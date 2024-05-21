@@ -13,7 +13,7 @@ export default class AdminDebugLoginRunbotContentFeature extends LimitedRunbotCo
     }
 
     async appendRunbotAdminDebugLogin() {
-        const btnIdentifier = 'qol-admin-debug-login-runbot';
+        const btnIdentifier = 'joorney-admin-debug-login-runbot';
 
         for (const e of document.getElementsByClassName(btnIdentifier)) e.remove();
 

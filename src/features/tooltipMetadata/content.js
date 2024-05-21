@@ -16,7 +16,7 @@ export default class TooltipMetadataContentFeature extends ContentFeature {
     }
 
     async appendTooltipMetadata(url) {
-        const metadataContainer = document.getElementById('odoo-qol-tooltip-metadata');
+        const metadataContainer = document.getElementById('joorney-tooltip-metadata');
         if (metadataContainer) metadataContainer.remove();
 
         const debugManager = document.querySelector('.o_debug_manager');
@@ -70,7 +70,7 @@ export default class TooltipMetadataContentFeature extends ContentFeature {
     appendTooltip(datas) {
         if (!datas || datas.length === 0) return;
 
-        const metadataContainer = document.getElementById('odoo-qol-tooltip-metadata');
+        const metadataContainer = document.getElementById('joorney-tooltip-metadata');
         if (metadataContainer) metadataContainer.remove();
 
         const debugManager = document.querySelector('.o_debug_manager');
@@ -80,9 +80,9 @@ export default class TooltipMetadataContentFeature extends ContentFeature {
 
         const template = document.createElement('template');
         template.innerHTML = `
-            <div id="odoo-qol-tooltip-metadata">
+            <div id="joorney-tooltip-metadata">
                 <style>
-                    #odoo-qol-tooltip-metadata {
+                    #joorney-tooltip-metadata {
                         display: none;
                         position: absolute;
                         top: 100%;
@@ -96,18 +96,18 @@ export default class TooltipMetadataContentFeature extends ContentFeature {
                         box-shadow: 0 0.125rem 0.25rem rgba(252, 163, 17, 0.075);
                         transform: translateX(-90%);
                     }
-                    #odoo-qol-tooltip-metadata th, #odoo-qol-tooltip-metadata td {
+                    #joorney-tooltip-metadata th, #joorney-tooltip-metadata td {
                         padding-right: 50px;
                     }
-                    #odoo-qol-tooltip-metadata th:first-child {
+                    #joorney-tooltip-metadata th:first-child {
                         width: 1%;
                         white-space: nowrap;
                     }
 
-                    #odoo-qol-tooltip-metadata td:last-child {
+                    #joorney-tooltip-metadata td:last-child {
                         width: 100%;
                     }
-                    .o_debug_manager:hover #odoo-qol-tooltip-metadata {
+                    .o_debug_manager:hover #joorney-tooltip-metadata {
                         display: flex;
                     }
                     .o_debug_manager:hover button {
