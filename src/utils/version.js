@@ -20,3 +20,6 @@ export async function getOdooVersion() {
 
     return data;
 }
+export function sanitizeVersion(version) {
+    return `${version}`.replaceAll(/saas[~|-]/g, '');
+}

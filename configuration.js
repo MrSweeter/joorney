@@ -1,7 +1,7 @@
 import FeaturesState from './features_state.json';
-import { sanitizeVersion } from './src/api/odoo.js';
 import { Runtime, StorageSync } from './src/utils/browser.js';
 import { MESSAGE_ACTION } from './src/utils/messaging.js';
+import { sanitizeVersion } from './src/utils/version.js';
 
 export const SUPPORTED_VERSION = [
     '15.0',
@@ -14,7 +14,7 @@ export const SUPPORTED_VERSION = [
     '17.0',
     'saas-17.1',
     'saas-17.2',
-    //'saas-17.3', // master
+    'saas-17.3', // master
     //'saas-17.4',
     //'18.0'
 ].map((v) => sanitizeVersion(v));

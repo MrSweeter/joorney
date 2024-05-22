@@ -1,4 +1,5 @@
 import { isNumeric, sanitizeURL } from '../utils/util.js';
+import { sanitizeVersion } from '../utils/version.js';
 import { readCacheCall, saveCacheCall } from './cache.js';
 
 //#region Window Action
@@ -167,8 +168,4 @@ export async function writeRecord(model, recordID, writeData) {
         return true;
     }
     throw new Error(data?.result);
-}
-
-export function sanitizeVersion(version) {
-    return `${version}`.replaceAll(/saas[~|-]/g, '');
 }

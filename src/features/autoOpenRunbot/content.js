@@ -1,6 +1,6 @@
-import { sanitizeVersion } from '../../api/odoo.js';
 import LimitedRunbotContentFeature from '../../shared/limited/runbot_content.js';
 import { ValueIsNaN } from '../../utils/util.js';
+import { sanitizeVersion } from '../../utils/version.js';
 import configuration from './configuration.js';
 
 export default class AutoOpenRunbotContentFeature extends LimitedRunbotContentFeature {

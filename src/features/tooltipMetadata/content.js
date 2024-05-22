@@ -35,6 +35,7 @@ export default class TooltipMetadataContentFeature extends ContentFeature {
 
     async loadRecordMetadata(model_id) {
         const { resId, model } = model_id;
+        if (!model || !resId) return;
         const metadata = await getMetadata(model, resId);
         this.appendRecordMetadataTooltip(metadata);
     }

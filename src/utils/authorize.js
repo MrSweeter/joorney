@@ -1,7 +1,7 @@
 import { baseSettings } from '../../configuration.js';
-import { sanitizeVersion } from '../api/odoo.js';
 import { StorageLocal, StorageSync } from './browser.js';
 import { ValueIsNaN, sanitizeURL } from './util.js';
+import { sanitizeVersion } from './version.js';
 
 export const regexSchemePrefix = 'regex://';
 
