@@ -1,4 +1,5 @@
 import { importFeatureBackgroundTriggerFile, importFeatureContentFile } from '../configuration.js';
+import { loadToast } from '../src/toast/index.js';
 import { Runtime } from '../src/utils/browser.js';
 import { MESSAGE_ACTION } from '../src/utils/messaging.js';
 import { getOdooVersion } from '../src/utils/version.js';
@@ -35,6 +36,8 @@ async function onVersionLoaded() {
     const versionInfo = await getOdooVersion();
     await loadFeatures(url, versionInfo, 'background');
     await loadFeatures(url, versionInfo, 'load');
+
+    loadToast(versionInfo);
 
     loaded = true;
 }

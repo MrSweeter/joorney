@@ -16,10 +16,6 @@ export function createRecordFormURL(url, model, id) {
 //#endregion
 
 //#region Check model new form
-export async function isServerActionCreateView_fromURL(url) {
-    return await isModelCreateView_fromURL(url, 'ir.actions.server');
-}
-
 export async function isModelCreateView_fromURL(url, model) {
     const state = await parseURL(url);
     return state.model === model && state.view_type === 'form' && state.resId === 'new';
@@ -43,7 +39,7 @@ export async function getActionWindow_fromURL(url) {
     if (state.actionWindow) return state.actionWindow;
     if (!state.action) return undefined;
 
-    const actionWindow = getActionWindowWithState(state.action, actionWindowFields);
+    const actionWindow = await getActionWindowWithState(state.action, actionWindowFields);
     if (actionWindow) return actionWindow;
     return undefined;
 }

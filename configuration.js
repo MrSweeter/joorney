@@ -21,6 +21,7 @@ export const SUPPORTED_VERSION = [
 
 export const baseSettings = {
     configurationVersion: 1,
+    toastMode: 'ui',
 
     // [LIMITATION] Object is loaded by default even if values exists - 'https://www.odoo.com': {},
     originsFilterOrigins: {},

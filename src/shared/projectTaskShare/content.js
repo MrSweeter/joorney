@@ -21,14 +21,12 @@ export default class ProjectTaskShareContentFeature extends ContentFeature {
     }
 
     async getTask(url) {
-        const taskID = await this.getProjectTaskID_fromURL(url);
+        const taskID = await this.tryCatch(() => this.getProjectTaskID_fromURL(url), undefined);
         if (taskID === undefined) return undefined;
 
-        const response = await getDataset(
-            'project.task',
-            [['id', '=', taskID]],
-            ['id', 'project_id', 'user_ids', 'priority'],
-            1
+        const response = await this.tryCatch(
+            () => getDataset('project.task', [['id', '=', taskID]], ['id', 'project_id', 'user_ids', 'priority'], 1),
+            undefined
         );
         return response;
     }

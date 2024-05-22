@@ -36,7 +36,7 @@ export default class SaveKnowledgeContentFeature extends ContentFeature {
     }
 
     async getArticle(url) {
-        const articleID = await this.getKnowledgeArticleID_fromURL(url);
+        const articleID = await this.tryCatch(() => this.getKnowledgeArticleID_fromURL(url), undefined);
         if (!articleID) return undefined;
         return { id: articleID };
     }
@@ -56,7 +56,11 @@ export default class SaveKnowledgeContentFeature extends ContentFeature {
     }
 
     async saveArticle(article) {
-        const articleID = await this.getKnowledgeArticleID_fromURL(window.location.href);
+        const articleID = await this.tryCatch(
+            () => this.getKnowledgeArticleID_fromURL(window.location.href),
+            undefined
+        );
+        if (!articleID) return;
         if (article.id !== articleID)
             throw new Error(`Button context is not the same as the url context: '${article.id}' vs '${articleID}'`);
 

@@ -1,6 +1,7 @@
 import { getFeaturesAndCurrentSettings } from '../configuration.js';
 import { initImportExport } from './import_export.js';
 import { loadPage as loadConfigurationPage } from './pages/configuration/index.js';
+import { loadPage as loadToastPage } from './pages/toast/index.js';
 import { loadPage as loadVersionPage } from './pages/version/index.js';
 import { loadPage as loadWebsitePage } from './pages/website/index.js';
 import { load as loadShortcut } from './src/keyboard_shortcut.js';
@@ -29,6 +30,13 @@ const PAGES = [
         label: 'Versions',
         path: './pages/version/index.html',
         loader: loadVersionPage,
+    },
+    {
+        id: 'page-toast',
+        menu: 'page-toast',
+        label: 'Notifications',
+        path: './pages/toast/index.html',
+        loader: loadToastPage,
     },
 ];
 

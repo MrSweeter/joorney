@@ -1,3 +1,4 @@
+import { ToastManager } from '../toast/index.js';
 import { isAuthorizedFeature, isSupportedFeature } from '../utils/authorize.js';
 import { NotYetImplemented } from '../utils/error.js';
 import { sanitizeURL } from '../utils/util.js';
@@ -25,5 +26,38 @@ export default class ContentFeature {
 
     async handleUpdateMessage() {
         if (this.configuration.customization.popup) throw NotYetImplemented;
+    }
+
+    async tryCatch(fct, fallback = undefined) {
+        try {
+            return await Promise.resolve(fct());
+        } catch (e) {
+            if (e.type === 'OdooAPIException') {
+                const error = e.error;
+                switch (error.data.name) {
+                    case 'odoo.exceptions.AccessError':
+                        ToastManager.warn(
+                            this.configuration.id,
+                            `${e.fromCache ? '[cache] ' : ''}${error.data.name}`,
+                            error.data.message
+                        );
+                        break;
+                    case 'builtins.ValueError':
+                        ToastManager.warn(
+                            this.configuration.id,
+                            `${e.fromCache ? '[cache] ' : ''}${error.data.name}`,
+                            error.data.message
+                        );
+                        break;
+                    default:
+                        ToastManager.error(
+                            this.configuration.id,
+                            `${e.fromCache ? '[cache] ' : ''}${error.data.name}`,
+                            error.data.message
+                        );
+                }
+            }
+        }
+        return fallback;
     }
 }

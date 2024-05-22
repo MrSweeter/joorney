@@ -22,9 +22,9 @@ export default class TooltipMetadataContentFeature extends ContentFeature {
         const debugManager = document.querySelector('.o_debug_manager');
         if (!debugManager) return;
 
-        const model_id = await getModelAndID_fromURL(url);
+        const model_id = await this.tryCatch(() => getModelAndID_fromURL(url), undefined);
         if (!model_id) {
-            const actionWindow = await getActionWindow_fromURL(url);
+            const actionWindow = await this.tryCatch(() => getActionWindow_fromURL(url), undefined);
             if (!actionWindow) return;
             this.appendActionWindowTooltip(actionWindow);
             return;

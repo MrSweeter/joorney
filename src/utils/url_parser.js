@@ -58,7 +58,8 @@ function parseURL_V1(searchParams) {
     }
 
     if (searchParams.has('action')) {
-        state.action = searchParams.get('action');
+        const action = searchParams.get('action');
+        if (isNumeric(action)) state.action = Number.parseInt(action);
     }
 
     if (searchParams.has('active_id')) {

@@ -1,3 +1,4 @@
+import { OdooAPIException } from '../utils/error.js';
 import { isNumeric, sanitizeURL } from '../utils/util.js';
 import { sanitizeVersion } from '../utils/version.js';
 import { readCacheCall, saveCacheCall } from './cache.js';
@@ -50,11 +51,29 @@ export async function getVersionInfo(urlArg) {
 }
 
 export async function getDataset(model, domain, fields, limit, cachingTime = 1) {
+    let data = {};
+    let fromCache = true;
     if (cachingTime > 0) {
-        const result = await readCacheCall('getDataset', model, domain, fields, limit);
-        if (result) return limit === 1 ? result[0] : result;
+        data = await readCacheCall('getDataset', model, domain, fields, limit);
+    }
+    if (!data) {
+        data = await _getDataset(model, domain, fields, limit);
+        fromCache = false;
+
+        if (cachingTime > 0) saveCacheCall(cachingTime, 'getDataset', data, model, domain, fields, limit);
     }
 
+    if (data.error) {
+        throw new OdooAPIException(data.error, fromCache);
+    }
+
+    if (data.result === undefined) return limit === 1 ? undefined : [];
+    if (data.result.length === 0) return limit === 1 ? undefined : [];
+
+    return limit === 1 ? data.result[0] : data.result;
+}
+
+async function _getDataset(model, domain, fields, limit) {
     const response = await fetch(
         new Request(`/web/dataset/call_kw/${model}/search_read`, {
             method: 'POST',
@@ -78,13 +97,7 @@ export async function getDataset(model, domain, fields, limit, cachingTime = 1) 
     );
 
     const data = await response.json();
-
-    if (data.result === undefined) return limit === 1 ? undefined : [];
-    if (data.result.length === 0) return limit === 1 ? undefined : [];
-
-    if (cachingTime > 0) saveCacheCall(cachingTime, 'getDataset', data.result, model, domain, fields, limit);
-
-    return limit === 1 ? data.result[0] : data.result;
+    return data;
 }
 
 export async function getDatasetWithIDs(model, ids) {

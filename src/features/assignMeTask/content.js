@@ -14,8 +14,8 @@ export default class AssignMeTaskContentFeature extends ProjectTaskShareContentF
     }
 
     async loadFeatureWithTask(task) {
-        const currentUser = await getCurrentUserID();
-        if (currentUser === undefined) return;
+        const currentUser = await this.tryCatch(() => getCurrentUserID(), undefined);
+        if (!currentUser) return;
         const userAssigned = task.user_ids.includes(currentUser);
 
         const exist = document.getElementsByName('joorney_action_assign_to_me');

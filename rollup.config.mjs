@@ -105,7 +105,7 @@ export default () => {
                 copy({ targets: [{ src: 'options/css/*', dest: `${bundleOutput}/options/css` }] }),
             ],
         },
-        ...getOptionPages(bundleOutput, ['website', 'configuration', 'version']),
+        ...getOptionPages(bundleOutput, ['website', 'configuration', 'version', 'toast']),
         {
             input: 'options/migration/index.js',
             output: getESMOutput(`${bundleOutput}/options/migration/index.js`),

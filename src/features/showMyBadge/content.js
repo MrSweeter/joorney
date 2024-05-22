@@ -41,7 +41,7 @@ export default class ShowMyBadgeContentFeature extends ContentFeature {
     }
 
     async appendBadges(card, emailArg, nameArg) {
-        const badges = await this.loadBadgesForUser(emailArg, nameArg);
+        const badges = await this.tryCatch(() => this.loadBadgesForUser(emailArg, nameArg), undefined);
         if (!badges) return;
 
         const infoNode = card.querySelector('div.o_card_user_infos')?.parentNode;

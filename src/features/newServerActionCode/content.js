@@ -9,7 +9,7 @@ export default class NewServerActionCodeContentFeature extends ContentFeature {
     }
 
     async loadFeature(url) {
-        const isNew = await this.isServerActionCreateView_fromURL(url);
+        const isNew = await this.tryCatch(() => this.isServerActionCreateView_fromURL(url), false);
         if (!isNew) return;
         if (!(await isStillSamePage(250, url))) return;
         this.selectExecuteCode();
