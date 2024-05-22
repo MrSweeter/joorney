@@ -64,7 +64,20 @@ export default class ShowMyBadgeContentFeature extends ContentFeature {
             1,
             60
         );
-        const badgeIDs = user.badge_ids;
+        let badgeIDs = user?.badge_ids;
+        if (!badgeIDs) {
+            const employee = await getDataset(
+                'hr.employee.public',
+                [
+                    ['email', '=', email],
+                    ['name', '=', name],
+                ],
+                ['id', 'badge_ids'],
+                1,
+                60
+            );
+            badgeIDs = employee?.badge_ids;
+        }
         if (!badgeIDs || badgeIDs.length === 0) return undefined;
 
         return await this.getBadges(badgeIDs);

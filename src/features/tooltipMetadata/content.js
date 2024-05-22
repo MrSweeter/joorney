@@ -22,15 +22,17 @@ export default class TooltipMetadataContentFeature extends ContentFeature {
         const debugManager = document.querySelector('.o_debug_manager');
         if (!debugManager) return;
 
-        const model_id = await this.tryCatch(() => getModelAndID_fromURL(url), undefined);
-        if (!model_id) {
-            const actionWindow = await this.tryCatch(() => getActionWindow_fromURL(url), undefined);
-            if (!actionWindow) return;
-            this.appendActionWindowTooltip(actionWindow);
-            return;
-        }
+        await this.tryCatch(async () => {
+            const model_id = await getModelAndID_fromURL(url);
+            if (!model_id) {
+                const actionWindow = await getActionWindow_fromURL(url);
+                if (!actionWindow) return;
+                this.appendActionWindowTooltip(actionWindow);
+                return;
+            }
 
-        this.loadRecordMetadata(model_id);
+            this.loadRecordMetadata(model_id);
+        });
     }
 
     async loadRecordMetadata(model_id) {

@@ -16,10 +16,10 @@ export async function getCurrentUserID() {
     }
     // 17.2
     const partnerIDRegex = /res.partner\/(\d+)\//g;
-    const partnerID = partnerIDRegex.exec(avatarURL)[1];
+    const partnerID = Number.parseInt(partnerIDRegex.exec(avatarURL)[1]);
 
-    const response = await getDataset('res.partner', [['id', '=', partnerID]], ['id', 'user_id', 'user_ids'], 1, 60);
-    const partner = response;
+    const response = await getDataset('res.users', [['partner_id', '=', partnerID]], ['id'], 1, 60);
+    const user = response;
 
-    return partner.user_id ? partner.user_id[0] : partner.user_ids.length > 0 ? partner.user_ids[0] : undefined;
+    return user.id;
 }

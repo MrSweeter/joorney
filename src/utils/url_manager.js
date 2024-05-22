@@ -23,8 +23,8 @@ export async function isModelCreateView_fromURL(url, model) {
 //#endregion
 
 //#region Get model ID
-export async function getModelAndID_fromURL(url, modelArg = undefined) {
-    const state = await parseURL(url);
+export async function getModelAndID_fromURL(url, modelArg = undefined, requireID = false) {
+    const state = await parseURL(url, undefined, requireID);
 
     const { model, resId } = state;
     if (modelArg && model !== modelArg) return undefined;

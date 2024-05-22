@@ -32,6 +32,6 @@ export default class ProjectTaskShareContentFeature extends ContentFeature {
     }
 
     async getProjectTaskID_fromURL(url) {
-        return (await getModelAndID_fromURL(url, 'project.task'))?.resId;
+        return (await getModelAndID_fromURL(url, 'project.task', true))?.resId;
     }
 }

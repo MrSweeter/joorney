@@ -13,7 +13,7 @@ import { getOdooVersion } from '../src/utils/version.js';
 
 //#region Navigation Event
 
-let loaded = false;
+let loadedURL = false;
 addNavigationListener();
 
 window.addEventListener('load', async () => {
@@ -39,7 +39,7 @@ async function onVersionLoaded() {
 
     loadToast(versionInfo);
 
-    loaded = true;
+    loadedURL = url;
 }
 
 function addNavigationListener() {
@@ -49,9 +49,11 @@ function addNavigationListener() {
     // });
     // Chrome & Firefox compatible
     Runtime.onMessage.addListener(async (msg) => {
-        if (!loaded) return;
+        if (!loadedURL) return;
         if (!msg.navigator) return;
         const url = msg.url;
+        if (loadedURL === url) return;
+        loadedURL = url;
         const versionInfo = await getOdooVersion();
         loadFeatures(url, versionInfo, 'navigate');
     });

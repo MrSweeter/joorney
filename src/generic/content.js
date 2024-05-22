@@ -56,6 +56,8 @@ export default class ContentFeature {
                             error.data.message
                         );
                 }
+            } else {
+                console.error(e);
             }
         }
         return fallback;

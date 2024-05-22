@@ -102,6 +102,6 @@ export default class SaveKnowledgeContentFeature extends ContentFeature {
     }
 
     async getKnowledgeArticleID_fromURL(url) {
-        return (await getModelAndID_fromURL(url, 'knowledge.article'))?.resId;
+        return (await getModelAndID_fromURL(url, 'knowledge.article', true))?.resId;
     }
 }

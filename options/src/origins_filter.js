@@ -31,6 +31,11 @@ export async function createOriginsFilterOrigin() {
 
     originString = originString.trim().toLowerCase().replace(/\s/g, '');
 
+    if (origins[originString]) {
+        renderOriginsFilterError('Origin already added');
+        return;
+    }
+
     try {
         originString = new URL(originString).origin;
         origins[originString] = {};
