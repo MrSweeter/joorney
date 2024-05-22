@@ -1,5 +1,6 @@
 import { importFeatureBackgroundTriggerFile, importFeatureContentFile } from '../configuration.js';
 import { loadToast } from '../src/toast/index.js';
+import { includeVersion } from '../src/utils/authorize.js';
 import { Runtime } from '../src/utils/browser.js';
 import { MESSAGE_ACTION } from '../src/utils/messaging.js';
 import { getOdooVersion } from '../src/utils/version.js';
@@ -35,7 +36,10 @@ async function onVersionLoaded() {
     await updateTabState(url);
     const versionInfo = await getOdooVersion();
     await loadFeatures(url, versionInfo, 'background');
-    await loadFeatures(url, versionInfo, 'load');
+
+    if (includeVersion(['17.2-'], versionInfo.version)) {
+        await loadFeatures(url, versionInfo, 'load');
+    }
 
     loadToast(versionInfo);
 
