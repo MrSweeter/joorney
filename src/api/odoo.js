@@ -1,14 +1,30 @@
+import { baseSettings } from '../../configuration.js';
+import { StorageSync } from '../utils/browser.js';
 import { OdooAPIException } from '../utils/error.js';
 import { isNumeric, sanitizeURL } from '../utils/util.js';
 import { sanitizeVersion } from '../utils/version.js';
 import { readCacheCall, saveCacheCall } from './cache.js';
 
 //#region Window Action
+export async function getActionWindowModelFallback(actionPath) {
+    const { windowActionFallbacks } = await StorageSync.get(baseSettings);
+    return windowActionFallbacks[window.location.origin]?.[actionPath];
+}
 export async function getActionWindowWithState(action, fields) {
     if (isNumeric(`${action}`)) {
-        return getActionWindowWithID(action, fields);
+        return await getActionWindowWithID(action, fields);
     }
-    return getActionWindowWithPath(action, fields);
+
+    try {
+        return await getActionWindowWithPath(action, fields);
+    } catch (e) {
+        if (e.type === 'OdooAPIException' && e.error.data.name === 'odoo.exceptions.AccessError') {
+            // if a fallback exist, ignore the error
+            const model = await getActionWindowModelFallback(action);
+            if (model) return undefined;
+        }
+        throw e;
+    }
 }
 async function getActionWindowWithPath(path, fields) {
     if (!path) return undefined;
