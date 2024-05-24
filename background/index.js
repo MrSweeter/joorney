@@ -14,7 +14,7 @@ WebNavigation.onReferenceFragmentUpdated.addListener((e) => {
     }
 });
 
-// 17.2, triggered on page load
+// 17.2
 WebNavigation.onHistoryStateUpdated.addListener((e) => {
     if (e.url.startsWith('http')) {
         Tabs.sendMessage(e.tabId, { url: e.url, navigator: true, history: true });
