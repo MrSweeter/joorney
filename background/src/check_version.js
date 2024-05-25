@@ -7,6 +7,11 @@ async function getInstallType() {
     return extension.installType;
 }
 
+export async function isDevMode() {
+    const installType = await getInstallType();
+    return installType === 'development';
+}
+
 export async function checkVersion() {
     const installType = await getInstallType();
     if (!['development', 'other'].includes(installType)) return;

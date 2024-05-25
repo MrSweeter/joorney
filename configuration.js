@@ -29,6 +29,7 @@ export const baseSettings = {
     supportedVersions: ['17.0'],
 };
 
+export const extensionFeatureState = FeaturesState;
 const activeFeaturesList = Object.keys(FeaturesState).filter((k) => FeaturesState[k]);
 
 export let features = [];

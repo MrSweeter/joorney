@@ -1,0 +1,128 @@
+/* https://github.com/callumlocke/json-formatter */
+
+.jsonEntry {
+    display: block;
+    padding-left: 20px;
+    margin-left: -20px;
+    position: relative;
+    font-size: 13px;
+    font-family: monospace;
+}
+
+.json-collapsed {
+    white-space: nowrap;
+}
+.json-collapsed > .innerJSON {
+    display: none;
+}
+.json-collapsed > .collectionEllipsis:after {
+    content: '...';
+    font-weight: bold;
+}
+.json-collapsed > .collectionEllipsis {
+    margin: 0 4px;
+    color: #888;
+}
+.json-collapsed .jsonEntry {
+    display: inline;
+}
+
+.json-collapsed:after {
+    content: attr(data-size);
+    color: #aaa;
+}
+
+.expander {
+    width: 20px;
+    height: 18px;
+    display: block;
+    position: absolute;
+    left: 0px;
+    top: 1px;
+    color: black;
+    z-index: 5;
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.15;
+}
+
+.expander::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 4px 0 4px 6.9px;
+    border-color: transparent transparent transparent currentColor;
+    transform: rotate(90deg) translateY(1px);
+}
+
+.json-collapsed > .expander::after {
+    transform: none;
+}
+
+.expander:hover {
+    opacity: 0.35;
+}
+.expander:active {
+    opacity: 0.5;
+}
+.json-collapsed .jsonEntry .expander {
+    display: none;
+}
+.innerJSON {
+    display: block;
+    padding-left: 24px;
+    border-left: 1px dotted #bbb;
+    margin-left: 2px;
+}
+
+.brace_bracket {
+    font-weight: bold;
+}
+.stringValue {
+    color: #0b7500;
+    word-wrap: break-word;
+}
+a:link,
+a:visited {
+    text-decoration: none;
+    color: inherit;
+}
+a:hover,
+a:active {
+    text-decoration: underline;
+    color: #050;
+}
+.boolValue,
+.nullValue,
+.numberValue {
+    font-weight: bold;
+    color: #1a01cc;
+}
+.key {
+    color: #000;
+}
+
+[hidden] {
+    display: none !important;
+}
+span {
+    white-space: pre-wrap;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#spinner {
+    animation: spin 2s linear infinite;
+}

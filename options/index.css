@@ -20,6 +20,10 @@ body {
     min-height: 100vh;
 }
 
+#joorney-brand-debug {
+    cursor: pointer;
+}
+
 .joorney-valign-middle {
     vertical-align: middle;
 }

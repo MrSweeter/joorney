@@ -1,6 +1,8 @@
+import { isDevMode } from '../background/src/check_version.js';
 import { getFeaturesAndCurrentSettings } from '../configuration.js';
 import { initImportExport } from './import_export.js';
 import { loadPage as loadConfigurationPage } from './pages/configuration/index.js';
+import { loadPage as loadTechnicalPage } from './pages/technical/index.js';
 import { loadPage as loadToastPage } from './pages/toast/index.js';
 import { loadPage as loadVersionPage } from './pages/version/index.js';
 import { loadPage as loadWebsitePage } from './pages/website/index.js';
@@ -38,6 +40,14 @@ const PAGES = [
         path: './pages/toast/index.html',
         loader: loadToastPage,
     },
+    {
+        id: 'page-technical',
+        menu: 'page-technical',
+        label: 'Developers',
+        path: './pages/technical/index.html',
+        loader: loadTechnicalPage,
+        technical: true,
+    },
 ];
 
 async function onDOMContentLoaded() {
@@ -46,22 +56,22 @@ async function onDOMContentLoaded() {
 
     initImportExport();
 
-    const searchParams = new URLSearchParams(window.location.search);
-    let htmlDebug = 1;
-    if (searchParams.get('debug')) {
-        htmlDebug = '';
-        const debug = document.getElementById('joorney-debug-configuration');
-        const config = await getFeaturesAndCurrentSettings();
-        debug.innerHTML = JSON.stringify(config, null, 4);
-    }
-    document.getElementById('joorney-brand-debug').href = `?debug=${htmlDebug}`;
-
     loadMenus();
     loadShortcut();
+
+    const searchParams = new URLSearchParams(window.location.search);
+    toggleTechnicalMenus(!searchParams.get('debug') && !(await isDevMode()));
+    document.getElementById('joorney-brand-debug').onclick = () => toggleTechnicalMenus();
 }
 
 document.removeEventListener('DOMContentLoaded', onDOMContentLoaded);
 document.addEventListener('DOMContentLoaded', onDOMContentLoaded);
+
+function toggleTechnicalMenus(force = undefined) {
+    for (const element of document.getElementsByClassName('joorney-tech-menu')) {
+        element.classList.toggle('d-none', force);
+    }
+}
 
 function loadMenus() {
     const container = document.getElementById(MENU_ITEMS_CONTAINER);
@@ -78,7 +88,9 @@ function loadMenus() {
 function loadMenu(page, container) {
     const template = document.createElement('template');
     template.innerHTML = `
-        <li id="${page.menu}" class="joorney-menu-item nav-item nav-link">${page.label}</li>
+        <li id="${page.menu}" class="joorney-menu-item ${
+            page.technical ? 'joorney-tech-menu' : ''
+        } nav-item nav-link">${page.label}</li>
     `.trim();
 
     template.content.firstChild.onclick = () => {

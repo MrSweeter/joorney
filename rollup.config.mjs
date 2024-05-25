@@ -3,8 +3,14 @@ import json from '@rollup/plugin-json';
 import resolve from '@rollup/plugin-node-resolve';
 import { defineConfig } from 'rollup';
 import copy from 'rollup-plugin-copy';
+import watchAssets from 'rollup-plugin-watch-assets';
 
-const defaultPlugins = [resolve(), json(), dynamicImportVars({ exclude: 'features_state.json' })];
+const defaultPlugins = [
+    resolve(),
+    json(),
+    dynamicImportVars({ exclude: 'features_state.json' }),
+    watchAssets({ assets: ['options/**/*.css', 'options/**/*.html'] }),
+];
 function getESMOutput(file) {
     return { file: file, format: 'esm', inlineDynamicImports: true };
 }
@@ -105,7 +111,7 @@ export default () => {
                 copy({ targets: [{ src: 'options/css/*', dest: `${bundleOutput}/options/css` }] }),
             ],
         },
-        ...getOptionPages(bundleOutput, ['website', 'configuration', 'version', 'toast']),
+        ...getOptionPages(bundleOutput, ['website', 'configuration', 'version', 'toast', 'technical']),
         {
             input: 'options/migration/index.js',
             output: getESMOutput(`${bundleOutput}/options/migration/index.js`),

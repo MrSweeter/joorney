@@ -1,5 +1,5 @@
+import { confetti } from '../../../lib/canvas-confetti/particle.js';
 import ProjectTaskShareContentFeature from '../../shared/projectTaskShare/content.js';
-import { confetti } from '../../utils/particle.js';
 import configuration from './configuration.js';
 
 const defaultsStar = {
