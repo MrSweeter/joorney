@@ -1,8 +1,8 @@
 import { importFeatureBackgroundTriggerFile, importFeatureContentFile } from '../configuration.js';
 import { loadToast } from '../src/toast/index.js';
-import { Runtime } from '../src/utils/browser.js';
-import { MESSAGE_ACTION } from '../src/utils/messaging.js';
-import { getOdooVersion } from '../src/utils/version.js';
+import { Runtime } from '../src/utils/browser.ts';
+import { MESSAGE_ACTION } from '../src/utils/messaging.ts';
+import { getOdooVersion } from '../src/utils/version.ts';
 
 /**
  * Entry point for content scripts.

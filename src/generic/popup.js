@@ -1,6 +1,6 @@
 import { reloadTabFeatures } from '../../popup/src/tab_features.js';
-import { Runtime, StorageSync, Tabs } from '../utils/browser.js';
-import { featureIDToPascalCase } from '../utils/features.js';
+import { Runtime, StorageSync, Tabs } from '../utils/browser.ts';
+import { featureIDToPascalCase } from '../utils/features.ts';
 
 export default class PopupFeature {
     constructor(configuration) {

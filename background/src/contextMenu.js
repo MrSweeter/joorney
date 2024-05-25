@@ -1,4 +1,4 @@
-import { ContextMenus } from '../../src/utils/browser.js';
+import { ContextMenus } from '../../src/utils/browser.ts';
 
 export const CLEAR_CACHE_HOST_ID_MENU = 'clear_cache_host';
 

@@ -1,6 +1,6 @@
 import { writeRecord } from '../../api/odoo.js';
 import ProjectTaskShareContentFeature from '../../shared/projectTaskShare/content.js';
-import { getCurrentUserID } from '../../utils/user.js';
+import { getCurrentUserID } from '../../utils/user.ts';
 import configuration from './configuration.js';
 
 const ASSIGN_TYPE = Object.freeze({

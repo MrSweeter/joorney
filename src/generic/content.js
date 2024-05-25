@@ -1,7 +1,7 @@
 import { ToastManager } from '../toast/index.js';
-import { isAuthorizedFeature, isSupportedFeature } from '../utils/authorize.js';
-import { NotYetImplemented } from '../utils/error.js';
-import { sanitizeURL } from '../utils/util.js';
+import { isAuthorizedFeature, isSupportedFeature } from '../utils/authorize.ts';
+import { NotYetImplemented } from '../utils/error.ts';
+import { sanitizeURL } from '../utils/util.ts';
 
 export default class ContentFeature {
     constructor(configuration) {

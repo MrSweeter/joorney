@@ -1,6 +1,6 @@
 import BackgroundFeature from '../../generic/background.js';
-import { StorageLocal, StorageSync, Tabs } from '../../utils/browser.js';
-import { getThemeModeCookie, setThemeModeCookie } from '../../utils/cookies.js';
+import { StorageLocal, StorageSync, Tabs } from '../../utils/browser.ts';
+import { getThemeModeCookie, setThemeModeCookie } from '../../utils/cookies.ts';
 import configuration from './configuration.js';
 
 export default class ThemeSwitchBackgroundFeature extends BackgroundFeature {

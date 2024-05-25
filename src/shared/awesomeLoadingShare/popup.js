@@ -1,5 +1,5 @@
 import { PopupCustomizableFeature } from '../../generic/popup.js';
-import { Runtime } from '../../utils/browser.js';
+import { Runtime } from '../../utils/browser.ts';
 
 export default class AwesomeLoadingSharePopupFeature extends PopupCustomizableFeature {
     constructor(configuration) {

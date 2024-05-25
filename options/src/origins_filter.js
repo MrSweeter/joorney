@@ -1,8 +1,8 @@
 import { baseSettings, getCurrentSettings } from '../../configuration.js';
 import { generateFeatureOptionTableHeadItem, stringToHTML } from '../../src/html_generator.js';
-import { regexSchemePrefix } from '../../src/utils/authorize.js';
-import { Runtime, StorageSync } from '../../src/utils/browser.js';
-import { MESSAGE_ACTION } from '../../src/utils/messaging.js';
+import { regexSchemePrefix } from '../../src/utils/authorize.ts';
+import { Runtime, StorageSync } from '../../src/utils/browser.ts';
+import { MESSAGE_ACTION } from '../../src/utils/messaging.ts';
 import { updateFeatureOriginInputs } from './features.js';
 
 //#region CRUD

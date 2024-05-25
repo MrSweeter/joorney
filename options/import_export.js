@@ -1,5 +1,5 @@
 import { baseSettings, getFeaturesAndCurrentSettings } from '../configuration.js';
-import { StorageSync, Tabs } from '../src/utils/browser.js';
+import { StorageSync, Tabs } from '../src/utils/browser.ts';
 
 function importOptions(file) {
     const reader = new FileReader();

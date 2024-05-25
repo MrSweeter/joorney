@@ -1,5 +1,5 @@
 import { PopupCustomizableFeature } from '../../generic/popup.js';
-import { StorageSync } from '../../utils/browser.js';
+import { StorageSync } from '../../utils/browser.ts';
 import configuration from './configuration.js';
 
 export default class UnfocusAppPopupFeature extends PopupCustomizableFeature {

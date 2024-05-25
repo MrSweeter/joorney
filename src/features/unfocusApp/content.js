@@ -1,8 +1,8 @@
 import ContentFeature from '../../generic/content.js';
-import { isOdooWebsite, isStillSameWebsite } from '../../utils/authorize.js';
-import { Runtime, StorageSync } from '../../utils/browser.js';
-import { getThemeModeCookie } from '../../utils/cookies.js';
-import { sanitizeURL } from '../../utils/util.js';
+import { isOdooWebsite, isStillSameWebsite } from '../../utils/authorize.ts';
+import { Runtime, StorageSync } from '../../utils/browser.ts';
+import { getThemeModeCookie } from '../../utils/cookies.ts';
+import { sanitizeURL } from '../../utils/util.ts';
 import configuration from './configuration.js';
 
 const UNFOCUS_STATE = Object.freeze({

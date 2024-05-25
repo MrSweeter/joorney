@@ -1,5 +1,5 @@
 import LimitedRunbotContentFeature from '../../shared/limited/runbot_content.js';
-import { isAuthorizedLimitedFeature } from '../../utils/authorize.js';
+import { isAuthorizedLimitedFeature } from '../../utils/authorize.ts';
 import adminDebugLoginConfiguration from '../adminDebugLoginRunbot/configuration.js';
 import autoOpenRunbotConfiguration from '../autoOpenRunbot/configuration.js';
 import configuration from './configuration.js';

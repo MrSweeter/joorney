@@ -1,4 +1,4 @@
-import { Tabs } from '../../src/utils/browser.js';
+import { Tabs } from '../../src/utils/browser.ts';
 
 export async function load() {
     const openExtensionShortcut = document.getElementById('open-extension-shortcut');

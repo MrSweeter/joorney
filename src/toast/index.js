@@ -1,7 +1,7 @@
 import { baseSettings } from '../../configuration.js';
 import { stringToHTML } from '../html_generator.js';
-import { isSupportedOdoo } from '../utils/authorize.js';
-import { StorageSync } from '../utils/browser.js';
+import { isSupportedOdoo } from '../utils/authorize.ts';
+import { StorageSync } from '../utils/browser.ts';
 import {
     ToastContainerElementID,
     buildContainer,

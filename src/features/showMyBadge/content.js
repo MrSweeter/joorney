@@ -1,6 +1,6 @@
 import { getDataset, getDatasetWithIDs } from '../../api/odoo.js';
 import ContentFeature from '../../generic/content.js';
-import { createRecordFormURL } from '../../utils/url_manager.js';
+import { createRecordFormURL } from '../../utils/url_manager.ts';
 import configuration from './configuration.js';
 
 let overlayShowMyBadgeObserver = undefined;

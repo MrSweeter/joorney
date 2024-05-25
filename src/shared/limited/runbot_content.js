@@ -1,9 +1,9 @@
 import ContentFeature from '../../generic/content.js';
-import { isAuthorizedLimitedFeature } from '../../utils/authorize.js';
-import { Runtime } from '../../utils/browser.js';
-import { RunbotException } from '../../utils/error.js';
-import { MESSAGE_ACTION } from '../../utils/messaging.js';
-import { sanitizeURL } from '../../utils/util.js';
+import { isAuthorizedLimitedFeature } from '../../utils/authorize.ts';
+import { Runtime } from '../../utils/browser.ts';
+import { RunbotException } from '../../utils/error.ts';
+import { MESSAGE_ACTION } from '../../utils/messaging.ts';
+import { sanitizeURL } from '../../utils/util.ts';
 
 export const openVersionKey = 'joorney-runbot';
 
@@ -62,7 +62,7 @@ export default class LimitedRunbotContentFeature extends ContentFeature {
                 href: href,
             });
             if (response.error) {
-                throw RunbotException(response.error);
+                throw new RunbotException(response.error);
             }
             finalURL = this.getAdminDebugURL(response.url) ?? finalURL;
         }

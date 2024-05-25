@@ -1,4 +1,4 @@
-export function isFirefox() {
+export function isFirefox(): boolean {
     return typeof chrome !== 'undefined' && typeof browser !== 'undefined';
 }
 

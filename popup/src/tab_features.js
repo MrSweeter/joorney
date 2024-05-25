@@ -1,6 +1,6 @@
 import { getFeaturesAndCurrentSettings } from '../../configuration.js';
-import { regexSchemePrefix } from '../../src/utils/authorize.js';
-import { StorageSync, Tabs } from '../../src/utils/browser.js';
+import { regexSchemePrefix } from '../../src/utils/authorize.ts';
+import { StorageSync, Tabs } from '../../src/utils/browser.ts';
 
 export async function reloadTabFeatures() {
     const { features, currentSettings } = await getFeaturesAndCurrentSettings();

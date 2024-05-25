@@ -1,30 +1,27 @@
 // https://github.com/odoo/odoo/blob/master/addons/web/static/src/core/browser/router.js#L173
 
 import { getActionWindowWithState } from '../api/odoo.js';
-import { isNumeric, sanitizeURL } from './util.js';
+import { isNumeric, sanitizeURL } from './util.ts';
 
-const defaultState = {
+const defaultState: URLState = {
     resId: undefined,
     view_type: undefined,
     action: undefined,
     active_id: undefined,
     model: undefined,
+    actionWindow: undefined,
 };
 
-/**
- *
- * @param {*} url: string|URL
- * @param {*} actionWindowFields: StringArray
- * @returns { resId: string|int, active_id: int, view_type: string, action: int, model: string, actionWindow: OdooActionWindow }
- */
-export async function parseURL(urlArg, actionWindowFields = ['res_model'], requireID = false) {
-    const url = typeof urlArg === 'object' ? urlArg : new URL(urlArg);
-
-    const sanitizedURL = sanitizeURL(url.href);
+export async function parseURL(
+    urlArg: UnsafeURL,
+    actionWindowFields = ['res_model'],
+    requireID = false
+): Promise<URLState> {
+    const sanitizedURL = sanitizeURL(urlArg);
 
     const { pathname, searchParams } = sanitizedURL;
 
-    let state = {};
+    let state: URLState = JSON.parse(JSON.stringify(defaultState));
 
     if (pathname === '/web') {
         state = parseURL_V1(searchParams);
@@ -46,12 +43,12 @@ export async function parseURL(urlArg, actionWindowFields = ['res_model'], requi
     return state;
 }
 
-function parseURL_V1(searchParams) {
+function parseURL_V1(searchParams: URLSearchParams): URLState {
     const state = { ...defaultState };
 
     if (searchParams.has('id')) {
         const id = searchParams.get('id');
-        if (isNumeric(id)) state.resId = Number.parseInt(id);
+        if (isNumeric(id)) state.resId = Number.parseInt(id as string);
         state.view_type = searchParams.get('view_type');
     } else if (searchParams.get('view_type') === 'form') {
         state.resId = 'new';
@@ -60,12 +57,12 @@ function parseURL_V1(searchParams) {
 
     if (searchParams.has('action')) {
         const action = searchParams.get('action');
-        if (isNumeric(action)) state.action = Number.parseInt(action);
+        if (isNumeric(action)) state.action = Number.parseInt(action as string);
     }
 
     if (searchParams.has('active_id')) {
         const active_id = searchParams.get('active_id');
-        if (isNumeric(active_id)) state.active_id = Number.parseInt(active_id);
+        if (isNumeric(active_id)) state.active_id = Number.parseInt(active_id as string);
     }
 
     if (searchParams.has('model')) {
@@ -75,15 +72,15 @@ function parseURL_V1(searchParams) {
     return state;
 }
 
-function parseURL_V2(pathname) {
+function parseURL_V2(pathname: string): URLState {
     const [prefix, ...splitPath] = pathname.split('/').filter(Boolean);
-    if (prefix !== 'odoo') return {};
+    if (prefix !== 'odoo') return defaultState;
 
     const actionParts = [...splitPath.entries()].filter(([_, part]) => !isNumeric(part) && part !== 'new');
     let lastAction = defaultState;
 
     for (const [i, part] of actionParts) {
-        const action = {};
+        const action = JSON.parse(JSON.stringify(defaultState));
         const [left, right] = [splitPath[i - 1], splitPath[i + 1]];
 
         if (isNumeric(left)) {

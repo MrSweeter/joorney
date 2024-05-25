@@ -1,6 +1,6 @@
-import { OdooAPIException } from '../utils/error.js';
-import { isNumeric, sanitizeURL } from '../utils/util.js';
-import { sanitizeVersion } from '../utils/version.js';
+import { OdooAPIException } from '../utils/error.ts';
+import { isNumeric, sanitizeURL } from '../utils/util.ts';
+import { sanitizeVersion } from '../utils/version.ts';
 import { readCacheCall, saveCacheCall } from './cache.js';
 
 //#region Window Action

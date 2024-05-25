@@ -1,6 +1,7 @@
 import dynamicImportVars from '@rollup/plugin-dynamic-import-vars';
 import json from '@rollup/plugin-json';
 import resolve from '@rollup/plugin-node-resolve';
+import typescript from '@rollup/plugin-typescript';
 import { defineConfig } from 'rollup';
 import copy from 'rollup-plugin-copy';
 import watchAssets from 'rollup-plugin-watch-assets';
@@ -9,6 +10,7 @@ const defaultPlugins = [
     resolve(),
     json(),
     dynamicImportVars({ exclude: 'features_state.json' }),
+    typescript(),
     watchAssets({ assets: ['options/**/*.css', 'options/**/*.html'] }),
 ];
 function getESMOutput(file) {

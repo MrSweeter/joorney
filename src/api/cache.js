@@ -1,4 +1,4 @@
-import { StorageLocal } from '../utils/browser.js';
+import { StorageLocal } from '../utils/browser.ts';
 
 function getHost() {
     return window.location.host;

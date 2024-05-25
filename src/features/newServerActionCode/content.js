@@ -1,6 +1,6 @@
 import ContentFeature from '../../generic/content.js';
-import { isStillSamePage } from '../../utils/authorize.js';
-import { isModelCreateView_fromURL } from '../../utils/url_manager.js';
+import { isStillSamePage } from '../../utils/authorize.ts';
+import { isModelCreateView_fromURL } from '../../utils/url_manager.ts';
 import configuration from './configuration.js';
 
 export default class NewServerActionCodeContentFeature extends ContentFeature {
