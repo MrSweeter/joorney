@@ -1,6 +1,6 @@
 import { getFeaturesAndCurrentSettings, importFeaturePopupFile } from '../configuration.js';
-import { generateFeaturePopupToggleItem, generateTabFeaturePopupToggleItem } from '../src/html_generator.js';
-import { Runtime, Tabs } from '../src/utils/browser.ts';
+import { generateFeaturePopupToggleItem, generateTabFeaturePopupToggleItem } from '../src/html_generator';
+import { Runtime, Tabs } from '../src/utils/browser';
 import { reloadTabFeatures } from './src/tab_features.js';
 
 window.onload = async () => {

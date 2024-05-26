@@ -1,7 +1,7 @@
 import { writeRecord } from '../../api/odoo.js';
 import ContentFeature from '../../generic/content.js';
-import { isStillSamePage } from '../../utils/authorize.ts';
-import { getModelAndID_fromURL } from '../../utils/url_manager.ts';
+import { isStillSamePage } from '../../utils/authorize';
+import { getModelAndID_fromURL } from '../../utils/url_manager';
 import configuration from './configuration.js';
 
 export default class SaveKnowledgeContentFeature extends ContentFeature {

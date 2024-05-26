@@ -1,4 +1,4 @@
-import { Action, Runtime } from '../../src/utils/browser.ts';
+import { Action, Runtime } from '../../src/utils/browser';
 
 const fetchVersion = 'https://raw.githubusercontent.com/MrSweeter/joorney/master/manifest.json';
 

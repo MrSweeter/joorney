@@ -1,10 +1,10 @@
-export function stringToHTML(str) {
+export function stringToHTML(str: string): HTMLElement {
     const template = document.createElement('template');
     template.innerHTML = str.trim();
-    return template.content.firstChild;
+    return template.content.firstChild as HTMLElement;
 }
 
-export function generateLimitedFeatureOptionButtonItem(feature) {
+export function generateLimitedFeatureOptionButtonItem(feature: Configuration.Feature) {
     return stringToHTML(`
 		<label
 			title="[Limited Feature] ${feature.display_name ?? feature.id}"
@@ -19,7 +19,7 @@ export function generateLimitedFeatureOptionButtonItem(feature) {
 	`);
 }
 
-export function generateFeatureOptionListItem(feature) {
+export function generateFeatureOptionListItem(feature: Configuration.Feature) {
     const icon = feature.icon.join('\n');
 
     return stringToHTML(`
@@ -39,7 +39,7 @@ export function generateFeatureOptionListItem(feature) {
 	`);
 }
 
-export function generateFeatureOptionTableHeadItem(feature) {
+export function generateFeatureOptionTableHeadItem(feature: Configuration.Feature) {
     const icon = feature.icon.join('\n');
 
     return stringToHTML(`
@@ -51,7 +51,7 @@ export function generateFeatureOptionTableHeadItem(feature) {
 	`);
 }
 
-export function generateFeaturePopupToggleItem(feature) {
+export function generateFeaturePopupToggleItem(feature: Configuration.Feature) {
     const icon = feature.icon.join('\n');
 
     return stringToHTML(`
@@ -68,7 +68,7 @@ export function generateFeaturePopupToggleItem(feature) {
 	`);
 }
 
-export function generateTabFeaturePopupToggleItem(feature) {
+export function generateTabFeaturePopupToggleItem(feature: Configuration.Feature) {
     const icon = feature.icon.join('\n');
 
     return stringToHTML(`

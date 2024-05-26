@@ -1,7 +1,7 @@
 import { SUPPORTED_VERSION, baseSettings } from '../../../configuration.js';
-import { stringToHTML } from '../../../src/html_generator.js';
-import { includeVersion } from '../../../src/utils/authorize.ts';
-import { StorageSync } from '../../../src/utils/browser.ts';
+import { stringToHTML } from '../../../src/html_generator';
+import { includeVersion } from '../../../src/utils/authorize';
+import { StorageSync } from '../../../src/utils/browser';
 
 export async function loadPage(features, currentSettings) {
     loadSupportedOdoo(currentSettings, features);

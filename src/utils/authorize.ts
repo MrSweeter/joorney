@@ -1,7 +1,7 @@
 import { baseSettings } from '../../configuration.js';
-import { StorageLocal, StorageSync } from './browser.ts';
-import { ValueIsNaN, sanitizeURL } from './util.ts';
-import { sanitizeVersion } from './version.ts';
+import { StorageLocal, StorageSync } from './browser';
+import { ValueIsNaN, sanitizeURL } from './util';
+import { sanitizeVersion } from './version';
 
 export const regexSchemePrefix = 'regex://';
 

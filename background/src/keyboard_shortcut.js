@@ -1,4 +1,4 @@
-import { Action, Commands, StorageLocal, Tabs } from '../../src/utils/browser.ts';
+import { Action, Commands, StorageLocal, Tabs } from '../../src/utils/browser';
 
 // Only use this function during the initial install phase. After
 // installation the user may have intentionally unassigned commands.

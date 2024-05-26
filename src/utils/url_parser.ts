@@ -1,7 +1,7 @@
 // https://github.com/odoo/odoo/blob/master/addons/web/static/src/core/browser/router.js#L173
 
 import { getActionWindowWithState } from '../api/odoo.js';
-import { isNumeric, sanitizeURL } from './util.ts';
+import { isNumeric, sanitizeURL } from './util';
 
 const defaultState: URLState = {
     resId: undefined,

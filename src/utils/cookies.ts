@@ -1,4 +1,4 @@
-import { Cookies } from './browser.ts';
+import { Cookies } from './browser';
 
 export async function setThemeModeCookie(expectedMode: string, origin: string) {
     if (!origin.startsWith('http')) return;

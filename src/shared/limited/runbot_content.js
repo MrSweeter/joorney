@@ -1,9 +1,9 @@
 import ContentFeature from '../../generic/content.js';
-import { isAuthorizedLimitedFeature } from '../../utils/authorize.ts';
-import { Runtime } from '../../utils/browser.ts';
-import { RunbotException } from '../../utils/error.ts';
-import { MESSAGE_ACTION } from '../../utils/messaging.ts';
-import { sanitizeURL } from '../../utils/util.ts';
+import { isAuthorizedLimitedFeature } from '../../utils/authorize';
+import { Runtime } from '../../utils/browser';
+import { RunbotException } from '../../utils/error';
+import { MESSAGE_ACTION } from '../../utils/messaging';
+import { sanitizeURL } from '../../utils/util';
 
 export const openVersionKey = 'joorney-runbot';
 

@@ -1,4 +1,5 @@
-import { stringToHTML } from '../html_generator.js';
+import { ToastType } from '../../lib/joorney/enum';
+import { stringToHTML } from '../html_generator';
 
 const html = String.raw;
 const css = String.raw;
@@ -11,10 +12,10 @@ export const ToastContainerElementID = 'joorney-toast-container';
 const ToastItemElementClass = 'joorney-toasty';
 
 const iconForType = {
-    success: 'fa fa-check-circle',
-    danger: 'fa fa-exclamation-circle',
-    warning: 'fa fa-exclamation-triangle',
-    info: 'fa fa-info-circle',
+    [ToastType.SUCCESS]: 'fa fa-check-circle',
+    [ToastType.ERROR]: 'fa fa-exclamation-circle',
+    [ToastType.WARN]: 'fa fa-exclamation-triangle',
+    [ToastType.INFO]: 'fa fa-info-circle',
 };
 
 const ToastStyle = css`
@@ -118,7 +119,7 @@ export function buildContainer() {
     return container;
 }
 
-export function buildToastItem(feature, title, message, type) {
+export function buildToastItem(feature: string, title: string, message: string, type: ToastType): HTMLElement {
     const toastID = `toast-${Date.now()}`;
     const item = stringToHTML(html`
         <div id="${toastID}" class="${ToastItemElementClass} ${ToastItemElementClass}-${type} alert-${type}">

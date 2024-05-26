@@ -1,4 +1,4 @@
-import { StorageSync } from '../../src/utils/browser.ts';
+import { StorageSync } from '../../src/utils/browser';
 
 export function disableFeatureInput(feature) {
     const inputs = Array.from(document.getElementsByClassName(`joorney_origins_filter_feature_input_${feature}`));

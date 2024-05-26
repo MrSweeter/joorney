@@ -1,5 +1,5 @@
 import OptionCustomizationFeature from '../../generic/option_customization.js';
-import { StorageSync } from '../../utils/browser.ts';
+import { StorageSync } from '../../utils/browser';
 
 export default class AwesomeLoadingShareOptionCustomizationFeature extends OptionCustomizationFeature {
     async load() {

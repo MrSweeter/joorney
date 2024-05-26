@@ -1,5 +1,5 @@
 import OptionCustomizationFeature from '../../generic/option_customization.js';
-import { StorageSync } from '../../utils/browser.ts';
+import { StorageSync } from '../../utils/browser';
 import configuration from './configuration.js';
 
 export default class ThemeSwitchOptionCustomizationFeature extends OptionCustomizationFeature {

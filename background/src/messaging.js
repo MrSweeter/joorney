@@ -1,5 +1,5 @@
 import { features, importFeatureBackgroundFile } from '../../configuration.js';
-import { MESSAGE_ACTION } from '../../src/utils/messaging.ts';
+import { MESSAGE_ACTION } from '../../src/utils/messaging';
 import { updateTabState } from './keyboard_shortcut.js';
 import { getFinalRunbotURL } from './runbot.js';
 

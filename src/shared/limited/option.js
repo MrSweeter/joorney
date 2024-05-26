@@ -1,6 +1,6 @@
 import OptionFeature from '../../generic/option.js';
-import { generateLimitedFeatureOptionButtonItem } from '../../html_generator.js';
-import { StorageSync } from '../../utils/browser.ts';
+import { generateLimitedFeatureOptionButtonItem } from '../../html_generator';
+import { StorageSync } from '../../utils/browser';
 
 export default class LimitedShareOptionFeature extends OptionFeature {
     appendHTMLFeatureElement() {

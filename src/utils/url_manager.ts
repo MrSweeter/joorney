@@ -1,6 +1,6 @@
 import { getActionWindowWithState } from '../api/odoo.js';
-import { parseURL } from './url_parser.ts';
-import { sanitizeURL } from './util.ts';
+import { parseURL } from './url_parser';
+import { sanitizeURL } from './util';
 
 //#region URL Creator
 export function createRecordFormURL(url: UnsafeURL, model: string, id: number): string {

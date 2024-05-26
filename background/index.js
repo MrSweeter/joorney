@@ -1,4 +1,4 @@
-import { ContextMenus, Runtime, StorageSync, Tabs, WebNavigation } from '../src/utils/browser.ts';
+import { ContextMenus, Runtime, StorageSync, Tabs, WebNavigation } from '../src/utils/browser';
 
 import { features, getCurrentSettings, loadFeaturesConfiguration } from '../configuration.js';
 import { checkHostsExpiration, clearHost } from '../src/api/cache.js';

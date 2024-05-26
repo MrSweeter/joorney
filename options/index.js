@@ -3,7 +3,7 @@ import { getFeaturesAndCurrentSettings } from '../configuration.js';
 import { initImportExport } from './import_export.js';
 import { loadPage as loadConfigurationPage } from './pages/configuration/index.js';
 import { loadPage as loadTechnicalPage } from './pages/technical/index.js';
-import { loadPage as loadToastPage } from './pages/toast/index.js';
+import { loadPage as loadToastPage } from './pages/toast/index';
 import { loadPage as loadVersionPage } from './pages/version/index.js';
 import { loadPage as loadWebsitePage } from './pages/website/index.js';
 import { load as loadShortcut } from './src/keyboard_shortcut.js';

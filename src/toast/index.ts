@@ -1,7 +1,8 @@
 import { baseSettings } from '../../configuration.js';
+import { ToastMode, ToastType } from '../../lib/joorney/enum';
 import { stringToHTML } from '../html_generator.js';
-import { isSupportedOdoo } from '../utils/authorize.ts';
-import { StorageSync } from '../utils/browser.ts';
+import { isSupportedOdoo } from '../utils/authorize.js';
+import { StorageSync } from '../utils/browser.js';
 import {
     ToastContainerElementID,
     buildContainer,
@@ -11,7 +12,7 @@ import {
     toastFadeInOutDurationMillis,
 } from './html.js';
 
-export async function loadToast(versionInfo) {
+export async function loadToast(versionInfo: GuessVersion) {
     const { isOdoo, version } = versionInfo;
     if (!isOdoo) return;
     if (!version) return;
@@ -21,47 +22,50 @@ export async function loadToast(versionInfo) {
     await ToastManager.load();
 }
 
-const existingToast = {};
+const existingToast: Toast.Collection = {};
 const maximumNotification = 3;
 
-export const ToastManager = {
+export const ToastManager: Toast.Manager = {
+    toastMode: ToastMode.UI,
+
     async load() {
         const container = buildContainer();
         document.documentElement.appendChild(container);
-        this.toastMode = (await StorageSync.get(baseSettings))?.toastMode ?? 'ui';
+        this.toastMode = (await StorageSync.get(baseSettings))?.toastMode ?? ToastMode.UI;
     },
 
-    isUI() {
+    isUI(): boolean {
         return this.toastMode === 'ui';
     },
 
     info(feature, title, message) {
-        this._notify(feature, title, message, 'info');
+        this._notify(feature, title, message, ToastType.INFO);
     },
 
     warn(feature, title, message) {
-        this._notify(feature, title, message, 'warning');
+        this._notify(feature, title, message, ToastType.WARN);
     },
 
     error(feature, title, message) {
-        this._notify(feature, title, message, 'danger');
+        this._notify(feature, title, message, ToastType.ERROR);
     },
 
     success(feature, title, message) {
-        this._notify(feature, title, message, 'success');
+        this._notify(feature, title, message, ToastType.SUCCESS);
     },
 
     async _notify(feature, title, message, type) {
         const existing = Object.entries(existingToast).find((entry) => entry[1].msg === message);
         if (existing) {
             if (existing[1].id) clearTimeout(existing[1].id);
-            const features = document.getElementById(existing[0]).getElementsByClassName('toast-feature')[0];
+            const toast = document.getElementById(existing[0]) as HTMLDivElement;
+            const features = toast.getElementsByClassName('toast-feature')[0] as HTMLDivElement;
             const featureBadge = stringToHTML(`
                 <span class="badge rounded-pill">${feature}</span>
             `);
             features.appendChild(featureBadge);
 
-            const progress = document.getElementById(existing[0]).getElementsByClassName('toast-progress')[0];
+            const progress = toast.getElementsByClassName('toast-progress')[0] as HTMLDivElement;
             progress.style.animation = 'none';
             progress.offsetWidth; // force re-render
             progress.style.animation = '';
@@ -88,7 +92,7 @@ export const ToastManager = {
 
     _logs(feature, title, message, type) {
         const itemID = `log-${Date.now()}`;
-        existingToast[itemID] = message;
+        existingToast[itemID].msg = message;
         switch (type) {
             case 'info':
                 console.info(`(${feature})\n${title}\n${message}`);
@@ -100,7 +104,7 @@ export const ToastManager = {
                 console.log(`[${type}] (${feature})\n${title}\n${message}`);
                 break;
             case 'success':
-                console.success(`(${feature})\n${title}\n${message}`);
+                console.log(`(${feature})\n${title}\n${message}`);
                 break;
             default:
                 console.log(`[${type}] (${feature})\n${title}\n${message}`);
@@ -110,19 +114,18 @@ export const ToastManager = {
         }, 10000);
     },
 
-    _show(toastID) {
-        const toast = document.getElementById(toastID);
-        if (!toast) return;
+    _show(toastID): NodeJS.Timeout {
+        const toast = document.getElementById(toastID) as HTMLDivElement;
 
         toast.style.display = 'flex';
         toast.style.transform = 'translateX(200%)';
         toast.style.transition = `transform ${toastFadeInOutDurationMillis}ms ease-in-out, opacity ${toastFadeInOutDurationMillis}ms ease-in-out`;
         setTimeout(() => {
             toast.style.transform = 'translateX(0%)';
-            toast.style.opacity = 1;
+            toast.style.opacity = '1';
         }, toastDelayMillis);
 
-        document.getElementById(`close-${toastID}`).onclick = () => this._hide(toastID);
+        (document.getElementById(`close-${toastID}`) as HTMLButtonElement).onclick = () => this._hide(toastID);
         toast.onclick = () => this._hide(toastID);
 
         return setTimeout(
@@ -137,7 +140,7 @@ export const ToastManager = {
         const toast = document.getElementById(toastID);
         if (!toast) return;
         toast.style.transform = 'translateX(200%)';
-        toast.style.opacity = 0;
+        toast.style.opacity = '0';
         setTimeout(() => {
             toast.remove();
             delete existingToast[toastID];

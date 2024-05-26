@@ -1,7 +1,7 @@
 import { startDrag, updateFeatureOriginInputs } from '../../options/src/features.js';
-import { generateFeatureOptionListItem } from '../html_generator.js';
-import { Runtime, StorageSync } from '../utils/browser.ts';
-import { featureIDToPascalCase } from '../utils/features.ts';
+import { generateFeatureOptionListItem } from '../html_generator';
+import { Runtime, StorageSync } from '../utils/browser';
+import { featureIDToPascalCase } from '../utils/features';
 
 export default class OptionFeature {
     constructor(configuration) {

@@ -1,7 +1,7 @@
 import { getDataset } from '../../api/odoo.js';
 import ContentFeature from '../../generic/content.js';
-import { isStillSamePage } from '../../utils/authorize.ts';
-import { getModelAndID_fromURL } from '../../utils/url_manager.ts';
+import { isStillSamePage } from '../../utils/authorize';
+import { getModelAndID_fromURL } from '../../utils/url_manager';
 
 export default class ProjectTaskShareContentFeature extends ContentFeature {
     async loadFeature(url) {

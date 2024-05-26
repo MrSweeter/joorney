@@ -1,6 +1,7 @@
 import dynamicImportVars from '@rollup/plugin-dynamic-import-vars';
 import json from '@rollup/plugin-json';
 import resolve from '@rollup/plugin-node-resolve';
+//import terser from '@rollup/plugin-terser';
 import typescript from '@rollup/plugin-typescript';
 import { defineConfig } from 'rollup';
 import copy from 'rollup-plugin-copy';
@@ -10,11 +11,12 @@ const defaultPlugins = [
     resolve(),
     json(),
     dynamicImportVars({ exclude: 'features_state.json' }),
-    typescript(),
+    typescript({ tsconfig: './tsconfig.json' }),
+    //terser(), // Minify
     watchAssets({ assets: ['options/**/*.css', 'options/**/*.html'] }),
 ];
 function getESMOutput(file) {
-    return { file: file, format: 'esm', inlineDynamicImports: true };
+    return { file: file, format: 'esm', sourcemap: true, inlineDynamicImports: true };
 }
 
 function getOptionPages(bundleOutput, pages) {
@@ -77,6 +79,7 @@ export default () => {
                 format: 'iife',
                 inlineDynamicImports: true,
                 name: 'joorney_content',
+                sourcemap: true,
             },
             plugins: [...defaultPlugins, copy({ targets: [{ src: 'content/inject.js', dest: bundleOutput }] })],
         },

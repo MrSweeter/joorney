@@ -1,6 +1,6 @@
-import { isAuthorizedFeature } from '../utils/authorize.ts';
-import { Runtime } from '../utils/browser.ts';
-import { sanitizeURL } from '../utils/util.ts';
+import { isAuthorizedFeature } from '../utils/authorize';
+import { Runtime } from '../utils/browser';
+import { sanitizeURL } from '../utils/util';
 import ContentFeature from './content.js';
 
 export default class BackgroundFeature {

@@ -1,7 +1,7 @@
 import FeaturesState from './features_state.json';
-import { Runtime, StorageSync } from './src/utils/browser.ts';
-import { MESSAGE_ACTION } from './src/utils/messaging.ts';
-import { sanitizeVersion } from './src/utils/version.ts';
+import { Runtime, StorageSync } from './src/utils/browser';
+import { MESSAGE_ACTION } from './src/utils/messaging';
+import { sanitizeVersion } from './src/utils/version';
 
 export const SUPPORTED_VERSION = [
     '15.0',

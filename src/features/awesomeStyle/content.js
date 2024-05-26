@@ -1,6 +1,6 @@
 import ContentFeature from '../../generic/content.js';
-import { isOdooWebsite } from '../../utils/authorize.ts';
-import { Runtime, StorageSync } from '../../utils/browser.ts';
+import { isOdooWebsite } from '../../utils/authorize';
+import { Runtime, StorageSync } from '../../utils/browser';
 import configuration from './configuration.js';
 
 const awesomeStyleID = 'joorney-awesome-style';

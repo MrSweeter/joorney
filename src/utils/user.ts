@@ -1,5 +1,5 @@
 import { getDataset } from '../api/odoo.js';
-import { ValueIsNaN } from './util.ts';
+import { ValueIsNaN } from './util';
 
 export async function getCurrentUserID(): Promise<number | undefined> {
     // TODO[IMP] IMPROVE, settings page field ? web request ?

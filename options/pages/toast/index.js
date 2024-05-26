@@ -1,4 +1,4 @@
-import { StorageSync } from '../../../src/utils/browser.ts';
+import { StorageSync } from '../../../src/utils/browser';
 
 export async function loadPage(features, currentSettings) {
     handleToastMode(currentSettings.toastMode);

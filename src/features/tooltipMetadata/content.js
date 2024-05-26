@@ -1,7 +1,7 @@
 import { getMetadata } from '../../api/odoo.js';
 import ContentFeature from '../../generic/content.js';
-import { isStillSamePage } from '../../utils/authorize.ts';
-import { getActionWindow_fromURL, getModelAndID_fromURL } from '../../utils/url_manager.ts';
+import { isStillSamePage } from '../../utils/authorize';
+import { getActionWindow_fromURL, getModelAndID_fromURL } from '../../utils/url_manager';
 import configuration from './configuration.js';
 
 export default class TooltipMetadataContentFeature extends ContentFeature {

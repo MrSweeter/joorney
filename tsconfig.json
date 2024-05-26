@@ -1,6 +1,6 @@
 {
-    "include": ["./**/*.ts", "content/inject.js", "src/utils/browser.js"],
-    "exclude": ["node_modules", "bundle"],
+    "include": ["./**/*.ts"],
+    "exclude": ["node_modules", "bundle", "content/inject.js"],
     "compilerOptions": {
         /* Visit https://aka.ms/tsconfig to read more about this file */
 
@@ -28,7 +28,7 @@
 
         /* Modules */
         "module": "esnext" /* Specify what module code is generated. */,
-        // "rootDir": "./",                                  /* Specify the root folder within your source files. */
+        "rootDir": "./" /* Specify the root folder within your source files. */,
         "moduleResolution": "node" /* Specify how TypeScript looks up a file from a given module specifier. */,
         // "baseUrl": "./",                                  /* Specify the base directory to resolve non-relative module names. */
         // "paths": {},                                      /* Specify a set of entries that re-map imports to additional lookup locations. */
@@ -41,7 +41,7 @@
         ] /* Specify type package names to be included without being referenced in a source file. */,
         // "allowUmdGlobalAccess": true,                     /* Allow accessing UMD globals from modules. */
         // "moduleSuffixes": [],                             /* List of file name suffixes to search when resolving a module. */
-        "allowImportingTsExtensions": true /* Allow imports to include TypeScript file extensions. Requires '--moduleResolution bundler' and either '--noEmit' or '--emitDeclarationOnly' to be set. */,
+        // "allowImportingTsExtensions": true                /* Allow imports to include TypeScript file extensions. Requires '--moduleResolution bundler' and either '--noEmit' or '--emitDeclarationOnly' to be set. */,
         // "resolvePackageJsonExports": true,                /* Use the package.json 'exports' field when resolving package imports. */
         // "resolvePackageJsonImports": true,                /* Use the package.json 'imports' field when resolving imports. */
         // "customConditions": [],                           /* Conditions to set in addition to the resolver-specific defaults when resolving imports. */
@@ -58,12 +58,12 @@
         // "declaration": true,                              /* Generate .d.ts files from TypeScript and JavaScript files in your project. */
         // "declarationMap": true,                           /* Create sourcemaps for d.ts files. */
         // "emitDeclarationOnly": true,                      /* Only output d.ts files and not JavaScript files. */
-        // "sourceMap": true,                                /* Create source map files for emitted JavaScript files. */
+        "sourceMap": true /* Create source map files for emitted JavaScript files. */,
         // "inlineSourceMap": true,                          /* Include sourcemap files inside the emitted JavaScript. */
         // "outFile": "./",                                  /* Specify a file that bundles all outputs into one JavaScript file. If 'declaration' is true, also designates a file that bundles all .d.ts output. */
-        //"outDir": "./compiled" /* Specify an output folder for all emitted files. */,
+        "outDir": "./bundle/ts" /* Specify an output folder for all emitted files. */,
         "removeComments": true /* Disable emitting comments. */,
-        "noEmit": true /* Disable emitting files from a compilation. */,
+        // "noEmit": true                                    /* Disable emitting files from a compilation. */,
         // "importHelpers": true,                            /* Allow importing helper functions from tslib once per project, instead of including them per-file. */
         // "importsNotUsedAsValues": "remove",               /* Specify emit/checking behavior for imports that are only used for types. */
         // "downlevelIteration": true,                       /* Emit more compliant, but verbose and less performant JavaScript for iteration. */
@@ -74,7 +74,7 @@
         // "newLine": "crlf",                                /* Set the newline character for emitting files. */
         // "stripInternal": true,                            /* Disable emitting declarations that have '@internal' in their JSDoc comments. */
         // "noEmitHelpers": true,                            /* Disable generating custom helper functions like '__extends' in compiled output. */
-        "noEmitOnError": true /* Disable emitting files if any type checking errors are reported. */,
+        // "noEmitOnError": true                             /* Disable emitting files if any type checking errors are reported. */,
         // "preserveConstEnums": true,                       /* Disable erasing 'const enum' declarations in generated code. */
         // "declarationDir": "./",                           /* Specify the output directory for generated declaration files. */
         // "preserveValueImports": true,                     /* Preserve unused imported values in the JavaScript output that would otherwise be removed. */
