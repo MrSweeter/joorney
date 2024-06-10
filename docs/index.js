@@ -10,8 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
     loadFeatures();
     loadCategories();
 });
-// TODO[DOCS/DYNAMIC HTML]
-// TODO[DOCS/ONE PAGE WEBSITE]
 
 function loadCategories() {
     const categoryContainer = document.getElementById('categories-list-container');

@@ -25,7 +25,7 @@ export default class ProjectTaskShareContentFeature extends ContentFeature {
         if (taskID === undefined) return undefined;
 
         const response = await this.tryCatch(
-            () => getDataset('project.task', [['id', '=', taskID]], ['id', 'project_id', 'user_ids', 'priority'], 1),
+            () => getDataset('project.task', [['id', '=', taskID]], ['id', 'project_id', 'user_ids', 'priority'], 1, 0),
             undefined
         );
         return response;

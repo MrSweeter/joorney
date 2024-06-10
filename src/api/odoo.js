@@ -67,7 +67,7 @@ export async function getVersionInfo(urlArg) {
 }
 
 export async function getDataset(model, domain, fields, limit, cachingTime = 1) {
-    let data = {};
+    let data = undefined;
     let fromCache = true;
     if (cachingTime > 0) {
         data = await readCacheCall('getDataset', model, domain, fields, limit);

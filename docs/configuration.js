@@ -3,22 +3,19 @@ export const categories = [
         id: 'odooFeature',
         label: 'Odoo Features',
         icon: 'cubes-stacked-solid',
-        description:
-            '<span class="opacity-25">Joorney is a Chrome extension that makes your Odoo experience more enjoyable and productive by adding some cool features and effects.</span>',
+        description: '<span class="opacity-25">Improve your productivity with some utilitary features.</span>',
     },
     {
         id: 'runbotFeature',
         label: 'Runbot',
         icon: 'robot-solid',
-        description:
-            '<span class="opacity-25">Joorney is a Chrome extension that makes your Odoo experience more enjoyable and productive by adding some cool features and effects.</span>',
+        description: '<span class="opacity-25">Use runbot more efficiently!</span>',
     },
     {
         id: 'designFeature',
         label: 'Design',
         icon: 'display-newspaper-solid',
-        description:
-            '<span class="opacity-25">Joorney is a Chrome extension that makes your Odoo experience more enjoyable and productive by adding some cool features and effects.</span>',
+        description: '<span class="opacity-25">Improve your Odoo experience with effects and custom UI.</span>',
     },
 ];
 
