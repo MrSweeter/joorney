@@ -1,7 +1,7 @@
-import { configurationInternalVersion } from '../../utils/feature_default_configuration.js';
+import { baseSettings, importMigratorFile } from '../../configuration.js';
 
 function setupInput() {
-    const importInput = document.getElementById('qol_import_storage_sync_file');
+    const importInput = document.getElementById('joorney_import_storage_sync_file');
     importInput.onchange = (e) => {
         const reader = new FileReader();
         reader.onload = async (eventRead) => {
@@ -14,20 +14,17 @@ function setupInput() {
 
 function analyzeConfiguration(jsonFile) {
     const migrateVersion = jsonFile.configurationVersion ?? 0;
-    const currentVersion = configurationInternalVersion.configurationVersion;
+    const currentVersion = baseSettings.configurationVersion;
 
     const resume = document.getElementById('migration_resume');
 
     if (migrateVersion > currentVersion) {
-        document.getElementById('error_message').innerHTML =
-            'Configuration cannot be migrate to a lower version';
+        document.getElementById('error_message').innerHTML = 'Configuration cannot be migrate to a lower version';
         if (!resume.classList.contains('d-none')) resume.classList.add('d-none');
         return;
     }
-    if (migrateVersion == currentVersion) {
-        document.getElementById('error_message').innerHTML =
-            'Configuration cannot be migrate to the same version';
-
+    if (migrateVersion === currentVersion) {
+        document.getElementById('error_message').innerHTML = 'Configuration cannot be migrate to the same version';
         if (!resume.classList.contains('d-none')) resume.classList.add('d-none');
         return;
     }
@@ -45,13 +42,13 @@ function analyzeConfiguration(jsonFile) {
     runButton.innerHTML = 'Execute migration';
     runButton.onclick = async (e) => {
         e.preventDefault();
-        document.getElementById('qol_import_storage_sync_file').value = null;
+        document.getElementById('joorney_import_storage_sync_file').value = null;
         const button = e.currentTarget;
         button.disabled = true;
         button.innerHTML = '<i class="fa-solid fa-spin fa-spinner"></i>';
-        const finalConfiguration = runMigration(jsonFile, migrateVersion, currentVersion);
+        const finalConfiguration = await runMigration(jsonFile, migrateVersion, currentVersion);
         button.innerHTML = 'Download new configuration';
-        runButton.onclick = (e) => {
+        runButton.onclick = () => {
             downloadNewMigration(finalConfiguration);
         };
         button.disabled = false;
@@ -60,49 +57,33 @@ function analyzeConfiguration(jsonFile) {
     resume.classList.remove('d-none');
 }
 
-function runMigration(configuration, fromVersion, toVersion) {
+async function runMigration(configuration, fromVersion, toVersion) {
     let data = configuration;
     for (let i = fromVersion; i < toVersion; i++) {
-        data = runOneMigration(data, i);
+        data = await runOneMigration(data, i);
     }
     return data;
 }
 
-function runOneMigration(configuration, version) {
-    const result = configuration;
-
-    switch (version) {
-        case 0: {
-            const isWhitelist = !result.originsFilterIsBlacklist;
-
-            result.assignMeTaskWhitelistMode = isWhitelist;
-            result.saveKnowledgeWhitelistMode = isWhitelist;
-            result.awesomeLoadingLargeWhitelistMode = isWhitelist;
-            result.awesomeLoadingSmallWhitelistMode = isWhitelist;
-            result.awesomeStyleWhitelistMode = isWhitelist;
-            result.starringTaskEffectWhitelistMode = isWhitelist;
-            result.unfocusAppWhitelistMode = isWhitelist;
-            result.themeSwitchWhitelistMode = isWhitelist;
-
-            delete result.originsFilterIsBlacklist;
-
-            result.configurationVersion = 1;
-            break;
-        }
-    }
-
-    return result;
+async function runOneMigration(configuration, version) {
+    const migrator = await importMigratorFile(version);
+    return migrator(configuration);
 }
 
 function downloadNewMigration(data) {
-    const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(data));
+    const dataStr = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(data))}`;
     const downloadAnchorNode = document.createElement('a');
     downloadAnchorNode.setAttribute('href', dataStr);
-    const fileName = `qol_storage_sync_${new Date().toLocaleDateString()}.json`;
+    const fileName = `joorney_storage_sync_${new Date().toLocaleDateString()}.json`;
     downloadAnchorNode.setAttribute('download', fileName);
     document.body.appendChild(downloadAnchorNode); // required for firefox
     downloadAnchorNode.click();
     downloadAnchorNode.remove();
 }
 
-setupInput();
+async function onDOMContentLoaded() {
+    setupInput();
+}
+
+document.removeEventListener('DOMContentLoaded', onDOMContentLoaded);
+document.addEventListener('DOMContentLoaded', onDOMContentLoaded);

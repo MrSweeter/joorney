@@ -1,33 +1,44 @@
+import { getFeaturesAndCurrentSettings, importFeaturePopupFile } from '../configuration.js';
+import { generateFeaturePopupToggleItem, generateTabFeaturePopupToggleItem } from '../src/html_generator.js';
+import { Runtime, Tabs } from '../src/utils/browser.js';
+import { reloadTabFeatures } from './src/tab_features.js';
+
 window.onload = async () => {
-    const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+    const tabs = await Tabs.query({ active: true, currentWindow: true });
     const currentTab = tabs[0];
     if (!currentTab.url.startsWith('http')) return;
 
-    document.getElementById('qol-invalid-website').remove();
-    document.getElementById('qol-popup-configuration').classList.remove('d-none');
+    document.getElementById('joorney-invalid-website').remove();
+    document.getElementById('joorney-popup-configuration').classList.remove('d-none');
 
-    const configuration = await chrome.storage.sync.get(features_enabled_configuration);
-
-    loadAwesomeLoading(configuration);
-    loadThemeSwitch(configuration);
-    loadTaskSetup(configuration);
-    loadSaveKnowledge(configuration);
-    loadAwesomeStyle(configuration);
-    loadUnfocusApp(configuration);
-    loadSmartLogin(configuration);
-    loadNewServerActionCode(configuration);
-    loadTooltipMetadata(configuration);
-
-    loadTabFeatures(configuration);
+    renderFeatures();
 
     const popupIcon = document.getElementById('popupIcon');
-    popupIcon.onclick = () => chrome.runtime.openOptionsPage();
+    popupIcon.onclick = () => Runtime.openOptionsPage();
 };
 
-async function updateOptionPage(message) {
+async function renderFeatures() {
+    const { features, currentSettings } = await getFeaturesAndCurrentSettings();
+
+    const toggleContainer = document.getElementById('joorney-popup-feature-toggle');
+    toggleContainer.innerHTML = '';
+    const tabFeatureContainer = document.getElementById('tabFeaturesContainer');
+    tabFeatureContainer.innerHTML = '';
+
+    for (const f of features) {
+        toggleContainer.appendChild(generateFeaturePopupToggleItem(f));
+        if (!f.limited) tabFeatureContainer.appendChild(generateTabFeaturePopupToggleItem(f));
+    }
+
+    loadFeatures(features, currentSettings);
+}
+
+async function loadFeatures(features, currentSettings) {
+    for (const feature of features) {
+        importFeaturePopupFile(feature.id).then((featureModule) => {
+            featureModule.load(currentSettings);
+        });
+    }
+
     reloadTabFeatures();
-    const tabs = await chrome.tabs.query({}); // No query for the chrome-extension scheme
-    tabs.filter((t) => t.url.startsWith(`chrome-extension://${chrome.runtime.id}`)).forEach((tab) =>
-        chrome.tabs.sendMessage(tab.id, message)
-    );
 }

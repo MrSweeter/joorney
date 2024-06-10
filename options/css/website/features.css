@@ -1,0 +1,105 @@
+.feature-wrapper {
+    background-color: var(--joorney-primary-bg);
+    display: grid;
+    place-items: center;
+    border-radius: 21px;
+    border: solid 2px var(--joorney-primary-bg);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0);
+    transition: all 200ms ease-out;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    margin: 2px;
+}
+
+.feature-wrapper:hover {
+    box-shadow: 0 0 6px var(--joorney-secondary);
+}
+
+.feature-wrapper p {
+    color: var(--joorney-primary);
+    transition: color 0.3s;
+    margin: 0;
+}
+
+.action-head {
+    width: 5%;
+}
+
+.icon-wrapper-head {
+    width: 3%;
+}
+
+.icon-wrapper {
+    display: grid;
+    place-items: center;
+}
+
+.icon-wrapper i {
+    color: var(--joorney-primary);
+    font-size: 18px;
+}
+
+.double-fa {
+    font-size: 8px !important;
+    position: absolute !important;
+}
+
+.double-fa-mask {
+    font-size: 10px !important;
+    position: absolute !important;
+}
+
+.double-fa-bicolor {
+    color: whitesmoke !important;
+}
+
+/*#region Drag and Drop (https://github.com/flowforfrank/drag-n-drop/tree/master)*/
+.draggable-feature {
+    cursor: grab;
+}
+
+.draggable-feature:active {
+    cursor: grabbing;
+}
+
+.draggable-feature.feature-dragging {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.5;
+    transform: scale(0.8);
+    animation: feature-shaking 0.5s infinite;
+}
+
+@keyframes feature-shaking {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(1deg);
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+    75% {
+        transform: rotate(-1deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+#joorney-whitelist-feature label .feature-wrapper {
+    background-color: rgba(0, 128, 0, 0.1);
+    border-color: rgba(0, 128, 0, 0.1);
+}
+
+#joorney-blacklist-feature label .feature-wrapper {
+    background-color: rgba(255, 0, 0, 0.1);
+    border-color: rgba(255, 0, 0, 0.1);
+}
+
+#joorney-disable-feature label {
+    opacity: 0.5;
+}
+/*#endregion*/

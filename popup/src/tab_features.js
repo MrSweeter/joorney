@@ -1,67 +1,45 @@
-const features_enabled_configuration = {
-    assignMeTaskEnabled: false,
-    saveKnowledgeEnabled: false,
-    themeSwitchEnabled: false,
-    awesomeLoadingLargeEnabled: false,
-    awesomeLoadingSmallEnabled: false,
-    starringTaskEffectEnabled: false,
-    awesomeStyleEnabled: false,
-    unfocusAppEnabled: false,
-    newServerActionCodeEnabled: false,
-    tooltipMetadataEnabled: false,
-    adminDebugLoginRunbotEnabled: false,
-    impersonateLoginRunbotEnabled: false,
+import { getFeaturesAndCurrentSettings } from '../../configuration.js';
+import { regexSchemePrefix } from '../../src/utils/authorize.js';
+import { StorageSync, Tabs } from '../../src/utils/browser.js';
 
-    assignMeTaskWhitelistMode: true,
-    saveKnowledgeWhitelistMode: true,
-    themeSwitchWhitelistMode: true,
-    awesomeLoadingLargeWhitelistMode: true,
-    awesomeLoadingSmallWhitelistMode: true,
-    starringTaskEffectWhitelistMode: true,
-    awesomeStyleWhitelistMode: true,
-    unfocusAppWhitelistMode: true,
-    newServerActionCodeWhitelistMode: false,
-    tooltipMetadataWhitelistMode: false,
-    adminDebugLoginRunbotWhitelistMode: true,
-    impersonateLoginRunbotWhitelistMode: true,
+export async function reloadTabFeatures() {
+    const { features, currentSettings } = await getFeaturesAndCurrentSettings();
 
-    originsFilterOrigins: {},
-};
+    loadTabFeatures(features, currentSettings);
+}
 
-async function loadTabFeatures(configuration) {
-    const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+async function loadTabFeatures(features, configuration) {
+    const tabs = await Tabs.query({ active: true, currentWindow: true });
     const currentTab = tabs[0];
 
     const originString = new URL(currentTab.url).origin;
 
-    const currentTabText = document.getElementById('currentTabUrl');
-    currentTabText.innerHTML = originString;
-
     const origins = configuration.originsFilterOrigins;
 
-    setupSaveOriginButton(configuration, currentTab.id, origins, originString);
+    setupSaveOriginButton(features, configuration, currentTab.id, origins, originString);
 }
 
-async function reloadTabFeatures() {
-    const configuration = await chrome.storage.sync.get(features_enabled_configuration);
-
-    loadTabFeatures(configuration);
-}
-
-function setupSaveOriginButton(configuration, currentTabID, origins, originString) {
+function setupSaveOriginButton(features, configuration, currentTabID, origins, originStringArg) {
     const saveOriginButton = document.getElementById('saveOriginButton');
     const tabFeaturesList = document.getElementById('tabFeaturesList');
 
-    const regexes = Object.keys(origins)
-        .filter((o) => o.startsWith('regex://'))
-        .map((o) => new RegExp(o.replace('regex://', '')));
-    const validRegex = regexes.find((r) => r.test(originString));
-    if (validRegex) {
-        originString = 'regex://' + validRegex.source;
+    let originString = originStringArg;
+    const originKeys = Object.keys(origins);
+    if (!originKeys.includes(originString)) {
+        const regexes = originKeys
+            .filter((o) => o.startsWith(regexSchemePrefix))
+            .map((o) => new RegExp(o.replace(regexSchemePrefix, '')));
+        const validRegex = regexes.find((r) => r.test(originString));
+        if (validRegex) {
+            originString = regexSchemePrefix + validRegex.source;
+        }
     }
 
-    if (Object.keys(origins).includes(originString)) {
-        setupFeatures(configuration, currentTabID, origins, originString);
+    const currentTabText = document.getElementById('currentTabUrl');
+    currentTabText.innerHTML = originString;
+
+    if (originKeys.includes(originString)) {
+        setupFeatures(features, configuration, currentTabID, origins, originString);
         saveOriginButton.style.display = 'none';
         tabFeaturesList.style.display = 'flex';
         return;
@@ -70,44 +48,35 @@ function setupSaveOriginButton(configuration, currentTabID, origins, originStrin
     tabFeaturesList.style.display = 'none';
     saveOriginButton.onclick = async () => {
         origins[originString] = {};
-        await chrome.storage.sync.set({ originsFilterOrigins: origins });
+        await StorageSync.set({ originsFilterOrigins: origins });
         reloadTabFeatures();
     };
     saveOriginButton.disabled = false;
 }
 
-function setupFeatures(configuration, currentTabID, origins, originString) {
+function setupFeatures(featuresArg, configuration, currentTabID, origins, originString) {
     const tabConfiguration = origins[originString];
-    const features = [
-        'awesomeLoadingLarge',
-        'awesomeLoadingSmall',
-        'assignMeTask',
-        'starringTaskEffect',
-        'saveKnowledge',
-        'themeSwitch',
-        'awesomeStyle',
-        'unfocusApp',
-    ];
+    const features = featuresArg.filter((f) => !f.limited).map((f) => f.id);
 
-    features.forEach((f) => {
+    for (const f of features) {
         const featureInput = document.getElementById(`${f}FeatureTab`);
         featureInput.checked = tabConfiguration[f];
         featureInput.disabled = !configuration[`${f}Enabled`];
         featureInput.classList.remove('blacklist');
         featureInput.classList.remove('whitelist');
         featureInput.classList.add(configuration[`${f}WhitelistMode`] ? 'whitelist' : 'blacklist');
-    });
+    }
 
     const saveButton = document.getElementById('saveButton');
     saveButton.onclick = async () => {
         const originConfiguration = {};
-        features.forEach((f) => {
+        for (const f of features) {
             const featureInput = document.getElementById(`${f}FeatureTab`);
             originConfiguration[f] = featureInput.checked;
-        });
+        }
         origins[originString] = originConfiguration;
-        await chrome.storage.sync.set({ originsFilterOrigins: origins });
-        chrome.tabs.reload(currentTabID);
+        await StorageSync.set({ originsFilterOrigins: origins });
+        Tabs.reload(currentTabID);
     };
     saveButton.disabled = false;
 }

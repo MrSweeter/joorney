@@ -1,12 +1,13 @@
 {
     "manifest_version": 3,
-    "version": "1.4.0",
-    "name": "Odoo - Quality of Life & Fun",
-    "description": "Odoo - Quality of Life & Fun",
+    "version": "2.0.0.%BUILD%",
+    "version_name": "2.0.0-beta",
+    "name": "Joorney",
+    "description": "Improve your Odoo Journey!",
     "author": "Vanden Bergh Gaëtan",
-    "homepage_url": "https://github.com/MrSweeter/odoo-qol",
+    "homepage_url": "https://github.com/MrSweeter/joorney",
     "action": {
-        "default_title": "Odoo - QoL & Fun",
+        "default_title": "Joorney",
         "default_popup": "popup/index.html",
         "default_icon": "images/icon_128.png"
     },
@@ -23,8 +24,7 @@
         "128": "images/icon_128.png"
     },
     "background": {
-        "service_worker": "background/index.js",
-        "type": "module"
+        "service_worker": "background.js"
     },
     "options_ui": {
         "page": "options/index.html",
@@ -33,34 +33,14 @@
     "content_scripts": [
         {
             "matches": ["http://*/*", "https://*/*"],
-            "js": [
-                "utils/confetti_qol.js",
-                "utils/url_parser.js",
-                "utils/url_manager.js",
-                "content/src/task/task_setup.js",
-                "content/src/task/assign_me.js",
-                "content/src/save_knowledge.js",
-                "content/src/awesome_loading_large.js",
-                "content/src/awesome_loading_small.js",
-                "content/src/task/starring_effect.js",
-                "content/src/awesome_style.js",
-                "content/src/unfocus_app.js",
-                "content/src/runbot_smart_login/admin_debug_login.js",
-                "content/src/runbot_smart_login/impersonate_login.js",
-                "content/src/runbot_smart_login/login_setup.js",
-                "content/src/runbot_smart_login/autoopen_runbot.js",
-                "content/src/keyboard_shortcut.js",
-                "content/src/new_server_action_code.js",
-                "content/src/tooltip_metadata.js",
-                "content/index.js"
-            ],
+            "js": ["content.js"],
             "run_at": "document_start"
         }
     ],
     "web_accessible_resources": [
         {
-            "resources": [],
-            "matches": []
+            "resources": ["inject.js"],
+            "matches": ["*://*/*"]
         }
     ],
     "permissions": ["tabs", "webNavigation", "cookies", "storage", "contextMenus"],

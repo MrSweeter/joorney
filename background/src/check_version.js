@@ -1,9 +1,20 @@
-import { Action, Runtime } from '../../utils/browser.js';
+import { Action, Runtime } from '../../src/utils/browser.js';
 
-const fetchVersion =
-    'https://raw.githubusercontent.com/MrSweeter/vigilant-potato/master/manifest.json';
+const fetchVersion = 'https://raw.githubusercontent.com/MrSweeter/joorney/master/manifest.json';
+
+async function getInstallType() {
+    const extension = await chrome.management.getSelf();
+    return extension.installType;
+}
+
+export async function isDevMode() {
+    const installType = await getInstallType();
+    return installType === 'development';
+}
 
 export async function checkVersion() {
+    const installType = await getInstallType();
+    if (!['development', 'other'].includes(installType)) return;
     const res = await fetch(fetchVersion);
     const manifest = await res.json();
     const remoteVersion = manifest.version;

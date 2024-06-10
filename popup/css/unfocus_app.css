@@ -44,7 +44,7 @@ input:indeterminate + .ua-slider {
     left: 4px;
     bottom: 4px;
     background-color: rgba(126, 126, 126, 0.5);
-    color: var(--qol-primary);
+    color: var(--joorney-primary);
     -webkit-transition: 0.4s;
     transition: 0.4s;
     font-family: 'Font Awesome 6 Free';

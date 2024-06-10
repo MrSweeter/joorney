@@ -1,0 +1,14 @@
+#joorney_origins_filter_table input[type='checkbox']:checked.joorney_f_blacklist {
+    background-color: red !important;
+    border-color: darkred !important;
+}
+
+#joorney_origins_filter_table input[type='checkbox']:checked.joorney_f_whitelist {
+    background-color: green !important;
+    border-color: darkgreen !important;
+}
+
+#joorney_origins_filter_table input[type='checkbox']:checked.joorney_f_disable {
+    background-color: gray !important;
+    border-color: darkgrey !important;
+}

@@ -1,9 +1,13 @@
-import { StorageSync } from '../../utils/browser.js';
-import { defaultOriginsFilterSetting } from '../../utils/feature_default_configuration.js';
+import { baseSettings, getCurrentSettings } from '../../configuration.js';
+import { generateFeatureOptionTableHeadItem, stringToHTML } from '../../src/html_generator.js';
+import { regexSchemePrefix } from '../../src/utils/authorize.js';
+import { Runtime, StorageSync } from '../../src/utils/browser.js';
+import { MESSAGE_ACTION } from '../../src/utils/messaging.js';
+import { updateFeatureOriginInputs } from './features.js';
 
 //#region CRUD
 export async function createOriginsFilterOrigin() {
-    const origin = document.getElementById('qol_origins_filter_new_origin');
+    const origin = document.getElementById('joorney_origins_filter_new_origin');
     let originString = origin.value.trim();
     if (!originString) {
         renderOriginsFilterError('Missing origin');
@@ -12,10 +16,10 @@ export async function createOriginsFilterOrigin() {
 
     const origins = await readOriginsFilterOrigins();
 
-    if (originString.startsWith('regex://')) {
-        let regexString = originString.replace('regex://', '');
+    if (originString.startsWith(regexSchemePrefix)) {
+        let regexString = originString.replace(regexSchemePrefix, '');
         try {
-            regexString = 'regex://' + new RegExp(regexString).source;
+            regexString = regexSchemePrefix + new RegExp(regexString).source;
             origins[regexString] = {};
             await renderOriginsObject(origins);
             origin.value = '';
@@ -26,6 +30,11 @@ export async function createOriginsFilterOrigin() {
     }
 
     originString = originString.trim().toLowerCase().replace(/\s/g, '');
+
+    if (origins[originString]) {
+        renderOriginsFilterError('Origin already added');
+        return;
+    }
 
     try {
         originString = new URL(originString).origin;
@@ -38,9 +47,7 @@ export async function createOriginsFilterOrigin() {
 }
 
 async function readOriginsFilterOrigins() {
-    const { originsFilterOrigins } = await StorageSync.get({
-        originsFilterOrigins: defaultOriginsFilterSetting.originsFilterOrigins,
-    });
+    const { originsFilterOrigins } = await StorageSync.get(baseSettings);
     return originsFilterOrigins;
 }
 
@@ -58,17 +65,16 @@ function onKeydownHost(event) {
     if (event.key === 'Enter') createOriginsFilterOrigin();
 }
 export async function load() {
-    const originsFilterNewOrigin = document.getElementById('qol_origins_filter_new_origin');
+    const originsFilterNewOrigin = document.getElementById('joorney_origins_filter_new_origin');
     originsFilterNewOrigin.onkeydown = onKeydownHost;
 
-    document.getElementById('qol_origins_filter_new_origin_save').onclick =
-        createOriginsFilterOrigin;
+    document.getElementById('joorney_origins_filter_new_origin_save').onclick = createOriginsFilterOrigin;
 
     await restore();
 }
 
 async function restore() {
-    const configuration = await StorageSync.get(defaultOriginsFilterSetting);
+    const configuration = await StorageSync.get(baseSettings);
 
     await renderOriginsObject(configuration.originsFilterOrigins);
 }
@@ -76,76 +82,94 @@ async function restore() {
 
 //#region UI
 function renderOriginsFilterError(errorMessage) {
-    const container = document.getElementById('qol_origins_filter_error_footer');
+    const container = document.getElementById('joorney_origins_filter_error_footer');
     container.textContent = errorMessage;
     container.style.display = errorMessage ? 'table-cell' : 'none';
 }
 
+function updateColSpan(count) {
+    const footers = document.querySelectorAll('tfoot tr td:first-child');
+    footers[0].colSpan = `${count + 2}`;
+    footers[1].colSpan = `${count + 1}`;
+    footers[2].colSpan = `${count + 2}`;
+}
+
 async function renderOriginsObject(origins) {
     const originsArray = [];
-    Object.keys(origins).forEach((o) =>
-        originsArray.push({
-            ...origins[o],
-            origin: o,
-        })
-    );
+    for (const o of Object.keys(origins)) originsArray.push({ ...origins[o], origin: o });
 
     await StorageSync.set({ originsFilterOrigins: origins });
 
-    const container = document.getElementById('qol_origins_filter_table_body');
+    const response = await Runtime.sendMessage({
+        action: MESSAGE_ACTION.GET_FEATURES_LIST,
+    });
+    const features = response.features.filter((f) => !f.limited);
+
+    const tableHeader = document.querySelector('#joorney_origins_filter_table thead tr');
+    tableHeader.innerHTML = '';
+    tableHeader.appendChild(
+        stringToHTML(`<th class="joorney-origins_filter-origin-input" title="Odoo Database Origin">Origins</th>`)
+    );
+    for (const f of features) tableHeader.appendChild(generateFeatureOptionTableHeadItem(f));
+    tableHeader.appendChild(stringToHTML(`<th class="py-0 joorney-valign-middle action-head"></th>`));
+
+    const container = document.getElementById('joorney_origins_filter_table_body');
     container.innerHTML = '';
-    originsArray.forEach((o, id) => container.appendChild(renderOrigin(id, o)));
+    for (const [id, o] of originsArray.entries())
+        container.appendChild(
+            renderOrigin(
+                id,
+                o,
+                features.map((f) => f.id)
+            )
+        );
     renderOriginsFilterError();
+    updateColSpan(features.length);
+
+    const defaultConfiguration = await getCurrentSettings(features);
+
+    for (const feature of features) {
+        const enabled = defaultConfiguration[`${feature.id}Enabled`];
+        const isWhitelist = defaultConfiguration[`${feature.id}WhitelistMode`];
+
+        updateFeatureOriginInputs(feature.id, enabled, isWhitelist);
+    }
 }
 
 function setupOriginFeature(container, idx, feature, origin) {
-    const checkInput = container.getElementsByClassName(
-        `qol_origins_filter_origin_${idx}_${feature}`
-    )[0];
+    const checkInput = container.getElementsByClassName(`joorney_origins_filter_origin_${idx}_${feature}`)[0];
     checkInput.onchange = (e) => updateOriginFeature(idx, origin, feature, e.currentTarget.checked);
 }
 
 async function updateOriginFeature(idx, origin, feature, checked) {
     // Disable row on update to avoid spamming/inconsistency if StorageSync.set take time
     const rowInputs = Array.from(
-        document.getElementsByClassName(`qol_origins_filter_feature_input_${idx} `)
+        document.getElementsByClassName(`joorney_origins_filter_feature_input_${idx} `)
     ).filter((i) => !i.className.includes('feature-disabled'));
-    rowInputs.forEach((i) => (i.disabled = true));
+    for (const i of rowInputs) i.disabled = true;
 
     const origins = await readOriginsFilterOrigins();
     origins[origin][feature] = checked;
     await StorageSync.set({ originsFilterOrigins: origins });
 
-    rowInputs.forEach((i) => (i.disabled = false));
+    for (const i of rowInputs) i.disabled = false;
 }
 
-function renderOrigin(idx, origin, blacklist) {
+function renderOrigin(idx, origin, features) {
     const originTemplate = document.createElement('template');
 
-    const features = [
-        'awesomeLoadingLarge',
-        'awesomeLoadingSmall',
-        'assignMeTask',
-        'starringTaskEffect',
-        'saveKnowledge',
-        'themeSwitch',
-        'awesomeStyle',
-        'unfocusApp',
-        'newServerActionCode',
-        'tooltipMetadata',
-    ];
     const featuresUI = features
         .map((f) =>
             `
 			<td>
 				<input
 					class="
-					    qol_origins_filter_feature_input_${idx}
-                        qol_origins_filter_feature_input_${f} 
-                        qol_origins_filter_origin_${idx}_${f}
+					    joorney_origins_filter_feature_input_${idx}
+                        joorney_origins_filter_feature_input_${f}
+                        joorney_origins_filter_origin_${idx}_${f}
                         m-0 form-check-input
                     "
-                    ${!document.getElementById(`qol_${f}_feature`).checked ? 'disabled' : ''}
+                    ${!document.getElementById(`joorney_${f}_feature`)?.checked ? 'disabled' : ''}
 					type="checkbox"
 					${origin[f] === true ? 'checked' : ''}
 				/>
@@ -156,22 +180,22 @@ function renderOrigin(idx, origin, blacklist) {
 
     originTemplate.innerHTML = `
 		<tr>
-			<td class="p-1 qol-valign-middle">
+			<td class="p-1 joorney-valign-middle">
 				<input
-					id="qol_origins_filter_origin_${idx}"
-					class="qol-bg-white form-control border border-0 qol_origins_filter_origin_input"
+					id="joorney_origins_filter_origin_${idx}"
+					class="joorney-bg-white form-control border border-0 joorney_origins_filter_origin_input"
 					type="text"
 					disabled
 					value="${origin.origin}"
 				/>
 			</td>
 			${featuresUI}
-			<td class="p-1 qol-valign-middle">
+			<td class="p-1 joorney-valign-middle">
 				<button
-					class="qol_origins_filter_origin_delete_${idx} btn btn-outline-danger border-0 btn-floating"
+					class="joorney_origins_filter_origin_delete_${idx} btn btn-outline-danger border-0 btn-floating"
 					title="Delete origin"
 				>
-					<i class="qol-font-icon-size fa fa-trash"></i>
+					<i class="joorney-font-icon-size fa fa-trash"></i>
 				</button>
 			</td>
 		</tr>
@@ -179,12 +203,10 @@ function renderOrigin(idx, origin, blacklist) {
 
     const originElement = originTemplate.content.firstChild;
 
-    features.forEach((f) => setupOriginFeature(originElement, idx, f, origin.origin));
+    for (const f of features) setupOriginFeature(originElement, idx, f, origin.origin);
 
-    const deleteButton = originElement.getElementsByClassName(
-        `qol_origins_filter_origin_delete_${idx}`
-    )[0];
-    deleteButton.onclick = (e) => deleteOriginsFilterOrigin(origin.origin);
+    const deleteButton = originElement.getElementsByClassName(`joorney_origins_filter_origin_delete_${idx}`)[0];
+    deleteButton.onclick = () => deleteOriginsFilterOrigin(origin.origin);
 
     return originElement;
 }

@@ -1,3 +1,9 @@
+import { importFeatureBackgroundTriggerFile, importFeatureContentFile } from '../configuration.js';
+import { loadToast } from '../src/toast/index.js';
+import { Runtime } from '../src/utils/browser.js';
+import { MESSAGE_ACTION } from '../src/utils/messaging.js';
+import { getOdooVersion } from '../src/utils/version.js';
+
 /**
  * Entry point for content scripts.
  *
@@ -7,125 +13,93 @@
 
 //#region Navigation Event
 
+let loadedURL = false;
+addNavigationListener();
+
 window.addEventListener('load', async () => {
+    const script = document.createElement('script');
+    script.src = Runtime.getURL('inject.js');
+    script.onload = function () {
+        onVersionLoaded();
+        this.remove();
+    };
+    document.documentElement.appendChild(script);
+});
+
+async function onVersionLoaded() {
     const url = window.location.href;
-    if (!url.startsWith('http')) return;
+    if (!canContinue(url)) return;
 
     updateLandingPage();
 
     await updateTabState(url);
+    const versionInfo = await getOdooVersion();
+    await loadFeatures(url, versionInfo, 'background');
+    await loadFeatures(url, versionInfo, 'load');
 
-    checkTaskPage(url);
-    checkKnowledge(url);
-    appendLargeLoading(url);
-    appendSmallLoading(url);
-    appendAwesomeStyle(url);
-    appendUnfocusApp(url);
-    appendSmartLogin(url);
-    appendTooltipMetadata(url);
-});
+    loadToast(versionInfo);
 
-// Experimental: This is an experimental technology - firefox not compatible
-// navigation.addEventListener('navigate', (e) => {
-//     checkTaskPage(e.destination.url);
-// });
-// Chrome & Firefox compatible
-chrome.runtime.onMessage.addListener((msg) => {
-    const url = msg.url;
-    if (!url.startsWith('http')) return;
-    if (url) {
-        checkTaskPage(url);
-        checkKnowledge(url);
-        appendUnfocusApp(url);
-        checkNewServerActionPage(url);
-        appendTooltipMetadata(url);
+    loadedURL = url;
+}
+
+function addNavigationListener() {
+    // Experimental: This is an experimental technology - firefox not compatible
+    // navigation.addEventListener('navigate', (e) => {
+    //     checkTaskPage(e.destination.url);
+    // });
+    // Chrome & Firefox compatible
+    Runtime.onMessage.addListener(async (msg) => {
+        if (!loadedURL) return;
+        if (!msg.navigator) return;
+        const url = msg.url;
+        if (loadedURL === url) return;
+        loadedURL = url;
+        const versionInfo = await getOdooVersion();
+        loadFeatures(url, versionInfo, 'navigate');
+    });
+}
+
+function canContinue(url) {
+    if (!url || !url.startsWith('http')) return false;
+    return true;
+    // TODO[VERSION] Limited feature like runbot, can work without version check
+    // const { isOdoo, version } = getOdooVersion();
+    // return isOdoo && isSupportedOdoo(version);
+}
+
+async function loadFeatures(url, versionInfo, trigger) {
+    const response = await Runtime.sendMessage({
+        action: MESSAGE_ACTION.GET_FEATURES_LIST,
+    });
+    const features = response.features.filter((f) => f.trigger[trigger]);
+
+    let importer = async (feature) => await importFeatureContentFile(feature.id);
+    if (trigger === 'background') {
+        importer = async (feature) => await importFeatureBackgroundTriggerFile(feature.id);
     }
-});
+
+    for (const feature of features) {
+        const loader = await importer(feature);
+        loader.load(url, versionInfo);
+    }
+}
 
 //#endregion
 
-//#region Utils
-
-let rpcIndex = 0; // ID of rpc_call
-
-function hrefFragmentToURLParameters(href) {
-    // Odoo url can manage fragment for some parameter, need to merge fragment and classic parameter
-    const url = new URL(href.replace(/#/g, href.includes('?') ? '&' : '?'));
-    return url;
-}
-
-function isOdooTab(url) {
-    const regex = /^https?:\/\/(.+?\.odoo\.com|localhost|127\.0\.0\.\d+)(:\d+)?.*$/;
-    if (!url.match(regex)) return false;
-    return true;
-}
-
-function getActiveFeatureOrigins(originsFilterOrigins, featureName) {
-    const enabledOrigins = Object.entries(originsFilterOrigins)
-        .filter((origin) => origin[1][featureName] === true)
-        .map((origin) => origin[0]);
-    return enabledOrigins;
-}
-
-async function authorizeFeature(featureName, origin) {
-    let { offs } = await chrome.storage.local.get({ offs: [] });
-    if (offs.includes(origin)) {
-        return false;
+export async function updateTabState(url) {
+    const { offs } = await chrome.storage.local.get({ offs: [] });
+    if (offs.includes(new URL(url).origin)) {
+        await chrome.runtime.sendMessage({
+            action: MESSAGE_ACTION.UPDATE_EXT_STATUS,
+            forceSwitchToOFF: true,
+        });
+        return true;
     }
-
-    const configuration = await chrome.storage.sync.get({
-        originsFilterOrigins: {},
-        [`${featureName}Enabled`]: false,
-        [`${featureName}WhitelistMode`]: true,
-    });
-
-    if (!configuration[`${featureName}Enabled`]) return false;
-
-    const activeOrigins = getActiveFeatureOrigins(configuration.originsFilterOrigins, featureName);
-    const activeRegex = activeOrigins
-        .filter((o) => o.startsWith('regex://'))
-        .map((o) => new RegExp(o.replace('regex://', '')));
-
-    const originExist = activeOrigins.includes(origin) || activeRegex.some((r) => r.test(origin));
-
-    const isWhitelistMode = configuration[`${featureName}WhitelistMode`];
-    if (isWhitelistMode) {
-        return originExist;
-    }
-
-    if (!isWhitelistMode) {
-        return !originExist;
-    }
-
     return false;
 }
 
-async function authorizeLimitedFeature(featureName, origin) {
-    configKey = `${featureName}LimitedOrigins`;
-    const configuration = await chrome.storage.sync.get({
-        [configKey]: [],
-    });
-
-    // Check URL
-    if (configuration[configKey].includes(origin)) {
-        return true;
-    }
-
-    // Check Regex
-    const activeRegex = configuration[configKey]
-        .filter((o) => o.startsWith('regex://'))
-        .map((o) => new RegExp(o.replace('regex://', '')));
-    const validRegex = activeRegex.some((r) => r.test(origin));
-
-    return validRegex;
-}
-
-//#endregion
-
-//#region landing page
 function updateLandingPage() {
-    Array.from(document.getElementsByClassName('odoo-qol-landing-extension-state')).forEach(
-        (el) => (el.style.color = '#fca311')
-    );
+    for (const el of document.getElementsByClassName('joorney-landing-extension-state')) {
+        el.style.color = '#fca311';
+    }
 }
-//#endregion

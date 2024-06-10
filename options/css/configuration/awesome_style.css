@@ -1,0 +1,9 @@
+#joorney_awe_style_container {
+    position: relative;
+}
+
+#joorney_awe_style_container button {
+    position: absolute;
+    bottom: 0.25rem;
+    right: 1.5rem;
+}

@@ -1,0 +1,16 @@
+{
+    "awesomeLoadingLarge": true,
+    "awesomeLoadingSmall": true,
+    "assignMeTask": true,
+    "starringTaskEffect": true,
+    "saveKnowledge": true,
+    "themeSwitch": true,
+    "awesomeStyle": true,
+    "unfocusApp": true,
+    "newServerActionCode": true,
+    "tooltipMetadata": true,
+    "impersonateLoginRunbot": true,
+    "adminDebugLoginRunbot": true,
+    "autoOpenRunbot": true,
+    "showMyBadge": true
+}

@@ -1,0 +1,43 @@
+.limited-feature-wrapper {
+    background-color: var(--joorney-primary-bg);
+    display: grid;
+    place-items: center;
+    border-radius: 21px;
+    border: solid 2px var(--joorney-primary-bg);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0);
+    transition: all 200ms ease-out;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    margin: 2px;
+}
+
+/*https://fontawesome.com/icons/circle?f=classic&s=regular*/
+.limited-feature-wrapper i::before {
+    content: '\f111';
+}
+
+.limited-feature-wrapper:hover {
+    box-shadow: 0 0 6px var(--joorney-limited-secondary);
+}
+
+.limited-feature-wrapper p {
+    color: var(--joorney-primary);
+    transition: color 0.3s;
+    margin: 0;
+}
+
+input:checked + .limited-feature-wrapper {
+    border: solid 2px var(--joorney-limited-secondary);
+}
+/*https://fontawesome.com/icons/circle-check?f=classic&s=solid*/
+input:checked + .limited-feature-wrapper i::before {
+    content: '\f058';
+    font-weight: 900;
+    color: var(--joorney-limited-secondary);
+}
+
+input:disabled + .limited-feature-wrapper {
+    opacity: 0.5;
+}
