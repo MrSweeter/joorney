@@ -25,6 +25,12 @@ export const baseSettings = {
 
     // [LIMITATION] Object is loaded by default even if values exists - 'https://www.odoo.com': {},
     originsFilterOrigins: {},
+    windowActionFallbacks: {
+        // 'https://www.odoo.com': {
+        //     'my-tasks': 'project.task',
+        //     'all-tasks': 'project.task',
+        // },
+    },
 
     supportedVersions: ['17.0'],
 };

@@ -1,6 +1,6 @@
 // https://github.com/odoo/odoo/blob/master/addons/web/static/src/core/browser/router.js#L173
 
-import { getActionWindowWithState } from '../api/odoo.js';
+import { getActionWindowModelFallback, getActionWindowWithState } from '../api/odoo.js';
 import { isNumeric, sanitizeURL } from './util.js';
 
 const defaultState = {
@@ -41,6 +41,8 @@ export async function parseURL(urlArg, actionWindowFields = ['res_model'], requi
         if (actionWindow) {
             state.model = actionWindow.res_model;
             state.actionWindow = actionWindow;
+        } else {
+            state.model = await getActionWindowModelFallback(state.action);
         }
     }
     return state;
