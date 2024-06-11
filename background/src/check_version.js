@@ -17,8 +17,8 @@ export async function checkVersion() {
     if (!['development', 'other'].includes(installType)) return;
     const res = await fetch(fetchVersion);
     const manifest = await res.json();
-    const remoteVersion = manifest.version;
-    const currentVersion = Runtime.getManifest().version;
+    const remoteVersion = removeBuildFromVersion(manifest.version);
+    const currentVersion = removeBuildFromVersion(Runtime.getManifest().version);
 
     let badgeText = { text: '' };
 
@@ -35,4 +35,8 @@ export async function checkVersion() {
     await Action.setBadgeBackgroundColor({
         color: '#FF0000',
     });
+}
+
+function removeBuildFromVersion(version) {
+    return version.split('.').slice(0, 3).join('.');
 }
