@@ -190,11 +190,24 @@ export async function writeRecord(model, recordID, writeData) {
 
     const data = await response.json();
 
-    if (data?.error || !data?.result) {
-        throw new Error(data.error?.data?.message);
+    if (data.error) {
+        throw new OdooAPIException(data.error, false);
     }
     if (data?.result === true) {
         return true;
     }
     throw new Error(data?.result);
+}
+
+export async function getMenu(menupath) {
+    const parts = menupath.split('/').reverse();
+    let field = 'name';
+    const domain = [];
+    for (const part of parts) {
+        domain.push([field, '=', part.trim()]);
+        field = `parent_id.${field}`;
+    }
+
+    const response = await getDataset('ir.ui.menu', domain, ['action'], 2, 600);
+    return response;
 }

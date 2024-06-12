@@ -1,6 +1,7 @@
 import { reloadTabFeatures } from '../../popup/src/tab_features.js';
-import { Runtime, StorageSync, Tabs } from '../utils/browser.js';
+import { Runtime, StorageSync, Tabs, sendTabMessage } from '../utils/browser.js';
 import { featureIDToPascalCase } from '../utils/features.js';
+import { MESSAGE_ACTION } from '../utils/messaging.js';
 
 export default class PopupFeature {
     constructor(configuration) {
@@ -49,7 +50,7 @@ export default class PopupFeature {
             const message = this.getNotificationMessage(data);
             if (Object.keys(message).length) {
                 for (const t of tabs) {
-                    Tabs.sendMessage(t.id, { ...message, url: t.url });
+                    sendTabMessage(t.id, MESSAGE_ACTION.TO_CONTENT.POPUP_HAS_CHANGE, { ...message, url: t.url });
                 }
             }
         });
@@ -60,7 +61,7 @@ export default class PopupFeature {
         // No query for the chrome-extension scheme
         Tabs.query({}).then((tabs) => {
             for (const tab of tabs.filter((t) => t.url.startsWith(`chrome-extension://${Runtime.id}`))) {
-                Tabs.sendMessage(tab.id, message);
+                sendTabMessage(tab.id, MESSAGE_ACTION.TO_CONTENT.POPUP_HAS_CHANGE, message);
             }
         });
     }

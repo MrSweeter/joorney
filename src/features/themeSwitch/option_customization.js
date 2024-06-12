@@ -5,6 +5,7 @@ import configuration from './configuration.js';
 export default class ThemeSwitchOptionCustomizationFeature extends OptionCustomizationFeature {
     constructor() {
         super(configuration);
+        this.updateLocation = this.updateLocation.bind(this);
     }
 
     async load() {

@@ -1,9 +1,9 @@
-import { Action, Runtime } from '../../src/utils/browser.js';
+import { Action, Management, Runtime } from '../../src/utils/browser.js';
 
 const fetchVersion = 'https://raw.githubusercontent.com/MrSweeter/joorney/master/manifest.json';
 
 async function getInstallType() {
-    const extension = await chrome.management.getSelf();
+    const extension = await Management.getSelf();
     return extension.installType;
 }
 
@@ -39,4 +39,12 @@ export async function checkVersion() {
 
 function removeBuildFromVersion(version) {
     return version.split('.').slice(0, 3).join('.');
+}
+
+const openOption4Version = ['2.1.0'];
+export function openOption(force = false) {
+    const currentVersion = removeBuildFromVersion(Runtime.getManifest().version);
+    if (force || openOption4Version.includes(currentVersion)) {
+        Runtime.openOptionsPage();
+    }
 }

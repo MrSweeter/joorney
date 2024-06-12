@@ -102,7 +102,7 @@ export default () => {
                 copy({
                     targets: [
                         {
-                            src: ['options/index.html', 'options/index.css'],
+                            src: ['options/index.html', 'options/index.css', 'options/checklist.css'],
                             dest: `${bundleOutput}/options`,
                         },
                     ],

@@ -4,7 +4,8 @@
 export const META_GUESS_ELEMENT_NAME = 'joorney-guess';
 const DEFAULT_VERSION = { isOdoo: false };
 
-export async function getOdooVersion() {
+// { "isOdoo":true, "version":"saas~17.2" }
+export function getOdooVersion() {
     if (!document) return DEFAULT_VERSION;
 
     const element = document.querySelector(`meta[name="${META_GUESS_ELEMENT_NAME}"]`);

@@ -17,6 +17,7 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
     min-height: 100vh;
 }
 
@@ -42,4 +43,33 @@ body {
 
 .input-hide {
     display: none;
+}
+
+.feature-collapse-content {
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+}
+
+.feature-collapse-toggle {
+    cursor: pointer;
+}
+
+.feature-collapse-indicator {
+    font-size: 18px;
+    transition: transform 0.3s ease;
+    transform: rotate(90deg);
+}
+
+.feature-opened.feature-collapse-indicator {
+    transform: rotate(180deg);
+}
+
+/* OVERRIDE */
+.form-check-input[type='checkbox']:checked:focus,
+.form-check-input[type='checkbox']:checked {
+    background-color: var(--joorney-secondary);
+}
+
+.form-switch .form-check-input:checked[type='checkbox']:after {
+    background-color: var(--joorney-secondary);
 }

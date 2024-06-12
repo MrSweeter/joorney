@@ -13,6 +13,17 @@ export function createRecordFormURL(url, model, id) {
 
     return `${url.origin}${url.pathname}/${model}/${id}`;
 }
+export function createActionMenuURL(url, actionID) {
+    if (url.pathname.startsWith('/web')) {
+        return `${url.origin}${url.pathname}#action=${actionID}`;
+    }
+
+    if (url.pathname.startsWith('/odoo')) {
+        return `${url.origin}${url.pathname}/action-${actionID}${url.search}`;
+    }
+
+    return `${url.origin}/odoo/action-${actionID}`; // Not compatible before 17.2 --> 404
+}
 //#endregion
 
 //#region Check model new form

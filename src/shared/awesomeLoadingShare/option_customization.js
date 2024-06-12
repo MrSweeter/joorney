@@ -1,5 +1,5 @@
 import OptionCustomizationFeature from '../../generic/option_customization.js';
-import { StorageSync } from '../../utils/browser.js';
+import { Console, StorageSync } from '../../utils/browser.js';
 
 export default class AwesomeLoadingShareOptionCustomizationFeature extends OptionCustomizationFeature {
     async load() {
@@ -8,14 +8,16 @@ export default class AwesomeLoadingShareOptionCustomizationFeature extends Optio
         container.classList.remove('d-none');
 
         const awesomeLoadingNewImage = document.getElementById('joorney_awe_loading_new_image');
-        awesomeLoadingNewImage.onkeydown = this.onKeydownHost;
-        awesomeLoadingNewImage.oninput = this.onImageChange;
+        awesomeLoadingNewImage.onkeydown = (e) => this.onKeydownHost(e);
+        awesomeLoadingNewImage.oninput = (e) => this.onImageChange(e);
 
-        document.getElementById('joorney_awe_loading_new_image_save').onclick = this.createAwesomeLoadingImage;
+        document.getElementById('joorney_awe_loading_new_image_save').onclick = () => this.createAwesomeLoadingImage();
 
         const configuration = await StorageSync.get(this.configuration.defaultSettings);
 
         this.renderImagesList(configuration.awesomeLoadingImages);
+
+        this.setupCollapse(container);
     }
 
     //#region CRUD
@@ -71,7 +73,7 @@ export default class AwesomeLoadingShareOptionCustomizationFeature extends Optio
             const imagePreview = document.getElementById('joorney_awe_loading_new_image_preview');
             imagePreview.src = imageUrl;
         } catch (ex) {
-            console.warn(ex);
+            Console.warn(ex);
         }
     }
     //#endregion

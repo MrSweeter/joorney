@@ -2,6 +2,7 @@ import { startDrag, updateFeatureOriginInputs } from '../../options/src/features
 import { generateFeatureOptionListItem } from '../html_generator.js';
 import { Runtime, StorageSync } from '../utils/browser.js';
 import { featureIDToPascalCase } from '../utils/features.js';
+import { MESSAGE_ACTION } from '../utils/messaging.js';
 
 export default class OptionFeature {
     constructor(configuration) {
@@ -12,7 +13,7 @@ export default class OptionFeature {
     async load() {
         this.appendHTMLFeatureElement();
 
-        this.handleUpdateMessage();
+        this.handlePopupMessage();
 
         return this.restore();
     }
@@ -22,13 +23,19 @@ export default class OptionFeature {
         disabledContainer.appendChild(generateFeatureOptionListItem(this.configuration));
     }
 
-    handleUpdateMessage() {
+    handlePopupMessage() {
+        if (!this.configuration.customization.popup) return;
         Runtime.onMessage.addListener((msg) => {
-            const enableFeature = msg[`enable${featureIDToPascalCase(this.configuration.id)}`];
-            if (enableFeature === true || enableFeature === false) {
-                this.restore();
-            }
+            if (msg.action !== MESSAGE_ACTION.TO_CONTENT.POPUP_HAS_CHANGE) return;
+            this.onPopupMessage(msg);
         });
+    }
+
+    onPopupMessage(msg) {
+        const enableFeature = msg[`enable${featureIDToPascalCase(this.configuration.id)}`];
+        if (enableFeature === true || enableFeature === false) {
+            this.restore();
+        }
     }
 
     async restore() {

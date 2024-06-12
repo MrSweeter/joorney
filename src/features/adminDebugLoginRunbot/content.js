@@ -1,4 +1,5 @@
 import LimitedRunbotContentFeature from '../../shared/limited/runbot_content.js';
+import { Console } from '../../utils/browser.js';
 import configuration from './configuration.js';
 
 export default class AdminDebugLoginRunbotContentFeature extends LimitedRunbotContentFeature {
@@ -38,7 +39,7 @@ export default class AdminDebugLoginRunbotContentFeature extends LimitedRunbotCo
         try {
             await this.openRunbot(e.target.href, newTab);
         } catch (error) {
-            console.warn(error);
+            Console.warn(error);
             e.target.classList.remove('btn-warning');
             e.target.classList.add('btn-danger');
             e.target.title = error;

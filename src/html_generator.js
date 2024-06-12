@@ -84,3 +84,61 @@ export function generateTabFeaturePopupToggleItem(feature) {
 		</label>
 	`);
 }
+
+export function generateUserAvatarTag(userName, avatarSrc) {
+    const tagElement = stringToHTML(`
+		<span class="o_tag position-relative d-inline-flex align-items-center mw-100 o_avatar pe-1 rounded" title="${userName}">
+			<span
+				class="position-absolute top-0 end-0 bottom-0 start-0 mx-n2 mt-n1 mb-n1 rounded border"
+				style="background-color: rgba(252, 163, 17, 0.25)"
+			></span>
+			<img class="o_avatar o_m2m_avatar position-relative rounded" src="${avatarSrc}" />
+			<div class="o_tag_badge_text text-truncate position-relative ms-1">${userName}</div>
+		</span>
+	`);
+
+    return tagElement;
+}
+
+export function generateTrackingMessage(authorName, newValue, fieldName, avatarSrc, date) {
+    const messageElement = stringToHTML(`
+		<div class="o-mail-Message position-relative undefined py-1 mt-2 px-3">
+			<span
+				class="position-absolute top-0 end-0 bottom-0 start-0 mx-2 mt-n1 mb-n1 rounded border"
+				style="background-color: rgba(252, 163, 17, 0.25)"
+			></span>
+			<div class="o-mail-Message-core position-relative d-flex flex-shrink-0">
+				<div class="o-mail-Message-sidebar d-flex flex-shrink-0">
+					<div class="o-mail-Message-avatarContainer position-relative bg-view rounded">
+						<img class="o-mail-Message-avatar w-100 h-100 rounded o_object_fit_cover" src="${avatarSrc}" />
+					</div>
+				</div>
+				<div class="w-100 o-min-width-0">
+					<div class="o-mail-Message-header d-flex flex-wrap align-items-baseline mb-1 lh-1">
+						<span class="o-mail-Message-author">
+							<strong class="me-1 text-truncate">${authorName}</strong>
+						</span>
+						<small class="o-mail-Message-date text-muted opacity-75 me-2">- ${date.toLocaleDateString()} ${date.toLocaleTimeString()} - Joorney</small>
+					</div>
+					<div class="position-relative d-flex">
+						<div class="o-mail-Message-content o-min-width-0">
+							<div class="o-mail-Message-textContent position-relative d-flex">
+								<div>
+									<ul class="mb-0 ps-4">
+										<li class="o-mail-Message-tracking mb-1">
+											<span class="o-mail-Message-trackingOld me-1 px-1 text-muted fw-bold">?</span>
+											<i class="o-mail-Message-trackingSeparator fa fa-long-arrow-right mx-1 text-600"></i>
+											<span class="o-mail-Message-trackingNew me-1 fw-bold text-info">?, ${newValue}</span>
+											<span class="o-mail-Message-trackingField ms-1 fst-italic text-muted">(${fieldName})</span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	`);
+    return messageElement;
+}

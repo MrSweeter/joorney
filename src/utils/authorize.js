@@ -1,6 +1,6 @@
 import { baseSettings } from '../../configuration.js';
-import { StorageLocal, StorageSync } from './browser.js';
-import { ValueIsNaN, sanitizeURL } from './util.js';
+import { Console, StorageLocal, StorageSync } from './browser.js';
+import { ValueIsNaN, sanitizeURL, sleep } from './util.js';
 import { sanitizeVersion } from './version.js';
 
 export const regexSchemePrefix = 'regex://';
@@ -11,13 +11,13 @@ export function isOdooWebsite(url) {
 }
 
 export async function isStillSamePage(timeout, url) {
-    if (timeout > 0) await new Promise((r) => setTimeout(r, timeout));
+    if (timeout > 0) await sleep(timeout);
     const currentURL = sanitizeURL(window.location.href);
     return currentURL.href === url.href;
 }
 
 export async function isStillSameWebsite(timeout, url) {
-    if (timeout > 0) await new Promise((r) => setTimeout(r, timeout));
+    if (timeout > 0) await sleep(timeout);
     return window.location.origin === url.origin;
 }
 
@@ -57,6 +57,11 @@ export async function isAuthorizedLimitedFeature(featureName, url) {
     });
     if (!configuration[key]) return false;
     const origin = url.origin;
+
+    const { offs } = await StorageLocal.get({ offs: [] });
+    if (offs.includes(origin)) {
+        return false;
+    }
 
     // Check URL
     if (configuration[configKey].includes(origin)) {
@@ -140,13 +145,13 @@ function isVersionSupported(supportedVersion, version, uniqueOperator) {
 
     if (supportedVersion.endsWith('+')) {
         if (uniqueOperator) return versionNum >= supportedVersionNum;
-        console.warn('Version operator "+" cannot be used with other values, with ":" for range');
+        Console.warn('Version operator "+" cannot be used with other values, with ":" for range');
         return false;
     }
 
     if (supportedVersion.endsWith('-')) {
         if (uniqueOperator) return versionNum < supportedVersionNum;
-        console.warn('Version operator "-" cannot be used with other values, with ":" for range');
+        Console.warn('Version operator "-" cannot be used with other values, with ":" for range');
         return false;
     }
 
@@ -155,7 +160,7 @@ function isVersionSupported(supportedVersion, version, uniqueOperator) {
         const minimum = Number.parseFloat(fromTo[0]);
         const maximum = Number.parseFloat(fromTo[1]);
         if (ValueIsNaN(minimum) || ValueIsNaN(maximum)) {
-            console.warn(`Invalid range for operator ":" --> ${supportedVersion}`);
+            Console.warn(`Invalid range for operator ":" --> ${supportedVersion}`);
             return false;
         }
         return versionNum >= minimum && versionNum < maximum;

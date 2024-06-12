@@ -1,54 +1,13 @@
 import { isDevMode } from '../background/src/check_version.js';
 import { getFeaturesAndCurrentSettings } from '../configuration.js';
+import { getNextTourID } from '../src/checklist/index.js';
+import ChecklistManager from '../src/checklist/manager.js';
 import { initImportExport } from './import_export.js';
-import { loadPage as loadConfigurationPage } from './pages/configuration/index.js';
-import { loadPage as loadTechnicalPage } from './pages/technical/index.js';
-import { loadPage as loadToastPage } from './pages/toast/index.js';
-import { loadPage as loadVersionPage } from './pages/version/index.js';
-import { loadPage as loadWebsitePage } from './pages/website/index.js';
+import { PAGES } from './menu.js';
 import { load as loadShortcut } from './src/keyboard_shortcut.js';
 
 const MENU_ITEMS_CONTAINER = 'joorney-menu-items-container';
 const PAGE_CONTAINER = 'joorney-page-container';
-const PAGES = [
-    {
-        id: 'page-website',
-        menu: 'page-website',
-        label: 'Hosts control',
-        path: './pages/website/index.html',
-        loader: loadWebsitePage,
-        default: true,
-    },
-    {
-        id: 'page-configuration',
-        menu: 'page-configuration',
-        label: 'Preferences',
-        path: './pages/configuration/index.html',
-        loader: loadConfigurationPage,
-    },
-    {
-        id: 'page-version',
-        menu: 'page-version',
-        label: 'Versions',
-        path: './pages/version/index.html',
-        loader: loadVersionPage,
-    },
-    {
-        id: 'page-toast',
-        menu: 'page-toast',
-        label: 'Notifications',
-        path: './pages/toast/index.html',
-        loader: loadToastPage,
-    },
-    {
-        id: 'page-technical',
-        menu: 'page-technical',
-        label: 'Developers',
-        path: './pages/technical/index.html',
-        loader: loadTechnicalPage,
-        technical: true,
-    },
-];
 
 async function onDOMContentLoaded() {
     document.getElementById('copyright-year').innerText = new Date().getFullYear();
@@ -56,12 +15,14 @@ async function onDOMContentLoaded() {
 
     initImportExport();
 
-    loadMenus();
+    await loadMenus();
     loadShortcut();
 
     const searchParams = new URLSearchParams(window.location.search);
     toggleTechnicalMenus(!searchParams.get('debug') && !(await isDevMode()));
     document.getElementById('joorney-brand-debug').onclick = () => toggleTechnicalMenus();
+
+    ChecklistManager.load();
 }
 
 document.removeEventListener('DOMContentLoaded', onDOMContentLoaded);
@@ -73,7 +34,7 @@ function toggleTechnicalMenus(force = undefined) {
     }
 }
 
-function loadMenus() {
+async function loadMenus() {
     const container = document.getElementById(MENU_ITEMS_CONTAINER);
     container.innerHTML = '';
     const pageMenus = PAGES.filter((p) => p.menu);
@@ -81,8 +42,17 @@ function loadMenus() {
         loadMenu(page, container);
     }
 
-    const defaultMenu = pageMenus.find((m) => m.default);
+    const defaultMenu = await getDefaultMenu(pageMenus);
+
     document.getElementById(defaultMenu.id).click();
+}
+
+async function getDefaultMenu(pageMenus) {
+    const defaultMenuTour = await getNextTourID();
+    const defaultMenu =
+        pageMenus.find((m) => (defaultMenuTour ? m.tour === defaultMenuTour : m.default)) ?? pageMenus[0];
+
+    return defaultMenu;
 }
 
 function loadMenu(page, container) {
@@ -107,6 +77,7 @@ async function loadPage(page) {
     document.getElementById(PAGE_CONTAINER).innerHTML = data;
     page.loader(features, currentSettings);
     if (page.menu) updateActiveMenu(page.menu);
+    updateMenuTour(page.tour);
 }
 
 function updateActiveMenu(menu) {
@@ -114,4 +85,8 @@ function updateActiveMenu(menu) {
         if (e.id === menu) e.classList.add('active');
         else e.classList.remove('active');
     }
+}
+
+function updateMenuTour(tourID) {
+    ChecklistManager.onboard(tourID);
 }
