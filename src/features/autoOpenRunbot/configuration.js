@@ -1,6 +1,14 @@
+export const openRunbotWithVersionMenuItem = {
+    id: 'joorney_autoOpenRunbot_open_with_version',
+    title: 'Open runbot with version %version%',
+    active: true,
+    favorite: true,
+    order: 100,
+};
+
 export default {
     id: 'autoOpenRunbot',
-    display_name: 'Auto Open Runbot',
+    display_name: '[Runbot] Auto Open',
     icon: [
         '<!--<i class="fa-solid fa-door-open"></i>-->',
         '<!--<i class="fa-solid fa-dungeon"></i>-->',
@@ -9,6 +17,7 @@ export default {
     trigger: {
         load: true,
         navigate: true,
+        context: true,
     },
     customization: {
         popup: false,
@@ -17,6 +26,9 @@ export default {
     defaultSettings: {
         autoOpenRunbotEnabled: false,
         autoOpenRunbotLimitedOrigins: ['https://runbot.odoo.com'],
+        autoOpenRunbotContextMenu: {
+            [openRunbotWithVersionMenuItem.id]: openRunbotWithVersionMenuItem,
+        },
     },
     limited: true,
 };

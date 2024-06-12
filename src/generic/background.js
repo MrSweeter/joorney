@@ -1,5 +1,6 @@
 import { isAuthorizedFeature } from '../utils/authorize.js';
-import { Runtime } from '../utils/browser.js';
+import { sendRuntimeMessage } from '../utils/browser.js';
+import { MESSAGE_ACTION } from '../utils/messaging.js';
 import { sanitizeURL } from '../utils/util.js';
 import ContentFeature from './content.js';
 
@@ -26,10 +27,10 @@ export default class BackgroundFeature {
 
 export class BackgroundTriggerContentFeature extends ContentFeature {
     async loadFeature(_url) {
-        Runtime.sendMessage({ feature: this.configuration.id });
+        sendRuntimeMessage(MESSAGE_ACTION.TO_BACKGROUND.TRIGGER_FEATURE, { feature: this.configuration.id });
     }
 
-    handleUpdateMessage() {
+    handlePopupMessage() {
         /* No message */
     }
 }

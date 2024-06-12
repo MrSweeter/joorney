@@ -15,3 +15,7 @@ function sanitizedHrefToUrl(hrefArg) {
 export function ValueIsNaN(value) {
     return isNaN(value) || Number.isNaN(value);
 }
+
+export async function sleep(timeMS) {
+    return await new Promise((r) => setTimeout(r, timeMS));
+}

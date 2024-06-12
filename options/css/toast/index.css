@@ -1,69 +1,23 @@
-.toggle-toast-mode {
-    display: inline-block;
-    position: relative;
-    cursor: pointer;
-    width: 100%;
+.joorney-toast-mode-control.radio-control,
+.joorney-toast-mode-control.checkbox-control label {
     background-color: whitesmoke;
-    height: 34px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.toggle-toast-mode input {
-    position: absolute;
-    opacity: 0;
-    z-index: 5;
+.joorney-toast-mode-control input[type='radio'],
+.joorney-toast-mode-control input[type='checkbox'] {
+    display: none;
 }
 
-.toggle-toast-mode > span span {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 5;
-    display: block;
-    width: 50%;
-    margin-left: 50px;
-    text-align: left;
-    font-size: 0.9em;
-    width: auto;
-    opacity: 1;
-    width: 40%;
-    text-align: center;
-    line-height: 34px;
+.joorney-toast-mode-control label {
+    width: 100%;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
-.toggle-toast-mode a {
-    position: absolute;
-    right: 50%;
-    z-index: 4;
-    display: block;
-    top: 3px;
-    bottom: 3px;
-    padding: 0;
-    left: 3px;
-    width: 50%;
+
+.joorney-toast-mode-control input[type='radio']:checked + label,
+.joorney-toast-mode-control input[type='checkbox']:checked + label {
     background-color: var(--joorney-primary);
-    border-radius: 4px;
-    transition: all 0.2s ease-out;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-}
-.toggle-toast-mode > span span:first-of-type {
-    color: whitesmoke;
-    left: 0;
-    margin: 0;
-    width: 50%;
-}
-.toggle-toast-mode > span span:last-of-type {
-    left: auto;
-    right: 0;
-    color: gray;
-    margin: 0;
-    width: 50%;
-}
-
-.toggle-toast-mode input:checked ~ a {
-    left: calc(50% - 3px);
-}
-.toggle-toast-mode input:checked ~ span span:first-of-type {
-    color: gray;
-}
-.toggle-toast-mode input:checked ~ span span:last-of-type {
     color: whitesmoke;
 }

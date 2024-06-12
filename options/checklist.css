@@ -1,0 +1,78 @@
+#joorney_checklist_show_btn {
+    z-index: 100;
+    position: fixed;
+    top: 72px;
+    right: 12px;
+}
+
+#bubble {
+    z-index: 101;
+    position: fixed;
+    height: 32px;
+    width: 32px;
+    color: var(--joorney-secondary);
+    transition: opacity 1s ease;
+    animation: rotate 2s infinite linear;
+    background-color: rgba(255, 196, 0, 0.1);
+    border-radius: 16px;
+    pointer-events: none;
+}
+
+.joorney_checklist_target_btn.active {
+    color: var(--joorney-secondary);
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.onboarding-checklist {
+    z-index: 102;
+    position: fixed;
+    left: 2000px;
+    max-width: 360px;
+    width: 360px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.onboarding-checklist h3 {
+    margin-top: 0;
+}
+
+.checklist-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.checklist-item input[type='checkbox'] {
+    margin-right: 10px;
+}
+
+.checklist-item.locked {
+    color: #aaa;
+    opacity: 0.5;
+}
+
+.checklist-item.locked .joorney_checklist_target_btn,
+input[disabled] + label .joorney_checklist_target_btn {
+    display: none;
+}
+
+.checklist-item.locked input[type='checkbox'] {
+    display: none;
+}
+
+#joorney_checklist_congrats {
+    transition: max-height 0.5s ease;
+}

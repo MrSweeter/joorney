@@ -1,5 +1,5 @@
 import FeaturesState from './features_state.json';
-import { Runtime, StorageSync } from './src/utils/browser.js';
+import { Console, StorageSync, sendRuntimeMessage } from './src/utils/browser.js';
 import { MESSAGE_ACTION } from './src/utils/messaging.js';
 import { sanitizeVersion } from './src/utils/version.js';
 
@@ -22,6 +22,12 @@ export const SUPPORTED_VERSION = [
 export const baseSettings = {
     configurationVersion: 1,
     toastMode: 'ui',
+    toastType: JSON.stringify({
+        info: false,
+        warning: true,
+        danger: true,
+        success: false,
+    }),
 
     // [LIMITATION] Object is loaded by default even if values exists - 'https://www.odoo.com': {},
     originsFilterOrigins: {},
@@ -33,6 +39,9 @@ export const baseSettings = {
     },
 
     supportedVersions: ['17.0'],
+
+    useSimulatedUI: false,
+    omniboxFocusCurrentTab: false,
 };
 
 export const extensionFeatureState = FeaturesState;
@@ -41,7 +50,7 @@ const activeFeaturesList = Object.keys(FeaturesState).filter((k) => FeaturesStat
 export let features = [];
 export async function loadFeaturesConfiguration() {
     features = await Promise.all(activeFeaturesList.map((f) => importFeatureConfigurationFile(f)));
-    console.info(features);
+    Console.info(features);
 }
 
 export function importFeatureConfigurationFile(featureID) {
@@ -77,9 +86,7 @@ export function importMigratorFile(fromVersion) {
 }
 
 export async function getFeaturesAndCurrentSettings() {
-    const response = await Runtime.sendMessage({
-        action: MESSAGE_ACTION.GET_FEATURES_LIST,
-    });
+    const response = await sendRuntimeMessage(MESSAGE_ACTION.TO_BACKGROUND.GET_FEATURES_LIST);
     const features = response.features;
 
     const configuration = await getCurrentSettings(features);

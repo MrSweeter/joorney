@@ -1,33 +1,71 @@
-import { ContextMenus, Runtime, StorageSync, Tabs, WebNavigation } from '../src/utils/browser.js';
+import {
+    Console,
+    ContextMenus,
+    Runtime,
+    StorageSync,
+    Tabs,
+    WebNavigation,
+    Windows,
+    sendTabMessage,
+} from '../src/utils/browser.js';
 
 import { features, getCurrentSettings, loadFeaturesConfiguration } from '../configuration.js';
-import { checkHostsExpiration, clearHost } from '../src/api/cache.js';
-import { checkVersion } from './src/check_version.js';
-import { CLEAR_CACHE_HOST_ID_MENU, createClearHostCache } from './src/contextMenu.js';
+import { checkHostsExpiration } from '../src/api/cache.js';
+import { createContextMenu, onContextMenuItemClick, updateContext } from '../src/contextmenu/manager.js';
+import { MESSAGE_ACTION } from '../src/utils/messaging.js';
+import { sleep } from '../src/utils/util.js';
+import { checkVersion, openOption } from './src/check_version.js';
 import { checkCommandShortcuts, handleCommands } from './src/keyboard_shortcut.js';
 import { handleMessage } from './src/messaging.js';
+import { initOmni } from './src/omnibox.js';
 
 // On page # path change, pre 17.2
 WebNavigation.onReferenceFragmentUpdated.addListener((e) => {
     if (e.url.startsWith('http')) {
-        Tabs.sendMessage(e.tabId, { url: e.url, navigator: true, fragment: true });
+        sendTabMessage(e.tabId, MESSAGE_ACTION.TO_CONTENT.TAB_NAVIGATION, {
+            url: e.url,
+            navigator: true,
+            fragment: true,
+        });
     }
 });
 
 // 17.2
 WebNavigation.onHistoryStateUpdated.addListener((e) => {
     if (e.url.startsWith('http')) {
-        Tabs.sendMessage(e.tabId, { url: e.url, navigator: true, history: true });
+        sendTabMessage(e.tabId, MESSAGE_ACTION.TO_CONTENT.TAB_NAVIGATION, {
+            url: e.url,
+            navigator: true,
+            history: true,
+        });
     }
 });
 
 Runtime.onInstalled.addListener(async (details) => {
-    if (details.reason === Runtime.OnInstalledReason.INSTALL) {
+    const isInstall = details.reason === Runtime.OnInstalledReason.INSTALL;
+    if (isInstall) {
         const settingsOrDefault = getCurrentSettings(features);
         await StorageSync.set(settingsOrDefault);
         checkCommandShortcuts();
     }
-    createClearHostCache();
+    await sleep(1000);
+    openOption(isInstall);
+});
+
+Tabs.onActivated.addListener((activeInfo) => {
+    updateContext(activeInfo.tabId);
+});
+
+// Handled by message "TAB_LOADED"
+// Tabs.onUpdated.addListener((tabId, changeInfo, _tab) => {
+//     if (changeInfo.status === 'complete') {
+//         updateContext(tabId);
+//     }
+// });
+
+Windows.onFocusChanged.addListener(async (windowId) => {
+    const tabs = await Tabs.query({ active: true, windowId: windowId });
+    if (tabs.length > 0) updateContext(tabs[0].id);
 });
 
 // Triggers when a message is received (from the content script)
@@ -37,24 +75,27 @@ Runtime.onMessage.addListener((message, sender, sendResponse) => {
             sendResponse(r);
         })
         .catch((ex) => {
-            console.warn(ex);
+            Console.warn(ex);
             sendResponse();
         });
     return true;
 });
 
-ContextMenus.onClicked.addListener((info, tab) => {
-    if (info.menuItemId === CLEAR_CACHE_HOST_ID_MENU) {
-        clearHost(new URL(tab.url).host);
-    }
-});
+ContextMenus.onClicked.addListener(onContextMenuItemClick);
 
-function main() {
+async function main() {
+    // Add some delay to avoid initialization side effect
+    await sleep(1000);
+
     checkVersion();
     handleCommands();
     checkHostsExpiration();
 
     loadFeaturesConfiguration();
+
+    initOmni();
+
+    createContextMenu();
 }
 
 main();

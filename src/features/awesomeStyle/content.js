@@ -1,6 +1,6 @@
 import ContentFeature from '../../generic/content.js';
 import { isOdooWebsite } from '../../utils/authorize.js';
-import { Runtime, StorageSync } from '../../utils/browser.js';
+import { StorageSync } from '../../utils/browser.js';
 import configuration from './configuration.js';
 
 const awesomeStyleID = 'joorney-awesome-style';
@@ -38,15 +38,13 @@ export default class AwesomeStyleContentFeature extends ContentFeature {
         document.documentElement.appendChild(styleTemplate.content.firstChild);
     }
 
-    handleUpdateMessage() {
-        Runtime.onMessage.addListener((msg) => {
-            const css = msg.enableAwesomeStyle;
+    onPopupMessage(msg) {
+        const css = msg.enableAwesomeStyle;
 
-            if (typeof css === 'boolean') {
-                const exist = Array.from(document.getElementsByName(awesomeStyleID));
-                if (exist) for (const e of exist) e.remove();
-                if (css && isOdooWebsite(msg.url)) this.appendAwesomeStyle(msg.url);
-            }
-        });
+        if (typeof css === 'boolean') {
+            const exist = Array.from(document.getElementsByName(awesomeStyleID));
+            if (exist) for (const e of exist) e.remove();
+            if (css && isOdooWebsite(msg.url)) this.appendAwesomeStyle(msg.url);
+        }
     }
 }

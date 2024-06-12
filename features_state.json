@@ -12,5 +12,6 @@
     "impersonateLoginRunbot": true,
     "adminDebugLoginRunbot": true,
     "autoOpenRunbot": true,
-    "showMyBadge": true
+    "showMyBadge": true,
+    "contextOdooMenus": true
 }

@@ -1,5 +1,5 @@
 import OptionCustomizationFeature from '../../generic/option_customization.js';
-import { StorageSync } from '../../utils/browser.js';
+import { Console, StorageSync } from '../../utils/browser.js';
 import configuration from './configuration.js';
 
 export default class UnfocusAppOptionCustomizationFeature extends OptionCustomizationFeature {
@@ -131,7 +131,7 @@ export default class UnfocusAppOptionCustomizationFeature extends OptionCustomiz
                 imageInput.value = imageUrl;
                 document.getElementById(imageKey).src = imageUrl;
             } catch (ex) {
-                console.warn(ex);
+                Console.warn(ex);
             }
         };
     }

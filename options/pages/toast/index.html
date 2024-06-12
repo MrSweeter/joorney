@@ -1,16 +1,33 @@
 <link href="./css/toast/index.css" rel="stylesheet" />
 
 <div class="container pt-5">
-    <h3>Notification Mode</h3>
-    <div class="text-center">
-        <label class="toggle-toast-mode">
-            <input id="joorney-toast-mode" type="checkbox" />
-            <a></a>
-            <span>
-                <span>Devtools console</span>
-                <span>UI Notification</span>
-            </span>
-        </label>
-        <small>You will need to reload tabs to apply the change.</small>
+    <div class="d-flex align-items-center">
+        <h3>Mode & Type</h3>
+        <div class="ms-3"><button id="joorney-toast-mode-showme" class="btn btn-sm btn-secondary">Show me</button></div>
+    </div>
+    <small class="text-muted">You will need to reload tabs to apply the change.</small>
+
+    <p>Choose where to receive notifications (information, warning, error).</p>
+    <div class="joorney-toast-mode-control radio-control rounded d-flex w-100">
+        <input type="radio" name="joorney-toast-mode-control" id="joorney-toast-mode-disabled" value="disabled" />
+        <label for="joorney-toast-mode-disabled" class="text-center rounded">Nowhere <small class="opacity-50">(disable)</small></label>
+        <input type="radio" name="joorney-toast-mode-control" id="joorney-toast-mode-log" value="log" />
+        <label for="joorney-toast-mode-log" class="text-center rounded">Devtools console</label>
+        <input type="radio" name="joorney-toast-mode-control" id="joorney-toast-mode-small" value="ui" checked />
+        <label for="joorney-toast-mode-small" class="text-center rounded">Standard UI</label>
+        <input type="radio" name="joorney-toast-mode-control" id="joorney-toast-mode-large" value="large-ui" />
+        <label for="joorney-toast-mode-large" class="text-center rounded">Large UI</label>
+    </div>
+
+    <p class="pt-3">Choose which type of notification you want to see</p>
+    <div class="joorney-toast-mode-control checkbox-control rounded d-flex w-100 text-uppercase">
+        <input type="checkbox" name="joorney-toast-mode-control" id="joorney-toast-mode-info" data-toast-type="info" />
+        <label for="joorney-toast-mode-info" class="text-center rounded m-1"><i class="fa fa-info-circle text-info"></i> INFO</label>
+        <input type="checkbox" name="joorney-toast-mode-control" id="joorney-toast-mode-warn" data-toast-type="warning" />
+        <label for="joorney-toast-mode-warn" class="text-center rounded m-1"><i class="fa fa-exclamation-triangle text-warning"></i> WARN</label>
+        <input type="checkbox" name="joorney-toast-mode-control" id="joorney-toast-mode-error" data-toast-type="danger" />
+        <label for="joorney-toast-mode-error" class="text-center rounded m-1"><i class="fa fa-exclamation-circle text-danger"></i> ERROR</label>
+        <input type="checkbox" name="joorney-toast-mode-control" id="joorney-toast-mode-success" data-toast-type="success" />
+        <label for="joorney-toast-mode-success" class="text-center rounded m-1"><i class="fa fa-check-circle text-success"></i> SUCCESS</label>
     </div>
 </div>

@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
-    "version": "2.0.0.%BUILD%",
-    "version_name": "2.0.0-beta",
+    "version": "2.1.0.%BUILD%",
+    "version_name": "2.1.0-alpha",
     "name": "Joorney",
     "description": "Improve your Odoo Journey!",
     "author": "Vanden Bergh Gaëtan",
@@ -16,6 +16,9 @@
             "suggested_key": "Alt+Shift+F",
             "description": "Enable or Disable extension features on the current origin"
         }
+    },
+    "omnibox": {
+        "keyword": "joorney"
     },
     "icons": {
         "16": "images/icon_128.png",

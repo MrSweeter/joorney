@@ -1,4 +1,5 @@
-import LimitedRunbotContentFeature from '../../shared/limited/runbot_content.js';
+import LimitedRunbotContentFeature, { openVersionKey, searchVersionPath } from '../../shared/limited/runbot_content.js';
+import { Console } from '../../utils/browser.js';
 import { ValueIsNaN } from '../../utils/util.js';
 import { sanitizeVersion } from '../../utils/version.js';
 import configuration from './configuration.js';
@@ -15,12 +16,23 @@ export default class AutoOpenRunbotContentFeature extends LimitedRunbotContentFe
     }
 
     async loadPath(url, batchOffset = 0) {
-        const path = await this.getRunbotPath(url, batchOffset);
+        const { path, version } = await this.getRunbotPath(url, batchOffset);
         try {
-            await this.openRunbot(`https://runbot.odoo.com/${path ?? ''}`, false);
+            if (!path && !version) {
+                window.location = 'https://runbot.odoo.com/';
+            }
+            if (!path && version) {
+                const searchPath = `${searchVersionPath}${version}`;
+                const searchAndOpenPath = `${searchPath}&${openVersionKey}=${version}`;
+                // Avoid loop if version not exist and already searched
+                const finalPath = url.searchParams.has('search') ? searchPath : searchAndOpenPath;
+                window.location = `https://runbot.odoo.com/${finalPath}`;
+                return;
+            }
+            await this.openRunbot(`https://runbot.odoo.com/${path}`, false);
         } catch (error) {
             if (batchOffset) {
-                console.warn(error);
+                Console.warn(error);
                 return;
             }
             this.loadPath(url, 1);
@@ -29,7 +41,7 @@ export default class AutoOpenRunbotContentFeature extends LimitedRunbotContentFe
 
     async getRunbotPath(tabURL, batchOffset = 0) {
         const urlVersion = this.getOpenData(tabURL);
-        if (!urlVersion) return;
+        if (!urlVersion) return {};
 
         let openVersion = Number.parseFloat(urlVersion).toFixed(1);
         if (ValueIsNaN(openVersion)) {
@@ -65,11 +77,12 @@ export default class AutoOpenRunbotContentFeature extends LimitedRunbotContentFe
 
                     // SIGN IN exist and runbot not in a refresh state
                     if (signInButtons.length > 0 && spinGearIcons.length === 0 && !refreshingIcons) {
-                        return signInButtons.item(0).getAttribute('href');
+                        return { path: signInButtons.item(0).getAttribute('href'), version: openVersion };
                     }
                 }
             }
         }
-        return undefined;
+
+        return { version: openVersion };
     }
 }

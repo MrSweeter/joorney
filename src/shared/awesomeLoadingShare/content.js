@@ -1,6 +1,5 @@
 import ContentFeature from '../../generic/content.js';
 import { isOdooWebsite } from '../../utils/authorize.js';
-import { Runtime } from '../../utils/browser.js';
 
 export default class AwesomeLoadingShareContentFeature extends ContentFeature {
     constructor(configuration) {
@@ -33,15 +32,13 @@ export default class AwesomeLoadingShareContentFeature extends ContentFeature {
         document.documentElement.appendChild(styleTemplate.content.firstChild);
     }
 
-    handleUpdateMessage() {
-        Runtime.onMessage.addListener((msg) => {
-            const img = this.getImageFromNavigationMessage(msg);
-            if (img || img === false) {
-                const exist = Array.from(document.getElementsByName(this.loadingID));
-                for (const e of exist) e.remove();
-                if (img && isOdooWebsite(msg.url)) this.appendLoadingToDOM(img);
-            }
-        });
+    onPopupMessage(msg) {
+        const img = this.getImageFromNavigationMessage(msg);
+        if (img || img === false) {
+            const exist = Array.from(document.getElementsByName(this.loadingID));
+            for (const e of exist) e.remove();
+            if (img && isOdooWebsite(msg.url)) this.appendLoadingToDOM(img);
+        }
     }
 
     getImageFromNavigationMessage(_msg) {

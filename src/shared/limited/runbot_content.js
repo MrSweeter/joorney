@@ -1,11 +1,16 @@
 import ContentFeature from '../../generic/content.js';
 import { isAuthorizedLimitedFeature } from '../../utils/authorize.js';
-import { Runtime } from '../../utils/browser.js';
+import { sendRuntimeMessage } from '../../utils/browser.js';
 import { RunbotException } from '../../utils/error.js';
 import { MESSAGE_ACTION } from '../../utils/messaging.js';
 import { sanitizeURL } from '../../utils/util.js';
 
 export const openVersionKey = 'joorney-runbot';
+export const searchVersionPath = 'runbot/r-d-1?search=';
+
+export function getRunbotOpenUrl(version) {
+    return `https://runbot.odoo.com?${openVersionKey}=${version}`;
+}
 
 export default class LimitedRunbotContentFeature extends ContentFeature {
     async load(urlArg, _versionInfo) {
@@ -55,10 +60,11 @@ export default class LimitedRunbotContentFeature extends ContentFeature {
 
     async openRunbot(href, newTab) {
         let finalURL = 'https://runbot.odoo.com/';
-        if (href !== finalURL) {
+        if (href.includes(searchVersionPath)) {
+            finalURL = href;
+        } else if (href !== finalURL) {
             // Messaging flow require due to CORS on runbot
-            const response = await Runtime.sendMessage({
-                action: MESSAGE_ACTION.GET_FINAL_RUNBOT_URL,
+            const response = await sendRuntimeMessage(MESSAGE_ACTION.TO_BACKGROUND.GET_FINAL_RUNBOT_URL, {
                 href: href,
             });
             if (response.error) {

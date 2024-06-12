@@ -46,6 +46,14 @@ const features = [
         amico: 'static_assets-amico',
     },
     {
+        id: 'contextOdooMenus',
+        icon: 'location-arrow-solid',
+        title: 'Context OdooMenus',
+        category: 'odooFeature',
+        description: `<span class="fw-bold">Context OdooMenus</span> is a feature that will add Odoo's menus to the browser context menu`,
+        amico: 'dropdown_menu-amico',
+    },
+    {
         id: 'autoOpenRunbot',
         icon: 'jet-fighter-solid',
         title: 'Automatic Open runbot',

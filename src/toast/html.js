@@ -76,7 +76,11 @@ const ToastStyle = css`
         margin-bottom: 5px;
     }
 
-    .toast-text {}
+    .toast-text {
+        max-width: 500px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 
     .toast-feature span {
         background-color: rgba(128, 128, 128, .25);
@@ -118,17 +122,24 @@ export function buildContainer() {
     return container;
 }
 
-export function buildToastItem(feature, title, message, type) {
+export function buildToastItem(feature, title, message, type, large) {
     const toastID = `toast-${Date.now()}`;
+    const textHeight = !large ? 'height: 20px; white-space: nowrap;' : '';
     const item = stringToHTML(html`
         <div id="${toastID}" class="${ToastItemElementClass} ${ToastItemElementClass}-${type} alert-${type}">
             <div class="toast-icon"><i class="${iconForType[type]}"></i></div>
             <div class="toast-content">
-                <div class="toast-feature">
-                    <span class="badge rounded-pill">${feature}</span>
-                </div>
+                <div>
+                    <strong>Joorney: </strong>
+                    <span class="toast-feature">
+                        <span class="badge rounded-pill">${feature}</span>
+                    </span>
+                </span>
                 <div class="toast-title">${title}</div>
-                <div class="toast-text">${message}</div>
+                <div
+                    class="toast-text"
+                    style="${textHeight}"
+                >${message}</div>
             </div>
             <button id="close-${toastID}" class="toast-close"><i class="fa-solid fa-xmark"></i></button>
             <div class="toast-progress"></div>

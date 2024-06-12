@@ -1,3 +1,5 @@
+import { Console } from '../../src/utils/browser.js';
+
 export async function getFinalRunbotURL(request) {
     try {
         const response = await fetch(request.href, {
@@ -5,7 +7,7 @@ export async function getFinalRunbotURL(request) {
         });
         return { url: response.url };
     } catch (ex) {
-        console.warn(ex);
+        Console.warn(ex);
         return { url: null, error: ex.toString() };
     }
 }
