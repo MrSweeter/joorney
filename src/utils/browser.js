@@ -14,3 +14,4 @@ export const Cookies = isFirefox() ? browser.cookies : chrome.cookies;
 export const Action = isFirefox() ? browser.action : chrome.action;
 export const Commands = isFirefox() ? browser.commands : chrome.commands;
 //export const Windows = isFirefox() ? browser.windows : chrome.windows;
+export const Management = isFirefox() ? browser.management : chrome.management;

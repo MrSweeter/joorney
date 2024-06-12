@@ -1,5 +1,7 @@
 import { writeRecord } from '../../api/odoo.js';
+import { generateTrackingMessage, generateUserAvatarTag } from '../../html_generator.js';
 import ProjectTaskShareContentFeature from '../../shared/projectTaskShare/content.js';
+import { StorageSync } from '../../utils/browser.js';
 import { getCurrentUserID } from '../../utils/user.js';
 import configuration from './configuration.js';
 
@@ -50,7 +52,9 @@ export default class AssignMeTaskContentFeature extends ProjectTaskShareContentF
         if (response) {
             switch (callback) {
                 case ASSIGN_TYPE.RELOAD: {
-                    window.location.reload();
+                    const { useSimulatedUI } = await StorageSync.get({ useSimulatedUI: false });
+                    if (useSimulatedUI) this.addUserInUI();
+                    else window.location.reload();
                     break;
                 }
                 case ASSIGN_TYPE.REDIRECT: {
@@ -61,10 +65,45 @@ export default class AssignMeTaskContentFeature extends ProjectTaskShareContentF
         }
     }
 
+    addUserInUI() {
+        const fakeDataTitle = `This element is not part of the original application; it was added artificially by Joorney.
+If unsure, please reload the page!`;
+        // Fake assigned element
+        const fieldElement = document.getElementsByName('user_ids')?.[0];
+        if (!fieldElement) return false;
+        const containerElement = fieldElement
+            .querySelector('.many2many_tags_avatar_field_container')
+            ?.querySelector('.o_field_many2many_selection');
+        if (!containerElement) return false;
+        const avatarSrc = document.querySelector('.o_user_avatar, .oe_topbar_avatar')?.src;
+        if (!avatarSrc || avatarSrc.length <= 0) return false;
+        const userName = document.querySelector('.o_user_avatar ~ .oe_topbar_name, .oe_topbar_avatar ~ .oe_topbar_name')
+            ?.firstChild?.nodeValue;
+        if (!userName || userName.length <= 0) return false;
+        const tagElement = generateUserAvatarTag(userName, avatarSrc);
+
+        // Fake chat message
+        const chatParent = document
+            .querySelector('.o-mail-Chatter-content')
+            ?.querySelector('.o-mail-Thread')?.firstChild;
+        if (!chatParent) return false;
+        const previousElement = chatParent.querySelector('.o-mail-Message, .o-mail-DateSection');
+        if (!previousElement) return false;
+        const messageElement = generateTrackingMessage(userName, userName, 'Assignees', avatarSrc, new Date());
+
+        // Add Fake data warning
+        tagElement.title = fakeDataTitle;
+        messageElement.title = fakeDataTitle;
+
+        containerElement.prepend(tagElement);
+        previousElement.before(messageElement);
+        return true;
+    }
+
     appendAssignMeTaskButtonToDom(task, currentUser) {
         const buttonTemplate = document.createElement('template');
         buttonTemplate.innerHTML = `
-            <button class="btn btn-warning" name="joorney_action_assign_to_me" type="object">
+            <button class="btn btn-warning" name="joorney_action_assign_to_me" type="object" title="Page will be reloaded, use wheel click to open in another tab">
                 <span>Assign to me</span>
             </button>
         `.trim();

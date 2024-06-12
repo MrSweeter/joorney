@@ -2,7 +2,7 @@ import { ContextMenus, Runtime, StorageSync, Tabs, WebNavigation } from '../src/
 
 import { features, getCurrentSettings, loadFeaturesConfiguration } from '../configuration.js';
 import { checkHostsExpiration, clearHost } from '../src/api/cache.js';
-import { checkVersion } from './src/check_version.js';
+import { checkVersion, openOption } from './src/check_version.js';
 import { CLEAR_CACHE_HOST_ID_MENU, createClearHostCache } from './src/contextMenu.js';
 import { checkCommandShortcuts, handleCommands } from './src/keyboard_shortcut.js';
 import { handleMessage } from './src/messaging.js';
@@ -22,12 +22,14 @@ WebNavigation.onHistoryStateUpdated.addListener((e) => {
 });
 
 Runtime.onInstalled.addListener(async (details) => {
-    if (details.reason === Runtime.OnInstalledReason.INSTALL) {
+    const isInstall = details.reason === Runtime.OnInstalledReason.INSTALL;
+    if (isInstall) {
         const settingsOrDefault = getCurrentSettings(features);
         await StorageSync.set(settingsOrDefault);
         checkCommandShortcuts();
     }
     createClearHostCache();
+    openOption(isInstall);
 });
 
 // Triggers when a message is received (from the content script)

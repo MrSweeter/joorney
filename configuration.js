@@ -33,6 +33,8 @@ export const baseSettings = {
     },
 
     supportedVersions: ['17.0'],
+
+    useSimulatedUI: false,
 };
 
 export const extensionFeatureState = FeaturesState;

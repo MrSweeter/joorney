@@ -124,9 +124,12 @@ export function buildToastItem(feature, title, message, type) {
         <div id="${toastID}" class="${ToastItemElementClass} ${ToastItemElementClass}-${type} alert-${type}">
             <div class="toast-icon"><i class="${iconForType[type]}"></i></div>
             <div class="toast-content">
-                <div class="toast-feature">
-                    <span class="badge rounded-pill">${feature}</span>
-                </div>
+                <div>
+                    <strong>Joorney: </strong>
+                    <span class="toast-feature">
+                        <span class="badge rounded-pill">${feature}</span>
+                    </span>
+                </span>
                 <div class="toast-title">${title}</div>
                 <div class="toast-text">${message}</div>
             </div>

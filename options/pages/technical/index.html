@@ -5,6 +5,21 @@
     }
 </style>
 
+<div id="joorney_chaos_mode" class="container d-none pt-5">
+    <h3 class="text-danger">[Chaos Mode] What are you doing here? You should not use these buttons!!!</h3>
+    <button class="btn btn-danger d-none" id="joorney_chaos_destroy_local_storage">Destroy Local-Storage</button>
+    <button class="btn btn-danger d-none" id="joorney_chaos_destroy_sync_storage">Destroy Sync-Storage</button>
+</div>
+
+<div class="container pt-5">
+    <h3 class="mb-3">Experimental</h3>
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="joorney_experimentalSimulatedUI" />
+        <label class="form-check-label" for="joorney_experimentalSimulatedUI">Use simulated UI</label>
+        <p><small class="text-muted">Instead of reloading the page when assigning task using the "Assign Me" feature, append a simulated UI elements.</small></p>
+    </div>
+</div>
+
 <div class="container pt-5">
     <h3>Window actions fallback</h3>
     <table id="joorney_window_action_fallback_table" class="table table-striped table-sm bg-light">
@@ -46,25 +61,31 @@
     </table>
 </div>
 
-<div>
-    <p class="pt-5 text-center opacity-50">
+<div class="pt-5">
+    <p class="text-center opacity-50">
         <small>Use <strong>[Ctrl/Cmd + Click]</strong> key to expand/collapse all elements at the same level</small> <strong class="tip-separator">|</strong>
         <small>Use <strong>[Shift + Click]</strong> to expand/collapse element and all childs</small>
     </p>
     <div class="row mx-0 px-5">
-        <div class="col-4">
+        <div class="col-3">
             <div class="mb-3">
                 <h5>Extension Features State</h5>
                 <div id="joorney-extension-state"></div>
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-3">
+            <div class="mb-3">
+                <h5>Extension OnBoarding</h5>
+                <div id="joorney-onboarding-progression"></div>
+            </div>
+        </div>
+        <div class="col-6">
             <div class="mb-3">
                 <h5>Extension Features</h5>
                 <div id="joorney-extension-features"></div>
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-12">
             <div class="mb-3">
                 <h5>Extension configuration</h5>
                 <div id="joorney-storage-configuration"></div>

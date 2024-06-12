@@ -1,5 +1,6 @@
 import { isDevMode } from '../background/src/check_version.js';
 import { getFeaturesAndCurrentSettings } from '../configuration.js';
+import ChecklistManager from '../src/checklist/manager.js';
 import { initImportExport } from './import_export.js';
 import { loadPage as loadConfigurationPage } from './pages/configuration/index.js';
 import { loadPage as loadTechnicalPage } from './pages/technical/index.js';
@@ -14,6 +15,7 @@ const PAGES = [
     {
         id: 'page-website',
         menu: 'page-website',
+        tour: 'tour_hostControls',
         label: 'Hosts control',
         path: './pages/website/index.html',
         loader: loadWebsitePage,
@@ -22,6 +24,7 @@ const PAGES = [
     {
         id: 'page-configuration',
         menu: 'page-configuration',
+        tour: 'tour_preferences',
         label: 'Preferences',
         path: './pages/configuration/index.html',
         loader: loadConfigurationPage,
@@ -29,6 +32,7 @@ const PAGES = [
     {
         id: 'page-version',
         menu: 'page-version',
+        tour: 'tour_versions',
         label: 'Versions',
         path: './pages/version/index.html',
         loader: loadVersionPage,
@@ -36,6 +40,7 @@ const PAGES = [
     {
         id: 'page-toast',
         menu: 'page-toast',
+        tour: undefined,
         label: 'Notifications',
         path: './pages/toast/index.html',
         loader: loadToastPage,
@@ -43,6 +48,7 @@ const PAGES = [
     {
         id: 'page-technical',
         menu: 'page-technical',
+        tour: 'tour_technical',
         label: 'Developers',
         path: './pages/technical/index.html',
         loader: loadTechnicalPage,
@@ -62,6 +68,8 @@ async function onDOMContentLoaded() {
     const searchParams = new URLSearchParams(window.location.search);
     toggleTechnicalMenus(!searchParams.get('debug') && !(await isDevMode()));
     document.getElementById('joorney-brand-debug').onclick = () => toggleTechnicalMenus();
+
+    ChecklistManager.load();
 }
 
 document.removeEventListener('DOMContentLoaded', onDOMContentLoaded);
@@ -107,6 +115,7 @@ async function loadPage(page) {
     document.getElementById(PAGE_CONTAINER).innerHTML = data;
     page.loader(features, currentSettings);
     if (page.menu) updateActiveMenu(page.menu);
+    updateMenuTour(page.tour);
 }
 
 function updateActiveMenu(menu) {
@@ -114,4 +123,8 @@ function updateActiveMenu(menu) {
         if (e.id === menu) e.classList.add('active');
         else e.classList.remove('active');
     }
+}
+
+function updateMenuTour(tourID) {
+    ChecklistManager.onboard(tourID);
 }

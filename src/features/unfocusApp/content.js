@@ -2,7 +2,7 @@ import ContentFeature from '../../generic/content.js';
 import { isOdooWebsite, isStillSameWebsite } from '../../utils/authorize.js';
 import { Runtime, StorageSync } from '../../utils/browser.js';
 import { getThemeModeCookie } from '../../utils/cookies.js';
-import { sanitizeURL } from '../../utils/util.js';
+import { sanitizeURL, sleep } from '../../utils/util.js';
 import configuration from './configuration.js';
 
 const UNFOCUS_STATE = Object.freeze({
@@ -44,7 +44,7 @@ export default class UnfocusApp extends ContentFeature {
 
         const elements = document.getElementsByClassName('o_app');
         if (elements.length === 0 && count === 0) {
-            await new Promise((r) => setTimeout(r, 2500));
+            await sleep(2500);
             return this.appendUnfocusApp(url, count + 1);
         }
 
@@ -120,7 +120,7 @@ export default class UnfocusApp extends ContentFeature {
         // debounce
         this.clickCount += 1;
         const currentClickCount = this.clickCount;
-        await new Promise((r) => setTimeout(r, 200));
+        await sleep(200);
         if (this.clickCount !== currentClickCount || this.clickCount === 0) return;
 
         let origin = window.location.origin;

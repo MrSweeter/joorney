@@ -1,6 +1,6 @@
 import { baseSettings } from '../../configuration.js';
 import { StorageLocal, StorageSync } from './browser.js';
-import { ValueIsNaN, sanitizeURL } from './util.js';
+import { ValueIsNaN, sanitizeURL, sleep } from './util.js';
 import { sanitizeVersion } from './version.js';
 
 export const regexSchemePrefix = 'regex://';
@@ -11,13 +11,13 @@ export function isOdooWebsite(url) {
 }
 
 export async function isStillSamePage(timeout, url) {
-    if (timeout > 0) await new Promise((r) => setTimeout(r, timeout));
+    if (timeout > 0) await sleep(timeout);
     const currentURL = sanitizeURL(window.location.href);
     return currentURL.href === url.href;
 }
 
 export async function isStillSameWebsite(timeout, url) {
-    if (timeout > 0) await new Promise((r) => setTimeout(r, timeout));
+    if (timeout > 0) await sleep(timeout);
     return window.location.origin === url.origin;
 }
 

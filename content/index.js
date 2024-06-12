@@ -1,6 +1,6 @@
 import { importFeatureBackgroundTriggerFile, importFeatureContentFile } from '../configuration.js';
 import { loadToast } from '../src/toast/index.js';
-import { Runtime } from '../src/utils/browser.js';
+import { Runtime, StorageLocal } from '../src/utils/browser.js';
 import { MESSAGE_ACTION } from '../src/utils/messaging.js';
 import { getOdooVersion } from '../src/utils/version.js';
 
@@ -87,9 +87,9 @@ async function loadFeatures(url, versionInfo, trigger) {
 //#endregion
 
 export async function updateTabState(url) {
-    const { offs } = await chrome.storage.local.get({ offs: [] });
+    const { offs } = await StorageLocal.get({ offs: [] });
     if (offs.includes(new URL(url).origin)) {
-        await chrome.runtime.sendMessage({
+        await Runtime.sendMessage({
             action: MESSAGE_ACTION.UPDATE_EXT_STATUS,
             forceSwitchToOFF: true,
         });

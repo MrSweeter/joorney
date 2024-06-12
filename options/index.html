@@ -4,17 +4,18 @@
         <title>Joorney Configuration</title>
         <link rel="icon" type="image/x+icon" href="./../images/icon_128.svg" />
         <!-- Font Awesome -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
         <!-- MDB -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.1/mdb.min.css" rel="stylesheet" />
 
         <link href="./index.css" rel="stylesheet" />
+        <link href="./checklist.css" rel="stylesheet" />
         <script src="index.js"></script>
     </head>
     <body class="joorney-body-background">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" id="joorney-navig-menu">
             <div class="container-fluid">
                 <div id="joorney-brand-debug" class="navbar-brand" title="Debug mode">
                     <img loading="lazy" src="/images/icon_128.png" class="mx-2" height="20" alt="Joorney Logo" />
@@ -42,11 +43,40 @@
 
         <div id="joorney-page-container"></div>
 
+        <div id="bubble" class="bubble opacity-0"><img class="w-100" src="/images/bubble.png" /></div>
+        <button id="joorney_checklist_show_btn" class="d-none btn btn-floating" type="button" title="Show onboarding-checklist"><i class="fa-solid fa-list-check"></i></button>
+        <div class="onboarding-checklist" id="joorney_checklist">
+            <button id="joorney_checklist_hide_btn" class="btn btn-floating position-absolute top-0 end-0 shadow-0" type="button" title="Close"><i class="fa-solid fa-xmark"></i></button>
+            <div class="justify-content-between d-flex flex-column">
+                <h3 id="joorney_checklist_tour_title" class="m-0">Discover Joorney</h3>
+                <h6 id="joorney_checklist_tour_description" class="text-muted">${step.description}</h6>
+            </div>
+            <div class="progress rounded" style="height: 8px;">
+                <div id="joorney_checklist_tour_progress" class="progress-bar rounded" role="progressbar" style="width: 25%;"></div>
+            </div>
+            <div id="joorney_checklist_congrats" class="card text-center mt-3 overflow-hidden" style="max-height: 0;">
+                <div class="card-body">
+                    <h4 class="card-title text-success">Congratulations!</h4>
+                    <p class="card-text">You've completed the onboarding checklist. Great job!</p>
+                    <button id="joorney_checklist_congrats_restart" class="btn btn-success">Restart</button>
+                </div>
+            </div>
+            <hr id="joorney_checklist_congrats_separator" class="d-none" />
+            <div class="position-relative">
+                <div id="joorney_checklist_steps_list" class="mt-3"></div>
+                <div
+                    id="joorney_checklist_congrats_blur"
+                    class="w-100 h-100 position-absolute top-0 start-0 d-none"
+                    style="background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 255));"
+                ></div>
+            </div>
+        </div>
+
         <footer class="text-center">
             <div class="text-center p-3">
                 &copy; <span id="copyright-year">2023</span>
                 All rights reserved :
-                <a id="copyright-link" class="text-dark" href="https://github.com/MrSweeter/joorney">Joorney</a>
+                <a id="copyright-link" href="https://github.com/MrSweeter/joorney">Joorney</a>
             </div>
             <div>Theme Switch base on Location is powered by <a href="https://sunrisesunset.io/">SunriseSunset.io</a></div>
         </footer>
