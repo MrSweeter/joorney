@@ -43,3 +43,13 @@ body {
 .input-hide {
     display: none;
 }
+
+/* OVERRIDE */
+.form-check-input[type='checkbox']:checked:focus,
+.form-check-input[type='checkbox']:checked {
+    background-color: var(--joorney-secondary);
+}
+
+.form-switch .form-check-input:checked[type='checkbox']:after {
+    background-color: var(--joorney-secondary);
+}

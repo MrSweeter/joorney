@@ -1,4 +1,5 @@
 import { StorageLocal } from '../../src/utils/browser.js';
+import { sleep } from '../../src/utils/util.js';
 import { stringToHTML } from '../html_generator.js';
 import { Checklist } from './index.js';
 import { tours } from './tour.js';
@@ -36,6 +37,17 @@ export default class ChecklistContent {
         this.updateProgress();
 
         this.updateSteps(this.tour.steps, tourStore);
+
+        const titleIcon = document.getElementById('joorney_checklist_tour_title_markall_done');
+        titleIcon.onclick = async () => {
+            for (const step of Object.values(this.tour.steps)) {
+                const isComplete = await this.markDone(step);
+                if (!isComplete) await sleep(100);
+            }
+        };
+        titleIcon.className = 'fa-solid fa-clipboard-list fa-2xs';
+        titleIcon.title = 'Wave a magic wand and deem all steps magically done!';
+
         const tourState = tourStore[this.tour.id];
         const lastTourVersion = tourStore[`${this.tour.id}_version`];
         const tourVersion = this.tour.version;
@@ -131,8 +143,7 @@ export default class ChecklistContent {
         this.updateProgress();
 
         if (this.progressStatePct >= 100) {
-            await StorageLocal.set({ [this.tour.id]: true, [`${this.tour.id}_version`]: this.tour.version });
-            this.congrats(true);
+            await this.completeTour();
             return true;
         }
         return false;
@@ -176,6 +187,15 @@ export default class ChecklistContent {
         stepElement.setAttribute('disabled', true);
         const parentElement = stepElement.parentElement;
         parentElement.classList.add('locked');
+    }
+
+    async completeTour() {
+        await StorageLocal.set({ [this.tour.id]: true, [`${this.tour.id}_version`]: this.tour.version });
+        this.congrats(true);
+        const titleIcon = document.getElementById('joorney_checklist_tour_title_markall_done');
+        titleIcon.onclick = null;
+        titleIcon.title = '';
+        titleIcon.className = 'fa-solid fa-clipboard-check text-success fa-2xs';
     }
 
     congrats(isShow) {
