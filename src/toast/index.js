@@ -27,31 +27,41 @@ const maximumNotification = 3;
 export const ToastManager = {
     async load() {
         const container = buildContainer();
+        const existElement = document.getElementById(container.id);
+        if (existElement) existElement.remove();
+
         document.documentElement.appendChild(container);
         this.toastMode = (await StorageSync.get(baseSettings))?.toastMode ?? 'ui';
+        this.toastType = JSON.parse((await StorageSync.get(baseSettings))?.toastType);
     },
 
-    isUI() {
-        return this.toastMode === 'ui';
+    isLogConsole() {
+        return this.toastMode === 'log';
+    },
+
+    isLargeMode() {
+        return this.toastMode === 'large-ui';
     },
 
     info(feature, title, message) {
-        this._notify(feature, title, message, 'info');
+        return this._notify(feature, title, message, 'info');
     },
 
     warn(feature, title, message) {
-        this._notify(feature, title, message, 'warning');
+        return this._notify(feature, title, message, 'warning');
     },
 
     error(feature, title, message) {
-        this._notify(feature, title, message, 'danger');
+        return this._notify(feature, title, message, 'danger');
     },
 
     success(feature, title, message) {
-        this._notify(feature, title, message, 'success');
+        return this._notify(feature, title, message, 'success');
     },
 
     async _notify(feature, title, message, type) {
+        if (!this.toastType[type]) return false;
+
         const existing = Object.entries(existingToast).find((entry) => entry[1].msg === message);
         if (existing) {
             if (existing[1].id) clearTimeout(existing[1].id);
@@ -69,15 +79,38 @@ export const ToastManager = {
                 this._hide(existing[0]);
             }, toastDurationMillis + toastFadeInOutDurationMillis);
 
-            return;
+            return true;
         }
 
-        const isUI = this.isUI();
-        if (!isUI || Object.keys(existingToast).length >= maximumNotification) {
-            this._logs(feature, title, message, type);
-            return;
+        const isLogConsole = this.isLogConsole();
+        if (isLogConsole) {
+            this._log(feature, title, message, type);
+            return true;
         }
 
+        if (Object.keys(existingToast).length >= maximumNotification) {
+            this._log(feature, title, message, type, false);
+            this._ui(
+                'notification',
+                '',
+                `You have reached the notification limit (${maximumNotification}). Notification logged to console.`,
+                'warning'
+            );
+            return true;
+        }
+
+        if (this.isLargeMode()) {
+            this._ui(feature, title, message, type);
+            return true;
+        }
+
+        this._log(feature, title, message, type, false);
+        this._ui(feature, title, message, type);
+
+        return true;
+    },
+
+    _ui(feature, title, message, type) {
         const container = document.getElementById(ToastContainerElementID);
         if (!container) return;
         const item = buildToastItem(feature, title, message, type);
@@ -86,9 +119,9 @@ export const ToastManager = {
         existingToast[toastID] = { msg: message, id: this._show(toastID) };
     },
 
-    _logs(feature, title, message, type) {
+    _log(feature, title, message, type, antispam = true) {
         const itemID = `log-${Date.now()}`;
-        existingToast[itemID] = message;
+        if (antispam) existingToast[itemID] = message;
         switch (type) {
             case 'info':
                 console.info(`(${feature})\n${title}\n${message}`);
@@ -100,14 +133,16 @@ export const ToastManager = {
                 console.log(`[${type}] (${feature})\n${title}\n${message}`);
                 break;
             case 'success':
-                console.success(`(${feature})\n${title}\n${message}`);
+                console.log(`(${feature})\n${title}\n${message}`);
                 break;
             default:
                 console.log(`[${type}] (${feature})\n${title}\n${message}`);
         }
-        setTimeout(() => {
-            delete existingToast[itemID];
-        }, 10000);
+        if (antispam) {
+            setTimeout(() => {
+                delete existingToast[itemID];
+            }, toastDelayMillis * 1000);
+        }
     },
 
     _show(toastID) {

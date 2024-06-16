@@ -40,7 +40,7 @@ const PAGES = [
     {
         id: 'page-toast',
         menu: 'page-toast',
-        tour: undefined,
+        tour: 'tour_toasts',
         label: 'Notifications',
         path: './pages/toast/index.html',
         loader: loadToastPage,
