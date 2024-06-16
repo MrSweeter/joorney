@@ -39,7 +39,6 @@ export const steps = {
         name: 'Disable Version',
         description: 'Disable the previously enabled version.',
         trigger: [{ selector: 'label[for="joorney_15_2_version"]', run: 'click' }],
-        end: true,
         progression: 30,
     },
 };

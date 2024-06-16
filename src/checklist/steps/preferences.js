@@ -53,7 +53,6 @@ export const steps = {
             { selector: '#joorney_theme_switch_dark_start', run: 'click' },
             { selector: '#joorney_theme_switch_dark_stop', run: 'click' },
         ],
-        end: true,
         progression: 20,
     },
 };

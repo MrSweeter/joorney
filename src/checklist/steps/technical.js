@@ -68,7 +68,6 @@ export const steps = {
         name: 'User Configuration',
         description: "Check your user configuration stored in Chrome's sync storage.",
         trigger: [{ selector: '#joorney-storage-configuration .expander', run: 'click' }],
-        end: true,
         progression: 15,
     },
 };

@@ -43,7 +43,6 @@ export const steps = {
         name: 'Remove your origin',
         description: 'Initiate and confirm origin deletion in the prompt.',
         trigger: [{ selector: '.joorney_origins_filter_origin_delete_0', run: 'click' }],
-        end: true,
         progression: 20,
     },
 };

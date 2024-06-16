@@ -30,9 +30,9 @@ export default class ChecklistContent {
         const stepIDs = Object.keys(this.tour.steps);
         const stepStates = stepIDs.length > 0 ? await StorageLocal.get(this.tour.store) : {};
         const stepCount = stepIDs.length > 0 ? stepIDs.length : 1;
+
         this.progressInc = (1 / stepCount) * 100;
         this.progressStatePct = 0;
-
         this.updateProgress();
 
         this.updateSteps(this.tour.steps, stepStates);
@@ -49,18 +49,12 @@ export default class ChecklistContent {
         const stepArray = Object.values(steps);
         if (stepArray.length <= 0) return;
         for (const step of stepArray) {
-            if (step.button) this.createButton(step, stepStates[step.id]);
-            else this.createStep(step, stepStates[step.id]);
+            this.createStep(step, stepStates[step.id]);
             this.lockStep(step);
+            if (stepStates[step.id]) this.markDone(step);
         }
 
-        let next = stepArray[0];
-        while (next && stepStates[next.id]) {
-            this.markDone(next);
-            next = steps[next.next];
-        }
-
-        if (next) this.loadNextStep(next);
+        this.loadNextStep(stepArray[0]);
     }
 
     createStep(step, done) {
@@ -85,46 +79,46 @@ export default class ChecklistContent {
         if (!done) this.loadTrigger(step);
     }
 
-    createButton(step, done) {
-        const stepElement = stringToHTML(`
-            <div class="checklist-item">
-                <button id=${step.id} class="btn btn-info">${step.button}</button>
-            </div>
-        `);
-        document.getElementById('joorney_checklist_steps_list').appendChild(stepElement);
-        if (!done) this.loadTrigger(step);
-    }
-
     loadTrigger(step) {
-        const next = () => this.markDone(step);
-        if (step.button) {
-            document.getElementById(step.id).onclick = () => next();
-        } else {
-            document.getElementById(step.id).onchange = (e) => {
-                if (e.target.checked) next();
-                else {
-                    this.progressStatePct -= step.progression ?? this.progressInc;
-                    this.updateProgress();
-                }
-            };
-        }
-        if (!step.trigger) return;
-        for (const trigger of step.trigger) {
-            const triggerElement = document.querySelector(trigger.selector);
-            if (!triggerElement) return;
-            if (trigger.run) {
-                const run = () => {
-                    triggerElement.removeEventListener(trigger.run, run);
-                    next();
-                };
-                triggerElement.addEventListener(trigger.run, run);
+        const triggers = step.trigger?.filter((t) => t.run) ?? [];
+        const added = {};
+
+        function removeTriggers() {
+            for (const [triggerStr, fct] of Object.entries(added)) {
+                const trigger = JSON.parse(triggerStr);
+                const triggerElement = document.querySelector(trigger.selector);
+                if (!triggerElement) continue;
+                triggerElement.removeEventListener(trigger.run, fct);
             }
         }
+
+        const next = () => {
+            removeTriggers();
+            this.markDoneAndNext(step);
+        };
+
+        for (const trigger of triggers) {
+            const triggerElement = document.querySelector(trigger.selector);
+            if (!triggerElement) continue;
+
+            const run = () => next();
+            added[JSON.stringify(trigger)] = run;
+            triggerElement.addEventListener(trigger.run, run);
+        }
+
+        document.getElementById(step.id).onchange = (e) => {
+            if (e.target.checked) next();
+            else {
+                this.progressStatePct -= step.progression ?? this.progressInc;
+                this.updateProgress();
+            }
+        };
     }
 
     async markDone(step) {
-        const stepElement = document.getElementById(step.id);
         await StorageLocal.set({ [step.id]: true });
+
+        const stepElement = document.getElementById(step.id);
         stepElement.setAttribute('disabled', true);
         stepElement.setAttribute('checked', true);
         const parentElement = stepElement.parentElement;
@@ -133,21 +127,33 @@ export default class ChecklistContent {
         this.progressStatePct += step.progression ?? this.progressInc;
         this.updateProgress();
 
+        if (this.progressStatePct >= 100) {
+            await StorageLocal.set({ [this.tour.id]: true });
+            this.congrats(true);
+            return true;
+        }
+        return false;
+    }
+
+    async markDoneAndNext(step) {
         const bubbleShow = Checklist.bubble.isShow();
         this.inspect(null);
 
-        if (step.end) {
-            await StorageLocal.set({ [this.tour.id]: true });
-            this.congrats(true);
-            return;
-        }
+        const isComplete = await this.markDone(step);
+        if (isComplete) return;
 
         const next = this.tour.steps[step.next];
         this.loadNextStep(next, bubbleShow);
     }
 
-    loadNextStep(step, bubbleShow) {
-        this.unlockStep(step, bubbleShow);
+    async loadNextStep(step, bubbleShow) {
+        const stepStates = await StorageLocal.get(this.tour.store);
+        let next = step;
+        while (next && stepStates[next.id]) {
+            next = this.tour.steps[next.next];
+        }
+
+        if (next) this.unlockStep(next, bubbleShow);
     }
 
     unlockStep(step, bubbleShow) {
@@ -196,8 +202,13 @@ export default class ChecklistContent {
         if (!Checklist.bubble) return;
         if (trigger === null || Checklist.bubble.isShow()) {
             Checklist.bubble.close();
-            if (btn) btn.classList.remove('active');
-            return;
+
+            const inspectButtons = document.getElementsByClassName('joorney_checklist_target_btn');
+            for (const btn of inspectButtons) {
+                btn.classList.remove('active');
+            }
+
+            if (trigger === null) return;
         }
         const target = document.querySelector(trigger.selector);
         if (!target) return;
