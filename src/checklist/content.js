@@ -28,30 +28,33 @@ export default class ChecklistContent {
         document.getElementById('joorney_checklist_tour_description').innerText = this.tour.description;
 
         const stepIDs = Object.keys(this.tour.steps);
-        const stepStates = stepIDs.length > 0 ? await StorageLocal.get(this.tour.store) : {};
+        const tourStore = stepIDs.length > 0 ? await StorageLocal.get(this.tour.store) : {};
         const stepCount = stepIDs.length > 0 ? stepIDs.length : 1;
 
         this.progressInc = (1 / stepCount) * 100;
         this.progressStatePct = 0;
         this.updateProgress();
 
-        this.updateSteps(this.tour.steps, stepStates);
-        const tourState = stepStates[this.tour.id];
-        Checklist.manager.toggle(!tourState);
+        this.updateSteps(this.tour.steps, tourStore);
+        const tourState = tourStore[this.tour.id];
+        const lastTourVersion = tourStore[`${this.tour.id}_version`];
+        const tourVersion = this.tour.version;
+
+        Checklist.manager.toggle(!tourState || lastTourVersion < tourVersion);
     }
 
     updateProgress() {
         document.getElementById('joorney_checklist_tour_progress').style.width = `${this.progressStatePct}%`;
     }
 
-    updateSteps(steps, stepStates) {
+    updateSteps(steps, tourStore) {
         document.getElementById('joorney_checklist_steps_list').innerHTML = '';
         const stepArray = Object.values(steps);
         if (stepArray.length <= 0) return;
         for (const step of stepArray) {
-            this.createStep(step, stepStates[step.id]);
+            this.createStep(step, tourStore[step.id]);
             this.lockStep(step);
-            if (stepStates[step.id]) this.markDone(step);
+            if (tourStore[step.id]) this.markDone(step);
         }
 
         this.loadNextStep(stepArray[0]);
@@ -128,7 +131,7 @@ export default class ChecklistContent {
         this.updateProgress();
 
         if (this.progressStatePct >= 100) {
-            await StorageLocal.set({ [this.tour.id]: true });
+            await StorageLocal.set({ [this.tour.id]: true, [`${this.tour.id}_version`]: this.tour.version });
             this.congrats(true);
             return true;
         }
@@ -147,9 +150,9 @@ export default class ChecklistContent {
     }
 
     async loadNextStep(step, bubbleShow) {
-        const stepStates = await StorageLocal.get(this.tour.store);
+        const tourStore = await StorageLocal.get(this.tour.store);
         let next = step;
-        while (next && stepStates[next.id]) {
+        while (next && tourStore[next.id]) {
             next = this.tour.steps[next.next];
         }
 

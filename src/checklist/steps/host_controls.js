@@ -1,5 +1,6 @@
 export const store = {
     tour_hostControls: false,
+    tour_hostControls_version: 1,
     step_hostControls_moveFeature: false,
     step_hostControls_addHost: false,
     step_hostControls_configureHost: false,

@@ -1,5 +1,6 @@
 export const store = {
     tour_technical: true,
+    tour_technical_version: 1,
     step_technical_experimentalOption: false,
     step_technical_addWAFallback: false,
     step_technical_removeWAFallback: false,

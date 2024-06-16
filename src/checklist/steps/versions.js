@@ -1,5 +1,6 @@
 export const store = {
     tour_versions: false,
+    tour_versions_version: 1,
     step_versions_addLTSVersion: false,
     step_versions_addSubVersion: false,
     step_versions_checkCompatibility: false,

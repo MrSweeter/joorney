@@ -1,5 +1,6 @@
 export const store = {
     tour_toasts: false,
+    tour_toasts_version: 1,
     step_toast_showMe_1: false,
     step_toast_switchMode: false,
     step_toast_disableType: false,

@@ -1,5 +1,6 @@
 export const store = {
     tour_preferences: false,
+    tour_preferences_version: 1,
     step_preferences_awesomeLoading: false,
     step_preferences_awesomeStyle: false,
     step_preferences_unfocusApp: false,

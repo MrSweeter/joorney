@@ -7,6 +7,7 @@ import { steps as versionsSteps, store as versionsStore } from './steps/versions
 export const tours = {
     tour_hostControls: {
         id: 'tour_hostControls',
+        version: 1,
         title: 'Hosts control',
         description: 'Manage feature by host!',
         steps: hostControlsSteps,
@@ -14,6 +15,7 @@ export const tours = {
     },
     tour_preferences: {
         id: 'tour_preferences',
+        version: 1,
         title: 'Preferences',
         description: 'Setup your preferences for many features.',
         steps: preferencesSteps,
@@ -21,6 +23,7 @@ export const tours = {
     },
     tour_versions: {
         id: 'tour_versions',
+        version: 1,
         title: 'Versions',
         description: 'Choose in which version you want to use Joorney!',
         steps: versionsSteps,
@@ -28,6 +31,7 @@ export const tours = {
     },
     tour_toasts: {
         id: 'tour_toasts',
+        version: 1,
         title: 'Notifications',
         description: 'Setup your notification preferences!',
         steps: toastsSteps,
@@ -35,6 +39,7 @@ export const tours = {
     },
     tour_technical: {
         id: 'tour_technical',
+        version: 1,
         title: 'Technical / Developers',
         description: 'Welcome to the dark side, we have cookies!',
         steps: technicalSteps,
