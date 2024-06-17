@@ -6,6 +6,7 @@ import { MESSAGE_ACTION } from '../../utils/messaging.js';
 import { sanitizeURL } from '../../utils/util.js';
 
 export const openVersionKey = 'joorney-runbot';
+export const searchVersionPath = 'runbot/r-d-1?search=';
 
 export default class LimitedRunbotContentFeature extends ContentFeature {
     async load(urlArg, _versionInfo) {
@@ -55,7 +56,9 @@ export default class LimitedRunbotContentFeature extends ContentFeature {
 
     async openRunbot(href, newTab) {
         let finalURL = 'https://runbot.odoo.com/';
-        if (href !== finalURL) {
+        if (href.includes(searchVersionPath)) {
+            finalURL = href;
+        } else if (href !== finalURL) {
             // Messaging flow require due to CORS on runbot
             const response = await Runtime.sendMessage({
                 action: MESSAGE_ACTION.GET_FINAL_RUNBOT_URL,

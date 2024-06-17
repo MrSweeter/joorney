@@ -17,6 +17,9 @@
             "description": "Enable or Disable extension features on the current origin"
         }
     },
+    "omnibox": {
+        "keyword": "joorney"
+    },
     "icons": {
         "16": "images/icon_128.png",
         "32": "images/icon_128.png",

@@ -13,10 +13,11 @@ async function setCache(cache) {
     await StorageLocal.set({ joorneyLocalCacheCall: cache ?? {} });
 }
 
+// Clear host if last change is 12h hours old
 async function _checkHostsExpiration(cache, now) {
     let hasChange = false;
     for (const [k, v] of Object.entries(cache)) {
-        if (now - (v.lastChange ?? 0) > 24 * 60 * 60 * 1000) {
+        if (now - (v.lastChange ?? 0) > 12 * 60 * 60 * 1000) {
             delete cache[k];
             hasChange = true;
         }
@@ -48,6 +49,7 @@ export async function saveCacheCall(expireAfterMinute, call, result, ...params) 
     cache[host][call] ??= {};
     cache[host][call][hash] = {
         date: now,
+        dateStr: new Date(now).toISOString(),
         expireAfterMinute: expireAfterMinute ?? 0,
         data: btoa(JSON.stringify(result)),
     };

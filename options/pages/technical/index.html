@@ -18,6 +18,12 @@
         <label class="form-check-label" for="joorney_experimentalSimulatedUI">Use simulated UI</label>
         <p><small class="text-muted">Instead of reloading the page when assigning task using the "Assign Me" feature, append a simulated UI elements.</small></p>
     </div>
+
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="joorney_experimentalOmniboxFocusCurrentTab" />
+        <label class="form-check-label" for="joorney_experimentalOmniboxFocusCurrentTab">Omnibox: open in current tab</label>
+        <p><small class="text-muted">Default behaviour will open the omnibox result in a new tab.</small></p>
+    </div>
 </div>
 
 <div class="container pt-5">
@@ -61,12 +67,36 @@
     </table>
 </div>
 
-<div class="pt-5">
-    <p class="text-center opacity-50">
+<div class="pt-5 px-5">
+    <h3>Storage</h3>
+
+    <div>
+        <div class="d-flex align-items-center">
+            <div class="flex-fill me-3">
+                <div id="joorney-sync-storage-byteUsageTotal" class="progress" style="height: 16px; line-height: 16px;"></div>
+                <div id="joorney-sync-storage-byteUsageFeature" class="progress d-none" style="height: 16px; line-height: 16px;"></div>
+            </div>
+            <i id="joorney-sync-storage-progress-switch" class="fa-solid fa-arrow-right-arrow-left"></i>
+        </div>
+        <small id="joorney-sync-storage-progress-label" class="text-muted"></small>
+    </div>
+
+    <div>
+        <div class="d-flex align-items-center">
+            <div class="flex-fill me-3">
+                <div id="joorney-local-storage-byteUsageTotal" class="progress" style="height: 16px; line-height: 16px;"></div>
+                <div id="joorney-local-storage-byteUsageFeature" class="progress d-none" style="height: 16px; line-height: 16px;"></div>
+            </div>
+            <i id="joorney-local-storage-progress-switch" class="fa-solid fa-arrow-right-arrow-left"></i>
+        </div>
+        <small id="joorney-local-storage-progress-label" class="text-muted"></small>
+    </div>
+
+    <p class="text-center opacity-50 pt-5">
         <small>Use <strong>[Ctrl/Cmd + Click]</strong> key to expand/collapse all elements at the same level</small> <strong class="tip-separator">|</strong>
         <small>Use <strong>[Shift + Click]</strong> to expand/collapse element and all childs</small>
     </p>
-    <div class="row mx-0 px-5">
+    <div class="row mx-0">
         <div class="col-3">
             <div class="mb-3">
                 <h5>Extension Features State</h5>

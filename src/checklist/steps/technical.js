@@ -5,6 +5,7 @@ export const store = {
     step_technical_addWAFallback: false,
     step_technical_removeWAFallback: false,
     step_technical_extensionState: false,
+    step_technical_onboardingProgress: false,
     step_technical_extensionFeaturesConfiguration: false,
     step_technical_extensionConfiguration: false,
 };

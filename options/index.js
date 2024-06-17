@@ -1,6 +1,7 @@
 import { isDevMode } from '../background/src/check_version.js';
 import { getFeaturesAndCurrentSettings } from '../configuration.js';
 import ChecklistManager from '../src/checklist/manager.js';
+import { StorageLocal } from '../src/utils/browser.js';
 import { initImportExport } from './import_export.js';
 import { loadPage as loadConfigurationPage } from './pages/configuration/index.js';
 import { loadPage as loadTechnicalPage } from './pages/technical/index.js';
@@ -62,7 +63,7 @@ async function onDOMContentLoaded() {
 
     initImportExport();
 
-    loadMenus();
+    await loadMenus();
     loadShortcut();
 
     const searchParams = new URLSearchParams(window.location.search);
@@ -81,7 +82,7 @@ function toggleTechnicalMenus(force = undefined) {
     }
 }
 
-function loadMenus() {
+async function loadMenus() {
     const container = document.getElementById(MENU_ITEMS_CONTAINER);
     container.innerHTML = '';
     const pageMenus = PAGES.filter((p) => p.menu);
@@ -89,8 +90,25 @@ function loadMenus() {
         loadMenu(page, container);
     }
 
-    const defaultMenu = pageMenus.find((m) => m.default);
+    const defaultMenu = await getDefaultMenu(pageMenus);
+
     document.getElementById(defaultMenu.id).click();
+}
+
+async function getDefaultMenu(pageMenus) {
+    const tourState = await StorageLocal.get({
+        tour_hostControls: false,
+        tour_preferences: false,
+        tour_versions: false,
+        tour_toasts: false,
+    });
+    const tourOrder = ['tour_versions', 'tour_hostControls', 'tour_preferences', 'tour_toasts'];
+    const defaultMenuTour = tourOrder.find((t) => !tourState[t]);
+
+    const defaultMenu =
+        pageMenus.find((m) => (defaultMenuTour ? m.tour === defaultMenuTour : m.default)) ?? pageMenus[0];
+
+    return defaultMenu;
 }
 
 function loadMenu(page, container) {

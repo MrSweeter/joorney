@@ -41,6 +41,7 @@ export const baseSettings = {
     supportedVersions: ['17.0'],
 
     useSimulatedUI: false,
+    omniboxFocusCurrentTab: false,
 };
 
 export const extensionFeatureState = FeaturesState;

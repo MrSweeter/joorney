@@ -1,6 +1,6 @@
 export default {
     id: 'autoOpenRunbot',
-    display_name: 'Auto Open Runbot',
+    display_name: '[Runbot] Auto Open',
     icon: [
         '<!--<i class="fa-solid fa-door-open"></i>-->',
         '<!--<i class="fa-solid fa-dungeon"></i>-->',
