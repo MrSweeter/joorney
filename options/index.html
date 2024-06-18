@@ -14,7 +14,7 @@
         <link href="./checklist.css" rel="stylesheet" />
         <script src="index.js"></script>
     </head>
-    <body class="joorney-body-background">
+    <body class="joorney-body-background d-flex flex-column">
         <nav class="navbar navbar-expand-lg navbar-light bg-light" id="joorney-navig-menu">
             <div class="container-fluid">
                 <div id="joorney-brand-debug" class="navbar-brand" title="Debug mode">
@@ -41,7 +41,7 @@
             </div>
         </nav>
 
-        <div id="joorney-page-container"></div>
+        <div id="joorney-page-container" class="flex-fill"></div>
 
         <div id="bubble" class="bubble opacity-0"><img class="w-100" src="/images/bubble.png" /></div>
         <button id="joorney_checklist_show_btn" class="d-none btn btn-floating" type="button" title="Show onboarding-checklist"><i class="fa-solid fa-list-check"></i></button>

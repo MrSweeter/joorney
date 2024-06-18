@@ -16,6 +16,8 @@ export default class AwesomeLoadingShareOptionCustomizationFeature extends Optio
         const configuration = await StorageSync.get(this.configuration.defaultSettings);
 
         this.renderImagesList(configuration.awesomeLoadingImages);
+
+        this.setupCollapse(container);
     }
 
     //#region CRUD

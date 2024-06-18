@@ -17,7 +17,6 @@ export default class ContextOdooMenusOptionCustomizationFeature extends OptionCu
 
     async getItems() {
         const settings = await StorageSync.get(this.defaultSettings);
-        console.log(settings);
         return settings[this.menusKey];
     }
 
@@ -165,7 +164,7 @@ export default class ContextOdooMenusOptionCustomizationFeature extends OptionCu
                     class="joorney_contextOdooMenus_record_path_${menu.id} form-control border border-0 ${
                         menu.active ? '' : 'text-muted'
                     }"
-                    placeholder="Menu name / Menu Path"
+                    placeholder="General Ledger"
                     value="${menu.path}"
                     type="text"
                     ${!menu.active ? 'disabled' : ''}

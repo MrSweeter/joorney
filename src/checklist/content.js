@@ -231,7 +231,7 @@ export default class ChecklistContent {
                 btn.classList.remove('active');
             }
 
-            if (trigger === null) return;
+            return;
         }
         const target = document.querySelector(trigger.selector);
         if (!target) return;

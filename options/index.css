@@ -44,6 +44,26 @@ body {
     display: none;
 }
 
+.feature-collapse-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.feature-collapse-toggle {
+    cursor: pointer;
+}
+
+.feature-collapse-indicator {
+    font-size: 18px;
+    transition: transform 0.3s ease;
+    transform: rotate(90deg);
+}
+
+.feature-opened.feature-collapse-indicator {
+    transform: rotate(180deg);
+}
+
 /* OVERRIDE */
 .form-check-input[type='checkbox']:checked:focus,
 .form-check-input[type='checkbox']:checked {

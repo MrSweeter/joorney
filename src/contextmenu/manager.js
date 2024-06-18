@@ -54,8 +54,6 @@ export async function createContextMenu() {
 export async function updateContextMenu(tab, isOdoo = undefined) {
     const dynamicItems = await getItems(tab);
 
-    console.log(dynamicItems);
-
     const itemsUpdate = [];
     for (const item of dynamicItems) {
         itemsUpdate.push(
@@ -75,11 +73,11 @@ export async function onContextMenuItemClick(info, tab) {
     switch (itemId) {
         case optionMenuItem.id: {
             Runtime.openOptionsPage();
-            break;
+            return;
         }
         case clearLocalCacheMenuItem.id: {
             clearHost(new URL(tab.url).host);
-            break;
+            return;
         }
     }
 
