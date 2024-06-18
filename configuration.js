@@ -1,5 +1,5 @@
 import FeaturesState from './features_state.json';
-import { Runtime, StorageSync } from './src/utils/browser.js';
+import { StorageSync, sendRuntimeMessage } from './src/utils/browser.js';
 import { MESSAGE_ACTION } from './src/utils/messaging.js';
 import { sanitizeVersion } from './src/utils/version.js';
 
@@ -86,9 +86,7 @@ export function importMigratorFile(fromVersion) {
 }
 
 export async function getFeaturesAndCurrentSettings() {
-    const response = await Runtime.sendMessage({
-        action: MESSAGE_ACTION.GET_FEATURES_LIST,
-    });
+    const response = await sendRuntimeMessage(MESSAGE_ACTION.TO_BACKGROUND.GET_FEATURES_LIST);
     const features = response.features;
 
     const configuration = await getCurrentSettings(features);

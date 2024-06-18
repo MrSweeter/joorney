@@ -52,6 +52,7 @@ export default class AssignMeTaskContentFeature extends ProjectTaskShareContentF
         if (response) {
             switch (callback) {
                 case ASSIGN_TYPE.RELOAD: {
+                    for (const e of document.getElementsByName('joorney_action_assign_to_me')) e.remove();
                     const { useSimulatedUI } = await StorageSync.get({ useSimulatedUI: false });
                     if (useSimulatedUI) this.addUserInUI();
                     else window.location.reload();

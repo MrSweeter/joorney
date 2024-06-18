@@ -123,4 +123,45 @@
         </table>
     </div>
     <!--#endregion-->
+
+    <!--#region Context OdooMenus -->
+    <div data-feature-customization="contextOdooMenus" class="d-none">
+        <div class="mt-3 d-flex justify-content-between align-items-center">
+            <div>
+                <h4 class="text-start">Context OdooMenus</h4>
+            </div>
+
+            <div>
+                <button id="joorney_contextOdooMenus_delete_all" class="btn btn-sm btn-outline-danger">Delete All</button>
+            </div>
+        </div>
+        <table id="joorney_contextOdooMenus_table" class="table table-striped bg-light">
+            <thead class="shadow-2">
+                <tr>
+                    <th></th>
+                    <th style="width: 80%" title="Name of ir.ui.menu, unique">Menu name</th>
+                    <th class="py-0" style="vertical-align: middle"></th>
+                </tr>
+            </thead>
+            <tbody id="joorney_contextOdooMenus_table_body"></tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                </tr>
+                <tr class="table-secondary">
+                    <td></td>
+                    <td class="p-1" style="vertical-align: middle">
+                        <input type="text" class="form-control border border-0" id="joorney_contextOdooMenus_new_path" placeholder="Menu name / Menu Path" />
+                    </td>
+                    <td class="p-1" style="vertical-align: middle">
+                        <button id="joorney_contextOdooMenus_new_save" class="btn btn-success">Add</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="joorney_contextOdooMenus_new_error" class="text-danger" colspan="4"></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <!--#endregion-->
 </div>

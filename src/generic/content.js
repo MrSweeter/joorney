@@ -1,6 +1,8 @@
 import { ToastManager } from '../toast/index.js';
 import { isAuthorizedFeature, isSupportedFeature } from '../utils/authorize.js';
+import { Runtime } from '../utils/browser.js';
 import { NotYetImplemented } from '../utils/error.js';
+import { MESSAGE_ACTION } from '../utils/messaging.js';
 import { sanitizeURL } from '../utils/util.js';
 
 export default class ContentFeature {
@@ -17,14 +19,22 @@ export default class ContentFeature {
         if (!(await isAuthorizedFeature(this.configuration.id, url))) return;
 
         this.loadFeature(url);
-        this.handleUpdateMessage();
+        this.handlePopupMessage();
     }
 
     async loadFeature(_url) {
         throw NotYetImplemented;
     }
 
-    async handleUpdateMessage() {
+    async handlePopupMessage() {
+        if (!this.configuration.customization.popup) return;
+        Runtime.onMessage.addListener((msg) => {
+            if (msg.action !== MESSAGE_ACTION.TO_CONTENT.POPUP_HAS_CHANGE) return;
+            this.onPopupMessage(msg);
+        });
+    }
+
+    onPopupMessage(_msg) {
         if (this.configuration.customization.popup) throw NotYetImplemented;
     }
 

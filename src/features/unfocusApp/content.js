@@ -1,6 +1,6 @@
 import ContentFeature from '../../generic/content.js';
 import { isOdooWebsite, isStillSameWebsite } from '../../utils/authorize.js';
-import { Runtime, StorageSync } from '../../utils/browser.js';
+import { StorageSync } from '../../utils/browser.js';
 import { getThemeModeCookie } from '../../utils/cookies.js';
 import { sanitizeURL, sleep } from '../../utils/util.js';
 import configuration from './configuration.js';
@@ -72,7 +72,7 @@ export default class UnfocusApp extends ContentFeature {
             }
 
             const isUnfocus = state === UNFOCUS_STATE.UNFOCUS;
-            divElement.innerHTML = `<i class="joorney-focus-app fa
+            divElement.innerHTML = `<i title="Change focus state" class="joorney-focus-app fa
                 ${isUnfocus ? UNFOCUS_ICON : FOCUS_ICON} me-1" data-joorney-state="${state}">
             </i>${divElement.innerHTML}`.trim();
         }
@@ -182,20 +182,18 @@ export default class UnfocusApp extends ContentFeature {
         parent.style.backgroundPosition = 'center top';
     }
 
-    handleUpdateMessage() {
-        Runtime.onMessage.addListener((msg) => {
-            const checked = msg.enableUnfocusApp;
+    onPopupMessage(msg) {
+        const checked = msg.enableUnfocusApp;
 
-            if (typeof checked === 'boolean') {
-                const exist = Array.from(document.getElementsByClassName(STAR_ELEMENT_CLASS));
-                if (exist)
-                    for (const e of exist) {
-                        e.parentElement.parentElement.style.opacity = FOCUS_OPACITY;
-                        e.parentElement.parentElement.parentElement.style.backgroundImage = null;
-                        e.remove();
-                    }
-                if (checked && isOdooWebsite(msg.url)) this.appendUnfocusApp(msg.url);
-            }
-        });
+        if (typeof checked === 'boolean') {
+            const exist = Array.from(document.getElementsByClassName(STAR_ELEMENT_CLASS));
+            if (exist)
+                for (const e of exist) {
+                    e.parentElement.parentElement.style.opacity = FOCUS_OPACITY;
+                    e.parentElement.parentElement.parentElement.style.backgroundImage = null;
+                    e.remove();
+                }
+            if (checked && isOdooWebsite(msg.url)) this.appendUnfocusApp(msg.url);
+        }
     }
 }

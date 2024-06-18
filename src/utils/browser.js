@@ -16,3 +16,23 @@ export const Commands = isFirefox() ? browser.commands : chrome.commands;
 //export const Windows = isFirefox() ? browser.windows : chrome.windows;
 export const Management = isFirefox() ? browser.management : chrome.management;
 export const OmniBox = isFirefox() ? browser.omnibox : chrome.omnibox;
+
+export async function sendRuntimeMessage(action, message = {}) {
+    try {
+        return await Runtime.sendMessage({ action: action, ...message });
+    } catch (err) {
+        // TODO[CATCH]
+        console.warn(`catch runtime\n${err.stack}`);
+        console.warn(err);
+    }
+}
+
+export async function sendTabMessage(tabID, action, message = {}) {
+    try {
+        return await Tabs.sendMessage(tabID, { action: action, ...message });
+    } catch (err) {
+        // TODO[CATCH]
+        console.warn(`catch tabs\n${err.stack}`);
+        console.warn(err);
+    }
+}

@@ -1,6 +1,6 @@
 import ContentFeature from '../../generic/content.js';
 import { isAuthorizedLimitedFeature } from '../../utils/authorize.js';
-import { Runtime } from '../../utils/browser.js';
+import { sendRuntimeMessage } from '../../utils/browser.js';
 import { RunbotException } from '../../utils/error.js';
 import { MESSAGE_ACTION } from '../../utils/messaging.js';
 import { sanitizeURL } from '../../utils/util.js';
@@ -60,8 +60,7 @@ export default class LimitedRunbotContentFeature extends ContentFeature {
             finalURL = href;
         } else if (href !== finalURL) {
             // Messaging flow require due to CORS on runbot
-            const response = await Runtime.sendMessage({
-                action: MESSAGE_ACTION.GET_FINAL_RUNBOT_URL,
+            const response = await sendRuntimeMessage(MESSAGE_ACTION.TO_BACKGROUND.GET_FINAL_RUNBOT_URL, {
                 href: href,
             });
             if (response.error) {

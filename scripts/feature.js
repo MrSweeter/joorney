@@ -1,6 +1,6 @@
 const doc = `
 Usage:
-	feature.js create <name> [<supported-version>... -b -l -n -o -p --overwrite]
+	feature.js create <name> [<supported-version>... -b -l -n -c -o -p --overwrite]
 	feature.js update <name> [-b -l -n -o -p --overwrite]
 	feature.js delete <name>
 |
@@ -10,6 +10,7 @@ Options:
     -b --with-trigger-background        Create background file to run the feature as a background script
     -l --with-trigger-load              Create content file to run the feature on page load
     -n --with-trigger-navigate          Create content file to run the feature on page navigation
+    -c --with-trigger-context           Setup context menu values
     -o --with-customization-option      Create custom option file to allow customizable option in options page
     -p --with-customization-popup       Create custom popup file to allow customizable option in popup extension
     --overwrite                         Delete feature if already exist
@@ -82,6 +83,7 @@ function createFeature(featureName, option) {
             background: option['--with-trigger-background'] === 1,
             load: option['--with-trigger-load'] === 1,
             navigate: option['--with-trigger-navigate'] === 1,
+            context: option['--with-trigger-context'] === 1,
         },
         customization: {
             option: option['--with-customization-option'] === 1,
@@ -93,6 +95,9 @@ function createFeature(featureName, option) {
         },
         supported_version: option['<supported-version>'] ?? [],
     };
+    if (configuration.trigger.context) {
+        configuration.defaultSettings[`${featureName.id}ContextMenu`] = {};
+    }
 
     const featureFolder = `${__dirname}/../src/features/${configuration.id}`;
     const configurationFile = 'configuration.js';

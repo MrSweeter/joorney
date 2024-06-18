@@ -86,7 +86,6 @@ async function loadStorage(features, currentSettings) {
         label: 'Sunrise / Sunset ',
         usage: await StorageLocal.getBytesInUse(['joorney_sunrise', 'joorney_sunset', 'joorney_date']),
     });
-    console.log(sections);
 
     new DoubleProgressBar(
         'Local Storage',

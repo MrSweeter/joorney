@@ -13,6 +13,13 @@ export function createRecordFormURL(url, model, id) {
 
     return `${url.origin}${url.pathname}/${model}/${id}`;
 }
+export function createActionMenuURL(url, actionID) {
+    if (url.pathname.startsWith('/web')) {
+        return `${url.origin}${url.pathname}#action=${actionID}`;
+    }
+
+    return `${url.origin}${url.pathname}/action-${actionID}${url.search}`;
+}
 //#endregion
 
 //#region Check model new form

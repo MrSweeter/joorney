@@ -25,7 +25,7 @@ export const steps = {
         description: 'Adjust and customize the visual style to match your preferences.',
         trigger: [{ selector: '#joorney_awe_style_css', run: 'click' }],
         next: 'step_preferences_unfocusApp',
-        progression: 20,
+        progression: 15,
     },
     step_preferences_unfocusApp: {
         id: 'step_preferences_unfocusApp',
@@ -43,7 +43,7 @@ export const steps = {
         description: 'Enable automatic theme switching based on sunrise and sunset times.',
         trigger: [{ selector: '#joorney_theme_switch_get_location_button', run: 'click' }],
         next: 'step_preferences_themeSwitchTime',
-        progression: 20,
+        progression: 15,
     },
     step_preferences_themeSwitchTime: {
         id: 'step_preferences_themeSwitchTime',
@@ -54,6 +54,15 @@ export const steps = {
             { selector: '#joorney_theme_switch_dark_start', run: 'click' },
             { selector: '#joorney_theme_switch_dark_stop', run: 'click' },
         ],
-        progression: 20,
+        next: 'step_preferences_contextOdooMenus',
+        progression: 15,
+    },
+    step_preferences_contextOdooMenus: {
+        id: 'step_preferences_contextOdooMenus',
+        tour: 'tour_preferences',
+        name: 'Context Menus',
+        description: "Setup some Odoo's menus to use in Joorney context menu.",
+        trigger: [{ selector: '#joorney_contextOdooMenus_new_save', run: 'click' }],
+        progression: 15,
     },
 };
