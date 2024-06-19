@@ -1,5 +1,6 @@
 import { importFeatureBackgroundTriggerFile, importFeatureContentFile } from '../configuration.js';
 import { getMenu } from '../src/api/odoo.js';
+import { getRunbotOpenUrl } from '../src/shared/limited/runbot_content.js';
 import { loadToast } from '../src/toast/index.js';
 import { Runtime, StorageLocal, sendRuntimeMessage } from '../src/utils/browser.js';
 import { MESSAGE_ACTION } from '../src/utils/messaging.js';
@@ -64,6 +65,10 @@ async function handleMessage(message, _sender) {
         }
         case MESSAGE_ACTION.TO_CONTENT.CM_OPEN_MENU: {
             openPathMenu(message.menupath);
+            return {};
+        }
+        case MESSAGE_ACTION.TO_CONTENT.CM_OPEN_RUNBOT: {
+            openRunbotWithVersion();
             return {};
         }
     }
@@ -143,6 +148,15 @@ async function openPathMenu(menupath) {
     const windowActionID = menu.action.split(',')[1];
     const url = window.location;
 
-    const redirectURL = createActionMenuURL(url, windowActionID);
-    window.location = redirectURL;
+    openURL(createActionMenuURL(url, windowActionID));
+}
+
+function openRunbotWithVersion() {
+    const { version } = getOdooVersion();
+    if (!version) return;
+    openURL(getRunbotOpenUrl(version));
+}
+
+function openURL(url) {
+    window.location = url;
 }

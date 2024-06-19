@@ -82,7 +82,7 @@ async function updateContext(tabId) {
         if (!tab.url.startsWith('http')) return;
         const odooInfo = await sendTabMessage(tab.id, MESSAGE_ACTION.TO_CONTENT.REQUEST_ODOO_INFO);
         if (!odooInfo) return;
-        updateContextMenu(tab, odooInfo.isOdoo);
+        updateContextMenu(tab, odooInfo.isOdoo, odooInfo.version);
     } catch (error) {
         // Error: No tab with id (from Tabs.get) is expected
         if (`${error}`.includes(tabId)) console.log(`background.js - updateContext: ${error}`);

@@ -1,5 +1,5 @@
 import { SUPPORTED_VERSION } from '../../configuration.js';
-import { openVersionKey } from '../../src/shared/limited/runbot_content.js';
+import { getRunbotOpenUrl } from '../../src/shared/limited/runbot_content.js';
 import { OmniBox, StorageSync, Tabs } from '../../src/utils/browser.js';
 
 export function initOmni() {
@@ -72,7 +72,7 @@ function getURLFromKeyword(keyword) {
 
     if (match) {
         const version = match[1];
-        return `https://runbot.odoo.com?${openVersionKey}=${version}`;
+        return getRunbotOpenUrl(version);
     }
 
     return null;

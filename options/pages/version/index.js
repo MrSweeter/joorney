@@ -62,7 +62,7 @@ async function loadSupportedFeature(features, supportedVersions) {
         const versions = SUPPORTED_VERSION.map((v) => {
             return {
                 odoo: includeVersion(supportedVersions, v),
-                feature: includeVersion(feature.supported_version, v),
+                feature: includeVersion(feature.supported_version, v, true),
             };
         });
         const versionRow = stringToHTML(`

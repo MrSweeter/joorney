@@ -8,6 +8,10 @@ import { sanitizeURL } from '../../utils/util.js';
 export const openVersionKey = 'joorney-runbot';
 export const searchVersionPath = 'runbot/r-d-1?search=';
 
+export function getRunbotOpenUrl(version) {
+    return `https://runbot.odoo.com?${openVersionKey}=${version}`;
+}
+
 export default class LimitedRunbotContentFeature extends ContentFeature {
     async load(urlArg, _versionInfo) {
         const url = sanitizeURL(urlArg);

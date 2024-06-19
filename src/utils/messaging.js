@@ -11,5 +11,6 @@ export const MESSAGE_ACTION = {
         POPUP_HAS_CHANGE: 'POPU¨_HAS_CHANGE',
         REQUEST_ODOO_INFO: 'REQUEST_ODOO_INFO',
         CM_OPEN_MENU: 'CM_OPEN_MENU',
+        CM_OPEN_RUNBOT: 'CM_OPEN_RUNBOT',
     },
 };

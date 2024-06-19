@@ -1,5 +1,6 @@
 import { features } from '../../configuration.js';
 import { clearHost } from '../api/cache.js';
+import { openRunbotWithVersionMenuItem } from '../features/autoOpenRunbot/configuration.js';
 import { isAuthorizedFeature } from '../utils/authorize.js';
 import { ContextMenus, Runtime, StorageSync, sendTabMessage } from '../utils/browser.js';
 import { MESSAGE_ACTION } from '../utils/messaging.js';
@@ -51,7 +52,7 @@ export async function createContextMenu() {
     await Promise.all(items);
 }
 
-export async function updateContextMenu(tab, isOdoo = undefined) {
+export async function updateContextMenu(tab, isOdoo, version) {
     const dynamicItems = await getItems(tab);
 
     const itemsUpdate = [];
@@ -59,7 +60,7 @@ export async function updateContextMenu(tab, isOdoo = undefined) {
         itemsUpdate.push(
             ContextMenus.update(item.id, {
                 visible: isOdoo === true && item.active,
-                title: item.title ?? item.path ?? 'Unknown item',
+                title: formatTitle(item.title ?? item.path ?? 'Unknown item', { version }),
                 parentId: null,
             })
         );
@@ -79,6 +80,10 @@ export async function onContextMenuItemClick(info, tab) {
             clearHost(new URL(tab.url).host);
             return;
         }
+        case openRunbotWithVersionMenuItem.id: {
+            sendTabMessage(tab.id, MESSAGE_ACTION.TO_CONTENT.CM_OPEN_RUNBOT);
+            return;
+        }
     }
 
     const items = await getItems(tab, false);
@@ -86,6 +91,15 @@ export async function onContextMenuItemClick(info, tab) {
     if (item.path) {
         sendTabMessage(tab.id, MESSAGE_ACTION.TO_CONTENT.CM_OPEN_MENU, { menupath: item.path });
     }
+}
+
+function formatTitle(title, args) {
+    const placeholders = ['%version%'];
+    let finalTitle = title;
+    for (const p of placeholders) {
+        finalTitle = finalTitle.replaceAll(p, args[p.replaceAll('%', '')]);
+    }
+    return finalTitle;
 }
 
 async function createContextMenuItem(createProperties) {
@@ -127,7 +141,8 @@ async function getFeaturesItems(tab) {
 
     const result = {};
     for (const feature of contextFeatures) {
-        const isActive = url !== undefined && (await isAuthorizedFeature(feature.id, url));
+        // TODO[IMP] If more limited feature, maybe need to rethink the "true"
+        const isActive = feature.limited ? true : url !== undefined && (await isAuthorizedFeature(feature.id, url));
 
         const defaultSettings = await StorageSync.get(feature.defaultSettings);
 
@@ -140,7 +155,7 @@ async function getFeaturesItems(tab) {
         const activeMenuCount = menusArray.filter((m) => m.active).length;
         const activeFavoriteCount = menusArray.filter((m) => m.favorite).length;
 
-        const parentActive = !allFavorite && activeFavoriteCount !== activeMenuCount;
+        const parentActive = !allFavorite && activeFavoriteCount !== activeMenuCount && activeMenuCount > 1;
         result[id] = {
             id: id,
             title: feature.display_name,
