@@ -80,11 +80,13 @@ async function updateContext(tabId) {
         const tab = await Tabs.get(tabId);
         if (!tab.active) return;
         if (!tab.url.startsWith('http')) return;
-        const odooInfo = await sendTabMessage(tabId, MESSAGE_ACTION.TO_CONTENT.REQUEST_ODOO_INFO);
+        const odooInfo = await sendTabMessage(tab.id, MESSAGE_ACTION.TO_CONTENT.REQUEST_ODOO_INFO);
         if (!odooInfo) return;
         updateContextMenu(tab, odooInfo.isOdoo);
     } catch (error) {
-        console.error(error);
+        // Error: No tab with id (from Tabs.get) is expected
+        if (`${error}`.includes(tabId)) console.log(`background.js - updateContext: ${error}`);
+        else console.error(error);
     }
 }
 
