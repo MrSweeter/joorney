@@ -6,6 +6,7 @@ export const store = {
     step_preferences_unfocusApp: false,
     step_preferences_themeSwitchLocation: false,
     step_preferences_themeSwitchTime: false,
+    step_preferences_contextOdooMenus: false,
 };
 
 export const steps = {

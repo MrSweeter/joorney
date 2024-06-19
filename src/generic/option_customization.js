@@ -15,20 +15,20 @@ export default class OptionCustomizationFeature {
 
     async setupCollapse(container) {
         const toggleElement = container.getElementsByClassName('feature-collapse-toggle')[0];
-        const contentElement = container.getElementsByClassName('feature-collapse-content')[0];
+        const contentElements = container.getElementsByClassName('feature-collapse-content');
         const indicatorElement = container.getElementsByClassName('feature-collapse-indicator')[0];
 
         function toggle() {
-            if (contentElement.style.maxHeight && Number.parseInt(contentElement.style.maxHeight)) {
-                contentElement.style.maxHeight = 0;
+            if (indicatorElement.classList.contains('feature-opened')) {
+                for (const el of contentElements) el.style.maxHeight = 0;
                 indicatorElement.classList.remove('feature-opened');
             } else {
-                contentElement.style.maxHeight = `${contentElement.scrollHeight + 200}px`;
+                for (const el of contentElements) el.style.maxHeight = '100%';
                 indicatorElement.classList.add('feature-opened');
             }
         }
 
         toggleElement.onclick = () => toggle();
-        contentElement.style.maxHeight = 0;
+        for (const el of contentElements) el.style.maxHeight = 0;
     }
 }
