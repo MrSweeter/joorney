@@ -43,23 +43,23 @@ export const ToastManager = {
         return this.toastMode === 'large-ui';
     },
 
-    info(feature, title, message) {
-        return this._notify(feature, title, message, 'info');
+    info(feature, title, message, force = false) {
+        return this._notify(feature, title, message, 'info', force);
     },
 
-    warn(feature, title, message) {
-        return this._notify(feature, title, message, 'warning');
+    warn(feature, title, message, force = false) {
+        return this._notify(feature, title, message, 'warning', force);
     },
 
-    error(feature, title, message) {
-        return this._notify(feature, title, message, 'danger');
+    error(feature, title, message, force = false) {
+        return this._notify(feature, title, message, 'danger', force);
     },
 
-    success(feature, title, message) {
-        return this._notify(feature, title, message, 'success');
+    success(feature, title, message, force = false) {
+        return this._notify(feature, title, message, 'success', force);
     },
 
-    async _notify(feature, title, message, type) {
+    async _notify(feature, title, message, type, force) {
         if (!this.toastType[type]) return false;
 
         const existing = Object.entries(existingToast).find((entry) => entry[1].msg === message);
@@ -71,7 +71,11 @@ export const ToastManager = {
             `);
             features.appendChild(featureBadge);
 
-            const progress = document.getElementById(existing[0]).getElementsByClassName('toast-progress')[0];
+            const toast = document.getElementById(existing[0]);
+            if (!toast) return true;
+            const progress = toast.getElementsByClassName('toast-progress')[0];
+            if (!progress) return true;
+
             progress.style.animation = 'none';
             progress.offsetWidth; // force re-render
             progress.style.animation = '';
@@ -88,7 +92,7 @@ export const ToastManager = {
             return true;
         }
 
-        if (Object.keys(existingToast).length >= maximumNotification) {
+        if (!force && Object.keys(existingToast).length >= maximumNotification) {
             this._log(feature, title, message, type, false);
             this._ui(
                 'notification',
@@ -100,20 +104,20 @@ export const ToastManager = {
         }
 
         if (this.isLargeMode()) {
-            this._ui(feature, title, message, type);
+            this._ui(feature, title, message, type, true);
             return true;
         }
 
         this._log(feature, title, message, type, false);
-        this._ui(feature, title, message, type);
+        this._ui(feature, title, message, type, false);
 
         return true;
     },
 
-    _ui(feature, title, message, type) {
+    _ui(feature, title, message, type, large) {
         const container = document.getElementById(ToastContainerElementID);
         if (!container) return;
-        const item = buildToastItem(feature, title, message, type);
+        const item = buildToastItem(feature, title, message, type, large);
         container.appendChild(item);
         const toastID = item.id;
         existingToast[toastID] = { msg: message, id: this._show(toastID) };
