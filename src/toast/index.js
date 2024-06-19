@@ -35,6 +35,10 @@ export const ToastManager = {
         this.toastType = JSON.parse((await StorageSync.get(baseSettings))?.toastType);
     },
 
+    isDisabled() {
+        return this.toastMode === 'disabled';
+    },
+
     isLogConsole() {
         return this.toastMode === 'log';
     },
@@ -60,6 +64,7 @@ export const ToastManager = {
     },
 
     async _notify(feature, title, message, type, force) {
+        if (this.isDisabled()) return false;
         if (!this.toastType[type]) return false;
 
         const existing = Object.entries(existingToast).find((entry) => entry[1].msg === message);
