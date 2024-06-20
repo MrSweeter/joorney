@@ -1,7 +1,7 @@
 import { features } from '../../configuration.js';
 import { clearHost } from '../api/cache.js';
 import { openRunbotWithVersionMenuItem } from '../features/autoOpenRunbot/configuration.js';
-import { isAuthorizedFeature } from '../utils/authorize.js';
+import { isAuthorizedFeature, isAuthorizedLimitedFeature } from '../utils/authorize.js';
 import { ContextMenus, Runtime, StorageSync, sendTabMessage } from '../utils/browser.js';
 import { MESSAGE_ACTION } from '../utils/messaging.js';
 import { sanitizeURL } from '../utils/util.js';
@@ -141,8 +141,13 @@ async function getFeaturesItems(tab) {
 
     const result = {};
     for (const feature of contextFeatures) {
-        // TODO[IMP] If more limited feature, maybe need to rethink the "true"
-        const isActive = feature.limited ? true : url !== undefined && (await isAuthorizedFeature(feature.id, url));
+        // If more limited feature, maybe need to rethink this part
+        const isActive = feature.limited
+            ? await isAuthorizedLimitedFeature(
+                  feature.id,
+                  new URL(feature.defaultSettings[`${feature.id}LimitedOrigins`][0])
+              )
+            : url !== undefined && (await isAuthorizedFeature(feature.id, url));
 
         const defaultSettings = await StorageSync.get(feature.defaultSettings);
 
