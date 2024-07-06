@@ -1,5 +1,6 @@
 import { importFeatureBackgroundTriggerFile, importFeatureContentFile } from '../configuration.js';
 import { getMenu } from '../src/api/odoo.js';
+import { loadSessionInfo } from '../src/api/session.js';
 import { getRunbotOpenUrl } from '../src/shared/limited/runbot_content.js';
 import { ToastManager, loadToast } from '../src/toast/index.js';
 import { Console, Runtime, StorageLocal, sendRuntimeMessage } from '../src/utils/browser.js';
@@ -20,13 +21,16 @@ let loadedURL = false;
 addNavigationListener();
 
 window.addEventListener('load', async () => {
-    const script = document.createElement('script');
-    script.src = Runtime.getURL('inject.js');
-    script.onload = function () {
-        onVersionLoaded();
-        this.remove();
-    };
-    document.documentElement.appendChild(script);
+    // ALTERNATIVE of loadSessionInfo
+    // const script = document.createElement('script');
+    //script.src = Runtime.getURL('inject.js');
+    //script.onload = function () {
+    //    onVersionLoaded();
+    //    this.remove();
+    //};
+    //document.documentElement.appendChild(script);
+    await loadSessionInfo();
+    onVersionLoaded();
 });
 
 async function onVersionLoaded() {

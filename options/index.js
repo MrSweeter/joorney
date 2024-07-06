@@ -1,7 +1,7 @@
-import { isDevMode } from '../background/src/check_version.js';
 import { getFeaturesAndCurrentSettings } from '../configuration.js';
 import { getNextTourID } from '../src/checklist/index.js';
 import ChecklistManager from '../src/checklist/manager.js';
+import { isDevMode } from '../src/utils/check_version.js';
 import { initImportExport } from './import_export.js';
 import { PAGES } from './menu.js';
 import { load as loadShortcut } from './src/keyboard_shortcut.js';

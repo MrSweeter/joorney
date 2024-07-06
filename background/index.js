@@ -12,9 +12,9 @@ import {
 import { features, getCurrentSettings, loadFeaturesConfiguration } from '../configuration.js';
 import { checkHostsExpiration } from '../src/api/cache.js';
 import { createContextMenu, onContextMenuItemClick, updateContext } from '../src/contextmenu/manager.js';
+import { checkVersion, openOption } from '../src/utils/check_version.js';
 import { MESSAGE_ACTION } from '../src/utils/messaging.js';
 import { sleep } from '../src/utils/util.js';
-import { checkVersion, openOption } from './src/check_version.js';
 import { checkCommandShortcuts, handleCommands } from './src/keyboard_shortcut.js';
 import { handleMessage } from './src/messaging.js';
 import { initOmni } from './src/omnibox.js';

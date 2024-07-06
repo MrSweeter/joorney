@@ -1,5 +1,4 @@
 import { v4 as uuidv4 } from 'uuid';
-import { isDevMode } from '../../../background/src/check_version.js';
 import { baseSettings } from '../../../configuration';
 import { extensionFeatureState } from '../../../configuration.js';
 import { handleExpanderClick } from '../../../lib/json-formatter/collapse.js';
@@ -8,6 +7,7 @@ import { getOnboardingProgressData } from '../../../src/checklist/index.js';
 import { tours } from '../../../src/checklist/tour.js';
 import { stringToHTML } from '../../../src/html_generator';
 import { StorageLocal, StorageSync } from '../../../src/utils/browser.js';
+import { isDevMode } from '../../../src/utils/check_version.js';
 import { sleep } from '../../../src/utils/util.js';
 import DoubleProgressBar from './doubleprogress.js';
 

@@ -1,9 +1,9 @@
 import { writeRecord } from '../../api/odoo.js';
+import { SessionKey, getSessionData } from '../../api/session.js';
 import { generateTrackingMessage, generateUserAvatarTag } from '../../html_generator.js';
 import ProjectTaskShareContentFeature from '../../shared/projectTaskShare/content.js';
 import { ToastManager } from '../../toast/index.js';
 import { StorageSync } from '../../utils/browser.js';
-import { getCurrentUserID } from '../../utils/user.js';
 import configuration from './configuration.js';
 
 const ASSIGN_TYPE = Object.freeze({
@@ -17,7 +17,7 @@ export default class AssignMeTaskContentFeature extends ProjectTaskShareContentF
     }
 
     async loadFeatureWithTask(task) {
-        const currentUser = await this.tryCatch(() => getCurrentUserID(), undefined);
+        const currentUser = await this.tryCatch(() => getSessionData(SessionKey.UID), undefined);
         if (!currentUser) return;
         const userAssigned = task.user_ids.includes(currentUser);
 
