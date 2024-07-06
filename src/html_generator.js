@@ -87,7 +87,7 @@ export function generateTabFeaturePopupToggleItem(feature) {
 
 export function generateUserAvatarTag(userName, avatarSrc) {
     const tagElement = stringToHTML(`
-		<span class="o_tag position-relative d-inline-flex align-items-center mw-100 o_avatar pe-1 rounded" title="${userName}">
+		<span class="o_tag position-relative d-inline-flex align-items-center mw-100 o_avatar pe-1 rounded joorney-simulated-ui-assignme" title="${userName}">
 			<span
 				class="position-absolute top-0 end-0 bottom-0 start-0 mx-n2 mt-n1 mb-n1 rounded border"
 				style="background-color: rgba(252, 163, 17, 0.25)"
@@ -102,7 +102,7 @@ export function generateUserAvatarTag(userName, avatarSrc) {
 
 export function generateTrackingMessage(authorName, newValue, fieldName, avatarSrc, date) {
     const messageElement = stringToHTML(`
-		<div class="o-mail-Message position-relative undefined py-1 mt-2 px-3">
+		<div class="o-mail-Message position-relative undefined py-1 mt-2 px-3 joorney-simulated-ui-assignme">
 			<span
 				class="position-absolute top-0 end-0 bottom-0 start-0 mx-2 mt-n1 mb-n1 rounded border"
 				style="background-color: rgba(252, 163, 17, 0.25)"

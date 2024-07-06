@@ -40,6 +40,7 @@ export default class AssignMeTaskContentFeature extends ProjectTaskShareContentF
     preloadFeature() {
         const exist = document.getElementsByName('joorney_action_assign_to_me');
         for (const e of exist) e.disabled = true;
+        this.removeUserInUI();
     }
 
     async addUserToTaskAssignees(task, userID, callback) {
@@ -104,6 +105,12 @@ If unsure, please reload the page!`;
         containerElement.prepend(tagElement);
         previousElement.before(messageElement);
         return true;
+    }
+
+    removeUserInUI() {
+        for (const element of document.getElementsByClassName('joorney-simulated-ui-assignme')) {
+            element.remove();
+        }
     }
 
     appendAssignMeTaskButtonToDom(task, currentUser) {
