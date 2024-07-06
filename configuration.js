@@ -14,9 +14,9 @@ export const SUPPORTED_VERSION = [
     '17.0',
     'saas-17.1',
     'saas-17.2',
-    'saas-17.3', // master
-    //'saas-17.4',
-    //'18.0'
+    'saas-17.3',
+    'saas-17.4',
+    //'18.0' master
 ].map((v) => sanitizeVersion(v));
 
 export const baseSettings = {
