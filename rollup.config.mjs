@@ -76,7 +76,7 @@ export default () => {
                 inlineDynamicImports: true,
                 name: 'joorney_content',
             },
-            plugins: [...defaultPlugins, copy({ targets: [{ src: 'content/inject.js', dest: bundleOutput }] })],
+            plugins: [...defaultPlugins],
         },
         {
             input: 'popup/index.js',

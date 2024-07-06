@@ -40,12 +40,7 @@
             "run_at": "document_start"
         }
     ],
-    "web_accessible_resources": [
-        {
-            "resources": ["inject.js"],
-            "matches": ["*://*/*"]
-        }
-    ],
+    "web_accessible_resources": [],
     "permissions": ["tabs", "webNavigation", "cookies", "storage", "contextMenus"],
     "host_permissions": ["http://*/*", "https://*/*"]
 }
