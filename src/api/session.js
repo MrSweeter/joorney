@@ -3,6 +3,12 @@ export const SessionKey = {
     UID: 'uid',
     SERVER_VERSION_INFO: 'server_version_info',
 };
+
+export function isDebugSession() {
+    const dataset = document.querySelector('body').dataset
+    return dataset.odooDebugMode && dataset.odooDebugMode !== '0'
+}
+
 export function getSessionData(key) {
     return SESSION_INFO?.[key];
 }
