@@ -1,5 +1,7 @@
 import { getMetadata } from '../../api/odoo.js';
+import { isDebugSession } from '../../api/session.js';
 import ContentFeature from '../../generic/content.js';
+import { stringToHTML } from '../../html_generator.js';
 import { isStillSamePage } from '../../utils/authorize.js';
 import { getActionWindow_fromURL, getModelAndID_fromURL } from '../../utils/url_manager.js';
 import configuration from './configuration.js';
@@ -19,20 +21,44 @@ export default class TooltipMetadataContentFeature extends ContentFeature {
         const metadataContainer = document.getElementById('joorney-tooltip-metadata');
         if (metadataContainer) metadataContainer.remove();
 
-        const debugManager = document.querySelector('.o_debug_manager');
-        if (!debugManager) return;
+        if (!isDebugSession()) return
 
         await this.tryCatch(async () => {
             const model_id = await getModelAndID_fromURL(url);
             if (!model_id) {
                 const actionWindow = await getActionWindow_fromURL(url);
                 if (!actionWindow) return;
+                this.appendModelToBreadcrumb(actionWindow.res_model)
                 this.appendActionWindowTooltip(actionWindow);
                 return;
             }
 
+            this.appendModelToBreadcrumb(model_id.model)
             this.loadRecordMetadata(model_id);
         });
+    }
+
+    appendModelToBreadcrumb(model) {
+        const spanID = 'joorney-technical-model'
+        const existing = document.getElementById(spanID)
+        if (!model) {
+            existing?.remove()
+            return
+        }
+
+        const content = `(${model})`
+        const clickAction = () => navigator.clipboard.writeText(model)
+        if (existing) {
+            existing.innerHTML = content
+            existing.onclick = clickAction
+            return
+        }
+
+        const container = document.querySelector('ol.breadcrumb') ?? document.querySelector('.o_breadcrumb') // ?? document.querySelector('.o_control_panel_navigation') no breadcrumb?
+        if (!container) return
+        const element = stringToHTML(`<span id="${spanID}" style="margin-left: 4px; font-style: italic; color: darkgoldenrod; cursor: copy" title="[Joorney] Copy technical name to clipboard" >${content}</span>`)
+        element.onclick = clickAction
+        container.appendChild(element)
     }
 
     async loadRecordMetadata(model_id) {
