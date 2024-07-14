@@ -40,24 +40,16 @@ export default class TooltipMetadataContentFeature extends ContentFeature {
 
     appendModelToBreadcrumb(model) {
         const spanID = 'joorney-technical-model'
-        const existing = document.getElementById(spanID)
-        if (!model) {
-            existing?.remove()
-            return
-        }
+        document.getElementById(spanID)?.remove()
+        if (!model) return
 
-        const content = `(${model})`
-        const clickAction = () => navigator.clipboard.writeText(model)
-        if (existing) {
-            existing.innerHTML = content
-            existing.onclick = clickAction
-            return
-        }
-
-        const container = document.querySelector('ol.breadcrumb') ?? document.querySelector('.o_breadcrumb') // ?? document.querySelector('.o_control_panel_navigation') no breadcrumb?
+        const breadcrumbList = document.querySelector('ol.breadcrumb')
+        const lastItem = document.querySelector('.o_last_breadcrumb_item')
+        const container = (breadcrumbList ? lastItem?.parentElement ?? breadcrumbList : breadcrumbList) ?? document.querySelector('.o_breadcrumb') // ?? document.querySelector('.o_control_panel_navigation') no breadcrumb?
         if (!container) return
-        const element = stringToHTML(`<span id="${spanID}" style="margin-left: 4px; font-style: italic; color: darkgoldenrod; cursor: copy" title="[Joorney] Copy technical name to clipboard" >${content}</span>`)
-        element.onclick = clickAction
+
+        const element = stringToHTML(`<span id="${spanID}" style="align-content: center; margin-left: 4px; line-height: initial; font-style: italic; color: darkgoldenrod; cursor: copy" title="[Joorney] Copy technical name to clipboard" >(${model})</span>`)
+        element.onclick = () => navigator.clipboard.writeText(model)
         container.appendChild(element)
     }
 
