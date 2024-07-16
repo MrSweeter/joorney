@@ -1,6 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Inter:300,400,500,600&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Caveat:700&display=swap');
 
+@font-face {
+    font-family: 'odoo_ui_icons';
+    src: url('./assets/fonts/odoo_ui_icons.woff2') format('woff2'), url('./assets/fonts/odoo_ui_icons.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
 :root {
     --joorney-primary: #fca311;
     --joorney-primary-text: #13213c;
@@ -179,13 +187,35 @@ body.odoo-style .text-paint-blue {
     background-image: url('./assets/text-paint-odoo/text-paint-blue.svg');
 }
 
+.oi, .fa {
+    font-weight: 400;
+}
+.oi {
+    display: inline-block;
+    font-family: 'odoo_ui_icons';
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: geometricPrecision;
+}
+.oi-view-list:before {
+    content: '\e817';
+}
+.oi-view-kanban:before {
+    content: '\e814';
+}
+
 
 /* NEW CSS */
 .feature-row-details-button {
     opacity: 0;
 }
 
-.feature-row:hover > .feature-row-details-button {
+.feature-row:hover .feature-row-details-button {
     opacity: 1;
 }
 
@@ -196,4 +226,12 @@ body.odoo-style .text-paint-blue {
 .feature-row:hover {
     background-color: rgba(113, 75, 103, 0.2);
     border-radius: 8px;
+}
+
+#features-list-viewtype-list, #features-list-viewtype-kanban, #features-list-viewtype-grid {
+    display: none;
+}
+
+body.odoo-style #features-list-viewtype-list, body.odoo-style #features-list-viewtype-kanban, body.odoo-style #features-list-viewtype-grid {
+    display: inline-block;
 }

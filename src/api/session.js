@@ -5,8 +5,8 @@ export const SessionKey = {
 };
 
 export function isDebugSession() {
-    const dataset = document.querySelector('body').dataset
-    return dataset.odooDebugMode && dataset.odooDebugMode !== '0'
+    const dataset = document.querySelector('body').dataset;
+    return dataset.odooDebugMode && dataset.odooDebugMode !== '0';
 }
 
 export function getSessionData(key) {

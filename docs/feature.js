@@ -16,7 +16,8 @@ const features = [
         category: 'odooFeature',
         longDescription:
             '<span class="fw-bold">Save knowledge</span> is a feature that adds a new button on the top right corner of the article page that you can click to force the save of it.',
-        textDescription: 'Add a new button on the top right corner of the article page that you can click to force the save of it.',
+        textDescription:
+            'Add a new button on the top right corner of the article page that you can click to force the save of it.',
         amico: 'floppy_disk-amico',
         deprecated: true,
     },
@@ -27,7 +28,8 @@ const features = [
         category: 'odooFeature',
         longDescription:
             '<span class="fw-bold">Unfocus App</span> is a feature that allows you to hide the apps that you are not using frequently, so you can focus on the ones that are more relevant to your work. It adds a small star next to the app name on the Odoo home page that you can toggle to unfocus the apps.<br/><br/>You prefer to highlight an apps, double click on the star to put a background image around the app icon.',
-        textDescription: 'Hide the apps that you are not using frequently, so you can focus on the ones that are more relevant to your work.',
+        textDescription:
+            'Hide the apps that you are not using frequently, so you can focus on the ones that are more relevant to your work.',
         amico: 'social_strategy-amico',
     },
     {
@@ -56,7 +58,7 @@ const features = [
         title: 'Context OdooMenus',
         category: 'odooFeature',
         longDescription: `<span class="fw-bold">Context OdooMenus</span> is a feature that will add Odoo's menus to the browser context menu`,
-        textDescription: 'Add Odoo\'s menus to the browser context menu',
+        textDescription: "Add Odoo's menus to the browser context menu",
         amico: 'dropdown_menu-amico',
     },
     {
@@ -66,7 +68,8 @@ const features = [
         category: 'runbotFeature',
         longDescription:
             '<span class="fw-bold">AutoOpen Runbot</span> is a feature that allows you to open a runbot instance in a specific version as an admin user in debug mode, by adding a hash parameter to the url. For example, if you want to open a runbot in 16.3, you can use this url: <a target="_blank" href="https://runbot.odoo.com?joorney-runbot=16.3">https://runbot.odoo.com?joorney-runbot=16.3</a>.',
-        textDescription: 'Open a runbot instance in a specific version: <a target="_blank" href="https://runbot.odoo.com?joorney-runbot=17.0">https://runbot.odoo.com?joorney-runbot=17.0</a>',
+        textDescription:
+            'Open a runbot instance in a specific version: <a target="_blank" href="https://runbot.odoo.com?joorney-runbot=17.0">https://runbot.odoo.com?joorney-runbot=17.0</a>',
         amico: 'product_tour-amico',
     },
     {
@@ -136,7 +139,7 @@ const features = [
         title: 'Show my Badge',
         category: 'designFeature',
         longDescription: '<span class="fw-bold">Show My Badge</span> will show user\'s badges when showing user card.',
-        textDescription: 'Show user\'s badges in the user card.',
+        textDescription: "Show user's badges in the user card.",
         amico: 'brand_loyalty-amico',
     },
 ];

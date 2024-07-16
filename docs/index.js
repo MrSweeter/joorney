@@ -16,7 +16,8 @@ const features = [
         category: 'odooFeature',
         longDescription:
             '<span class="fw-bold">Save knowledge</span> is a feature that adds a new button on the top right corner of the article page that you can click to force the save of it.',
-        textDescription: 'Add a new button on the top right corner of the article page that you can click to force the save of it.',
+        textDescription:
+            'Add a new button on the top right corner of the article page that you can click to force the save of it.',
         amico: 'floppy_disk-amico',
         deprecated: true,
     },
@@ -27,7 +28,8 @@ const features = [
         category: 'odooFeature',
         longDescription:
             '<span class="fw-bold">Unfocus App</span> is a feature that allows you to hide the apps that you are not using frequently, so you can focus on the ones that are more relevant to your work. It adds a small star next to the app name on the Odoo home page that you can toggle to unfocus the apps.<br/><br/>You prefer to highlight an apps, double click on the star to put a background image around the app icon.',
-        textDescription: 'Hide the apps that you are not using frequently, so you can focus on the ones that are more relevant to your work.',
+        textDescription:
+            'Hide the apps that you are not using frequently, so you can focus on the ones that are more relevant to your work.',
         amico: 'social_strategy-amico',
     },
     {
@@ -56,7 +58,7 @@ const features = [
         title: 'Context OdooMenus',
         category: 'odooFeature',
         longDescription: `<span class="fw-bold">Context OdooMenus</span> is a feature that will add Odoo's menus to the browser context menu`,
-        textDescription: 'Add Odoo\'s menus to the browser context menu',
+        textDescription: "Add Odoo's menus to the browser context menu",
         amico: 'dropdown_menu-amico',
     },
     {
@@ -66,7 +68,8 @@ const features = [
         category: 'runbotFeature',
         longDescription:
             '<span class="fw-bold">AutoOpen Runbot</span> is a feature that allows you to open a runbot instance in a specific version as an admin user in debug mode, by adding a hash parameter to the url. For example, if you want to open a runbot in 16.3, you can use this url: <a target="_blank" href="https://runbot.odoo.com?joorney-runbot=16.3">https://runbot.odoo.com?joorney-runbot=16.3</a>.',
-        textDescription: 'Open a runbot instance in a specific version: <a target="_blank" href="https://runbot.odoo.com?joorney-runbot=17.0">https://runbot.odoo.com?joorney-runbot=17.0</a>',
+        textDescription:
+            'Open a runbot instance in a specific version: <a target="_blank" href="https://runbot.odoo.com?joorney-runbot=17.0">https://runbot.odoo.com?joorney-runbot=17.0</a>',
         amico: 'product_tour-amico',
     },
     {
@@ -136,7 +139,7 @@ const features = [
         title: 'Show my Badge',
         category: 'designFeature',
         longDescription: '<span class="fw-bold">Show My Badge</span> will show user\'s badges when showing user card.',
-        textDescription: 'Show user\'s badges in the user card.',
+        textDescription: "Show user's badges in the user card.",
         amico: 'brand_loyalty-amico',
     },
 ];
@@ -144,11 +147,17 @@ const features = [
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('copyright-year').innerHTML = new Date().getFullYear();
 
-    if (new URL(location.href).searchParams.get('odoo') != null) {
+    const isOdoo = new URL(location.href).searchParams.get('odoo') != null;
+
+    if (isOdoo) {
         document.getElementsByTagName('body')[0].classList.add('odoo-style');
     }
 
-    loadFeatures();
+    loadFeatures('list');
+
+    document.getElementById('features-list-viewtype-list').onclick = () => loadFeatures('list');
+    document.getElementById('features-list-viewtype-kanban').onclick = () => loadFeatures('kanban');
+    document.getElementById('features-list-viewtype-grid').onclick = () => loadFeatures('grid');
 });
 
 function loadFeatureMobile(feature, container) {
@@ -177,6 +186,14 @@ function loadFeatures(viewType) {
 function loadFeature(feature, viewType, container) {
     const template = document.createElement('template');
 
+    container.classList.remove('flex-column');
+    container.classList.remove('row');
+    container.classList.remove('justify-content-center');
+
+    document.getElementById('features-list-viewtype-list').style.color = null;
+    document.getElementById('features-list-viewtype-kanban').style.color = null;
+    document.getElementById('features-list-viewtype-grid').style.color = null;
+
     switch (viewType) {
         case 'grid': {
             template.innerHTML = `
@@ -184,22 +201,42 @@ function loadFeature(feature, viewType, container) {
                 <img class="w-100 h-100 svg-image-primary-text" alt="${feature.id}, Icon" src="./assets/custom-fa-icons/${feature.icon}.svg" />
             </a>
             `.trim();
+            container.classList.add('row');
+            container.classList.add('justify-content-center');
+            document.getElementById('features-list-viewtype-grid').style.color = 'goldenrod';
             break;
         }
         case 'kanban': {
             template.innerHTML = `
-            <a class="feature-box p-4 m-3" title="[Odoo Feature] ${feature.id}" href="./feature.html#${feature.id}">
-                <img class="w-100 h-100 svg-image-primary-text" alt="${feature.id}, Icon" src="./assets/custom-fa-icons/${feature.icon}.svg" />
-            </a>
+            <div class="p-1 w-25 feature-row">
+                <div class="card h-100">
+                    <div class="card-body d-flex flex-column">
+                        <div class="card-title w-100 px-0 col-2 d-flex align-items-center justify-content-start">
+                            <a class="d-flex justify-content-center align-items-center me-3" style="height: 32px; min-width: 32px; background-color: var(--joorney-primary); border-radius: 8px;" title="[Odoo Feature] ${feature.id}" href="./feature.html#${feature.id}">
+                                <img style="height: 24px; min-width: 24px" class="svg-image-primary-text" alt="${feature.id}, Icon" src="./assets/custom-fa-icons/${feature.icon}.svg" />
+                            </a>
+                            <p class="m-0"><strong>${feature.title}</strong></p>
+                        </div>
+                        <p class="card-text">${feature.textDescription}</p>
+                        <div class="mt-auto d-flex justify-content-end">
+                            <a class="btn btn-light" title="[Odoo Feature] ${feature.id}" href="./feature.html#${feature.id}">
+                                Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
             `.trim();
+            container.classList.add('row');
+            document.getElementById('features-list-viewtype-kanban').style.color = 'goldenrod';
             break;
         }
         default: {
             template.innerHTML = `
             <div class="row d-flex align-items-center feature-row">
                 <div class="px-0 col-2 d-flex align-items-center justify-content-start">
-                    <a class="d-flex justify-content-center align-items-center mx-3" style="height: 32px; width: 32px; background-color: var(--joorney-primary); border-radius: 8px;" title="[Odoo Feature] ${feature.id}" href="./feature.html#${feature.id}">
-                        <img style="height: 24px; width: 24px" class="svg-image-primary-text" alt="${feature.id}, Icon" src="./assets/custom-fa-icons/${feature.icon}.svg" />
+                    <a class="d-flex justify-content-center align-items-center mx-3" style="height: 32px; min-width: 32px; background-color: var(--joorney-primary); border-radius: 8px;" title="[Odoo Feature] ${feature.id}" href="./feature.html#${feature.id}">
+                        <img style="height: 24px; min-width: 24px" class="svg-image-primary-text" alt="${feature.id}, Icon" src="./assets/custom-fa-icons/${feature.icon}.svg" />
                     </a>
                     <p class="m-0"><strong>${feature.title}</strong></p>
                 </div>
@@ -210,6 +247,8 @@ function loadFeature(feature, viewType, container) {
                 </a>
             </div>
             `.trim();
+            container.classList.add('flex-column');
+            document.getElementById('features-list-viewtype-list').style.color = 'goldenrod';
         }
     }
 
