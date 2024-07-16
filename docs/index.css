@@ -22,7 +22,7 @@ body {
 .geometric-background {
     background-image: url('./assets/background.png');
     background-position: top;
-    background-size: 100% 100%;
+    background-size: cover;
 }
 
 /* https://www.odoo.com/page/brand-assets */
@@ -177,4 +177,23 @@ body.odoo-style .text-paint-red {
 
 body.odoo-style .text-paint-blue {
     background-image: url('./assets/text-paint-odoo/text-paint-blue.svg');
+}
+
+
+/* NEW CSS */
+.feature-row-details-button {
+    opacity: 0;
+}
+
+.feature-row:hover > .feature-row-details-button {
+    opacity: 1;
+}
+
+.feature-row {
+    padding: 4px;
+}
+
+.feature-row:hover {
+    background-color: rgba(113, 75, 103, 0.2);
+    border-radius: 8px;
 }

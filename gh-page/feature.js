@@ -32,7 +32,7 @@ function loadFeature(featureName) {
         feature.deprecated
             ? '<span class="text-danger">[DEPRECATED] This feature is no more supported in recent Odoo versions</span><br />'
             : ''
-    }${feature.description}`;
+    }${feature.longDescription ?? feature.textDescription}`;
 
     for (const el of document.getElementsByClassName('feature-amico')) {
         el.src = `./assets/storyset-amico/${feature.amico}.svg`;
