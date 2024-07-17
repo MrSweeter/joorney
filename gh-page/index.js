@@ -46,9 +46,9 @@ function loadFeature(feature, viewType, container) {
     container.classList.remove('row');
     container.classList.remove('justify-content-center');
 
-    document.getElementById('features-list-viewtype-list').style.color = null;
-    document.getElementById('features-list-viewtype-kanban').style.color = null;
-    document.getElementById('features-list-viewtype-grid').style.color = null;
+    document.getElementById('features-list-viewtype-list').classList.remove('active');
+    document.getElementById('features-list-viewtype-kanban').classList.remove('active');
+    document.getElementById('features-list-viewtype-grid').classList.remove('active');
 
     switch (viewType) {
         case 'grid': {
@@ -59,7 +59,7 @@ function loadFeature(feature, viewType, container) {
             `.trim();
             container.classList.add('row');
             container.classList.add('justify-content-center');
-            document.getElementById('features-list-viewtype-grid').style.color = 'goldenrod';
+            document.getElementById('features-list-viewtype-grid').classList.add('active');
             break;
         }
         case 'kanban': {
@@ -84,7 +84,7 @@ function loadFeature(feature, viewType, container) {
             </div>
             `.trim();
             container.classList.add('row');
-            document.getElementById('features-list-viewtype-kanban').style.color = 'goldenrod';
+            document.getElementById('features-list-viewtype-kanban').classList.add('active');
             break;
         }
         default: {
@@ -104,7 +104,7 @@ function loadFeature(feature, viewType, container) {
             </div>
             `.trim();
             container.classList.add('flex-column');
-            document.getElementById('features-list-viewtype-list').style.color = 'goldenrod';
+            document.getElementById('features-list-viewtype-list').classList.add('active');
         }
     }
 
