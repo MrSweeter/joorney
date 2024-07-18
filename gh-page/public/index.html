@@ -31,13 +31,13 @@
                 <div class="navbar-collapse justify-content-center text-center collapse" id="navbarTogglerJoorney">
                     <ul class="px-0 navbar-nav container w-100 justify-content-around">
                         <li class="nav-item col-lg-2">
-                            <a class="nav-link active" href="./index.html#extension">Home</a>
+                            <a class="nav-link active" href="#extension">Home</a>
                         </li>
                         <li class="d-lg-flex d-none ">
                             <span class="nav-link disabled"><i class="fa-solid fa-xs fa-circle joorney-landing-extension-state"></i></span>
                         </li>
                         <li class="nav-item col-lg-2">
-                            <a class="nav-link" href="./index.html#features">Features</a>
+                            <a class="nav-link" href="#features">Features</a>
                         </li>
                         <li class="d-lg-flex d-none">
                             <span class="nav-link disabled"><i class="fa-solid fa-xs fa-circle" style="color: transparent;"></i></span>
@@ -75,7 +75,7 @@
                                 is a Chrome extension that makes your Odoo experience more enjoyable and productive by adding some cool features and effects.
                             </p>
 
-                            <a class="btn btn-warning fw-bold" href="#installation"> TRY IT </a>
+                            <a class="btn btn-warning fw-bold" target="_blank" href="https://chromewebstore.google.com/detail/joorney/mjbkdgpgjmmkmjbebpdhpcpoicbpjglb"> TRY IT </a>
                         </div>
                     </div>
                     <div class="col-6 d-lg-flex d-none justify-content-center align-items-center">
@@ -87,17 +87,23 @@
 
         <section class="vw-100 bg-light py-5 overflow-hidden" style="min-height: 100vh;" id="features">
             <div class="container h-100">
-                <h1 class="text-center pt-5 mb-3">
-                    Let's see what we can add to <span class="odoo">Odoo</span>
-                    <span class="d-none d-lg-inline-flex joorney-valign-middle">
-                        <button id="features-list-viewtype-list" class="btn btn-light view-type-icon icon-left d-flex justify-content-center align-items-center"><img class="w-100" alt="list view" src="./assets/icons/list.svg"/></button>
-                        <button id="features-list-viewtype-kanban" class="btn btn-light view-type-icon icon-center d-flex justify-content-center align-items-center"><img class="w-100" alt="kanban view" src="./assets/icons/kanban.svg"/></button>
-                        <button id="features-list-viewtype-grid" class="btn btn-light view-type-icon icon-right d-flex justify-content-center align-items-center"><img class="w-100" alt="grid view" src="./assets/icons/grid.svg"/></button>
-                    </span>
+                <h1 class="text-center pt-5 mb-3 caveat">
+                    <span class="text-paint text-paint-yellow">Let's see</span> what we can add to <span class="odoo">Odoo</span>
                 </h1>
 
                 <div id="features-list-mobile" class="d-lg-none d-flex row justify-content-center"></div>
 
+                <div id="view-type-bar" class="d-none justify-content-between align-items-center mb-3">
+                    <div class="d-flex align-items-center">
+                        <a class="btn btn-odoo me-2" target="_blank" href="https://chromewebstore.google.com/detail/joorney/mjbkdgpgjmmkmjbebpdhpcpoicbpjglb">Install</a>
+                        <span class="joorney-valign-middle odoo-font">Joorney / Features</span>
+                    </div>
+                    <div class="d-none d-lg-inline-flex">
+                        <button id="features-list-viewtype-list" class="btn btn-light view-type-icon icon-left d-flex justify-content-center align-items-center"><img class="w-100" alt="list view" src="./assets/icons/list.svg"/></button>
+                        <button id="features-list-viewtype-kanban" class="btn btn-light view-type-icon icon-center d-flex justify-content-center align-items-center"><img class="w-100" alt="kanban view" src="./assets/icons/kanban.svg"/></button>
+                        <button id="features-list-viewtype-grid" class="btn btn-light view-type-icon icon-right d-flex justify-content-center align-items-center"><img class="w-100" alt="grid view" src="./assets/icons/grid.svg"/></button>
+                    </div>
+                </div>
                 <div id="features-list" class="d-lg-flex d-none flex-column"></div>
             </div>
         </section>

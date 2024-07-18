@@ -140,6 +140,7 @@ export default () => {
                         },
                     ],
                 }),
+                watchAssets({ assets: ['gh-page/**/*.css', 'gh-page/**/*.html'] }),
             ],
         },
         {

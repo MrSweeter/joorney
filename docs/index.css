@@ -5,6 +5,7 @@
     --joorney-primary: #fca311;
     --joorney-primary-text: #13213c;
     --odoo-primary: #714b67;
+    --odoo-primary-text: whitesmoke;
 }
 
 html,
@@ -29,6 +30,10 @@ body {
 .odoo {
     color: var(--odoo-primary);
     /*font-family: 'Inter', 'Roboto', sans-serif;*/
+}
+
+.odoo-font {
+    font-family: 'Inter', 'Roboto', sans-serif;
 }
 
 .text-primary {
@@ -135,6 +140,22 @@ ol {
     --mdb-btn-focus-bg: whitesmoke;
     --mdb-btn-active-bg: whitesmoke;
 }
+.btn-odoo {
+    border-radius: 0.25rem;
+    padding: 0.3125rem 0.625rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: none !important;
+    --mdb-btn-bg: var(--odoo-primary);
+    --mdb-btn-color: var(--odoo-primary-text);
+    --mdb-btn-box-shadow: 0 4px 9px -4px var(--odoo-primary);
+    --mdb-btn-hover-bg: #624159;
+    --mdb-btn-hover-color: var(--odoo-primary-text);
+    --mdb-btn-focus-bg: #624159;
+    --mdb-btn-focus-color: var(--odoo-primary-text);
+    --mdb-btn-active-bg: #624159;
+    --mdb-btn-active-color: var(--odoo-primary-text);
+}
 
 .vw-100 {
     width: calc(100vw - (100vw - 100%)) !important;
@@ -179,6 +200,10 @@ body.odoo-style .text-paint-blue {
     background-image: url('./assets/text-paint-odoo/text-paint-blue.svg');
 }
 
+body.odoo-style #view-type-bar {
+    display: flex !important;
+}
+
 .feature-row-details-button {
     opacity: 0;
 }
@@ -216,13 +241,13 @@ body.odoo-style #features-list-viewtype-list, body.odoo-style #features-list-vie
 }
 
 .view-type-icon.icon-left {
-    border-radius: 0.5rem 0 0 0.5rem;
+    border-radius: 0.25rem 0 0 0.25rem;
 }
 .view-type-icon.icon-center {
     border-radius: 0;
 }
 .view-type-icon.icon-right {
-    border-radius: 0 0.5rem 0.5rem 0;
+    border-radius: 0 0.25rem 0.25rem 0;
 }
 
 .joorney-valign-middle {

@@ -147,9 +147,9 @@ const features = [
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('copyright-year').innerHTML = new Date().getFullYear();
 
-    const isOdoo = new URL(location.href).searchParams.get('odoo') != null;
+    const isOdooStyle = new URL(location.href).searchParams.get('style') === 'odoo';
 
-    if (isOdoo) {
+    if (isOdooStyle) {
         document.getElementsByTagName('body')[0].classList.add('odoo-style');
     }
 
