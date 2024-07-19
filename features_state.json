@@ -13,5 +13,6 @@
     "adminDebugLoginRunbot": true,
     "autoOpenRunbot": true,
     "showMyBadge": true,
-    "contextOdooMenus": true
+    "contextOdooMenus": true,
+    "pinMessage": true
 }

@@ -102,7 +102,7 @@ export function generateUserAvatarTag(userName, avatarSrc) {
 
 export function generateTrackingMessage(authorName, newValue, fieldName, avatarSrc, date) {
     const messageElement = stringToHTML(`
-		<div class="o-mail-Message position-relative undefined py-1 mt-2 px-3 joorney-simulated-ui-assignme">
+		<div class="o-mail-Message position-relative py-1 mt-2 px-3 joorney-simulated-ui-assignme">
 			<span
 				class="position-absolute top-0 end-0 bottom-0 start-0 mx-2 mt-n1 mb-n1 rounded border"
 				style="background-color: rgba(252, 163, 17, 0.25)"
@@ -132,6 +132,39 @@ export function generateTrackingMessage(authorName, newValue, fieldName, avatarS
 											<span class="o-mail-Message-trackingField ms-1 fst-italic text-muted">(${fieldName})</span>
 										</li>
 									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	`);
+    return messageElement;
+}
+
+export function generateMessage(authorName, avatarSrc, bodyContent, date) {
+    const messageElement = stringToHTML(`
+		<div class="o-mail-Message position-relative py-1 mt-2 px-3 rounded border">
+			<div class="o-mail-Message-core position-relative d-flex flex-shrink-0">
+				<div class="o-mail-Message-sidebar d-flex flex-shrink-0">
+					<div class="o-mail-Message-avatarContainer position-relative bg-view rounded">
+						<img class="o-mail-Message-avatar w-100 h-100 rounded o_object_fit_cover" src="${avatarSrc}" />
+					</div>
+				</div>
+				<div class="w-100 o-min-width-0">
+					<div class="o-mail-Message-header d-flex flex-wrap align-items-baseline mb-1 lh-1">
+						<span class="o-mail-Message-author">
+							<strong class="me-1 text-truncate">${authorName}</strong>
+						</span>
+						<small class="o-mail-Message-date text-muted opacity-75 me-2">- ${date.toLocaleDateString()} ${date.toLocaleTimeString()} - Joorney</small>
+					</div>
+					<div class="position-relative d-flex">
+						<div class="o-mail-Message-content o-min-width-0">
+							<div class="o-mail-Message-textContent position-relative d-flex">
+								<div class="position-relative overflow-x-auto d-inline-block">
+									<div class="o-mail-Message-bubble rounded-bottom-3 position-absolute top-0 start-0 w-100 h-100 rounded-end-3"></div>
+									<div class="o-mail-Message-body text-break mb-0 w-100">${bodyContent}</div>
 								</div>
 							</div>
 						</div>
