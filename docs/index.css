@@ -26,6 +26,10 @@ body {
     background-size: cover;
 }
 
+.text-joorney {
+    color: var(--joorney-primary)
+}
+
 /* https://www.odoo.com/page/brand-assets */
 .odoo {
     color: var(--odoo-primary);

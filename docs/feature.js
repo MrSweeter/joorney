@@ -147,7 +147,7 @@ const features = [
 const featuresName = features.map((f) => f.id);
 
 document.addEventListener('DOMContentLoaded', () => {
-    const currentHash = window.location.hash.slice(1);
+    const currentHash = window.location.hash.slice(1) || features.map((f) => f.id)[0];
     if (currentHash) loadFeature(currentHash);
 });
 
@@ -172,6 +172,7 @@ function loadFeature(featureName) {
     if (!feature) return;
 
     document.getElementById('feature-icon').src = `./assets/custom-fa-icons/${feature.icon}.svg`;
+    document.getElementById('feature-icon').alt = `${feature.id}, Icon`;
     document.getElementById('feature-title').innerHTML = feature.title;
     document.getElementById('feature-description').innerHTML = `${
         feature.deprecated
@@ -181,6 +182,7 @@ function loadFeature(featureName) {
 
     for (const el of document.getElementsByClassName('feature-amico')) {
         el.src = `./assets/storyset-amico/${feature.amico}.svg`;
+        el.alt = `${feature.id}, Amico`;
     }
 
     const currentFeatureIndex = featuresName.indexOf(featureName);

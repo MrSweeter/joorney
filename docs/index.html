@@ -1,15 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <title>Joorney</title>
+        <title>Joorney - Improve your Odoo experience</title>
         <link rel="icon" type="image/x-icon" href="./assets/icon_128.svg" />
-        <!-- Font Awesome -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
-        <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
-        <!-- MDB -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.1/mdb.min.css" rel="stylesheet" />
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
+
+        <meta name="robots" content="index, follow">
+        <meta name="language" content="en">
+        <meta name="theme-color" content="#fca311">
+        <link rel="canonical" href="https://mrsweeter.github.io/joorney">
+        <link rel="alternate" href="https://github.com/MrSweeter/joorney" title="Joorney repository">
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Joorney is a Chrome extension that makes your Odoo experience more enjoyable and productive by adding some cool features and effects.">
+        <meta name="keywords" content="Joorney, Journey, Chrome Extension, Odoo, Productivity, features, effects, Quality of life">
+        <meta name="author" content="Vanden Bergh Gaëtan">
+
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <link href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600&display=swap" rel="stylesheet" media="screen">
+        <link href="https://fonts.googleapis.com/css?family=Caveat:700&display=swap" rel="stylesheet" media="screen">
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" media="screen"/>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" media="screen"/>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.1/mdb.min.css" rel="stylesheet" media="screen"/>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js" media="screen"></script>
 
         <link href="./index.css" rel="stylesheet" />
         <script src="./index.js"></script>
@@ -53,7 +70,7 @@
                         </li>
                     </ul>
                     <a class="navbar-joorney-brand position-absolute d-lg-flex d-none" href="#">
-                        <img src="./assets/icon_128.svg" height="72" alt="" />
+                        <img src="./assets/icon_128.svg" height="72" alt="Joorney logo" />
                     </a>
                 </div>
             </div>
@@ -63,7 +80,7 @@
             <div class="container h-100 d-flex align-items-center ">
                 <div class="row m-0 align-items-center w-100">
                     <div class="col-lg-6 col-12 d-flex justify-content-center align-items-center">
-                        <img class="w-75 h-75 d-lg-none position-absolute background-amico" src="./assets/storyset-amico/starting_a_business_project-amico.svg" />
+                        <img class="w-75 h-75 d-lg-none position-absolute background-amico" alt="Joorney, Amico" src="./assets/storyset-amico/starting_a_business_project-amico.svg" />
                         <div>
                             <h6 class="text-primary">CHROME EXTENSION</h6>
                             <h1 class="caveat">
@@ -75,11 +92,11 @@
                                 is a Chrome extension that makes your Odoo experience more enjoyable and productive by adding some cool features and effects.
                             </p>
 
-                            <a class="btn btn-warning fw-bold" target="_blank" href="https://chromewebstore.google.com/detail/joorney/mjbkdgpgjmmkmjbebpdhpcpoicbpjglb"> TRY IT </a>
+                            <a class="btn btn-lg btn-warning fw-bold col-12 col-lg-auto mt-5 mt-lg-auto" target="_blank" href="https://chromewebstore.google.com/detail/joorney/mjbkdgpgjmmkmjbebpdhpcpoicbpjglb"> TRY IT </a>
                         </div>
                     </div>
                     <div class="col-6 d-lg-flex d-none justify-content-center align-items-center">
-                        <img class="w-75 " src="./assets/storyset-amico/starting_a_business_project-amico.svg" />
+                        <img class="w-75 " alt="Joorney, Amico" src="./assets/storyset-amico/starting_a_business_project-amico.svg" />
                     </div>
                 </div>
             </div>
@@ -91,20 +108,19 @@
                     <span class="text-paint text-paint-yellow">Let's see</span> what we can add to <span class="odoo">Odoo</span>
                 </h1>
 
-                <div id="features-list-mobile" class="d-lg-none d-flex row justify-content-center"></div>
 
-                <div id="view-type-bar" class="d-none justify-content-between align-items-center mb-3">
+                <div id="view-type-bar" class="d-flex justify-content-between align-items-center mb-3">
                     <div class="d-flex align-items-center">
                         <a class="btn btn-odoo me-2" target="_blank" href="https://chromewebstore.google.com/detail/joorney/mjbkdgpgjmmkmjbebpdhpcpoicbpjglb">Install</a>
                         <span class="joorney-valign-middle odoo-font">Joorney / Features</span>
                     </div>
-                    <div class="d-none d-lg-inline-flex">
+                    <div class="d-inline-flex">
                         <button id="features-list-viewtype-list" class="btn btn-light view-type-icon icon-left d-flex justify-content-center align-items-center"><img class="w-100" alt="list view" src="./assets/icons/list.svg"/></button>
                         <button id="features-list-viewtype-kanban" class="btn btn-light view-type-icon icon-center d-flex justify-content-center align-items-center"><img class="w-100" alt="kanban view" src="./assets/icons/kanban.svg"/></button>
                         <button id="features-list-viewtype-grid" class="btn btn-light view-type-icon icon-right d-flex justify-content-center align-items-center"><img class="w-100" alt="grid view" src="./assets/icons/grid.svg"/></button>
                     </div>
                 </div>
-                <div id="features-list" class="d-lg-flex d-none flex-column"></div>
+                <div id="features-list" class="d-flex flex-column"></div>
             </div>
         </section>
 

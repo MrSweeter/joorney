@@ -16,25 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('features-list-viewtype-grid').onclick = () => loadFeatures('grid');
 });
 
-function loadFeatureMobile(feature, container) {
-    const mobileTemplate = document.createElement('template');
-    mobileTemplate.innerHTML = `
-    <a class="feature-box p-4 m-3" title="[Odoo Feature] ${feature.id}" href="./feature.html#${feature.id}">
-        <img class="w-100 h-100 svg-image-primary-text" alt="${feature.id}, Icon" src="./assets/custom-fa-icons/${feature.icon}.svg" />
-    </a>
-    `.trim();
-    container.appendChild(mobileTemplate.content.firstChild);
-}
-
 function loadFeatures(viewType) {
-    const featureMobileContainer = document.getElementById('features-list-mobile');
-    featureMobileContainer.innerHTML = '';
-
     const featureContainer = document.getElementById('features-list');
     featureContainer.innerHTML = '';
 
     for (const feature of features.filter((f) => !f.deprecated)) {
-        loadFeatureMobile(feature, featureMobileContainer);
         loadFeature(feature, viewType, featureContainer);
     }
 }
@@ -54,7 +40,7 @@ function loadFeature(feature, viewType, container) {
         case 'grid': {
             template.innerHTML = `
             <a class="feature-box p-4 m-3" title="[Odoo Feature] ${feature.id}" href="./feature.html#${feature.id}">
-                <img class="w-100 h-100 svg-image-primary-text" alt="${feature.id}, Icon" src="./assets/custom-fa-icons/${feature.icon}.svg" />
+                <img class="w-100 h-100 svg-image-primary-text" alt="${feature.id}, Icon" src="./assets/custom-fa-icons/${feature.icon}.svg" loading="lazy" />
             </a>
             `.trim();
             container.classList.add('row');
@@ -64,12 +50,12 @@ function loadFeature(feature, viewType, container) {
         }
         case 'kanban': {
             template.innerHTML = `
-            <div class="p-1 w-25 feature-row">
+            <div class="p-1 col-12 col-md-6 col-lg-3 feature-row">
                 <div class="card h-100">
                     <div class="card-body d-flex flex-column">
                         <div class="card-title w-100 px-0 col-2 d-flex align-items-center justify-content-start">
                             <a class="d-flex justify-content-center align-items-center me-3" style="height: 32px; min-width: 32px; background-color: var(--joorney-primary); border-radius: 8px;" title="[Odoo Feature] ${feature.id}" href="./feature.html#${feature.id}">
-                                <img style="height: 24px; min-width: 24px" class="svg-image-primary-text" alt="${feature.id}, Icon" src="./assets/custom-fa-icons/${feature.icon}.svg" />
+                                <img style="height: 24px; min-width: 24px" class="svg-image-primary-text" alt="${feature.id}, Icon" src="./assets/custom-fa-icons/${feature.icon}.svg" loading="lazy" />
                             </a>
                             <p class="m-0"><strong>${feature.title}</strong></p>
                         </div>
@@ -90,16 +76,23 @@ function loadFeature(feature, viewType, container) {
         default: {
             template.innerHTML = `
             <div class="row d-flex align-items-center feature-row">
-                <div class="px-0 col-2 d-flex align-items-center justify-content-start">
+                <div class="px-0 col-11 col-lg-2 d-flex align-items-center justify-content-start">
                     <a class="d-flex justify-content-center align-items-center mx-3" style="height: 32px; min-width: 32px; background-color: var(--joorney-primary); border-radius: 8px;" title="[Odoo Feature] ${feature.id}" href="./feature.html#${feature.id}">
-                        <img style="height: 24px; min-width: 24px" class="svg-image-primary-text" alt="${feature.id}, Icon" src="./assets/custom-fa-icons/${feature.icon}.svg" />
+                        <img style="height: 24px; min-width: 24px" class="svg-image-primary-text" alt="${feature.id}, Icon" src="./assets/custom-fa-icons/${feature.icon}.svg" loading="lazy"/>
                     </a>
                     <p class="m-0"><strong>${feature.title}</strong></p>
                 </div>
-                <p class="px-0 m-0 ps-5 col-9" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">${feature.textDescription}</p>
+                <div class="d-none d-lg-flex align-items-center m-0 ps-5 pe-3 col-8" >
+                    <p class="m-0" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">${feature.textDescription}</p>
+                </div>
 
-                <a class="feature-row-details-button col-1 btn btn-light" title="[Odoo Feature] ${feature.id}" href="./feature.html#${feature.id}">
-                    Details
+                <div class="col-2 d-flex justify-content-end align-items-center d-none d-lg-flex ">
+                    <a class="feature-row-details-button btn btn-light" title="[Odoo Feature] ${feature.id}" href="./feature.html#${feature.id}">
+                        Details
+                    </a>
+                </div>
+                <a class="col-1 d-flex d-lg-none justify-content-center px-0 btn btn-link text-joorney" title="[Odoo Feature] ${feature.id}" href="./feature.html#${feature.id}">
+                    <i class="fa-solid fa-chevron-right"></i>
                 </a>
             </div>
             `.trim();
