@@ -2,6 +2,11 @@ import { features } from './configuration.js';
 const featuresName = features.map((f) => f.id);
 
 document.addEventListener('DOMContentLoaded', () => {
+    const isOdooStyle = new URL(location.href).searchParams.get('style') === 'odoo';
+    if (isOdooStyle) {
+        document.getElementsByTagName('body')[0].classList.add('odoo-style');
+    }
+
     const currentHash = window.location.hash.slice(1) || features.map((f) => f.id)[0];
     if (currentHash) loadFeature(currentHash);
 });
@@ -33,7 +38,18 @@ function loadFeature(featureName) {
         feature.deprecated
             ? '<span class="text-danger">[DEPRECATED] This feature is no more supported in recent Odoo versions</span><br />'
             : ''
-    }${feature.longDescription ?? feature.textDescription}`;
+    }${feature.longDescription || feature.textDescription}`;
+
+    if (feature.additionalDescription) {
+        document.getElementById('joorney-additional-feature-info').classList.remove('d-none');
+        document.getElementById('feature-additional-description').innerHTML = feature.additionalDescription;
+        const source = document.getElementById('feature-video-source');
+        source.src = feature.video;
+        source.parentElement.load();
+        source.parentElement.play();
+    } else {
+        document.getElementById('joorney-additional-feature-info').classList.add('d-none');
+    }
 
     for (const el of document.getElementsByClassName('feature-amico')) {
         el.src = `./assets/storyset-amico/${feature.amico}.svg`;
