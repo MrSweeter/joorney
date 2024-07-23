@@ -257,3 +257,7 @@ body.odoo-style #features-list-viewtype-list, body.odoo-style #features-list-vie
 .joorney-valign-middle {
     vertical-align: middle;
 }
+
+#feature-navbar-np2, #feature-navbar-np1, #feature-navbar-active, #feature-navbar-nn1, #feature-navbar-nn2 {
+    cursor: pointer;
+}

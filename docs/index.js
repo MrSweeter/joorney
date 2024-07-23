@@ -1,137 +1,139 @@
-const features = [
+const e = [
     {
         id: 'assignMeTask',
         icon: 'user-plus-solid',
         title: 'Assign Me',
-        category: 'odooFeature',
         longDescription:
-            '<span class="fw-bold">Assign Me</span> is a feature that adds a new button to the task form that you can click to assign yourself the task.',
+            '<em>Assign Me</em> is a feature that enhances task management by adding a convenient button to the task form. This button allows you to quickly assign any task to yourself with a single click. Whether you are organizing your workload or taking on new responsibilities, <em>Assign Me</em> streamlines the process, ensuring you can take ownership of tasks efficiently.',
         textDescription: 'Add a new button to the task form that you can click to assign yourself the task.',
         video: './assets/video/2715412-hd_1280_720_60fps.webm',
-        additionalDescription: '',
+        additionalDescription:
+            '<div class="additional-info">\n    <p class="fw-bold">Additional Information:</p>\n    <ul>\n        <li><strong>Instant Assignment:</strong> Quickly assign tasks to yourself with a single click, eliminating delays in task allocation.</li>\n        <li><strong>User Empowerment:</strong> Take charge of your responsibilities, fostering a sense of ownership and accountability.</li>\n        <li><strong>Streamlined Workflow:</strong> Integrates seamlessly with the task management system, promoting efficiency and productivity.</li>\n        <li><strong>Enhanced Collaboration:</strong> Allows team members to proactively manage their workloads, improving overall team dynamics.</li>\n    </ul>\n</div>\n',
         amico: 'add_tasks-amico',
     },
     {
         id: 'saveKnowledge',
         icon: 'bookmark-floppy-disk-solid',
         title: 'Save Article',
-        category: 'odooFeature',
         longDescription:
-            '<span class="fw-bold">Save knowledge</span> is a feature that adds a new button on the top right corner of the article page that you can click to force the save of it.',
+            '<em>Save Article</em> simplifies content management by adding a save button to the top right corner of article pages. This button ensures that you can easily save important articles for later reference with just one click. This feature is perfect for users who frequently research or need to keep track of various articles and information.',
         textDescription:
             'Add a new button on the top right corner of the article page that you can click to force the save of it.',
         video: './assets/video/2715412-hd_1280_720_60fps.webm',
-        additionalDescription: '',
+        additionalDescription:
+            '<div class="additional-info">\n    <p class="fw-bold">Additional Information:</p>\n    <ul>\n        <li><strong>Easy Access:</strong> Save articles with a single click, making it simple to keep important information at your fingertips.</li>\n        <li><strong>Organized Research:</strong> Keep your saved articles well-organized, enhancing your research and reference capabilities.</li>\n        <li><strong>Offline Availability:</strong> Ensure that saved articles are available even without an internet connection.</li>\n        <li><strong>Enhanced Productivity:</strong> Spend less time searching for articles and more time utilizing them effectively.</li>\n    </ul>\n</div>\n',
         amico: 'floppy_disk-amico',
-        deprecated: true,
+        deprecated: !0,
+        deprecatedReason: 'This feature has been added in standard version of Odoo!',
     },
     {
         id: 'unfocusApp',
         icon: 'ghost-solid',
         title: 'Unfocus Apps',
-        category: 'odooFeature',
         longDescription:
-            '<span class="fw-bold">Unfocus App</span> is a feature that allows you to hide the apps that you are not using frequently, so you can focus on the ones that are more relevant to your work. It adds a small star next to the app name on the Odoo home page that you can toggle to unfocus the apps.<br/><br/>You prefer to highlight an apps, double click on the star to put a background image around the app icon.',
+            '<em>Unfocus Apps</em> helps you maintain productivity by allowing you to hide apps that are not frequently used. By clicking the star next to the app name on the Odoo home page, you can toggle the visibility of these apps, focusing on those more relevant to your work. Additionally, you can highlight an app by double-clicking the star to add a background image around the app icon.',
         textDescription:
             'Hide the apps that you are not using frequently, so you can focus on the ones that are more relevant to your work.',
         video: './assets/video/2715412-hd_1280_720_60fps.webm',
-        additionalDescription: '',
+        additionalDescription:
+            '<div class="additional-info">\n    <p class="fw-bold">Additional Information:</p>\n    <ul>\n        <li><strong>Focus Enhancement:</strong> Hide less-used apps to concentrate on the most important tools for your tasks.</li>\n        <li><strong>Customizable Workspace:</strong> Easily toggle visibility of apps to create a personalized and efficient workspace.</li>\n        <li><strong>Visual Clarity:</strong> Reduce clutter on your Odoo home page, making it easier to find and use essential apps.</li>\n        <li><strong>Highlight Key Apps:</strong> Double-click the star icon to visually emphasize the most critical apps with a background image.</li>\n    </ul>\n</div>\n',
         amico: 'social_strategy-amico',
     },
     {
         id: 'newServerActionCode',
         icon: 'code-solid',
         title: 'Server Action Code',
-        category: 'odooFeature',
         longDescription:
-            '<span class="fw-bold">Server Action Code App</span> is a feature that will automatically select "Execute code" as type for Server Action, so you can focus on writing code directly.',
+            '<em>Server Action Code</em> optimizes your workflow by automatically selecting "Execute code" as the type for Server Action. This allows you to focus directly on writing code without manually setting the action type, making the coding process more efficient and streamlined.',
         textDescription: 'Automatically select "Execute code" as type for Server Action',
         video: './assets/video/2715412-hd_1280_720_60fps.webm',
-        additionalDescription: '',
+        additionalDescription:
+            '<div class="additional-info">\n    <p class="fw-bold">Additional Information:</p>\n    <ul>\n        <li><strong>Automated Setup:</strong> Automatically selects "Execute code" for server actions, reducing setup time.</li>\n        <li><strong>Developer Friendly:</strong> Allows developers to focus directly on writing and testing code without additional steps.</li>\n        <li><strong>Consistency:</strong> Ensures consistent setup for server actions, minimizing errors and improving reliability.</li>\n        <li><strong>Efficiency Boost:</strong> Streamlines the coding process, making development and debugging faster and easier.</li>\n    </ul>\n</div>\n',
         amico: 'hand_coding-amico',
     },
     {
         id: 'tooltipMetadata',
         icon: 'file-lines-solid',
         title: 'Tooltip Metadata',
-        category: 'odooFeature',
         longDescription:
-            '<span class="fw-bold">Tooltip Metadata</span> is a feature that will show you current record metadata by hovering the debug icon.',
+            "<em>Tooltip Metadata</em> provides quick access to record metadata. By hovering over the debug icon, you can instantly view the current record's metadata, making it easier to gather essential information without navigating away from the current view.",
         textDescription: 'Show you current record metadata by hovering the debug icon.',
         video: './assets/video/2715412-hd_1280_720_60fps.webm',
-        additionalDescription: '',
+        additionalDescription:
+            '<div class="additional-info">\n    <p class="fw-bold">Additional Information:</p>\n    <ul>\n        <li><strong>Instant Information:</strong> View metadata quickly by hovering over the debug icon, saving time on data retrieval.</li>\n        <li><strong>Improved Debugging:</strong> Access important metadata without navigating away from the current view, streamlining the debugging process.</li>\n        <li><strong>Enhanced Usability:</strong> Provides a seamless way to gather necessary information for record analysis and troubleshooting.</li>\n        <li><strong>Time-Saving:</strong> Reduces the need for multiple clicks and page loads, improving overall efficiency.</li>\n    </ul>\n</div>\n',
         amico: 'static_assets-amico',
     },
     {
         id: 'contextOdooMenus',
         icon: 'location-arrow-solid',
         title: 'Context OdooMenus',
-        category: 'odooFeature',
-        longDescription: `<span class="fw-bold">Context OdooMenus</span> is a feature that will add Odoo's menus to the browser context menu`,
+        longDescription:
+            "<em>Context OdooMenus</em> integrates Odoo's menus into the browser context menu. This addition allows you to access Odoo's functionalities directly from the browser's right-click menu, providing a more seamless and integrated user experience.",
         textDescription: "Add Odoo's menus to the browser context menu",
         video: './assets/video/2715412-hd_1280_720_60fps.webm',
-        additionalDescription: '',
+        additionalDescription:
+            '<div class="additional-info">\n    <p class="fw-bold">Additional Information:</p>\n    <ul>\n        <li><strong>Convenient Access:</strong> Adds Odoo\'s menus to the browser context menu for quick and easy access.</li>\n        <li><strong>Streamlined Navigation:</strong> Navigate Odoo functionalities directly from the right-click menu, saving time.</li>\n        <li><strong>User-Friendly:</strong> Enhances the user experience by integrating Odoo menus into familiar browser controls.</li>\n        <li><strong>Efficiency Improvement:</strong> Reduces the number of steps needed to access Odoo features, increasing productivity.</li>\n    </ul>\n</div>\n',
         amico: 'dropdown_menu-amico',
     },
     {
         id: 'autoOpenRunbot',
         icon: 'jet-fighter-solid',
         title: 'Auto-Open Runbot',
-        category: 'runbotFeature',
         longDescription:
-            '<span class="fw-bold">AutoOpen Runbot</span> is a feature that allows you to open a runbot instance in a specific version as an admin user in debug mode, by adding a hash parameter to the url. For example, if you want to open a runbot in 16.3, you can use this url: <a target="_blank" href="https://runbot.odoo.com?joorney-runbot=16.3">https://runbot.odoo.com?joorney-runbot=16.3</a>.',
+            '<em>Auto-Open Runbot</em> facilitates quick access to specific runbot instances. By adding a search parameter to the URL, you can open a runbot instance in a specific version as an admin user in debug mode. For example, accessing a runbot in version 17.0 can be done through a URL like <a target="_blank" href="https://runbot.odoo.com?joorney-runbot=17.0">https://runbot.odoo.com?joorney-runbot=17.0</a>.',
         textDescription:
             'Open a runbot instance in a specific version: <a target="_blank" href="https://runbot.odoo.com?joorney-runbot=17.0">https://runbot.odoo.com?joorney-runbot=17.0</a>',
         video: './assets/video/2715412-hd_1280_720_60fps.webm',
-        additionalDescription: '',
+        additionalDescription:
+            '<div class="additional-info">\n    <p class="fw-bold">Additional Information:</p>\n    <ul>\n        <li><strong>Version Specific:</strong> Open a runbot instance in a specific version quickly by adding a hash parameter to the URL.</li>\n        <li><strong>Admin Access:</strong> Automatically opens the instance as an admin user in debug mode for enhanced testing and debugging.</li>\n        <li><strong>URL Customization:</strong> Easily customize the URL to access different runbot versions as needed.</li>\n        <li><strong>Time-Saving:</strong> Streamlines the process of opening and configuring runbot instances, improving workflow efficiency.</li>\n    </ul>\n</div>\n',
         amico: 'product_tour-amico',
     },
     {
         id: 'impersonateLoginRunbot',
         icon: 'masks-theater-solid',
         title: 'Impersonate User',
-        category: 'runbotFeature',
         longDescription:
-            '<span class="fw-bold">Impersonate Login</span> is a feature that allows you to impersonate a default user on a runbot, such as admin, demo, or portal. This can be useful for testing purposes or for providing support to other users. It adds new options on the login page menu that you can select to impersonate one of the default user.',
+            '<em>Impersonate User</em> allows you to test and support effectively by impersonating default users on a runbot, such as admin, demo, or portal. This feature adds options to the login page menu, enabling you to select and impersonate different default users for various purposes.',
         textDescription: 'Impersonate a default user on a runbot, such as admin, demo, or portal.',
         video: './assets/video/2715412-hd_1280_720_60fps.webm',
-        additionalDescription: '',
+        additionalDescription:
+            '<div class="additional-info">\n    <p class="fw-bold">Additional Information:</p>\n    <ul>\n        <li><strong>Testing Flexibility:</strong> Easily impersonate default users like admin, demo, or portal for comprehensive testing.</li>\n        <li><strong>Support Enhancement:</strong> Provide better support by experiencing the system from different user perspectives.</li>\n        <li><strong>Quick Switching:</strong> Add options to the login page menu to seamlessly switch between different user roles.</li>\n        <li><strong>Debugging Aid:</strong> Simplifies the process of identifying and resolving user-specific issues.</li>\n    </ul>\n</div>\n',
         amico: 'add_user-amico',
     },
     {
         id: 'adminDebugLoginRunbot',
         icon: 'rocket-solid',
         title: 'Admin-Debug Login',
-        category: 'runbotFeature',
         longDescription:
-            '<span class="fw-bold">Admin-Debug Login</span> is a feature that allows you to open a runbot instance from the runbot page as an admin user in debug mode. It adds a new icon next to the database name that you can click to open the runbot instance.',
+            '<em>Admin-Debug Login</em> provides an easy way to open a runbot instance from the runbot page as an admin user in debug mode. This feature adds a new icon next to the database name, allowing you to access the runbot instance with a single click, facilitating easier debugging and developer tasks.',
         textDescription: 'Open a runbot instance from the runbot page as an admin user in debug mode.',
         video: './assets/video/2715412-hd_1280_720_60fps.webm',
-        additionalDescription: '',
+        additionalDescription:
+            '<div class="additional-info">\n    <p class="fw-bold">Additional Information:</p>\n    <ul>\n        <li><strong>Instant Access:</strong> Quickly open a runbot instance from the runbot page as an admin user in debug mode.</li>\n        <li><strong>Simplified Debugging:</strong> Adds a new icon next to the database name for easy access to the debug mode.</li>\n        <li><strong>Enhanced Control:</strong> Provides administrators with immediate access to necessary debugging tools.</li>\n        <li><strong>Efficiency Boost:</strong> Reduces the steps needed to access and debug runbot instances, saving time.</li>\n    </ul>\n</div>\n',
         amico: 'superhero-amico',
     },
     {
         id: 'themeSwitch',
         icon: 'sun-moon-solid',
         title: 'Switch <span class="odoo">Odoo</span> Theme',
-        category: 'designFeature',
         longDescription:
-            '<span class="fw-bold">Switch Odoo Theme</span> is a feature that allows you to switch the Odoo theme dynamically based on a configured option. You can switch Odoo theme depending of location, time range or simply to a choosed one.',
+            '<em>Switch Odoo Theme</em> allows you to dynamically change the Odoo theme based on configured options. You can switch themes depending on location, time range, or simply choose a preferred one, enhancing the visual and functional experience of using Odoo.',
         textDescription: 'Switch the Odoo theme dynamically based on a configured option',
         video: './assets/video/2715412-hd_1280_720_60fps.webm',
-        additionalDescription: '',
+        additionalDescription:
+            '<div class="additional-info">\n    <p class="fw-bold">Additional Information:</p>\n    <ul>\n        <li><strong>Dynamic Themes:</strong> Switch Odoo themes based on location, time range, or user preference.</li>\n        <li><strong>Enhanced Customization:</strong> Personalize the Odoo interface to match different work environments or times of day.</li>\n        <li><strong>User Experience:</strong> Improves the visual and functional experience by providing adaptable theme options.</li>\n        <li><strong>Easy Configuration:</strong> Simple to configure and switch themes, making customization accessible to all users.</li>\n    </ul>\n</div>\n',
         amico: 'google_sitemap-amico',
     },
     {
         id: 'awesomeStyle',
         icon: 'css3-alt',
         title: 'Awesome CSS',
-        category: 'designFeature',
         longDescription:
-            '<span class="fw-bold">Awesome Style</span> is a feature that allows you to apply custom CSS styles on your Odoo database page.',
+            '<em>Awesome CSS</em> gives you the power to customize the appearance of your Odoo database page by applying custom CSS styles. This feature is perfect for users who want to personalize and enhance the visual aspects of their Odoo interface.',
         textDescription: 'Apply custom CSS styles on your Odoo database page.',
         video: './assets/video/2715412-hd_1280_720_60fps.webm',
-        additionalDescription: '',
+        additionalDescription:
+            '<div class="additional-info">\n    <p class="fw-bold">Additional Information:</p>\n    <ul>\n        <li><strong>Customization:</strong> Apply custom CSS styles to personalize the appearance of your Odoo database page.</li>\n        <li><strong>Visual Enhancement:</strong> Improve the aesthetics of your Odoo interface to suit your preferences.</li>\n        <li><strong>User-Friendly:</strong> Easily implement CSS changes without needing advanced technical skills.</li>\n        <li><strong>Enhanced Interface:</strong> Make your Odoo experience more engaging and visually appealing.</li>\n    </ul>\n</div>\n',
         amico: 'design_process-amico',
     },
     {
@@ -139,138 +141,82 @@ const features = [
         sub: ['awesomeLoadingLarge', 'awesomeLoadingSmall'],
         icon: 'spinner-solid',
         title: 'Awesome Loading',
-        category: 'designFeature',
         longDescription:
-            '<span class="fw-bold">Awesome Loading Small/Large</span> is a feature that allows you to change the loading design of Odoo, the large one or the small one. The large one shows a spinning circle in fullscreen, while the small one shows a "Loading" text at the bottom right of the page.',
+            '<em>Awesome Loading</em> allows you to customize the loading design of Odoo. You can choose between a large loading design, which displays a spinning circle in fullscreen, or a small one, which shows a "Loading" text at the bottom right of the page. This feature enhances the user experience during load times.<br /><br /><i>Note that the large loading has been removed in Odoo 17.0</i>',
         textDescription: 'Change the loading design of Odoo, the large one or the small one.',
         video: './assets/video/2715412-hd_1280_720_60fps.webm',
-        additionalDescription: '',
+        additionalDescription:
+            '<div class="additional-info">\n    <p class="fw-bold">Additional Information:</p>\n    <ul>\n        <li><strong>Loading Design Options:</strong> Choose between a large, fullscreen loading design or a small, corner text.</li>\n        <li><strong>Visual Appeal:</strong> Customize the loading indicator to enhance the visual experience during load times.</li>\n        <li><strong>User Engagement:</strong> Keeps users informed and engaged while waiting for pages to load.</li>\n        <li><strong>Easy Switching:</strong> Quickly switch between different loading designs to suit your needs.</li>\n    </ul>\n</div>\n',
         amico: 'progress_indicator-amico',
     },
     {
         id: 'starringTaskEffect',
         icon: 'star-solid',
         title: 'Stars Effect',
-        category: 'designFeature',
         longDescription:
-            '<span class="fw-bold">Stars effect</span> is a feature that will trigger stars particles effect when you prioritize a task.',
+            '<em>Stars Effect</em> adds a touch of magic to task prioritization. When you prioritize a task, it triggers a stars particles effect, adding a visually pleasing element to task management and making the prioritization process more engaging.',
         textDescription: 'Trigger stars particles effect when you prioritize a task.',
         video: './assets/video/2715412-hd_1280_720_60fps.webm',
-        additionalDescription: '',
+        additionalDescription:
+            '<div class="additional-info">\n    <p class="fw-bold">Additional Information:</p>\n    <ul>\n        <li><strong>Visual Feedback:</strong> Adds a visually pleasing stars particle effect when prioritizing tasks.</li>\n        <li><strong>Engaging Experience:</strong> Makes task prioritization more enjoyable and interactive.</li>\n        <li><strong>Instant Recognition:</strong> Provides immediate visual confirmation when a task is prioritized.</li>\n        <li><strong>Motivation Boost:</strong> Enhances user satisfaction and motivation through engaging visuals.</li>\n    </ul>\n</div>\n',
         amico: 'launching_with_balloons-amico',
     },
     {
         id: 'showMyBadge',
         icon: 'user-certificate-solid',
         title: 'Show my Badge',
-        category: 'designFeature',
-        longDescription: '<span class="fw-bold">Show My Badge</span> will show user\'s badges when showing user card.',
+        longDescription:
+            "<em>Show My Badge</em> displays user badges in the user card, highlighting achievements. This feature is ideal for recognizing and showcasing users' accomplishments within the Odoo interface, promoting a sense of achievement and community.",
         textDescription: "Show user's badges in the user card.",
         video: './assets/video/2715412-hd_1280_720_60fps.webm',
-        additionalDescription: '',
+        additionalDescription:
+            '<div class="additional-info">\n    <p class="fw-bold">Additional Information:</p>\n    <ul>\n        <li><strong>Recognition:</strong> Displays user badges in the user card, highlighting achievements and credentials.</li>\n        <li><strong>Enhanced Profiles:</strong> Makes user profiles more informative and visually appealing.</li>\n        <li><strong>Community Building:</strong> Promotes a sense of achievement\n',
         amico: 'brand_loyalty-amico',
     },
 ];
-
+function i(i) {
+    const n = document.getElementById('features-list');
+    n.innerHTML = '';
+    for (const o of e.filter((e) => !e.deprecated)) t(o, i, n);
+}
+function t(e, i, t) {
+    const n = document.createElement('template');
+    switch (
+        (t.classList.remove('flex-column'),
+        t.classList.remove('row'),
+        t.classList.remove('justify-content-center'),
+        document.getElementById('features-list-viewtype-list').classList.remove('active'),
+        document.getElementById('features-list-viewtype-kanban').classList.remove('active'),
+        document.getElementById('features-list-viewtype-grid').classList.remove('active'),
+        i)
+    ) {
+        case 'grid':
+            (n.innerHTML =
+                `\n            <a class="feature-box p-4 m-3" title="[Odoo Feature] ${e.id}" href="./feature.html#${e.id}">\n                <img class="w-100 h-100 svg-image-primary-text" alt="${e.id}, Icon" src="./assets/custom-fa-icons/${e.icon}.svg" loading="lazy" />\n            </a>\n            `.trim()),
+                t.classList.add('row'),
+                t.classList.add('justify-content-center'),
+                document.getElementById('features-list-viewtype-grid').classList.add('active');
+            break;
+        case 'kanban':
+            (n.innerHTML =
+                `\n            <div class="p-1 col-12 col-md-6 col-lg-3 feature-row">\n                <div class="card h-100">\n                    <div class="card-body d-flex flex-column">\n                        <div class="card-title w-100 px-0 col-2 d-flex align-items-center justify-content-start">\n                            <a class="d-flex justify-content-center align-items-center me-3" style="height: 32px; min-width: 32px; background-color: var(--joorney-primary); border-radius: 8px;" title="[Odoo Feature] ${e.id}" href="./feature.html#${e.id}">\n                                <img style="height: 24px; min-width: 24px" class="svg-image-primary-text" alt="${e.id}, Icon" src="./assets/custom-fa-icons/${e.icon}.svg" loading="lazy" />\n                            </a>\n                            <p class="m-0"><strong>${e.title}</strong></p>\n                        </div>\n                        <p class="card-text">${e.textDescription}</p>\n                        <div class="mt-auto d-flex justify-content-end">\n                            <a class="btn btn-light" title="[Odoo Feature] ${e.id}" href="./feature.html#${e.id}">\n                                Details\n                            </a>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            `.trim()),
+                t.classList.add('row'),
+                document.getElementById('features-list-viewtype-kanban').classList.add('active');
+            break;
+        default:
+            (n.innerHTML =
+                `\n            <div class="row d-flex align-items-center feature-row">\n                <div class="px-0 col-11 col-lg-2 d-flex align-items-center justify-content-start">\n                    <a class="d-flex justify-content-center align-items-center mx-3" style="height: 32px; min-width: 32px; background-color: var(--joorney-primary); border-radius: 8px;" title="[Odoo Feature] ${e.id}" href="./feature.html#${e.id}">\n                        <img style="height: 24px; min-width: 24px" class="svg-image-primary-text" alt="${e.id}, Icon" src="./assets/custom-fa-icons/${e.icon}.svg" loading="lazy"/>\n                    </a>\n                    <p class="m-0"><strong>${e.title}</strong></p>\n                </div>\n                <div class="d-none d-lg-flex align-items-center m-0 ps-5 pe-3 col-8" >\n                    <p class="m-0" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">${e.textDescription}</p>\n                </div>\n\n                <div class="col-2 d-flex justify-content-end align-items-center d-none d-lg-flex ">\n                    <a class="feature-row-details-button btn btn-light" title="[Odoo Feature] ${e.id}" href="./feature.html#${e.id}">\n                        Details\n                    </a>\n                </div>\n                <a class="col-1 d-flex d-lg-none justify-content-center px-0 btn btn-link text-joorney" title="[Odoo Feature] ${e.id}" href="./feature.html#${e.id}">\n                    <i class="fa-solid fa-chevron-right"></i>\n                </a>\n            </div>\n            `.trim()),
+                t.classList.add('flex-column'),
+                document.getElementById('features-list-viewtype-list').classList.add('active');
+    }
+    t.appendChild(n.content.firstChild);
+}
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('copyright-year').innerHTML = new Date().getFullYear();
-
-    const isOdooStyle = new URL(location.href).searchParams.get('style') === 'odoo';
-    if (isOdooStyle) {
-        document.getElementsByTagName('body')[0].classList.add('odoo-style');
-    }
-
-    loadFeatures('list');
-
-    document.getElementById('features-list-viewtype-list').onclick = () => loadFeatures('list');
-    document.getElementById('features-list-viewtype-kanban').onclick = () => loadFeatures('kanban');
-    document.getElementById('features-list-viewtype-grid').onclick = () => loadFeatures('grid');
+    'odoo' === new URL(location.href).searchParams.get('style') &&
+        document.getElementsByTagName('body')[0].classList.add('odoo-style'),
+        i('list'),
+        (document.getElementById('features-list-viewtype-list').onclick = () => i('list')),
+        (document.getElementById('features-list-viewtype-kanban').onclick = () => i('kanban')),
+        (document.getElementById('features-list-viewtype-grid').onclick = () => i('grid'));
 });
-
-function loadFeatures(viewType) {
-    const featureContainer = document.getElementById('features-list');
-    featureContainer.innerHTML = '';
-
-    for (const feature of features.filter((f) => !f.deprecated)) {
-        loadFeature(feature, viewType, featureContainer);
-    }
-}
-
-function loadFeature(feature, viewType, container) {
-    const template = document.createElement('template');
-
-    container.classList.remove('flex-column');
-    container.classList.remove('row');
-    container.classList.remove('justify-content-center');
-
-    document.getElementById('features-list-viewtype-list').classList.remove('active');
-    document.getElementById('features-list-viewtype-kanban').classList.remove('active');
-    document.getElementById('features-list-viewtype-grid').classList.remove('active');
-
-    switch (viewType) {
-        case 'grid': {
-            template.innerHTML = `
-            <a class="feature-box p-4 m-3" title="[Odoo Feature] ${feature.id}" href="./feature.html#${feature.id}">
-                <img class="w-100 h-100 svg-image-primary-text" alt="${feature.id}, Icon" src="./assets/custom-fa-icons/${feature.icon}.svg" loading="lazy" />
-            </a>
-            `.trim();
-            container.classList.add('row');
-            container.classList.add('justify-content-center');
-            document.getElementById('features-list-viewtype-grid').classList.add('active');
-            break;
-        }
-        case 'kanban': {
-            template.innerHTML = `
-            <div class="p-1 col-12 col-md-6 col-lg-3 feature-row">
-                <div class="card h-100">
-                    <div class="card-body d-flex flex-column">
-                        <div class="card-title w-100 px-0 col-2 d-flex align-items-center justify-content-start">
-                            <a class="d-flex justify-content-center align-items-center me-3" style="height: 32px; min-width: 32px; background-color: var(--joorney-primary); border-radius: 8px;" title="[Odoo Feature] ${feature.id}" href="./feature.html#${feature.id}">
-                                <img style="height: 24px; min-width: 24px" class="svg-image-primary-text" alt="${feature.id}, Icon" src="./assets/custom-fa-icons/${feature.icon}.svg" loading="lazy" />
-                            </a>
-                            <p class="m-0"><strong>${feature.title}</strong></p>
-                        </div>
-                        <p class="card-text">${feature.textDescription}</p>
-                        <div class="mt-auto d-flex justify-content-end">
-                            <a class="btn btn-light" title="[Odoo Feature] ${feature.id}" href="./feature.html#${feature.id}">
-                                Details
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            `.trim();
-            container.classList.add('row');
-            document.getElementById('features-list-viewtype-kanban').classList.add('active');
-            break;
-        }
-        default: {
-            template.innerHTML = `
-            <div class="row d-flex align-items-center feature-row">
-                <div class="px-0 col-11 col-lg-2 d-flex align-items-center justify-content-start">
-                    <a class="d-flex justify-content-center align-items-center mx-3" style="height: 32px; min-width: 32px; background-color: var(--joorney-primary); border-radius: 8px;" title="[Odoo Feature] ${feature.id}" href="./feature.html#${feature.id}">
-                        <img style="height: 24px; min-width: 24px" class="svg-image-primary-text" alt="${feature.id}, Icon" src="./assets/custom-fa-icons/${feature.icon}.svg" loading="lazy"/>
-                    </a>
-                    <p class="m-0"><strong>${feature.title}</strong></p>
-                </div>
-                <div class="d-none d-lg-flex align-items-center m-0 ps-5 pe-3 col-8" >
-                    <p class="m-0" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">${feature.textDescription}</p>
-                </div>
-
-                <div class="col-2 d-flex justify-content-end align-items-center d-none d-lg-flex ">
-                    <a class="feature-row-details-button btn btn-light" title="[Odoo Feature] ${feature.id}" href="./feature.html#${feature.id}">
-                        Details
-                    </a>
-                </div>
-                <a class="col-1 d-flex d-lg-none justify-content-center px-0 btn btn-link text-joorney" title="[Odoo Feature] ${feature.id}" href="./feature.html#${feature.id}">
-                    <i class="fa-solid fa-chevron-right"></i>
-                </a>
-            </div>
-            `.trim();
-            container.classList.add('flex-column');
-            document.getElementById('features-list-viewtype-list').classList.add('active');
-        }
-    }
-
-    container.appendChild(template.content.firstChild);
-}

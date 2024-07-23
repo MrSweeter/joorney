@@ -12,6 +12,7 @@
         "@rollup/plugin-json": "^6.1.0",
         "@rollup/plugin-node-resolve": "^15.2.3",
         "@rollup/plugin-replace": "^5.0.5",
+        "@rollup/plugin-terser": "^0.4.4",
         "@types/node": "^20.11.28",
         "docopt": "^0.6.2",
         "rollup": "^4.13.0",

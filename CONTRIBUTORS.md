@@ -1,3 +1,4 @@
 -   [MrSweeter](https://github.com/MrSweeter) (owner)
 -   [GaetanVandenBergh](https://github.com/GaetanVandenBergh) (secondary owner)
 -   [mao-odoo](https://github.com/mao-odoo) (beta tester)
+-	[Chat GPT](https://chatgpt.com/) (bot, writer)
