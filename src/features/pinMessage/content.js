@@ -3,6 +3,7 @@ import { SessionKey, getSessionData } from '../../api/session.js';
 import ContentFeature from '../../generic/content.js';
 import { generateMessage, stringToHTML } from '../../html_generator.js';
 import { isStillSamePage } from '../../utils/authorize.js';
+import { StorageSync } from '../../utils/browser.js';
 import { getModelAndID_fromURL } from '../../utils/url_manager.js';
 import configuration from './configuration.js';
 
@@ -16,6 +17,7 @@ export default class PinMessageContentFeature extends ContentFeature {
         this.url = null;
         this.handleChatterMutation = this.handleChatterMutation.bind(this);
         this.onPin = this.onPin.bind(this);
+        this.selfAuthor = true;
         pinMessageChatterObserver?.disconnect();
         pinMessageChatterObserver = new MutationObserver(this.handleChatterMutation);
     }
@@ -25,6 +27,9 @@ export default class PinMessageContentFeature extends ContentFeature {
         this.url = url;
         this.chatter = document.querySelector('.o-mail-Form-chatter');
         if (!this.chatter) return;
+
+        const { pinMessageSelfAuthorEnabled } = await StorageSync.get(this.defaultSettings);
+        this.selfAuthor = pinMessageSelfAuthorEnabled;
 
         this.observerChatter();
 
@@ -79,16 +84,16 @@ export default class PinMessageContentFeature extends ContentFeature {
 
             for (const node of mutation.addedNodes) {
                 if (node.nodeType === 1 && node.matches('.o-mail-Message')) {
+                    if (node.querySelector('.o-mail-Message-bubble.border')) return;
                     this.appendPinButtonToMessage(node);
                 }
             }
         }
     }
 
-    getPinnableMessages(selfAuthor) {
-        // TODO[IMP] ONLY MY PIN - OPTIONS selfAuthor
+    getPinnableMessages() {
         const messages = Array.from(
-            this.chatter.querySelectorAll(`div.o-mail-Message${selfAuthor ? 'o-selfAuthored' : ''}`)
+            this.chatter.querySelectorAll(`div.o-mail-Message${this.selfAuthor ? '.o-selfAuthored' : ''}`)
         );
         return messages
             .filter((m) => !m.querySelector('.o-mail-Message-bubble.border'))
@@ -98,24 +103,22 @@ export default class PinMessageContentFeature extends ContentFeature {
     async getPinnedMessages(url) {
         const model_id = await getModelAndID_fromURL(url);
         if (!model_id) return [];
-        const messages = this.tryCatch(
-            () =>
-                getDataset(
-                    'mail.message',
-                    [
-                        ['model', '=', model_id.model],
-                        ['res_id', '=', model_id.resId],
-                        ['body', '!=', false],
-                        ['body', '!=', ''],
-                        ['starred_partner_ids', '!=', false],
-                        //['subtype_id.internal', '=', true],
-                    ],
-                    // TODO[IMP] ONLY MY PIN - OPTIONS selfAuthor
-                    //['UID', '!=', 'starred_partner_ids']]
-                    ['id', 'body', 'display_name', 'author_id', 'create_date'],
-                    50,
-                    0
-                ),
+
+        const domain = [
+            ['model', '=', model_id.model],
+            ['res_id', '=', model_id.resId],
+            ['body', '!=', false],
+            ['body', '!=', ''],
+            ['starred_partner_ids', '!=', false],
+            ['subtype_id.internal', '=', true],
+        ];
+        if (this.selfAuthor) {
+            const uid = getSessionData(SessionKey.PARTNER_ID) || -1;
+            domain.push(['starred_partner_ids', 'in', uid]);
+        }
+
+        const messages = await this.tryCatch(
+            () => getDataset('mail.message', domain, ['id', 'body', 'author_id', 'create_date'], 50, 0),
             []
         );
         return messages;
@@ -165,7 +168,7 @@ export default class PinMessageContentFeature extends ContentFeature {
         for (const pin of pins.slice(0, Math.min(MAX_PIN, pins.length))) {
             messageContainer.appendChild(
                 generateMessage(
-                    pin.display_name,
+                    pin.author_id[1],
                     this.getAuthorAvatar(pin.author_id[0]),
                     pin.body,
                     new Date(pin.create_date)

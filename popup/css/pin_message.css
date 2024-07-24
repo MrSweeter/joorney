@@ -1,18 +1,18 @@
-/* TODO[REF] Generic toggle - Pin Message */
-.ua-switch {
+/* TODO[REF] Generic toggle - Unfocus app */
+.pm-switch {
     position: relative;
     display: inline-block;
     width: 60px;
     height: 34px;
 }
 
-.ua-switch input {
+.pm-switch input {
     opacity: 0;
     width: 0;
     height: 0;
 }
 
-.ua-slider {
+.pm-slider {
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -24,15 +24,15 @@
     background: linear-gradient(90deg, rgba(56, 56, 56, 0.25) 0%, rgba(126, 126, 126, 0.25) 100%);
 }
 
-input:checked + .ua-slider {
+input:checked + .pm-slider {
     background: linear-gradient(90deg, rgba(255, 154, 0, 1) 0%, rgba(255, 192, 0, 1) 100%);
 }
 
-input:indeterminate + .ua-slider {
+input:indeterminate + .pm-slider {
     background: linear-gradient(90deg, rgb(154, 154, 154) 0%, rgb(200, 200, 200) 100%);
 }
 
-.ua-slider:before {
+.pm-slider:before {
     position: absolute;
     height: 26px;
     width: 26px;
@@ -50,14 +50,14 @@ input:indeterminate + .ua-slider {
     line-height: 26px;
 }
 
-input:checked + .ua-slider:before {
+input:checked + .pm-slider:before {
     background-color: #fff;
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
 }
 
-input:indeterminate + .ua-slider:before {
+input:indeterminate + .pm-slider:before {
     content: '\3f';
     background-color: rgb(136, 136, 136);
     -webkit-transform: translateX(13px);
@@ -65,26 +65,18 @@ input:indeterminate + .ua-slider:before {
     transform: translateX(13px);
 }
 
-.ua-slider.ua-round {
+.pm-slider.pm-round {
     border-radius: 34px;
 }
 
-.ua-slider.ua-round:before {
+.pm-slider.pm-round:before {
     border-radius: 50%;
 }
 
-.ua-order:before {
-    content: '\f0dc';
+.pm-author:before {
+    content: '\f086';
 }
 
-input:checked + .ua-order:before {
-    content: '\f0dc';
-}
-
-.ua-share:before {
-    content: '\f21b'; /*f4fb*/
-}
-
-input:checked + .ua-share:before {
-    content: '\f1e0';
+input:checked + .pm-author:before {
+    content: '\f075';
 }

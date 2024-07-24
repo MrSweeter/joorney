@@ -10,12 +10,13 @@ export default {
     },
     customization: {
         option: false,
-        popup: false,
+        popup: true,
     },
     defaultSettings: {
         pinMessageEnabled: false,
         pinMessageWhitelistMode: false,
         pinMessageContextMenu: {},
+        pinMessageSelfAuthorEnabled: true,
     },
     supported_version: ['17+'],
 };
