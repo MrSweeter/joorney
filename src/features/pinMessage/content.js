@@ -21,7 +21,7 @@ export default class PinMessageContentFeature extends ContentFeature {
     }
 
     async loadFeature(url) {
-        if (!(await isStillSamePage(1000, url))) return;
+        if (!(await isStillSamePage(2000, url))) return;
         this.url = url;
         this.chatter = document.querySelector('.o-mail-Form-chatter');
         if (!this.chatter) return;
@@ -49,6 +49,7 @@ export default class PinMessageContentFeature extends ContentFeature {
 
     appendPinButtonToMessage(messageElement) {
         const starBtnIcon = messageElement.querySelector('i.fa-star, i.fa-star-o');
+        if (!starBtnIcon) return;
         starBtnIcon.parentElement.title = 'Odoo: Mark as Todo | Joorney UI override: Pin';
         starBtnIcon.classList.add('fa-thumb-tack');
         starBtnIcon.parentElement.removeEventListener('click', this.onPin);
@@ -57,6 +58,7 @@ export default class PinMessageContentFeature extends ContentFeature {
 
     async onPin() {
         // Delay require to let Odoo handling the request
+        // Can use chrome.webRequest in background but seems overkill for this small feature/request
         if (!(await isStillSamePage(500, this.url))) return;
         this.updatePinnedMessages();
     }
@@ -90,27 +92,31 @@ export default class PinMessageContentFeature extends ContentFeature {
         );
         return messages
             .filter((m) => !m.querySelector('.o-mail-Message-bubble.border'))
-            .filter((m) => m.querySelector('.o-mail-Message-body').innerHTML.trim() !== '');
+            .filter((m) => (m.querySelector('.o-mail-Message-body')?.innerHTML.trim() || '') !== '');
     }
 
     async getPinnedMessages(url) {
         const model_id = await getModelAndID_fromURL(url);
         if (!model_id) return [];
-        const messages = await getDataset(
-            'mail.message',
-            [
-                ['model', '=', model_id.model],
-                ['res_id', '=', model_id.resId],
-                ['body', '!=', false],
-                ['body', '!=', ''],
-                ['starred_partner_ids', '!=', false],
-                ['subtype_id.internal', '=', true],
-            ],
-            // TODO[IMP] ONLY MY PIN - OPTIONS selfAuthor
-            //['UID', '!=', 'starred_partner_ids']]
-            ['id', 'body', 'display_name', 'author_id', 'create_date'],
-            50,
-            0
+        const messages = this.tryCatch(
+            () =>
+                getDataset(
+                    'mail.message',
+                    [
+                        ['model', '=', model_id.model],
+                        ['res_id', '=', model_id.resId],
+                        ['body', '!=', false],
+                        ['body', '!=', ''],
+                        ['starred_partner_ids', '!=', false],
+                        //['subtype_id.internal', '=', true],
+                    ],
+                    // TODO[IMP] ONLY MY PIN - OPTIONS selfAuthor
+                    //['UID', '!=', 'starred_partner_ids']]
+                    ['id', 'body', 'display_name', 'author_id', 'create_date'],
+                    50,
+                    0
+                ),
+            []
         );
         return messages;
     }
