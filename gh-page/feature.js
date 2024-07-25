@@ -49,9 +49,10 @@ function loadFeature() {
     document.getElementById('feature-icon').src = `./assets/custom-fa-icons/${feature.icon}.svg`;
     document.getElementById('feature-icon').alt = `${feature.id}, Icon`;
     document.getElementById('feature-title').innerHTML = feature.title;
-    document.getElementById('feature-description').innerHTML = `${
-        feature.deprecated ? `<span class="text-danger">[DEPRECATED] ${feature.deprecatedReason}</span><br />` : ''
-    }${feature.longDescription || feature.textDescription}`;
+    document.getElementById('feature-description').innerHTML = `
+        ${feature.deprecated ? `<span class="text-danger">[DEPRECATED] ${feature.deprecatedReason}</span><br />` : ''}
+        ${feature.soon ? `<span class="text-success">[SOON]</span><br />` : ''}
+        ${feature.longDescription || feature.textDescription}`;
 
     if (feature.additionalDescription) {
         document.getElementById('joorney-additional-feature-info').classList.remove('d-none');

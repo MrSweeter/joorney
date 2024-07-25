@@ -75,7 +75,7 @@ export function generateTabFeaturePopupToggleItem(feature) {
 		<label
 			title="[Feature Origin] ${feature.display_name ?? feature.id}"
 			for="${feature.id}FeatureTab"
-			class="mx-1"
+			class=""
 		>
 			<input id="${feature.id}FeatureTab" type="checkbox" />
 			<div class="icon-wrapper-tab">
