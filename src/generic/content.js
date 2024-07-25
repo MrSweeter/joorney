@@ -20,7 +20,20 @@ export default class ContentFeature {
 
         this.loadFeature(url);
         this.handlePopupMessage();
+
+        this.observeRequest();
     }
+
+    observeRequest() {
+        const onrequest = this.configuration.trigger.onrequest;
+        if (!onrequest || onrequest.length < 1) return;
+
+        Runtime.onMessage.addListener((msg) => {
+            if (msg.action === MESSAGE_ACTION.TO_CONTENT.WEB_REQUEST_COMPLETE) this.onRequestCompleted(msg);
+        });
+    }
+
+    async onRequestCompleted(_msg) {}
 
     async loadFeature(_url) {
         throw NotYetImplemented;

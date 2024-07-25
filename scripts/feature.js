@@ -84,6 +84,8 @@ function createFeature(featureName, option) {
             load: option['--with-trigger-load'] === 1,
             navigate: option['--with-trigger-navigate'] === 1,
             context: option['--with-trigger-context'] === 1,
+            // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Match_patterns
+            onrequest: [],
         },
         customization: {
             option: option['--with-customization-option'] === 1,

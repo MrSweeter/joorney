@@ -22,6 +22,11 @@ export default class PinMessageContentFeature extends ContentFeature {
         pinMessageChatterObserver = new MutationObserver(this.handleChatterMutation);
     }
 
+    async onRequestCompleted(msg) {
+        if (msg.status !== 200) return;
+        this.onPin();
+    }
+
     async loadFeature(url) {
         if (!(await isStillSamePage(2000, url))) return;
         this.url = url;
@@ -57,14 +62,9 @@ export default class PinMessageContentFeature extends ContentFeature {
         if (!starBtnIcon) return;
         starBtnIcon.parentElement.title = 'Odoo: Mark as Todo | Joorney UI override: Pin';
         starBtnIcon.classList.add('fa-thumb-tack');
-        starBtnIcon.parentElement.removeEventListener('click', this.onPin);
-        starBtnIcon.parentElement.addEventListener('click', this.onPin);
     }
 
     async onPin() {
-        // Delay require to let Odoo handling the request
-        // Can use chrome.webRequest in background but seems overkill for this small feature/request
-        if (!(await isStillSamePage(500, this.url))) return;
         this.updatePinnedMessages();
     }
 
@@ -109,8 +109,10 @@ export default class PinMessageContentFeature extends ContentFeature {
             ['res_id', '=', model_id.resId],
             ['body', '!=', false],
             ['body', '!=', ''],
+            // Cannot be too much restrictive due to UI, hard to identify which message can be pinned
+            //['message_type', 'not in', ['notification', 'auto_comment', 'user_notification']],
+            //['subtype_id.internal', '=', true],
             ['starred_partner_ids', '!=', false],
-            ['subtype_id.internal', '=', true],
         ];
         if (this.selfAuthor) {
             const uid = getSessionData(SessionKey.PARTNER_ID) || -1;

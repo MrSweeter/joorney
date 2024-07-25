@@ -41,6 +41,6 @@
         }
     ],
     "web_accessible_resources": [],
-    "permissions": ["tabs", "webNavigation", "cookies", "storage", "contextMenus"],
+    "permissions": ["tabs", "webNavigation", "cookies", "storage", "contextMenus", "webRequest"],
     "host_permissions": ["http://*/*", "https://*/*"]
 }
