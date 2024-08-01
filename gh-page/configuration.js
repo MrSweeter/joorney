@@ -270,6 +270,7 @@ export const features = [
         additionalDescription: `<div class="additional-info">
             <p class="fw-bold">Additional Information:</p>
             <ul>
+                <li class="pb-3"><strong>Odoo Feature appropriation:</strong> Starring a message in chatter doesn't have impact on it, keep this standard feature but transform it as a "Pin".</li>
                 <li class="pb-3"><strong>Priority Access:</strong> Ensures important messages are always at the top of the chat, preventing the from getting lost in the conversation flow.</li>
                 <li class="pb-3"><strong>Easy management:</strong> Simple pin and unpin actions allow for dynamic management of important messages.</li>
                 <li class="pb-3"><strong>Improved communication:</strong> Reduces the need to scroll through long chat histories to find critical messages, enhancing overall communication efficiency.</li>
