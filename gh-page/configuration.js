@@ -276,6 +276,5 @@ export const features = [
             </ul>
         </div>`,
         amico: 'my_answer-amico',
-        soon: true,
     },
 ];

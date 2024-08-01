@@ -65,6 +65,7 @@ export default class PinMessageContentFeature extends ContentFeature {
     }
 
     async onPin() {
+        if (!this.chatter) return;
         this.updatePinnedMessages();
     }
 
@@ -128,6 +129,7 @@ export default class PinMessageContentFeature extends ContentFeature {
 
     appendPinnedToggle() {
         this.chatter.querySelector('#joorney-pin-message-toggle')?.remove();
+        const threadOpened = this.chatter.querySelector('.joorney-pinned-mail-Thread') != null;
         this.chatter.querySelector('.joorney-pinned-mail-Thread')?.remove();
         if (this.pins.length === 0) return;
         const previous = this.chatter.querySelector('button.text-action');
@@ -143,6 +145,7 @@ export default class PinMessageContentFeature extends ContentFeature {
             else this.appendPinnedSection();
         };
         previous.after(btn);
+        if (threadOpened) this.appendPinnedSection();
     }
 
     appendPinnedSection() {
