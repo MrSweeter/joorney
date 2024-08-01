@@ -36,6 +36,9 @@ export default class PinMessageContentFeature extends ContentFeature {
         const { pinMessageSelfAuthorEnabled } = await StorageSync.get(this.defaultSettings);
         this.selfAuthor = pinMessageSelfAuthorEnabled;
 
+        const model_id = await this.tryCatch(() => getModelAndID_fromURL(url), undefined);
+        if (!model_id) return;
+
         this.observerChatter();
 
         this.appendPinButton();
@@ -102,7 +105,7 @@ export default class PinMessageContentFeature extends ContentFeature {
     }
 
     async getPinnedMessages(url) {
-        const model_id = await getModelAndID_fromURL(url);
+        const model_id = await this.tryCatch(() => getModelAndID_fromURL(url), undefined);
         if (!model_id) return [];
 
         const domain = [
