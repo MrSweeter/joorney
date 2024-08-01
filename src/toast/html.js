@@ -23,7 +23,7 @@ const ToastStyle = css`
         flex-direction: column;
         padding: 16px;
         position: fixed;
-        top: 10px;
+        top: 32px;
         width: 100%;
         z-index: 9999;
         pointer-events: none;

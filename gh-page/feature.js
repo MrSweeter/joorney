@@ -1,9 +1,23 @@
 import { features } from './configuration.js';
-const featuresName = features.map((f) => f.id);
+
+const state = {
+    featuresName: features.map((f) => f.id),
+    currentIndex: 0,
+};
 
 document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('copyright-year').innerHTML = new Date().getFullYear();
+
+    const isOdooStyle = new URL(location.href).searchParams.get('style') === 'odoo';
+    if (isOdooStyle) {
+        document.getElementsByTagName('body')[0].classList.add('odoo-style');
+    }
+
     const currentHash = window.location.hash.slice(1);
-    if (currentHash) loadFeature(currentHash);
+    state.currentIndex = Math.max(state.featuresName.indexOf(currentHash), 0);
+    loadFeature();
+
+    handleTouch();
 });
 
 document.addEventListener('wheel', (e) => {
@@ -22,37 +36,88 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-function loadFeature(featureName) {
-    const feature = features.find((f) => f.id === featureName || f.sub?.includes(featureName));
+function updateIndex(newIndex) {
+    state.currentIndex = newIndex;
+    loadFeature();
+}
+
+function loadFeature() {
+    const feature = getFeature(state.currentIndex);
     if (!feature) return;
+    window.location.hash = feature.id;
 
     document.getElementById('feature-icon').src = `./assets/custom-fa-icons/${feature.icon}.svg`;
+    document.getElementById('feature-icon').alt = `${feature.id}, Icon`;
     document.getElementById('feature-title').innerHTML = feature.title;
-    document.getElementById('feature-description').innerHTML = `${
-        feature.deprecated
-            ? '<span class="text-danger">[DEPRECATED] This feature is no more supported in recent Odoo versions</span><br />'
-            : ''
-    }${feature.description}`;
+    document.getElementById('feature-description').innerHTML = `
+        ${feature.deprecated ? `<span class="text-danger">[DEPRECATED] ${feature.deprecatedReason}</span><br />` : ''}
+        ${feature.soon ? `<span class="text-success">[SOON]</span><br />` : ''}
+        ${feature.longDescription || feature.textDescription}`;
+
+    if (feature.additionalDescription) {
+        document.getElementById('joorney-additional-feature-info').classList.remove('d-none');
+        document.getElementById('feature-additional-description').innerHTML = feature.additionalDescription;
+        const source = document.getElementById('feature-video-source');
+        source.src = feature.video;
+        source.parentElement.load();
+    } else {
+        document.getElementById('joorney-additional-feature-info').classList.add('d-none');
+    }
 
     for (const el of document.getElementsByClassName('feature-amico')) {
         el.src = `./assets/storyset-amico/${feature.amico}.svg`;
+        el.alt = `${feature.id}, Amico`;
     }
 
-    const currentFeatureIndex = featuresName.indexOf(featureName);
-    document.getElementById('joorney-previous-feature').onclick = () => previousFeature(currentFeatureIndex - 1);
-    document.getElementById('joorney-next-feature').onclick = () => nextFeature(currentFeatureIndex + 1);
+    document.getElementById('joorney-previous-feature').onclick = () => updateIndex(state.currentIndex - 1);
+    document.getElementById('joorney-next-feature').onclick = () => updateIndex(state.currentIndex + 1);
+
+    updateFeatureMenu();
 }
 
-function previousFeature(indexArg) {
-    let index = indexArg;
-    if (index < 0) index = featuresName.length - 1;
-    window.location.hash = featuresName[index];
-    loadFeature(featuresName[index]);
+function getFeature(index) {
+    const length = features.length;
+    return features[((index % length) + length) % length];
 }
 
-function nextFeature(indexArg) {
-    let index = indexArg;
-    if (index >= featuresName.length) index = 0;
-    window.location.hash = featuresName[index];
-    loadFeature(featuresName[index]);
+function updateFeatureMenu() {
+    const indexArg = state.currentIndex;
+    const np2 = getFeature(indexArg - 2);
+    const np1 = getFeature(indexArg - 1);
+    const active = getFeature(indexArg);
+    const nn1 = getFeature(indexArg + 1);
+    const nn2 = getFeature(indexArg + 2);
+
+    document.getElementById('feature-navbar-np2').innerHTML = np2.title;
+    document.getElementById('feature-navbar-np1').innerHTML = np1.title;
+    document.getElementById('feature-navbar-active').innerHTML = active.title;
+    document.getElementById('feature-navbar-nn1').innerHTML = nn1.title;
+    document.getElementById('feature-navbar-nn2').innerHTML = nn2.title;
+
+    document.getElementById('feature-navbar-np2').onclick = () => updateIndex(state.currentIndex - 2);
+    document.getElementById('feature-navbar-np1').onclick = () => updateIndex(state.currentIndex - 1);
+    document.getElementById('feature-navbar-active').onclick = () => updateIndex(state.currentIndex);
+    document.getElementById('feature-navbar-nn1').onclick = () => updateIndex(state.currentIndex + 1);
+    document.getElementById('feature-navbar-nn2').onclick = () => updateIndex(state.currentIndex + 2);
+}
+
+function handleTouch() {
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const threshold = window.innerWidth > 600 ? 50 : 30; // Adjust threshold based on screen width
+
+    function checkDirection() {
+        const delta = touchEndX - touchStartX;
+        if (delta > threshold) updateIndex(state.currentIndex - 1);
+        if (delta < -threshold) updateIndex(state.currentIndex + 1);
+    }
+
+    document.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    });
+
+    document.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        checkDirection();
+    });
 }

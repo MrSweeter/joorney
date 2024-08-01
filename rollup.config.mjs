@@ -1,6 +1,7 @@
 import dynamicImportVars from '@rollup/plugin-dynamic-import-vars';
 import json from '@rollup/plugin-json';
 import resolve from '@rollup/plugin-node-resolve';
+import terser from '@rollup/plugin-terser';
 import { defineConfig } from 'rollup';
 import copy from 'rollup-plugin-copy';
 import watchAssets from 'rollup-plugin-watch-assets';
@@ -132,6 +133,7 @@ export default () => {
             output: getESMOutput(`${publicOutput}/index.js`),
             plugins: [
                 ...defaultPlugins,
+                terser(),
                 copy({
                     targets: [
                         {
@@ -140,12 +142,13 @@ export default () => {
                         },
                     ],
                 }),
+                watchAssets({ assets: ['gh-page/**/*.css', 'gh-page/**/*.html'] }),
             ],
         },
         {
             input: 'gh-page/feature.js',
             output: getESMOutput(`${publicOutput}/feature.js`),
-            plugins: [...defaultPlugins],
+            plugins: [...defaultPlugins, terser()],
         },
     ]);
 };
