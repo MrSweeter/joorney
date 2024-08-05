@@ -156,9 +156,13 @@ export default class PinMessageContentFeature extends ContentFeature {
         const chatterContent = this.chatter.querySelector('div.o-mail-Chatter-content');
         if (!chatterContent) return;
         const pinsContainer = stringToHTML(`
-            <div class="px-3 joorney-pinned-mail-Thread position-relative flex-grow-1 d-flex flex-column overflow-auto pb-4">
-                <div id="joorney-pinned-mail-list" class="d-flex flex-column position-relative flex-grow-1">
+            <div class="joorney-pinned-mail-Thread position-relative flex-grow-1 d-flex flex-column overflow-auto pb-4">
+                <div class="d-flex align-items-center">
+                    <hr class="flex-grow-1" />
+                    <span class="p-3 fw-bold"> Pinned Messages <span class="text-muted opacity-75">[Joorney]</span></span>
+                    <hr class="flex-grow-1" />
                 </div>
+                <div id="joorney-pinned-mail-list" class="px-3 d-flex flex-column position-relative flex-grow-1"></div>
             </div>
         `);
         const messageContainer = pinsContainer.querySelector('#joorney-pinned-mail-list');
