@@ -1,5 +1,12 @@
 # Joorney Release Notes
 
+## [2.2.0] New feature: Pin Message
+
+-   Pin a message in Odoo chatter [:link:](https://mrsweeter.github.io/joorney/feature.html#pinMessage)
+    -   Usage of the "Starred" Odoo feature
+    -   Privacy toggle: see only your pinned message or all
+    -   Limit of 5 pinned messages
+
 ## [2.1.3] Improve feature: Switch Odoo Theme
 
 -   Add 'system' option

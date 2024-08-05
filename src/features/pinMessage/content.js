@@ -152,7 +152,7 @@ export default class PinMessageContentFeature extends ContentFeature {
     }
 
     appendPinnedSection() {
-        const MAX_PIN = 3;
+        const MAX_PIN = 5;
         const chatterContent = this.chatter.querySelector('div.o-mail-Chatter-content');
         if (!chatterContent) return;
         const pinsContainer = stringToHTML(`
