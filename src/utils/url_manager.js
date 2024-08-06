@@ -44,13 +44,12 @@ export async function getModelAndID_fromURL(url, modelArg = undefined, requireID
 }
 //#endregion
 
-const actionWindowFields = ['id', 'name', 'xml_id', 'domain', 'context', 'limit', 'filter', 'res_model'];
 export async function getActionWindow_fromURL(url) {
-    const state = await parseURL(url, actionWindowFields);
+    const state = await parseURL(url);
     if (state.actionWindow) return state.actionWindow;
     if (!state.action) return undefined;
 
-    const actionWindow = await getActionWindowWithState(state.action, actionWindowFields);
+    const actionWindow = await getActionWindowWithState(state.action);
     if (actionWindow) return actionWindow;
     return undefined;
 }

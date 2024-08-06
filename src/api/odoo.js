@@ -10,14 +10,15 @@ export async function getActionWindowModelFallback(actionPath) {
     const { windowActionFallbacks } = await StorageSync.get(baseSettings);
     return windowActionFallbacks[window.location.origin]?.[actionPath];
 }
-export async function getActionWindowWithState(action, fields) {
-    if (isNumeric(`${action}`)) {
-        return await getActionWindowWithID(action, fields);
-    }
-
+export async function getActionWindowWithState(action) {
     try {
-        return await getActionWindowWithPath(action, fields);
+        if (isNumeric(`${action}`)) {
+            return await getActionWindowWithID(action);
+        }
+
+        return await getActionWindowWithPath(action);
     } catch (e) {
+        // TODO[REMOVE] After more usage/testing, probably useless as /action/load|run is "public" endpoint
         if (e.type === 'OdooAPIException' && e.error.data.name === 'odoo.exceptions.AccessError') {
             // if a fallback exist, ignore the error
             const model = await getActionWindowModelFallback(action);
@@ -26,18 +27,68 @@ export async function getActionWindowWithState(action, fields) {
         throw e;
     }
 }
-async function getActionWindowWithPath(path, fields) {
+async function getActionWindowWithPath(path) {
     if (!path) return undefined;
-    return await getActionWindow([['path', '=', path]], fields);
+    return await getActionWindow_fromLoadRun(path);
 }
-async function getActionWindowWithID(id, fields) {
+async function getActionWindowWithID(id) {
     if (!id) return undefined;
-    return await getActionWindow([['id', '=', id]], fields);
+    return await getActionWindow_fromLoadRun(id);
 }
 
-async function getActionWindow(domain, fields) {
-    const response = await getDataset('ir.actions.act_window', domain, fields, 1, 60);
-    return response;
+async function getActionWindow_fromLoadRun(idOrPath, cachingTime = 60) {
+    let data = undefined;
+    let fromCache = true;
+    if (cachingTime > 0) {
+        data = await readCacheCall('getActionWindow_fromLoadRun', idOrPath);
+    }
+    if (!data) {
+        let response = await fetch(
+            new Request('/web/action/load', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    jsonrpc: '2.0',
+                    method: 'call',
+                    params: {
+                        action_id: idOrPath,
+                    },
+                }),
+            })
+        );
+        let data = await response.json();
+
+        if (!data || !data.result) data = undefined;
+
+        if (data && data.result.type === 'ir.actions.server') {
+            response = await fetch(
+                new Request('/web/action/run', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        jsonrpc: '2.0',
+                        method: 'call',
+                        params: {
+                            action_id: data.result.id,
+                        },
+                    }),
+                })
+            );
+            data = await response.json();
+        }
+
+        if (data && data.result.type !== 'ir.actions.act_window') data = undefined;
+        if (typeof data.result.context !== 'string') data.result.context = JSON.stringify(data.result.context);
+
+        if (cachingTime > 0) saveCacheCall(cachingTime, 'getActionWindow_fromLoadRun', data, idOrPath);
+        fromCache = false;
+    }
+
+    if (data?.error) {
+        throw new OdooAPIException(data.error, fromCache);
+    }
+
+    return data?.result;
 }
 //#endregion
 
