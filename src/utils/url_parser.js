@@ -17,7 +17,7 @@ const defaultState = {
  * @param {*} actionWindowFields: StringArray
  * @returns { resId: string|int, active_id: int, view_type: string, action: int, model: string, actionWindow: OdooActionWindow }
  */
-export async function parseURL(urlArg, actionWindowFields = ['res_model'], requireID = false) {
+export async function parseURL(urlArg, requireID = false) {
     const url = typeof urlArg === 'object' ? urlArg : new URL(urlArg);
 
     const sanitizedURL = sanitizeURL(url.href);
@@ -37,7 +37,7 @@ export async function parseURL(urlArg, actionWindowFields = ['res_model'], requi
     if (requireID && !state.resId) return state;
 
     if (state.action && !state.model) {
-        const actionWindow = await getActionWindowWithState(state.action, actionWindowFields);
+        const actionWindow = await getActionWindowWithState(state.action);
         if (actionWindow) {
             state.model = actionWindow.res_model;
             state.actionWindow = actionWindow;
