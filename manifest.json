@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "version": "2.1.2.%BUILD%",
-    "version_name": "2.1.2",
+    "version_name": "2.1.3",
     "name": "Joorney",
     "description": "Improve your Odoo Journey!",
     "author": "Vanden Bergh Gaëtan",
