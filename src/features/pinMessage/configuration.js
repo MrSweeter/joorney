@@ -7,7 +7,7 @@ export default {
         load: true,
         navigate: true,
         context: false,
-        onrequest: ['https://*/*/toggle_message_starred'],
+        onrequest: ['https://*/*/toggle_message_starred', 'https://*/*/message/update_content'],
     },
     customization: {
         option: false,

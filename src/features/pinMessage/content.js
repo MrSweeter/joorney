@@ -5,6 +5,7 @@ import { generateMessage, stringToHTML } from '../../html_generator.js';
 import { isStillSamePage } from '../../utils/authorize.js';
 import { StorageSync } from '../../utils/browser.js';
 import { getModelAndID_fromURL } from '../../utils/url_manager.js';
+import { sleep } from '../../utils/util.js';
 import configuration from './configuration.js';
 
 let pinMessageChatterObserver = undefined;
@@ -36,7 +37,6 @@ export default class PinMessageContentFeature extends ContentFeature {
     }
 
     async loadDiscussChatter() {
-        console.log('loadDiscussChatter');
         const discussChatter = document.querySelector('.o-mail-Discuss-content');
         return this.loadChatter(discussChatter, false);
     }
@@ -91,6 +91,8 @@ export default class PinMessageContentFeature extends ContentFeature {
     async onPin() {
         if (!this.chatter) return;
         this.updatePinnedMessages();
+        await sleep(100);
+        this.appendPinButton();
     }
 
     observerChatter() {
