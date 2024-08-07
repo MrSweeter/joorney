@@ -10,7 +10,7 @@ export default class BackgroundFeature {
         this.defaultSettings = configuration.defaultSettings;
     }
 
-    async load(tab) {
+    async load(tab, args = undefined) {
         // TODO[IMP] Maybe useless as background trigger has been moved to content script side, cf themeSwitch
         if (!tab.url) return;
         const url = sanitizeURL(tab.url);
@@ -19,18 +19,25 @@ export default class BackgroundFeature {
 
         if (!(await isAuthorizedFeature(this.configuration.id, url))) return;
 
-        this.loadFeature(tab, url);
+        this.loadFeature(tab, url, args);
     }
 
-    async loadFeature(_tab, _url) {}
+    async loadFeature(_tab, _url, _args) {}
 }
 
 export class BackgroundTriggerContentFeature extends ContentFeature {
     async loadFeature(_url) {
-        sendRuntimeMessage(MESSAGE_ACTION.TO_BACKGROUND.TRIGGER_FEATURE, { feature: this.configuration.id });
+        sendRuntimeMessage(MESSAGE_ACTION.TO_BACKGROUND.TRIGGER_FEATURE, {
+            feature: this.configuration.id,
+            args: this.getArgs(),
+        });
     }
 
     handlePopupMessage() {
         /* No message */
+    }
+
+    getArgs() {
+        return {};
     }
 }

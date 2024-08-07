@@ -31,7 +31,7 @@ async function handleAction(message, sender) {
         }
         case MESSAGE_ACTION.TO_BACKGROUND.TRIGGER_FEATURE: {
             if (!message.feature) return undefined;
-            callback = handleFeature(message.feature, sender.tab);
+            callback = handleFeature(message.feature, sender.tab, message.args);
             break;
         }
         case MESSAGE_ACTION.TO_BACKGROUND.TAB_LOADED: {
@@ -43,10 +43,10 @@ async function handleAction(message, sender) {
     return callback;
 }
 
-async function handleFeature(feature, tab) {
+async function handleFeature(feature, tab, args) {
     if (!features.some((f) => f.id === feature)) return undefined;
 
     return importFeatureBackgroundFile(feature).then((featureModule) => {
-        featureModule.load(tab);
+        featureModule.load(tab, args);
     });
 }
