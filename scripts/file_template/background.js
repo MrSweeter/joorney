@@ -6,7 +6,7 @@ export default class FEATURE_CLASS_NAMEBackgroundFeature extends BackgroundFeatu
         super(configuration);
     }
 
-    async loadFeature(tab, url) {
+    async loadFeature(tab, url, args) {
         TODO('Complete empty generated method for background');
     }
 }

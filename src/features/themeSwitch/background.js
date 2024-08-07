@@ -8,9 +8,9 @@ export default class ThemeSwitchBackgroundFeature extends BackgroundFeature {
         super(configuration);
     }
 
-    async loadFeature(tab, url) {
+    async loadFeature(tab, url, args) {
         const {
-            themeSwitchMode /* "autoDark", "autoLight", "dynamicLocation", "dynamicTime" */,
+            themeSwitchMode /* "system", "autoDark", "autoLight", "dynamicLocation", "dynamicTime" */,
             themeSwitchLocationLatitude,
             themeSwitchLocationLongitude,
             themeSwitchDarkStartTime,
@@ -22,6 +22,17 @@ export default class ThemeSwitchBackgroundFeature extends BackgroundFeature {
         const time = today.getHours() * 60 + today.getMinutes();
 
         switch (themeSwitchMode) {
+            case 'system': {
+                if (!args.theme) break;
+                if (!['dark', 'light'].includes(args.theme)) {
+                    console.debug(
+                        `Invalid theme provided: ${args.theme}\nYou can open a bug report on https://github.com/MrSweeter/joorney/issues/new/choose`
+                    );
+                    return;
+                }
+                expectedMode = args.theme;
+                break;
+            }
             case 'autoDark':
                 expectedMode = 'dark';
                 break;
@@ -46,11 +57,13 @@ export default class ThemeSwitchBackgroundFeature extends BackgroundFeature {
 
         if (!expectedMode) return;
 
+        const useConfiguredCookie = args.version < 17.4;
         const origin = url.origin;
-        const currentMode = await getThemeModeCookie(origin);
+        const currentMode = await getThemeModeCookie(origin, useConfiguredCookie);
+        console.log(currentMode);
 
         if (currentMode !== expectedMode) {
-            await setThemeModeCookie(expectedMode, origin);
+            await setThemeModeCookie(expectedMode, origin, useConfiguredCookie);
             Tabs.reload(tab.id);
         }
     }

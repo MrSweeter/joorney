@@ -15,11 +15,11 @@ export default {
         popup: true,
         option: true,
     },
-    __comment__: "themeSwitchMode: 'autoDark', 'autoLight', 'dynamicLocation', 'dynamicTime'",
+    __comment__: "themeSwitchMode: 'system', 'autoDark', 'autoLight', 'dynamicLocation', 'dynamicTime'",
     defaultSettings: {
         themeSwitchEnabled: false,
         themeSwitchWhitelistMode: false,
-        themeSwitchMode: 'autoDark',
+        themeSwitchMode: 'system',
         themeSwitchLocationLatitude: '51.477928',
         themeSwitchLocationLongitude: '-0.001545',
         themeSwitchDarkStartTime: '20:30',

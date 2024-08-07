@@ -17,6 +17,13 @@ export const Windows = isFirefox() ? browser.windows : chrome.windows;
 export const Management = isFirefox() ? browser.management : chrome.management;
 export const OmniBox = isFirefox() ? browser.omnibox : chrome.omnibox;
 
+export function getPrefersColorScheme() {
+    if (window.matchMedia('(prefers-color-scheme: no-preference)').matches) return null;
+    if (window.matchMedia('(prefers-color-scheme: light)').matches) return 'light';
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
+    return null;
+}
+
 export async function sendRuntimeMessage(action, message = {}) {
     try {
         return await Runtime.sendMessage({ action: action, ...message });
