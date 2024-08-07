@@ -30,19 +30,40 @@ export default class PinMessageContentFeature extends ContentFeature {
     async loadFeature(url) {
         if (!(await isStillSamePage(2000, url))) return;
         this.url = url;
-        this.chatter = document.querySelector('.o-mail-Form-chatter');
-        if (!this.chatter) return;
+
+        const loaded = await this.loadFormChatter();
+        if (!loaded) this.loadDiscussChatter();
+    }
+
+    async loadDiscussChatter() {
+        console.log('loadDiscussChatter');
+        const discussChatter = document.querySelector('.o-mail-Discuss-content');
+        return this.loadChatter(discussChatter, false);
+    }
+
+    async loadFormChatter() {
+        const formChatter = document.querySelector('.o-mail-Form-chatter');
+        return this.loadChatter(formChatter, true);
+    }
+
+    async loadChatter(chatter, checkModel) {
+        this.chatter = chatter;
+        if (!this.chatter) return false;
 
         const { pinMessageSelfAuthorEnabled } = await StorageSync.get(this.defaultSettings);
         this.selfAuthor = pinMessageSelfAuthorEnabled;
 
-        const model_id = await this.tryCatch(() => getModelAndID_fromURL(url), undefined);
-        if (!model_id) return;
+        if (checkModel) {
+            const model_id = await this.tryCatch(() => getModelAndID_fromURL(this.url), undefined);
+            if (!model_id) return true;
+        }
 
         this.observerChatter();
 
         this.appendPinButton();
         this.updatePinnedMessages();
+
+        return true;
     }
 
     async updatePinnedMessages() {
@@ -190,7 +211,7 @@ export default class PinMessageContentFeature extends ContentFeature {
         if (warning) {
             messageContainer.appendChild(
                 stringToHTML(`
-                <span class="position-sticky alert alert-warning d-flex cursor-pointer align-items-center py-2 m-0 px-4 top-0" role="button">
+                <span class="mt-2 position-sticky alert alert-warning d-flex cursor-pointer align-items-center py-2 m-0 px-4 top-0" role="button">
                     <span class="small">${warning}</span>
                 </span>
             `)
