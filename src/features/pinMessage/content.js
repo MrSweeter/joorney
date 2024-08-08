@@ -47,7 +47,7 @@ export default class PinMessageContentFeature extends ContentFeature {
 
     async loadFormChatter() {
         const formChatter = document.querySelector('.o-mail-Form-chatter');
-        const state = this.loadChatter(formChatter, true);
+        const state = await this.loadChatter(formChatter, true);
         if (state && this.defaultShown) {
             this.appendPinnedSection();
         }
@@ -60,7 +60,7 @@ export default class PinMessageContentFeature extends ContentFeature {
 
         if (checkModel) {
             const model_id = await this.tryCatch(() => getModelAndID_fromURL(this.url), undefined);
-            if (!model_id) return true;
+            if (!model_id) return false;
         }
 
         this.observerChatter();
