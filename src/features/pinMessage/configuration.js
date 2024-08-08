@@ -18,6 +18,7 @@ export default {
         pinMessageWhitelistMode: false,
         pinMessageContextMenu: {},
         pinMessageSelfAuthorEnabled: true,
+        pinMessageDefaultShown: false,
     },
     supported_version: ['17+'],
 };

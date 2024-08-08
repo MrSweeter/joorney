@@ -80,3 +80,11 @@ input:indeterminate + .pm-slider:before {
 input:checked + .pm-author:before {
     content: '\f075';
 }
+
+.pm-shown:before {
+    content: '\f070';
+}
+
+input:checked + .pm-shown:before {
+    content: '\f06e';
+}

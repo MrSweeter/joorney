@@ -32,6 +32,10 @@ export default class PinMessageContentFeature extends ContentFeature {
         if (!(await isStillSamePage(2000, url))) return;
         this.url = url;
 
+        const { pinMessageSelfAuthorEnabled, pinMessageDefaultShown } = await StorageSync.get(this.defaultSettings);
+        this.selfAuthor = pinMessageSelfAuthorEnabled;
+        this.defaultShown = pinMessageDefaultShown;
+
         const loaded = await this.loadFormChatter();
         if (!loaded) this.loadDiscussChatter();
     }
@@ -43,15 +47,16 @@ export default class PinMessageContentFeature extends ContentFeature {
 
     async loadFormChatter() {
         const formChatter = document.querySelector('.o-mail-Form-chatter');
-        return this.loadChatter(formChatter, true);
+        const state = this.loadChatter(formChatter, true);
+        if (state && this.defaultShown) {
+            this.appendPinnedSection();
+        }
+        return state;
     }
 
     async loadChatter(chatter, checkModel) {
         this.chatter = chatter;
         if (!this.chatter) return false;
-
-        const { pinMessageSelfAuthorEnabled } = await StorageSync.get(this.defaultSettings);
-        this.selfAuthor = pinMessageSelfAuthorEnabled;
 
         if (checkModel) {
             const model_id = await this.tryCatch(() => getModelAndID_fromURL(this.url), undefined);
