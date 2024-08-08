@@ -1,5 +1,5 @@
 import { baseSettings, getFeaturesAndCurrentSettings } from '../configuration.js';
-import { StorageSync, Tabs } from '../src/utils/browser.js';
+import { Runtime, StorageSync, Tabs } from '../src/utils/browser.js';
 
 function importOptions(file) {
     const reader = new FileReader();
@@ -18,7 +18,8 @@ async function exportOptions() {
     const dataStr = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(currentSettings))}`;
     const downloadAnchorNode = document.createElement('a');
     downloadAnchorNode.setAttribute('href', dataStr);
-    const fileName = `joorney_storage_sync_${new Date().toLocaleDateString()}.json`;
+    const version = Runtime.getManifest().version.replaceAll('.', '-');
+    const fileName = `joorney_storage_sync_${version}_${new Date().toLocaleDateString()}.json`;
     downloadAnchorNode.setAttribute('download', fileName);
     document.body.appendChild(downloadAnchorNode); // required for firefox
     downloadAnchorNode.click();

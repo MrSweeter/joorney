@@ -12,6 +12,7 @@
         <link href="index.css" rel="stylesheet" />
         <link href="css/awesome_loading.css" rel="stylesheet" />
         <link href="css/unfocus_app.css" rel="stylesheet" />
+        <link href="css/pin_message.css" rel="stylesheet" />
 
         <script src="index.js"></script>
     </head>
@@ -60,17 +61,33 @@
                         </select>
                     </div>
                 </div>
-                <div data-feature-customization="unfocusApp" class="d-none">
-                    <label id="joorney-popup-feature-unfocusApp-label" class="h6"></label>
-                    <div class="col-12 d-flex align-items-center ">
-                        <label id="joorney_unfocus_app_order_switcher" class="ua-switch text-center me-2" title="Enable unfocus app reorder">
-                            <input id="joorney_unfocus_app_order_input" type="checkbox" />
-                            <i class="ua-slider ua-round ua-order"></i>
-                        </label>
-                        <label id="joorney_unfocus_app_share_switcher" class="ua-switch text-center" title="Enable unfocus app configuration share between host">
-                            <input id="joorney_unfocus_app_share_input" type="checkbox" />
-                            <i class="ua-slider ua-round ua-share"></i>
-                        </label>
+                <div class="row">
+                    <div data-feature-customization="unfocusApp" class="d-none col-6">
+                        <label id="joorney-popup-feature-unfocusApp-label" class="h6"></label>
+                        <div class="col-12 d-flex align-items-center ">
+                            <label id="joorney_unfocus_app_order_switcher" class="ua-switch text-center me-2" title="Enable unfocus app reorder">
+                                <input id="joorney_unfocus_app_order_input" type="checkbox" />
+                                <i class="ua-slider ua-round ua-order"></i>
+                            </label>
+                            <label id="joorney_unfocus_app_share_switcher" class="ua-switch text-center" title="Enable unfocus app configuration share between host">
+                                <input id="joorney_unfocus_app_share_input" type="checkbox" />
+                                <i class="ua-slider ua-round ua-share"></i>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div data-feature-customization="pinMessage" class="d-none col-6">
+                        <label id="joorney-popup-feature-pinMessage-label" class="h6"></label>
+                        <div class="col-12 d-flex align-items-center ">
+                            <label id="joorney_pin_message_self_author_switcher" class="pm-switch text-center me-2" title="Manage pin for current user messages only?">
+                                <input id="joorney_pin_message_self_author_input" type="checkbox" />
+                                <i class="pm-slider pm-round pm-author"></i>
+                            </label>
+                            <label id="joorney_pin_message_default_shown_switcher" class="pm-switch text-center me-2" title="Show pinned message section on load?">
+                                <input id="joorney_pin_message_default_shown_input" type="checkbox" />
+                                <i class="pm-slider pm-round pm-shown"></i>
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>

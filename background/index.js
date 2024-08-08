@@ -18,6 +18,7 @@ import { sleep } from '../src/utils/util.js';
 import { checkCommandShortcuts, handleCommands } from './src/keyboard_shortcut.js';
 import { handleMessage } from './src/messaging.js';
 import { initOmni } from './src/omnibox.js';
+import { listenRequest } from './src/request.js';
 
 // On page # path change, pre 17.2
 WebNavigation.onReferenceFragmentUpdated.addListener((e) => {
@@ -91,11 +92,13 @@ async function main() {
     handleCommands();
     checkHostsExpiration();
 
-    loadFeaturesConfiguration();
+    await loadFeaturesConfiguration();
 
     initOmni();
 
     createContextMenu();
+
+    listenRequest();
 }
 
 main();

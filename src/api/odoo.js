@@ -77,10 +77,13 @@ async function getActionWindow_fromLoadRun(idOrPath, cachingTime = 60) {
             data = await response.json();
         }
 
-        if (data && data.result.type !== 'ir.actions.act_window') data = undefined;
-        if (typeof data.result.context !== 'string') data.result.context = JSON.stringify(data.result.context);
-
         if (cachingTime > 0) saveCacheCall(cachingTime, 'getActionWindow_fromLoadRun', data, idOrPath);
+
+        if (data?.result) {
+            if (typeof data.result.context !== 'string') data.result.context = JSON.stringify(data.result.context);
+            if (data.result.type !== 'ir.actions.act_window') data = undefined;
+        }
+
         fromCache = false;
     }
 
