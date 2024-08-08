@@ -4,7 +4,7 @@ function getHost() {
     return window.location.host;
 }
 
-async function getCache() {
+export async function getCache() {
     const { joorneyLocalCacheCall } = await StorageLocal.get('joorneyLocalCacheCall');
     return joorneyLocalCacheCall ?? {};
 }
