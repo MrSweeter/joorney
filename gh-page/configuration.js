@@ -263,8 +263,7 @@ export const features = [
         id: 'pinMessage',
         icon: 'thumbtack-solid',
         title: 'Pin Message',
-        longDescription:
-            '<em>Pin Message</em> allows users to quickly pin important messages of the chatter. By pinning a message, you ensure that critical information is easily accessible. Enhance communication efficiency by keeping key message highlighted and easy to find.',
+        longDescription: `<em>Pin Message</em> allows users to quickly pin important messages of the chatter. By pinning a message, you ensure that critical information is easily accessible. Enhance communication efficiency by keeping key message highlighted and easy to find.<br /><br /><i>Note that due to high dependency to Odoo chatter, it's not the stablest feature!</i>`,
         textDescription: 'Pin message to the top of chatter fo easy access.',
         video: '',
         additionalDescription: `<div class="additional-info">

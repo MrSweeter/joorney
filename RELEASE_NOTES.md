@@ -6,19 +6,19 @@
     -   Usage of the "Starred" Odoo feature
     -   Privacy toggle: see only your pinned message or all
     -   Limit of 5 pinned messages
+    -   Easily jump to pinned messages if loaded in the chatter
 
 ## [2.1.3] Improve feature: Switch Odoo Theme
 
 -   Add 'system' option
-    - Based on system settings
+    -   Based on system settings
 -   Support 17.4+ cookie (configured_color_scheme has been removed)
-
 
 ## [2.1.2] Window Actions Endpoint
 
 -   Change the endpoint to get windows actions to an open one
-    - Need to handle action type (eg: "crm")
-    - Ensure data format for some fields (eg: "context")
+    -   Need to handle action type (eg: "crm")
+    -   Ensure data format for some fields (eg: "context")
 
 ## [2.1.1] Improve feature: Tooltip Metadata
 

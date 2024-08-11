@@ -205,13 +205,18 @@ export default class PinMessageContentFeature extends ContentFeature {
             }
         }
 
+        const messages = Array.from(this.chatter.querySelectorAll('.o-mail-Message-body'));
+
         for (const pin of pins.slice(0, Math.min(MAX_PIN, pins.length))) {
+            const original = messages.find((m) => m.innerHTML === pin.body);
+
             messageContainer.appendChild(
                 generateMessage(
                     pin.author_id[1],
                     this.getAuthorAvatar(pin.author_id[0]),
                     pin.body,
-                    new Date(pin.create_date)
+                    new Date(pin.create_date),
+                    original
                 )
             );
         }

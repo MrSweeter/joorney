@@ -7,7 +7,11 @@ export default {
         load: true,
         navigate: true,
         context: false,
-        onrequest: ['https://*/*/toggle_message_starred', 'https://*/*/message/update_content'],
+        onrequest: [
+            'https://*/*/mail.message/toggle_message_starred',
+            'https://*/mail/message/update_content',
+            'https://*/mail/thread/messages',
+        ],
     },
     customization: {
         option: false,
