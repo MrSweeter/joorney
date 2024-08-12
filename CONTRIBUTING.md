@@ -17,10 +17,9 @@
 4. Build the extension for development/testing `npm run dev`
 5. Update the CONTRIBUTORS.md file to give yourself credit
 6. Commit and create a pull request with details as to what has been changed and why
-
--   Use well-described, small (atomic) commits.
--   Include links to any relevant GitHub issues. [doc](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#referencing-issues-and-pull-requests)
--   _Don't_ change the VERSION file.
+   -   Use well-described, small (atomic) commits.
+   -   Include links to any relevant GitHub issues. [doc](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#referencing-issues-and-pull-requests)
+   -   **Don't** change the VERSION file.
 
 ## Build
 
