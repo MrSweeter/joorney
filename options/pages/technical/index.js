@@ -3,6 +3,7 @@ import { baseSettings } from '../../../configuration';
 import { extensionFeatureState } from '../../../configuration.js';
 import { handleExpanderClick } from '../../../lib/json-formatter/collapse.js';
 import { buildDom } from '../../../lib/json-formatter/html.js';
+import { getCache } from '../../../src/api/cache.js';
 import { getOnboardingProgressData } from '../../../src/checklist/index.js';
 import { tours } from '../../../src/checklist/tour.js';
 import { stringToHTML } from '../../../src/html_generator';
@@ -41,6 +42,7 @@ function loadExperimental(currentSettings) {
 async function loadStorage(features, currentSettings) {
     loadFeaturesPreview(features);
     loadConfigurationPreview(currentSettings);
+    await loadCachePreview();
     await loadOnboardingProgression();
     handleExpanderClick();
 
@@ -115,6 +117,13 @@ function loadConfigurationPreview(currentSettings) {
     preview.innerHTML = '';
     preview.appendChild(buildDom(currentSettings, false, true));
     //debug.innerHTML = JSON.stringify(currentSettings, null, 4);
+}
+
+async function loadCachePreview() {
+    const cache = await getCache();
+    const preview = document.getElementById('joorney-storage-cache');
+    preview.innerHTML = '';
+    preview.appendChild(buildDom(cache, false, true));
 }
 
 async function loadOnboardingProgression() {

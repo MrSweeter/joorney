@@ -16,6 +16,7 @@ export const Commands = isFirefox() ? browser.commands : chrome.commands;
 export const Windows = isFirefox() ? browser.windows : chrome.windows;
 export const Management = isFirefox() ? browser.management : chrome.management;
 export const OmniBox = isFirefox() ? browser.omnibox : chrome.omnibox;
+export const WebRequest = isFirefox() ? browser.webRequest : chrome.webRequest;
 
 export function getPrefersColorScheme() {
     if (window.matchMedia('(prefers-color-scheme: no-preference)').matches) return null;

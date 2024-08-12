@@ -1,3 +1,5 @@
+const joorneySimulatedStyle = 'background-color: rgba(252, 163, 17, 0.25)';
+
 export function stringToHTML(str) {
     const template = document.createElement('template');
     template.innerHTML = str.trim();
@@ -90,7 +92,7 @@ export function generateUserAvatarTag(userName, avatarSrc) {
 		<span class="o_tag position-relative d-inline-flex align-items-center mw-100 o_avatar pe-1 rounded joorney-simulated-ui-assignme" title="${userName}">
 			<span
 				class="position-absolute top-0 end-0 bottom-0 start-0 mx-n2 mt-n1 mb-n1 rounded border"
-				style="background-color: rgba(252, 163, 17, 0.25)"
+				style="${joorneySimulatedStyle}"
 			></span>
 			<img class="o_avatar o_m2m_avatar position-relative rounded" src="${avatarSrc}" />
 			<div class="o_tag_badge_text text-truncate position-relative ms-1">${userName}</div>
@@ -102,10 +104,10 @@ export function generateUserAvatarTag(userName, avatarSrc) {
 
 export function generateTrackingMessage(authorName, newValue, fieldName, avatarSrc, date) {
     const messageElement = stringToHTML(`
-		<div class="o-mail-Message position-relative undefined py-1 mt-2 px-3 joorney-simulated-ui-assignme">
+		<div class="o-mail-Message position-relative py-1 mt-2 px-3 joorney-simulated-ui-assignme">
 			<span
 				class="position-absolute top-0 end-0 bottom-0 start-0 mx-2 mt-n1 mb-n1 rounded border"
-				style="background-color: rgba(252, 163, 17, 0.25)"
+				style="${joorneySimulatedStyle}"
 			></span>
 			<div class="o-mail-Message-core position-relative d-flex flex-shrink-0">
 				<div class="o-mail-Message-sidebar d-flex flex-shrink-0">
@@ -140,5 +142,54 @@ export function generateTrackingMessage(authorName, newValue, fieldName, avatarS
 			</div>
 		</div>
 	`);
+    return messageElement;
+}
+
+export function generateMessage(authorName, avatarSrc, bodyContent, date, original) {
+    const messageElement = stringToHTML(`
+		<div class="o-mail-Message position-relative py-1 mt-2 px-3 rounded border">
+			<button class="o-mail-Message-jumpTo d-none btn m-1 position-absolute top-0 end-0 rounded-pill badge badge-secondary" style="z-index: 1;">
+				Jump
+			</button>
+			<div class="o-mail-Message-core position-relative d-flex flex-shrink-0">
+				<div class="o-mail-Message-sidebar d-flex flex-shrink-0">
+					<div class="o-mail-Message-avatarContainer position-relative bg-view rounded">
+						<img class="o-mail-Message-avatar w-100 h-100 rounded o_object_fit_cover" src="${avatarSrc}" />
+					</div>
+				</div>
+				<div class="w-100 o-min-width-0">
+					<div class="o-mail-Message-header d-flex flex-wrap align-items-baseline mb-1 lh-1">
+						<span class="o-mail-Message-author">
+							<strong class="me-1 text-truncate">${authorName}</strong>
+						</span>
+						<small class="o-mail-Message-date text-muted opacity-75 me-2">- ${date.toLocaleDateString()} ${date.toLocaleTimeString()} - Joorney</small>
+					</div>
+					<div class="position-relative d-flex">
+						<div class="o-mail-Message-content o-min-width-0">
+							<div class="o-mail-Message-textContent position-relative d-flex">
+								<div class="position-relative overflow-x-auto d-inline-block">
+									<div class="o-mail-Message-bubble rounded-bottom-3 position-absolute top-0 start-0 w-100 h-100 rounded-end-3"></div>
+									<div class="o-mail-Message-body position-relative text-break mb-0 w-100">${bodyContent}</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	`);
+
+    if (original) {
+        const jumpTo = messageElement.querySelector('.o-mail-Message-jumpTo');
+        jumpTo.onclick = () => {
+            original.scrollIntoView({ behavior: 'instant', block: 'center', inline: 'nearest' });
+            original.style = joorneySimulatedStyle;
+            setTimeout(() => {
+                original.style = null;
+            }, 1000);
+        };
+        jumpTo.classList.toggle('d-none');
+    }
+
     return messageElement;
 }

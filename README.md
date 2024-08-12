@@ -1,3 +1,5 @@
-<img src="https://github.com/MrSweeter/joorney/assets/22725763/62e252c6-03ab-42f3-9075-e6f9ee527c40" />
+<img src="https://raw.githubusercontent.com/MrSweeter/joorney/master/store/marquee-1400-560.png" />
 
-[Joorney Website](https://mrsweeter.github.io/joorney/?odoo) - [Contribute](./CONTRIBUTING.md)
+[Joorney Website](https://mrsweeter.github.io/joorney/?odoo)
+
+[Release Notes](./RELEASE_NOTES.md) - [Contribute](./CONTRIBUTING.md)

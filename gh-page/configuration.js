@@ -263,19 +263,18 @@ export const features = [
         id: 'pinMessage',
         icon: 'thumbtack-solid',
         title: 'Pin Message',
-        longDescription:
-            '<em>Pin Message</em> allows users to quickly pin important messages of the chatter. By pinning a message, you ensure that critical information is easily accessible. Enhance communication efficiency by keeping key message highlighted and easy to find.',
+        longDescription: `<em>Pin Message</em> allows users to quickly pin important messages of the chatter. By pinning a message, you ensure that critical information is easily accessible. Enhance communication efficiency by keeping key message highlighted and easy to find.<br /><br /><i>Note that due to high dependency to Odoo chatter, it's not the stablest feature!</i>`,
         textDescription: 'Pin message to the top of chatter fo easy access.',
         video: '',
         additionalDescription: `<div class="additional-info">
             <p class="fw-bold">Additional Information:</p>
             <ul>
+                <li class="pb-3"><strong>Odoo Feature appropriation:</strong> Starring a message in chatter doesn't have impact on it, keep this standard feature but transform it as a "Pin".</li>
                 <li class="pb-3"><strong>Priority Access:</strong> Ensures important messages are always at the top of the chat, preventing the from getting lost in the conversation flow.</li>
                 <li class="pb-3"><strong>Easy management:</strong> Simple pin and unpin actions allow for dynamic management of important messages.</li>
                 <li class="pb-3"><strong>Improved communication:</strong> Reduces the need to scroll through long chat histories to find critical messages, enhancing overall communication efficiency.</li>
             </ul>
         </div>`,
         amico: 'my_answer-amico',
-        soon: true,
     },
 ];
