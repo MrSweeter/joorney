@@ -1,6 +1,6 @@
 import { SUPPORTED_VERSION } from '../../configuration.js';
 import { getRunbotOpenUrl } from '../../src/shared/limited/runbot_content.js';
-import { OmniBox, StorageSync, Tabs } from '../../src/utils/browser.js';
+import { OmniBox, Runtime, StorageSync, Tabs } from '../../src/utils/browser.js';
 
 export function initOmni() {
     OmniBox.onInputStarted.removeListener(onStarted);
@@ -25,6 +25,10 @@ async function onStarted() {
 }
 
 function onChange(text, suggest) {
+    if (text === 'chrome') {
+        suggest([{ content: 'chromewebstore', description: 'Open Chrome Web Store' }]);
+        return;
+    }
     const suggestions = getSuggestions(text);
     suggest(suggestions);
 }
@@ -67,6 +71,9 @@ function getSuggestions(keyword) {
 }
 
 function getURLFromKeyword(keyword) {
+    if (keyword === 'chromewebstore') {
+        return `https://chromewebstore.google.com/detail/${Runtime.id}`;
+    }
     const pattern = /^rb:(.+)$/;
     const match = keyword.match(pattern);
 
