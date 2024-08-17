@@ -480,7 +480,19 @@ class Fetti {
         context.fillStyle = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${alpha})`;
         context.beginPath();
 
-        if (this.shape.type === 'bitmap') {
+        if (this.shape.type === 'path' && typeof this.shape.path === 'string' && Array.isArray(this.shape.matrix)) {
+            context.fill(
+                this.transformPath2D(
+                    this.shape.path,
+                    this.shape.matrix,
+                    this.x,
+                    this.y,
+                    Math.abs(x2 - x1) * 0.1,
+                    Math.abs(y2 - y1) * 0.1,
+                    (Math.PI / 10) * this.wobble
+                )
+            );
+        } else if (this.shape.type === 'bitmap') {
             this.updateFettiBitmap(context, x1, x2, y1, y2, alpha);
         } else if (this.shape === 'circle') {
             this.updateFettiCircle(context, x1, x2, y1, y2);
@@ -497,6 +509,29 @@ class Fetti {
         context.fill();
 
         return this.tick < this.totalTicks;
+    }
+
+    transformPath2D(pathString, pathMatrix, x, y, scaleX, scaleY, rotation) {
+        const path2d = new Path2D(pathString);
+
+        const t1 = new Path2D();
+        t1.addPath(path2d, new DOMMatrix(pathMatrix));
+
+        const t2 = new Path2D();
+        // see https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrix/DOMMatrix
+        t2.addPath(
+            t1,
+            new DOMMatrix([
+                Math.cos(rotation) * scaleX,
+                Math.sin(rotation) * scaleX,
+                -Math.sin(rotation) * scaleY,
+                Math.cos(rotation) * scaleY,
+                x,
+                y,
+            ])
+        );
+
+        return t2;
     }
 }
 
@@ -637,6 +672,66 @@ export function shapeFromText(textData, flips = { vertical: false, horizontal: f
             (-height * scale) / 2,
         ],
     };
+}
+
+// note: you CAN only use a path for confetti.shapeFrompath(), but for
+// performance reasons it is best to use it once in development and save
+// the result to avoid the performance penalty at runtime
+// cf custom_path.js
+export function shapeFromPath(pathData) {
+    let path = undefined;
+    let matrix = undefined;
+
+    if (typeof pathData === 'string') {
+        path = pathData;
+    } else {
+        path = pathData.path;
+        matrix = pathData.matrix;
+    }
+
+    const path2d = new Path2D(path);
+    const tempCanvas = document.createElement('canvas');
+    const tempCtx = tempCanvas.getContext('2d');
+
+    if (!matrix) {
+        // attempt to figure out the width of the path, up to 1000x1000
+        const maxSize = 1000;
+        let minX = maxSize;
+        let minY = maxSize;
+        let maxX = 0;
+        let maxY = 0;
+        let width = undefined;
+        let height = undefined;
+
+        // do some line skipping... this is faster than checking
+        // every pixel and will be mostly still correct
+        for (let x = 0; x < maxSize; x += 2) {
+            for (let y = 0; y < maxSize; y += 2) {
+                if (tempCtx.isPointInPath(path2d, x, y, 'nonzero')) {
+                    minX = Math.min(minX, x);
+                    minY = Math.min(minY, y);
+                    maxX = Math.max(maxX, x);
+                    maxY = Math.max(maxY, y);
+                }
+            }
+        }
+
+        width = maxX - minX;
+        height = maxY - minY;
+
+        const maxDesiredSize = 10;
+        const scale = Math.min(maxDesiredSize / width, maxDesiredSize / height);
+
+        matrix = [scale, 0, 0, scale, -Math.round(width / 2 + minX) * scale, -Math.round(height / 2 + minY) * scale];
+    }
+
+    const d = {
+        type: 'path',
+        path: path,
+        matrix: matrix,
+    };
+    console.log(d);
+    return d;
 }
 
 //#endregion

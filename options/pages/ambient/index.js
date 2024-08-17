@@ -23,8 +23,6 @@ function loadAmbientList() {
     container.innerHTML = '';
 
     for (const [type, category] of Object.entries(ambients)) {
-        if (type === 'test') continue;
-
         container.appendChild(
             stringToHTML(`<h6 class="bg-body-tertiary p-2 border-top border-bottom">${category.name}</h6>`)
         );
