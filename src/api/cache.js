@@ -1,6 +1,7 @@
-import { StorageLocal } from '../utils/browser.js';
+import { Runtime, StorageLocal } from '../utils/browser.js';
 
 function getHost() {
+    if (typeof window === 'undefined') return `joorney://${Runtime.id}`; // Background
     return window.location.host;
 }
 

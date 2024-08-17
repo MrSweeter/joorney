@@ -265,3 +265,45 @@ export async function getMenu(menupath) {
     const response = await getDataset('ir.ui.menu', domain, ['action'], 2, 600);
     return response;
 }
+
+//#region External Public Odoo API
+export async function getEventWithName(name, host) {
+    let data = undefined;
+    data = await readCacheCall('getEventWithName', name, host);
+    if (!data) {
+        const url = `https://${host}/web/dataset/call_kw/event.event/search_read`;
+        const payload = {
+            method: 'call',
+            jsonrpc: '2.0',
+            params: {
+                args: [],
+                kwargs: {
+                    context: { active_test: true, lang: 'en_US' },
+                    domain: [
+                        ['name', '=', name],
+                        ['date_end', '>=', '2024-08-17 06:00:00'],
+                    ],
+                    limit: 1,
+                    fields: ['date_begin', 'date_end', 'name'],
+                },
+                model: 'event.event',
+                method: 'search_read',
+            },
+        };
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload),
+        });
+        data = await response.json();
+
+        await saveCacheCall(30 * 24 * 60, 'getEventWithName', data, name, host); // Cache 30j
+    }
+
+    if (data.error) return undefined;
+    if (!data.result || data.result.length !== 1) return undefined;
+    return data.result[0];
+}
+//#endregion
