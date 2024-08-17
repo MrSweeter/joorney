@@ -5,7 +5,7 @@ export default class AmbientManager {
     static async computeEvents() {
         const ambient_dates = {};
 
-        const computes = Object.values(ambients.compute);
+        const computes = Object.values(ambients.compute.ambients);
         for (const c of computes) {
             const dates = await c.computeDates();
             if (!dates) continue;
@@ -24,7 +24,7 @@ export default class AmbientManager {
         if (!ambient) ambient = this.getSeasonAmbientForDate(date);
         if (!ambient) ambient = this.getWeatherAmbientForDate(date);
 
-        return ambient ?? ambients.test;
+        return ambient;
     }
 
     getEventForDate(date, events) {
@@ -48,11 +48,11 @@ export default class AmbientManager {
     }
 
     getEventAmbientForDate(date) {
-        return this.getEventForDate(date, Object.values(ambients.event));
+        return this.getEventForDate(date, Object.values(ambients.event.ambients));
     }
 
     async getComputedEventForDate(date) {
-        const computes = Object.values(ambients.compute);
+        const computes = Object.values(ambients.compute.ambients);
         const { ambient_dates } = await StorageLocal.get({ ambient_dates: {} });
         for (const c of computes) {
             const dates = ambient_dates[c.id];
@@ -65,7 +65,7 @@ export default class AmbientManager {
         const mm = date.getMonth() + 1; // Months start at 0!
         const dd = date.getDate();
 
-        const yearly = Object.values(ambients.yearly);
+        const yearly = Object.values(ambients.yearly.ambients);
         return yearly.find((y) => y.day === dd && y.month === mm);
     }
 

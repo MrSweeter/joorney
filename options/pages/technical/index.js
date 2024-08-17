@@ -85,6 +85,10 @@ async function loadStorage(features, currentSettings) {
         usage: await StorageLocal.getBytesInUse('offs'),
     });
     sections.push({
+        label: 'Ambient computed events',
+        usage: await StorageLocal.getBytesInUse('ambient_dates'),
+    });
+    sections.push({
         label: 'Sunrise / Sunset ',
         usage: await StorageLocal.getBytesInUse(['joorney_sunrise', 'joorney_sunset', 'joorney_date']),
     });
