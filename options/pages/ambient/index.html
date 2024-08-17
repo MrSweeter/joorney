@@ -1,31 +1,29 @@
-<link href="./css/image_comparison.css" rel="stylesheet" />
+<link href="./css/ambient/image_comparison.css" rel="stylesheet" />
 
-<div class="d-flex justify-content-center m-5" style="height: 70vh;">
-    <div class="images-comparison rounded">
-        <div class="position-absolute mt-3" style="z-index: 1; transform: translateX(-50%); left: 50%;">
-            <select id="ambientSelector" class="ms-2 my-1 form-select">
-                <option value="spring" selected>Spring</option>
-                <option value="summer">Summer</option>
-                <option value="fall">Fall</option>
-                <option value="winter">Winter</option>
-                <option value="halloween">Halloween</option>
-            </select>
-        </div>
+<div class="row d-flex justify-content-center m-5" style="max-height: 70vh;">
+    <div class="col-3" style="max-height: inherit; overflow-y: scroll;">
+        <ul id="joorney-ambient-list" class="list-group list-group-light"></ul>
+    </div>
 
-        <!-- https://github.com/livebloggerofficial/Image-Comparison/tree/main -->
-        <div class="themes-container">
-            <img class="left-image" src="../../../images/odoo_homepage_light.png" alt="" />
-            <img class="right-theme" src="../../../images/odoo_homepage_dark.png" alt="" />
+    <div class="col-9 p-0">
+        <div class="ms-5 images-comparison rounded">
+            <!-- https://github.com/livebloggerofficial/Image-Comparison/tree/main -->
+            <div class="themes-container">
+                <img class="left-image" src="../../../images/odoo_homepage_light.png" alt="" />
+                <img class="right-image" src="../../../images/odoo_homepage_dark.png" alt="" />
 
-            <div class="slider-line"></div>
-            <div class="slider-icon">
-                <i class="fa-solid fa-2x fa-chevron-left me-1"></i>
-                <i class="fa-solid fa-2x fa-chevron-right ms-1"></i>
+                <div class="slider-line"></div>
+                <div class="slider-icon">
+                    <i class="fa-solid fa-2x fa-chevron-left me-1"></i>
+                    <i class="fa-solid fa-2x fa-chevron-right ms-1"></i>
+                </div>
+
+                <input type="range" class="slider" min="0" max="100" />
             </div>
 
-            <input type="range" class="slider" min="0" max="100" />
+            <canvas id="previewAmbient" class="position-absolute h-100 w-100" style="pointer-events: none;"></canvas>
         </div>
 
-        <canvas id="previewAmbient" class="position-absolute h-100 w-100" style="pointer-events: none;"></canvas>
+        <p class="ms-5"><small id="joorney-playing-ambient-info" class="text-muted"></small></p>
     </div>
 </div>
