@@ -585,7 +585,7 @@ function hexToRgb(str) {
     };
 }
 
-export function shapeFromText(textData) {
+export function shapeFromText(textData, flips = { vertical: false, horizontal: false }) {
     let text;
     let scalar = 1;
     let color = '#000000';
@@ -607,7 +607,7 @@ export function shapeFromText(textData) {
     const fontSize = 10 * scalar;
     const font = `${fontSize}px ${fontFamily}`;
 
-    let canvas = new OffscreenCanvas(fontSize, fontSize);
+    let canvas = new OffscreenCanvas(1, 1);
     let ctx = canvas.getContext('2d');
 
     ctx.font = font;
@@ -628,7 +628,14 @@ export function shapeFromText(textData) {
         type: 'bitmap',
         // TODO these probably need to be transfered for workers
         bitmap: canvas.transferToImageBitmap(),
-        matrix: [scale, 0, 0, scale, (-width * scale) / 2, (-height * scale) / 2],
+        matrix: [
+            scale * (flips?.horizontal ? -1 : 1),
+            0,
+            0,
+            scale * (flips?.vertical ? -1 : 1),
+            (-width * scale) / 2,
+            (-height * scale) / 2,
+        ],
     };
 }
 

@@ -19,3 +19,8 @@ export function ValueIsNaN(value) {
 export async function sleep(timeMS) {
     return await new Promise((r) => setTimeout(r, timeMS));
 }
+
+export function yyyymmdd_hhmmssToDate(datetimeStr) {
+    const [dateStr, timeStr] = datetimeStr.split(' ');
+    return new Date(`${dateStr}T${timeStr}Z`).toISOString();
+}
