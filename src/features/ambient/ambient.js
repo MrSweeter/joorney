@@ -1,17 +1,18 @@
 import { getEventWithName } from '../../api/odoo.js';
 import { shapeFromText } from '../../utils/confetti.js';
 import { yyyymmdd_hhmmssToDate } from '../../utils/util.js';
+import { bubbles } from './custom_path.js';
 
 //#region Abstract Loader
 const lockedState = ['circle', 'square', 'star'];
 const emojisLoader = ({
     emojis,
-    alpha = { max: 1, double: true },
-    size = { min: 1, max: 1, dynamic: false },
-    gravity = { min: 0.4, max: 0.6, dynamic: false },
-    drift = { min: -0.4, max: 0.4, dynamic: false },
-    xRange = { min: 0, max: 1 },
-    yRange = { min: 0, max: 1 }, // Top = 0, Bottom = 1
+    alpha,
+    size,
+    gravity,
+    drift,
+    xRange,
+    yRange,
     color = '#ffffff',
     flat = true,
     flipHorizontal = false,
@@ -21,33 +22,55 @@ const emojisLoader = ({
         lockedState.includes(emoji)
             ? emoji
             : shapeFromText(
-                  { text: emoji, scalar: size.max, color: color },
+                  { text: emoji, scalar: size?.max ?? 1, color: color },
                   { vertical: flipVertical, horizontal: flipHorizontal }
               )
     );
 
+    return shapesLoader({
+        shapes: emojisBitmap,
+        alpha,
+        size,
+        gravity,
+        drift,
+        xRange,
+        yRange,
+        colors: [color],
+        flat,
+    });
+};
+
+const shapesLoader = ({
+    shapes,
+    alpha = { max: 1, double: true },
+    size = { min: 1, max: 1, dynamic: false },
+    gravity = { min: 0.4, max: 0.6, dynamic: false },
+    drift = { min: -0.4, max: 0.4, dynamic: false },
+    xRange = { min: 0, max: 1 },
+    yRange = { min: 0, max: 1 }, // Top = 0, Bottom = 1
+    colors = ['#ffffff'],
+    flat = true,
+}) => {
     const scalarComputed = size.dynamic ? () => Math.round(randomInRange(size.min, size.max)) : size.max;
     const gravityComputed = gravity.dynamic ? () => randomInRange(gravity.min, gravity.max) : gravity.max;
     const driftComputed = drift.dynamic ? () => randomInRange(drift.min, drift.max) : drift.max;
 
-    return (ticks) => {
-        return {
-            flat: flat,
-            particleCount: 1,
-            startVelocity: 0,
-            ticks: ticks,
-            origin: {
-                x: randomInRange(xRange.min, xRange.max),
-                y: randomInRange(yRange.min, yRange.max),
-            },
-            colors: [color],
-            shapes: emojisBitmap,
-            gravity: gravityComputed,
-            scalar: scalarComputed,
-            drift: driftComputed,
-            alpha: alpha,
-        };
-    };
+    return (ticks) => ({
+        flat,
+        particleCount: 1,
+        startVelocity: 0,
+        ticks,
+        origin: {
+            x: randomInRange(xRange.min, xRange.max),
+            y: randomInRange(yRange.min, yRange.max),
+        },
+        colors,
+        shapes,
+        gravity: gravityComputed,
+        scalar: scalarComputed,
+        drift: driftComputed,
+        alpha,
+    });
 };
 
 // const defaultLoader = (falling, ...emojis) =>
@@ -325,7 +348,16 @@ export const ambients = {
                         drift: { min: 0.3, max: 1, dynamic: true },
                         flipHorizontal: true,
                     })(ticks);
-                    return [left, right];
+                    const bubble = shapesLoader({
+                        shapes: [bubbles.large, bubbles.medium, bubbles.small],
+                        alpha: { max: 0.2, double: true },
+                        size: { min: 2, max: 5, dynamic: true },
+                        gravity: { min: -0.4, max: -0.2, dynamic: true },
+                        drift: { min: -0.4, max: 0.4, dynamic: true },
+                        yRange: { min: 0.5, max: 1 },
+                        colors: ['#89cff0', 'e7feff', '#a1caf1', '#39a78e'],
+                    })(ticks);
+                    return [left, right, bubble];
                 },
             },
             halloween: {
