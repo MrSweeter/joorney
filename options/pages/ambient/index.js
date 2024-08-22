@@ -163,7 +163,7 @@ function playAmbient(event) {
     ambientLoader?.load(ambient);
     const timeout = setCancellableTimeout(() => {
         stopAmbient();
-    }, estimatedDuration);
+    }, estimatedDuration + 1000);
 
     const iconClass = button.querySelector('i').classList;
     iconClass.remove('fa-pause');
