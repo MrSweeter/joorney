@@ -1,8 +1,10 @@
 import { ambients, estimateAmbientDuration } from '../../../src/features/ambient/ambient.js';
 import AmbientLoader from '../../../src/features/ambient/ambient_loader.js';
 import { stringToHTML } from '../../../src/html_generator.js';
+import { StorageLocal, StorageSync } from '../../../src/utils/browser.js';
 import Confetti from '../../../src/utils/confetti.js';
 import { setCancellableTimeout } from '../../../src/utils/timeout.js';
+import { toLocaleDateStringFormatted, toLocaleDateTimeStringFormatted } from '../../../src/utils/util.js';
 
 let ambientLoader = undefined;
 let ambientConfetti = undefined;
@@ -18,27 +20,63 @@ export async function loadPage(_features, _currentSettings) {
     loadAmbientList();
 }
 
-function loadAmbientList() {
+async function loadAmbientList() {
     const container = document.getElementById('joorney-ambient-list');
     container.innerHTML = '';
 
-    for (const [type, category] of Object.entries(ambients)) {
+    const { ambient_dates } = await StorageLocal.get({ ambient_dates: {} });
+
+    for (const [id, category] of Object.entries(ambients)) {
         container.appendChild(
-            stringToHTML(`<h6 class="bg-body-tertiary p-2 border-top border-bottom">${category.name}</h6>`)
+            stringToHTML(`
+            <div class="d-flex justify-content-between bg-body-tertiary p-2 border-bottom" data-ambient-category-id="${id}">
+                <h6 class="m-0"><span class="ambient-category-toggle me-1 opacity-25" style="cursor: pointer;"><i class="fa-fw fa-solid fa-chevron-down"></i></span>${category.name}</h6>
+                <p class="m-0">
+                    <small class="text-decoration-underline ambient-category-all-toggle" style="cursor: pointer;">All</small>
+                    &nbsp;/&nbsp;
+                    <small class="text-decoration-underline ambient-category-none-toggle" style="cursor: pointer;">None</small>
+                </p>
+            </div>
+            `)
         );
 
-        for (const [k, v] of Object.entries(category.ambients)) {
-            if (k.startsWith('_')) return;
-            ambientsData[`${type}_${k}`] = v;
+        for (const v of category.ambients) {
+            ambientsData[v.id] = v;
+
+            let description = '';
+            if (v.date) {
+                description = toLocaleDateStringFormatted(new Date(v.date));
+            } else if (v.date_from && v.date_to) {
+                const from = new Date(v.date_from);
+                const to = new Date(v.date_to);
+                toLocaleDateTimeStringFormatted;
+                description = `${toLocaleDateTimeStringFormatted(from)} - ${toLocaleDateTimeStringFormatted(to)}`;
+            } else if (v.month && v.day) {
+                const d = new Date();
+                d.setMonth(v.month - 1);
+                d.setDate(v.day);
+                description = toLocaleDateStringFormatted(d);
+            } else if (ambient_dates[v.id]) {
+                const from = new Date(ambient_dates[v.id].date_from);
+                const to = new Date(ambient_dates[v.id].date_to);
+                description = `${toLocaleDateTimeStringFormatted(from)} - ${toLocaleDateTimeStringFormatted(to)}`;
+            }
 
             container.appendChild(
                 stringToHTML(`
-                <li class="list-group-item d-flex justify-content-between align-items-center">
+                <li class="list-collapsible show list-group-item d-flex justify-content-between align-items-center" data-ambient-id="${v.id}" title='${JSON.stringify(v)}'>
                     <div class="d-flex align-items-center">
-                        <button class="joorney-play-ambient btn me-3" data-ambient-key="${type}_${k}"><i class="fa-solid fa-play"></i></button>
-                        <label class="form-check-label">${v.name}</label>
+                        <button class="joorney-play-ambient btn me-3"><i class="fa-solid fa-play"></i></button>
+                        <label class="form-check-label">${v.name}${description ? `<br/><span class="small text-muted">${description}</span>` : ''}</label>
                     </div>
-                    <span class="badge rounded-pill badge-success">Active</span>
+                    <!--<span class="badge rounded-pill badge-success">Active</span>-->
+                    <div class="vc-toggle-container">
+                        <label class="vc-switch" style="--vc-width: 75px;">
+                            <input type="checkbox" class="vc-switch-input" checked />
+                            <span class="vc-switch-label" data-on="Active" data-off="Inactive"></span>
+                            <span class="vc-handle"></span>
+                        </label>
+                    </div>
                 </li>
             `)
             );
@@ -48,13 +86,71 @@ function loadAmbientList() {
     for (const el of container.getElementsByClassName('joorney-play-ambient')) {
         el.onclick = playAmbient;
     }
+    for (const el of container.getElementsByClassName('ambient-category-all-toggle')) {
+        el.onclick = (e) => onSwitchCategory(e, true);
+    }
+    for (const el of container.getElementsByClassName('ambient-category-none-toggle')) {
+        el.onclick = (e) => onSwitchCategory(e, false);
+    }
+    for (const header of container.getElementsByClassName('ambient-category-toggle')) {
+        const icon = header.querySelector('i');
+        icon.style.transition = 'transform .25s';
+        header.onclick = () => {
+            icon.style.transform = icon.style.transform === '' ? 'rotate(-90deg)' : '';
+
+            let sibling = header.parentElement.parentElement.nextElementSibling;
+            console.log(sibling);
+            while (sibling && sibling.tagName.toLowerCase() !== 'div') {
+                if (sibling.tagName.toLowerCase() === 'li') {
+                    console.log('toggle');
+                    sibling.classList.toggle('show');
+                }
+                sibling = sibling.nextElementSibling;
+            }
+        };
+    }
+
+    const { ambientStatus } = await StorageSync.get({ ambientStatus: {} });
+    updateAmbientState(ambientStatus);
+}
+
+function updateAmbientState(ambientStatus) {
+    const container = document.getElementById('joorney-ambient-list');
+    for (const el of container.getElementsByClassName('vc-switch-input')) {
+        const dataElement = el.parentElement.parentElement.parentElement;
+        const ambientId = dataElement.dataset.ambientId;
+        el.checked = ambientStatus[ambientId] ?? true;
+        el.onchange = onSwitch;
+    }
+}
+
+async function onSwitchCategory(event, enable) {
+    const dataElement = event.currentTarget.parentElement.parentElement;
+    const ambientsList = ambients[dataElement.dataset.ambientCategoryId].ambients ?? [];
+    if (!ambientsList || ambientsList.lenght <= 0) return;
+
+    const { ambientStatus } = await StorageSync.get({ ambientStatus: {} });
+    for (const a of ambientsList) {
+        ambientStatus[a.id] = enable;
+    }
+    await StorageSync.set({ ambientStatus });
+    updateAmbientState(ambientStatus);
+}
+
+async function onSwitch(event) {
+    const input = event.currentTarget;
+    const dataElement = input.parentElement.parentElement.parentElement;
+    const { ambientStatus } = await StorageSync.get({ ambientStatus: {} });
+    ambientStatus[dataElement.dataset.ambientId] = input.checked;
+    await StorageSync.set({ ambientStatus });
 }
 
 function playAmbient(event) {
     disableAllButtons();
 
     const button = event.currentTarget;
-    const ambient = ambientsData[button.dataset.ambientKey];
+    const dataElement = button.parentElement.parentElement;
+    const ambient = ambientsData[dataElement.dataset.ambientId];
     if (!ambient) {
         enableAllButtons();
         return;

@@ -77,3 +77,12 @@ export const Console = {
         }
     },
 };
+
+export async function getUserLocation() {
+    return await new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(
+            (loc) => resolve(loc.coords),
+            (error) => reject(error)
+        );
+    });
+}

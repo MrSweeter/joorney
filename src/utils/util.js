@@ -24,3 +24,15 @@ export function yyyymmdd_hhmmssToDate(datetimeStr) {
     const [dateStr, timeStr] = datetimeStr.split(' ');
     return new Date(`${dateStr}T${timeStr}Z`).toISOString();
 }
+
+export function toLocaleDateStringFormatted(date) {
+    return date.toLocaleDateString([], { year: '2-digit', month: '2-digit', day: '2-digit' });
+}
+
+export function toLocaleTimeStringFormatted(date) {
+    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
+
+export function toLocaleDateTimeStringFormatted(date) {
+    return `${toLocaleDateStringFormatted(date)} ${toLocaleTimeStringFormatted(date)}`;
+}

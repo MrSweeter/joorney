@@ -34,7 +34,7 @@ export default class AmbientLoader {
     async loadOneTimeAmbient(ambientLoader) {
         await this.stop(0);
         this.stopped = false;
-        const ambients = ambientLoader();
+        const ambients = await ambientLoader();
         this.playAmbients(ambients);
     }
 
