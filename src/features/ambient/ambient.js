@@ -73,16 +73,6 @@ const shapesLoader = ({
     });
 };
 
-// const defaultLoader = (falling, ...emojis) =>
-//     emojisLoader({
-//         emojis: emojis,
-//         alpha: { max: 1 },
-//         size: { min: 0.4, max: 1, dynamic: true },
-//         gravity: { min: falling ? 0.4 : -0.6, max: falling ? 0.6 : -0.4, dynamic: true },
-//         drift: { min: -0.4, max: 0.4, dynamic: true },
-//         flat: false,
-//     });
-
 const fireworkLoader = (colors, mixColor, smallAndLarge, doubleBurst) => {
     return (_ticks) => {
         const loads = [
@@ -162,22 +152,22 @@ export function estimateAmbientDuration(ambient) {
     if (!ambient) return 1000;
     switch (ambient.type) {
         case 'long':
-            return ambient.duration + 1000;
+            return ambient.duration;
         case 'count':
-            return ambient.count * ambient.delay + ambient.delay + 1000;
+            return ambient.count * ambient.delay;
         case 'onetime':
-            return 1000;
+            return 1;
     }
-    return 1000;
+    return 0;
 }
 
 export const ambients = {
     compute: {
         name: 'Computed Events',
-        ambients: {
-            experience: {
+        ambients: [
+            {
                 name: `Odoo Experience ${new Date().getFullYear()}`,
-                id: 'odoo-experience-oxp',
+                id: 'odoo-experience-oxp-cpt',
                 computeDates: async () => {
                     const event = await getEventWithName(`Odoo Experience ${new Date().getFullYear()}`, 'www.odoo.com');
                     if (!event) return undefined;
@@ -191,17 +181,14 @@ export const ambients = {
                 duration: 3000,
                 load: schoolPrideLoader(['#FBB130', '#714b67', '#050a30']),
             },
-        },
+        ],
     },
     event: {
         name: 'Events',
-        ambients: {
+        ambients: [
             // experience: { // DONE ABOVE
             //     date_from: '2024-10-02T08:00:00+02:00',
             //     date_to: '2024-10-04T16:00:00+02:00',
-            //     type: 'long',
-            //     duration: 3000,
-            //     load: schoolPrideLoader(['#FBB130', '#714b67', '#050a30']),
             // },
             // tinyERPBirthday: {
             //     date: '2005-02-22T12:00:00Z',
@@ -209,16 +196,18 @@ export const ambients = {
             // openERPBirthday: {
             //     date: '2009-04-14T12:00:00Z',
             // },
-            odooBirthday: {
+            {
                 name: 'Happy Birthday Odoo!',
+                id: 'odoo-birthday-evt',
                 date: '2014-05-15T12:00:00Z',
                 type: 'count',
                 count: 20,
                 delay: 250,
                 load: fireworkLoader(['#E46E78', '#21B799', '#5B899E', '#E4A900'], true, false, false),
             },
-            newyear: {
+            {
                 name: 'New Year, Countdown',
+                id: 'new-year-evt',
                 date_from: `${new Date().getFullYear()}-12-31T23:59:30`,
                 date_to: `${new Date().getFullYear() + 1}-01-01T00:00:30`,
                 type: 'count',
@@ -250,21 +239,23 @@ export const ambients = {
                     true
                 ),
             },
-        },
+        ],
     },
     yearly: {
         name: 'Every year, one day',
-        ambients: {
-            newyear: {
+        ambients: [
+            {
                 name: 'New Year',
+                id: 'new-year-yly',
                 day: 1,
                 month: 1,
                 type: 'long',
                 duration: 10000,
                 load: schoolPrideLoader(['#BF7218', '#FADE98', '#F1A738', '#f9eb82', '#180D1C', '#514414']),
             },
-            valentine: {
+            {
                 name: "Valentine's Day",
+                id: 'valentine-yly',
                 day: 14,
                 month: 2,
                 type: 'count',
@@ -272,8 +263,9 @@ export const ambients = {
                 delay: 1000,
                 load: floatingLoader(['♥️', '🌹']),
             },
-            patrick: {
+            {
                 name: "Lucky Day (St. Patrick's)",
+                id: 'patrick-yly',
                 day: 17,
                 month: 3,
                 type: 'onetime',
@@ -325,8 +317,9 @@ export const ambients = {
                     ];
                 },
             },
-            aprilfool: {
+            {
                 name: "April Fool's",
+                id: 'aprilfool-yly',
                 day: 1,
                 month: 4,
                 type: 'count',
@@ -360,8 +353,9 @@ export const ambients = {
                     return [left, right, bubble];
                 },
             },
-            halloween: {
+            {
                 name: 'Halloween Night',
+                id: 'halloween-yly',
                 day: 31,
                 month: 10,
                 type: 'count',
@@ -369,8 +363,9 @@ export const ambients = {
                 delay: 1000,
                 load: floatingLoader(['🎃']),
             },
-            newyear_eve: {
+            {
                 name: "New Year's Eve",
+                id: 'new-year-eve-yly',
                 day: 31,
                 month: 12,
                 type: 'count',
@@ -378,7 +373,7 @@ export const ambients = {
                 delay: 1000,
                 load: floatingLoader(['🥂']),
             },
-        },
+        ],
     },
     // season: {
     //     winter: {},

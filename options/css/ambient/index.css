@@ -1,0 +1,7 @@
+.list-collapsible {
+    display: none !important; /* Hide elements by default */
+}
+
+.list-collapsible.show {
+    display: flex !important; /* Show them when the class is added */
+}

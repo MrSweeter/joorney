@@ -1,5 +1,5 @@
 import OptionCustomizationFeature from '../../generic/option_customization.js';
-import { StorageSync } from '../../utils/browser.js';
+import { StorageSync, getUserLocation } from '../../utils/browser.js';
 import configuration from './configuration.js';
 
 export default class ThemeSwitchOptionCustomizationFeature extends OptionCustomizationFeature {
@@ -34,22 +34,13 @@ export default class ThemeSwitchOptionCustomizationFeature extends OptionCustomi
     }
 
     async updateLocation() {
-        const coords = await this.getUserLocation();
+        const coords = await getUserLocation();
         document.getElementById('joorney_theme_switch_latitude').value = coords.latitude;
         document.getElementById('joorney_theme_switch_longitude').value = coords.longitude;
 
         await StorageSync.set({
             themeSwitchLocationLatitude: coords.latitude,
             themeSwitchLocationLongitude: coords.longitude,
-        });
-    }
-
-    async getUserLocation() {
-        return await new Promise((resolve, reject) => {
-            navigator.geolocation.getCurrentPosition(
-                (loc) => resolve(loc.coords),
-                (error) => reject(error)
-            );
         });
     }
 }
