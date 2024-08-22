@@ -1,4 +1,5 @@
 import { getEventWithName } from '../../api/odoo.js';
+import { WIND_TYPE, getWeatherSun } from '../../api/weather.js';
 import { shapeFromText } from '../../utils/confetti.js';
 import { yyyymmdd_hhmmssToDate } from '../../utils/util.js';
 import { bubbles } from './custom_path.js';
@@ -384,11 +385,101 @@ export const ambients = {
     //     summer: {},
     //     fall: {},
     // },
-    // weather: {
-    //     rain: {},
-    //     snow: {},
-    //     sun: {},
-    // },
+    weather: {
+        name: 'Weather',
+        ambients: [
+            {
+                name: 'Rain',
+                id: 'rain-weather',
+                type: 'long',
+                duration: 10000,
+                load: async (ticks) => {
+                    const weather = await getWeatherSun();
+                    const hour = new Date().getHours();
+                    let { speed, direction } = weather.joorney_wind[hour];
+                    speed = WIND_TYPE.CALM; //WIND_TYPE.findType(speed);
+                    direction = 1; // direction >= 0 && direction < 180 ? -1 /* west -> east */ : 1; /* east -> west */
+                    const force = speed.force + 1;
+
+                    const driftMultiplier = direction * force ** 2;
+                    const gravityMultiplier = force * 3;
+
+                    console.log(gravityMultiplier);
+                    console.log(driftMultiplier);
+
+                    const scalarComputed = () => Math.round(randomInRange(0.1, 0.6));
+                    const gravityComputed = () => randomInRange(0.4, 0.6) * gravityMultiplier;
+                    const driftComputed = () => randomInRange(0, 0.5) * driftMultiplier;
+
+                    const drops = [];
+                    for (let i = 0; i < force; i++) {
+                        drops.push({
+                            flat: true,
+                            particleCount: 1,
+                            startVelocity: 0,
+                            ticks,
+                            origin: {
+                                x: randomInRange(0, 1),
+                                y: randomInRange(-0.1, 0.1),
+                            },
+                            colors: ['#4a6583'],
+                            shapes: ['circle'],
+                            gravity: gravityComputed,
+                            scalar: scalarComputed,
+                            drift: driftComputed,
+                            alpha: { max: 1 },
+                        });
+                    }
+                    return drops;
+                },
+            },
+            {
+                name: 'Snowfall',
+                id: 'snow-weather',
+                type: 'long',
+                duration: 10000,
+                load: async (ticks) => {
+                    const weather = await getWeatherSun();
+                    const hour = new Date().getHours();
+                    let { speed, direction } = weather.joorney_wind[hour];
+                    speed = WIND_TYPE.CALM; //WIND_TYPE.findType(speed);
+                    direction = 1; // direction >= 0 && direction < 180 ? -1 /* west -> east */ : 1; /* east -> west */
+                    const force = speed.force + 1;
+
+                    const driftMultiplier = direction * force ** 2;
+                    const gravityMultiplier = force * 3;
+
+                    console.log(gravityMultiplier);
+                    console.log(driftMultiplier);
+
+                    const scalarComputed = () => Math.round(randomInRange(0.1, 0.6));
+                    const gravityComputed = () => randomInRange(0.4, 0.6) * gravityMultiplier;
+                    const driftComputed = () => randomInRange(0, 0.5) * driftMultiplier;
+
+                    const drops = [];
+                    for (let i = 0; i < force; i++) {
+                        drops.push({
+                            flat: true,
+                            particleCount: 1,
+                            startVelocity: 0,
+                            ticks,
+                            origin: {
+                                x: randomInRange(0, 1),
+                                y: randomInRange(-0.1, 0.1),
+                            },
+                            colors: ['#ffffff'],
+                            shapes: ['circle'],
+                            gravity: gravityComputed,
+                            scalar: scalarComputed,
+                            drift: driftComputed,
+                            alpha: { max: 1 },
+                        });
+                    }
+                    return drops;
+                },
+            },
+        ],
+    },
 };
 
 // Utils

@@ -1,3 +1,4 @@
+import { RAIN_TYPE, SNOW_TYPE, getWeatherSun } from '../../api/weather.js';
 import { StorageLocal, StorageSync } from '../../utils/browser.js';
 import { ambients } from './ambient.js';
 
@@ -74,7 +75,27 @@ export default class AmbientManager {
     }
 
     async getWeatherAmbientForDate(_ambientStatus, _date) {
-        return undefined;
+        const weather = await getWeatherSun();
+        const hour = new Date().getHours();
+
+        const snow = weather.joorney_snowfall[hour];
+        const rain = weather.joorney_rain[hour];
+        let idToSearch = undefined;
+        let type = undefined;
+
+        if (snow > 0) {
+            idToSearch = 'snow-weather';
+            type = SNOW_TYPE.findType(snow);
+        }
+        if (rain > 0) {
+            idToSearch = 'rain-weather';
+            type = RAIN_TYPE.findType(rain);
+        }
+
+        if (!type) return undefined;
+        const ambient = ambients.weather.ambients.find((a) => a['id' === idToSearch]);
+        if (!ambient) return undefined;
+        return ambient;
     }
 
     isDateBetween(targetDate, startDate, endDate) {

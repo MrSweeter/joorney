@@ -1,4 +1,4 @@
-import { getSunRiseSunSet } from '../../api/sun.js';
+import { getWeatherSun } from '../../api/weather.js';
 import BackgroundFeature from '../../generic/background.js';
 import { StorageSync, Tabs } from '../../utils/browser.js';
 import { getThemeModeCookie, setThemeModeCookie } from '../../utils/cookies.js';
@@ -41,7 +41,7 @@ export default class ThemeSwitchBackgroundFeature extends BackgroundFeature {
                 expectedMode = 'light';
                 break;
             case 'dynamicLocation': {
-                const sunData = await getSunRiseSunSet(themeSwitchLocationLatitude, themeSwitchLocationLongitude);
+                const sunData = await getWeatherSun(themeSwitchLocationLatitude, themeSwitchLocationLongitude);
 
                 expectedMode = time > sunData.joorney_sunrise && time < sunData.joorney_sunset ? 'light' : 'dark';
                 break;
