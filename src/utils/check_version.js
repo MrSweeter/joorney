@@ -1,3 +1,5 @@
+import { getAnnounceData } from '../api/github.js';
+import { getAnnounceCloseStatus } from '../api/local.js';
 import { Action, Management, Runtime } from './browser.js';
 
 const fetchVersion = 'https://raw.githubusercontent.com/MrSweeter/joorney/master/manifest.json';
@@ -51,4 +53,16 @@ export function openOption(force = false) {
     if (force || openOption4Version.includes(currentVersion)) {
         Runtime.openOptionsPage();
     }
+}
+
+export async function getAnnounce() {
+    const currentVersion = removeBuildFromVersion(Runtime.getManifest().version);
+    const announces = await getAnnounceData();
+    const announce = announces[currentVersion];
+    if (!announce || !announce.hash) return undefined;
+    if (announce.closeable !== false) {
+        const status = await getAnnounceCloseStatus(currentVersion);
+        if (status) return undefined;
+    }
+    return { ...announce, version: currentVersion, closeable: announce.closeable === true };
 }

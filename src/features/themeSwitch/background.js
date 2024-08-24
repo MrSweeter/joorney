@@ -60,7 +60,6 @@ export default class ThemeSwitchBackgroundFeature extends BackgroundFeature {
         const useConfiguredCookie = args.version < 17.4;
         const origin = url.origin;
         const currentMode = await getThemeModeCookie(origin, useConfiguredCookie);
-        console.log(currentMode);
 
         if (currentMode !== expectedMode) {
             await setThemeModeCookie(expectedMode, origin, useConfiguredCookie);

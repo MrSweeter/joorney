@@ -1,7 +1,8 @@
 import { getFeaturesAndCurrentSettings } from '../configuration.js';
+import { closeAnnounce } from '../src/api/local.js';
 import { getNextTourID } from '../src/checklist/index.js';
 import ChecklistManager from '../src/checklist/manager.js';
-import { isDevMode } from '../src/utils/check_version.js';
+import { getAnnounce, isDevMode } from '../src/utils/check_version.js';
 import { initImportExport } from './import_export.js';
 import { PAGES } from './menu.js';
 import { load as loadShortcut } from './src/keyboard_shortcut.js';
@@ -23,6 +24,8 @@ async function onDOMContentLoaded() {
     document.getElementById('joorney-brand-debug').onclick = () => toggleTechnicalMenus();
 
     ChecklistManager.load();
+
+    loadAnnouncement();
 }
 
 document.removeEventListener('DOMContentLoaded', onDOMContentLoaded);
@@ -89,4 +92,30 @@ function updateActiveMenu(menu) {
 
 function updateMenuTour(tourID) {
     ChecklistManager.onboard(tourID);
+}
+
+async function loadAnnouncement() {
+    const announce = await getAnnounce();
+    if (!announce) return;
+    const announceElement = document.getElementById('joorney-announcement');
+    let show = false;
+    if (announce.title) {
+        document.getElementById('ja-title').innerHTML = announce.title;
+        document.getElementById('ja-version').innerText = announce.version ? `[${announce.version}] ` : '';
+        document.getElementById('ja-title').parentElement.classList.toggle('d-none');
+        show = true;
+    }
+    if (announce.description) {
+        document.getElementById('ja-description').innerHTML = announce.description;
+        document.getElementById('ja-description').classList.toggle('d-none');
+        show = true;
+    }
+    if (announce.closeable) {
+        document.getElementById('ja-close').onclick = () => {
+            closeAnnounce(announce);
+            announceElement.parentElement.classList.add('d-none');
+        };
+        document.getElementById('ja-close').classList.toggle('d-none');
+    }
+    if (show) announceElement.parentElement.classList.toggle('d-none');
 }
