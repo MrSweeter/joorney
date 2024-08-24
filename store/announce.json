@@ -1,0 +1,8 @@
+{
+    "2.2.1": {
+        "title": "Introducing the Announcement Banner",
+        "description": "Stay updated with the latest news and updates in the extension through our new announcement banner!",
+        "closeable": false,
+        "hash": "2.2.1.1"
+    }
+}

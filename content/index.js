@@ -1,9 +1,10 @@
 import { importFeatureBackgroundTriggerFile, importFeatureContentFile } from '../configuration.js';
+import { getWebsiteOff } from '../src/api/local.js';
 import { getMenu } from '../src/api/odoo.js';
 import { loadSessionInfo } from '../src/api/session.js';
 import { getRunbotOpenUrl } from '../src/shared/limited/runbot_content.js';
 import { ToastManager, loadToast } from '../src/toast/index.js';
-import { Console, Runtime, StorageLocal, sendRuntimeMessage } from '../src/utils/browser.js';
+import { Console, Runtime, sendRuntimeMessage } from '../src/utils/browser.js';
 import { MESSAGE_ACTION } from '../src/utils/messaging.js';
 import { createActionMenuURL } from '../src/utils/url_manager.js';
 import { getOdooVersion } from '../src/utils/version.js';
@@ -124,8 +125,8 @@ async function loadFeatures(url, versionInfo, trigger) {
 //#endregion
 
 export async function updateTabState(url) {
-    const { offs } = await StorageLocal.get({ offs: [] });
-    if (offs.includes(new URL(url).origin)) {
+    const offs = await getWebsiteOff();
+    if (offs.has(new URL(url).origin)) {
         await sendRuntimeMessage(MESSAGE_ACTION.TO_BACKGROUND.UPDATE_EXT_STATUS, {
             forceSwitchToOFF: true,
         });

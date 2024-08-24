@@ -1,4 +1,5 @@
-import { Action, Commands, StorageLocal, Tabs } from '../../src/utils/browser.js';
+import { updateWebsiteOff } from '../../src/api/local.js';
+import { Action, Commands, Tabs } from '../../src/utils/browser.js';
 
 // Only use this function during the initial install phase. After
 // installation the user may have intentionally unassigned commands.
@@ -46,26 +47,20 @@ async function enableDisableTabExtension(tab, forceOff = undefined) {
         isOFF = false;
     }
 
-    let { offs } = await StorageLocal.get({ offs: [] });
-    offs = new Set(offs);
-
     const badgeText = { tabId: tabId, text: isOFF ? '' : 'OFF' };
 
     if (isOFF) {
         Action.enable(tabId);
-        offs = offs.delete(origin);
     } else {
         Action.disable(tabId);
-        offs.add(origin);
     }
-
     await Action.setBadgeText(badgeText);
     await Action.setBadgeBackgroundColor({
         tabId: tabId,
         color: '#FF0000',
     });
 
-    await StorageLocal.set({ offs: Array.from(offs) });
+    updateWebsiteOff(origin, !isOFF);
 
     if (forceOff === undefined) {
         Tabs.reload(tabId);
