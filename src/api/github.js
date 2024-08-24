@@ -1,7 +1,7 @@
 import { Console } from '../utils/browser';
 
 export async function getAnnounceData() {
-    const source = 'https://raw.githubusercontent.com/MrSweeter/joorney/master/store/announce.json' ?? {};
+    const source = 'https://raw.githubusercontent.com/MrSweeter/joorney/master/store/announce.json';
     try {
         const response = await fetch(source);
         if (!response.ok) return {};
