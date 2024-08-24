@@ -7,6 +7,27 @@ export function initOmni() {
     OmniBox.onInputStarted.addListener(onStarted);
 }
 
+const STATIC_LINK = {
+    CHROMEWEBSTORE: {
+        suggestionStart: ['chrome', 'store'],
+        keyword: 'chromewebstore',
+        description: 'Open Chrome Web Store',
+        url: `https://chromewebstore.google.com/detail/${Runtime.id}`,
+    },
+    GITHUB: {
+        suggestionStart: ['git'],
+        keyword: 'githubrepository',
+        description: 'Open GitHub repository',
+        url: 'https://github.com/MrSweeter/joorney',
+    },
+    WEBSITE: {
+        suggestionStart: ['web'],
+        keyword: 'websitepage',
+        description: 'Open Github Page',
+        url: 'https://mrsweeter.github.io/joorney/?style=odoo',
+    },
+};
+
 async function onStarted() {
     const { autoOpenRunbotEnabled } = await StorageSync.get({ autoOpenRunbotEnabled: false });
     if (!autoOpenRunbotEnabled) {
@@ -25,10 +46,6 @@ async function onStarted() {
 }
 
 function onChange(text, suggest) {
-    if (text === 'chrome') {
-        suggest([{ content: 'chromewebstore', description: 'Open Chrome Web Store' }]);
-        return;
-    }
     const suggestions = getSuggestions(text);
     suggest(suggestions);
 }
@@ -54,6 +71,12 @@ async function openURL(url) {
 }
 
 function getSuggestions(keyword) {
+    for (const link of Object.values(STATIC_LINK)) {
+        if (link.suggestionStart?.some((start) => keyword.startsWith(start))) {
+            return [{ content: link.keyword, description: link.description }];
+        }
+    }
+
     const prefix = 'rb';
     if (!keyword.startsWith(prefix)) return [];
 
@@ -71,9 +94,9 @@ function getSuggestions(keyword) {
 }
 
 function getURLFromKeyword(keyword) {
-    if (keyword === 'chromewebstore') {
-        return `https://chromewebstore.google.com/detail/${Runtime.id}`;
-    }
+    const link = Object.values(STATIC_LINK).find((link) => link.keyword === keyword);
+    if (link) return link.url;
+
     const pattern = /^rb:(.+)$/;
     const match = keyword.match(pattern);
 

@@ -5,7 +5,7 @@
     "name": "Joorney",
     "description": "Improve your Odoo Journey!",
     "author": "Vanden Bergh Gaëtan",
-    "homepage_url": "https://github.com/MrSweeter/joorney",
+    "homepage_url": "https://mrsweeter.github.io/joorney/?style=odoo",
     "action": {
         "default_title": "Joorney",
         "default_popup": "popup/index.html",
