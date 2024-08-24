@@ -46,8 +46,9 @@ function removeBuildFromVersion(version) {
 /*
 - 2.1.0: Initial/Public release
 - 2.2.0: [Feature] Pin Message
+- 2.3.0: [Feature] Ambient
 */
-const openOption4Version = ['2.1.0', '2.2.0'];
+const openOption4Version = ['2.1.0', '2.2.0', '2.3.0'];
 export function openOption(force = false) {
     const currentVersion = removeBuildFromVersion(Runtime.getManifest().version);
     if (force || openOption4Version.includes(currentVersion)) {

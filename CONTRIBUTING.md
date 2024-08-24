@@ -1,28 +1,46 @@
+# Contributing Guide
+
+Thank you for considering contributing to this project! Below is a guide on how you can help.
+
 [Contributors](./CONTRIBUTORS.md)
 
-# How to contribute:
+## How to Report Issues/Bugs
 
-## Bug reports / Issues
+-   **Encounter a bug or unexpected behavior?**
+    -   Check if the issue already exists  [here](https://github.com/MrSweeter/joorney/issues) or [create a new one](https://github.com/MrSweeter/joorney/issues/new/choose).
+    -   If you submit a pull request (PR) that resolves an issue, there's no need to create a separate issue. You can explain the details directly in your PR description.
 
--   Is something broken or not working as expected?
--   Check for an existing issue or [create a new one](https://github.com/MrSweeter/joorney/issues/new/choose)
+## Contributing to the Project
 
--   If you make a pull request, do not create an issue! Use the PR description for that
+1. **Fork and Clone** the repository:
+   `git clone git://github.com/XXXXX/joorney.git && cd joorney`
+2. **Install Dependencies**:
+   `npm install`
+3. **Make Your Changes**: Implement the desired modifications.
+4. **Build for Development/Testing**:
+   `npm run dev`
+5. **Update** the `CONTRIBUTORS.md` file to add your name.
+6. **Commit and Submit a Pull Request**: Provide details on what has been changed and why.
+    - Use clear, descriptive, and atomic commits.
+    - Link to any relevant GitHub issues in your PR description. Here's a helpful [reference guide](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#referencing-issues-and-pull-requests) [closing keyword](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue).
 
-## Contributing
+## Building the Project
 
-1. Fork and clone the repo: `git clone git://github.com/XXXXX/joorney.git && cd joorney`
-2. Install the node dependencies: `npm install`
-3. Make the changes you want.
-4. Build the extension for development/testing `npm run dev`
-5. Update the CONTRIBUTORS.md file to give yourself credit
-6. Commit and create a pull request with details as to what has been changed and why
-   -   Use well-described, small (atomic) commits.
-   -   Include links to any relevant GitHub issues. [doc](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#referencing-issues-and-pull-requests)
-   -   **Don't** change the VERSION file.
+1. **Build for Development/Testing**:
+   `npm run dev`
+2. **Load the Extension**: Follow [this guide](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked) to load the unpacked extension.
+3. **Reload if Needed**: Depending on the changes, you might need to reload the extension. See [here](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#reload) for instructions.
 
-## Build
+## Preparing for Release
 
-1. Build the extension for development/testing `npm run dev`
-2. Load the extension [doc](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked)
-3. Reload the extension if optional and depends on the modification [doc](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#reload)
+1. **Update Files**:
+    - Modify the `store/announce.json` file as necessary.
+    - Update both the manifest `version` and `version_name`.
+2. **Build** the extension.
+3. **Create a Zip Archive**:
+    - Check the build number by checking the generated manifest version.
+    - Zip the contents of the `bundle` folder and name it `joorney_X.X.X.XXXXX.zip`.
+4. **Push Changes**:
+    - Commit with the format `[VERSION] X.X.X` (squash multiple version commits if applicable).
+    - Push to the repository (never push directly to the `master` branch).
+    - If you haven't already, open a pull request.
