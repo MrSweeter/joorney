@@ -98,7 +98,6 @@ async function loadAnnouncement() {
     const announce = await getAnnounce();
     if (!announce) return;
     const announceElement = document.getElementById('joorney-announcement');
-    console.log(announce);
     let show = false;
     if (announce.title) {
         document.getElementById('ja-title').innerHTML = announce.title;
