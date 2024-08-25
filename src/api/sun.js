@@ -1,13 +1,9 @@
-import { StorageLocal } from '../utils/browser.js';
+import { getSunSchedule, setSunSchedule } from './local.js';
 
 export async function getSunRiseSunSet(latitude, longitude) {
     let today = new Date();
     today = `${today.getMonth() + 1}-${today.getDate()}-${today.getFullYear()}`;
-    const cached = await StorageLocal.get({
-        joorney_sunrise: 0,
-        joorney_sunset: 23 * 60 + 59,
-        joorney_date: '',
-    });
+    const cached = await getSunSchedule();
 
     if (cached.joorney_sunrise && cached.joorney_sunset && cached.joorney_date === today) {
         return cached;
@@ -31,6 +27,6 @@ export async function getSunRiseSunSet(latitude, longitude) {
         joorney_date: today,
     };
 
-    await StorageLocal.set(data);
+    await setSunSchedule(data);
     return data;
 }

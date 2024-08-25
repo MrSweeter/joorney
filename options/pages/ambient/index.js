@@ -1,7 +1,8 @@
+import { getAmbientDates } from '../../../src/api/local.js';
 import { ambients, estimateAmbientDuration } from '../../../src/features/ambient/ambient.js';
 import AmbientLoader from '../../../src/features/ambient/ambient_loader.js';
 import { stringToHTML } from '../../../src/html_generator.js';
-import { StorageLocal, StorageSync } from '../../../src/utils/browser.js';
+import { StorageSync } from '../../../src/utils/browser.js';
 import Confetti from '../../../src/utils/confetti.js';
 import { setCancellableTimeout } from '../../../src/utils/timeout.js';
 import { toLocaleDateStringFormatted, toLocaleDateTimeStringFormatted } from '../../../src/utils/util.js';
@@ -24,7 +25,7 @@ async function loadAmbientList() {
     const container = document.getElementById('joorney-ambient-list');
     container.innerHTML = '';
 
-    const { ambient_dates } = await StorageLocal.get({ ambient_dates: {} });
+    const ambient_dates = await getAmbientDates();
 
     for (const [id, category] of Object.entries(ambients)) {
         container.appendChild(
@@ -99,10 +100,8 @@ async function loadAmbientList() {
             icon.style.transform = icon.style.transform === '' ? 'rotate(-90deg)' : '';
 
             let sibling = header.parentElement.parentElement.nextElementSibling;
-            console.log(sibling);
             while (sibling && sibling.tagName.toLowerCase() !== 'div') {
                 if (sibling.tagName.toLowerCase() === 'li') {
-                    console.log('toggle');
                     sibling.classList.toggle('show');
                 }
                 sibling = sibling.nextElementSibling;

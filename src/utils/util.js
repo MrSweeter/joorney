@@ -36,3 +36,12 @@ export function toLocaleTimeStringFormatted(date) {
 export function toLocaleDateTimeStringFormatted(date) {
     return `${toLocaleDateStringFormatted(date)} ${toLocaleTimeStringFormatted(date)}`;
 }
+
+export function hasUnknownKey(sourceObj, targetObj) {
+    for (const key in sourceObj) {
+        if (!(key in targetObj)) {
+            return true;
+        }
+    }
+    return false;
+}

@@ -1,4 +1,5 @@
-import { StorageLocal, StorageSync } from '../../utils/browser.js';
+import { getAmbientDates, setAmbientDates } from '../../api/local.js';
+import { StorageSync } from '../../utils/browser.js';
 import { ambients } from './ambient.js';
 
 export default class AmbientManager {
@@ -11,7 +12,7 @@ export default class AmbientManager {
             ambient_dates[c.id] = { date_from: dates.date_from, date_to: dates.date_to };
         }
 
-        await StorageLocal.set({ ambient_dates });
+        await setAmbientDates(ambient_dates);
     }
 
     async getAmbientForDate(date) {
@@ -54,7 +55,7 @@ export default class AmbientManager {
 
     async getComputedEventForDate(ambientStatus, date) {
         const computes = ambients.compute.ambients.filter((a) => ambientStatus[a.id] ?? true);
-        const { ambient_dates } = await StorageLocal.get({ ambient_dates: {} });
+        const ambient_dates = await getAmbientDates();
         for (const c of computes) {
             const dates = ambient_dates[c.id];
             if (dates) Object.assign(c, dates);

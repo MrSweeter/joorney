@@ -3,7 +3,7 @@ import { StorageSync } from '../utils/browser.js';
 import { OdooAPIException } from '../utils/error.js';
 import { isNumeric, sanitizeURL } from '../utils/util.js';
 import { sanitizeVersion } from '../utils/version.js';
-import { readCacheCall, saveCacheCall } from './cache.js';
+import { cache } from './cache.js';
 
 //#region Window Action
 export async function getActionWindowModelFallback(actionPath) {
@@ -37,61 +37,67 @@ async function getActionWindowWithID(id) {
 }
 
 async function getActionWindow_fromLoadRun(idOrPath, cachingTime = 60) {
-    let data = undefined;
-    let fromCache = true;
-    if (cachingTime > 0) {
-        data = await readCacheCall('getActionWindow_fromLoadRun', idOrPath);
-    }
-    if (!data) {
-        let response = await fetch(
-            new Request('/web/action/load', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    jsonrpc: '2.0',
-                    method: 'call',
-                    params: {
-                        action_id: idOrPath,
-                    },
-                }),
-            })
-        );
-        let data = await response.json();
-
-        if (!data || !data.result) data = undefined;
-
-        if (data && data.result.type === 'ir.actions.server') {
-            response = await fetch(
-                new Request('/web/action/run', {
+    let { fromCache, data } = await cache(
+        cachingTime,
+        async () => {
+            const response = await fetch(
+                new Request('/web/action/load', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         jsonrpc: '2.0',
                         method: 'call',
                         params: {
-                            action_id: data.result.id,
+                            action_id: idOrPath,
                         },
                     }),
                 })
             );
-            data = await response.json();
-        }
+            if (!response.ok) return undefined;
+            return await response.json();
+        },
+        'getActionWindow_fromLoadRun_web-action-load',
+        idOrPath
+    );
 
-        if (cachingTime > 0) saveCacheCall(cachingTime, 'getActionWindow_fromLoadRun', data, idOrPath);
+    if (!data || !data.result) data = undefined;
 
-        if (data?.result) {
-            if (typeof data.result.context !== 'string') data.result.context = JSON.stringify(data.result.context);
-            if (data.result.type !== 'ir.actions.act_window') data = undefined;
-        }
-
-        fromCache = false;
+    if (data && data.result.type === 'ir.actions.server') {
+        ({ fromCache, data } = await cache(
+            cachingTime,
+            async () => {
+                const response = await fetch(
+                    new Request('/web/action/run', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            jsonrpc: '2.0',
+                            method: 'call',
+                            params: {
+                                action_id: data.result.id,
+                            },
+                        }),
+                    })
+                );
+                if (!response.ok) return undefined;
+                return await response.json();
+            },
+            'getActionWindow_fromLoadRun_web-action-run',
+            idOrPath
+        ));
     }
 
-    if (data?.error) {
+    if (!data) return undefined;
+
+    if (data.error) {
         throw new OdooAPIException(data.error, fromCache);
     }
+    if (data.result) {
+        if (typeof data.result.context !== 'string') data.result.context = JSON.stringify(data.result.context);
+        if (data.result.type !== 'ir.actions.act_window') return undefined;
+    }
 
-    return data?.result;
+    return data.result;
 }
 //#endregion
 
@@ -104,34 +110,37 @@ export async function getVersionInfo(urlArg) {
         return sanitizeVersion(version);
     }
 
-    const cacheResult = await readCacheCall('getVersionInfo', url.origin);
-    if (cacheResult) return parseInfo(cacheResult);
+    const { data } = await cache(
+        15,
+        async () => {
+            const response = await fetch(`${url.origin}/web/webclient/version_info`, {
+                headers: { 'Content-Type': 'application/json' },
+                body: '{}',
+                method: 'POST',
+            });
 
-    const response = await fetch(`${url.origin}/web/webclient/version_info`, {
-        headers: { 'Content-Type': 'application/json' },
-        body: '{}',
-        method: 'POST',
-    });
-
-    if (response.status !== 200) return undefined;
-
-    const { result } = await response.json();
-    saveCacheCall(15, 'getVersionInfo', result, url.origin);
-    return parseInfo(result);
+            if (!response.ok) return undefined;
+            return await response.json();
+        },
+        'getVersionInfo',
+        url.origin
+    );
+    if (!data || !data.result) return undefined;
+    return parseInfo(data.result);
 }
 
 export async function getDataset(model, domain, fields, limit, cachingTime = 1) {
-    let data = undefined;
-    let fromCache = true;
-    if (cachingTime > 0) {
-        data = await readCacheCall('getDataset', model, domain, fields, limit);
-    }
-    if (!data) {
-        data = await _getDataset(model, domain, fields, limit);
-        fromCache = false;
-
-        if (cachingTime > 0) saveCacheCall(cachingTime, 'getDataset', data, model, domain, fields, limit);
-    }
+    const { fromCache, data } = await cache(
+        cachingTime,
+        async () => {
+            return await _getDataset(model, domain, fields, limit);
+        },
+        'getDataset',
+        model,
+        domain,
+        fields,
+        limit
+    );
 
     if (data.error) {
         throw new OdooAPIException(data.error, fromCache);
@@ -268,40 +277,42 @@ export async function getMenu(menupath) {
 
 //#region External Public Odoo API
 export async function getEventWithName(name, host) {
-    let data = undefined;
-    data = await readCacheCall('getEventWithName', name, host);
-    if (!data) {
-        const url = `https://${host}/web/dataset/call_kw/event.event/search_read`;
-        const payload = {
-            method: 'call',
-            jsonrpc: '2.0',
-            params: {
-                args: [],
-                kwargs: {
-                    context: { active_test: true, lang: 'en_US' },
-                    domain: [
-                        ['name', '=', name],
-                        ['date_end', '>=', '2024-08-17 06:00:00'],
-                    ],
-                    limit: 1,
-                    fields: ['date_begin', 'date_end', 'name'],
+    const { data } = await cache(
+        30 * 24 * 60,
+        async () => {
+            const url = `https://${host}/web/dataset/call_kw/event.event/search_read`;
+            const payload = {
+                method: 'call',
+                jsonrpc: '2.0',
+                params: {
+                    args: [],
+                    kwargs: {
+                        context: { active_test: true, lang: 'en_US' },
+                        domain: [
+                            ['name', '=', name],
+                            ['date_end', '>=', '2024-08-17 06:00:00'],
+                        ],
+                        limit: 1,
+                        fields: ['date_begin', 'date_end', 'name'],
+                    },
+                    model: 'event.event',
+                    method: 'search_read',
                 },
-                model: 'event.event',
-                method: 'search_read',
-            },
-        };
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload),
-        });
-        data = await response.json();
-
-        await saveCacheCall(30 * 24 * 60, 'getEventWithName', data, name, host); // Cache 30j
-    }
-
+            };
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            });
+            return await response.json();
+        },
+        'getEventWithName',
+        name,
+        host
+    );
+    if (!data) return undefined;
     if (data.error) return undefined;
     if (!data.result || data.result.length !== 1) return undefined;
     return data.result[0];
