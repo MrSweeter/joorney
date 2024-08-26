@@ -281,7 +281,7 @@ export const features = [
         id: 'ambient',
         icon: 'mountain-sun-solid',
         title: 'Ambient',
-        longDescription: `<em>Ambient Effects</em> brings a touch of magic to your Odoo main menu by adding particle effects for special events and days. Whether it's falling snow during winter, flying pumpkins for Halloween, or colorful fireworks on New Year's Eve, these effects create a visually engaging atmosphere that enhances the user experience. Bring your Odoo to life with dynamic and festive animations!<br /><br /><i>Note that this feature has minimal impact on performance and can be customized for various occasions.</i>`,
+        longDescription: `<em>Ambient Effects</em> brings a touch of magic to your Odoo main menu by adding particle effects for special events and days. Whether it's falling snow during winter, flying pumpkins for Halloween, or colorful fireworks on New Year's Eve, these effects create a visually engaging atmosphere that enhances the user experience. Bring your Odoo to life with dynamic and festive animations!<br /><br /><i>Note that this feature can have impact on performance and can be disabled by event/effect in options.</i>`,
         textDescription: 'Add particle effects like snow, pumpkins, and fireworks to enhance user engagement.',
         video: '',
         additionalDescription: `<div class="additional-info">

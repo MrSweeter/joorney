@@ -39,7 +39,7 @@ export async function checkHostsExpiration() {
 
 export async function clearHost(host) {
     const cache = await getLocalCache();
-    delete cache[host];
+    delete cache[host === Runtime.id ? `joorney://${Runtime.id}` : host];
     await setLocalCache(cache);
 }
 

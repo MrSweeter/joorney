@@ -3,7 +3,7 @@ import { ambients, estimateAmbientDuration } from '../../../src/features/ambient
 import AmbientLoader from '../../../src/features/ambient/ambient_loader.js';
 import AmbientManager from '../../../src/features/ambient/ambient_manager.js';
 import { stringToHTML } from '../../../src/html_generator.js';
-import { StorageSync } from '../../../src/utils/browser.js';
+import { StorageSync, createTitleFromJSON } from '../../../src/utils/browser.js';
 import Confetti from '../../../src/utils/confetti.js';
 import { setCancellableTimeout } from '../../../src/utils/timeout.js';
 import { toLocaleDateStringFormatted, toLocaleDateTimeStringFormatted } from '../../../src/utils/util.js';
@@ -69,7 +69,7 @@ async function loadAmbientList() {
 
             container.appendChild(
                 stringToHTML(`
-                <li class="list-collapsible show list-group-item d-flex justify-content-between align-items-center" data-ambient-id="${v.id}" title='${JSON.stringify(v)}'>
+                <li class="list-collapsible show list-group-item d-flex justify-content-between align-items-center" data-ambient-id="${v.id}" title='${createTitleFromJSON(v)}'>
                     <div class="d-flex align-items-center">
                         <button class="joorney-play-ambient btn me-3"><i class="fa-fw fa-solid fa-play"></i></button>
                         <label class="form-check-label">

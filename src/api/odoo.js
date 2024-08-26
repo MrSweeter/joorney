@@ -1,7 +1,7 @@
 import { baseSettings } from '../../configuration.js';
 import { StorageSync } from '../utils/browser.js';
 import { OdooAPIException } from '../utils/error.js';
-import { isNumeric, sanitizeURL } from '../utils/util.js';
+import { isNumeric, sanitizeURL, toOdooBackendDateGMT0 } from '../utils/util.js';
 import { sanitizeVersion } from '../utils/version.js';
 import { cache } from './cache.js';
 
@@ -276,11 +276,12 @@ export async function getMenu(menupath) {
 }
 
 //#region External Public Odoo API
-export async function getEventWithName(name, host) {
+export async function getFutureEventWithName(domainName, host) {
     const { data } = await cache(
         30 * 24 * 60,
         async () => {
             const url = `https://${host}/web/dataset/call_kw/event.event/search_read`;
+            const today = toOdooBackendDateGMT0(new Date());
             const payload = {
                 method: 'call',
                 jsonrpc: '2.0',
@@ -288,10 +289,7 @@ export async function getEventWithName(name, host) {
                     args: [],
                     kwargs: {
                         context: { active_test: true, lang: 'en_US' },
-                        domain: [
-                            ['name', '=', name],
-                            ['date_end', '>=', '2024-08-17 06:00:00'],
-                        ],
+                        domain: [domainName, ['date_end', '>=', today]],
                         limit: 1,
                         fields: ['date_begin', 'date_end', 'name'],
                     },
@@ -308,8 +306,8 @@ export async function getEventWithName(name, host) {
             });
             return await response.json();
         },
-        'getEventWithName',
-        name,
+        'getFutureEventWithName',
+        domainName,
         host
     );
     if (!data) return undefined;

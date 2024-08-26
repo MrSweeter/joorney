@@ -1,4 +1,4 @@
-import { getEventWithName } from '../../api/odoo.js';
+import { getFutureEventWithName } from '../../api/odoo.js';
 import { shapeFromText } from '../../utils/confetti.js';
 import { yyyymmdd_hhmmssToDate } from '../../utils/util.js';
 import { bubbles } from './custom_path.js';
@@ -169,7 +169,10 @@ export const ambients = {
                 name: `Odoo Experience ${new Date().getFullYear()}`,
                 id: 'odoo-experience-oxp-cpt',
                 computeDates: async () => {
-                    const event = await getEventWithName(`Odoo Experience ${new Date().getFullYear()}`, 'www.odoo.com');
+                    const event = await getFutureEventWithName(
+                        ['name', '=', `Odoo Experience ${new Date().getFullYear()}`],
+                        'www.odoo.com'
+                    );
                     if (!event) return undefined;
 
                     return {
@@ -180,6 +183,22 @@ export const ambients = {
                 type: 'long',
                 duration: 3000,
                 load: schoolPrideLoader(['#FBB130', '#714b67', '#050a30']),
+            },
+            {
+                name: 'Future Community Days',
+                id: 'odoo-community-days-cpt',
+                computeDates: async () => {
+                    const event = await getFutureEventWithName(['name', '=like', '%Community Days%'], 'www.odoo.com');
+                    if (!event) return undefined;
+
+                    return {
+                        date_from: yyyymmdd_hhmmssToDate(event.date_begin),
+                        date_to: yyyymmdd_hhmmssToDate(event.date_end),
+                    };
+                },
+                type: 'long',
+                duration: 3000,
+                load: schoolPrideLoader(['#714B67', '#FFFFFF', '#017E84']),
             },
         ],
     },
