@@ -1,14 +1,16 @@
 import { getAmbientDates } from '../../../src/api/local.js';
 import { ambients, estimateAmbientDuration } from '../../../src/features/ambient/ambient.js';
 import AmbientLoader from '../../../src/features/ambient/ambient_loader.js';
+import AmbientManager from '../../../src/features/ambient/ambient_manager.js';
 import { stringToHTML } from '../../../src/html_generator.js';
 import { StorageSync } from '../../../src/utils/browser.js';
 import Confetti from '../../../src/utils/confetti.js';
 import { setCancellableTimeout } from '../../../src/utils/timeout.js';
 import { toLocaleDateStringFormatted, toLocaleDateTimeStringFormatted } from '../../../src/utils/util.js';
 
-let ambientLoader = undefined;
 let ambientConfetti = undefined;
+let ambientManager = undefined;
+let ambientLoader = undefined;
 const ambientsData = {};
 
 export async function loadPage(_features, _currentSettings) {
@@ -16,6 +18,7 @@ export async function loadPage(_features, _currentSettings) {
 
     const canva = document.getElementById('previewAmbient');
     ambientConfetti = new Confetti(canva);
+    ambientManager = new AmbientManager(ambientConfetti);
     ambientLoader = new AmbientLoader(ambientConfetti);
 
     loadAmbientList();
@@ -26,6 +29,7 @@ async function loadAmbientList() {
     container.innerHTML = '';
 
     const ambient_dates = await getAmbientDates();
+    const todayAmbient = await ambientManager.getAmbientForDate(new Date());
 
     for (const [id, category] of Object.entries(ambients)) {
         container.appendChild(
@@ -68,13 +72,16 @@ async function loadAmbientList() {
                 <li class="list-collapsible show list-group-item d-flex justify-content-between align-items-center" data-ambient-id="${v.id}" title='${JSON.stringify(v)}'>
                     <div class="d-flex align-items-center">
                         <button class="joorney-play-ambient btn me-3"><i class="fa-fw fa-solid fa-play"></i></button>
-                        <label class="form-check-label">${v.name}${description ? `<br/><span class="small text-muted">${description}</span>` : ''}</label>
+                        <label class="form-check-label">
+                            <p class="m-0" >${v.name}${todayAmbient?.id === v.id ? ' <span title="This effect is currently active for today" class="badge badge-success rounded-pill">active</span>' : ''}</p>
+                            ${description ? `<span class="small text-muted">${description}</span>` : ''}
+                        </label>
                     </div>
                     <!--<span class="badge rounded-pill badge-success">Active</span>-->
                     <div class="vc-toggle-container">
                         <label class="vc-switch" style="--vc-width: 75px;">
                             <input type="checkbox" class="vc-switch-input" checked />
-                            <span class="vc-switch-label" data-on="Active" data-off="Inactive"></span>
+                            <span class="vc-switch-label" data-on="Enable" data-off="Disable"></span>
                             <span class="vc-handle"></span>
                         </label>
                     </div>

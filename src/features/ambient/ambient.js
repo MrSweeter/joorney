@@ -186,19 +186,20 @@ export const ambients = {
     event: {
         name: 'Events',
         ambients: [
-            // experience: { // DONE ABOVE
-            //     date_from: '2024-10-02T08:00:00+02:00',
-            //     date_to: '2024-10-04T16:00:00+02:00',
-            // },
-            // tinyERPBirthday: {
-            //     date: '2005-02-22T12:00:00Z',
-            // },
-            // openERPBirthday: {
-            //     date: '2009-04-14T12:00:00Z',
+            // {
+            //     name: 'Developer Test',
+            //     id: 'joorney-test-ambient-evt',
+            //     date: new Date().toISOString(),
+            //     type: 'count',
+            //     count: 20,
+            //     delay: 250,
+            //     load: fireworkLoader(['#FFFFFF', '#000000'], true, false, false),
             // },
             {
                 name: 'Happy Birthday Odoo!',
                 id: 'odoo-birthday-evt',
+                // date: '2005-02-22T12:00:00Z', // TinyERP
+                // date: '2009-04-14T12:00:00Z', // OpenERP
                 date: '2014-05-15T12:00:00Z',
                 type: 'count',
                 count: 20,
