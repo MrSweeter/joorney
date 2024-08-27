@@ -2,6 +2,8 @@ import { getFeaturesAndCurrentSettings } from '../configuration.js';
 import { closeAnnounce } from '../src/api/local.js';
 import { getNextTourID } from '../src/checklist/index.js';
 import ChecklistManager from '../src/checklist/manager.js';
+import { stringToHTML } from '../src/html_generator.js';
+import { Runtime } from '../src/utils/browser.js';
 import { getAnnounce, isDevMode } from '../src/utils/check_version.js';
 import { initImportExport } from './import_export.js';
 import { PAGES } from './menu.js';
@@ -26,6 +28,7 @@ async function onDOMContentLoaded() {
     ChecklistManager.load();
 
     loadAnnouncement();
+    loadManifest();
 }
 
 document.removeEventListener('DOMContentLoaded', onDOMContentLoaded);
@@ -118,4 +121,14 @@ async function loadAnnouncement() {
         document.getElementById('ja-close').classList.toggle('d-none');
     }
     if (show) announceElement.parentElement.classList.toggle('d-none');
+}
+
+async function loadManifest() {
+    const manifest = Runtime.getManifest();
+    const element = document.getElementById('joorney-manifest');
+    element.innerHTML = '';
+    const versionElement = stringToHTML(
+        `<p class="small m-0 text-muted opacity-25 position-absolute">Joorney ${manifest.version_name} (${manifest.version})`
+    );
+    element.appendChild(versionElement);
 }

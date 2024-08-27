@@ -1,6 +1,6 @@
-import { SUPPORTED_VERSION } from '../../configuration.js';
 import { getRunbotOpenUrl } from '../../src/shared/limited/runbot_content.js';
 import { OmniBox, Runtime, StorageSync, Tabs } from '../../src/utils/browser.js';
+import { SUPPORTED_VERSION } from '../../src/utils/version.js';
 
 export function initOmni() {
     OmniBox.onInputStarted.removeListener(onStarted);

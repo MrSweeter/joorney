@@ -5,6 +5,7 @@ import terser from '@rollup/plugin-terser';
 import { defineConfig } from 'rollup';
 import copy from 'rollup-plugin-copy';
 import watchAssets from 'rollup-plugin-watch-assets';
+import { SUPPORTED_VERSION } from './src/utils/version.js';
 
 const defaultPlugins = [
     resolve(),
@@ -47,6 +48,22 @@ function getBuildDate() {
     return currentYear + currentDayOfYear;
 }
 
+function getMinimalOdooVersionSupported() {
+    return Number.parseInt(SUPPORTED_VERSION[0]);
+}
+
+function placeholder(strArg) {
+    const placeholders = {
+        BUILD: () => getBuildDate(),
+        MINIMAL_ODOO_VERSION: () => getMinimalOdooVersionSupported(),
+    };
+    let result = strArg;
+    for (const [placeholder, getDataFct] of Object.entries(placeholders)) {
+        result = result.replaceAll(`%${placeholder}%`, getDataFct());
+    }
+    return result;
+}
+
 export default () => {
     const bundleOutput = 'bundle';
     const publicOutput = 'docs';
@@ -62,7 +79,7 @@ export default () => {
                         {
                             src: 'manifest.json',
                             dest: bundleOutput,
-                            transform: (contents, _) => contents.toString().replace('%BUILD%', getBuildDate()),
+                            transform: (contents, _) => placeholder(contents.toString()),
                         },
                     ],
                 }),

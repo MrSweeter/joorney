@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
-    "version": "2.3.0.%BUILD%",
-    "version_name": "2.3.0",
+    "version": "2.3.0.%MINIMAL_ODOO_VERSION%%BUILD%",
+    "version_name": "2.3.0.%MINIMAL_ODOO_VERSION%",
     "name": "Joorney",
     "description": "Improve your Odoo Journey!",
     "author": "Vanden Bergh Gaëtan",
