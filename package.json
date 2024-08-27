@@ -5,7 +5,8 @@
         "zip": "node scripts/zip_bundle.js",
         "build": "rollup -c",
         "dev": "rollup -c -w",
-        "clean-bundle": "rm -rf ./bundle"
+        "clean-bundle": "rm -rf ./bundle",
+        "cloc": "cloc --exclude-dir=node_modules,bundle,docs,lib ."
     },
     "devDependencies": {
         "@biomejs/biome": "1.8.3",
