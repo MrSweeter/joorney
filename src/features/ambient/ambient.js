@@ -169,16 +169,7 @@ export const ambients = {
                 name: `Odoo Experience ${new Date().getFullYear()}`,
                 id: 'odoo-experience-oxp-cpt',
                 computeDates: async () => {
-                    const event = await getFutureEventWithName(
-                        ['name', '=', `Odoo Experience ${new Date().getFullYear()}`],
-                        'www.odoo.com'
-                    );
-                    if (!event) return undefined;
-
-                    return {
-                        date_from: yyyymmdd_hhmmssToDate(event.date_begin),
-                        date_to: yyyymmdd_hhmmssToDate(event.date_end),
-                    };
+                    return await getOdooEventDate(['name', '=', `Odoo Experience ${new Date().getFullYear()}`]);
                 },
                 type: 'long',
                 duration: 3000,
@@ -188,13 +179,7 @@ export const ambients = {
                 name: 'Future Community Days',
                 id: 'odoo-community-days-cpt',
                 computeDates: async () => {
-                    const event = await getFutureEventWithName(['name', '=like', '%Community Days%'], 'www.odoo.com');
-                    if (!event) return undefined;
-
-                    return {
-                        date_from: yyyymmdd_hhmmssToDate(event.date_begin),
-                        date_to: yyyymmdd_hhmmssToDate(event.date_end),
-                    };
+                    return await getOdooEventDate(['name', '=like', '%Community Days%']);
                 },
                 type: 'long',
                 duration: 3000,
@@ -411,6 +396,17 @@ export const ambients = {
 // Utils
 function randomInRange(min, max) {
     return Math.random() * (max - min) + min;
+}
+
+async function getOdooEventDate(domainName) {
+    const event = await getFutureEventWithName(domainName, 'www.odoo.com');
+    if (!event) return undefined;
+
+    return {
+        event_name: event.display_name,
+        event_date_from: yyyymmdd_hhmmssToDate(event.date_begin),
+        event_date_to: yyyymmdd_hhmmssToDate(event.date_end),
+    };
 }
 
 //#region SEASON

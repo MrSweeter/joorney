@@ -48,6 +48,7 @@ async function loadAmbientList() {
         for (const v of category.ambients) {
             ambientsData[v.id] = v;
 
+            let name = v.name;
             let description = '';
             if (v.date) {
                 description = toLocaleDateStringFormatted(new Date(v.date));
@@ -64,6 +65,7 @@ async function loadAmbientList() {
             } else if (ambient_dates[v.id]) {
                 const from = new Date(ambient_dates[v.id].date_from);
                 const to = new Date(ambient_dates[v.id].date_to);
+                name = ambient_dates[v.id].name;
                 description = `${toLocaleDateTimeStringFormatted(from)} - ${toLocaleDateTimeStringFormatted(to)}`;
             }
 
@@ -73,7 +75,7 @@ async function loadAmbientList() {
                     <div class="d-flex align-items-center">
                         <button class="joorney-play-ambient btn me-3"><i class="fa-fw fa-solid fa-play"></i></button>
                         <label class="form-check-label">
-                            <p class="m-0" >${v.name}${todayAmbient?.id === v.id ? ' <span title="This effect is currently active for today" class="badge badge-success rounded-pill">active</span>' : ''}</p>
+                            <p class="m-0" >${name}${todayAmbient?.id === v.id ? ' <span title="This effect is currently active for today" class="badge badge-success rounded-pill">active</span>' : ''}</p>
                             ${description ? `<span class="small text-muted">${description}</span>` : ''}
                         </label>
                     </div>

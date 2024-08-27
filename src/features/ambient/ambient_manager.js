@@ -9,7 +9,11 @@ export default class AmbientManager {
         for (const c of ambients.compute.ambients) {
             const dates = await c.computeDates();
             if (!dates) continue;
-            ambient_dates[c.id] = { date_from: dates.date_from, date_to: dates.date_to };
+            ambient_dates[c.id] = {
+                date_from: dates.event_date_from,
+                date_to: dates.event_date_to,
+                name: dates.event_name,
+            };
         }
 
         await setAmbientDates(ambient_dates);

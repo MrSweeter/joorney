@@ -291,7 +291,7 @@ export async function getFutureEventWithName(domainName, host) {
                         context: { active_test: true, lang: 'en_US' },
                         domain: [domainName, ['date_end', '>=', today]],
                         limit: 1,
-                        fields: ['date_begin', 'date_end', 'name'],
+                        fields: ['date_begin', 'date_end', 'name', 'display_name'],
                     },
                     model: 'event.event',
                     method: 'search_read',
