@@ -1,9 +1,9 @@
 {
     "manifest_version": 3,
-    "version": "2.3.0.%MINIMAL_ODOO_VERSION%%BUILD%",
+    "version": "2.3.0.%BUILD%",
     "version_name": "2.3.0.%MINIMAL_ODOO_VERSION%",
     "name": "Joorney",
-    "description": "Improve your Odoo Journey!",
+    "description": "Improve your Odoo Journey! Makes your Odoo experience more enjoyable and productive by adding some cool features and effects.",
     "author": "Vanden Bergh Gaëtan",
     "homepage_url": "https://mrsweeter.github.io/joorney/?style=odoo",
     "action": {
