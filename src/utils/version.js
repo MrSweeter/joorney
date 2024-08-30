@@ -3,6 +3,23 @@ import { SessionKey, getSessionData } from '../api/session.js';
 
 const DEFAULT_VERSION = { isOdoo: false };
 
+export const SUPPORTED_VERSION = [
+    '15.0',
+    'saas-15.2',
+    '16.0',
+    'saas-16.1',
+    'saas-16.2',
+    'saas-16.3',
+    'saas-16.4',
+    '17.0',
+    'saas-17.1',
+    'saas-17.2',
+    'saas-17.3',
+    'saas-17.4',
+    'saas-17.5', // master
+    //'18.0'
+].map((v) => sanitizeVersion(v));
+
 export function getOdooVersion() {
     if (!document) return DEFAULT_VERSION;
     const serverVersionInfo = getSessionData(SessionKey.SERVER_VERSION_INFO);

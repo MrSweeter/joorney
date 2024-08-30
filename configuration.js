@@ -1,23 +1,6 @@
 import FeaturesState from './features_state.json';
 import { Console, StorageSync, sendRuntimeMessage } from './src/utils/browser.js';
 import { MESSAGE_ACTION } from './src/utils/messaging.js';
-import { sanitizeVersion } from './src/utils/version.js';
-
-export const SUPPORTED_VERSION = [
-    '15.0',
-    'saas-15.2',
-    '16.0',
-    'saas-16.1',
-    'saas-16.2',
-    'saas-16.3',
-    'saas-16.4',
-    '17.0',
-    'saas-17.1',
-    'saas-17.2',
-    'saas-17.3',
-    'saas-17.4',
-    //'18.0' master
-].map((v) => sanitizeVersion(v));
 
 export const baseSettings = {
     configurationVersion: 1,

@@ -14,5 +14,6 @@
     "autoOpenRunbot": true,
     "showMyBadge": true,
     "contextOdooMenus": true,
-    "pinMessage": true
+    "pinMessage": true,
+    "ambient": true
 }

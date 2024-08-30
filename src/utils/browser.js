@@ -77,3 +77,26 @@ export const Console = {
         }
     },
 };
+
+export async function getUserLocation() {
+    return await new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(
+            (loc) => resolve(loc.coords),
+            (error) => reject(error)
+        );
+    });
+}
+
+export function createTitleFromJSON(obj) {
+    return escapeForHTMLTitle(JSON.stringify(obj));
+}
+
+function escapeForHTMLTitle(str) {
+    return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+        .replace(/\n/g, '&#10;');
+}

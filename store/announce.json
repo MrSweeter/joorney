@@ -4,5 +4,11 @@
         "description": "Stay updated with the latest news and updates in the extension through our new announcement banner!",
         "closeable": true,
         "hash": "2.2.1.1"
+    },
+    "2.3.0": {
+        "title": "New Feature - Ambient Effects",
+        "description": "Introduce ambient effects on the Odoo Home/Apps menu to highlight special events and important days.",
+        "closeable": true,
+        "hash": "2.3.0.1"
     }
 }

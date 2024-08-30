@@ -1,8 +1,12 @@
 {
     "type": "module",
     "scripts": {
+        "prod": "npm run clean-bundle && npm run build && npm run zip",
+        "zip": "node scripts/zip_bundle.js",
         "build": "rollup -c",
-        "dev": "rollup -c -w"
+        "dev": "rollup -c -w",
+        "clean-bundle": "rm -rf ./bundle",
+        "cloc": "cloc --exclude-dir=node_modules,bundle,docs,lib ."
     },
     "devDependencies": {
         "@biomejs/biome": "1.8.3",
@@ -14,12 +18,12 @@
         "@rollup/plugin-replace": "^5.0.5",
         "@rollup/plugin-terser": "^0.4.4",
         "@types/node": "^20.11.28",
+        "archiver": "^7.0.1",
         "docopt": "^0.6.2",
         "rollup": "^4.13.0",
         "rollup-plugin-copy": "^3.5.0",
-        "rollup-plugin-watch-assets": "^1.0.1"
-    },
-    "dependencies": {
+        "rollup-plugin-watch-assets": "^1.0.1",
         "uuid": "^9.0.1"
-    }
+    },
+    "dependencies": {}
 }

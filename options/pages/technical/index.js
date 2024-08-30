@@ -3,7 +3,7 @@ import { baseSettings } from '../../../configuration';
 import { extensionFeatureState } from '../../../configuration.js';
 import { handleExpanderClick } from '../../../lib/json-formatter/collapse.js';
 import { buildDom } from '../../../lib/json-formatter/html.js';
-import { getCache } from '../../../src/api/cache.js';
+import { clearLocal, getLocal, getStorageUsage } from '../../../src/api/local.js';
 import { getOnboardingProgressData } from '../../../src/checklist/index.js';
 import { tours } from '../../../src/checklist/tour.js';
 import { stringToHTML } from '../../../src/html_generator';
@@ -42,7 +42,7 @@ function loadExperimental(currentSettings) {
 async function loadStorage(features, currentSettings) {
     loadFeaturesPreview(features);
     loadConfigurationPreview(currentSettings);
-    await loadCachePreview();
+    await loadLocalDataPreview();
     await loadOnboardingProgression();
     handleExpanderClick();
 
@@ -73,20 +73,28 @@ async function loadStorage(features, currentSettings) {
     for (const tour of Object.values(tours)) {
         sections.push({
             label: `[Onboard] ${tour.title}`,
-            usage: await StorageLocal.getBytesInUse(Object.keys(tour.store)),
+            usage: await getStorageUsage(...Object.keys(tour.store)),
         });
     }
     sections.push({
         label: 'Cache',
-        usage: await StorageLocal.getBytesInUse('joorneyLocalCacheCall'),
+        usage: await getStorageUsage('joorneyLocalCacheCall'),
     });
     sections.push({
         label: 'Extension Off',
-        usage: await StorageLocal.getBytesInUse('offs'),
+        usage: await getStorageUsage('offs'),
+    });
+    sections.push({
+        label: 'Extension Announcement',
+        usage: await getStorageUsage('journey_announces'),
+    });
+    sections.push({
+        label: 'Ambient computed events',
+        usage: await getStorageUsage('ambient_dates'),
     });
     sections.push({
         label: 'Sunrise / Sunset ',
-        usage: await StorageLocal.getBytesInUse(['joorney_sunrise', 'joorney_sunset', 'joorney_date']),
+        usage: await getStorageUsage('joorney_sunrise', 'joorney_sunset', 'joorney_date'),
     });
 
     new DoubleProgressBar(
@@ -96,7 +104,7 @@ async function loadStorage(features, currentSettings) {
         'joorney-local-storage-byteUsageTotal',
         'joorney-local-storage-byteUsageFeature',
         StorageLocal.QUOTA_BYTES,
-        await StorageLocal.getBytesInUse(undefined),
+        await getStorageUsage(),
         sections
     );
 }
@@ -119,9 +127,9 @@ function loadConfigurationPreview(currentSettings) {
     //debug.innerHTML = JSON.stringify(currentSettings, null, 4);
 }
 
-async function loadCachePreview() {
-    const cache = await getCache();
-    const preview = document.getElementById('joorney-storage-cache');
+async function loadLocalDataPreview() {
+    const cache = await getLocal();
+    const preview = document.getElementById('joorney-storage-local');
     preview.innerHTML = '';
     preview.appendChild(buildDom(cache, false, true));
 }
@@ -281,7 +289,7 @@ async function loadChaos() {
     const chaos = document.getElementById('joorney_chaos_mode');
     if (!chaos) return;
     const actions = [
-        { id: 'joorney_chaos_destroy_local_storage', action: () => StorageLocal.clear() },
+        { id: 'joorney_chaos_destroy_local_storage', action: () => clearLocal() },
         { id: 'joorney_chaos_destroy_sync_storage', action: () => StorageSync.clear() },
     ];
     for (const action of actions) {

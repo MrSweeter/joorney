@@ -12,6 +12,7 @@ import {
 import { features, getCurrentSettings, loadFeaturesConfiguration } from '../configuration.js';
 import { checkHostsExpiration } from '../src/api/cache.js';
 import { createContextMenu, onContextMenuItemClick, updateContext } from '../src/contextmenu/manager.js';
+import AmbientManager from '../src/features/ambient/ambient_manager.js';
 import { checkVersion, openOption } from '../src/utils/check_version.js';
 import { MESSAGE_ACTION } from '../src/utils/messaging.js';
 import { sleep } from '../src/utils/util.js';
@@ -99,6 +100,8 @@ async function main() {
     createContextMenu();
 
     listenRequest();
+
+    await AmbientManager.computeEvents();
 }
 
 main();
