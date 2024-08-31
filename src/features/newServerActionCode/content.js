@@ -12,7 +12,36 @@ export default class NewServerActionCodeContentFeature extends ContentFeature {
         const isNew = await this.tryCatch(() => this.isServerActionCreateView_fromURL(url), false);
         if (!isNew) return;
         if (!(await isStillSamePage(250, url))) return;
+        await this.selectServerActionModel();
         this.selectExecuteCode();
+    }
+
+    async selectServerActionModel() {
+        // Odoo 17.0+ model_id_0, name_0, model_id_0_0_0
+        // Odoo 16.0 model_id, name, model_id_0_0
+
+        const inputModel = document.getElementById('model_id_0') ?? document.getElementById('model_id');
+        if (!inputModel) return;
+        inputModel.click();
+        inputModel.value = 'ir.actions.server';
+
+        const parent = inputModel.parentElement;
+        const observer = new MutationObserver((mutations) => {
+            const choiceMutations = mutations.filter((m) => m.target.id.match(/^model_id_0_(0_)?\d+$/));
+            // model_id_0_0_0 for record and model_id_0_0_1 for search more (optional)
+            if (choiceMutations.length !== 2 && choiceMutations.length !== 1) return;
+
+            const serverActionItem = parent.querySelector('#model_id_0_0_0') ?? parent.querySelector('#model_id_0_0');
+
+            observer.disconnect();
+            if (serverActionItem) serverActionItem.click();
+
+            const nameElement = document.getElementById('name_0') ?? document.getElementById('name');
+            if (nameElement) nameElement.focus();
+        });
+        observer.disconnect();
+        observer.observe(parent, { childList: true, subtree: true });
+        inputModel.dispatchEvent(new InputEvent('input', { bubbles: true }));
     }
 
     selectExecuteCode() {
