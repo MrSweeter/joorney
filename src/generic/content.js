@@ -1,6 +1,6 @@
 import { ToastManager } from '../toast/index.js';
 import { isAuthorizedFeature, isSupportedFeature } from '../utils/authorize.js';
-import { Console, Runtime } from '../utils/browser.js';
+import { Runtime } from '../utils/browser.js';
 import { NotYetImplemented } from '../utils/error.js';
 import { MESSAGE_ACTION } from '../utils/messaging.js';
 import { sanitizeURL } from '../utils/util.js';
@@ -80,7 +80,7 @@ export default class ContentFeature {
                         );
                 }
             } else {
-                Console.error(e);
+                ToastManager.error(this.configuration.id, `${e.name}`, e.message);
             }
         }
         return fallback;

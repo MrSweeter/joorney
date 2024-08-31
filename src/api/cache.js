@@ -1,4 +1,4 @@
-import { Runtime } from '../utils/browser.js';
+import { Console, Runtime, StorageSync } from '../utils/browser.js';
 import { getLocalCache, setLocalCache } from './local.js';
 
 /**
@@ -61,7 +61,8 @@ async function _checkHostsExpiration(cache, now) {
 }
 
 async function saveCacheCall(expireAfterMinute, call, result, ...params) {
-    const hash = btoa(JSON.stringify(params));
+    const { cacheEncodingBase64 } = await StorageSync.get({ cacheEncodingBase64: true });
+    const hash = jbtoa(JSON.stringify(params), cacheEncodingBase64);
     const host = getHost();
 
     let cache = await getLocalCache();
@@ -74,7 +75,7 @@ async function saveCacheCall(expireAfterMinute, call, result, ...params) {
         date: now,
         dateStr: new Date(now).toISOString(),
         expireAfterMinute: expireAfterMinute ?? 0,
-        data: btoa(JSON.stringify(result)),
+        data: jbtoa(JSON.stringify(result), cacheEncodingBase64),
     };
     cache[host].lastChange = now;
 
@@ -83,7 +84,8 @@ async function saveCacheCall(expireAfterMinute, call, result, ...params) {
 }
 
 async function readCacheCall(call, ...params) {
-    const hash = btoa(JSON.stringify(params));
+    const { cacheEncodingBase64 } = await StorageSync.get({ cacheEncodingBase64: true });
+    const hash = jbtoa(JSON.stringify(params), cacheEncodingBase64);
     const host = getHost();
     let cache = await getLocalCache();
     cache = cache?.[host]?.[call]?.[hash];
@@ -92,5 +94,31 @@ async function readCacheCall(call, ...params) {
 
     const now = Date.now();
     if (now - date > expireAfterMinute * 60 * 1000) return undefined;
-    return JSON.parse(atob(data));
+    const decodeData = jatob(data, cacheEncodingBase64);
+    return decodeData ? JSON.parse(decodeData) : undefined;
+}
+
+// TODO[IMP] Encryption/Decryption instead of Encoding/Decoding
+function jbtoa(str, cacheEncodingBase64) {
+    if (!cacheEncodingBase64) return str;
+    try {
+        return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, (_, p1) => String.fromCharCode(`0x${p1}`)));
+    } catch (e) {
+        Console.error(e);
+        return undefined;
+    }
+}
+
+function jatob(data, cacheEncodingBase64) {
+    if (!cacheEncodingBase64) return data;
+    try {
+        return decodeURIComponent(
+            atob(data)
+                .map((c) => `%${`00${c.charCodeAt(0).toString(16)}`.slice(-2)}`)
+                .join('')
+        );
+    } catch (e) {
+        Console.error(e);
+        return undefined;
+    }
 }

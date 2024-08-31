@@ -23,7 +23,7 @@ export async function loadPage(features, currentSettings) {
 }
 
 function loadExperimental(currentSettings) {
-    const { useSimulatedUI, omniboxFocusCurrentTab } = currentSettings;
+    const { useSimulatedUI, omniboxFocusCurrentTab, cacheEncodingBase64 } = currentSettings;
 
     const useSimulatedUIElement = document.getElementById('joorney_experimentalSimulatedUI');
     useSimulatedUIElement.checked = useSimulatedUI;
@@ -35,6 +35,12 @@ function loadExperimental(currentSettings) {
     omniboxElement.checked = omniboxFocusCurrentTab;
     omniboxElement.onchange = (e) => {
         StorageSync.set({ omniboxFocusCurrentTab: e.target.checked });
+    };
+
+    const base64Element = document.getElementById('joorney_experimentalBase64CacheEncoding');
+    base64Element.checked = cacheEncodingBase64;
+    base64Element.onchange = (e) => {
+        StorageSync.set({ cacheEncodingBase64: e.target.checked });
     };
 }
 
