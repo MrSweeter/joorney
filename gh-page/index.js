@@ -39,7 +39,7 @@ function loadFeature(feature, viewType, container) {
         case 'grid': {
             template.innerHTML = `
             <a class="feature-box p-4 m-3" title="[Odoo Feature] ${feature.id}" href="./feature.html#${feature.id}">
-                <img class="w-100 h-100 svg-image-primary-text" alt="${feature.id}, Icon" src="./assets/custom-fa-icons/${feature.icon}.svg" loading="lazy" />
+                <i class="${feature.icon} fa-4x h-100 text-center text-dark d-flex justify-content-center align-items-center"></i>
             </a>
             `.trim();
             container.classList.add('row');
@@ -54,7 +54,7 @@ function loadFeature(feature, viewType, container) {
                     <div class="card-body d-flex flex-column">
                         <div class="card-title w-100 px-0 col-2 d-flex align-items-center justify-content-start">
                             <a class="d-flex justify-content-center align-items-center me-3" style="height: 32px; min-width: 32px; background-color: var(--joorney-primary); border-radius: 8px;" title="[Odoo Feature] ${feature.id}" href="./feature.html#${feature.id}">
-                                <img style="height: 24px; min-width: 24px" class="svg-image-primary-text" alt="${feature.id}, Icon" src="./assets/custom-fa-icons/${feature.icon}.svg" loading="lazy" />
+                                <i class="${feature.icon} fa-1x h-100 text-center text-dark d-flex justify-content-center align-items-center"></i>
                             </a>
                             <p class="m-0"><strong>${feature.title}</strong></p>
                         </div>
@@ -77,7 +77,7 @@ function loadFeature(feature, viewType, container) {
             <div class="row d-flex align-items-center feature-row">
                 <div class="px-0 col-11 col-lg-2 d-flex align-items-center justify-content-start">
                     <a class="d-flex justify-content-center align-items-center mx-3" style="height: 32px; min-width: 32px; background-color: var(--joorney-primary); border-radius: 8px;" title="[Odoo Feature] ${feature.id}" href="./feature.html#${feature.id}">
-                        <img style="height: 24px; min-width: 24px" class="svg-image-primary-text" alt="${feature.id}, Icon" src="./assets/custom-fa-icons/${feature.icon}.svg" loading="lazy"/>
+                        <i class="${feature.icon} fa-1x h-100 text-center text-dark d-flex justify-content-center align-items-center"></i>
                     </a>
                     <p class="m-0"><strong>${feature.title}</strong></p>
                 </div>
