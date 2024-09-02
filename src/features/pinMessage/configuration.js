@@ -1,7 +1,7 @@
 export default {
     id: 'pinMessage',
     display_name: 'Pin Message',
-    icon: ['<i class="fa-solid fa-thumbtack"></i>'],
+    icon: '<i class="fa-solid fa-thumbtack"></i>',
     trigger: {
         background: false,
         load: true,

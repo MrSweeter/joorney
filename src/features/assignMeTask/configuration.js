@@ -1,7 +1,7 @@
 export default {
     id: 'assignMeTask',
     display_name: 'Assign Me Task',
-    icon: ['<i class="fa-solid fa-user-plus"></i>'],
+    icon: '<i class="fa-solid fa-user-plus"></i>',
     trigger: {
         load: true,
         navigate: true,

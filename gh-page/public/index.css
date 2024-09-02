@@ -27,7 +27,7 @@ body {
 }
 
 .text-joorney {
-    color: var(--joorney-primary)
+    color: var(--joorney-primary);
 }
 
 /* https://www.odoo.com/page/brand-assets */
@@ -91,14 +91,6 @@ body {
 
 .feature-box.disable {
     opacity: 0.25;
-}
-
-.svg-image-primary {
-    filter: invert(81%) sepia(44%) saturate(4660%) hue-rotate(350deg) brightness(100%) contrast(98%);
-}
-
-.svg-image-primary-text {
-    filter: invert(9%) sepia(12%) saturate(6667%) hue-rotate(195deg) brightness(95%) contrast(92%);
 }
 
 /* HTML Override */
@@ -225,11 +217,15 @@ body.odoo-style #view-type-bar {
     border-radius: 8px;
 }
 
-#features-list-viewtype-list, #features-list-viewtype-kanban, #features-list-viewtype-grid {
+#features-list-viewtype-list,
+#features-list-viewtype-kanban,
+#features-list-viewtype-grid {
     display: none;
 }
 
-body.odoo-style #features-list-viewtype-list, body.odoo-style #features-list-viewtype-kanban, body.odoo-style #features-list-viewtype-grid {
+body.odoo-style #features-list-viewtype-list,
+body.odoo-style #features-list-viewtype-kanban,
+body.odoo-style #features-list-viewtype-grid {
     display: inline-block;
 }
 
@@ -258,6 +254,10 @@ body.odoo-style #features-list-viewtype-list, body.odoo-style #features-list-vie
     vertical-align: middle;
 }
 
-#feature-navbar-np2, #feature-navbar-np1, #feature-navbar-active, #feature-navbar-nn1, #feature-navbar-nn2 {
+#feature-navbar-np2,
+#feature-navbar-np1,
+#feature-navbar-active,
+#feature-navbar-nn1,
+#feature-navbar-nn2 {
     cursor: pointer;
 }

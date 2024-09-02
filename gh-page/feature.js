@@ -46,8 +46,8 @@ function loadFeature() {
     if (!feature) return;
     window.location.hash = feature.id;
 
-    document.getElementById('feature-icon').src = `./assets/custom-fa-icons/${feature.icon}.svg`;
-    document.getElementById('feature-icon').alt = `${feature.id}, Icon`;
+    document.getElementById('feature-icon').className =
+        `fa-2x w-100 h-100 text-joorney d-flex justify-content-center align-items-center ${feature.icon}`;
     document.getElementById('feature-title').innerHTML = feature.title;
     document.getElementById('feature-description').innerHTML = `
         ${feature.deprecated ? `<span class="text-danger">[DEPRECATED] ${feature.deprecatedReason}</span><br />` : ''}

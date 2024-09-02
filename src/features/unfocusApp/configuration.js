@@ -1,7 +1,7 @@
 export default {
     id: 'unfocusApp',
     display_name: 'Unfocus App',
-    icon: ['<i class="fa-solid fa-ghost"></i>'],
+    icon: '<i class="fa-solid fa-ghost"></i>',
     trigger: {
         load: true,
         navigate: true,

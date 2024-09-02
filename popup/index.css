@@ -75,24 +75,6 @@ input:disabled + .icon-wrapper:hover {
     border: 1px solid var(--joorney-primary-bg) !important;
 }
 
-.double-fa {
-    font-size: 8px !important;
-    position: absolute !important;
-}
-
-.double-fa-mask {
-    font-size: 9px !important;
-    position: absolute !important;
-}
-
-.double-fa-bicolor {
-    color: var(--joorney-primary-bg) !important;
-}
-
-input:checked + .icon-wrapper .double-fa-bicolor {
-    color: var(--joorney-primary) !important;
-}
-
 .icon-wrapper-sm {
     cursor: pointer;
     width: 40px;

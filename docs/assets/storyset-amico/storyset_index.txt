@@ -1,11 +1,18 @@
-starting_a_business_project-amico: https://storyset.com/illustration/starting-a-business-proyect/amico
 add_tasks-amico: https://storyset.com/illustration/add-tasks/amico
-floppy_disk-amico: https://storyset.com/illustration/floppy-disk/amico
-social_strategy-amico: https://storyset.com/illustration/social-strategy/amico
-product_tour-amico: https://storyset.com/illustration/product-tour/amico
 add_user-amico: https://storyset.com/illustration/add-user/amico
-superhero-amico: https://storyset.com/illustration/superhero/amico
-google_sitemap-amico: https://storyset.com/illustration/google-sitemap/amico
+brand_loyalty-amico: https://storyset.com/illustration/brand-loyalty/amico
 design_process-amico: https://storyset.com/illustration/design-process/amico
-progress_indicator-amico: https://storyset.com/illustration/progress-indicator/amico
+dropdown_menu-amico: https://storyset.com/illustration/dropdown-menu/amico
+fireworks-amico: https://storyset.com/illustration/fireworks/amico
+floppy_disk-amico: https://storyset.com/illustration/floppy-disk/amico
+google_sitemap-amico: https://storyset.com/illustration/google-sitemap/amico
+hand_coding-amico: https://storyset.com/illustration/hand-coding/amico
 launching_with_balloons-amico: https://storyset.com/illustration/children-with-balloons/amico & https://storyset.com/illustration/launching/amico
+leprechaun-amico: https://storyset.com/illustration/leprechaun/amico
+my_answer-amico: https://storyset.com/illustration/my-answer/amico
+product_tour-amico: https://storyset.com/illustration/product-tour/amico
+progress_indicator-amico: https://storyset.com/illustration/progress-indicator/amico
+social_strategy-amico: https://storyset.com/illustration/social-strategy/amico
+starting_a_business_project-amico: https://storyset.com/illustration/starting-a-business-proyect/amico
+static_assets-amico: https://storyset.com/illustration/static-assets/amico
+superhero-amico: https://storyset.com/illustration/superhero/amico

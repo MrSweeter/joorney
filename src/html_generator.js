@@ -22,8 +22,6 @@ export function generateLimitedFeatureOptionButtonItem(feature) {
 }
 
 export function generateFeatureOptionListItem(feature) {
-    const icon = feature.icon.join('\n');
-
     return stringToHTML(`
 		<label
 			id="joorney_${feature.id}_feature"
@@ -33,7 +31,7 @@ export function generateFeatureOptionListItem(feature) {
 		>
 			<div class="feature-wrapper d-flex">
 				<div class="icon-wrapper pe-1">
-					${icon}
+					${feature.icon}
 				</div>
 				<p>${feature.display_name ?? feature.id}</p>
 			</div>
@@ -42,20 +40,16 @@ export function generateFeatureOptionListItem(feature) {
 }
 
 export function generateFeatureOptionTableHeadItem(feature) {
-    const icon = feature.icon.join('\n');
-
     return stringToHTML(`
 		<th title="[Feature Origin] ${feature.display_name ?? feature.id}" class="icon-wrapper-head">
 			<div class="icon-wrapper" id="joorney_origins_filter_feature_header_${feature.id}">
-				${icon}
+				${feature.icon}
 			</div>
 		</th>
 	`);
 }
 
 export function generateFeaturePopupToggleItem(feature) {
-    const icon = feature.icon.join('\n');
-
     return stringToHTML(`
 		<label
 			title="[Feature] ${feature.display_name ?? feature.id}"
@@ -64,15 +58,13 @@ export function generateFeaturePopupToggleItem(feature) {
 		>
 			<input id="${feature.id}Feature" type="checkbox" />
 			<div class="icon-wrapper ${feature.limited ? 'limited-feature' : ''}">
-				${icon}
+				${feature.icon}
 			</div>
 		</label>
 	`);
 }
 
 export function generateTabFeaturePopupToggleItem(feature) {
-    const icon = feature.icon.join('\n');
-
     return stringToHTML(`
 		<label
 			title="[Feature Origin] ${feature.display_name ?? feature.id}"
@@ -81,7 +73,7 @@ export function generateTabFeaturePopupToggleItem(feature) {
 		>
 			<input id="${feature.id}FeatureTab" type="checkbox" />
 			<div class="icon-wrapper-tab">
-				${icon}
+				${feature.icon}
 			</div>
 		</label>
 	`);
