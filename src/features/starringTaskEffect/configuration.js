@@ -1,7 +1,7 @@
 export default {
     id: 'starringTaskEffect',
     display_name: 'Starring Task Effect',
-    icon: ['<i class="fa-solid fa-star"></i>'],
+    icon: '<i class="fa-solid fa-star"></i>',
     trigger: {
         load: true,
         navigate: true,

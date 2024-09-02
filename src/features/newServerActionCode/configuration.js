@@ -1,7 +1,7 @@
 export default {
     id: 'newServerActionCode',
     display_name: 'New Server Action Code',
-    icon: ['<i class="fa-solid fa-code"></i>'],
+    icon: '<i class="fa-solid fa-code"></i>',
     trigger: {
         load: true,
         navigate: true,

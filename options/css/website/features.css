@@ -41,20 +41,6 @@
     font-size: 18px;
 }
 
-.double-fa {
-    font-size: 8px !important;
-    position: absolute !important;
-}
-
-.double-fa-mask {
-    font-size: 10px !important;
-    position: absolute !important;
-}
-
-.double-fa-bicolor {
-    color: whitesmoke !important;
-}
-
 /*#region Drag and Drop (https://github.com/flowforfrank/drag-n-drop/tree/master)*/
 .draggable-feature {
     cursor: grab;

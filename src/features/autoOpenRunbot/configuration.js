@@ -9,11 +9,7 @@ export const openRunbotWithVersionMenuItem = {
 export default {
     id: 'autoOpenRunbot',
     display_name: '[Runbot] Auto Open',
-    icon: [
-        '<!--<i class="fa-solid fa-door-open"></i>-->',
-        '<!--<i class="fa-solid fa-dungeon"></i>-->',
-        '<i class="fa-solid fa-fighter-jet"></i>',
-    ],
+    icon: '<i class="fa-solid fa-fighter-jet"></i>',
     trigger: {
         load: true,
         navigate: true,

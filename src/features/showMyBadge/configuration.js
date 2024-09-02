@@ -1,7 +1,7 @@
 export default {
     id: 'showMyBadge',
     display_name: 'Show My Badge',
-    icon: ['<i class="fa-solid fa-certificate"></i>'],
+    icon: '<i class="fa-solid fa-certificate"></i>',
     trigger: {
         background: false,
         load: true,

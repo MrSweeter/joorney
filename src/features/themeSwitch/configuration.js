@@ -1,11 +1,7 @@
 export default {
     id: 'themeSwitch',
     display_name: 'Theme Switch',
-    icon: [
-        '<i class="fa-solid fa-sun"></i>',
-        '<i class="fa-solid fa-circle double-fa-mask double-fa-bicolor"></i>',
-        '<i class="fa-solid fa-moon double-fa"></i>',
-    ],
+    icon: '<i class="fa-solid fa-sun"></i>',
     trigger: {
         background: true,
         load: false,

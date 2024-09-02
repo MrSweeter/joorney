@@ -73,7 +73,7 @@ async function loadSupportedFeature(features, supportedVersions) {
                 </th>
                 <th>
                     <div class="icon-wrapper">
-                        ${feature.icon.join('\n')}
+                        ${feature.icon}
                     </div>
                 </th>
                 ${versions

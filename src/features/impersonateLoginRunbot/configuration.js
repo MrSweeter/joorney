@@ -1,7 +1,7 @@
 export default {
     id: 'impersonateLoginRunbot',
     display_name: '[Runbot] Impersonate Login',
-    icon: ['<!--<i class="fa-solid fa-people-arrows"></i>-->', '<i class="fa-solid fa-masks-theater"></i>'],
+    icon: '<i class="fa-solid fa-masks-theater"></i>',
     trigger: {
         load: true,
         navigate: true,

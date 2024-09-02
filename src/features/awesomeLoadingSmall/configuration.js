@@ -1,7 +1,7 @@
 export default {
     id: 'awesomeLoadingSmall',
     display_name: 'Awesome Loading Small',
-    icon: ['<i class="fa-solid fa-spinner"></i>'],
+    icon: '<i class="fa-solid fa-spinner"></i>',
     trigger: {
         load: true,
         navigate: true,
