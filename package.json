@@ -1,11 +1,11 @@
 {
     "type": "module",
     "scripts": {
-        "prod": "npm run clean-bundle && npm run build && npm run zip",
+        "prod": "npm run clean-build && npm run build && npm run zip",
         "zip": "node scripts/zip_bundle.js",
         "build": "rollup -c",
         "dev": "rollup -c -w",
-        "clean-bundle": "rm -rf ./bundle",
+        "clean-build": "rm -rf ./bundle && rm -rf ./docs",
         "cloc": "cloc --exclude-dir=node_modules,bundle,docs,lib ."
     },
     "devDependencies": {
