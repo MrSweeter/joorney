@@ -46,11 +46,31 @@ function zip(folder, outputFolder, outputFilename) {
     archive.finalize();
 }
 
+function deleteExistingVersion(outputFolder, deleteFormat) {
+    const files = fs.readdirSync(outputFolder);
+
+    for (const file of files) {
+        if (file.startsWith(deleteFormat)) {
+            fs.unlink(path.join(outputFolder, file), (err) => {
+                if (err) {
+                    console.error(`Error deleting file ${file}:`, err);
+                } else {
+                    console.log(`Deleted file: ${file}`);
+                }
+            });
+        }
+    }
+}
+
 function main() {
     const bundlePath = './bundle';
     const outputFolder = 'store/artefacts';
 
     const version = manifestJSON.version;
+
+    const versionNoBuild = version.split('.').slice(0, 3).join('-');
+    const deleteFormat = `joorney_${versionNoBuild}`;
+    deleteExistingVersion(outputFolder, deleteFormat);
 
     const zipName = `joorney_${version.replaceAll('.', '-')}.zip`;
     zip(bundlePath, outputFolder, zipName);

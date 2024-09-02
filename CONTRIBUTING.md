@@ -7,7 +7,7 @@ Thank you for considering contributing to this project! Below is a guide on how 
 ## How to Report Issues/Bugs
 
 -   **Encounter a bug or unexpected behavior?**
-    -   Check if the issue already exists  [here](https://github.com/MrSweeter/joorney/issues) or [create a new one](https://github.com/MrSweeter/joorney/issues/new/choose).
+    -   Check if the issue already exists [here](https://github.com/MrSweeter/joorney/issues) or [create a new one](https://github.com/MrSweeter/joorney/issues/new/choose).
     -   If you submit a pull request (PR) that resolves an issue, there's no need to create a separate issue. You can explain the details directly in your PR description.
 
 ## Contributing to the Project
