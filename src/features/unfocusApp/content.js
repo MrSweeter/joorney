@@ -89,7 +89,7 @@ export default class UnfocusApp extends ContentFeature {
 
             if (reorderEnabled) {
                 let parent = app.parentElement.parentElement;
-                // 16.4+ introduce draggable feature, a new parent has been added
+                // [ODOO] 16.4+ introduce draggable feature, a new parent has been added
                 if (parent.parentElement.classList.contains('o_draggable')) {
                     parent = parent.parentElement;
                 }

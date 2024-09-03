@@ -59,6 +59,7 @@ export default class ThemeSwitchBackgroundFeature extends BackgroundFeature {
 
         if (!expectedMode) return;
 
+        // [ODOO] < 17.4
         const useConfiguredCookie = args.version < 17.4;
         const origin = url.origin;
         const currentMode = await getThemeModeCookie(origin, useConfiguredCookie);

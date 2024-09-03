@@ -17,8 +17,8 @@ export default class NewServerActionCodeContentFeature extends ContentFeature {
     }
 
     async selectServerActionModel() {
-        // Odoo 17.0+ model_id_0, name_0, model_id_0_0_0
-        // Odoo 16.0 model_id, name, model_id_0_0
+        // [ODOO] 17.0+ model_id_0, name_0, model_id_0_0_0
+        // [ODOO] 16.0 model_id, name, model_id_0_0
 
         const inputModel = document.getElementById('model_id_0') ?? document.getElementById('model_id');
         if (!inputModel) return;
@@ -47,11 +47,11 @@ export default class NewServerActionCodeContentFeature extends ContentFeature {
     selectExecuteCode() {
         const badge = document.querySelector(`span.o_selection_badge[value='"code"']`);
         if (badge) {
-            // Odoo 16.4+
+            // [ODOO] 16.4+
             badge.click();
             return;
         }
-        // Odoo < 16.4
+        // [ODOO] < 16.4
         const codeOption = document.querySelector(`option[value='"code"']`);
         if (!codeOption) return;
         const selector = codeOption.parentElement;

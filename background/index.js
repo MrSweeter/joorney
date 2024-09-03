@@ -21,7 +21,7 @@ import { handleMessage } from './src/messaging.js';
 import { initOmni } from './src/omnibox.js';
 import { listenRequest } from './src/request.js';
 
-// On page # path change, pre 17.2
+// [ODOO] < 17.2 On page # path change
 WebNavigation.onReferenceFragmentUpdated.addListener((e) => {
     if (e.url.startsWith('http')) {
         sendTabMessage(e.tabId, MESSAGE_ACTION.TO_CONTENT.TAB_NAVIGATION, {
@@ -32,7 +32,7 @@ WebNavigation.onReferenceFragmentUpdated.addListener((e) => {
     }
 });
 
-// 17.2
+// [ODOO] 17.2+
 WebNavigation.onHistoryStateUpdated.addListener((e) => {
     if (e.url.startsWith('http')) {
         sendTabMessage(e.tabId, MESSAGE_ACTION.TO_CONTENT.TAB_NAVIGATION, {
