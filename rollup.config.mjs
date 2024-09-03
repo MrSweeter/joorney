@@ -4,13 +4,14 @@ import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import { defineConfig } from 'rollup';
 import copy from 'rollup-plugin-copy';
+import scss from 'rollup-plugin-scss';
 import watchAssets from 'rollup-plugin-watch-assets';
 import { SUPPORTED_VERSION } from './src/utils/version.js';
 
 const defaultPlugins = [
     resolve(),
     json(),
-    dynamicImportVars({ exclude: 'features_state.json' }),
+    dynamicImportVars({ exclude: ['features_state.json', '**/*.scss'] }),
     watchAssets({ assets: ['options/**/*.css', 'options/**/*.html'] }),
 ];
 function getESMOutput(file) {

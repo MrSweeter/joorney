@@ -16,6 +16,7 @@
         <script src="index.js"></script>
     </head>
     <body class="joorney-body-background d-flex flex-column">
+        <!-- Menu -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light" id="joorney-navig-menu">
             <div class="container-fluid">
                 <div id="joorney-brand-debug" class="navbar-brand" title="Debug mode">
@@ -43,6 +44,7 @@
         </nav>
         <div id="joorney-manifest"></div>
 
+        <!-- Announcement -->
         <div class="d-none">
             <div id="joorney-announcement" class="alert alert-info rounded mx-5 mt-3">
                 <button id="ja-close" class="btn-close small position-absolute top-0 end-0 mt-2 me-2 opacity-50 d-none"></button>
@@ -51,8 +53,10 @@
             </div>
         </div>
 
+        <!-- Content -->
         <div id="joorney-page-container" class="flex-fill"></div>
 
+        <!-- Onboard -->
         <div id="bubble" class="bubble opacity-0"><img class="w-100" src="/images/bubble.png" /></div>
         <button id="joorney_checklist_show_btn" class="d-none btn btn-floating" type="button" title="Show onboarding-checklist"><i class="fa-solid fa-list-check"></i></button>
         <div id="joorney_checklist" class="onboarding-checklist overflow-hidden" style="max-height: 80%;">
@@ -87,6 +91,7 @@
             </div>
         </div>
 
+        <!-- Footer -->
         <footer class="text-center">
             <div class="text-center p-3">
                 &copy; <span id="copyright-year">2023</span>

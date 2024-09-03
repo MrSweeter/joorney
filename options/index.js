@@ -43,12 +43,11 @@ function toggleTechnicalMenus(force = undefined) {
 async function loadMenus() {
     const container = document.getElementById(MENU_ITEMS_CONTAINER);
     container.innerHTML = '';
-    const pageMenus = PAGES.filter((p) => p.menu);
-    for (const page of pageMenus) {
+    for (const page of PAGES) {
         loadMenu(page, container);
     }
 
-    const defaultMenu = await getDefaultMenu(pageMenus);
+    const defaultMenu = await getDefaultMenu(PAGES);
 
     document.getElementById(defaultMenu.id).click();
 }
@@ -64,7 +63,7 @@ async function getDefaultMenu(pageMenus) {
 function loadMenu(page, container) {
     const template = document.createElement('template');
     template.innerHTML = `
-        <li id="${page.menu}" class="joorney-menu-item ${
+        <li id="${page.id}" class="joorney-menu-item ${
             page.technical ? 'joorney-tech-menu' : ''
         } nav-item nav-link">${page.label}</li>
     `.trim();
@@ -82,7 +81,7 @@ async function loadPage(page) {
     const { features, currentSettings } = await getFeaturesAndCurrentSettings();
     document.getElementById(PAGE_CONTAINER).innerHTML = data;
     page.loader(features, currentSettings);
-    if (page.menu) updateActiveMenu(page.menu);
+    updateActiveMenu(page.id);
     updateMenuTour(page.tour);
 }
 

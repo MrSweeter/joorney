@@ -22,8 +22,9 @@
         "docopt": "^0.6.2",
         "rollup": "^4.13.0",
         "rollup-plugin-copy": "^3.5.0",
+        "rollup-plugin-scss": "^4.0.0",
         "rollup-plugin-watch-assets": "^1.0.1",
+        "sass": "^1.78.0",
         "uuid": "^9.0.1"
-    },
-    "dependencies": {}
+    }
 }
