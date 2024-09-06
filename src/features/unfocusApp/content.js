@@ -1,7 +1,7 @@
 import ContentFeature from '../../generic/content.js';
 import { isOdooWebsite, isStillSameWebsite } from '../../utils/authorize.js';
 import { StorageSync } from '../../utils/browser.js';
-import { getThemeModeCookie } from '../../utils/cookies.js';
+import { isDarkCookie } from '../../utils/cookies.js';
 import { sanitizeURL, sleep } from '../../utils/util.js';
 import configuration from './configuration.js';
 
@@ -162,10 +162,9 @@ export default class UnfocusApp extends ContentFeature {
     }
 
     async updateAppElement(element, state, starElement, configuration) {
-        const superfocusImageURL =
-            (await getThemeModeCookie(origin)) === 'light'
-                ? configuration.unfocusAppLightImageURL
-                : configuration.unfocusAppDarkImageURL;
+        const superfocusImageURL = (await isDarkCookie(origin))
+            ? configuration.unfocusAppDarkImageURL
+            : configuration.unfocusAppLightImageURL;
 
         const isUnfocus = state === UNFOCUS_STATE.UNFOCUS;
         if (starElement) {
