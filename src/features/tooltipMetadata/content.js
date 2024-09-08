@@ -3,6 +3,7 @@ import { isDebugSession } from '../../api/session.js';
 import ContentFeature from '../../generic/content.js';
 import { stringToHTML } from '../../html_generator.js';
 import { isStillSamePage } from '../../utils/authorize.js';
+import { isDarkCookie } from '../../utils/cookies.js';
 import { getActionWindow_fromURL, getModelAndID_fromURL } from '../../utils/url_manager.js';
 import configuration from './configuration.js';
 
@@ -92,7 +93,7 @@ export default class TooltipMetadataContentFeature extends ContentFeature {
         ]);
     }
 
-    appendTooltip(datas) {
+    async appendTooltip(datas) {
         if (!datas || datas.length === 0) return;
 
         const metadataContainer = document.getElementById('joorney-tooltip-metadata');
@@ -102,6 +103,7 @@ export default class TooltipMetadataContentFeature extends ContentFeature {
         if (!debugManager) return;
 
         const rows = datas.map((d) => `<tr><th>${d.label}:</th><td>${d.value}</td></tr>`.trim());
+        const isDark = await isDarkCookie(window.location.origin);
 
         const template = document.createElement('template');
         template.innerHTML = `
@@ -112,8 +114,8 @@ export default class TooltipMetadataContentFeature extends ContentFeature {
                         position: absolute;
                         top: 100%;
                         z-index: 10;
-                        background-color: #f9f9f9;
-                        color: #374151;
+                        background-color: ${isDark ? '#262A36' : '#f9f9f9'};
+                        color: ${isDark ? '#e4e4e4' : '#374151'};
                         width: max-content;
                         padding: 8px;
                         border: 1px solid rgba(252, 163, 17, 0.2);

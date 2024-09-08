@@ -33,14 +33,15 @@ export async function getLocal() {
 }
 
 // Announce
-export async function getAnnounceCloseStatus(version) {
+export async function getAnnounceCloseStatus(hash) {
     const { journey_announces } = await StorageLocal.get({ journey_announces: LOCAL_DEFAULT.journey_announces });
-    return journey_announces[version] ?? false;
+    return journey_announces[hash] ?? false;
 }
 
 export async function closeAnnounce(announce) {
     const { journey_announces } = await StorageLocal.get({ journey_announces: LOCAL_DEFAULT.journey_announces });
     journey_announces[announce.hash] = true;
+    await StorageLocal.set({ journey_announces });
 }
 
 // Off website

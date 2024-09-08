@@ -52,12 +52,14 @@ export default class ThemeSwitchBackgroundFeature extends BackgroundFeature {
                 let stop = themeSwitchDarkStopTime.split(':');
                 stop = Number.parseInt(stop[0]) * 60 + Number.parseInt(stop[1]);
 
-                expectedMode = time > start && time < stop ? 'dark' : 'light';
+                if (start < stop) expectedMode = time > start && time < stop ? 'dark' : 'light';
+                else expectedMode = time > start || time < stop ? 'dark' : 'light';
             }
         }
 
         if (!expectedMode) return;
 
+        // [ODOO] < 17.4
         const useConfiguredCookie = args.version < 17.4;
         const origin = url.origin;
         const currentMode = await getThemeModeCookie(origin, useConfiguredCookie);

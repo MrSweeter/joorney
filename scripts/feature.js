@@ -95,6 +95,7 @@ function createFeature(featureName, option) {
             [`${featureName.id}Enabled`]: false,
             [`${featureName.id}WhitelistMode`]: false,
         },
+        // Empty supported_version means "all"
         supported_version: option['<supported-version>'] ?? [],
     };
     if (configuration.trigger.context) {

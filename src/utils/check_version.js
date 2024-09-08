@@ -62,7 +62,7 @@ export async function getAnnounce() {
     const announce = announces[currentVersion];
     if (!announce || !announce.hash) return undefined;
     if (announce.closeable !== false) {
-        const status = await getAnnounceCloseStatus(currentVersion);
+        const status = await getAnnounceCloseStatus(announce.hash);
         if (status) return undefined;
     }
     return { ...announce, version: currentVersion, closeable: announce.closeable === true };

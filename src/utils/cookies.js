@@ -16,6 +16,10 @@ export async function setThemeModeCookie(expectedMode, origin, useConfiguredCook
     }
 }
 
+export async function isDarkCookie(origin, useConfiguredCookie) {
+    return (await getThemeModeCookie(origin, useConfiguredCookie)) === 'dark';
+}
+
 export async function getThemeModeCookie(origin, useConfiguredCookie) {
     if (!origin.startsWith('http')) return 'light';
 

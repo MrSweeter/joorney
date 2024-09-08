@@ -101,27 +101,26 @@ export default class UnfocusAppOptionCustomizationFeature extends OptionCustomiz
             'joorney_unfocus_app_light_image_input',
             'joorney_unfocus_app_light_image',
             'unfocusAppLightImageURL',
-            unfocusAppLightImageURL
+            unfocusAppLightImageURL,
+            this.defaultSettings.unfocusAppLightImageURL
         );
 
         this.loadImageInput(
             'joorney_unfocus_app_dark_image_input',
             'joorney_unfocus_app_dark_image',
             'unfocusAppDarkImageURL',
-            unfocusAppDarkImageURL
+            unfocusAppDarkImageURL,
+            this.defaultSettings.unfocusAppDarkImageURL
         );
     }
 
-    loadImageInput(inputKey, imageKey, configKey, value) {
+    loadImageInput(inputKey, imageKey, configKey, value, defaultImage) {
         const imageInput = document.getElementById(inputKey);
         imageInput.value = value;
 
         imageInput.oninput = async (e) => {
             let imageUrl = e.target.value.trim().replace(/\s/g, '');
-            if (imageUrl.length === 0) {
-                await StorageSync.set({ [configKey]: '' });
-                return;
-            }
+            if (imageUrl.length === 0) imageUrl = defaultImage;
 
             try {
                 imageUrl = new URL(imageUrl);
