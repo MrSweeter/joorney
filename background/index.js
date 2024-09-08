@@ -51,7 +51,7 @@ Runtime.onInstalled.addListener(async (details) => {
         checkCommandShortcuts();
     }
     await sleep(1000);
-    openOption(isInstall);
+    await openOption(isInstall, details.previousVersion);
 });
 
 Tabs.onActivated.addListener((activeInfo) => {

@@ -17,5 +17,5 @@ export default {
         contextOdooMenusWhitelistMode: false,
         contextOdooMenusContextMenu: {},
     },
-    supported_version: ['15+'],
+    supported_version: ['16+'],
 };

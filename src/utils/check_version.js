@@ -49,15 +49,17 @@ function removeBuildFromVersion(version) {
 - 2.3.0: [Feature] Ambient
 */
 const openOption4Version = ['2.1.0', '2.2.0', '2.3.0'];
-export function openOption(force = false) {
+export async function openOption(force = false, previousVersionFull = false) {
+    const previousVersion = previousVersionFull ? removeBuildFromVersion(previousVersionFull) : null;
     const currentVersion = removeBuildFromVersion(Runtime.getManifest().version);
-    if (force || openOption4Version.includes(currentVersion)) {
+    const announce = await getAnnounce();
+    if (force || announce || (currentVersion !== previousVersion && openOption4Version.includes(currentVersion))) {
         Runtime.openOptionsPage();
     }
 }
 
 export async function getAnnounce() {
-    const currentVersion = removeBuildFromVersion(Runtime.getManifest().version);
+    const currentVersion = Runtime.getManifest().version_name;
     const announces = await getAnnounceData();
     const announce = announces[currentVersion];
     if (!announce || !announce.hash) return undefined;
@@ -65,5 +67,5 @@ export async function getAnnounce() {
         const status = await getAnnounceCloseStatus(announce.hash);
         if (status) return undefined;
     }
-    return { ...announce, version: currentVersion, closeable: announce.closeable === true };
+    return { ...announce, version: removeBuildFromVersion(currentVersion), closeable: announce.closeable === true };
 }

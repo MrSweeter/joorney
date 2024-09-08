@@ -137,7 +137,7 @@ export function generateTrackingMessage(authorName, newValue, fieldName, avatarS
     return messageElement;
 }
 
-export function generateMessage(authorName, avatarSrc, bodyContent, date, original) {
+export function generateMessage(messageID, authorName, avatarSrc, bodyContent, date, hasOriginal) {
     const messageElement = stringToHTML(`
 		<div class="o-mail-Message position-relative py-1 mt-2 px-3 rounded border">
 			<button class="o-mail-Message-jumpTo d-none btn m-1 position-absolute top-0 end-0 rounded-pill badge badge-secondary" style="z-index: 1;">
@@ -171,14 +171,22 @@ export function generateMessage(authorName, avatarSrc, bodyContent, date, origin
 		</div>
 	`);
 
-    if (original) {
+    if (hasOriginal) {
         const jumpTo = messageElement.querySelector('.o-mail-Message-jumpTo');
         jumpTo.onclick = () => {
-            original.scrollIntoView({ behavior: 'instant', block: 'center', inline: 'nearest' });
-            original.style = joorneySimulatedStyle;
-            setTimeout(() => {
-                original.style = null;
-            }, 1000);
+            if (typeof hasOriginal === 'boolean') {
+                // [ODOO] 18.0+
+                const params = new URLSearchParams(window.location.search);
+                params.set('highlight_message_id', messageID);
+                window.location.search = params;
+            } else {
+                // [ODOO] <18.0
+                hasOriginal.scrollIntoView({ behavior: 'instant', block: 'center', inline: 'nearest' });
+                hasOriginal.style = joorneySimulatedStyle;
+                setTimeout(() => {
+                    hasOriginal.style = null;
+                }, 1000);
+            }
         };
         jumpTo.classList.toggle('d-none');
     }

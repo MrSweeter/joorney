@@ -21,7 +21,7 @@ export const baseSettings = {
         // },
     },
 
-    supportedVersions: ['17.0'],
+    supportedVersions: ['18.0'],
 
     // Experimental
     useSimulatedUI: false,

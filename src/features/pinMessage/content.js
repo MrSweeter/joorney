@@ -212,11 +212,12 @@ export default class PinMessageContentFeature extends ContentFeature {
 
             messageContainer.appendChild(
                 generateMessage(
+                    pin.id,
                     pin.author_id[1],
                     this.getAuthorAvatar(pin.author_id[0]),
                     pin.body,
                     new Date(pin.create_date),
-                    original
+                    Number.parseFloat(this.versionInfo?.version || '0') >= 18.0 || original
                 )
             );
         }

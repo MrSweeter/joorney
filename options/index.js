@@ -18,7 +18,9 @@ async function onDOMContentLoaded() {
 
     initImportExport();
 
-    await loadMenus();
+    const announce = await getAnnounce();
+
+    await loadMenus(announce);
     loadShortcut();
 
     const searchParams = new URLSearchParams(window.location.search);
@@ -27,7 +29,7 @@ async function onDOMContentLoaded() {
 
     ChecklistManager.load();
 
-    loadAnnouncement();
+    loadAnnouncement(announce);
     loadManifest();
 }
 
@@ -40,19 +42,24 @@ function toggleTechnicalMenus(force = undefined) {
     }
 }
 
-async function loadMenus() {
+async function loadMenus(announce) {
     const container = document.getElementById(MENU_ITEMS_CONTAINER);
     container.innerHTML = '';
     for (const page of PAGES) {
         loadMenu(page, container);
     }
 
-    const defaultMenu = await getDefaultMenu(PAGES);
+    const defaultMenu = await getDefaultMenu(PAGES, announce);
 
     document.getElementById(defaultMenu.id).click();
 }
 
-async function getDefaultMenu(pageMenus) {
+async function getDefaultMenu(pageMenus, announce) {
+    if (announce?.menu) {
+        const menu = pageMenus.find((m) => m.id === announce.menu);
+        if (menu) return menu;
+    }
+
     const defaultMenuTour = await getNextTourID();
     const defaultMenu =
         pageMenus.find((m) => (defaultMenuTour ? m.tour === defaultMenuTour : m.default)) ?? pageMenus[0];
@@ -63,9 +70,9 @@ async function getDefaultMenu(pageMenus) {
 function loadMenu(page, container) {
     const template = document.createElement('template');
     template.innerHTML = `
-        <li id="${page.id}" class="joorney-menu-item ${
-            page.technical ? 'joorney-tech-menu' : ''
-        } nav-item nav-link">${page.label}</li>
+        <li id="${page.id}" class="joorney-menu-item ${page.technical ? 'joorney-tech-menu' : ''} nav-item nav-link">
+            ${page.label}
+        </li>
     `.trim();
 
     template.content.firstChild.onclick = () => {
@@ -96,8 +103,7 @@ function updateMenuTour(tourID) {
     ChecklistManager.onboard(tourID);
 }
 
-async function loadAnnouncement() {
-    const announce = await getAnnounce();
+async function loadAnnouncement(announce) {
     if (!announce) return;
     const announceElement = document.getElementById('joorney-announcement');
     let show = false;

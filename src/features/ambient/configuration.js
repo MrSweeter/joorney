@@ -16,5 +16,5 @@ export default {
         ambientWhitelistMode: false,
         ambientStatus: {},
     },
-    supported_version: [],
+    supported_version: ['17+'],
 };

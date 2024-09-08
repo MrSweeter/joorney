@@ -19,5 +19,5 @@ export default {
         unfocusAppDarkImageURL: 'https://i.imgur.com/YzShNtH.png',
         unfocusAppOrigins: {},
     },
-    supported_version: ['15+'],
+    supported_version: ['16+'],
 };
