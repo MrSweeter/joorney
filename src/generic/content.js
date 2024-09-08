@@ -9,6 +9,7 @@ export default class ContentFeature {
     constructor(configuration) {
         this.configuration = configuration;
         this.defaultSettings = configuration.defaultSettings;
+        this.versionInfo = null;
     }
 
     async load(urlArg, versionInfo) {
@@ -17,6 +18,7 @@ export default class ContentFeature {
         const url = sanitizeURL(urlArg);
 
         if (!(await isAuthorizedFeature(this.configuration.id, url))) return;
+        this.versionInfo = versionInfo;
 
         this.loadFeature(url);
         this.handlePopupMessage();

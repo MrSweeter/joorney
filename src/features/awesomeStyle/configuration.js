@@ -15,5 +15,5 @@ export default {
         awesomeStyleWhitelistMode: false,
         awesomeStyleCSS: '',
     },
-    supported_version: ['15+'],
+    supported_version: ['16+'],
 };

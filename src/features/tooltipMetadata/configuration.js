@@ -14,5 +14,5 @@ export default {
         tooltipMetadataEnabled: false,
         tooltipMetadataWhitelistMode: false,
     },
-    supported_version: ['15+'],
+    supported_version: ['16+'],
 };

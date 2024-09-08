@@ -5,10 +5,17 @@
         "closeable": false,
         "hash": "2.2.1.1"
     },
-    "2.3.0": {
+    "2.3.0.15": {
         "title": "New Feature - Ambient Effects",
         "description": "Introduce ambient effects on the Odoo Home/Apps menu to highlight special events and important days.",
         "closeable": true,
-        "hash": "2.3.0.1"
+        "hash": "2.3.0.15.1"
+    },
+    "2.3.0.16": {
+        "title": "Odoo 18",
+        "description": "Odoo Experience 2024 has kicked off (or is over)! Buckle up and get ready to dive into the wild world of Odoo 18!",
+        "closeable": true,
+        "menu": "page-version",
+        "hash": "2.3.0.16.1"
     }
 }

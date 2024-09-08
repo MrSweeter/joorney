@@ -126,7 +126,7 @@ export function buildToastItem(feature, title, message, type, large) {
     const toastID = `toast-${Date.now()}`;
     const textHeight = !large ? 'height: 20px; white-space: nowrap;' : '';
     const item = stringToHTML(html`
-        <div id="${toastID}" class="${ToastItemElementClass} ${ToastItemElementClass}-${type} alert-${type}">
+        <div id="${toastID}" class="${ToastItemElementClass} ${ToastItemElementClass}-${type} alert alert-${type}">
             <div class="toast-icon"><i class="${iconForType[type]}"></i></div>
             <div class="toast-content">
                 <div>
