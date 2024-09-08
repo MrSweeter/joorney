@@ -6,7 +6,8 @@
         "build": "rollup -c",
         "dev": "rollup -c -w",
         "clean-build": "rm -rf ./bundle && rm -rf ./docs",
-        "cloc": "cloc --exclude-dir=node_modules,bundle,docs,lib ."
+        "cloc": "cloc --exclude-dir=node_modules,bundle,docs,lib .",
+        "postinstall": "cd cosmos && npm install"
     },
     "devDependencies": {
         "@biomejs/biome": "1.8.3",
