@@ -73,7 +73,7 @@ export default class TooltipMetadataContentFeature extends ContentFeature {
             { label: 'Model', value: actionWindow.res_model },
             {
                 label: '[Filters] Domain',
-                value: actionWindow.domain ? actionWindow.domain.trim() : false,
+                value: actionWindow.domain ? `${actionWindow.domain}`.trim() : false,
             },
             { label: '[Filters] Context', value: actionWindow.context?.trim() },
             { label: '[Filters] Limit', value: actionWindow.limit },

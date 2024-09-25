@@ -28,12 +28,13 @@ export async function parseURL(urlArg, requireID = false) {
 
     if (pathname === '/web') {
         state = parseURL_V1(searchParams);
+        if (state.action === 'studio') return { ...defaultState, action: 'studio' };
         return state;
     }
 
     state = parseURL_V2(pathname);
 
-    if (state.action === 'studio') return defaultState;
+    if (state.action === 'studio') return { ...defaultState, action: 'studio' };
     if (requireID && !state.resId) return state;
 
     if (state.action && !state.model) {
@@ -63,6 +64,7 @@ function parseURL_V1(searchParams) {
     if (searchParams.has('action')) {
         const action = searchParams.get('action');
         if (isNumeric(action)) state.action = Number.parseInt(action);
+        if (action === 'studio') state.action = action;
     }
 
     if (searchParams.has('active_id')) {
