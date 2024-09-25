@@ -59,6 +59,8 @@ export default class ThemeSwitchBackgroundFeature extends BackgroundFeature {
 
         if (!expectedMode) return;
 
+        // [ODOO] < 17.2
+        if (`${url}`.includes('action=studio')) return;
         // [ODOO] < 17.4
         const useConfiguredCookie = args.version < 17.4;
         const origin = url.origin;
