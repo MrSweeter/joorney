@@ -4,8 +4,9 @@
 
 1. **Create a branch**
     - `release-X.X.X`
-2. **Update version**
-    - [manifest.json](./manifest.json): version & version_name
+2. **Update version placeholders**
+    - [rollup.config.mjs](./rollup.config.mjs): function placeholder
+      - for [manifest.json](./manifest.json): version & version_name
 3. **Fill notes**
     - [RELEASE_NOTES.md](./RELEASE_NOTES.md)
     - [store/announce.json](./store/announce.json)
