@@ -107,7 +107,7 @@ export default class TooltipMetadataContentFeature extends ContentFeature {
 
         const template = document.createElement('template');
         template.innerHTML = `
-            <div id="joorney-tooltip-metadata">
+            <div id="joorney-tooltip-metadata" style="z-index:1000">
                 <style>
                     #joorney-tooltip-metadata {
                         display: none;
