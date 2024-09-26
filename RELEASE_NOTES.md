@@ -1,6 +1,11 @@
 # Joorney Release Notes
 
-## [2.3.0] New feature: Ambient and more
+## [2.3.0.16] Odoo 18
+
+-   Odoo 18 support
+-   Bug fixes
+
+## [2.3.0.15] New feature: Ambient and more
 
 -   Ambient Effects brings a touch of magic to your Odoo main menu by adding particle effects for special events and days. [:link:](https://mrsweeter.github.io/joorney/feature.html#ambient)
     -   Computed Event (Odoo Experience, Community Days)
