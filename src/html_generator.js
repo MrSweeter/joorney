@@ -1,4 +1,5 @@
-const joorneySimulatedStyle = 'background-color: rgba(252, 163, 17, 0.25)';
+const joorneySimulatedStyleWarning = 'background-color: rgba(252, 163, 17, 0.25)';
+const joorneySimulatedStyleError = 'background-color: rgba(252, 17, 17, 0.25)';
 
 export function stringToHTML(str) {
     const template = document.createElement('template');
@@ -84,7 +85,7 @@ export function generateUserAvatarTag(userName, avatarSrc) {
 		<span class="o_tag position-relative d-inline-flex align-items-center mw-100 o_avatar pe-1 rounded joorney-simulated-ui-assignme" title="${userName}">
 			<span
 				class="position-absolute top-0 end-0 bottom-0 start-0 mx-n2 mt-n1 mb-n1 rounded border"
-				style="${joorneySimulatedStyle}"
+				style="${joorneySimulatedStyleWarning}"
 			></span>
 			<img class="o_avatar o_m2m_avatar position-relative rounded" src="${avatarSrc}" />
 			<div class="o_tag_badge_text text-truncate position-relative ms-1">${userName}</div>
@@ -94,12 +95,12 @@ export function generateUserAvatarTag(userName, avatarSrc) {
     return tagElement;
 }
 
-export function generateTrackingMessage(authorName, newValue, fieldName, avatarSrc, date) {
+export function generateTrackingMessage(authorName, newValue, fieldName, avatarSrc, date, isWarning) {
     const messageElement = stringToHTML(`
 		<div class="o-mail-Message position-relative py-1 mt-2 px-3 joorney-simulated-ui-assignme">
 			<span
 				class="position-absolute top-0 end-0 bottom-0 start-0 mx-2 mt-n1 mb-n1 rounded border"
-				style="${joorneySimulatedStyle}"
+				style="${isWarning ? joorneySimulatedStyleWarning : joorneySimulatedStyleError}"
 			></span>
 			<div class="o-mail-Message-core position-relative d-flex flex-shrink-0">
 				<div class="o-mail-Message-sidebar d-flex flex-shrink-0">
@@ -182,7 +183,7 @@ export function generateMessage(messageID, authorName, avatarSrc, bodyContent, d
             } else {
                 // [ODOO] <18.0
                 hasOriginal.scrollIntoView({ behavior: 'instant', block: 'center', inline: 'nearest' });
-                hasOriginal.style = joorneySimulatedStyle;
+                hasOriginal.style = joorneySimulatedStyleWarning;
                 setTimeout(() => {
                     hasOriginal.style = null;
                 }, 1000);
