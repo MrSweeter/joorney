@@ -71,7 +71,7 @@ export default class AmbientManager {
         const mm = date.getMonth() + 1; // Months start at 0!
         const dd = date.getDate();
 
-        return ambients.event.ambients.find((a) => (ambientStatus[a] ?? true) && a.day === dd && a.month === mm);
+        return ambients.yearly.ambients.find((a) => (ambientStatus[a] ?? true) && a.day === dd && a.month === mm);
     }
 
     getSeasonAmbientForDate(_ambientStatus, _date) {
