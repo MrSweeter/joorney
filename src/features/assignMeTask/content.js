@@ -10,6 +10,8 @@ const ASSIGN_TYPE = Object.freeze({
     RELOAD: 'reload',
     REDIRECT: 'redirect',
 });
+const fakeDataTitle = `This element is not part of the original application; it was added artificially by Joorney.
+If unsure, please reload the page!`;
 
 export default class AssignMeTaskContentFeature extends ProjectTaskShareContentFeature {
     constructor() {
@@ -43,10 +45,12 @@ export default class AssignMeTaskContentFeature extends ProjectTaskShareContentF
         this.removeUserInUI();
     }
 
-    async addUserToTaskAssignees(task, userID, callback) {
+    async addUserToTaskAssignees(taskArg, userID, callback) {
         const taskID = await this.getProjectTaskID_fromURL(window.location.href);
-        if (task.id !== taskID)
-            throw new Error(`Button context is not the same as the url context: '${task.id}' vs '${taskID}'`);
+        if (taskArg.id !== taskID)
+            throw new Error(`Button context is not the same as the url context: '${taskArg.id}' vs '${taskID}'`);
+        const task = await this.getProjectTask(window.location.href);
+        const missingAssigned = task.user_ids.filter((u) => !taskArg.user_ids.includes(u));
 
         const newUsers = task.user_ids.concat(userID);
 
@@ -57,7 +61,7 @@ export default class AssignMeTaskContentFeature extends ProjectTaskShareContentF
                     case ASSIGN_TYPE.RELOAD: {
                         for (const e of document.getElementsByName('joorney_action_assign_to_me')) e.remove();
                         const { useSimulatedUI } = await StorageSync.get({ useSimulatedUI: false });
-                        if (useSimulatedUI) this.addUserInUI();
+                        if (useSimulatedUI) this.addUserInUI(missingAssigned.length === 0);
                         else window.location.reload();
                         break;
                     }
@@ -72,22 +76,13 @@ export default class AssignMeTaskContentFeature extends ProjectTaskShareContentF
         }
     }
 
-    addUserInUI() {
-        const fakeDataTitle = `This element is not part of the original application; it was added artificially by Joorney.
-If unsure, please reload the page!`;
+    addUserInUI(isWarning) {
         // Fake assigned element
-        const fieldElement = document.getElementsByName('user_ids')?.[0];
-        if (!fieldElement) return false;
-        const containerElement = fieldElement
-            .querySelector('.many2many_tags_avatar_field_container')
-            ?.querySelector('.o_field_many2many_selection');
-        if (!containerElement) return false;
         const avatarSrc = document.querySelector('.o_user_avatar, .oe_topbar_avatar')?.src;
         if (!avatarSrc || avatarSrc.length <= 0) return false;
         const userName = document.querySelector('.o_user_avatar ~ .oe_topbar_name, .oe_topbar_avatar ~ .oe_topbar_name')
             ?.firstChild?.nodeValue;
         if (!userName || userName.length <= 0) return false;
-        const tagElement = generateUserAvatarTag(userName, avatarSrc);
 
         // Fake chat message
         const chatParent = document
@@ -96,15 +91,31 @@ If unsure, please reload the page!`;
         if (!chatParent) return false;
         const previousElement = chatParent.querySelector('.o-mail-Message, .o-mail-DateSection');
         if (!previousElement) return false;
-        const messageElement = generateTrackingMessage(userName, userName, 'Assignees', avatarSrc, new Date());
-
-        // Add Fake data warning
-        tagElement.title = fakeDataTitle;
+        const messageElement = generateTrackingMessage(
+            userName,
+            userName,
+            'Assignees',
+            avatarSrc,
+            new Date(),
+            isWarning
+        );
         messageElement.title = fakeDataTitle;
 
-        containerElement.prepend(tagElement);
+        this.addUserTag(userName, avatarSrc);
         previousElement.before(messageElement);
         return true;
+    }
+
+    addUserTag(username, avatarSrc) {
+        const fieldElement = document.getElementsByName('user_ids')?.[0];
+        if (!fieldElement) return false;
+        const containerElement = fieldElement
+            .querySelector('.many2many_tags_avatar_field_container')
+            ?.querySelector('.o_field_many2many_selection');
+        if (!containerElement) return false;
+        const tagElement = generateUserAvatarTag(username, avatarSrc);
+        tagElement.title = fakeDataTitle;
+        containerElement.prepend(tagElement);
     }
 
     removeUserInUI() {
