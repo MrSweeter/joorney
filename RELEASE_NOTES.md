@@ -1,5 +1,10 @@
 # Joorney Release Notes
 
+## [2.3.1.16] Improve UX/UI
+
+-   Design fixes
+-   Bug fixes
+
 ## [2.3.0.16] Odoo 18
 
 -   Odoo 18 support
