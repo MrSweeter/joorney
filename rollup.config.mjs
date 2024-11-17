@@ -54,9 +54,12 @@ function getMinimalOdooVersionSupported() {
 }
 
 function placeholder(strArg) {
+    const isProd = process.env.NODE_ENV === 'production';
     const placeholders = {
         BUILD: () => getBuildDate(),
         MINIMAL_ODOO_VERSION: () => getMinimalOdooVersionSupported(),
+        EXT_NAME: () => (isProd ? 'Joorney' : 'Joorney (development)'),
+        ENV_SUFFIX: () => (isProd ? '' : '-dev'),
     };
     let result = strArg;
     for (const [placeholder, getDataFct] of Object.entries(placeholders)) {
