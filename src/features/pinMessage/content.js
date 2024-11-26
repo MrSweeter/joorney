@@ -9,6 +9,7 @@ import { sleep } from '../../utils/util.js';
 import configuration from './configuration.js';
 
 let pinMessageChatterObserver = undefined;
+const ignore_message_with_selector = ['.o-mail-Message-bubble.o-green', '.o-mail-Message-bubble.o-blue'];
 
 export default class PinMessageContentFeature extends ContentFeature {
     constructor() {
@@ -116,7 +117,7 @@ export default class PinMessageContentFeature extends ContentFeature {
 
             for (const node of mutation.addedNodes) {
                 if (node.nodeType === 1 && node.matches('.o-mail-Message')) {
-                    if (node.querySelector('.o-mail-Message-bubble.border')) return;
+                    if (ignore_message_with_selector.some((s) => node.querySelector(s))) return;
                     this.appendPinButtonToMessage(node);
                 }
             }
@@ -128,7 +129,7 @@ export default class PinMessageContentFeature extends ContentFeature {
             this.chatter.querySelectorAll(`div.o-mail-Message${this.selfAuthor ? '.o-selfAuthored' : ''}`)
         );
         return messages
-            .filter((m) => !m.querySelector('.o-mail-Message-bubble.border'))
+            .filter((m) => ignore_message_with_selector.every((s) => !m.querySelector(s)))
             .filter((m) => (m.querySelector('.o-mail-Message-body')?.innerHTML.trim() || '') !== '');
     }
 
