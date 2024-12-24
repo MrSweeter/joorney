@@ -17,7 +17,8 @@ export const SUPPORTED_VERSION = [
     'saas-17.3',
     'saas-17.4',
     '18.0',
-    //'saas-18.1', // master
+    'saas-18.1',
+    //'saas-18.2', // master
 ].map((v) => sanitizeVersion(v));
 
 export function getOdooVersion() {

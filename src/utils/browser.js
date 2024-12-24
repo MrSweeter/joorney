@@ -91,6 +91,16 @@ export function createTitleFromJSON(obj) {
     return escapeForHTMLTitle(JSON.stringify(obj));
 }
 
+export async function isDevMode() {
+    const installType = await getInstallType();
+    return installType === 'development';
+}
+
+export async function getInstallType() {
+    const extension = await Management.getSelf();
+    return extension.installType;
+}
+
 function escapeForHTMLTitle(str) {
     return str
         .replace(/&/g, '&amp;')

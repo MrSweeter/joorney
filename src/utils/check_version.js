@@ -1,18 +1,8 @@
 import { getAnnounceData } from '../api/github.js';
 import { getAnnounceCloseStatus } from '../api/local.js';
-import { Action, Management, Runtime } from './browser.js';
+import { Action, Runtime, getInstallType } from './browser.js';
 
 const fetchVersion = 'https://raw.githubusercontent.com/MrSweeter/joorney/master/manifest.json';
-
-async function getInstallType() {
-    const extension = await Management.getSelf();
-    return extension.installType;
-}
-
-export async function isDevMode() {
-    const installType = await getInstallType();
-    return installType === 'development';
-}
 
 export async function checkVersion() {
     const installType = await getInstallType();

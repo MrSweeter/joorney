@@ -17,5 +17,12 @@
         "closeable": true,
         "menu": "page-version",
         "hash": "2.3.0.16.1"
+    },
+    "2.3.2.16": {
+        "title": "Odoo 18.1",
+        "description": "",
+        "closeable": true,
+        "menu": "page-version",
+        "hash": "2.3.2.16.1"
     }
 }

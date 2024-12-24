@@ -1,7 +1,12 @@
-import { Console } from '../utils/browser';
+import { Console, isDevMode } from '../utils/browser';
 import { cache } from './cache';
 
 export async function getAnnounceData() {
+    const devMode = await isDevMode();
+    if (devMode) {
+        const d = await import('../../store/announce.json');
+        return d.default;
+    }
     const source = 'https://raw.githubusercontent.com/MrSweeter/joorney/master/store/announce.json';
     try {
         const { data } = await cache(
