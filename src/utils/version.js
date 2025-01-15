@@ -3,23 +3,13 @@ import { SessionKey, getSessionData } from '../api/session.js';
 
 const DEFAULT_VERSION = { isOdoo: false };
 
-export const SUPPORTED_VERSION = [
-    // '15.0', October 2024
-    // 'saas-15.2',
-    '16.0',
-    'saas-16.1',
-    'saas-16.2',
-    'saas-16.3',
-    'saas-16.4',
-    '17.0',
-    'saas-17.1',
-    'saas-17.2',
-    'saas-17.3',
-    'saas-17.4',
-    '18.0',
-    'saas-18.1',
-    //'saas-18.2', // master
-].map((v) => sanitizeVersion(v));
+export let SUPPORTED_VERSION = ['16.0']; // Minimal supported version for extension versioning
+
+export function updateSupportedVersion(versionsArg) {
+    let versions = versionsArg;
+    if (!versions || versions.length === 0) versions = ['18.0']; // Use current Odoo long-term version
+    SUPPORTED_VERSION = versions.map((v) => sanitizeVersion(v));
+}
 
 export function getOdooVersion() {
     if (!document) return DEFAULT_VERSION;
