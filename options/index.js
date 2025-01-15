@@ -1,10 +1,12 @@
 import { getFeaturesAndCurrentSettings } from '../configuration.js';
+import { getOdooData } from '../src/api/github.js';
 import { closeAnnounce } from '../src/api/local.js';
 import { getNextTourID } from '../src/checklist/index.js';
 import ChecklistManager from '../src/checklist/manager.js';
 import { stringToHTML } from '../src/html_generator.js';
-import { Runtime } from '../src/utils/browser.js';
-import { getAnnounce, isDevMode } from '../src/utils/check_version.js';
+import { Runtime, isDevMode } from '../src/utils/browser.js';
+import { getAnnounce } from '../src/utils/check_version.js';
+import { updateSupportedVersion } from '../src/utils/version.js';
 import { initImportExport } from './import_export.js';
 import { PAGES } from './menu.js';
 import { load as loadShortcut } from './src/keyboard_shortcut.js';
@@ -19,6 +21,8 @@ async function onDOMContentLoaded() {
     initImportExport();
 
     const announce = await getAnnounce();
+    const odooData = await getOdooData();
+    updateSupportedVersion(odooData?.availableOdooVersions);
 
     await loadMenus(announce);
     loadShortcut();

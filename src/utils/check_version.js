@@ -1,21 +1,16 @@
-import { getAnnounceData } from '../api/github.js';
+import { getAnnounceData, getOdooData } from '../api/github.js';
 import { getAnnounceCloseStatus } from '../api/local.js';
-import { Action, Management, Runtime } from './browser.js';
+import { Action, Runtime, getInstallType } from './browser.js';
+import { updateSupportedVersion } from './version.js';
 
 const fetchVersion = 'https://raw.githubusercontent.com/MrSweeter/joorney/master/manifest.json';
 
-async function getInstallType() {
-    const extension = await Management.getSelf();
-    return extension.installType;
-}
-
-export async function isDevMode() {
-    const installType = await getInstallType();
-    return installType === 'development';
-}
-
 export async function checkVersion() {
     const installType = await getInstallType();
+
+    const odooData = await getOdooData();
+    updateSupportedVersion(odooData?.availableOdooVersions);
+
     if (!['development', 'other'].includes(installType)) return;
     const res = await fetch(fetchVersion);
     const manifest = await res.json();

@@ -11,6 +11,7 @@ _For certain reasons, Joorney dependant or Odoo dependant, it's still possible t
 1. **Update the code**
     - Update [configuration.js/baseSettings/supportedVersions](./configuration.js)
     - Update [src/utils/version.js](./src/utils/version.js)
+    - Update [store/odoo.json](./store/odoo.json)
 2. **Test the extension**
     - Test the new version
     - Test all feature basics
@@ -42,6 +43,7 @@ _For certain reasons, Joorney dependant or Odoo dependant, it's still possible t
     - Including intermediary
 3. **Update the code**
     - Remove code part used before the deprecation
+    - Update [store/odoo.json](./store/odoo.json)
 4. **Test the extension**
     - Test the relevant versions
     - Test the other versions
