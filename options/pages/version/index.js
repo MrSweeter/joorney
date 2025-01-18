@@ -92,7 +92,7 @@ async function loadSupportedFeature(features, supportedVersions) {
                     .map(
                         (v) =>
                             `<td class="text-center table-${v.feature ? (v.odoo ? 'success' : 'warning') : 'danger'}">
-                                <span class="opacity-25">${v.feature}</span>
+                                <span class="opacity-25">${v.feature ? (v.odoo ? 'YES' : 'OFF') : 'NO'}</span>
                             </td>`
                     )
                     .join('')}
