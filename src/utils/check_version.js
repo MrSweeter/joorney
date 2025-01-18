@@ -1,7 +1,7 @@
 import { getAnnounceData, getOdooData } from '../api/github.js';
 import { getAnnounceCloseStatus } from '../api/local.js';
 import { Action, Runtime, getInstallType } from './browser.js';
-import { updateSupportedVersion } from './version.js';
+import { updateSupportedDevelopmentVersion, updateSupportedVersion } from './version.js';
 
 const fetchVersion = 'https://raw.githubusercontent.com/MrSweeter/joorney/master/manifest.json';
 
@@ -10,6 +10,7 @@ export async function checkVersion() {
 
     const odooData = await getOdooData();
     updateSupportedVersion(odooData?.availableOdooVersions);
+    await updateSupportedDevelopmentVersion(odooData?.developmentOdooVersions);
 
     if (!['development', 'other'].includes(installType)) return;
     const res = await fetch(fetchVersion);

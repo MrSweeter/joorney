@@ -6,7 +6,7 @@ import ChecklistManager from '../src/checklist/manager.js';
 import { stringToHTML } from '../src/html_generator.js';
 import { Runtime, isDevMode } from '../src/utils/browser.js';
 import { getAnnounce } from '../src/utils/check_version.js';
-import { updateSupportedVersion } from '../src/utils/version.js';
+import { updateSupportedDevelopmentVersion, updateSupportedVersion } from '../src/utils/version.js';
 import { initImportExport } from './import_export.js';
 import { PAGES } from './menu.js';
 import { load as loadShortcut } from './src/keyboard_shortcut.js';
@@ -23,6 +23,7 @@ async function onDOMContentLoaded() {
     const announce = await getAnnounce();
     const odooData = await getOdooData();
     updateSupportedVersion(odooData?.availableOdooVersions);
+    await updateSupportedDevelopmentVersion(odooData?.developmentOdooVersions);
 
     await loadMenus(announce);
     loadShortcut();

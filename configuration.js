@@ -22,8 +22,10 @@ export const baseSettings = {
     },
 
     supportedVersions: ['18.0'],
+    supportedDevVersions: [],
 
     // Experimental
+    developerMode: false,
     useSimulatedUI: false,
     omniboxFocusCurrentTab: false,
     cacheEncodingBase64: true,

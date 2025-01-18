@@ -25,9 +25,6 @@ export async function getStorageUsage(...keysArg) {
     const usage = await StorageLocal.getBytesInUse(keys && keys.length > 0 ? keys : undefined);
     return usage;
 }
-export async function clearLocal() {
-    await StorageLocal.clear();
-}
 export async function getLocal() {
     return await StorageLocal.get(LOCAL_DEFAULT);
 }

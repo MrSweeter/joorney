@@ -34,8 +34,10 @@ export async function isSupportedFeature(versionInfo, featureSupportedVersion) {
 }
 
 export async function isSupportedOdoo(version) {
-    const { supportedVersions } = await StorageSync.get(baseSettings);
-    return includeVersion(supportedVersions, version);
+    const { supportedVersions, supportedDevVersions, developerMode } = await StorageSync.get(baseSettings);
+    let versions = supportedVersions;
+    if (developerMode) versions = supportedVersions.concat(supportedDevVersions);
+    return includeVersion(versions, version);
 }
 
 export async function isAuthorizedFeature(feature, url) {

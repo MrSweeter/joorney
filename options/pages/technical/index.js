@@ -3,12 +3,14 @@ import { baseSettings } from '../../../configuration';
 import { extensionFeatureState } from '../../../configuration.js';
 import { handleExpanderClick } from '../../../lib/json-formatter/collapse.js';
 import { buildDom } from '../../../lib/json-formatter/html.js';
-import { clearLocal, getLocal, getStorageUsage } from '../../../src/api/local.js';
+import { getOdooData } from '../../../src/api/github.js';
+import { getLocal, getStorageUsage } from '../../../src/api/local.js';
 import { getOnboardingProgressData } from '../../../src/checklist/index.js';
 import { tours } from '../../../src/checklist/tour.js';
 import { stringToHTML } from '../../../src/html_generator';
 import { StorageLocal, StorageSync, isDevMode } from '../../../src/utils/browser.js';
 import { sleep } from '../../../src/utils/util.js';
+import { updateSupportedDevelopmentVersion } from '../../../src/utils/version.js';
 import DoubleProgressBar from './doubleprogress.js';
 
 export async function loadPage(features, currentSettings) {
@@ -22,7 +24,14 @@ export async function loadPage(features, currentSettings) {
 }
 
 function loadExperimental(currentSettings) {
-    const { useSimulatedUI, omniboxFocusCurrentTab, cacheEncodingBase64 } = currentSettings;
+    const { developerMode, useSimulatedUI, omniboxFocusCurrentTab, cacheEncodingBase64 } = currentSettings;
+
+    const developerModeUIElement = document.getElementById('joorney_experimentalDeveloperModeUI');
+    developerModeUIElement.checked = developerMode;
+    developerModeUIElement.onchange = async (e) => {
+        await StorageSync.set({ developerMode: e.target.checked });
+        await updateSupportedDevelopmentVersion(e.target.checked ? (await getOdooData())?.developmentOdooVersions : []);
+    };
 
     const useSimulatedUIElement = document.getElementById('joorney_experimentalSimulatedUI');
     useSimulatedUIElement.checked = useSimulatedUI;
@@ -294,7 +303,7 @@ async function loadChaos() {
     const chaos = document.getElementById('joorney_chaos_mode');
     if (!chaos) return;
     const actions = [
-        { id: 'joorney_chaos_destroy_local_storage', action: () => clearLocal() },
+        { id: 'joorney_chaos_destroy_local_storage', action: () => StorageLocal.clear() },
         { id: 'joorney_chaos_destroy_sync_storage', action: () => StorageSync.clear() },
     ];
     for (const action of actions) {

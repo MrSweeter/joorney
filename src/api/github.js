@@ -1,9 +1,9 @@
-import { Console, isDevMode } from '../utils/browser';
-import { cache } from './cache';
+import { Console, isLocalMode } from '../utils/browser.js';
+import { cache } from './cache.js';
 
 export async function getAnnounceData() {
-    const devMode = await isDevMode();
-    if (devMode) {
+    const isLocal = await isLocalMode();
+    if (isLocal) {
         const d = await import('../../store/announce.json');
         return d.default;
     }
@@ -26,8 +26,8 @@ export async function getAnnounceData() {
 }
 
 export async function getOdooData() {
-    const devMode = await isDevMode();
-    if (devMode) {
+    const isLocal = await isLocalMode();
+    if (isLocal) {
         const d = await import('../../store/odoo.json');
         return d.default;
     }
