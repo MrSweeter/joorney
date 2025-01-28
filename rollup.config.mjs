@@ -5,7 +5,7 @@ import terser from '@rollup/plugin-terser';
 import { defineConfig } from 'rollup';
 import copy from 'rollup-plugin-copy';
 import watchAssets from 'rollup-plugin-watch-assets';
-import { SUPPORTED_VERSION } from './src/utils/version.js';
+import { SUPPORTED_VERSION } from './src/utils/constant.js';
 
 const defaultPlugins = [
     resolve(),

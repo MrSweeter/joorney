@@ -5,7 +5,7 @@ import { load as loadOriginsFilter } from '../../src/origins_filter.js';
 export async function loadPage(features, _currentSettings) {
     await loadOriginsFilter();
 
-    loadFeatures(features);
+    await loadFeatures(features);
 
     setupDragAndDrop();
 }

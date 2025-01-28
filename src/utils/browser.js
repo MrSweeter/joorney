@@ -92,6 +92,11 @@ export function createTitleFromJSON(obj) {
 }
 
 export async function isDevMode() {
+    const { developerMode } = await StorageSync.get('developerMode');
+    return developerMode;
+}
+
+export async function isLocalMode() {
     const installType = await getInstallType();
     return installType === 'development';
 }

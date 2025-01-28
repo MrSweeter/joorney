@@ -24,5 +24,12 @@
         "closeable": true,
         "menu": "page-version",
         "hash": "2.3.2.16.1"
+    },
+    "2.3.3.16": {
+        "title": "Odoo Development Support",
+        "description": "New! Developer Mode will allow you to use some Odoo/Joorney development flow (e.g: master branch)",
+        "closeable": true,
+        "menu": "page-version",
+        "hash": "2.3.3.16.1"
     }
 }

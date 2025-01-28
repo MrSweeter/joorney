@@ -41,3 +41,15 @@ input:checked + .odoo-version-wrapper i::before {
 input:disabled + .odoo-version-wrapper {
     opacity: 0.5;
 }
+
+.dev.odoo-version-wrapper:hover {
+    box-shadow: 0 0 6px var(--joorney-odoo-secondary);
+}
+
+input:checked + .dev.odoo-version-wrapper {
+    border-color: var(--joorney-odoo-secondary);
+}
+
+input:checked + .dev.odoo-version-wrapper i::before {
+    color: var(--joorney-odoo-secondary);
+}

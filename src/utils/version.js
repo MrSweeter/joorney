@@ -1,14 +1,21 @@
 // import { getVersionInfo } from '../api/odoo.js';
 import { SessionKey, getSessionData } from '../api/session.js';
+import { isDevMode } from './browser.js';
+import { setSupportedDevelopmentVersion, setSupportedVersion } from './constant.js';
 
 const DEFAULT_VERSION = { isOdoo: false };
-
-export let SUPPORTED_VERSION = ['16.0']; // Minimal supported version for extension versioning
 
 export function updateSupportedVersion(versionsArg) {
     let versions = versionsArg;
     if (!versions || versions.length === 0) versions = ['18.0']; // Use current Odoo long-term version
-    SUPPORTED_VERSION = versions.map((v) => sanitizeVersion(v));
+    setSupportedVersion(versions.map((v) => sanitizeVersion(v)));
+}
+
+export async function updateSupportedDevelopmentVersion(devVersionArg) {
+    let versions = devVersionArg;
+    const isdev = await isDevMode();
+    if (!isdev || !versions) versions = [];
+    setSupportedDevelopmentVersion(versions.map((v) => sanitizeVersion(v)));
 }
 
 export function getOdooVersion() {
