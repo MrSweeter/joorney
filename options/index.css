@@ -65,6 +65,10 @@ body {
     transform: rotate(180deg);
 }
 
+.joorney-menu-item {
+    cursor: pointer;
+}
+
 /* OVERRIDE */
 .form-check-input[type='checkbox']:checked:focus,
 .form-check-input[type='checkbox']:checked {
