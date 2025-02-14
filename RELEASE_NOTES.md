@@ -1,5 +1,9 @@
 # Joorney Release Notes
 
+## [2.3.4.16] Support Odoo Development Version
+
+-   Bug fixes
+
 ## [2.3.3.16] Support Odoo Development Version
 
 -   Use Joorney in Odoo master branch
