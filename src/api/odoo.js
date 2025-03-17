@@ -267,7 +267,7 @@ export async function getMenu(menupath) {
     let field = 'name';
     const domain = [];
     for (const part of parts) {
-        domain.push([field, '=', part.trim()]);
+        domain.push([field, 'in', [part.trim()]]);
         field = `parent_id.${field}`;
     }
 
