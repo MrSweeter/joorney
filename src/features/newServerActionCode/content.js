@@ -59,6 +59,11 @@ export default class NewServerActionCodeContentFeature extends ContentFeature {
         selector.dispatchEvent(new Event('change'));
     }
 
+    // function focusEditor() {
+    //     const editor = window.ace.edit(document.getElementsByClassName('ace_editor')[0]);
+    //     editor.focus();
+    // }
+
     async isServerActionCreateView_fromURL(url) {
         return await isModelCreateView_fromURL(url, 'ir.actions.server');
     }

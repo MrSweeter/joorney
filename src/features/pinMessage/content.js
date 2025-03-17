@@ -137,20 +137,16 @@ export default class PinMessageContentFeature extends ContentFeature {
         const model_id = await this.tryCatch(() => getModelAndID_fromURL(url), undefined);
         if (!model_id) return [];
 
+        const uid = getSessionData(SessionKey.PARTNER_ID) || -1;
         const domain = [
-            ['model', '=', model_id.model],
-            ['res_id', '=', model_id.resId],
-            ['body', '!=', false],
-            ['body', '!=', ''],
+            ['model', 'in', [model_id.model]],
+            ['res_id', 'in', [model_id.resId]],
+            ['body', 'not in', [false, '']],
             // Cannot be too much restrictive due to UI, hard to identify which message can be pinned
             //['message_type', 'not in', ['notification', 'auto_comment', 'user_notification']],
             //['subtype_id.internal', '=', true],
-            ['starred_partner_ids', '!=', false],
+            ['starred_partner_ids', 'in', [uid]],
         ];
-        if (this.selfAuthor) {
-            const uid = getSessionData(SessionKey.PARTNER_ID) || -1;
-            domain.push(['starred_partner_ids', 'in', uid]);
-        }
 
         const messages = await this.tryCatch(
             () => getDataset('mail.message', domain, ['id', 'body', 'author_id', 'create_date'], 50, 0),

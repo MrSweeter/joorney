@@ -57,8 +57,8 @@ export default class ShowMyBadgeContentFeature extends ContentFeature {
         const user = await getDataset(
             'res.users',
             [
-                ['email', '=', email],
-                ['name', '=', name],
+                ['email', 'in', [email]],
+                ['name', 'in', [name]],
             ],
             ['id', 'badge_ids'],
             1,
@@ -69,8 +69,8 @@ export default class ShowMyBadgeContentFeature extends ContentFeature {
             const employee = await getDataset(
                 'hr.employee.public',
                 [
-                    ['email', '=', email],
-                    ['name', '=', name],
+                    ['email', 'in', [email]],
+                    ['name', 'in', [name]],
                 ],
                 ['id', 'badge_ids'],
                 1,
