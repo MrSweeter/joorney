@@ -26,6 +26,7 @@ export default class PinMessageContentFeature extends ContentFeature {
 
     async onRequestCompleted(msg) {
         if (msg.status !== 200) return;
+        if (!this.chatter) return;
         this.onPin();
     }
 

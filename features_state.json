@@ -15,5 +15,6 @@
     "showMyBadge": true,
     "contextOdooMenus": true,
     "pinMessage": true,
-    "ambient": true
+    "ambient": true,
+    "crudMessage": true
 }
