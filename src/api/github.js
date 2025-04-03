@@ -1,50 +1,38 @@
 import { Console, isLocalMode } from '../utils/browser.js';
 import { cache } from './cache.js';
 
-export async function getAnnounceData() {
-    const isLocal = await isLocalMode();
-    if (isLocal) {
-        const d = await import('../../store/announce.json');
-        return d.default;
-    }
-    const source = 'https://raw.githubusercontent.com/MrSweeter/joorney/master/store/announce.json';
-    try {
-        const { data } = await cache(
-            1 * 24 * 60,
-            async () => {
-                const response = await fetch(source);
-                if (!response.ok) return {};
-                return await response.json();
-            },
-            'getAnnounceData'
-        );
-        return data;
-    } catch (error) {
-        Console.critical('There was a problem with the fetch announce operation:', error);
-    }
-    return {};
+export async function getAnnounceRC() {
+    return getRemoteConfiguration('announce');
 }
 
-export async function getOdooData() {
+export async function getAmbientsRC() {
+    return getRemoteConfiguration('ambients');
+}
+
+export async function getOdooRC() {
+    return getRemoteConfiguration('odoo');
+}
+
+async function getRemoteConfiguration(key, cacheTime = 1 * 24 * 60) {
     const isLocal = await isLocalMode();
     if (isLocal) {
-        const d = await import('../../store/odoo.json');
+        const d = await import(`../../remoteConfiguration/${key}.json`);
         return d.default;
     }
-    const source = 'https://raw.githubusercontent.com/MrSweeter/joorney/master/store/odoo.json';
+    const source = `https://raw.githubusercontent.com/MrSweeter/joorney/master/remoteConfiguration/${key}.json`;
     try {
         const { data } = await cache(
-            1 * 24 * 60,
+            cacheTime,
             async () => {
                 const response = await fetch(source);
                 if (!response.ok) return {};
                 return await response.json();
             },
-            'getOdooData'
+            `getRemoteConfigurationData_${key}`
         );
         return data;
     } catch (error) {
-        Console.critical('There was a problem with the fetch odoo-version operation:', error);
+        Console.critical(`There was a problem with the remote config '${key}' fetch operation:`, error);
     }
     return {};
 }

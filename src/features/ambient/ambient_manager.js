@@ -1,9 +1,10 @@
 import { getAmbientDates, setAmbientDates } from '../../api/local.js';
 import { StorageSync } from '../../utils/browser.js';
-import { ambients } from './ambient.js';
+import { getAmbients } from './ambient.js';
 
 export default class AmbientManager {
     static async computeEvents() {
+        const ambients = await getAmbients();
         const ambient_dates = {};
 
         for (const c of ambients.compute.ambients) {
@@ -23,13 +24,15 @@ export default class AmbientManager {
         let ambient = undefined;
         const { ambientStatus } = await StorageSync.get({ ambientStatus: {} });
 
-        if (!ambient) ambient = await this.getComputedEventForDate(date);
-        if (!ambient) ambient = this.getEventAmbientForDate(date);
-        if (!ambient) ambient = this.getYearlyAmbientForDate(date);
-        if (!ambient) ambient = this.getSeasonAmbientForDate(date);
-        if (!ambient) ambient = await this.getWeatherAmbientForDate(date);
+        const ambients = await getAmbients();
 
-        if (this.isEnable(ambientStatus, ambient.id)) return ambient;
+        if (!ambient) ambient = await this.getComputedEventForDate(ambients, date);
+        if (!ambient) ambient = this.getEventAmbientForDate(ambients, date);
+        if (!ambient) ambient = this.getYearlyAmbientForDate(ambients, date);
+        if (!ambient) ambient = this.getSeasonAmbientForDate(ambients, date);
+        if (!ambient) ambient = await this.getWeatherAmbientForDate(ambients, date);
+
+        if (ambient && this.isEnable(ambientStatus, ambient.id)) return ambient;
         return false;
     }
 
@@ -53,12 +56,12 @@ export default class AmbientManager {
         return undefined;
     }
 
-    getEventAmbientForDate(date) {
+    getEventAmbientForDate(ambients, date) {
         const activeAmbients = ambients.event.ambients;
         return this.getEventForDate(date, activeAmbients);
     }
 
-    async getComputedEventForDate(date) {
+    async getComputedEventForDate(ambients, date) {
         const computes = ambients.compute.ambients;
         const ambient_dates = await getAmbientDates();
         for (const c of computes) {
@@ -68,18 +71,18 @@ export default class AmbientManager {
         return this.getEventForDate(date, computes);
     }
 
-    getYearlyAmbientForDate(date) {
+    getYearlyAmbientForDate(ambients, date) {
         const mm = date.getMonth() + 1; // Months start at 0!
         const dd = date.getDate();
 
         return ambients.yearly.ambients.find((a) => a.day === dd && a.month === mm);
     }
 
-    getSeasonAmbientForDate(_date) {
+    getSeasonAmbientForDate(_ambients, _date) {
         return undefined;
     }
 
-    async getWeatherAmbientForDate(_date) {
+    async getWeatherAmbientForDate(_ambients, _date) {
         return undefined;
     }
 

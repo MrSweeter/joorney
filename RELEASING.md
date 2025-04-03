@@ -9,7 +9,7 @@
     - [manifest.json](./manifest.json): version & version_name
 3. **Fill notes**
     - [RELEASE_NOTES.md](./RELEASE_NOTES.md)
-    - [store/announce.json](./store/announce.json)
+    - [remoteConfiguration/announce.json](./remoteConfiguration/announce.json)
 4. **Build for production**
     - `npm run prod`
 5. **Commit & Push**

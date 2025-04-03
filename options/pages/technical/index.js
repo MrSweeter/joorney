@@ -3,7 +3,7 @@ import { baseSettings } from '../../../configuration';
 import { extensionFeatureState } from '../../../configuration.js';
 import { handleExpanderClick } from '../../../lib/json-formatter/collapse.js';
 import { buildDom } from '../../../lib/json-formatter/html.js';
-import { getOdooData } from '../../../src/api/github.js';
+import { getOdooRC } from '../../../src/api/github.js';
 import { getLocal, getStorageUsage } from '../../../src/api/local.js';
 import { getOnboardingProgressData } from '../../../src/checklist/index.js';
 import { tours } from '../../../src/checklist/tour.js';
@@ -30,7 +30,7 @@ function loadExperimental(currentSettings) {
     developerModeUIElement.checked = developerMode;
     developerModeUIElement.onchange = async (e) => {
         await StorageSync.set({ developerMode: e.target.checked });
-        await updateSupportedDevelopmentVersion(e.target.checked ? (await getOdooData())?.developmentOdooVersions : []);
+        await updateSupportedDevelopmentVersion(e.target.checked ? (await getOdooRC())?.developmentOdooVersions : []);
     };
 
     const useSimulatedUIElement = document.getElementById('joorney_experimentalSimulatedUI');
