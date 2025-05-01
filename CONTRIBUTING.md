@@ -34,7 +34,7 @@ Thank you for considering contributing to this project! Below is a guide on how 
 ## Preparing for Release
 
 1. **Update Files**:
-    - Modify the `store/announce.json` file as necessary.
+    - Modify the `remoteConfiguration/announce.json` file as necessary.
     - Update both the manifest `version` and `version_name`.
 2. **Build** the extension.
 3. **Create a Zip Archive**:

@@ -1,5 +1,5 @@
 import { getAmbientDates } from '../../../src/api/local.js';
-import { ambients, estimateAmbientDuration } from '../../../src/features/ambient/ambient.js';
+import { estimateAmbientDuration, getAmbients } from '../../../src/features/ambient/ambient.js';
 import AmbientLoader from '../../../src/features/ambient/ambient_loader.js';
 import AmbientManager from '../../../src/features/ambient/ambient_manager.js';
 import { stringToHTML } from '../../../src/html_generator.js';
@@ -30,6 +30,7 @@ async function loadAmbientList() {
 
     const ambient_dates = await getAmbientDates();
     const todayAmbient = await ambientManager.getAmbientForDate(new Date());
+    const ambients = await getAmbients();
 
     for (const [id, category] of Object.entries(ambients)) {
         container.appendChild(
@@ -97,10 +98,10 @@ async function loadAmbientList() {
         el.onclick = playAmbient;
     }
     for (const el of container.getElementsByClassName('ambient-category-all-toggle')) {
-        el.onclick = (e) => onSwitchCategory(e, true);
+        el.onclick = (e) => onSwitchCategory(ambients, e, true);
     }
     for (const el of container.getElementsByClassName('ambient-category-none-toggle')) {
-        el.onclick = (e) => onSwitchCategory(e, false);
+        el.onclick = (e) => onSwitchCategory(ambients, e, false);
     }
     for (const header of container.getElementsByClassName('ambient-category-toggle')) {
         const icon = header.querySelector('i');
@@ -132,7 +133,7 @@ function updateAmbientState(ambientStatus) {
     }
 }
 
-async function onSwitchCategory(event, enable) {
+async function onSwitchCategory(ambients, event, enable) {
     const dataElement = event.currentTarget.parentElement.parentElement;
     const ambientsList = ambients[dataElement.dataset.ambientCategoryId].ambients ?? [];
     if (!ambientsList || ambientsList.lenght <= 0) return;

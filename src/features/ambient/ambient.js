@@ -1,7 +1,7 @@
+import { getAmbientsRC } from '../../api/github.js';
 import { getFutureEventWithName } from '../../api/odoo.js';
 import { shapeFromText } from '../../utils/confetti.js';
 import { yyyymmdd_hhmmssToDate } from '../../utils/util.js';
-import { bubbles } from './custom_path.js';
 
 //#region Abstract Loader
 const lockedState = ['circle', 'square', 'star'];
@@ -161,237 +161,111 @@ export function estimateAmbientDuration(ambient) {
     return 0;
 }
 
-export const ambients = {
-    compute: {
-        name: 'Computed Events',
-        ambients: [
-            {
-                name: `Odoo Experience ${new Date().getFullYear()}`,
-                id: 'odoo-experience-oxp-cpt',
-                computeDates: async () => {
-                    return await getOdooEventDate(['name', '=', `Odoo Experience ${new Date().getFullYear()}`]);
-                },
-                type: 'long',
-                duration: 3000,
-                load: schoolPrideLoader(['#FBB130', '#714b67', '#050a30']),
-            },
-            {
-                name: 'Future Community Days',
-                id: 'odoo-community-days-cpt',
-                computeDates: async () => {
-                    return await getOdooEventDate(['name', '=like', '%Community Days%']);
-                },
-                type: 'long',
-                duration: 3000,
-                load: schoolPrideLoader(['#714B67', '#FFFFFF', '#017E84']),
-            },
-        ],
-    },
-    event: {
-        name: 'Events',
-        ambients: [
-            // {
-            //     name: 'Developer Test',
-            //     id: 'joorney-test-ambient-evt',
-            //     date: new Date().toISOString(),
-            //     type: 'count',
-            //     count: 20,
-            //     delay: 250,
-            //     load: fireworkLoader(['#FFFFFF', '#000000'], true, false, false),
-            // },
-            {
-                name: 'Happy Birthday Odoo!',
-                id: 'odoo-birthday-evt',
-                // date: '2005-02-22T12:00:00Z', // TinyERP
-                // date: '2009-04-14T12:00:00Z', // OpenERP
-                date: '2014-05-15T12:00:00Z',
-                type: 'count',
-                count: 20,
-                delay: 250,
-                load: fireworkLoader(['#E46E78', '#21B799', '#5B899E', '#E4A900'], true, false, false),
-            },
-            {
-                name: 'New Year, Countdown',
-                id: 'new-year-evt',
-                date_from: `${new Date().getFullYear()}-12-31T23:59:30`,
-                date_to: `${new Date().getFullYear() + 1}-01-01T00:00:30`,
-                type: 'count',
-                count: 480,
-                delay: 250,
-                load: fireworkLoader(
-                    [
-                        // Palette 1
-                        '#C63347',
-                        '#F28E63',
-                        '#FC7F81',
-                        '#FAEFC4',
-                        '#F9AE9B',
-                        '#792BB2',
-                        '#2E42CB',
-                        '#F75781',
-                        '#E365E4',
-                        '#FA5348',
-                        // Palette 2
-                        '#FFD07E',
-                        '#FA9B49',
-                        '#90CA80',
-                        '#62ABCC',
-                        '#7984DE',
-                        '#DE6C90',
-                    ],
-                    false,
-                    true,
-                    true
-                ),
-            },
-        ],
-    },
-    yearly: {
-        name: 'Every year, one day',
-        ambients: [
-            {
-                name: 'New Year',
-                id: 'new-year-yly',
-                day: 1,
-                month: 1,
-                type: 'long',
-                duration: 10000,
-                load: schoolPrideLoader(['#BF7218', '#FADE98', '#F1A738', '#f9eb82', '#180D1C', '#514414']),
-            },
-            {
-                name: "Valentine's Day",
-                id: 'valentine-yly',
-                day: 14,
-                month: 2,
-                type: 'count',
-                count: 30,
-                delay: 1000,
-                load: floatingLoader(['♥️', '🌹']),
-            },
-            {
-                name: "Lucky Day (St. Patrick's)",
-                id: 'patrick-yly',
-                day: 17,
-                month: 3,
-                type: 'onetime',
-                load: (_ticks) => {
-                    const emojisBitmap = ['🍻', '🪙', '🍀', '🌈'].map((emoji) =>
-                        shapeFromText({ text: emoji, scalar: 4 })
-                    );
-                    return [
-                        {
-                            shapes: emojisBitmap,
-                            origin: { y: 0.7 },
-                            spread: 26,
-                            startVelocity: 55,
-                            particleCount: 50,
-                            scalar: 2,
-                        },
-                        {
-                            shapes: emojisBitmap,
-                            origin: { y: 0.7 },
-                            spread: 60,
-                            particleCount: 40,
-                            scalar: 2,
-                        },
-                        {
-                            shapes: emojisBitmap,
-                            origin: { y: 0.7 },
-                            spread: 100,
-                            decay: 0.91,
-                            scalar: 1.6,
-                            particleCount: 70,
-                        },
-                        {
-                            shapes: emojisBitmap,
-                            origin: { y: 0.7 },
-                            spread: 120,
-                            startVelocity: 25,
-                            decay: 0.92,
-                            scalar: 2.4,
-                            particleCount: 20,
-                        },
-                        {
-                            shapes: emojisBitmap,
-                            origin: { y: 0.7 },
-                            spread: 120,
-                            scalar: 2,
-                            startVelocity: 45,
-                            particleCount: 20,
-                        },
-                    ];
-                },
-            },
-            {
-                name: "April Fool's",
-                id: 'aprilfool-yly',
-                day: 1,
-                month: 4,
-                type: 'count',
-                count: 15,
-                delay: 1000,
-                load: (ticks) => {
-                    const left = emojisLoader({
-                        emojis: ['🐟', '🐠', '🐡'],
-                        alpha: { max: 0.5, double: true },
-                        size: { min: 4, max: 10, dynamic: true },
-                        gravity: { min: -0.1, max: 0.1, dynamic: true },
-                        drift: { min: -1, max: -0.3, dynamic: true },
-                    })(ticks);
-                    const right = emojisLoader({
-                        emojis: ['🐟', '🐠', '🐡'],
-                        alpha: { max: 0.5, double: true },
-                        size: { min: 4, max: 10, dynamic: true },
-                        gravity: { min: -0.1, max: 0.1, dynamic: true },
-                        drift: { min: 0.3, max: 1, dynamic: true },
-                        flipHorizontal: true,
-                    })(ticks);
-                    const bubble = shapesLoader({
-                        shapes: [bubbles.large, bubbles.medium, bubbles.small],
-                        alpha: { max: 0.2, double: true },
-                        size: { min: 2, max: 5, dynamic: true },
-                        gravity: { min: -0.4, max: -0.2, dynamic: true },
-                        drift: { min: -0.4, max: 0.4, dynamic: true },
-                        yRange: { min: 0.5, max: 1 },
-                        colors: ['#89cff0', 'e7feff', '#a1caf1', '#39a78e'],
-                    })(ticks);
-                    return [left, right, bubble];
-                },
-            },
-            {
-                name: 'Halloween Night',
-                id: 'halloween-yly',
-                day: 31,
-                month: 10,
-                type: 'count',
-                count: 30,
-                delay: 1000,
-                load: floatingLoader(['🎃']),
-            },
-            {
-                name: "New Year's Eve",
-                id: 'new-year-eve-yly',
-                day: 31,
-                month: 12,
-                type: 'count',
-                count: 30,
-                delay: 1000,
-                load: floatingLoader(['🥂']),
-            },
-        ],
-    },
-    // season: {
-    //     winter: {},
-    //     spring: {},
-    //     summer: {},
-    //     fall: {},
-    // },
-    // weather: {
-    //     rain: {},
-    //     snow: {},
-    //     sun: {},
-    // },
-};
+export async function getAmbients() {
+    const { shapes, ambients } = await getAmbientsRC('ambients');
+
+    return Object.fromEntries(
+        Object.entries(ambients).map(([group, { name, ambients }]) => [
+            group,
+            { name, ambients: ambients.map((a) => parseAmbient(a, group, shapes)) },
+        ])
+    );
+}
+
+function formatAmbientData(value) {
+    let newValue = value;
+
+    const currentYear = new Date().getFullYear();
+
+    // #year#, #year+X#, #year-X#
+    newValue = value.replace(/#year([+-])?(\d*)#/g, (_, sign, offset) => {
+        const yearsToAdd = offset ? Number.parseInt(offset, 10) : 0;
+        return sign === '-' ? currentYear - yearsToAdd : currentYear + yearsToAdd;
+    });
+
+    return newValue;
+}
+
+function parseAmbient(jsonAmbient, ambientGroup, shapes = {}) {
+    if (!jsonAmbient?.id || !jsonAmbient?.name || !jsonAmbient?.type || !jsonAmbient?.loader) return null;
+
+    const ambient = {
+        id: jsonAmbient.id,
+        name: formatAmbientData(jsonAmbient.name),
+        type: jsonAmbient.type,
+        load: parseLoader(jsonAmbient.loader, shapes),
+    };
+    if (!ambient.load) return null;
+
+    const typeHandlers = {
+        long: (ambient, jsonAmbient) => {
+            ambient.duration = jsonAmbient.duration;
+        },
+        count: (ambient, jsonAmbient) => {
+            ambient.count = jsonAmbient.count;
+            ambient.delay = jsonAmbient.delay;
+        },
+    };
+
+    if (!typeHandlers[jsonAmbient.type]) return null;
+    typeHandlers[jsonAmbient.type](ambient, jsonAmbient);
+
+    const groupHandlers = {
+        compute: (ambient, jsonAmbient) => {
+            parseCompute(jsonAmbient.compute)?.(ambient);
+        },
+        event: (ambient, jsonAmbient) => {
+            if (jsonAmbient.date) ambient.date = formatAmbientData(jsonAmbient.date);
+            if (jsonAmbient.date_from && jsonAmbient.date_to) {
+                ambient.date_from = formatAmbientData(jsonAmbient.date_from);
+                ambient.date_to = formatAmbientData(jsonAmbient.date_to);
+            }
+        },
+        yearly: (ambient, jsonAmbient) => {
+            ambient.day = jsonAmbient.day;
+            ambient.month = jsonAmbient.month;
+        },
+    };
+
+    if (!groupHandlers[ambientGroup]) return null;
+    groupHandlers[ambientGroup](ambient, jsonAmbient);
+
+    return ambient;
+}
+
+function parseCompute(compute) {
+    const computeHandlers = {
+        odoo_event: (ambient) => {
+            ambient.computeDates = async () => {
+                const domain = JSON.parse(formatAmbientData(JSON.stringify(compute.domain)));
+                return getOdooEventDate(domain);
+            };
+        },
+    };
+
+    return computeHandlers[compute.type];
+}
+
+function parseLoader(loader, shapes) {
+    if (!loader?.type) return null;
+
+    const loaderHandlers = {
+        schoolPride: (loader) => schoolPrideLoader(loader.colors),
+        firework: (loader) => fireworkLoader(loader.colors, loader.mixColor, loader.smallAndLarge, loader.doubleBurst),
+        floating: (loader) => floatingLoader(loader.emojis),
+        emojis: (loader) => emojisLoader(loader.data),
+        shapes: (loader) => {
+            if (!loader.loaded) {
+                loader.data.shapes = loader.data.shapes.map((s) => shapes[s]);
+                loader.loaded = true;
+            }
+            return shapesLoader(loader.data);
+        },
+        multiple: (loader) => (ticks) => loader.list.map((l) => parseLoader(l, shapes)(ticks)),
+    };
+
+    return loaderHandlers[loader.type]?.(loader) || null;
+}
 
 // Utils
 function randomInRange(min, max) {
@@ -408,6 +282,233 @@ async function getOdooEventDate(domainName) {
         event_date_to: yyyymmdd_hhmmssToDate(event.date_end),
     };
 }
+
+//#region LOCAL AMBIENTS
+// const ambients = {
+//     compute: {
+//         name: 'Computed Events',
+//         ambients: [
+//             {
+//                 name: `Odoo Experience ${new Date().getFullYear()}`,
+//                 id: 'odoo-experience-oxp-cpt',
+//                 computeDates: async () => {
+//                     return await getOdooEventDate(['name', 'in', [`Odoo Experience ${new Date().getFullYear()}`]]);
+//                 },
+//                 type: 'long',
+//                 duration: 3000,
+//                 load: schoolPrideLoader(['#FBB130', '#714b67', '#050a30']),
+//             },
+//             {
+//                 name: 'Future Community Days',
+//                 id: 'odoo-community-days-cpt',
+//                 computeDates: async () => {
+//                     return await getOdooEventDate(['name', '=like', '%Community Days%']);
+//                 },
+//                 type: 'long',
+//                 duration: 3000,
+//                 load: schoolPrideLoader(['#714B67', '#FFFFFF', '#017E84']),
+//             },
+//         ],
+//     },
+//     event: {
+//         name: 'Events',
+//         ambients: [
+//             // {
+//             //     name: 'Developer Test',
+//             //     id: 'joorney-test-ambient-evt',
+//             //     date: new Date().toISOString(),
+//             //     type: 'count',
+//             //     count: 20,
+//             //     delay: 250,
+//             //     load: fireworkLoader(['#FFFFFF', '#000000'], true, false, false),
+//             // },
+//             {
+//                 name: 'Happy Birthday Odoo!',
+//                 id: 'odoo-birthday-evt',
+//                 // date: '2005-02-22T12:00:00Z', // TinyERP
+//                 // date: '2009-04-14T12:00:00Z', // OpenERP
+//                 date: '2014-05-15T12:00:00Z',
+//                 type: 'count',
+//                 count: 20,
+//                 delay: 250,
+//                 load: fireworkLoader(['#E46E78', '#21B799', '#5B899E', '#E4A900'], true, false, false),
+//             },
+//             {
+//                 name: 'New Year, Countdown',
+//                 id: 'new-year-evt',
+//                 date_from: `${new Date().getFullYear()}-12-31T23:59:30`,
+//                 date_to: `${new Date().getFullYear() + 1}-01-01T00:00:30`,
+//                 type: 'count',
+//                 count: 480,
+//                 delay: 250,
+//                 load: fireworkLoader(
+//                     [
+//                         // Palette 1
+//                         '#C63347',
+//                         '#F28E63',
+//                         '#FC7F81',
+//                         '#FAEFC4',
+//                         '#F9AE9B',
+//                         '#792BB2',
+//                         '#2E42CB',
+//                         '#F75781',
+//                         '#E365E4',
+//                         '#FA5348',
+//                         // Palette 2
+//                         '#FFD07E',
+//                         '#FA9B49',
+//                         '#90CA80',
+//                         '#62ABCC',
+//                         '#7984DE',
+//                         '#DE6C90',
+//                     ],
+//                     false,
+//                     true,
+//                     true
+//                 ),
+//             },
+//         ],
+//     },
+//     yearly: {
+//         name: 'Every year, one day',
+//         ambients: [
+//             {
+//                 name: 'New Year',
+//                 id: 'new-year-yly',
+//                 day: 1,
+//                 month: 1,
+//                 type: 'long',
+//                 duration: 10000,
+//                 load: schoolPrideLoader(['#BF7218', '#FADE98', '#F1A738', '#f9eb82', '#180D1C', '#514414']),
+//             },
+//             {
+//                 name: "Valentine's Day",
+//                 id: 'valentine-yly',
+//                 day: 14,
+//                 month: 2,
+//                 type: 'count',
+//                 count: 30,
+//                 delay: 1000,
+//                 load: floatingLoader(['♥️', '🌹']),
+//             },
+//             {
+//                 name: "Lucky Day (St. Patrick's)",
+//                 id: 'patrick-yly',
+//                 day: 17,
+//                 month: 3,
+//                 type: 'count',
+//                 count: 30,
+//                 delay: 1000,
+//                 load: floatingLoader(['🍻', '🪙', '🍀', '🌈']),
+//                 // type: 'onetime',
+//                 // load: (_ticks) => {
+//                 //     const emojisBitmap = ['🍻', '🪙', '🍀', '🌈'].map((emoji) =>
+//                 //         shapeFromText({ text: emoji, scalar: 4 })
+//                 //     );
+//                 //     return [
+//                 //         {
+//                 //             shapes: emojisBitmap,
+//                 //             origin: { y: 0.7 },
+//                 //             spread: 26,
+//                 //             startVelocity: 55,
+//                 //             particleCount: 50,
+//                 //             scalar: 2,
+//                 //         },
+//                 //         {
+//                 //             shapes: emojisBitmap,
+//                 //             origin: { y: 0.7 },
+//                 //             spread: 60,
+//                 //             particleCount: 40,
+//                 //             scalar: 2,
+//                 //         },
+//                 //         {
+//                 //             shapes: emojisBitmap,
+//                 //             origin: { y: 0.7 },
+//                 //             spread: 100,
+//                 //             decay: 0.91,
+//                 //             scalar: 1.6,
+//                 //             particleCount: 70,
+//                 //         },
+//                 //         {
+//                 //             shapes: emojisBitmap,
+//                 //             origin: { y: 0.7 },
+//                 //             spread: 120,
+//                 //             startVelocity: 25,
+//                 //             decay: 0.92,
+//                 //             scalar: 2.4,
+//                 //             particleCount: 20,
+//                 //         },
+//                 //         {
+//                 //             shapes: emojisBitmap,
+//                 //             origin: { y: 0.7 },
+//                 //             spread: 120,
+//                 //             scalar: 2,
+//                 //             startVelocity: 45,
+//                 //             particleCount: 20,
+//                 //         },
+//                 //     ];
+//                 // },
+//             },
+//             {
+//                 name: "April Fool's",
+//                 id: 'aprilfool-yly',
+//                 day: 1,
+//                 month: 4,
+//                 type: 'count',
+//                 count: 15,
+//                 delay: 1000,
+//                 load: (ticks) => {
+//                     const left = emojisLoader({
+//                         emojis: ['🐟', '🐠', '🐡'],
+//                         alpha: { max: 0.5, double: true },
+//                         size: { min: 4, max: 10, dynamic: true },
+//                         gravity: { min: -0.1, max: 0.1, dynamic: true },
+//                         drift: { min: -1, max: -0.3, dynamic: true },
+//                     })(ticks);
+//                     const right = emojisLoader({
+//                         emojis: ['🐟', '🐠', '🐡'],
+//                         alpha: { max: 0.5, double: true },
+//                         size: { min: 4, max: 10, dynamic: true },
+//                         gravity: { min: -0.1, max: 0.1, dynamic: true },
+//                         drift: { min: 0.3, max: 1, dynamic: true },
+//                         flipHorizontal: true,
+//                     })(ticks);
+//                     const bubble = shapesLoader({
+//                         shapes: [bubbles.large, bubbles.medium, bubbles.small],
+//                         alpha: { max: 0.2, double: true },
+//                         size: { min: 2, max: 5, dynamic: true },
+//                         gravity: { min: -0.4, max: -0.2, dynamic: true },
+//                         drift: { min: -0.4, max: 0.4, dynamic: true },
+//                         yRange: { min: 0.5, max: 1 },
+//                         colors: ['#89cff0', 'e7feff', '#a1caf1', '#39a78e'],
+//                     })(ticks);
+//                     return [left, right, bubble];
+//                 },
+//             },
+//             {
+//                 name: 'Halloween Night',
+//                 id: 'halloween-yly',
+//                 day: 31,
+//                 month: 10,
+//                 type: 'count',
+//                 count: 30,
+//                 delay: 1000,
+//                 load: floatingLoader(['🎃']),
+//             },
+//             {
+//                 name: "New Year's Eve",
+//                 id: 'new-year-eve-yly',
+//                 day: 31,
+//                 month: 12,
+//                 type: 'count',
+//                 count: 30,
+//                 delay: 1000,
+//                 load: floatingLoader(['🥂']),
+//             },
+//         ],
+//     },
+// };
+//#endregion
 
 //#region SEASON
 // export const fallSeasonLoader = emojisLoader({

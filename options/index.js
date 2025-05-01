@@ -1,5 +1,5 @@
 import { getFeaturesAndCurrentSettings } from '../configuration.js';
-import { getOdooData } from '../src/api/github.js';
+import { getOdooRC } from '../src/api/github.js';
 import { closeAnnounce } from '../src/api/local.js';
 import { getNextTourID } from '../src/checklist/index.js';
 import ChecklistManager from '../src/checklist/manager.js';
@@ -21,7 +21,7 @@ async function onDOMContentLoaded() {
     initImportExport();
 
     const announce = await getAnnounce();
-    const odooData = await getOdooData();
+    const odooData = await getOdooRC();
     updateSupportedVersion(odooData?.availableOdooVersions);
     await updateSupportedDevelopmentVersion(odooData?.developmentOdooVersions);
 
