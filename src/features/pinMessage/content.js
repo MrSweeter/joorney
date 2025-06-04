@@ -88,10 +88,15 @@ export default class PinMessageContentFeature extends ContentFeature {
     }
 
     appendPinButtonToMessage(messageElement) {
-        const starBtnIcon = messageElement.querySelector('i.fa-star, i.fa-star-o');
-        if (!starBtnIcon) return;
-        starBtnIcon.parentElement.title = 'Odoo: Mark as Todo | Joorney UI override: Pin';
-        starBtnIcon.classList.add('fa-thumb-tack');
+        const starBtnIcon = messageElement.querySelectorAll('i.fa-star, i.fa-star-o');
+        if (!starBtnIcon || starBtnIcon.length === 0) return;
+        for (const btn of starBtnIcon) {
+            btn.parentElement.title =
+                btn.parentElement.tagName === 'BUTTON'
+                    ? 'Odoo: Mark as Todo | Joorney UI override: Pin'
+                    : 'Odoo: Todo/Starred | Pinned';
+            btn.classList.add('fa-thumb-tack');
+        }
     }
 
     async onPin() {
