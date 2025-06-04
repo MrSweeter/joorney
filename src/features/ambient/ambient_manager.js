@@ -29,7 +29,7 @@ export default class AmbientManager {
         if (!ambient) ambient = this.getSeasonAmbientForDate(date);
         if (!ambient) ambient = await this.getWeatherAmbientForDate(date);
 
-        if (this.isEnable(ambientStatus, ambient.id)) return ambient;
+        if (ambient && this.isEnable(ambientStatus, ambient.id)) return ambient;
         return false;
     }
 
