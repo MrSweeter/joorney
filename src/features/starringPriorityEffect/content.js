@@ -1,9 +1,10 @@
-import ProjectTaskShareContentFeature from '../../shared/projectTaskShare/content.js';
+import ContentFeature from '../../generic/content.js';
+import { isStillSamePage } from '../../utils/authorize.js';
 import Confetti from '../../utils/confetti.js';
 import configuration from './configuration.js';
 
 let starsConfetti = undefined;
-export default class StarringTaskEffectContentFeature extends ProjectTaskShareContentFeature {
+export default class StarringPriorityEffectContentFeature extends ContentFeature {
     constructor() {
         super(configuration);
         starsConfetti = new Confetti();
@@ -20,17 +21,46 @@ export default class StarringTaskEffectContentFeature extends ProjectTaskShareCo
         this.addStarsGenerator = this.addStarsGenerator.bind(this);
     }
 
-    async loadFeatureWithTask(task) {
-        const starred = Number.parseInt(`${task.priority}`) === 1;
-        for (const el of document.getElementsByClassName('o_priority_star')) {
-            // No way to detect starred state dynamically due to hover effect on the star
-            if (starred) el.addEventListener('click', this.addStarsGenerator);
-            else el.addEventListener('click', this.generateStars);
+    async loadFeature(url) {
+        this.preloadFeature();
+        if (!(await isStillSamePage(2500, url))) return;
+
+        for (const el of document.querySelectorAll('.o_priority')) {
+            this.updateWidgetFeature(el, 0, true);
         }
     }
 
+    updateWidgetFeature(widgetElement, newPriority, initialization = false) {
+        const stars = widgetElement.querySelectorAll('.o_priority_star');
+        if (stars.length === 0) return;
+
+        let priority = newPriority;
+        let checked = false;
+        for (const [i, el] of stars.entries()) {
+            const starPriority = Number.parseInt(el.dataset.joorneyPriorityValue ?? 10);
+            checked = starPriority <= newPriority;
+
+            if (initialization) {
+                el.dataset.joorneyPriorityValue = i + 1;
+                checked = el.classList.contains('fa-star');
+                if (checked) priority = i + 1;
+            }
+
+            el.dataset.joorneyChecked = checked;
+
+            el.removeEventListener('click', this.addStarsGenerator);
+            el.removeEventListener('click', this.generateStars);
+
+            if (checked && starPriority === newPriority) el.addEventListener('click', this.addStarsGenerator);
+            else if (checked) el.addEventListener('click', this.generateStars);
+            else el.addEventListener('click', this.generateStars);
+        }
+
+        widgetElement.dataset.joorneyPriorityValue = priority;
+    }
+
     preloadFeature() {
-        const exist = Array.from(document.getElementsByClassName('o_priority_star'));
+        const exist = Array.from(document.querySelectorAll('.o_priority .o_priority_star'));
         for (const el of exist) {
             el.removeEventListener('click', this.addStarsGenerator);
             el.removeEventListener('click', this.generateStars);
@@ -38,8 +68,8 @@ export default class StarringTaskEffectContentFeature extends ProjectTaskShareCo
     }
 
     addStarsGenerator(event) {
-        event.target.removeEventListener('click', this.addStarsGenerator);
-        event.target.addEventListener('click', this.generateStars);
+        const element = event.target;
+        this.updateWidgetFeature(element.closest('.o_priority'), 0);
     }
 
     generateStars(event) {
@@ -55,8 +85,7 @@ export default class StarringTaskEffectContentFeature extends ProjectTaskShareCo
         setTimeout(() => this.shoot(x, y), 100);
         setTimeout(() => this.shoot(x, y), 200);
 
-        element.removeEventListener('click', this.generateStars);
-        element.addEventListener('click', this.addStarsGenerator);
+        this.updateWidgetFeature(element.closest('.o_priority'), Number.parseInt(element.dataset.joorneyPriorityValue));
     }
 
     async shoot(x, y) {

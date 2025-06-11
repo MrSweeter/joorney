@@ -84,5 +84,5 @@ Design
 -   [Odoo Theme Auto-Switch](https://mrsweeter.github.io/joorney/feature.html#themeSwitch)
 -   [Awesome Style](https://mrsweeter.github.io/joorney/feature.html#awesomeStyle)
 -   [Awesome Loading](https://mrsweeter.github.io/joorney/feature.html#awesomeLoading)
--   [Stars your Tasks](https://mrsweeter.github.io/joorney/feature.html#starringTaskEffect)
+-   [Prioritize your records](https://mrsweeter.github.io/joorney/feature.html#starringPriorityEffect)
 -   [Show user Badges](https://mrsweeter.github.io/joorney/feature.html#showMyBadge)

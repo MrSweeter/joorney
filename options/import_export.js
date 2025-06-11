@@ -56,8 +56,6 @@ async function checkConfigurationVersion() {
     });
     if (configurationVersion < baseSettings.configurationVersion) {
         document.getElementById('joorney_migrate_configuration').classList.remove('d-none');
-        document.getElementById('joorney_import_storage_sync_file').disabled = true;
-        document.getElementById('joorney_import_storage_sync').disabled = true;
     }
 }
 

@@ -1,6 +1,6 @@
 export default {
-    id: 'starringTaskEffect',
-    display_name: 'Starring Task Effect',
+    id: 'starringPriorityEffect',
+    display_name: 'Starring Effect',
     icon: '<i class="fa-solid fa-star"></i>',
     trigger: {
         load: true,
@@ -11,8 +11,8 @@ export default {
         option: false,
     },
     defaultSettings: {
-        starringTaskEffectEnabled: false,
-        starringTaskEffectWhitelistMode: false,
+        starringPriorityEffectEnabled: false,
+        starringPriorityEffectWhitelistMode: false,
     },
     supported_version: ['16+'],
 };
