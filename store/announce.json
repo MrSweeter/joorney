@@ -31,5 +31,12 @@
         "closeable": true,
         "menu": "page-version",
         "hash": "2.3.3.16.1"
+    },
+    "2.4.0.16": {
+        "title": "Stars Effect + Odoo 18.2 & 18.3",
+        "description": "'Stars Task Effect' is now 'Stars Effect', available for all priority widget use!",
+        "closeable": true,
+        "menu": "page-version",
+        "hash": "2.4.0.16.1"
     }
 }
