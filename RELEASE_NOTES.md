@@ -1,5 +1,14 @@
 # Joorney Release Notes
 
+## [2.4.0.16] Stars Effect and Odoo 18.2, 18.3
+
+-   Odoo 18.2, 18.3
+-   Updated feature: "Stars Task Effect" into "Stars Effect" [:link:](https://mrsweeter.github.io/joorney/feature.html#starringPriorityEffect)
+    -   available for all fields using the "priority" widget
+    -   available in all views (form, kanban, list, calendar, ...)
+    -   more stable and based on first page load
+-   Bug fixes
+
 ## [2.3.4.16] Support Odoo Development Version
 
 -   Bug fixes
@@ -84,5 +93,5 @@ Design
 -   [Odoo Theme Auto-Switch](https://mrsweeter.github.io/joorney/feature.html#themeSwitch)
 -   [Awesome Style](https://mrsweeter.github.io/joorney/feature.html#awesomeStyle)
 -   [Awesome Loading](https://mrsweeter.github.io/joorney/feature.html#awesomeLoading)
--   [Stars your Tasks](https://mrsweeter.github.io/joorney/feature.html#starringTaskEffect)
+-   [Prioritize your records](https://mrsweeter.github.io/joorney/feature.html#starringPriorityEffect)
 -   [Show user Badges](https://mrsweeter.github.io/joorney/feature.html#showMyBadge)

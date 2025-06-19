@@ -17,9 +17,13 @@
         <div class="">
             <p id="error_message" class="text-danger"></p>
 
-            <div class="mb-5">
+            <div class="mb-5 w-100 d-flex flex-column justify-content-center align-items-center">
                 <h4>Select your configuration to migrate</h4>
-                <input type="file" accept=".json" class="form-control form-control-sm" id="joorney_import_storage_sync_file" />
+                <div class="d-flex justify-content-center align-items-center">
+                    <input type="file" accept=".json" class="form-control form-control-sm" id="joorney_import_storage_sync_file" />
+                    <span class="mx-2">or</span>
+                    <button id="migrate_current" class="btn btn-sm btn-success">Use current</button>
+                </div>
             </div>
 
             <div id="migration_resume" class="d-none">

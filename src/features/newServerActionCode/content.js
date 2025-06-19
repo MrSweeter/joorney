@@ -1,6 +1,7 @@
 import ContentFeature from '../../generic/content.js';
 import { isStillSamePage } from '../../utils/authorize.js';
 import { isModelCreateView_fromURL } from '../../utils/url_manager.js';
+import { sleep } from '../../utils/util.js';
 import configuration from './configuration.js';
 
 export default class NewServerActionCodeContentFeature extends ContentFeature {
@@ -29,7 +30,8 @@ export default class NewServerActionCodeContentFeature extends ContentFeature {
         const observer = new MutationObserver((mutations) => {
             const choiceMutations = mutations.filter((m) => m.target.id.match(/^model_id_0_(0_)?\d+$/));
             // model_id_0_0_0 for record and model_id_0_0_1 for search more (optional)
-            if (choiceMutations.length !== 2 && choiceMutations.length !== 1) return;
+            const mutationSet = new Set(choiceMutations.map((m) => m.target.id)); // [ODOO] 18.3+ create 4 mutations
+            if (mutationSet.size !== 2 && mutationSet.size !== 1) return;
 
             const serverActionItem = parent.querySelector('#model_id_0_0_0') ?? parent.querySelector('#model_id_0_0');
 
@@ -42,6 +44,8 @@ export default class NewServerActionCodeContentFeature extends ContentFeature {
         observer.disconnect();
         observer.observe(parent, { childList: true, subtree: true });
         inputModel.dispatchEvent(new InputEvent('input', { bubbles: true }));
+
+        await sleep(500); // [ODOO] 18.3+ action type is not shown by default, wait event end
     }
 
     selectExecuteCode() {

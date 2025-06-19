@@ -109,6 +109,7 @@ function canContinue(url) {
 
 async function loadFeatures(url, versionInfo, trigger) {
     const response = await sendRuntimeMessage(MESSAGE_ACTION.TO_BACKGROUND.GET_FEATURES_LIST);
+    if (!response) return;
     const features = response.features.filter((f) => f.trigger[trigger]);
 
     let importer = async (feature) => await importFeatureContentFile(feature.id);

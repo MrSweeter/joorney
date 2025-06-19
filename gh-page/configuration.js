@@ -224,19 +224,19 @@ export const features = [
         amico: 'progress_indicator-amico',
     },
     {
-        id: 'starringTaskEffect',
+        id: 'starringPriorityEffect',
         icon: 'fa-solid fa-star',
         title: 'Stars Effect',
         longDescription:
-            '<em>Stars Effect</em> adds a touch of magic to task prioritization. When you prioritize a task, it triggers a stars particles effect, adding a visually pleasing element to task management and making the prioritization process more engaging.',
-        textDescription: 'Trigger stars particles effect when you prioritize a task.',
+            '<em>Stars Effect</em> adds a touch of magic to prioritization. When you prioritize a record, it triggers a stars particles effect, adding a visually pleasing element to management and making the prioritization process more engaging.',
+        textDescription: 'Trigger stars particles effect when you prioritize a record.',
         video: '',
         additionalDescription: `<div class="additional-info">
             <p class="fw-bold">Additional Information:</p>
             <ul>
-                <li class="pb-3"><strong>Visual Feedback:</strong> Adds a visually pleasing stars particle effect when prioritizing tasks/tickets.</li>
-                <li class="pb-3"><strong>Engaging Experience:</strong> Makes task/ticket prioritization more enjoyable and interactive.</li>
-                <li class="pb-3"><strong>Instant Recognition:</strong> Provides immediate visual confirmation when a task/ticket is prioritized.</li>
+                <li class="pb-3"><strong>Visual Feedback:</strong> Adds a visually pleasing stars particle effect when prioritizing records/tickets.</li>
+                <li class="pb-3"><strong>Engaging Experience:</strong> Makes records prioritization more enjoyable and interactive.</li>
+                <li class="pb-3"><strong>Instant Recognition:</strong> Provides immediate visual confirmation when a record is prioritized.</li>
                 <li class="pb-3"><strong>Motivation Boost:</strong> Enhances user satisfaction and motivation through engaging visuals.</li>
             </ul>
         </div>`,

@@ -2,7 +2,7 @@
     "awesomeLoadingLarge": true,
     "awesomeLoadingSmall": true,
     "assignMeTask": true,
-    "starringTaskEffect": true,
+    "starringPriorityEffect": true,
     "saveKnowledge": true,
     "themeSwitch": true,
     "awesomeStyle": true,

@@ -1,4 +1,5 @@
-import { baseSettings, importMigratorFile } from '../../configuration.js';
+import { baseSettings, getFeaturesAndCurrentSettings, importMigratorFile } from '../../configuration.js';
+import { StorageSync } from '../../src/utils/browser.js';
 
 function setupInput() {
     const importInput = document.getElementById('joorney_import_storage_sync_file');
@@ -9,6 +10,12 @@ function setupInput() {
             analyzeConfiguration(resJson);
         };
         reader.readAsText(e.target.files[0]);
+    };
+
+    const migrateCurrent = document.getElementById('migrate_current');
+    migrateCurrent.onclick = async () => {
+        const { currentSettings } = await getFeaturesAndCurrentSettings();
+        analyzeConfiguration(currentSettings);
     };
 }
 
@@ -47,6 +54,9 @@ function analyzeConfiguration(jsonFile) {
         button.disabled = true;
         button.innerHTML = '<i class="fa-solid fa-spin fa-spinner"></i>';
         const finalConfiguration = await runMigration(jsonFile, migrateVersion, currentVersion);
+
+        await StorageSync.set(finalConfiguration);
+
         button.innerHTML = 'Download new configuration';
         runButton.onclick = () => {
             downloadNewMigration(finalConfiguration);

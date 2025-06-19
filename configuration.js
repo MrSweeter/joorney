@@ -3,7 +3,7 @@ import { Console, StorageSync, sendRuntimeMessage } from './src/utils/browser.js
 import { MESSAGE_ACTION } from './src/utils/messaging.js';
 
 export const baseSettings = {
-    configurationVersion: 1,
+    configurationVersion: 2,
     toastMode: 'ui',
     toastType: JSON.stringify({
         info: false,

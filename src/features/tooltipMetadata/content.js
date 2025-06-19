@@ -107,13 +107,13 @@ export default class TooltipMetadataContentFeature extends ContentFeature {
 
         const template = document.createElement('template');
         template.innerHTML = `
-            <div id="joorney-tooltip-metadata" style="z-index:900">
+            <div id="joorney-tooltip-metadata">
                 <style>
                     #joorney-tooltip-metadata {
                         display: none;
                         position: absolute;
                         top: 100%;
-                        z-index: 10;
+                        z-index: 1050;
                         background-color: ${isDark ? '#262A36' : '#f9f9f9'};
                         color: ${isDark ? '#e4e4e4' : '#374151'};
                         width: max-content;
@@ -134,10 +134,10 @@ export default class TooltipMetadataContentFeature extends ContentFeature {
                     #joorney-tooltip-metadata td:last-child {
                         width: 100%;
                     }
-                    .o_debug_manager:hover #joorney-tooltip-metadata {
+                    .o_debug_manager:hover:not(:has(.dropdown.show)) #joorney-tooltip-metadata {
                         display: flex;
                     }
-                    .o_debug_manager:hover button {
+                    .o_debug_manager:hover:not(:has(.dropdown.show)) button {
                         border-color: rgba(252, 163, 17, 1) !important
                     }
                 </style>
