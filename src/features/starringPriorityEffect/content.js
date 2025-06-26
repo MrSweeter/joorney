@@ -34,7 +34,7 @@ export default class StarringPriorityEffectContentFeature extends ContentFeature
         const stars = widgetElement.querySelectorAll('.o_priority_star');
         if (stars.length === 0) return;
 
-        let priority = newPriority;
+        let priority = 0;
         let checked = false;
         for (const [i, el] of stars.entries()) {
             const starPriority = Number.parseInt(el.dataset.joorneyPriorityValue ?? 10);
@@ -43,16 +43,15 @@ export default class StarringPriorityEffectContentFeature extends ContentFeature
             if (initialization) {
                 el.dataset.joorneyPriorityValue = i + 1;
                 checked = el.classList.contains('fa-star');
-                if (checked) priority = i + 1;
             }
+            if (checked) priority = i + 1;
 
             el.dataset.joorneyChecked = checked;
 
             el.removeEventListener('click', this.addStarsGenerator);
             el.removeEventListener('click', this.generateStars);
 
-            if (checked && starPriority === newPriority) el.addEventListener('click', this.addStarsGenerator);
-            else if (checked) el.addEventListener('click', this.generateStars);
+            if (checked) el.addEventListener('click', this.addStarsGenerator);
             else el.addEventListener('click', this.generateStars);
         }
 
@@ -69,7 +68,10 @@ export default class StarringPriorityEffectContentFeature extends ContentFeature
 
     addStarsGenerator(event) {
         const element = event.target;
-        this.updateWidgetFeature(element.closest('.o_priority'), 0);
+        const parent = element.closest('.o_priority');
+        const currentPriority = Number.parseInt(parent.dataset.joorneyPriorityValue ?? 0);
+        const priority = Number.parseInt(element.dataset.joorneyPriorityValue ?? 0);
+        this.updateWidgetFeature(parent, priority === currentPriority ? 0 : priority);
     }
 
     generateStars(event) {
