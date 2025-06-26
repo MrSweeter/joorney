@@ -1,5 +1,10 @@
 # Joorney Release Notes
 
+## [2.4.1.16] Bug fixes and Odoo 18.4
+
+-   Odoo 18.4
+-   Bug fixes
+
 ## [2.4.0.16] Stars Effect and Odoo 18.2, 18.3
 
 -   Odoo 18.2, 18.3
