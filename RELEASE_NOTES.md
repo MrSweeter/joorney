@@ -1,5 +1,7 @@
 # Joorney Release Notes
 
+## [2.5.0.16] Odoo 19+
+
 ## [2.4.1.16] Bug fixes and Odoo 18.4
 
 -   Odoo 18.4

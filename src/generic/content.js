@@ -32,6 +32,7 @@ export default class ContentFeature {
 
         Runtime.onMessage.addListener((msg) => {
             if (msg.action === MESSAGE_ACTION.TO_CONTENT.WEB_REQUEST_COMPLETE) this.onRequestCompleted(msg);
+            return true;
         });
     }
 
@@ -46,6 +47,7 @@ export default class ContentFeature {
         Runtime.onMessage.addListener((msg) => {
             if (msg.action !== MESSAGE_ACTION.TO_CONTENT.POPUP_HAS_CHANGE) return;
             this.onPopupMessage(msg);
+            return true;
         });
     }
 

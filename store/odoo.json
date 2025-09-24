@@ -14,7 +14,12 @@
         "saas-18.1",
         "saas-18.2",
         "saas-18.3",
-        "saas-18.4"
+        "saas-18.4",
+        "19.0",
+        "saas-19.1",
+        "saas-19.2",
+        "saas-19.3",
+        "saas-19.4"
     ],
-    "developmentOdooVersions": ["19.0"]
+    "developmentOdooVersions": ["20.0"]
 }

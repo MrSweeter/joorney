@@ -28,6 +28,7 @@ export default class OptionFeature {
         Runtime.onMessage.addListener((msg) => {
             if (msg.action !== MESSAGE_ACTION.TO_CONTENT.POPUP_HAS_CHANGE) return;
             this.onPopupMessage(msg);
+            return true;
         });
     }
 

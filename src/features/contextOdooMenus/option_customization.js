@@ -51,7 +51,7 @@ export default class ContextOdooMenusOptionCustomizationFeature extends OptionCu
 
     async updatePath(id, path) {
         try {
-            const menus = await this.updateOrCreate(id, path, false);
+            const menus = await this.updateOrCreate(id, path, true);
             await this.saveAndRender(menus, false);
         } catch (error) {
             this.displayError(error.message);
