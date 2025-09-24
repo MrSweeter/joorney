@@ -28,16 +28,34 @@ export default class ShowMyBadgeContentFeature extends ContentFeature {
     }
 
     handleMutation(mutations) {
-        const avatarCardMutationNode = mutations
-            .filter((m) => m.type === 'childList' && m.addedNodes?.length > 0)
-            .flatMap((m) => Array.from(m.addedNodes))
-            .find((n) => n.nodeName === 'DIV' && n.className.includes('o_avatar_card'));
-        if (!avatarCardMutationNode) return;
+        // [ODOO] < 19.0
+        function getOldCard() {
+            const avatarCardMutationNode = mutations
+                .filter((m) => m.type === 'childList' && m.addedNodes?.length > 0)
+                .flatMap((m) => Array.from(m.addedNodes))
+                .find((n) => n.nodeName === 'DIV' && n.className.includes('o_avatar_card'));
+            return avatarCardMutationNode;
+        }
 
+        // [ODOO] 19.0+
+        function getNewCard() {
+            const avatarCardMutationNode = mutations.filter(
+                (m) =>
+                    m.target.className.includes('o_card_user_infos') &&
+                    Array.from(m.addedNodes ?? [])?.filter((n) => !n.className?.includes('joorney-badge-container'))
+                        ?.length > 0
+            )?.[0]?.target?.parentNode;
+            return avatarCardMutationNode;
+        }
+
+        const avatarCardMutationNode = getNewCard() ?? getOldCard();
+        if (!avatarCardMutationNode) return;
         const emailNode = avatarCardMutationNode.querySelector('div.o_card_user_infos a[href^="mailto:"]');
+        if (!emailNode) return;
         const email = emailNode.href.replace('mailto:', '');
         const name = avatarCardMutationNode.querySelector('div.o_card_user_infos span').innerText;
-        if (email) this.appendBadges(avatarCardMutationNode, email, name);
+        if (!email) return;
+        this.appendBadges(avatarCardMutationNode, email, name);
     }
 
     async appendBadges(card, emailArg, nameArg) {
@@ -46,11 +64,21 @@ export default class ShowMyBadgeContentFeature extends ContentFeature {
 
         const infoNode = card.querySelector('div.o_card_user_infos')?.parentNode;
         if (!infoNode) return;
+        const buttonsNode = card.querySelector('div.o_avatar_card_buttons');
+
+        // [ODOO] 19.0+ buttonsNode
+        // [ODOO] < 19.0 infoNode
+        const containerNode = buttonsNode?.parentNode.innerText === infoNode.innerText ? buttonsNode : infoNode;
+        const before = buttonsNode?.parentNode.innerText === infoNode.innerText;
 
         const emailNode = card.querySelector('div.o_card_user_infos a[href^="mailto:"]');
         const email = emailNode.href.replace('mailto:', '');
         if (email !== emailArg) return;
-        infoNode.after(this.getBadgesNode(badges));
+        if (before) {
+            containerNode.before(this.getBadgesNode(badges));
+            return;
+        }
+        containerNode.after(this.getBadgesNode(badges));
     }
 
     async loadBadgesForUser(email, name) {
@@ -126,7 +154,7 @@ export default class ShowMyBadgeContentFeature extends ContentFeature {
 
         const template = document.createElement('template');
         template.innerHTML = `
-            <div class="d-flex mt-3 mb-3 gap-2 justify-content-end flex-wrap">
+            <div class="d-flex mt-3 mb-3 gap-2 justify-content-end flex-wrap joorney-badge-container">
                 ${badgesHTML.join('\n')}
             </div>
         `.trim();
