@@ -26,7 +26,7 @@ async function handleAction(message, sender) {
             break;
         }
         case MESSAGE_ACTION.TO_BACKGROUND.RECREATE_MENU: {
-            callback = createContextMenu();
+            callback = createContextMenu('messaging');
             break;
         }
         case MESSAGE_ACTION.TO_BACKGROUND.TRIGGER_FEATURE: {
