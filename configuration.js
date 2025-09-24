@@ -21,7 +21,7 @@ export const baseSettings = {
         // },
     },
 
-    supportedVersions: ['18.0'],
+    supportedVersions: ['19.0'],
     supportedDevVersions: [],
 
     // Experimental

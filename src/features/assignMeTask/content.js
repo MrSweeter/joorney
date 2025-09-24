@@ -80,8 +80,9 @@ export default class AssignMeTaskContentFeature extends ProjectTaskShareContentF
         // Fake assigned element
         const avatarSrc = document.querySelector('.o_user_avatar, .oe_topbar_avatar')?.src;
         if (!avatarSrc || avatarSrc.length <= 0) return false;
-        const userName = document.querySelector('.o_user_avatar ~ .oe_topbar_name, .oe_topbar_avatar ~ .oe_topbar_name')
-            ?.firstChild?.nodeValue;
+        const userName = document.querySelector(
+            '.o_user_avatar ~ .oe_topbar_name, .oe_topbar_avatar ~ .oe_topbar_name, .o_user_menu .oe_topbar_name'
+        )?.firstChild?.nodeValue;
         if (!userName || userName.length <= 0) return false;
 
         // Fake chat message

@@ -24,5 +24,5 @@ export default {
         pinMessageSelfAuthorEnabled: true,
         pinMessageDefaultShown: false,
     },
-    supported_version: ['17+'],
+    supported_version: ['17:19'],
 };

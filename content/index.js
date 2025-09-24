@@ -96,6 +96,7 @@ function addNavigationListener() {
         loadedURL = url;
         const versionInfo = getOdooVersion();
         loadFeatures(url, versionInfo, 'navigate');
+        return true;
     });
 }
 

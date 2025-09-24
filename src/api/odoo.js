@@ -179,7 +179,7 @@ async function _getDataset(model, domain, fields, limit) {
     return data;
 }
 
-export async function getDatasetWithIDs(model, ids) {
+export async function getDatasetWithIDs(model, ids, fields = null) {
     const recordIDs = Array.isArray(ids) ? ids : [ids];
     const response = await fetch(
         new Request(`/web/dataset/call_kw/${model}/read`, {
@@ -190,7 +190,9 @@ export async function getDatasetWithIDs(model, ids) {
                 method: 'call',
                 params: {
                     args: [recordIDs],
-                    kwargs: {},
+                    kwargs: {
+                        fields: fields,
+                    },
                     model: model,
                     method: 'read',
                 },

@@ -13,7 +13,7 @@ export async function disableDynamicItems() {
     return Promise.all(CONTEXT_MENU_DYNAMIC_ITEM_IDS.map((id) => ContextMenus.update(id, { visible: false })));
 }
 
-export async function createContextMenu() {
+export async function createContextMenu(initiator) {
     await ContextMenus.removeAll();
     CONTEXT_MENU_DYNAMIC_ITEM_IDS.length = 0;
 
@@ -22,32 +22,38 @@ export async function createContextMenu() {
 
     for (const item of dynamicItems.filter((i) => !i.parentId)) {
         items.push(
-            createContextMenuItem({
-                id: item.id,
-                title: item.title ?? item.path ?? 'Unknown item',
-                contexts: item.contexts ?? ['all'],
-                visible: false,
-            })
+            createContextMenuItem(
+                {
+                    id: item.id,
+                    title: item.title ?? item.path ?? 'Unknown item',
+                    contexts: item.contexts ?? ['all'],
+                    visible: false,
+                },
+                initiator
+            )
         );
         CONTEXT_MENU_DYNAMIC_ITEM_IDS.push(item.id);
     }
 
     for (const item of dynamicItems.filter((i) => i.parentId)) {
         items.push(
-            createContextMenuItem({
-                id: item.id,
-                title: item.title ?? item.path ?? 'Unknown item',
-                contexts: item.contexts ?? ['all'],
-                visible: false,
-                parentId: item.parentId,
-            })
+            createContextMenuItem(
+                {
+                    id: item.id,
+                    title: item.title ?? item.path ?? 'Unknown item',
+                    contexts: item.contexts ?? ['all'],
+                    visible: false,
+                    parentId: item.parentId,
+                },
+                initiator
+            )
         );
         CONTEXT_MENU_DYNAMIC_ITEM_IDS.push(item.id);
     }
 
-    if (dynamicItems.length > 0) items.push(createContextMenuItem(separatorMenuItem));
-    items.push(createContextMenuItem(clearLocalCacheMenuItem));
-    items.push(createContextMenuItem(optionMenuItem));
+    if (dynamicItems.length > 0) items.push(createContextMenuItem(separatorMenuItem, initiator));
+    items.push(createContextMenuItem(clearLocalCacheMenuItem, initiator));
+    items.push(createContextMenuItem(optionMenuItem, initiator));
 
     await Promise.all(items);
 }
@@ -119,13 +125,20 @@ function formatTitle(title, args) {
     return finalTitle;
 }
 
-async function createContextMenuItem(createProperties) {
+async function createContextMenuItem(createProperties, initiator) {
     // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/menus/create
     // https://developer.chrome.com/docs/extensions/reference/api/contextMenus#method-create
     // TODO switch to await when Promise flow is release
-    return new Promise((resolve) => {
-        ContextMenus.create(createProperties, resolve);
-    }).catch(() => {});
+    return new Promise((resolve, reject) => {
+        ContextMenus.create(createProperties, () => {
+            const err = Runtime.lastError;
+            if (err) {
+                console.error(`initiator: ${initiator}\n${err}`);
+                reject(`initiator: ${initiator}\n${err}`);
+            }
+            resolve();
+        });
+    });
 }
 
 async function getItems(tab = undefined, toArray = true) {

@@ -97,7 +97,7 @@ async function main() {
 
     initOmni();
 
-    createContextMenu();
+    createContextMenu('main');
 
     listenRequest();
 

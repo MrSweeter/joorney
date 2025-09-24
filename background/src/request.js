@@ -5,6 +5,7 @@ import { MESSAGE_ACTION } from '../../src/utils/messaging';
 export function listenRequest() {
     const urls = features.flatMap((f) => f.trigger.onrequest || []);
 
+    WebRequest.onCompleted.removeListener(requestComplete);
     WebRequest.onCompleted.addListener(requestComplete, { urls: urls }, []);
 }
 
