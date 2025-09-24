@@ -74,6 +74,8 @@ export default class ShowMyBadgeContentFeature extends ContentFeature {
         const emailNode = card.querySelector('div.o_card_user_infos a[href^="mailto:"]');
         const email = emailNode.href.replace('mailto:', '');
         if (email !== emailArg) return;
+
+        for (const el of document.getElementsByClassName('joorney-badge-container')) el.remove();
         if (before) {
             containerNode.before(this.getBadgesNode(badges));
             return;
