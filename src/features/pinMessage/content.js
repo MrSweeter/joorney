@@ -8,7 +8,6 @@ import { getModelAndID_fromURL } from '../../utils/url_manager.js';
 import { sleep } from '../../utils/util.js';
 import configuration from './configuration.js';
 
-let pinMessageChatterObserver = undefined;
 const ignore_message_with_selector = ['.o-mail-Message-bubble.o-green', '.o-mail-Message-bubble.o-blue'];
 
 export default class PinMessageContentFeature extends ContentFeature {
@@ -20,8 +19,7 @@ export default class PinMessageContentFeature extends ContentFeature {
         this.handleChatterMutation = this.handleChatterMutation.bind(this);
         this.onPin = this.onPin.bind(this);
         this.selfAuthor = true;
-        pinMessageChatterObserver?.disconnect();
-        pinMessageChatterObserver = new MutationObserver(this.handleChatterMutation);
+        this.pinMessageChatterObserver = new MutationObserver(this.handleChatterMutation);
     }
 
     async onRequestCompleted(msg) {
@@ -112,8 +110,12 @@ export default class PinMessageContentFeature extends ContentFeature {
         if (!target) return;
         const observerOptions = { childList: true, subtree: false };
 
-        pinMessageChatterObserver.disconnect();
-        pinMessageChatterObserver.observe(target.firstChild, observerOptions);
+        this.pinMessageChatterObserver.disconnect();
+        this.pinMessageChatterObserver.observe(target.firstChild, observerOptions);
+    }
+
+    unload() {
+        this.pinMessageChatterObserver?.disconnect();
     }
 
     handleChatterMutation(mutations) {

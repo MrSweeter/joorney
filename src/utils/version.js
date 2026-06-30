@@ -46,5 +46,4 @@ async function checkVersionIntegrity(versions, isDev) {
 
     const safe = settings[settingKey].filter((v) => versions.includes(v));
     StorageSync.set({ [settingKey]: safe });
-    console.log(safe);
 }

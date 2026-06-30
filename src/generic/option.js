@@ -27,15 +27,14 @@ export default class OptionFeature {
         if (!this.configuration.customization.popup) return;
         Runtime.onMessage.addListener((msg) => {
             if (msg.action !== MESSAGE_ACTION.TO_CONTENT.POPUP_HAS_CHANGE) return;
-            this.onPopupMessage(msg);
-            return true;
+            return this.onPopupMessage(msg).catch((ex) => Console.warn(ex));
         });
     }
 
-    onPopupMessage(msg) {
+    async onPopupMessage(msg) {
         const enableFeature = msg[`enable${featureIDToPascalCase(this.configuration.id)}`];
         if (enableFeature === true || enableFeature === false) {
-            this.restore();
+            await this.restore();
         }
     }
 

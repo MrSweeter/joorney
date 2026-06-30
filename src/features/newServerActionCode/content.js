@@ -31,12 +31,14 @@ export default class NewServerActionCodeContentFeature extends ContentFeature {
             const choiceMutations = mutations.filter((m) => m.target.id.match(/^model_id_0_(0_)?\d+$/));
             // model_id_0_0_0 for record and model_id_0_0_1 for search more (optional)
             const mutationSet = new Set(choiceMutations.map((m) => m.target.id)); // [ODOO] 18.3+ create 4 mutations
-            if (mutationSet.size !== 2 && mutationSet.size !== 1) return;
+            if (mutationSet.size > 3) return;
 
             const serverActionItem = parent.querySelector('#model_id_0_0_0') ?? parent.querySelector('#model_id_0_0');
 
-            observer.disconnect();
-            if (serverActionItem) serverActionItem.click();
+            if (serverActionItem) {
+                observer.disconnect();
+                serverActionItem.click();
+            }
 
             const nameElement = document.getElementById('name_0') ?? document.getElementById('name');
             if (nameElement) nameElement.focus();

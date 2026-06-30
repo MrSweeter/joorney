@@ -71,37 +71,33 @@ Windows.onFocusChanged.addListener(async (windowId) => {
 });
 
 // Triggers when a message is received (from the content script)
-Runtime.onMessage.addListener((message, sender, sendResponse) => {
-    handleMessage(message, sender)
-        .then(async (r) => {
-            sendResponse(r);
-        })
-        .catch((ex) => {
-            Console.warn(ex);
-            sendResponse();
-        });
-    return true;
+Runtime.onMessage.addListener((message, sender) => {
+    return handleMessage(message, sender);
 });
 
 ContextMenus.onClicked.addListener(onContextMenuItemClick);
 
 async function main() {
     // Add some delay to avoid initialization side effect
-    await sleep(1000);
+    // await sleep(1000);
 
-    checkVersion();
+    await checkVersion();
     handleCommands();
-    checkHostsExpiration();
+    await checkHostsExpiration();
 
     await loadFeaturesConfiguration();
 
     initOmni();
 
-    createContextMenu('main');
+    await createContextMenu('main');
 
     listenRequest();
 
     await AmbientManager.computeEvents();
 }
 
-main();
+try {
+    main();
+} catch (e) {
+    console.error(e)
+}

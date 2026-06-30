@@ -38,7 +38,7 @@ export default class AwesomeStyleContentFeature extends ContentFeature {
         document.documentElement.appendChild(styleTemplate.content.firstChild);
     }
 
-    onPopupMessage(msg) {
+    async onPopupMessage(msg) {
         const css = msg.enableAwesomeStyle;
 
         if (typeof css === 'boolean') {

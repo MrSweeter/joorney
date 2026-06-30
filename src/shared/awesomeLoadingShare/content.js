@@ -26,13 +26,13 @@ export default class AwesomeLoadingShareContentFeature extends ContentFeature {
         return '';
     }
 
-    async appendLoadingToDOM(image) {
+    appendLoadingToDOM(image) {
         const styleTemplate = document.createElement('template');
         styleTemplate.innerHTML = this.getInnerStyle(image);
         document.documentElement.appendChild(styleTemplate.content.firstChild);
     }
 
-    onPopupMessage(msg) {
+    async onPopupMessage(msg) {
         const img = this.getImageFromNavigationMessage(msg);
         if (img || img === false) {
             const exist = Array.from(document.getElementsByName(this.loadingID));

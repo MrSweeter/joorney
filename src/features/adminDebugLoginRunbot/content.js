@@ -37,7 +37,11 @@ export default class AdminDebugLoginRunbotContentFeature extends LimitedRunbotCo
     async openEventRunbot(e, newTab) {
         e.preventDefault();
         try {
+            e.target.classList.remove('btn-warning');
+            e.target.classList.add('btn-secondary');
             await this.openRunbot(e.target.href, newTab);
+            e.target.classList.remove('btn-secondary');
+            e.target.classList.add('btn-warning');
         } catch (error) {
             Console.warn(error);
             e.target.classList.remove('btn-warning');

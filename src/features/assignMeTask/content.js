@@ -72,17 +72,17 @@ export default class AssignMeTaskContentFeature extends ProjectTaskShareContentF
                 }
             }
         } catch (err) {
-            ToastManager.warn(this.configuration.id, 'An error occur during task asssignation', err.message);
+            ToastManager.warn(this.configuration.id, 'An error occurred during task assignment', err.message);
         }
     }
 
     addUserInUI(isWarning) {
         // Fake assigned element
-        const avatarSrc = document.querySelector('.o_user_avatar, .oe_topbar_avatar')?.src;
+        const avatarSrc = document.querySelector('.o_user_avatar, .oe_topbar_avatar')?.src ?? document.querySelector('.o_user_menu img')?.src;
         if (!avatarSrc || avatarSrc.length <= 0) return false;
-        const userName = document.querySelector(
-            '.o_user_avatar ~ .oe_topbar_name, .oe_topbar_avatar ~ .oe_topbar_name, .o_user_menu .oe_topbar_name'
-        )?.firstChild?.nodeValue;
+        const userName = document
+            .querySelector('.o_user_avatar ~ .oe_topbar_name, .oe_topbar_avatar ~ .oe_topbar_name, .o_user_menu .oe_topbar_name')
+            ?.textContent?.trim();
         if (!userName || userName.length <= 0) return false;
 
         // Fake chat message
