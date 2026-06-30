@@ -163,6 +163,10 @@ export const ToastManager = {
     _hide(toastID) {
         const toast = document.getElementById(toastID);
         if (!toast) return;
+        const state = existingToast[toastID];
+        if (state && typeof state === 'object' && state.id) {
+            clearTimeout(state.id);
+        }
         toast.style.transform = 'translateX(200%)';
         toast.style.opacity = 0;
         setTimeout(() => {

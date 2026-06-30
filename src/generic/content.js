@@ -1,6 +1,6 @@
 import { ToastManager } from '../toast/index.js';
 import { isAuthorizedFeature, isSupportedFeature } from '../utils/authorize.js';
-import { Runtime } from '../utils/browser.js';
+import { Runtime, Console } from '../utils/browser.js';
 import { NotYetImplemented } from '../utils/error.js';
 import { MESSAGE_ACTION } from '../utils/messaging.js';
 import { sanitizeURL } from '../utils/util.js';
@@ -10,6 +10,8 @@ export default class ContentFeature {
         this.configuration = configuration;
         this.defaultSettings = configuration.defaultSettings;
         this.versionInfo = null;
+        this._runtimeOnRequestListener = null;
+        this._runtimePopupListener = null;
     }
 
     async load(urlArg, versionInfo) {
@@ -29,11 +31,13 @@ export default class ContentFeature {
     observeRequest() {
         const onrequest = this.configuration.trigger.onrequest;
         if (!onrequest || onrequest.length < 1) return;
+        if (this._runtimeOnRequestListener) return;
 
-        Runtime.onMessage.addListener((msg) => {
-            if (msg.action === MESSAGE_ACTION.TO_CONTENT.WEB_REQUEST_COMPLETE) this.onRequestCompleted(msg);
-            return true;
-        });
+        this._runtimeOnRequestListener = (msg) => {
+            if (msg.action !== MESSAGE_ACTION.TO_CONTENT.WEB_REQUEST_COMPLETE) return;
+            return this.onRequestCompleted(msg).catch((ex) => Console.warn(ex));
+        };
+        Runtime.onMessage.addListener(this._runtimeOnRequestListener);
     }
 
     async onRequestCompleted(_msg) {}
@@ -44,14 +48,27 @@ export default class ContentFeature {
 
     async handlePopupMessage() {
         if (!this.configuration.customization.popup) return;
-        Runtime.onMessage.addListener((msg) => {
+        if (this._runtimePopupListener) return;
+
+        this._runtimePopupListener = (msg) => {
             if (msg.action !== MESSAGE_ACTION.TO_CONTENT.POPUP_HAS_CHANGE) return;
-            this.onPopupMessage(msg);
-            return true;
-        });
+            return this.onPopupMessage(msg).catch((ex) => Console.warn(ex));
+        };
+        Runtime.onMessage.addListener(this._runtimePopupListener);
     }
 
-    onPopupMessage(_msg) {
+    unload() {
+        if (this._runtimeOnRequestListener) {
+            Runtime.onMessage.removeListener(this._runtimeOnRequestListener);
+            this._runtimeOnRequestListener = null;
+        }
+        if (this._runtimePopupListener) {
+            Runtime.onMessage.removeListener(this._runtimePopupListener);
+            this._runtimePopupListener = null;
+        }
+    }
+
+    async onPopupMessage(_msg) {
         if (this.configuration.customization.popup) throw NotYetImplemented;
     }
 

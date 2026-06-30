@@ -5,6 +5,7 @@ import { Checklist } from './index.js';
 
 export default class ChecklistManager {
     static load() {
+        Checklist.manager?.destroy();
         Checklist.manager = new ChecklistManager(document.getElementById('joorney_checklist'));
         Checklist.bubble = new Bubble();
     }
@@ -31,6 +32,8 @@ export default class ChecklistManager {
         this.beginDrag = this.beginDrag.bind(this);
         this.moving = this.moving.bind(this);
         this.endDrag = this.endDrag.bind(this);
+        this.onWindowResize = this.onWindowResize.bind(this);
+        this.onWindowScroll = this.onWindowScroll.bind(this);
 
         this.init();
     }
@@ -40,13 +43,24 @@ export default class ChecklistManager {
         document.getElementById('joorney_checklist_show_btn').onclick = () => this.toggle(true);
         document.getElementById('joorney_checklist_hide_btn').onclick = () => this.toggle(false);
 
-        window.addEventListener('resize', () => {
-            this.reposition();
-            Checklist.bubble?.reposition();
-        });
-        window.addEventListener('scroll', () => {
-            Checklist.bubble?.reposition();
-        });
+        window.removeEventListener('resize', this.onWindowResize);
+        window.removeEventListener('scroll', this.onWindowScroll);
+        window.addEventListener('resize', this.onWindowResize);
+        window.addEventListener('scroll', this.onWindowScroll);
+    }
+
+    onWindowResize() {
+        this.reposition();
+        Checklist.bubble?.reposition();
+    }
+
+    onWindowScroll() {
+        Checklist.bubble?.reposition();
+    }
+
+    destroy() {
+        window.removeEventListener('resize', this.onWindowResize);
+        window.removeEventListener('scroll', this.onWindowScroll);
     }
 
     toggle(isOpen = undefined) {

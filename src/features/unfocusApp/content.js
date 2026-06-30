@@ -181,7 +181,7 @@ export default class UnfocusApp extends ContentFeature {
         parent.style.backgroundPosition = 'center top';
     }
 
-    onPopupMessage(msg) {
+    async onPopupMessage(msg) {
         const checked = msg.enableUnfocusApp;
 
         if (typeof checked === 'boolean') {
@@ -192,7 +192,7 @@ export default class UnfocusApp extends ContentFeature {
                     e.parentElement.parentElement.parentElement.style.backgroundImage = null;
                     e.remove();
                 }
-            if (checked && isOdooWebsite(msg.url)) this.appendUnfocusApp(msg.url);
+            if (checked && isOdooWebsite(msg.url)) await this.appendUnfocusApp(msg.url);
         }
     }
 }

@@ -18,6 +18,7 @@ import { getOdooVersion } from '../src/utils/version.js';
 
 //#region Navigation Event
 
+const loadedFeatures = new Map();
 let loadedURL = false;
 addNavigationListener();
 
@@ -47,16 +48,8 @@ async function onVersionLoaded() {
 
     loadToast(versionInfo);
 
-    Runtime.onMessage.addListener((message, sender, sendResponse) => {
-        handleMessage(message, sender)
-            .then(async (r) => {
-                sendResponse(r);
-            })
-            .catch((ex) => {
-                Console.warn(ex);
-                sendResponse();
-            });
-        return true;
+    Runtime.onMessage.addListener((message, sender) => {
+        return handleMessage(message, sender)
     });
 
     sendRuntimeMessage(MESSAGE_ACTION.TO_BACKGROUND.TAB_LOADED);
@@ -87,7 +80,7 @@ function addNavigationListener() {
     //     checkTaskPage(e.destination.url);
     // });
     // Chrome & Firefox compatible
-    Runtime.onMessage.addListener(async (msg) => {
+    Runtime.onMessage.addListener((msg) => {
         if (msg.action !== MESSAGE_ACTION.TO_CONTENT.TAB_NAVIGATION) return;
         if (!loadedURL) return;
         if (!msg.navigator) return;
@@ -95,8 +88,7 @@ function addNavigationListener() {
         if (loadedURL === url) return;
         loadedURL = url;
         const versionInfo = getOdooVersion();
-        loadFeatures(url, versionInfo, 'navigate');
-        return true;
+        return loadFeatures(url, versionInfo, 'navigate').catch((ex) => Console.warn(ex));
     });
 }
 
@@ -119,7 +111,13 @@ async function loadFeatures(url, versionInfo, trigger) {
     }
 
     for (const feature of features) {
+        const key = `${trigger}:${feature.id}`;
+        if (loadedFeatures.has(key)) {
+            loadedFeatures.get(key).unload();
+            loadedFeatures.delete(key);
+        }
         const loader = await importer(feature);
+        loadedFeatures.set(key, loader);
         loader.load(url, versionInfo);
     }
 }

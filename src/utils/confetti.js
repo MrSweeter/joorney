@@ -200,7 +200,10 @@ class ConfettiAnimator {
     }
 
     cancelFct(id) {
-        if (frames[id]) cancelAnimationFrame(frames[id]);
+        if (this.frames[id]) {
+            cancelAnimationFrame(this.frames[id]);
+            delete this.frames[id];
+        }
     }
 
     animate(canvas, fettis, resizer, size, done) {
@@ -730,7 +733,6 @@ export function shapeFromPath(pathData) {
         path: path,
         matrix: matrix,
     };
-    console.log(d);
     return d;
 }
 

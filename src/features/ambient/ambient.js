@@ -137,14 +137,14 @@ const schoolPrideLoader = (colors) => {
     };
 };
 const floatingLoader = (emojis) => {
-    return emojisLoader({
+    return (ticks) => emojisLoader({
         emojis: emojis,
         alpha: { max: 0.2, double: true },
         size: { min: 8, max: 20, dynamic: true },
         gravity: { min: -0.6, max: -0.4, dynamic: true },
         drift: { min: -0.4, max: 0.4, dynamic: true },
         yRange: { min: 0.5, max: 1 },
-    });
+    })(ticks);
 };
 //#endregion
 
@@ -176,10 +176,10 @@ export const ambients = {
                 load: schoolPrideLoader(['#FBB130', '#714b67', '#050a30']),
             },
             {
-                name: 'Future Community Days',
-                id: 'odoo-community-days-cpt',
+                name: 'Future Odoo Experience',
+                id: 'future-odoo-experience-cpt',
                 computeDates: async () => {
-                    return await getOdooEventDate(['name', '=like', '%Community Days%']);
+                    return await getOdooEventDate(['name', '=like', '%Odoo Experience%']);
                 },
                 type: 'long',
                 duration: 3000,

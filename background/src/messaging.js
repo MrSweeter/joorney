@@ -6,11 +6,11 @@ import { getFinalRunbotURL } from './runbot.js';
 
 export async function handleMessage(message, sender) {
     if (message.action) return handleAction(message, sender);
-    return undefined;
+    return Promise.resolve();
 }
 
 async function handleAction(message, sender) {
-    let callback = undefined;
+    let callback = Promise.resolve();
 
     switch (message.action) {
         case MESSAGE_ACTION.TO_BACKGROUND.GET_FEATURES_LIST: {

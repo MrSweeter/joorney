@@ -3,14 +3,11 @@ import ContentFeature from '../../generic/content.js';
 import { createRecordFormURL } from '../../utils/url_manager.js';
 import configuration from './configuration.js';
 
-let overlayShowMyBadgeObserver = undefined;
-
 export default class ShowMyBadgeContentFeature extends ContentFeature {
     constructor() {
         super(configuration);
         this.handleMutation = this.handleMutation.bind(this);
-        overlayShowMyBadgeObserver?.disconnect();
-        overlayShowMyBadgeObserver = new MutationObserver(this.handleMutation);
+        this.overlayShowMyBadgeObserver = new MutationObserver(this.handleMutation);
     }
 
     async loadFeature(_) {
@@ -23,8 +20,12 @@ export default class ShowMyBadgeContentFeature extends ContentFeature {
 
         const overlayTarget = overlays[0];
         const observerOptions = { childList: true, subtree: true };
-        overlayShowMyBadgeObserver.disconnect();
-        overlayShowMyBadgeObserver.observe(overlayTarget, observerOptions);
+        this.overlayShowMyBadgeObserver.disconnect();
+        this.overlayShowMyBadgeObserver.observe(overlayTarget, observerOptions);
+    }
+
+    unload() {
+        this.overlayShowMyBadgeObserver?.disconnect();
     }
 
     handleMutation(mutations) {
