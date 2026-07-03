@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Privacy Policy - Joorney</title>
+        <link rel="icon" type="image/x-icon" href="./assets/icon_128.svg" />
+
+        <meta name="robots" content="index, follow">
+        <meta name="language" content="en">
+        <link rel="canonical" href="https://mrsweeter.github.io/joorney/privacy-en.html" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./index.css" />
+        <style>
+            body {
+                font-family: Inter, sans-serif;
+                background: #f9fafb;
+                margin: 0;
+                color: #1f2937;
+            }
+            .container {
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 3rem 1.5rem;
+            }
+            h1, h2, h3 {
+                color: #111827;
+            }
+            a {
+                color: #fca311;
+                text-decoration: none;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+            .section {
+                margin-bottom: 2rem;
+            }
+            .note {
+                background: #fffbeb;
+                border: 1px solid #fcd34d;
+                padding: 1rem;
+                border-radius: 0.5rem;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <h1>Privacy Policy</h1>
+                <p>Last updated: July 3, 2026</p>
+                <p>This page describes the data that the Chrome extension <strong>Joorney</strong> may use or store in order to function properly.</p>
+                <p>This policy applies to the Joorney extension and any related browser-based features it provides.</p>
+                <p>This privacy policy is publicly available and is linked in the Chrome Web Store developer dashboard privacy field.</p>
+                <p><a class="link" href="./privacy-fr.html">Version française</a></p>
+            </header>
+
+            <section class="section">
+                <h2>1. Data collected</h2>
+                <p>Joorney does not collect personal data for analytics or tracking. The extension uses information only to provide its features and improve your Odoo experience.</p>
+
+                <h3>1.1 Browsing data and URLs</h3>
+                <p>
+                    Joorney may read the active tab URL and web pages opened in the browser to detect whether you are on an Odoo site, enable relevant features described on the Chrome Web Store
+                    listing, and provide contextual actions. This browsing activity is collected only for the user-facing Odoo functionality of the extension.
+                </p>
+
+                <h3>1.2 Odoo session data</h3>
+                <p>
+                    When you use Joorney on an Odoo site, the extension may read information present on the Odoo page, such as the internal session object (<code>odoo.__session_info__</code>), to
+                    determine your session state and offer useful actions. This data is used only locally in your browser to make the extension work.
+                </p>
+
+                <h3>1.3 Cookies</h3>
+                <p>Joorney uses cookie access only for the Odoo theme switch feature. It reads and writes the following cookies on the Odoo domain:</p>
+                <ul>
+                    <li><code>color_scheme</code></li>
+                    <li><code>configured_color_scheme</code></li>
+                </ul>
+
+                <h3>1.4 Local and synced storage data</h3>
+                <p>
+                    The extension stores your preferences, feature settings, and cache data locally in <code>chrome.storage.local</code> and <code>chrome.storage.sync</code>. These data may include,
+                    for example:
+                </p>
+                <ul>
+                    <li>Feature enablement preferences</li>
+                    <li>Disabled origins</li>
+                    <li>Cache data to speed up internal calls</li>
+                    <li>Text and user interface settings</li>
+                </ul>
+
+                <h3>1.5 Location data</h3>
+                <p>
+                    Joorney may access your geographic location only if you explicitly click the location button in the extension theme settings. This is used only to calculate sunrise and sunset
+                    times for automatic dark mode.
+                </p>
+
+                <h3>1.6 External requests</h3>
+                <p>Joorney makes network requests to the following services:</p>
+                <ul>
+                    <li><strong>GitHub</strong> to retrieve public announcement and version data.</li>
+                    <li><strong>SunriseSunset.io</strong> to calculate sunrise and sunset times when the corresponding option is enabled.</li>
+                </ul>
+                <p>
+                    When automatic dark mode with location is enabled, Joorney may send your latitude and longitude to SunriseSunset.io in order to calculate sunrise and sunset times. This location
+                    data is used only for that feature and is not retained for other purposes.
+                </p>
+                <p>Other service requests do not involve user-identifiable personal data. Joorney does not share user personal data with any third party for advertising, analytics, or profiling.</p>
+            </section>
+
+            <section class="section">
+                <h2>2. Data use</h2>
+                <p>Data is used only to:</p>
+                <ul>
+                    <li>Determine whether you are browsing an Odoo site</li>
+                    <li>Enable or disable features appropriate for the site</li>
+                    <li>Access Odoo APIs at the same time as you, to provide actions such as opening menus or reading data</li>
+                    <li>Keep your extension settings and preferences</li>
+                    <li>Calculate theme scheduling when you enable the location option</li>
+                </ul>
+                <p>All use of user data is limited to the functionality described here and in the extension listing. Joorney does not use user data for advertising, profiling, or credit decisions.</p>
+                <p>Joorney does not sell, rent, or share your personal data with third parties.</p>
+            </section>
+
+            <section class="section">
+                <h2>3. Retention and deletion</h2>
+                <p>Settings and cache data remain stored while the extension is installed. You can delete these data by clearing extension storage from Chrome settings or uninstalling Joorney.</p>
+            </section>
+
+            <section class="section">
+                <h2>4. No external tracking</h2>
+                <p>Joorney does not use third-party analytics or tracking services (such as Google Analytics, Sentry, Amplitude, Mixpanel, Hotjar, etc.).</p>
+            </section>
+
+            <section class="section">
+                <h2>5. Required Chrome permissions</h2>
+                <p>The extension manifest declares the following permissions. These permissions are used only for the features described in this policy and in the Chrome Web Store listing.</p>
+                <ul>
+                    <li><code>tabs</code>: to read the active tab URL and respond to tab events.</li>
+                    <li><code>webNavigation</code>: to detect navigation changes and dynamically load features.</li>
+                    <li><code>cookies</code>: to read and write Odoo theme-related cookies.</li>
+                    <li><code>storage</code>: to keep your preferences and cache data.</li>
+                    <li><code>contextMenus</code>: to create browser context menus.</li>
+                    <li><code>webRequest</code>: to detect the status of HTTP requests used by some features.</li>
+                </ul>
+            </section>
+
+            <footer>
+                <div class="text-center p-3">
+                    <a id="copyright-link" href="https://github.com/MrSweeter/joorney">
+                        Vanden Bergh Gaëtan
+                        <span style="opacity: .5;">(aka MrSweeter)</span>
+                    </a>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>

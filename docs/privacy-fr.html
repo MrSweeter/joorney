@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <title>Politique de confidentialité - Joorney</title>
+        <link rel="icon" type="image/x-icon" href="./assets/icon_128.svg" />
+
+        <meta name="robots" content="index, follow">
+        <meta name="language" content="fr">
+        <link rel="canonical" href="https://mrsweeter.github.io/joorney/privacy-en.html" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./index.css" />
+        <style>
+            body {
+                font-family: Inter, sans-serif;
+                background: #f9fafb;
+                margin: 0;
+                color: #1f2937;
+            }
+            .container {
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 3rem 1.5rem;
+            }
+            h1, h2, h3 {
+                color: #111827;
+            }
+            a {
+                color: #fca311;
+                text-decoration: none;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+            .section {
+                margin-bottom: 2rem;
+            }
+            .note {
+                background: #fffbeb;
+                border: 1px solid #fcd34d;
+                padding: 1rem;
+                border-radius: 0.5rem;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <h1>Politique de confidentialité</h1>
+                <p>Dernière mise à jour : 3 juillet 2026</p>
+                <p>Cette page décrit les données que l'extension Chrome <strong>Joorney</strong> peut utiliser ou stocker pour fonctionner correctement.</p>
+                <p>Cette politique s'applique à l'extension Joorney et aux fonctionnalités fournies dans le navigateur.</p>
+                <p>Cette politique de confidentialité est accessible publiquement et est liée dans le champ de confidentialité du tableau de bord du Chrome Web Store.</p>
+                <p><a href="./privacy-en.html">English Version</a></p>
+            </header>
+
+            <section class="section">
+                <h2>1. Données collectées</h2>
+                <p>
+                    Joorney ne collecte pas de données personnelles pour de l'analyse ou du tracking. L'extension utilise les informations uniquement pour fournir ses fonctionnalités et améliorer
+                    votre expérience Odoo.
+                </p>
+
+                <h3>1.1 Données de navigation et URL</h3>
+                <p>
+                    Joorney peut lire l'URL de l'onglet actif et les pages Web ouvertes dans le navigateur afin de détecter si vous êtes sur un site Odoo, d'activer les fonctionnalités pertinentes
+                    décrites dans la fiche du Chrome Web Store, et de proposer des actions contextuelles. Cette activité de navigation est collectée uniquement pour les fonctionnalités visibles et
+                    dédiées à Odoo.
+                </p>
+
+                <h3>1.2 Données de session Odoo</h3>
+                <p>
+                    Lorsque vous utilisez Joorney sur un site Odoo, l'extension peut lire des informations présentes dans la page Odoo, comme l'objet de session interne
+                    (<code>odoo.__session_info__</code>), pour déterminer votre état de session et proposer des actions utiles. Ces données ne sont utilisées que localement dans votre navigateur pour
+                    faire fonctionner l'extension.
+                </p>
+
+                <h3>1.3 Cookies</h3>
+                <p>Joorney utilise l'accès aux cookies uniquement pour la fonctionnalité de changement de thème Odoo. Elle lit et écrit les cookies suivants sur le domaine Odoo :</p>
+                <ul>
+                    <li><code>color_scheme</code></li>
+                    <li><code>configured_color_scheme</code></li>
+                </ul>
+
+                <h3>1.4 Données de stockage local et synchronisé</h3>
+                <p>
+                    L'extension stocke localement vos préférences, réglages de fonctionnalités et données de cache dans le stockage <code>chrome.storage.local</code> et
+                    <code>chrome.storage.sync</code>. Ces données comprennent par exemple :
+                </p>
+                <ul>
+                    <li>Préférences d'activation des fonctionnalités</li>
+                    <li>Origines désactivées</li>
+                    <li>Données de cache pour accélérer les appels internes</li>
+                    <li>Paramètres de texte ou d'interface utilisateur</li>
+                </ul>
+
+                <h3>1.5 Données de localisation</h3>
+                <p>
+                    Joorney peut accéder à votre position géographique uniquement si vous cliquez explicitement sur le bouton d'obtention de la position dans les paramètres du thème de l'extension.
+                    Cela sert uniquement à calculer les heures de lever/coucher du soleil pour le mode sombre automatique.
+                </p>
+
+                <h3>1.6 Requêtes externes</h3>
+                <p>Joorney effectue des appels réseau vers les services suivants :</p>
+                <ul>
+                    <li><strong>GitHub</strong> pour récupérer les données publiques d'annonce et de versions.</li>
+                    <li><strong>SunriseSunset.io</strong> pour calculer les horaires de lever et coucher du soleil lorsque l'option correspondante est activée.</li>
+                </ul>
+                <p>
+                    Lorsque le mode sombre automatique avec localisation est activé, Joorney peut envoyer vos coordonnées de latitude et de longitude à SunriseSunset.io afin de calculer les heures de
+                    lever et coucher du soleil. Ces données de localisation sont utilisées uniquement pour cette fonctionnalité et ne sont pas conservées à d'autres fins.
+                </p>
+                <p>
+                    Les autres requêtes de service n'impliquent pas de données personnelles identifiables. Joorney ne partage pas les données personnelles des utilisateurs avec des tiers pour la
+                    publicité, l'analyse ou le profilage.
+                </p>
+            </section>
+
+            <section class="section">
+                <h2>2. Utilisation des données</h2>
+                <p>Les données sont utilisées uniquement pour :</p>
+                <ul>
+                    <li>Déterminer si vous naviguez sur un site Odoo</li>
+                    <li>Activer ou désactiver les fonctionnalités adaptées au site</li>
+                    <li>Accéder aux API Odoo en même temps que vous, pour fournir des actions comme l'ouverture de menus ou la lecture de données</li>
+                    <li>Garder vos paramètres et préférences d'extension</li>
+                    <li>Calculer des horaires de thème si vous activez l'option de localisation</li>
+                </ul>
+                <p>
+                    Toute utilisation des données utilisateur est limitée aux fonctionnalités décrites ici et dans la fiche du Chrome Web Store. Joorney n'utilise pas les données utilisateur pour la
+                    publicité, le profilage ou les décisions de crédit.
+                </p>
+                <p>Joorney ne vend pas, ne loue pas et ne partage pas vos données personnelles à des tiers.</p>
+            </section>
+
+            <section class="section">
+                <h2>3. Retention et suppression</h2>
+                <p>
+                    Les paramètres et données de cache restent stockés tant que l'extension est installée. Vous pouvez supprimer ces données en effaçant le stockage de l'extension depuis les options
+                    Chrome ou en désinstallant Joorney.
+                </p>
+            </section>
+
+            <section class="section">
+                <h2>4. Absence de suivi externe</h2>
+                <p>Joorney n'utilise pas de services d'analyse ou de suivi tiers (comme Google Analytics, Sentry, Amplitude, Mixpanel, Hotjar, etc.).</p>
+            </section>
+
+            <section class="section">
+                <h2>5. Permissions Chrome requises</h2>
+                <p>
+                    Le manifeste de l'extension déclare les permissions suivantes. Ces permissions sont utilisées uniquement pour les fonctionnalités décrites dans cette politique et dans la fiche du
+                    Chrome Web Store.
+                </p>
+                <ul>
+                    <li><code>tabs</code> : pour lire l'URL de l'onglet actif et répondre aux événements d'onglet.</li>
+                    <li><code>webNavigation</code> : pour détecter les changements de navigation et charger dynamiquement les fonctionnalités.</li>
+                    <li><code>cookies</code> : pour lire et écrire les cookies Odoo liés au thème.</li>
+                    <li><code>storage</code> : pour conserver vos préférences et données de cache.</li>
+                    <li><code>contextMenus</code> : pour créer des menus contextuels dans le navigateur.</li>
+                    <li><code>webRequest</code> : pour détecter l'état des requêtes HTTP utilisées par certaines fonctionnalités.</li>
+                </ul>
+            </section>
+
+            <footer>
+                <div class="text-center p-3">
+                    <a id="copyright-link" href="https://github.com/MrSweeter/joorney">
+                        Vanden Bergh Gaëtan
+                        <span style="opacity: .5;">(aka MrSweeter)</span>
+                    </a>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>
