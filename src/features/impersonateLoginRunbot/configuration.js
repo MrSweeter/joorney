@@ -12,7 +12,7 @@ export default {
     },
     defaultSettings: {
         impersonateLoginRunbotEnabled: false,
-        impersonateLoginRunbotLimitedOrigins: ['regex://.*\\.runbot\\d{3}\\.odoo\\.com'],
     },
     limited: true,
+    limitedOrigins: ['regex://.*\\.runbot\\d{3}\\.odoo\\.com'],
 };

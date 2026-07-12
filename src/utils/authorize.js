@@ -41,6 +41,7 @@ export async function isSupportedOdoo(version) {
 }
 
 export async function isAuthorizedFeature(feature, url) {
+    if (!url) return false;
     const key = `${feature}Enabled`;
     const configuration = await StorageSync.get({
         [key]: false,
@@ -51,13 +52,10 @@ export async function isAuthorizedFeature(feature, url) {
     return authorizedFeature;
 }
 
-export async function isAuthorizedLimitedFeature(featureName, url) {
+export async function isAuthorizedLimitedFeature(featureName, limitedOrigins, url) {
+    if (!url || !limitedOrigins || limitedOrigins.length === 0) return false;
     const key = `${featureName}Enabled`;
-    const configKey = `${featureName}LimitedOrigins`;
-    const configuration = await StorageSync.get({
-        [key]: false,
-        [configKey]: [],
-    });
+    const configuration = await StorageSync.get({ [key]: false});
     if (!configuration[key]) return false;
     const origin = url.origin;
 
@@ -65,12 +63,10 @@ export async function isAuthorizedLimitedFeature(featureName, url) {
     if (offs.has(origin)) return false;
 
     // Check URL
-    if (configuration[configKey].includes(origin)) {
-        return true;
-    }
+    if (limitedOrigins.includes(origin)) return true;
 
     // Check Regex
-    const activeRegex = configuration[configKey]
+    const activeRegex = limitedOrigins
         .filter((o) => o.startsWith(regexSchemePrefix))
         .map((o) => new RegExp(o.replace(regexSchemePrefix, '')));
     const validRegex = activeRegex.some((r) => r.test(origin));

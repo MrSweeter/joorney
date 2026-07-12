@@ -12,8 +12,8 @@ export default class ImpersonateLoginRunbotContentFeature extends LimitedRunbotC
     async loadFeature(url) {
         let autologin = false;
         if (
-            (await isAuthorizedLimitedFeature(adminDebugLoginConfiguration.id, url)) ||
-            (await isAuthorizedLimitedFeature(autoOpenRunbotConfiguration.id, url))
+            (await isAuthorizedLimitedFeature(adminDebugLoginConfiguration.id, adminDebugLoginConfiguration.limitedOrigins, url)) ||
+            (await isAuthorizedLimitedFeature(autoOpenRunbotConfiguration.id, autoOpenRunbotConfiguration.limitedOrigins, url))
         ) {
             autologin = this.loginWithAdmin(url);
         }
