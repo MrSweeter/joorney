@@ -35,7 +35,6 @@ export const features = [
             </ul>
         </div>`,
         amico: 'floppy_disk-amico',
-        deprecated: true,
         deprecatedReason: 'This feature has been added in standard version of Odoo!',
     },
     {
@@ -184,6 +183,7 @@ export const features = [
             </ul>
         </div>`,
         amico: 'google_sitemap-amico',
+        deprecatedReason: 'Odoo is now using a user parameter to manage this! No more only frontend switch, but a real backend one!',
     },
     {
         id: 'awesomeStyle',
@@ -276,6 +276,7 @@ export const features = [
             </ul>
         </div>`,
         amico: 'my_answer-amico',
+        deprecatedReason: 'This feature has been added in standard version of Odoo!',
     },
     {
         id: 'ambient',

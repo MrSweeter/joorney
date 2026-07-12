@@ -19,7 +19,7 @@ function loadFeatures(viewType) {
     const featureContainer = document.getElementById('features-list');
     featureContainer.innerHTML = '';
 
-    for (const feature of features.filter((f) => !f.deprecated)) {
+    for (const feature of features.filter((f) => !f.deprecatedReason)) {
         loadFeature(feature, viewType, featureContainer);
     }
 }
