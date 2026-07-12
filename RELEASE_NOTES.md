@@ -1,6 +1,15 @@
 # Joorney Release Notes
 
+## [2.6.0.16] New feature: Follow/Unfollow
+
+-  Follow or unfollow a record in Odoo [:link:](https://mrsweeter.github.io/joorney/feature.html#followUnfollow)
+    - brings back the "Follow" button in the chatter header
+- Memory optimization
+- Bug fixes
+
 ## [2.5.0.16] Odoo 19+
+
+- Never published
 
 ## [2.4.1.16] Bug fixes and Odoo 18.4
 

@@ -298,9 +298,9 @@ export const features = [
     {
         id: 'followUnfollow',
         icon: 'fa-solid fa-user-check',
-        title: 'Follow Unfollow',
+        title: 'Follow/Unfollow',
         longDescription:
-            '<em>Follow Unfollow</em> adds a quick action next to the mail followers button so you can toggle follow state without opening the full dropdown. It makes it easier to manage subscriptions directly from the record view.',
+            '<em>Follow/Unfollow</em> adds a quick action next to the mail followers button so you can toggle follow state without opening the full dropdown. It makes it easier to manage subscriptions directly from the record view.',
         textDescription: 'Add a fast follow/unfollow toggle beside the mail followers button.',
         video: '',
         additionalDescription: `<div class="additional-info">
