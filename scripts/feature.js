@@ -78,7 +78,7 @@ function createFeature(featureName, option) {
     const configuration = {
         id: featureName.id,
         display_name: featureName.display,
-        icon: '<i class="fa-regular fa-circle-question"></i>',
+        icon: '<i class="fa-solid fa-circle-question"></i>',
         trigger: {
             background: option['--with-trigger-background'] === 1,
             load: option['--with-trigger-load'] === 1,
@@ -86,6 +86,7 @@ function createFeature(featureName, option) {
             context: option['--with-trigger-context'] === 1,
             // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Match_patterns
             onrequest: [],
+            ondom: false,
         },
         customization: {
             option: option['--with-customization-option'] === 1,
