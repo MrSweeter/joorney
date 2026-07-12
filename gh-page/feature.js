@@ -50,7 +50,7 @@ function loadFeature() {
         `fa-2x w-100 h-100 text-joorney d-flex justify-content-center align-items-center ${feature.icon}`;
     document.getElementById('feature-title').innerHTML = feature.title;
     document.getElementById('feature-description').innerHTML = `
-        ${feature.deprecated ? `<span class="text-danger">[DEPRECATED] ${feature.deprecatedReason}</span><br />` : ''}
+        ${feature.deprecatedReason ? `<span class="text-danger">[DEPRECATED] ${feature.deprecatedReason}</span><br />` : ''}
         ${feature.soon ? `<span class="text-success">[SOON]</span><br />` : ''}
         ${feature.longDescription || feature.textDescription}`;
 
