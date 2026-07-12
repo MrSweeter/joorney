@@ -21,10 +21,10 @@ export default {
     },
     defaultSettings: {
         autoOpenRunbotEnabled: false,
-        autoOpenRunbotLimitedOrigins: ['https://runbot.odoo.com'],
         autoOpenRunbotContextMenu: {
             [openRunbotWithVersionMenuItem.id]: openRunbotWithVersionMenuItem,
         },
     },
     limited: true,
+    limitedOrigins: ['https://runbot.odoo.com'],
 };

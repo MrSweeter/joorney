@@ -167,13 +167,9 @@ async function getFeaturesItems(tab) {
 
     const result = {};
     for (const feature of contextFeatures) {
-        // If more limited feature, maybe need to rethink this part
         const isActive = feature.limited
-            ? await isAuthorizedLimitedFeature(
-                  feature.id,
-                  new URL(feature.defaultSettings[`${feature.id}LimitedOrigins`][0])
-              )
-            : url !== undefined && (await isAuthorizedFeature(feature.id, url));
+            ? await isAuthorizedLimitedFeature(feature.id, feature.limitedOrigins, url)
+            : await isAuthorizedFeature(feature.id, url);
 
         const defaultSettings = await StorageSync.get(feature.defaultSettings);
 

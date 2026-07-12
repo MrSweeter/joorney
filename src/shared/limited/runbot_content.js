@@ -16,7 +16,7 @@ export default class LimitedRunbotContentFeature extends ContentFeature {
     async load(urlArg, _versionInfo) {
         const url = sanitizeURL(urlArg);
 
-        if (!(await isAuthorizedLimitedFeature(this.configuration.id, url))) return;
+        if (!(await isAuthorizedLimitedFeature(this.configuration.id, this.configuration.limitedOrigins, url))) return;
 
         this.loadFeature(url);
     }
