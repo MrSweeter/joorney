@@ -1,3 +1,4 @@
+import { baseSettings } from '../../../configuration.js';
 import { ToastManager } from '../../../src/toast/index.js';
 import { StorageSync } from '../../../src/utils/browser.js';
 import { sleep } from '../../../src/utils/util.js';
@@ -41,8 +42,8 @@ function handleToastType(types) {
 
 async function showMockToast() {
     if (!joorneyCurrentToastMode) return;
-    const types = await StorageSync.get('toastType');
-    const toastType = JSON.parse(types.toastType);
+    let { toastType } = await StorageSync.get("toastType");
+    toastType = toastType ? JSON.parse(toastType) : baseSettings.toastType;
 
     if (
         ToastManager.info(

@@ -38,5 +38,11 @@
         "closeable": true,
         "menu": "page-version",
         "hash": "2.4.0.16.1"
+    },
+    "2.6.0.16": {
+        "title": "New Feature - Follow/Unfollow & Odoo 19+",
+        "description": "New feature: Follow or unfollow a record in Odoo. Brings back the 'Follow' button in the chatter header.",
+        "closeable": true,
+        "hash": "2.6.0.16.1"
     }
 }
