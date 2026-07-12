@@ -12,6 +12,10 @@ export default class ContentFeature {
         this.versionInfo = null;
         this._runtimeOnRequestListener = null;
         this._runtimePopupListener = null;
+
+        this.onDocumentDOMChange = this.onDocumentDOMChange.bind(this);
+        this._observer = null;
+
     }
 
     async load(urlArg, versionInfo) {
@@ -26,6 +30,7 @@ export default class ContentFeature {
         this.handlePopupMessage();
 
         this.observeRequest();
+        this.observeDOMChange();
     }
 
     observeRequest() {
@@ -41,6 +46,14 @@ export default class ContentFeature {
     }
 
     async onRequestCompleted(_msg) {}
+
+    observeDOMChange()  {
+        if (!this.configuration.trigger.ondom) return;
+        this._observer = new MutationObserver(this.onDocumentDOMChange);
+        this._observer.observe(document.documentElement, { childList: true, subtree: true });
+    }
+
+    async onDocumentDOMChange(_mutations) {}
 
     async loadFeature(_url) {
         throw NotYetImplemented;
@@ -66,6 +79,8 @@ export default class ContentFeature {
             Runtime.onMessage.removeListener(this._runtimePopupListener);
             this._runtimePopupListener = null;
         }
+        this._observer?.disconnect()
+        this._observer = null
     }
 
     async onPopupMessage(_msg) {
