@@ -114,6 +114,7 @@ function jatob(data, cacheEncodingBase64) {
     try {
         return decodeURIComponent(
             atob(data)
+                .split('')
                 .map((c) => `%${`00${c.charCodeAt(0).toString(16)}`.slice(-2)}`)
                 .join('')
         );
