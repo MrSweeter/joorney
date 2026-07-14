@@ -169,7 +169,7 @@ export const ambients = {
                 name: `Odoo Experience ${new Date().getFullYear()}`,
                 id: 'odoo-experience-oxp-cpt',
                 computeDates: async () => {
-                    return await getOdooEventDate(['name', '=', `Odoo Experience ${new Date().getFullYear()}`]);
+                    return await getOdooEventDate(['name', 'in', [`Odoo Experience ${new Date().getFullYear()}`]]);
                 },
                 type: 'long',
                 duration: 3000,
