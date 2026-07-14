@@ -169,7 +169,7 @@ export const ambients = {
                 name: `Odoo Experience ${new Date().getFullYear()}`,
                 id: 'odoo-experience-oxp-cpt',
                 computeDates: async () => {
-                    return await getOdooEventDate(['name', '=', `Odoo Experience ${new Date().getFullYear()}`]);
+                    return await getOdooEventDate([['name', '=', `Odoo Experience ${new Date().getFullYear()}`]]);
                 },
                 type: 'long',
                 duration: 3000,
@@ -179,7 +179,7 @@ export const ambients = {
                 name: 'Future Odoo Experience',
                 id: 'future-odoo-experience-cpt',
                 computeDates: async () => {
-                    return await getOdooEventDate(['name', '=like', '%Odoo Experience%']);
+                    return await getOdooEventDate([['name', '=like', '%Odoo Experience%'], ['name', '!=', `Odoo Experience ${new Date().getFullYear()}`]]);
                 },
                 type: 'long',
                 duration: 3000,
@@ -398,8 +398,8 @@ function randomInRange(min, max) {
     return Math.random() * (max - min) + min;
 }
 
-async function getOdooEventDate(domainName) {
-    const event = await getFutureEventWithName(domainName, 'www.odoo.com');
+async function getOdooEventDate(domain) {
+    const event = await getFutureEventWithName(domain, 'www.odoo.com');
     if (!event) return undefined;
 
     return {
