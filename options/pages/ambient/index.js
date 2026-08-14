@@ -168,6 +168,11 @@ function playAmbient(event) {
     document.getElementById('joorney-playing-ambient-info').innerText =
         `Ambient: "${ambient.name}" - Duration: ${estimatedDuration}ms`;
 
+    if (ambient.id === "rain" || ambient.id === "snow") {
+        console.log("RAI RAI RAI")
+        ambient.load = ambient.load()
+    }
+
     ambientLoader?.load(ambient);
     const timeout = setCancellableTimeout(() => {
         stopAmbient();

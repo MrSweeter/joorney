@@ -146,6 +146,35 @@ const floatingLoader = (emojis) => {
         yRange: { min: 0.5, max: 1 },
     })(ticks);
 };
+
+const rainLoader = (multiplier = 1) => {
+    return (ticks) =>
+        emojisLoader({
+            emojis: ['💧'],
+            alpha: { max: Math.min(1, 0.3 * multiplier + 0.2), double: true },
+            size: { min: 0.1, max: 0.6 * multiplier, dynamic: true },
+            gravity: { min: 4 * multiplier, max: 5 * multiplier, dynamic: true },
+            drift: { min: -0.4, max: 0.4, dynamic: true },
+            yRange: { min: -0.1, max: 0 },
+            color: '#4a6583',
+            flat: true,
+        })(ticks);
+};
+
+const snowLoader = (multiplier = 1) => {
+    return (ticks) =>
+        shapesLoader({
+            shapes: ['circle'],
+            alpha: { max: Math.min(1, 0.3 * multiplier + 0.4), double: true },
+            size: { min: 0.1, max: 0.6 * multiplier, dynamic: true },
+            gravity: { min: 0.4 * multiplier, max: 0.6 * multiplier, dynamic: true },
+            drift: { min: -0.4, max: 0.4, dynamic: true },
+            yRange: { min: -0.1, max: 0.5 },
+            color: '#ffffff',
+            flat: false,
+        })(ticks);
+};
+
 //#endregion
 
 export function estimateAmbientDuration(ambient) {
@@ -386,11 +415,25 @@ export const ambients = {
     //     summer: {},
     //     fall: {},
     // },
-    // weather: {
-    //     rain: {},
-    //     snow: {},
-    //     sun: {},
-    // },
+    weather: {
+        name: 'Weather',
+        ambients: [
+            {
+                name: 'Rain',
+                id: 'rain',
+                type: 'long',
+                duration: 10000,
+                load: rainLoader,
+            },
+            {
+                name: 'Snow',
+                id: 'snow',
+                type: 'long',
+                duration: 10000,
+                load: snowLoader,
+            },
+        ],
+    },
 };
 
 // Utils

@@ -1,4 +1,5 @@
 import { getAmbientDates, setAmbientDates } from '../../api/local.js';
+import { getWeather } from '../../api/weather.js';
 import { StorageSync } from '../../utils/browser.js';
 import { ambients } from './ambient.js';
 
@@ -27,7 +28,7 @@ export default class AmbientManager {
         if (!ambient) ambient = this.getEventAmbientForDate(date);
         if (!ambient) ambient = this.getYearlyAmbientForDate(date);
         if (!ambient) ambient = this.getSeasonAmbientForDate(date);
-        if (!ambient) ambient = await this.getWeatherAmbientForDate(date);
+        if (!ambient) ambient = await this.getWeatherAmbient(date);
 
         if (ambient && this.isEnable(ambientStatus, ambient.id)) return ambient;
         return false;
@@ -79,8 +80,37 @@ export default class AmbientManager {
         return undefined;
     }
 
-    async getWeatherAmbientForDate(_date) {
-        return undefined;
+    async getWeatherAmbient() {
+        const weather = await getWeather();
+        const hour = new Date().getHours();
+
+        const snow = weather.joorney_snowfall[hour];
+        const rain = weather.joorney_rain[hour];
+        let idToSearch = undefined;
+        let type = undefined;
+
+        if (rain > 0) {
+            idToSearch = 'rain';
+            type = RAIN_TYPE.findType(rain);
+        }
+        if (snow > 0) {
+            idToSearch = 'snow';
+            type = SNOW_TYPE.findType(snow);
+        }
+
+        let ambient = undefined
+        if (type) ambient = ambients.weather.ambients.find((a) => a[`${idToSearch}-${type}`]);
+        if (ambient) return ambient
+
+        ambient = ambients.weather.ambients.find((a) => a[idToSearch]);
+        if (!ambient) return ambient
+        if (type)    {
+            ambient.duration *= type.ambientMultiplier
+            ambient.loader = ambient.loader(type.ambientMultiplier)
+            return ambient
+        }
+        ambient.loader = ambient.loader(1)
+        return ambient;
     }
 
     isDateBetween(targetDate, startDate, endDate) {
