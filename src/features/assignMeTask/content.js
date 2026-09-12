@@ -81,6 +81,7 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
                 this.updateAssignMeEvent(e);
                 e.disabled = false;
             }
+            return
         }
         if (userAssigned) return;
 
