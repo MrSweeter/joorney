@@ -3,35 +3,31 @@ import ContentFeature from '../../generic/content.js';
 import { isStillSamePage } from '../../utils/authorize.js';
 import { getModelAndID_fromURL } from '../../utils/url_manager.js';
 
-export default class ProjectTaskShareContentFeature extends ContentFeature {
-    async loadFeature(url) {
+export default class RecordFormContentFeature extends ContentFeature    {
+    constructor(configuration, models, caching=0)  {
+        super(configuration)
+        this.models = models;
+        this.caching = caching
+    }
+
+    async loadFeature(url)  {
         this.preloadFeature();
         if (!(await isStillSamePage(2500, url))) return;
-        const task = await this.getProjectTask(url);
-        if (task) this.loadFeatureWithTask(task);
+        const modelRecord = await this.getRecord(url, true);
+        if (modelRecord) this.loadFeatureWithRecord(modelRecord.model, modelRecord.record);
     }
 
     preloadFeature() {}
-    loadFeatureWithTask(_task) {}
+    loadFeatureWithRecord(_model, _record) {}
 
-    async getProjectTask(url) {
-        const task = await this.getTask(url);
-        if (!task) return undefined;
-        return task;
-    }
+    async getRecord(url)    {
+        const recordID = await this.tryCatch(() => getModelAndID_fromURL(url, Object.keys(this.models), true), undefined)
+        if (!recordID) return undefined
+        const { model, resId } = recordID
 
-    async getTask(url) {
-        const taskID = await this.tryCatch(() => this.getProjectTaskID_fromURL(url), undefined);
-        if (taskID === undefined) return undefined;
+        const fields = ['id', this.models[model].user_field, ...(this.models[model].extra_fields || [])]
+        const response = await this.tryCatch(() => getDataset(model, [['id', '=', resId]], fields, 1, this.caching), undefined)
 
-        const response = await this.tryCatch(
-            () => getDataset('project.task', [['id', '=', taskID]], ['id', 'project_id', 'user_ids', 'priority'], 1, 0),
-            undefined
-        );
-        return response;
-    }
-
-    async getProjectTaskID_fromURL(url) {
-        return (await getModelAndID_fromURL(url, 'project.task', true))?.resId;
+        return response ? {model: model, resId: response.id, record: response} : undefined
     }
 }
