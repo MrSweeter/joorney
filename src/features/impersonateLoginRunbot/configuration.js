@@ -14,5 +14,5 @@ export default {
         impersonateLoginRunbotEnabled: false,
     },
     limited: true,
-    limitedOrigins: ['regex://.*\\.runbot\\d{3}\\.odoo\\.com'],
+    limitedOrigins: ['regex://^https://[\\w-]+\\.runbot\\d{3}\\.odoo\\.com$'],
 };

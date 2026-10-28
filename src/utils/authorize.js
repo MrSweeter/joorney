@@ -6,9 +6,29 @@ import { sanitizeVersion } from './version.js';
 
 export const regexSchemePrefix = 'regex://';
 
-export function isOdooWebsite(url) {
-    const regex = /^https?:\/\/(.+?\.odoo\.com|localhost|127\.0\.0\.\d+)(:\d+)?.*$/;
-    return regex.test(url);
+export function isOdooWebsite(urlArg) {
+    let url = urlArg;
+    try {
+        if (typeof url !== 'object') url = new URL(url);
+    } catch {
+        return false;
+    }
+    if (!['http:', 'https:'].includes(url.protocol)) return false;
+    return /^(.+\.odoo\.com|localhost|127\.0\.0\.\d+)$/.test(url.hostname);
+}
+
+export function getOriginsRegex(origins) {
+    return origins
+        .filter((o) => o.startsWith(regexSchemePrefix))
+        .map((o) => {
+            try {
+                return new RegExp(o.replace(regexSchemePrefix, ''));
+            } catch (err) {
+                Console.warn(`Invalid origin regex '${o}': ${err.message}`);
+                return undefined;
+            }
+        })
+        .filter(Boolean);
 }
 
 export async function isStillSamePage(timeout, url) {
@@ -55,7 +75,7 @@ export async function isAuthorizedFeature(feature, url) {
 export async function isAuthorizedLimitedFeature(featureName, limitedOrigins, url) {
     if (!url || !limitedOrigins || limitedOrigins.length === 0) return false;
     const key = `${featureName}Enabled`;
-    const configuration = await StorageSync.get({ [key]: false});
+    const configuration = await StorageSync.get({ [key]: false });
     if (!configuration[key]) return false;
     const origin = url.origin;
 
@@ -66,9 +86,7 @@ export async function isAuthorizedLimitedFeature(featureName, limitedOrigins, ur
     if (limitedOrigins.includes(origin)) return true;
 
     // Check Regex
-    const activeRegex = limitedOrigins
-        .filter((o) => o.startsWith(regexSchemePrefix))
-        .map((o) => new RegExp(o.replace(regexSchemePrefix, '')));
+    const activeRegex = getOriginsRegex(limitedOrigins);
     const validRegex = activeRegex.some((r) => r.test(origin));
 
     return validRegex;
@@ -87,9 +105,7 @@ async function authorizeFeature(featureName, origin) {
     if (!configuration[`${featureName}Enabled`]) return false;
 
     const activeOrigins = getActiveFeatureOrigins(configuration.originsFilterOrigins, featureName);
-    const activeRegex = activeOrigins
-        .filter((o) => o.startsWith(regexSchemePrefix))
-        .map((o) => new RegExp(o.replace(regexSchemePrefix, '')));
+    const activeRegex = getOriginsRegex(activeOrigins);
 
     const originExist = activeOrigins.includes(origin) || activeRegex.some((r) => r.test(origin));
 

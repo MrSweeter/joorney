@@ -14,5 +14,5 @@ export default {
         adminDebugLoginRunbotEnabled: false,
     },
     limited: true,
-    limitedOrigins: ['https://runbot.odoo.com', 'regex://.*\\.runbot\\d{3}\\.odoo\\.com'],
+    limitedOrigins: ['https://runbot.odoo.com', 'regex://^https://[\\w-]+\\.runbot\\d{3}\\.odoo\\.com$'],
 };
