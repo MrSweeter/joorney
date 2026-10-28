@@ -1,5 +1,5 @@
 import { getFeaturesAndCurrentSettings } from '../../configuration.js';
-import { regexSchemePrefix } from '../../src/utils/authorize.js';
+import { getOriginsRegex, regexSchemePrefix } from '../../src/utils/authorize.js';
 import { StorageSync, Tabs } from '../../src/utils/browser.js';
 
 export async function reloadTabFeatures() {
@@ -26,9 +26,7 @@ function setupSaveOriginButton(features, configuration, currentTabID, origins, o
     let originString = originStringArg;
     const originKeys = Object.keys(origins);
     if (!originKeys.includes(originString)) {
-        const regexes = originKeys
-            .filter((o) => o.startsWith(regexSchemePrefix))
-            .map((o) => new RegExp(o.replace(regexSchemePrefix, '')));
+        const regexes = getOriginsRegex(originKeys);
         const validRegex = regexes.find((r) => r.test(originString));
         if (validRegex) {
             originString = regexSchemePrefix + validRegex.source;
@@ -36,7 +34,7 @@ function setupSaveOriginButton(features, configuration, currentTabID, origins, o
     }
 
     const currentTabText = document.getElementById('currentTabUrl');
-    currentTabText.innerHTML = originString;
+    currentTabText.textContent = originString;
 
     if (originKeys.includes(originString)) {
         setupFeatures(features, configuration, currentTabID, origins, originString);
