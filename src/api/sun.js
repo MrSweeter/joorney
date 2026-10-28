@@ -1,4 +1,15 @@
+import { Console } from '../utils/browser.js';
 import { getSunSchedule, setSunSchedule } from './local.js';
+
+// "7:12:34 AM" -> minutes since midnight
+function parseTime12h(timeStr) {
+    const match = /^(\d{1,2}):(\d{2})(?::\d{2})?\s*(AM|PM)$/i.exec(`${timeStr ?? ''}`.trim());
+    if (!match) return undefined;
+    const hours = Number.parseInt(match[1]) % 12;
+    const minutes = Number.parseInt(match[2]);
+    const isPM = match[3].toUpperCase() === 'PM';
+    return (hours + (isPM ? 12 : 0)) * 60 + minutes;
+}
 
 export async function getSunRiseSunSet(latitude, longitude) {
     let today = new Date();
@@ -9,24 +20,28 @@ export async function getSunRiseSunSet(latitude, longitude) {
         return cached;
     }
 
-    // Timezone related to coordinates
-    const response = await fetch(`https://api.sunrisesunset.io/json?lat=${latitude}&lng=${longitude}`);
+    try {
+        // Timezone related to coordinates
+        const response = await fetch(`https://api.sunrisesunset.io/json?lat=${latitude}&lng=${longitude}`);
+        if (!response.ok) throw new Error(`HTTP ${response.status} while fetching sunrise/sunset`);
 
-    const json = await response.json();
+        const json = await response.json();
 
-    let sunrise = json.results.sunrise.split(':');
-    sunrise =
-        Number.parseInt(sunrise[0]) * 60 + Number.parseInt(sunrise[1]) + (sunrise[2].endsWith('PM') ? 12 * 60 : 0);
+        // null during polar day/night
+        const sunrise = parseTime12h(json.results?.sunrise);
+        const sunset = parseTime12h(json.results?.sunset);
+        if (sunrise === undefined || sunset === undefined) return undefined;
 
-    let sunset = json.results.sunset.split(':');
-    sunset = Number.parseInt(sunset[0]) * 60 + Number.parseInt(sunset[1]) + (sunset[2].endsWith('PM') ? 12 * 60 : 0);
+        const data = {
+            joorney_sunrise: sunrise,
+            joorney_sunset: sunset,
+            joorney_date: today,
+        };
 
-    const data = {
-        joorney_sunrise: sunrise,
-        joorney_sunset: sunset,
-        joorney_date: today,
-    };
-
-    await setSunSchedule(data);
-    return data;
+        await setSunSchedule(data);
+        return data;
+    } catch (err) {
+        Console.warn(err);
+        return undefined;
+    }
 }

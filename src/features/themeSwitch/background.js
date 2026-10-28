@@ -42,6 +42,7 @@ export default class ThemeSwitchBackgroundFeature extends BackgroundFeature {
                 break;
             case 'dynamicLocation': {
                 const sunData = await getSunRiseSunSet(themeSwitchLocationLatitude, themeSwitchLocationLongitude);
+                if (!sunData) break;
 
                 expectedMode = time > sunData.joorney_sunrise && time < sunData.joorney_sunset ? 'light' : 'dark';
                 break;
