@@ -8,6 +8,7 @@ export const ContextMenus = isFirefox() ? browser.contextMenus : chrome.contextM
 export const Runtime = isFirefox() ? browser.runtime : chrome.runtime;
 export const StorageSync = isFirefox() ? browser.storage.sync : chrome.storage.sync;
 export const StorageLocal = isFirefox() ? browser.storage.local : chrome.storage.local;
+export const StorageSession = isFirefox() ? browser.storage.session : chrome.storage.session;
 //export const Scripting = isFirefox() ? browser.scripting : chrome.scripting;
 export const WebNavigation = isFirefox() ? browser.webNavigation : chrome.webNavigation;
 export const Cookies = isFirefox() ? browser.cookies : chrome.cookies;

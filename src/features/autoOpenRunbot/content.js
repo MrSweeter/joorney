@@ -31,7 +31,7 @@ export default class AutoOpenRunbotContentFeature extends LimitedRunbotContentFe
                 window.location = `https://runbot.odoo.com/${finalPath}`;
                 return;
             }
-            await this.openRunbot(`https://runbot.odoo.com/${path}`, false);
+            await this.openRunbot(path, false);
         } catch (error) {
             if (batchOffset) {
                 Console.warn(error);

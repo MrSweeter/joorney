@@ -12,6 +12,20 @@ export function getRunbotOpenUrl(version) {
     return `https://runbot.odoo.com?${openVersionKey}=${version}`;
 }
 
+export function isRunbotBuildHost(host) {
+    return /^[\w-]+\.runbot\d{3}\.odoo\.com$/.test(host);
+}
+
+export function buildAdminDebugURL(urlArg) {
+    if (!urlArg) return undefined;
+    const url = new URL(urlArg);
+
+    url.pathname = '/web/login';
+    url.search = url.search ? `${url.search}&debug=1` : 'debug=1';
+    url.search = `${url.search}&${openVersionKey}=login`;
+    return url.toString();
+}
+
 export default class LimitedRunbotContentFeature extends ContentFeature {
     async load(urlArg, _versionInfo) {
         const url = sanitizeURL(urlArg);
@@ -49,28 +63,25 @@ export default class LimitedRunbotContentFeature extends ContentFeature {
     }
 
     getAdminDebugURL(urlArg) {
-        if (!urlArg) return undefined;
-        const url = typeof urlArg === 'object' ? urlArg : new URL(urlArg);
-
-        url.pathname = '/web/login';
-        url.search = url.search ? `${url.search}&debug=1` : 'debug=1';
-        url.search = `${url.search}&joorney-runbot=login`;
-        return url.toString();
+        return buildAdminDebugURL(urlArg);
     }
 
-    async openRunbot(href, newTab) {
+    async openRunbot(hrefArg, newTab) {
         let finalURL = 'https://runbot.odoo.com/';
+        const href = new URL(hrefArg, finalURL).href;
         if (href.includes(searchVersionPath)) {
             finalURL = href;
         } else if (href !== finalURL) {
-            // Messaging flow require due to CORS on runbot
-            const response = await sendRuntimeMessage(MESSAGE_ACTION.TO_BACKGROUND.GET_FINAL_RUNBOT_URL, {
+            // Build links (/runbot/run/<id>) are behind a browser check (Cloudflare Turnstile) and redirect to the
+            // build host: the background opens the link in a real tab and rewrites the URL once on the build host
+            const response = await sendRuntimeMessage(MESSAGE_ACTION.TO_BACKGROUND.OPEN_RUNBOT_ADMIN_DEBUG, {
                 href: href,
+                newTab: newTab,
             });
-            if (response.error) {
-                throw RunbotException(response.error);
+            if (!response || response.error) {
+                throw RunbotException(response?.error ?? 'No response from background');
             }
-            finalURL = this.getAdminDebugURL(response.url) ?? finalURL;
+            return;
         }
 
         const finalLink = document.createElement('a');

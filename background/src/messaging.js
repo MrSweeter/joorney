@@ -2,7 +2,7 @@ import { importFeatureBackgroundFile, loadFeaturesConfiguration } from '../../co
 import { createContextMenu, updateContext } from '../../src/contextmenu/manager.js';
 import { MESSAGE_ACTION } from '../../src/utils/messaging.js';
 import { updateTabState } from './keyboard_shortcut.js';
-import { getFinalRunbotURL } from './runbot.js';
+import { openRunbotAdminDebug } from './runbot.js';
 
 export async function handleMessage(message, sender) {
     if (message.action) return handleAction(message, sender);
@@ -17,8 +17,8 @@ async function handleAction(message, sender) {
             callback = loadFeaturesConfiguration().then((features) => ({ features: features }));
             break;
         }
-        case MESSAGE_ACTION.TO_BACKGROUND.GET_FINAL_RUNBOT_URL: {
-            callback = getFinalRunbotURL(message);
+        case MESSAGE_ACTION.TO_BACKGROUND.OPEN_RUNBOT_ADMIN_DEBUG: {
+            callback = openRunbotAdminDebug(message, sender);
             break;
         }
         case MESSAGE_ACTION.TO_BACKGROUND.UPDATE_EXT_STATUS: {
