@@ -13,7 +13,7 @@ export async function getAnnounceData() {
             1 * 24 * 60,
             async () => {
                 const response = await fetch(source);
-                if (!response.ok) return {};
+                if (!response.ok) throw new Error(`HTTP ${response.status} while fetching ${source}`);
                 return await response.json();
             },
             'getAnnounceData'
@@ -37,7 +37,7 @@ export async function getOdooData() {
             1 * 24 * 60,
             async () => {
                 const response = await fetch(source);
-                if (!response.ok) return {};
+                if (!response.ok) throw new Error(`HTTP ${response.status} while fetching ${source}`);
                 return await response.json();
             },
             'getOdooData'
