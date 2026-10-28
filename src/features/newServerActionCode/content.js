@@ -7,6 +7,17 @@ import configuration from './configuration.js';
 export default class NewServerActionCodeContentFeature extends ContentFeature {
     constructor() {
         super(configuration);
+        this._serverActionObserver = null;
+    }
+
+    unload() {
+        super.unload();
+        this.disconnectServerActionObserver();
+    }
+
+    disconnectServerActionObserver() {
+        this._serverActionObserver?.disconnect();
+        this._serverActionObserver = null;
     }
 
     async loadFeature(url) {
@@ -27,6 +38,7 @@ export default class NewServerActionCodeContentFeature extends ContentFeature {
         inputModel.value = 'ir.actions.server';
 
         const parent = inputModel.parentElement;
+        this.disconnectServerActionObserver();
         const observer = new MutationObserver((mutations) => {
             const choiceMutations = mutations.filter((m) => m.target.id.match(/^model_id_0_(0_)?\d+$/));
             // model_id_0_0_0 for record and model_id_0_0_1 for search more (optional)
@@ -36,15 +48,19 @@ export default class NewServerActionCodeContentFeature extends ContentFeature {
             const serverActionItem = parent.querySelector('#model_id_0_0_0') ?? parent.querySelector('#model_id_0_0');
 
             if (serverActionItem) {
-                observer.disconnect();
+                this.disconnectServerActionObserver();
                 serverActionItem.click();
             }
 
             const nameElement = document.getElementById('name_0') ?? document.getElementById('name');
             if (nameElement) nameElement.focus();
         });
-        observer.disconnect();
+        this._serverActionObserver = observer;
         observer.observe(parent, { childList: true, subtree: true });
+        // Item may never appear (no match, other Odoo version), avoid stealing the focus forever
+        setTimeout(() => {
+            if (this._serverActionObserver === observer) this.disconnectServerActionObserver();
+        }, 5000);
         inputModel.dispatchEvent(new InputEvent('input', { bubbles: true }));
 
         await sleep(500); // [ODOO] 18.3+ action type is not shown by default, wait event end
