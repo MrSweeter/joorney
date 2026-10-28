@@ -1,11 +1,13 @@
-import { features } from '../../configuration';
+import { loadFeaturesConfiguration } from '../../configuration';
 import { Console, Tabs, WebRequest, sendTabMessage } from '../../src/utils/browser';
 import { MESSAGE_ACTION } from '../../src/utils/messaging';
 
-export function listenRequest() {
+export async function listenRequest() {
+    const features = await loadFeaturesConfiguration();
     const urls = features.flatMap((f) => f.trigger.onrequest || []);
 
     WebRequest.onCompleted.removeListener(requestComplete);
+    if (urls.length === 0) return;
     WebRequest.onCompleted.addListener(requestComplete, { urls: urls }, []);
 }
 

@@ -9,7 +9,7 @@ import {
     sendTabMessage,
 } from '../src/utils/browser.js';
 
-import { features, getCurrentSettings, loadFeaturesConfiguration } from '../configuration.js';
+import { getCurrentSettings, loadFeaturesConfiguration } from '../configuration.js';
 import { checkHostsExpiration } from '../src/api/cache.js';
 import { createContextMenu, onContextMenuItemClick, updateContext } from '../src/contextmenu/manager.js';
 import AmbientManager from '../src/features/ambient/ambient_manager.js';
@@ -46,7 +46,8 @@ WebNavigation.onHistoryStateUpdated.addListener((e) => {
 Runtime.onInstalled.addListener(async (details) => {
     const isInstall = details.reason === Runtime.OnInstalledReason.INSTALL;
     if (isInstall) {
-        const settingsOrDefault = getCurrentSettings(features);
+        const features = await loadFeaturesConfiguration();
+        const settingsOrDefault = await getCurrentSettings(features);
         await StorageSync.set(settingsOrDefault);
         checkCommandShortcuts();
     }
@@ -78,20 +79,18 @@ Runtime.onMessage.addListener((message, sender) => {
 ContextMenus.onClicked.addListener(onContextMenuItemClick);
 
 async function main() {
-    // Add some delay to avoid initialization side effect
-    // await sleep(1000);
+    // Start loading features immediately, messages handlers await the same promise
+    loadFeaturesConfiguration();
 
     await checkVersion();
     handleCommands();
     await checkHostsExpiration();
 
-    await loadFeaturesConfiguration();
-
     initOmni();
 
     await createContextMenu('main');
 
-    listenRequest();
+    await listenRequest();
 
     await AmbientManager.computeEvents();
 }

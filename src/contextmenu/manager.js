@@ -1,4 +1,4 @@
-import { features } from '../../configuration.js';
+import { loadFeaturesConfiguration } from '../../configuration.js';
 import { clearHost } from '../api/cache.js';
 import { openRunbotWithVersionMenuItem } from '../features/autoOpenRunbot/configuration.js';
 import { isAuthorizedFeature, isAuthorizedLimitedFeature } from '../utils/authorize.js';
@@ -159,9 +159,10 @@ async function getFeaturesItems(tab) {
     if (tab) {
         if (!tab.url) return {};
         url = sanitizeURL(tab.url);
-        if (!url.origin || !url.origin.startsWith('http')) return;
+        if (!url.origin || !url.origin.startsWith('http')) return {};
     }
 
+    const features = await loadFeaturesConfiguration();
     const contextFeatures = features.filter((f) => f.trigger.context);
     const allFavorite = contextFeatures.length === 1;
 
