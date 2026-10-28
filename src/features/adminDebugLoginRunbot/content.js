@@ -16,7 +16,7 @@ export default class AdminDebugLoginRunbotContentFeature extends LimitedRunbotCo
     async appendRunbotAdminDebugLogin() {
         const btnIdentifier = 'joorney-admin-debug-login-runbot';
 
-        for (const e of document.getElementsByClassName(btnIdentifier)) e.remove();
+        for (const e of document.querySelectorAll(`.${btnIdentifier}`)) e.remove();
 
         const signIn = Array.from(document.getElementsByClassName('fa fa-sign-in btn btn-info'));
 
