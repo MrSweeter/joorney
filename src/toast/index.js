@@ -6,6 +6,7 @@ import {
     ToastContainerElementID,
     buildContainer,
     buildToastItem,
+    generateToastID,
     toastDelayMillis,
     toastDurationMillis,
     toastFadeInOutDurationMillis,
@@ -74,6 +75,8 @@ export const ToastManager = {
 
         const existing = Object.entries(existingToast).find((entry) => entry[1].msg === message);
         if (existing) {
+            // Console antispam entry, no UI to update
+            if (existing[0].startsWith('log-')) return true;
             if (existing[1].id) clearTimeout(existing[1].id);
             this._updateui(existing, feature);
             return true;
@@ -117,8 +120,8 @@ export const ToastManager = {
     },
 
     _log(feature, title, message, type, antispam = true) {
-        const itemID = `log-${Date.now()}`;
-        if (antispam) existingToast[itemID] = message;
+        const itemID = generateToastID('log');
+        if (antispam) existingToast[itemID] = { msg: message };
         switch (type) {
             case 'info':
                 Console.info(`(${feature})\n${title}\n${message}`);
@@ -136,9 +139,12 @@ export const ToastManager = {
                 Console.log(`[${type}] (${feature})\n${title}\n${message}`);
         }
         if (antispam) {
-            setTimeout(() => {
-                delete existingToast[itemID];
-            }, toastDelayMillis * 1000);
+            setTimeout(
+                () => {
+                    delete existingToast[itemID];
+                },
+                toastDelayMillis + toastFadeInOutDurationMillis + toastDurationMillis
+            );
         }
     },
 
@@ -181,14 +187,15 @@ export const ToastManager = {
     },
 
     _updateui(existing, feature) {
-        const features = document.getElementById(existing[0]).getElementsByClassName('toast-feature')[0];
+        const toast = document.getElementById(existing[0]);
+        if (!toast) return true;
+
+        const features = toast.getElementsByClassName('toast-feature')[0];
         const featureBadge = stringToHTML(`
                 <span class="badge rounded-pill">${escapeHTML(feature)}</span>
             `);
-        features.appendChild(featureBadge);
+        features?.appendChild(featureBadge);
 
-        const toast = document.getElementById(existing[0]);
-        if (!toast) return true;
         const progress = toast.getElementsByClassName('toast-progress')[0];
         if (!progress) return true;
 
