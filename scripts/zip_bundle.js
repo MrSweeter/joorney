@@ -51,13 +51,13 @@ function deleteExistingVersion(outputFolder, deleteFormat) {
 
     for (const file of files) {
         if (file.startsWith(deleteFormat)) {
-            fs.unlink(path.join(outputFolder, file), (err) => {
-                if (err) {
-                    console.error(`Error deleting file ${file}:`, err);
-                } else {
-                    console.log(`Deleted file: ${file}`);
-                }
-            });
+            // Sync: an async unlink could remove the new archive (same name when rebuilt the same day)
+            try {
+                fs.unlinkSync(path.join(outputFolder, file));
+                console.log(`Deleted file: ${file}`);
+            } catch (err) {
+                console.error(`Error deleting file ${file}:`, err);
+            }
         }
     }
 }
