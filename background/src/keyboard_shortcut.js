@@ -31,11 +31,15 @@ export function handleCommands() {
     });
 }
 
-export async function updateTabState(request) {
-    const tabs = await Tabs.query({ active: true, currentWindow: true });
-    if (!tabs) return;
-    const tab = tabs[0];
-    enableDisableTabExtension(tab, request.forceSwitchToOFF);
+export async function updateTabState(request, sender) {
+    // Use the tab which sent the request, the active tab may be another one (background tab loading)
+    let tab = sender?.tab;
+    if (!tab) {
+        const tabs = await Tabs.query({ active: true, currentWindow: true });
+        tab = tabs?.[0];
+    }
+    if (!tab) return;
+    await enableDisableTabExtension(tab, request.forceSwitchToOFF);
 }
 
 async function enableDisableTabExtension(tab, forceOff = undefined) {

@@ -22,7 +22,7 @@ async function handleAction(message, sender) {
             break;
         }
         case MESSAGE_ACTION.TO_BACKGROUND.UPDATE_EXT_STATUS: {
-            callback = updateTabState(message);
+            callback = updateTabState(message, sender);
             break;
         }
         case MESSAGE_ACTION.TO_BACKGROUND.RECREATE_MENU: {
@@ -35,6 +35,7 @@ async function handleAction(message, sender) {
             break;
         }
         case MESSAGE_ACTION.TO_BACKGROUND.TAB_LOADED: {
+            if (!sender.tab) return undefined;
             callback = updateContext(sender.tab.id);
             break;
         }
