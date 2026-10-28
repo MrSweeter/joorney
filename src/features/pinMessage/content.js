@@ -115,6 +115,7 @@ export default class PinMessageContentFeature extends ContentFeature {
     }
 
     unload() {
+        super.unload();
         this.pinMessageChatterObserver?.disconnect();
     }
 
