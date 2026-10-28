@@ -10,7 +10,7 @@ export function updateSupportedVersion(versionsArg) {
     let versions = versionsArg;
     // Remote data unavailable (offline, GitHub error): don't drop the user selection based on the fallback
     const isFallback = !versions || versions.length === 0;
-    if (isFallback) versions = ['19.0']; // Use current Odoo long-term version
+    if (isFallback) versions = ['20.0']; // Use current Odoo long-term version
     versions = versions.map((v) => sanitizeVersion(v));
     setSupportedVersion(versions);
     if (!isFallback) checkVersionIntegrity(versions);
