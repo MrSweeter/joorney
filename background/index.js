@@ -23,7 +23,8 @@ import { listenRequest } from './src/request.js';
 
 // [ODOO] < 17.2 On page # path change
 WebNavigation.onReferenceFragmentUpdated.addListener((e) => {
-    if (e.url.startsWith('http')) {
+    // Ignore iframe navigation (website editor, html field, report preview...)
+    if (e.frameId === 0 && e.url.startsWith('http')) {
         sendTabMessage(e.tabId, MESSAGE_ACTION.TO_CONTENT.TAB_NAVIGATION, {
             url: e.url,
             navigator: true,
@@ -34,7 +35,7 @@ WebNavigation.onReferenceFragmentUpdated.addListener((e) => {
 
 // [ODOO] 17.2+
 WebNavigation.onHistoryStateUpdated.addListener((e) => {
-    if (e.url.startsWith('http')) {
+    if (e.frameId === 0 && e.url.startsWith('http')) {
         sendTabMessage(e.tabId, MESSAGE_ACTION.TO_CONTENT.TAB_NAVIGATION, {
             url: e.url,
             navigator: true,
