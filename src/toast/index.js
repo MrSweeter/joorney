@@ -1,5 +1,5 @@
 import { baseSettings } from '../../configuration.js';
-import { stringToHTML } from '../html_generator.js';
+import { escapeHTML, stringToHTML } from '../html_generator.js';
 import { isSupportedOdoo } from '../utils/authorize.js';
 import { Console, StorageSync } from '../utils/browser.js';
 import {
@@ -178,7 +178,7 @@ export const ToastManager = {
     _updateui(existing, feature) {
         const features = document.getElementById(existing[0]).getElementsByClassName('toast-feature')[0];
         const featureBadge = stringToHTML(`
-                <span class="badge rounded-pill">${feature}</span>
+                <span class="badge rounded-pill">${escapeHTML(feature)}</span>
             `);
         features.appendChild(featureBadge);
 
