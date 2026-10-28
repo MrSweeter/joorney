@@ -26,6 +26,7 @@ export default class ShowMyBadgeContentFeature extends ContentFeature {
     }
 
     unload() {
+        super.unload();
         this.overlayShowMyBadgeObserver?.disconnect();
     }
 
