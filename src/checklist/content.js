@@ -20,11 +20,17 @@ export default class ChecklistContent {
         }
         Checklist.manager.toggle(true);
         this.tour = tour;
+        this.triggerCleanups = [];
 
         this.load();
     }
 
     async load() {
+        // Remove page listeners of a previous load (restart), steps marked done without trigger keep them
+        for (const cleanup of this.triggerCleanups) cleanup();
+        this.triggerCleanups = [];
+        this.doneSteps = new Set();
+
         await this.congrats(false);
         document.getElementById('joorney_checklist_tour_title').innerText = this.tour.title;
         document.getElementById('joorney_checklist_tour_description').innerText = this.tour.description;
@@ -54,6 +60,11 @@ export default class ChecklistContent {
         const tourVersion = this.tour.version;
 
         Checklist.manager.toggle(!tourState || lastTourVersion < tourVersion);
+    }
+
+    isTourProgressComplete() {
+        // Floating sum of 100/n steps may end slightly below 100 (7 steps: 99.99999999999997)
+        return this.progressStatePct >= 100 - 1e-6;
     }
 
     updateProgress() {
@@ -112,6 +123,7 @@ export default class ChecklistContent {
             removeTriggers();
             this.markDoneAndNext(step);
         };
+        this.triggerCleanups.push(removeTriggers);
 
         for (const trigger of triggers) {
             const triggerElement = document.querySelector(trigger.selector);
@@ -125,6 +137,7 @@ export default class ChecklistContent {
         document.getElementById(step.id).onchange = (e) => {
             if (e.target.checked) next();
             else {
+                if (!this.doneSteps.delete(step.id)) return;
                 this.progressStatePct -= step.progression ?? this.progressInc;
                 this.updateProgress();
             }
@@ -132,6 +145,10 @@ export default class ChecklistContent {
     }
 
     async markDone(step) {
+        // Already counted ("mark all done" on partially completed tour)
+        if (this.doneSteps.has(step.id)) return this.isTourProgressComplete();
+        this.doneSteps.add(step.id);
+
         await StorageLocal.set({ [step.id]: true });
 
         const stepElement = document.getElementById(step.id);
@@ -143,7 +160,7 @@ export default class ChecklistContent {
         this.progressStatePct += step.progression ?? this.progressInc;
         this.updateProgress();
 
-        if (this.progressStatePct >= 100) {
+        if (this.isTourProgressComplete()) {
             await this.completeTour();
             return true;
         }
