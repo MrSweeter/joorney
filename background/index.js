@@ -78,15 +78,20 @@ Runtime.onMessage.addListener((message, sender) => {
 
 ContextMenus.onClicked.addListener(onContextMenuItemClick);
 
+// Listeners must be registered synchronously, MV3 does not dispatch the waking event to listeners added later
+handleCommands();
+initOmni();
+
 async function main() {
     // Start loading features immediately, messages handlers await the same promise
     loadFeaturesConfiguration();
 
-    await checkVersion();
-    handleCommands();
+    try {
+        await checkVersion();
+    } catch (e) {
+        Console.error(e);
+    }
     await checkHostsExpiration();
-
-    initOmni();
 
     await createContextMenu('main');
 
@@ -95,8 +100,4 @@ async function main() {
     await AmbientManager.computeEvents();
 }
 
-try {
-    main();
-} catch (e) {
-    console.error(e)
-}
+main().catch((e) => Console.error(e));
