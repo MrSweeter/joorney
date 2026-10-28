@@ -114,7 +114,7 @@ export default class ChecklistManager {
         this.loadSize();
         this.safeMove(
             Number.parseFloat(this.element.style.left.replace('px', '')),
-            Number.parseFloat(this.element.style.top.replace('px')),
+            Number.parseFloat(this.element.style.top.replace('px', '')),
             true
         );
     }
@@ -122,7 +122,7 @@ export default class ChecklistManager {
     async reset() {
         await sleep(100);
         this.element.onmousedown = this.beginDrag; //ODO[REF] DRAGGING BOUND
-        ChecklistManager.bubble?.close();
+        Checklist.bubble?.close();
         this.align(true, true, false, false);
     }
 
