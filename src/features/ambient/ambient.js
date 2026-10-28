@@ -5,6 +5,8 @@ import { bubbles } from './custom_path.js';
 
 //#region Abstract Loader
 const lockedState = ['circle', 'square', 'star'];
+// www.odoo.com event.tag used for Odoo Experience events
+const ODOO_EXPERIENCE_TAG_ID = 183;
 const emojisLoader = ({
     emojis,
     alpha,
@@ -137,14 +139,15 @@ const schoolPrideLoader = (colors) => {
     };
 };
 const floatingLoader = (emojis) => {
-    return (ticks) => emojisLoader({
-        emojis: emojis,
-        alpha: { max: 0.2, double: true },
-        size: { min: 8, max: 20, dynamic: true },
-        gravity: { min: -0.6, max: -0.4, dynamic: true },
-        drift: { min: -0.4, max: 0.4, dynamic: true },
-        yRange: { min: 0.5, max: 1 },
-    })(ticks);
+    return (ticks) =>
+        emojisLoader({
+            emojis: emojis,
+            alpha: { max: 0.2, double: true },
+            size: { min: 8, max: 20, dynamic: true },
+            gravity: { min: -0.6, max: -0.4, dynamic: true },
+            drift: { min: -0.4, max: 0.4, dynamic: true },
+            yRange: { min: 0.5, max: 1 },
+        })(ticks);
 };
 //#endregion
 
@@ -169,7 +172,10 @@ export const ambients = {
                 name: `Odoo Experience ${new Date().getFullYear()}`,
                 id: 'odoo-experience-oxp-cpt',
                 computeDates: async () => {
-                    return await getOdooEventDate([["tag_ids", "in", 183], ['name', '=', `Odoo Experience ${new Date().getFullYear()}`]]);
+                    return await getOdooEventDate([
+                        ['tag_ids', 'in', ODOO_EXPERIENCE_TAG_ID],
+                        ['name', '=', `Odoo Experience ${new Date().getFullYear()}`],
+                    ]);
                 },
                 type: 'long',
                 duration: 3000,
@@ -179,7 +185,11 @@ export const ambients = {
                 name: 'Future Odoo Experience',
                 id: 'future-odoo-experience-cpt',
                 computeDates: async () => {
-                    return await getOdooEventDate([["tag_ids", "in", 183], ['name', '=like', '%Odoo Experience%'], ['name', '!=', `Odoo Experience ${new Date().getFullYear()}`]]);
+                    return await getOdooEventDate([
+                        ['tag_ids', 'in', ODOO_EXPERIENCE_TAG_ID],
+                        ['name', '=like', '%Odoo Experience%'],
+                        ['name', '!=', `Odoo Experience ${new Date().getFullYear()}`],
+                    ]);
                 },
                 type: 'long',
                 duration: 3000,
