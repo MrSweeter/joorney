@@ -8,6 +8,13 @@ export const toastDelayMillis = 100;
 export const toastDurationMillis = 3000;
 
 export const ToastContainerElementID = 'joorney-toast-container';
+
+// Date.now() alone collides when two toasts are created in the same millisecond
+let toastCounter = 0;
+export function generateToastID(prefix) {
+    toastCounter += 1;
+    return `${prefix}-${Date.now()}-${toastCounter}`;
+}
 const ToastItemElementClass = 'joorney-toasty';
 
 const iconForType = {
@@ -123,7 +130,7 @@ export function buildContainer() {
 }
 
 export function buildToastItem(feature, title, message, type, large) {
-    const toastID = `toast-${Date.now()}`;
+    const toastID = generateToastID('toast');
     const textHeight = !large ? 'height: 20px; white-space: nowrap;' : '';
     const item = stringToHTML(html`
         <div id="${toastID}" class="${ToastItemElementClass} ${ToastItemElementClass}-${type} alert alert-${type}">
