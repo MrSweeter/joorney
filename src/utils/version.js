@@ -8,16 +8,19 @@ const DEFAULT_VERSION = { isOdoo: false };
 
 export function updateSupportedVersion(versionsArg) {
     let versions = versionsArg;
-    if (!versions || versions.length === 0) versions = ['19.0']; // Use current Odoo long-term version
+    // Remote data unavailable (offline, GitHub error): don't drop the user selection based on the fallback
+    const isFallback = !versions || versions.length === 0;
+    if (isFallback) versions = ['19.0']; // Use current Odoo long-term version
     versions = versions.map((v) => sanitizeVersion(v));
     setSupportedVersion(versions);
-    checkVersionIntegrity(versions);
+    if (!isFallback) checkVersionIntegrity(versions);
 }
 
 export async function updateSupportedDevelopmentVersion(devVersionArg) {
     let versions = devVersionArg;
     const isdev = await isDevMode();
-    if (!isdev || !versions) versions = [];
+    if (isdev && !versions) return;
+    if (!isdev) versions = [];
     versions = versions.map((v) => sanitizeVersion(v));
     setSupportedDevelopmentVersion(versions);
     checkVersionIntegrity(versions, true);
