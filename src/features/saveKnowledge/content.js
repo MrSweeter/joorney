@@ -1,5 +1,6 @@
 import { writeRecord } from '../../api/odoo.js';
 import ContentFeature from '../../generic/content.js';
+import { ToastManager } from '../../toast/index.js';
 import { isStillSamePage } from '../../utils/authorize.js';
 import { getModelAndID_fromURL } from '../../utils/url_manager.js';
 import configuration from './configuration.js';
@@ -56,20 +57,25 @@ export default class SaveKnowledgeContentFeature extends ContentFeature {
     }
 
     async saveArticle(article) {
-        const articleID = await this.tryCatch(
-            () => this.getKnowledgeArticleID_fromURL(window.location.href),
-            undefined
-        );
-        if (!articleID) return;
-        if (article.id !== articleID)
-            throw new Error(`Button context is not the same as the url context: '${article.id}' vs '${articleID}'`);
+        try {
+            const articleID = await this.tryCatch(
+                () => this.getKnowledgeArticleID_fromURL(window.location.href),
+                undefined
+            );
+            if (!articleID) return;
+            if (article.id !== articleID)
+                throw new Error(`Button context is not the same as the url context: '${article.id}' vs '${articleID}'`);
 
-        const body = document.getElementById('body_0').innerHTML;
-        if (!body) return;
+            // body_0 is the ID use when you can edit an article body
+            const body = (document.getElementById('body_0') ?? document.getElementById('body'))?.innerHTML;
+            if (!body) return;
 
-        await writeRecord('knowledge.article', Number.parseInt(articleID), {
-            body: body,
-        });
+            await writeRecord('knowledge.article', Number.parseInt(articleID), {
+                body: body,
+            });
+        } catch (err) {
+            ToastManager.warn(this.configuration.id, 'An error occurred during article save', err.message);
+        }
     }
 
     updateSaveEvent(btn, article) {
