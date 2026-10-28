@@ -20,6 +20,7 @@ import { checkCommandShortcuts, handleCommands } from './src/keyboard_shortcut.j
 import { handleMessage } from './src/messaging.js';
 import { initOmni } from './src/omnibox.js';
 import { listenRequest } from './src/request.js';
+import { onRunbotNavigationCommitted } from './src/runbot.js';
 
 // [ODOO] < 17.2 On page # path change
 WebNavigation.onReferenceFragmentUpdated.addListener((e) => {
@@ -43,6 +44,9 @@ WebNavigation.onHistoryStateUpdated.addListener((e) => {
         });
     }
 });
+
+// Admin/debug login on runbot builds opened through the background (see openRunbotAdminDebug)
+WebNavigation.onCommitted.addListener(onRunbotNavigationCommitted);
 
 Runtime.onInstalled.addListener(async (details) => {
     const isInstall = details.reason === Runtime.OnInstalledReason.INSTALL;
