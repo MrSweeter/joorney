@@ -1,7 +1,7 @@
 import { getMetadata } from '../../api/odoo.js';
 import { isDebugSession } from '../../api/session.js';
 import ContentFeature from '../../generic/content.js';
-import { stringToHTML } from '../../html_generator.js';
+import { escapeHTML, stringToHTML } from '../../html_generator.js';
 import { isStillSamePage } from '../../utils/authorize.js';
 import { isDarkCookie } from '../../utils/cookies.js';
 import { getActionWindow_fromURL, getModelAndID_fromURL } from '../../utils/url_manager.js';
@@ -52,7 +52,7 @@ export default class TooltipMetadataContentFeature extends ContentFeature {
         if (!container) return;
 
         const element = stringToHTML(
-            `<span id="${spanID}" style="align-content: center; margin-left: 4px; line-height: initial; font-style: italic; color: darkgoldenrod; cursor: copy" title="[Joorney] Copy technical name to clipboard" >(${model})</span>`
+            `<span id="${spanID}" style="align-content: center; margin-left: 4px; line-height: initial; font-style: italic; color: darkgoldenrod; cursor: copy" title="[Joorney] Copy technical name to clipboard" >(${escapeHTML(model)})</span>`
         );
         element.onclick = () => navigator.clipboard.writeText(model);
         container.appendChild(element);
@@ -86,9 +86,9 @@ export default class TooltipMetadataContentFeature extends ContentFeature {
             { label: 'ID', value: metadata.id },
             { label: 'XML ID', value: metadata.xmlid },
             { label: 'No Update', value: metadata.noupdate },
-            { label: 'Creation User', value: metadata.create_uid },
+            { label: 'Creation User', value: metadata.create_uid?.[1] ?? metadata.create_uid },
             { label: 'Creation Date', value: metadata.create_date },
-            { label: 'Latest Modification by', value: metadata.write_uid },
+            { label: 'Latest Modification by', value: metadata.write_uid?.[1] ?? metadata.write_uid },
             { label: 'Latest Modification Date', value: metadata.write_date },
         ]);
     }
@@ -102,7 +102,9 @@ export default class TooltipMetadataContentFeature extends ContentFeature {
         const debugManager = document.querySelector('.o_debug_manager');
         if (!debugManager) return;
 
-        const rows = datas.map((d) => `<tr><th>${d.label}:</th><td>${d.value}</td></tr>`.trim());
+        const rows = datas.map((d) =>
+            `<tr><th>${escapeHTML(d.label)}:</th><td>${escapeHTML(d.value)}</td></tr>`.trim()
+        );
         const isDark = await isDarkCookie(window.location.origin);
 
         const template = document.createElement('template');

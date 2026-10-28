@@ -1,4 +1,4 @@
-import { stringToHTML } from '../html_generator.js';
+import { escapeHTML, stringToHTML } from '../html_generator.js';
 
 const html = String.raw;
 const css = String.raw;
@@ -132,14 +132,14 @@ export function buildToastItem(feature, title, message, type, large) {
                 <div>
                     <strong>Joorney: </strong>
                     <span class="toast-feature">
-                        <span class="badge rounded-pill">${feature}</span>
+                        <span class="badge rounded-pill">${escapeHTML(feature)}</span>
                     </span>
                 </span>
-                <div class="toast-title">${title}</div>
+                <div class="toast-title">${escapeHTML(title)}</div>
                 <div
                     class="toast-text"
                     style="${textHeight}"
-                >${message}</div>
+                >${escapeHTML(message)}</div>
             </div>
             <button id="close-${toastID}" class="toast-close"><i class="fa-solid fa-xmark"></i></button>
             <div class="toast-progress"></div>
