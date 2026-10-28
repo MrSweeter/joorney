@@ -21,11 +21,7 @@ export default class AwesomeLoadingLargeContentFeature extends AwesomeLoadingSha
                     max-height: 46px;
 
                     /* Remove the spinning animation */
-                    if spin {
-                        animation: fa-spin 1s infinite linear !important;
-                    } else {
-                        animation: none !important;
-                    }
+                    animation: none !important;
                 }
 
                 /* Use same backdrop effect as Odoo 16 (slightly less blurred) */
