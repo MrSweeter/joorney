@@ -7,12 +7,9 @@ import copy from 'rollup-plugin-copy';
 import watchAssets from 'rollup-plugin-watch-assets';
 import { SUPPORTED_VERSION } from './src/utils/constant.js';
 
-const defaultPlugins = [
-    resolve(),
-    json(),
-    dynamicImportVars({ exclude: ['features_state.json', '**/*.scss'] }),
-    watchAssets({ assets: ['options/**/*.css', 'options/**/*.html'] }),
-];
+const defaultPlugins = [resolve(), json(), dynamicImportVars({ exclude: ['features_state.json'] })];
+// Only for configs copying options assets (watch mode)
+const optionsWatchAssets = watchAssets({ assets: ['options/**/*.css', 'options/**/*.html'] });
 function getESMOutput(file) {
     return { file: file, format: 'esm', inlineDynamicImports: true };
 }
@@ -24,6 +21,7 @@ function getOptionPages(bundleOutput, pages) {
             output: getESMOutput(`${bundleOutput}/options/pages/${page}/index.js`),
             plugins: [
                 ...defaultPlugins,
+                optionsWatchAssets,
                 copy({
                     targets: [
                         {
@@ -120,6 +118,7 @@ export default () => {
             output: getESMOutput(`${bundleOutput}/options/index.js`),
             plugins: [
                 ...defaultPlugins,
+                optionsWatchAssets,
                 copy({
                     targets: [
                         {
@@ -138,6 +137,7 @@ export default () => {
             output: getESMOutput(`${bundleOutput}/options/migration/index.js`),
             plugins: [
                 ...defaultPlugins,
+                optionsWatchAssets,
                 copy({
                     targets: [
                         {
