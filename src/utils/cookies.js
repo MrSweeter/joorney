@@ -53,9 +53,11 @@ function getCookiesFromDocument(useConfiguredCookie) {
 
     if (!cookieName) return 'light';
 
-    const cookies = decodedCookie.split(';');
-
-    const cookie = cookies.find((c) => c.trim().indexOf(cookieName) === 0).substring(cookieName.length + 2);
+    const cookie = decodedCookie
+        .split(';')
+        .map((c) => c.trim())
+        .find((c) => c.startsWith(`${cookieName}=`))
+        ?.substring(cookieName.length + 1);
 
     return cookie || 'light';
 }
