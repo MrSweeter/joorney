@@ -2,9 +2,19 @@ import { getRunbotOpenUrl } from '../../src/shared/limited/runbot_content.js';
 import { OmniBox, Runtime, StorageSync, Tabs } from '../../src/utils/browser.js';
 import { SUPPORTED_VERSION } from '../../src/utils/constant.js';
 
+// Must be called synchronously at service worker startup, MV3 only dispatches the waking event to those listeners
 export function initOmni() {
     OmniBox.onInputStarted.removeListener(onStarted);
     OmniBox.onInputStarted.addListener(onStarted);
+    OmniBox.onInputChanged.removeListener(onChange);
+    OmniBox.onInputChanged.addListener(onChange);
+    OmniBox.onInputEntered.removeListener(onEntered);
+    OmniBox.onInputEntered.addListener(onEntered);
+}
+
+async function isOmniboxEnabled() {
+    const { autoOpenRunbotEnabled } = await StorageSync.get({ autoOpenRunbotEnabled: false });
+    return autoOpenRunbotEnabled;
 }
 
 const STATIC_LINK = {
@@ -29,28 +39,24 @@ const STATIC_LINK = {
 };
 
 async function onStarted() {
-    const { autoOpenRunbotEnabled } = await StorageSync.get({ autoOpenRunbotEnabled: false });
-    if (!autoOpenRunbotEnabled) {
+    if (!(await isOmniboxEnabled())) {
         await OmniBox.setDefaultSuggestion({
             description:
                 'The functionality to open a runbot from URL is currently disabled. Open options to enabled "Auto Open Runbot"!',
         });
     } else {
         await OmniBox.setDefaultSuggestion({ description: 'Open <match>%s</match> <dim>(if found)</dim>' });
-        OmniBox.onInputChanged.removeListener(onChange);
-        OmniBox.onInputChanged.addListener(onChange);
-
-        OmniBox.onInputEntered.removeListener(onEntered);
-        OmniBox.onInputEntered.addListener(onEntered);
     }
 }
 
-function onChange(text, suggest) {
+async function onChange(text, suggest) {
+    if (!(await isOmniboxEnabled())) return;
     const suggestions = getSuggestions(text);
     suggest(suggestions);
 }
 
-function onEntered(text) {
+async function onEntered(text) {
+    if (!(await isOmniboxEnabled())) return;
     const url = getURLFromKeyword(text);
     if (url) {
         openURL(url);

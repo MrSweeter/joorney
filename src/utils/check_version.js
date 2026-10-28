@@ -14,6 +14,7 @@ export async function checkVersion() {
 
     if (!['development', 'other'].includes(installType)) return;
     const res = await fetch(fetchVersion);
+    if (!res.ok) throw new Error(`HTTP ${res.status} while fetching ${fetchVersion}`);
     const manifest = await res.json();
     const remoteVersion = removeBuildFromVersion(manifest.version);
     const currentVersion = removeBuildFromVersion(Runtime.getManifest().version);
