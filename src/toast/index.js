@@ -64,6 +64,11 @@ export const ToastManager = {
     },
 
     async _notify(feature, title, message, type, force) {
+        if (!this.toastType) {
+            // Not loaded (unsupported version, non-Odoo page...): fallback to console
+            Console.warn(`[${feature}] ${title}: ${message}`);
+            return false;
+        }
         if (this.isDisabled()) return false;
         if (!this.toastType[type]) return false;
 

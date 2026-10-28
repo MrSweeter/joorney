@@ -43,10 +43,10 @@ async function onVersionLoaded() {
 
     await updateTabState(url);
     const versionInfo = getOdooVersion();
+    // Toast must be ready before features, they may notify during loading
+    await loadToast(versionInfo);
     await loadFeatures(url, versionInfo, 'background');
     await loadFeatures(url, versionInfo, 'load');
-
-    loadToast(versionInfo);
 
     Runtime.onMessage.addListener((message, sender) => {
         return handleMessage(message, sender);
