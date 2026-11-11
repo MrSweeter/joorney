@@ -1,4 +1,4 @@
-export let SUPPORTED_VERSION = ['16.0']; // Minimal supported version for extension versioning
+export let SUPPORTED_VERSION = ['17.0']; // Minimal supported version for extension versioning
 export let SUPPORTED_DEV_VERSION = [];
 
 export function setSupportedVersion(versions) {
