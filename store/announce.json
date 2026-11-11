@@ -44,5 +44,12 @@
         "description": "New feature: Follow or unfollow a record in Odoo. Brings back the 'Follow' button in the chatter header.",
         "closeable": true,
         "hash": "2.6.0.16.1"
+    },
+    "2.7.0.17": {
+        "title": "Odoo 20 & Assign Me on Helpdesk",
+        "description": "Odoo 20 is now supported and Odoo 16 is no longer supported. 'Assign Me' now also works on Helpdesk tickets.",
+        "closeable": true,
+        "menu": "page-version",
+        "hash": "2.7.0.17.1"
     }
 }
