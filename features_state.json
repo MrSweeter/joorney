@@ -1,9 +1,10 @@
 {
-    "awesomeLoadingLarge": true,
+    "__comment__": "awesomeLoadingLarge and saveKnowledge are disabled: they only support Odoo 16.x (supported_version 16:17) and Odoo 16.0 is no longer supported.",
+    "awesomeLoadingLarge": false,
     "awesomeLoadingSmall": true,
     "assignMeTask": true,
     "starringPriorityEffect": true,
-    "saveKnowledge": true,
+    "saveKnowledge": false,
     "themeSwitch": true,
     "awesomeStyle": true,
     "unfocusApp": true,
