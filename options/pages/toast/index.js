@@ -42,7 +42,7 @@ function handleToastType(types) {
 
 async function showMockToast() {
     if (!joorneyCurrentToastMode) return;
-    let { toastType } = await StorageSync.get("toastType");
+    let { toastType } = await StorageSync.get('toastType');
     toastType = toastType ? JSON.parse(toastType) : baseSettings.toastType;
 
     if (

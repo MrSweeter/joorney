@@ -3,16 +3,16 @@ import { stringToHTML } from '../../html_generator.js';
 import { sleep } from '../../utils/util.js';
 import configuration from './configuration.js';
 
-const buttonClass = "joorney_follow_unfollow_button"
-const buttonLabelClass = "joorney_follow_unfollow_btn_label"
-const mailFollowersButtonClass = "o-mail-Followers-button"
+const buttonClass = 'joorney_follow_unfollow_button';
+const buttonLabelClass = 'joorney_follow_unfollow_btn_label';
+const mailFollowersButtonClass = 'o-mail-Followers-button';
 
-const followedIconClass = "fa-user"
-const unfollowedIconClass = "fa-user-o"
+const followedIconClass = 'fa-user';
+const unfollowedIconClass = 'fa-user-o';
 
-const followLabel = "Follow"
-const unfollowLabel = "Unfollow"
-const followingLabel = "Following"
+const followLabel = 'Follow';
+const unfollowLabel = 'Unfollow';
+const followingLabel = 'Following';
 
 export default class FollowUnfollowContentFeature extends ContentFeature {
     constructor() {
@@ -21,11 +21,14 @@ export default class FollowUnfollowContentFeature extends ContentFeature {
         this.followButtonObserver = new MutationObserver(this.handleButtonMutation);
     }
 
-    async loadFeature(url) { /* Nothing to load, document observer manage the logic */ }
+    async loadFeature(url) {
+        /* Nothing to load, document observer manage the logic */
+    }
 
     async onDocumentDOMChange(mutations) {
         for (const mutation of mutations) {
-            if (mutation.addedNodes.length && mutation.addedNodes[0].classList?.contains(mailFollowersButtonClass)) this.appendFollowButton();
+            if (mutation.addedNodes.length && mutation.addedNodes[0].classList?.contains(mailFollowersButtonClass))
+                this.appendFollowButton();
         }
     }
 
@@ -53,20 +56,21 @@ export default class FollowUnfollowContentFeature extends ContentFeature {
 
         userButton.click();
         await sleep(200);
-        const actionButton = document.querySelector(`.o-mail-Followers-dropdown .${followed ? "o-mail-FollowerList-unfollowBtn" : "o-mail-FollowerList-followBtn"}`);
+        const actionButton = document.querySelector(
+            `.o-mail-Followers-dropdown .${followed ? 'o-mail-FollowerList-unfollowBtn' : 'o-mail-FollowerList-followBtn'}`
+        );
         actionButton.click();
         e.target.remove();
         this.appendFollowButton();
     }
 
     appendFollowButton() {
-        for (const existing of document.querySelectorAll(`.${buttonClass}`))
-            existing.remove();
+        for (const existing of document.querySelectorAll(`.${buttonClass}`)) existing.remove();
 
         if (document.querySelector('.o-mail-Chatter-follow')) return;
 
         const mailFollowersButton = document.querySelector(`button.${mailFollowersButtonClass}`);
-        const mailFollowersIcon = mailFollowersButton?.querySelector("i.fa");
+        const mailFollowersIcon = mailFollowersButton?.querySelector('i.fa');
         if (!mailFollowersIcon) return;
 
         const followed = mailFollowersIcon.classList.contains(followedIconClass);
@@ -78,19 +82,19 @@ export default class FollowUnfollowContentFeature extends ContentFeature {
             </div>
         </button>`);
 
-        followButton.addEventListener('mouseenter', this.onMouseEnter)
-        followButton.addEventListener('mouseleave', this.onMouseLeave)
+        followButton.addEventListener('mouseenter', this.onMouseEnter);
+        followButton.addEventListener('mouseleave', this.onMouseLeave);
         followButton.onclick = (e) => this.onClick(e, followed, mailFollowersButton, mailFollowersIcon);
 
         mailFollowersButton.parentNode.parentNode.insertBefore(followButton, mailFollowersButton.nextSibling);
 
         this.followButtonObserver.disconnect();
-        this.followButtonObserver.observe(mailFollowersIcon, { attributes: true, attributeFilter: ["class"] });
+        this.followButtonObserver.observe(mailFollowersIcon, { attributes: true, attributeFilter: ['class'] });
     }
 
     handleButtonMutation(mutations) {
         for (const mutation of mutations) {
-            if (mutation.type === "attributes" && mutation.attributeName === "class") this.appendFollowButton();
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') this.appendFollowButton();
         }
     }
 }
