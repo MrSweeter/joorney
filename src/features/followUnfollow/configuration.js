@@ -1,6 +1,6 @@
 export default {
-    id: "followUnfollow",
-    display_name: "Follow/Unfollow",
+    id: 'followUnfollow',
+    display_name: 'Follow/Unfollow',
     icon: '<i class="fa-solid fa-user-check"></i>',
     trigger: {
         background: false,
@@ -8,17 +8,15 @@ export default {
         navigate: true,
         context: false,
         onrequest: [],
-        ondom: true
+        ondom: true,
     },
     customization: {
         option: false,
-        popup: false
+        popup: false,
     },
     defaultSettings: {
         followUnfollowEnabled: false,
-        followUnfollowWhitelistMode: false
+        followUnfollowWhitelistMode: false,
     },
-    supported_version: [
-        "18.3+"
-    ]
+    supported_version: ['18.3+'],
 };
