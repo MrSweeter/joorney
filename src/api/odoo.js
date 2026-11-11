@@ -278,7 +278,7 @@ export async function getMenu(menupath) {
 }
 
 //#region External Public Odoo API
-export async function getFutureEventWithName(domainName, host) {
+export async function getFutureEventWithName(domain, host) {
     const { data } = await cache(
         30 * 24 * 60,
         async () => {
@@ -291,7 +291,7 @@ export async function getFutureEventWithName(domainName, host) {
                     args: [],
                     kwargs: {
                         context: { active_test: true, lang: 'en_US' },
-                        domain: [domainName, ['date_end', '>=', today]],
+                        domain: [...domain, ['date_end', '>=', today]],
                         limit: 1,
                         fields: ['date_begin', 'date_end', 'name', 'display_name'],
                     },
@@ -309,7 +309,7 @@ export async function getFutureEventWithName(domainName, host) {
             return await response.json();
         },
         'getFutureEventWithName',
-        domainName,
+        domain,
         host
     );
     if (!data) return undefined;
