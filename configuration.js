@@ -32,7 +32,7 @@ export const baseSettings = {
 };
 
 export const extensionFeatureState = FeaturesState;
-const activeFeaturesList = Object.keys(FeaturesState).filter((k) => FeaturesState[k]);
+const activeFeaturesList = Object.keys(FeaturesState).filter((k) => !k.startsWith('__') && FeaturesState[k]);
 
 export let features = [];
 let featuresLoading = undefined;
