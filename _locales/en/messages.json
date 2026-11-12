@@ -240,5 +240,245 @@
     "autoOpenRunbot_menu_openWithVersion": {
         "message": "Open runbot with version %version%",
         "description": "Right-click menu on runbot: %version% is replaced by the Odoo version"
+    },
+    "common_fakeDataTitle": {
+        "message": "This element is not part of the original application; it was added artificially by Joorney.\nIf unsure, please reload the page!",
+        "description": "Tooltip on UI simulated by Joorney inside Odoo (not real data)"
+    },
+    "common_error_buttonContext": {
+        "message": "Button context is not the same as the url context: '$button$' vs '$url$'",
+        "description": "Error when a Joorney button belongs to another record than the current URL",
+        "placeholders": {
+            "button": {
+                "content": "$1",
+                "example": "42"
+            },
+            "url": {
+                "content": "$2",
+                "example": "43"
+            }
+        }
+    },
+    "common_jump": {
+        "message": "Jump",
+        "description": "Button on a simulated Odoo chatter message, jumps to the original message"
+    },
+    "toast_limitReached": {
+        "message": "You have reached the notification limit ($max$). Notification logged to console.",
+        "description": "Notification shown when too many notifications are displayed",
+        "placeholders": {
+            "max": {
+                "content": "$1",
+                "example": "5"
+            }
+        }
+    },
+    "toast_badgeNotification": {
+        "message": "notification",
+        "description": "Notification badge for Joorney own notifications (not linked to a feature)"
+    },
+    "assignMeTask_buttonLabel": {
+        "message": "Assign to me",
+        "description": "Button added in Odoo forms (task, ticket, equipment)"
+    },
+    "assignMeTask_buttonTitle": {
+        "message": "Page will be reloaded, use wheel click to open in another tab",
+        "description": "Tooltip of the Assign me button"
+    },
+    "assignMeTask_error_title": {
+        "message": "An error occurred during record assignment",
+        "description": "Notification title when the assignment fails"
+    },
+    "assignMeTask_label_assignees": {
+        "message": "Assignees",
+        "description": "Odoo field label (project task), shown in the simulated tracking message. Use the Odoo wording"
+    },
+    "assignMeTask_label_assignedTo": {
+        "message": "Assigned to",
+        "description": "Odoo field label (helpdesk ticket), shown in the simulated tracking message. Use the Odoo wording"
+    },
+    "assignMeTask_label_technician": {
+        "message": "Technician",
+        "description": "Odoo field label (maintenance equipment), shown in the simulated tracking message. Use the Odoo wording"
+    },
+    "saveKnowledge_buttonLabel": {
+        "message": "Save",
+        "description": "Button added on Odoo Knowledge articles"
+    },
+    "saveKnowledge_error_title": {
+        "message": "An error occurred during article save",
+        "description": "Notification title when the article save fails"
+    },
+    "pinMessage_starButtonTitle": {
+        "message": "Odoo: Mark as Todo | Joorney UI override: Pin",
+        "description": "Tooltip of the Odoo star button, replaced by a pin"
+    },
+    "pinMessage_starIconTitle": {
+        "message": "Odoo: Todo/Starred | Pinned",
+        "description": "Tooltip of the Odoo star icon, replaced by a pin"
+    },
+    "pinMessage_toggleLabel": {
+        "message": "Show pinned message",
+        "description": "Accessible label of the chatter button showing pinned messages"
+    },
+    "pinMessage_sectionTitle": {
+        "message": "Pinned Messages",
+        "description": "Chatter section title listing pinned messages"
+    },
+    "pinMessage_warning_tooManyPins": {
+        "message": "...There are more than $max$ pinned messages! Only yours are displayed",
+        "description": "Chatter warning when the record has too many pinned messages",
+        "placeholders": {
+            "max": {
+                "content": "$1",
+                "example": "5"
+            }
+        }
+    },
+    "pinMessage_warning_tooManyOwnPins": {
+        "message": "...You have more than $max$ pinned messages!",
+        "description": "Chatter warning when the current user has too many pinned messages",
+        "placeholders": {
+            "max": {
+                "content": "$1",
+                "example": "5"
+            }
+        }
+    },
+    "followUnfollow_follow": {
+        "message": "Follow",
+        "description": "Chatter button imitating Odoo: use the Odoo wording"
+    },
+    "followUnfollow_unfollow": {
+        "message": "Unfollow",
+        "description": "Chatter button imitating Odoo (hover when following): use the Odoo wording"
+    },
+    "followUnfollow_following": {
+        "message": "Following",
+        "description": "Chatter button imitating Odoo (state): use the Odoo wording"
+    },
+    "tooltipMetadata_copyModel": {
+        "message": "[Joorney] Copy technical name to clipboard",
+        "description": "Tooltip of the model technical name added in the breadcrumb"
+    },
+    "tooltipMetadata_windowActionId": {
+        "message": "Window Action ID",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_xmlId": {
+        "message": "XML ID",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_name": {
+        "message": "Name",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_model": {
+        "message": "Model",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_filterDomain": {
+        "message": "[Filters] Domain",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_filterContext": {
+        "message": "[Filters] Context",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_filterLimit": {
+        "message": "[Filters] Limit",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_filterFilter": {
+        "message": "[Filters] Filter",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_id": {
+        "message": "ID",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_noUpdate": {
+        "message": "No Update",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_createUser": {
+        "message": "Creation User",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_createDate": {
+        "message": "Creation Date",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_writeUser": {
+        "message": "Latest Modification by",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_writeDate": {
+        "message": "Latest Modification Date",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "impersonateLoginRunbot_loginAs": {
+        "message": "Login as $login$",
+        "description": "Tooltip of the runbot login buttons",
+        "placeholders": {
+            "login": {
+                "content": "$1",
+                "example": "admin"
+            }
+        }
+    },
+    "adminDebugLoginRunbot_buttonTitle": {
+        "message": "Open runbot as admin and with debug mode enabled",
+        "description": "Tooltip of the runbot rocket button"
+    },
+    "runbot_error_notRunbotLink": {
+        "message": "Not a runbot link: $url$",
+        "description": "Error (button tooltip) when the link is not a runbot one",
+        "placeholders": {
+            "url": {
+                "content": "$1",
+                "example": "https://example.com/runbot/run/123"
+            }
+        }
+    },
+    "runbot_error_noTab": {
+        "message": "No tab to open runbot from",
+        "description": "Error (button tooltip) when no tab can open runbot"
+    },
+    "runbot_error_noResponse": {
+        "message": "Extension not responding, reload the page",
+        "description": "Error (button tooltip) when the extension background does not answer"
+    },
+    "showMyBadge_more": {
+        "message": "More...",
+        "description": "Tooltip of the icon linking to all badges"
+    },
+    "unfocusApp_changeFocusState": {
+        "message": "Change focus state",
+        "description": "Tooltip of the icon switching an Odoo app between focused and unfocused"
+    },
+    "contextOdooMenus_error_title": {
+        "message": "An error occurred during menu opening",
+        "description": "Notification title when a menu from the right-click menu cannot be opened"
+    },
+    "contextOdooMenus_error_notFound": {
+        "message": "Menu '$path$' not found.",
+        "description": "Error when no Odoo menu matches the configured path",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Sales / Orders"
+            }
+        }
+    },
+    "contextOdooMenus_error_tooMany": {
+        "message": "Too many menus found for path $path$.",
+        "description": "Error when several Odoo menus match the configured path",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Sales / Orders"
+            }
+        }
     }
 }

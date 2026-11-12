@@ -2,6 +2,7 @@ import ContentFeature from '../../generic/content.js';
 import { isAuthorizedLimitedFeature } from '../../utils/authorize.js';
 import { sendRuntimeMessage } from '../../utils/browser.js';
 import { RunbotException } from '../../utils/error.js';
+import { t } from '../../utils/i18n.js';
 import { MESSAGE_ACTION } from '../../utils/messaging.js';
 import { sanitizeURL } from '../../utils/util.js';
 
@@ -78,9 +79,9 @@ export default class LimitedRunbotContentFeature extends ContentFeature {
                 href: href,
                 newTab: newTab,
             });
-            if (!response || response.error) {
-                throw RunbotException(response?.error ?? 'No response from background');
-            }
+            if (!response) throw RunbotException(t('runbot_error_noResponse'));
+            if (response.errorKey) throw RunbotException(t(response.errorKey, ...(response.errorArgs ?? [])));
+            if (response.error) throw RunbotException(response.error);
             return;
         }
 

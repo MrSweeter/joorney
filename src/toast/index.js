@@ -2,6 +2,7 @@ import { baseSettings } from '../../configuration.js';
 import { escapeHTML, stringToHTML } from '../html_generator.js';
 import { isSupportedOdoo } from '../utils/authorize.js';
 import { Console, StorageSync } from '../utils/browser.js';
+import { t } from '../utils/i18n.js';
 import {
     ToastContainerElementID,
     buildContainer,
@@ -90,12 +91,7 @@ export const ToastManager = {
 
         if (!force && Object.keys(existingToast).length >= maximumNotification) {
             this._log(feature, title, message, type, false);
-            this._ui(
-                'notification',
-                '',
-                `You have reached the notification limit (${maximumNotification}). Notification logged to console.`,
-                'warning'
-            );
+            this._ui('notification', '', t('toast_limitReached', maximumNotification), 'warning');
             return true;
         }
 

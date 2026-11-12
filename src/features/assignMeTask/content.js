@@ -1,9 +1,10 @@
 import { writeRecord } from '../../api/odoo.js';
 import { SessionKey, getSessionData } from '../../api/session.js';
-import { generateTrackingMessage, generateUserAvatarTag, stringToHTML } from '../../html_generator.js';
+import { escapeHTML, generateTrackingMessage, generateUserAvatarTag, stringToHTML } from '../../html_generator.js';
 import RecordFormContentFeature from '../../shared/projectTaskShare/content.js';
 import { ToastManager } from '../../toast/index.js';
 import { StorageSync } from '../../utils/browser.js';
+import { t } from '../../utils/i18n.js';
 import { toOdooBackendDate } from '../../utils/util.js';
 import configuration from './configuration.js';
 
@@ -12,8 +13,7 @@ const ASSIGN_TYPE = Object.freeze({
     RELOAD: 'reload',
     REDIRECT: 'redirect',
 });
-const fakeDataTitle = `This element is not part of the original application; it was added artificially by Joorney.
-If unsure, please reload the page!`;
+const fakeDataTitle = () => t('common_fakeDataTitle');
 
 export default class AssignMeTaskContentFeature extends RecordFormContentFeature {
     constructor() {
@@ -21,7 +21,7 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
             // <model>: {
             //     list: bool, list of assignee or not
             //     user_field: field_name for assignee,
-            //     label: field label displayed in simulated tracking message,
+            //     labelKey: i18n key of the field label displayed in simulated tracking message,
             //     date_field: field_name for assignation date field
             //     extra_fields: field names to fetch with record
             //     input_selector: HTML Query Selector,
@@ -30,19 +30,19 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
             'project.task': {
                 list: true,
                 user_field: 'user_ids',
-                label: 'Assignees',
+                labelKey: 'assignMeTask_label_assignees',
                 input_selector: '.many2many_tags_avatar_field_container .o_field_many2many_selection',
                 button_parent_selector: '.o_statusbar_buttons',
             },
             'helpdesk.ticket': {
                 user_field: 'user_id',
-                label: 'Assigned to',
+                labelKey: 'assignMeTask_label_assignedTo',
                 input_selector: '.o_field_many2one_avatar_user .o_field_many2one_selection',
                 button_parent_selector: '.o_statusbar_buttons',
             },
             'maintenance.equipment': {
                 user_field: 'technician_user_id',
-                label: 'Technician',
+                labelKey: 'assignMeTask_label_technician',
                 date_field: 'assign_date',
                 input_selector: '.o_many2one .o_field_many2one_selection',
                 button_parent_selector: "div[name='technician_user_id']",
@@ -108,8 +108,8 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
     appendAssignMeButtonToDom() {
         const buttonTemplate = document.createElement('template');
         buttonTemplate.innerHTML = `
-            <button class="btn btn-warning" name="joorney_action_assign_to_me" type="object" title="Page will be reloaded, use wheel click to open in another tab">
-                <span>Assign to me</span>
+            <button class="btn btn-warning" name="joorney_action_assign_to_me" type="object" title="${escapeHTML(t('assignMeTask_buttonTitle'))}">
+                <span>${escapeHTML(t('assignMeTask_buttonLabel'))}</span>
             </button>
         `.trim();
 
@@ -131,9 +131,7 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
         try {
             const modelResId = await this.getRecord(window.location.href);
             if (this.activeModel.name !== modelResId?.model || modelResId?.resId !== this.activeRecord.id) {
-                throw new Error(
-                    `Button context is not the same as the url context: '${modelResId?.resId}' vs '${this.activeRecord.id}'`
-                );
+                throw new Error(t('common_error_buttonContext', modelResId?.resId, this.activeRecord.id));
             }
             const record = modelResId.record;
 
@@ -158,7 +156,7 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
                 }
             }
         } catch (err) {
-            ToastManager.warn(this.configuration.id, 'An error occurred during record assignment', err.message);
+            ToastManager.warn(this.configuration.id, t('assignMeTask_error_title'), err.message);
         }
     }
 
@@ -183,12 +181,12 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
         const messageElement = generateTrackingMessage(
             userName,
             userName,
-            this.activeModel.label,
+            t(this.activeModel.labelKey),
             avatarSrc,
             new Date(),
             isWarning
         );
-        messageElement.title = fakeDataTitle;
+        messageElement.title = fakeDataTitle();
 
         this.addUserTag(userName, avatarSrc);
         previousElement.before(messageElement);
@@ -203,7 +201,7 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
         const fieldElement = document.getElementsByName(this.activeModel.date_field)?.[0];
         if (!fieldElement) return false;
         const dateElement = stringToHTML(`<span class="joorney-simulated-ui-assignme">${date}</span>`);
-        dateElement.title = fakeDataTitle;
+        dateElement.title = fakeDataTitle();
         dateElement.classList.add('rounded', 'border', 'px-1');
         dateElement.style.backgroundColor = 'rgba(255, 204, 0, 0.25)';
 
@@ -218,7 +216,7 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
         const containerElement = fieldElement.querySelector(this.activeModel.input_selector);
         if (!containerElement) return false;
         const tagElement = generateUserAvatarTag(username, avatarSrc);
-        tagElement.title = fakeDataTitle;
+        tagElement.title = fakeDataTitle();
 
         if (!this.activeModel.list) {
             for (const child of containerElement.children) this.hideForSimulation(child);

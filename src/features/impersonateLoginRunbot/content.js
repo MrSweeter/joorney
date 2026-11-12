@@ -1,5 +1,7 @@
+import { escapeHTML } from '../../html_generator.js';
 import LimitedRunbotContentFeature from '../../shared/limited/runbot_content.js';
 import { isAuthorizedLimitedFeature } from '../../utils/authorize.js';
+import { t } from '../../utils/i18n.js';
 import adminDebugLoginConfiguration from '../adminDebugLoginRunbot/configuration.js';
 import autoOpenRunbotConfiguration from '../autoOpenRunbot/configuration.js';
 import configuration from './configuration.js';
@@ -35,9 +37,9 @@ export default class ImpersonateLoginRunbotContentFeature extends LimitedRunbotC
         loginsTemplate.innerHTML = `
             <div id="${loginsIdentifier}" class="form-group mb-2 text-center">
                 <div class="btn-group-sm d-flex justify-content-center">
-                    <button type="button" class="btn btn-warning mx-1 flex-fill" data-login="admin" title="Login as admin">Admin</button>
-                    <button type="button" class="btn btn-warning mx-1 flex-fill" data-login="demo" title="Login as demo">Demo</button>
-                    <button type="button" class="btn btn-warning mx-1 flex-fill" data-login="portal" title="Login as portal">Portal</button>
+                    <button type="button" class="btn btn-warning mx-1 flex-fill" data-login="admin" title="${escapeHTML(t('impersonateLoginRunbot_loginAs', 'admin'))}">Admin</button>
+                    <button type="button" class="btn btn-warning mx-1 flex-fill" data-login="demo" title="${escapeHTML(t('impersonateLoginRunbot_loginAs', 'demo'))}">Demo</button>
+                    <button type="button" class="btn btn-warning mx-1 flex-fill" data-login="portal" title="${escapeHTML(t('impersonateLoginRunbot_loginAs', 'portal'))}">Portal</button>
                 </div>
             </div>
         `.trim();
