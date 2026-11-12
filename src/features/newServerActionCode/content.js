@@ -30,9 +30,7 @@ export default class NewServerActionCodeContentFeature extends ContentFeature {
 
     async selectServerActionModel() {
         // [ODOO] 17.0+ model_id_0, name_0, model_id_0_0_0
-        // [ODOO] 16.0 model_id, name, model_id_0_0
-
-        const inputModel = document.getElementById('model_id_0') ?? document.getElementById('model_id');
+        const inputModel = document.getElementById('model_id_0');
         if (!inputModel) return;
         inputModel.click();
         inputModel.value = 'ir.actions.server';
@@ -40,19 +38,19 @@ export default class NewServerActionCodeContentFeature extends ContentFeature {
         const parent = inputModel.parentElement;
         this.disconnectServerActionObserver();
         const observer = new MutationObserver((mutations) => {
-            const choiceMutations = mutations.filter((m) => m.target.id.match(/^model_id_0_(0_)?\d+$/));
+            const choiceMutations = mutations.filter((m) => m.target.id.match(/^model_id_0_0_\d+$/));
             // model_id_0_0_0 for record and model_id_0_0_1 for search more (optional)
             const mutationSet = new Set(choiceMutations.map((m) => m.target.id)); // [ODOO] 18.3+ create 4 mutations
             if (mutationSet.size > 3) return;
 
-            const serverActionItem = parent.querySelector('#model_id_0_0_0') ?? parent.querySelector('#model_id_0_0');
+            const serverActionItem = parent.querySelector('#model_id_0_0_0');
 
             if (serverActionItem) {
                 this.disconnectServerActionObserver();
                 serverActionItem.click();
             }
 
-            const nameElement = document.getElementById('name_0') ?? document.getElementById('name');
+            const nameElement = document.getElementById('name_0');
             if (nameElement) nameElement.focus();
         });
         this._serverActionObserver = observer;
@@ -68,17 +66,7 @@ export default class NewServerActionCodeContentFeature extends ContentFeature {
 
     selectExecuteCode() {
         const badge = document.querySelector(`span.o_selection_badge[value='"code"']`);
-        if (badge) {
-            // [ODOO] 16.4+
-            badge.click();
-            return;
-        }
-        // [ODOO] < 16.4
-        const codeOption = document.querySelector(`option[value='"code"']`);
-        if (!codeOption) return;
-        const selector = codeOption.parentElement;
-        selector.value = codeOption.value;
-        selector.dispatchEvent(new Event('change'));
+        if (badge) badge.click();
     }
 
     async isServerActionCreateView_fromURL(url) {
