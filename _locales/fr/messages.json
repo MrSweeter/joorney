@@ -1,0 +1,29 @@
+{
+    "ext_name": {
+        "message": "%EXT_NAME%"
+    },
+    "ext_description": {
+        "message": "Améliorez votre parcours Odoo ! Une expérience Odoo plus agréable et productive grâce à des fonctionnalités et effets sympas."
+    },
+    "command_enableDisable": {
+        "message": "Activer ou désactiver les fonctionnalités de l'extension sur l'origine actuelle"
+    },
+    "language_title": {
+        "message": "Langue"
+    },
+    "language_description": {
+        "message": "Choisissez la langue utilisée par Joorney."
+    },
+    "language_mode_system": {
+        "message": "Utiliser le système (langue du navigateur)"
+    },
+    "language_mode_odoo": {
+        "message": "Utiliser Odoo (langue de l'utilisateur)"
+    },
+    "language_mode_static": {
+        "message": "Choisir une langue"
+    },
+    "language_hint": {
+        "message": "Rechargez les onglets Odoo pour appliquer le changement. Le nom et la description de l'extension suivent toujours la langue du navigateur."
+    }
+}

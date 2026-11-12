@@ -1,0 +1,38 @@
+{
+    "ext_name": {
+        "message": "%EXT_NAME%",
+        "description": "Extension name (manifest), %EXT_NAME% is replaced at build time (dev/prod). Max 75 characters"
+    },
+    "ext_description": {
+        "message": "Improve your Odoo Journey! Makes your Odoo experience more enjoyable and productive by adding some cool features and effects.",
+        "description": "Extension description (manifest, Chrome Web Store). Max 132 characters"
+    },
+    "command_enableDisable": {
+        "message": "Enable or Disable extension features on the current origin",
+        "description": "Keyboard shortcut description (chrome://extensions/shortcuts)"
+    },
+    "language_title": {
+        "message": "Language",
+        "description": "Preferences page: Language card title"
+    },
+    "language_description": {
+        "message": "Choose the language used by Joorney.",
+        "description": "Preferences page: Language card description"
+    },
+    "language_mode_system": {
+        "message": "Use system (browser language)",
+        "description": "Language mode option: follow the browser language"
+    },
+    "language_mode_odoo": {
+        "message": "Use Odoo (user language)",
+        "description": "Language mode option: follow the language of the Odoo user"
+    },
+    "language_mode_static": {
+        "message": "Choose a language",
+        "description": "Language mode option: always use the language picked in the next select"
+    },
+    "language_hint": {
+        "message": "Reload Odoo tabs to apply the change. The extension name and description always follow the browser language.",
+        "description": "Preferences page: hint under the language selects"
+    }
+}
