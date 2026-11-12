@@ -204,6 +204,12 @@
     "common_jump": {
         "message": "Aller au message"
     },
+    "common_simulatedBadge": {
+        "message": "Joorney"
+    },
+    "common_injectedButtonTitle": {
+        "message": "Pas standard Odoo : fourni par l'extension Joorney"
+    },
     "toast_limitReached": {
         "message": "Vous avez atteint la limite de notifications ($max$). Notification affichée dans la console.",
         "placeholders": {
@@ -236,6 +242,9 @@
     },
     "saveKnowledge_buttonLabel": {
         "message": "Enregistrer"
+    },
+    "saveKnowledge_buttonTitle": {
+        "message": "Enregistrer le contenu de l'article"
     },
     "saveKnowledge_error_title": {
         "message": "Une erreur est survenue lors de l'enregistrement de l'article"

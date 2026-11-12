@@ -1,0 +1,91 @@
+#joorney-toast-container {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    position: fixed;
+    top: 32px;
+    width: 100%;
+    z-index: 9999;
+    pointer-events: none;
+    font-family: Roboto, sans-serif;
+}
+
+.joorney-toasty {
+    display: none;
+    opacity: 0;
+    align-self: end;
+    padding: 16px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    min-width: 300px;
+    max-width: 600px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    pointer-events: auto;
+}
+
+.joorney-toasty-success .toast-progress {
+    background-color: #4caf50;
+}
+
+.joorney-toasty-danger .toast-progress {
+    background-color: #f44336;
+}
+
+.joorney-toasty-info .toast-progress {
+    background-color: #2196f3;
+}
+
+.joorney-toasty-warning .toast-progress {
+    background-color: #ff9800;
+}
+
+.toast-icon {
+    margin-right: 10px;
+    font-size: 24px;
+}
+
+.toast-content {
+    flex-grow: 1;
+    align-content: center;
+}
+
+.toast-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.toast-text {
+    max-width: 500px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.toast-feature span {
+    background-color: rgba(128, 128, 128, .25);
+}
+
+.toast-close {
+    cursor: pointer;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 16px;
+    background: transparent;
+    border: none;
+}
+
+.toast-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 5px;
+    animation: progressBar var(--joorney-toast-duration) linear forwards;
+    animation-delay: var(--joorney-toast-progress-delay);
+}
+
+@keyframes progressBar {
+    from { width: 100%; }
+    to { width: 0%; }
+}

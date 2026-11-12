@@ -1,6 +1,12 @@
 import { writeRecord } from '../../api/odoo.js';
 import { SessionKey, getSessionData } from '../../api/session.js';
-import { escapeHTML, generateTrackingMessage, generateUserAvatarTag, stringToHTML } from '../../html_generator.js';
+import {
+    generateActionButton,
+    generateActionIconButton,
+    generateSimulatedValue,
+    generateTrackingMessage,
+    generateUserAvatarTag,
+} from '../../html_generator.js';
 import RecordFormContentFeature from '../../shared/projectTaskShare/content.js';
 import { ToastManager } from '../../toast/index.js';
 import { StorageSync } from '../../utils/browser.js';
@@ -13,7 +19,9 @@ const ASSIGN_TYPE = Object.freeze({
     RELOAD: 'reload',
     REDIRECT: 'redirect',
 });
-const fakeDataTitle = () => t('common_fakeDataTitle');
+// Cleanup key of every simulated node, see removeUserInUI
+const SIMULATED_CLASS = 'joorney-simulated-ui-assignme';
+const BUTTON_NAME = 'joorney_action_assign_to_me';
 
 export default class AssignMeTaskContentFeature extends RecordFormContentFeature {
     constructor() {
@@ -26,6 +34,7 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
             //     extra_fields: field names to fetch with record
             //     input_selector: HTML Query Selector,
             //     button_parent_selector: HTML Query Selector,
+            //         inside the form statusbar: labelled button, elsewhere: icon button next to the input
             // }
             'project.task': {
                 list: true,
@@ -44,7 +53,8 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
                 user_field: 'technician_user_id',
                 labelKey: 'assignMeTask_label_technician',
                 date_field: 'assign_date',
-                input_selector: '.o_many2one .o_field_many2one_selection',
+                // [ODOO] 19.0+ wraps it in .o_many2one, < 19.0 has it directly in the field root
+                input_selector: '.o_field_many2one_selection',
                 button_parent_selector: "div[name='technician_user_id']",
             },
         });
@@ -54,7 +64,7 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
     }
 
     preloadFeature() {
-        const exist = document.getElementsByName('joorney_action_assign_to_me');
+        const exist = document.getElementsByName(BUTTON_NAME);
         for (const e of exist) e.disabled = true;
         this.removeUserInUI();
     }
@@ -79,7 +89,7 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
         const userField = this.getUserField(record);
         const userAssigned = this.activeModel.list ? userField.includes(user) : userField === user;
 
-        const exist = Array.from(document.getElementsByName('joorney_action_assign_to_me'));
+        const exist = Array.from(document.getElementsByName(BUTTON_NAME));
         // Avoid adding button if already added, remove it if user already assigned
         if (exist.length > 0) {
             for (const e of exist) {
@@ -106,18 +116,26 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
     }
 
     appendAssignMeButtonToDom() {
-        const buttonTemplate = document.createElement('template');
-        buttonTemplate.innerHTML = `
-            <button class="btn btn-warning" name="joorney_action_assign_to_me" type="object" title="${escapeHTML(t('assignMeTask_buttonTitle'))}">
-                <span>${escapeHTML(t('assignMeTask_buttonLabel'))}</span>
-            </button>
-        `.trim();
-
-        const assignButton = buttonTemplate.content.firstChild;
-        this.updateAssignMeEvent(assignButton);
-
         const buttonContainer = document.querySelector(this.activeModel.button_parent_selector);
-        if (buttonContainer) buttonContainer.appendChild(assignButton);
+        if (!buttonContainer) return;
+
+        const buttonProps = {
+            name: BUTTON_NAME,
+            label: t('assignMeTask_buttonLabel'),
+            title: t('assignMeTask_buttonTitle'),
+            icon: { fa: 'fa-user-plus', oi: 'person_add' },
+        };
+        const inHeader = buttonContainer.closest('.o_form_statusbar') !== null;
+        if (inHeader) {
+            const assignButton = generateActionButton(buttonProps);
+            this.updateAssignMeEvent(assignButton);
+            buttonContainer.appendChild(assignButton);
+            return;
+        }
+        const assignButton = generateActionIconButton(buttonProps);
+        this.updateAssignMeEvent(assignButton);
+        const inputRow = buttonContainer.querySelector('.o_field_many2one_selection') ?? buttonContainer;
+        inputRow.appendChild(assignButton);
     }
 
     hasConcurrentAssignment(record) {
@@ -143,7 +161,7 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
             if (response) {
                 switch (callback) {
                     case ASSIGN_TYPE.RELOAD: {
-                        for (const e of document.querySelectorAll('[name="joorney_action_assign_to_me"]')) e.remove();
+                        for (const e of Array.from(document.getElementsByName(BUTTON_NAME))) e.remove();
                         const { useSimulatedUI } = await StorageSync.get({ useSimulatedUI: false });
                         if (useSimulatedUI) this.addUserInUI(!this.hasConcurrentAssignment(record));
                         else window.location.reload();
@@ -166,27 +184,26 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
             document.querySelector('.o_user_avatar, .oe_topbar_avatar')?.src ??
             document.querySelector('.o_user_menu img')?.src;
         if (!avatarSrc || avatarSrc.length <= 0) return false;
-        const userName = document
-            .querySelector(
-                '.o_user_avatar ~ .oe_topbar_name, .oe_topbar_avatar ~ .oe_topbar_name, .o_user_menu .oe_topbar_name'
-            )
-            ?.textContent?.trim();
+        const userName = getSessionData(SessionKey.NAME) || this.getTopbarUserName();
         if (!userName || userName.length <= 0) return false;
 
         // Fake chat message
         const chatParent = document.querySelector('.o-mail-Chatter-content .o-mail-Thread')?.firstChild;
         if (!chatParent) return false;
-        const previousElement = chatParent.querySelector('.o-mail-Message, .o-mail-DateSection');
-        if (!previousElement) return false;
-        const messageElement = generateTrackingMessage(
-            userName,
-            userName,
-            t(this.activeModel.labelKey),
-            avatarSrc,
-            new Date(),
-            isWarning
+        // Simulated messages reuse Odoo message markup inside their frame: skip them
+        const previousElement = Array.from(chatParent.querySelectorAll('.o-mail-Message, .o-mail-DateSection')).find(
+            (e) => !e.closest(`.${SIMULATED_CLASS}`)
         );
-        messageElement.title = fakeDataTitle();
+        if (!previousElement) return false;
+        const messageElement = generateTrackingMessage({
+            authorName: userName,
+            newValue: userName,
+            fieldName: t(this.activeModel.labelKey),
+            avatarSrc,
+            date: new Date(),
+            isWarning,
+            extraClass: SIMULATED_CLASS,
+        });
 
         this.addUserTag(userName, avatarSrc);
         previousElement.before(messageElement);
@@ -197,13 +214,22 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
         return true;
     }
 
+    getTopbarUserName() {
+        const topbarName = document.querySelector(
+            '.o_user_avatar ~ .oe_topbar_name, .oe_topbar_avatar ~ .oe_topbar_name, .o_user_menu .oe_topbar_name'
+        );
+        // [ODOO] 17.0+ .oe_topbar_name also holds <mark>db name</mark>: keep its own text only
+        return Array.from(topbarName?.childNodes ?? [])
+            .filter((n) => n.nodeType === Node.TEXT_NODE)
+            .map((n) => n.textContent)
+            .join('')
+            .trim();
+    }
+
     addDateTag(date) {
         const fieldElement = document.getElementsByName(this.activeModel.date_field)?.[0];
         if (!fieldElement) return false;
-        const dateElement = stringToHTML(`<span class="joorney-simulated-ui-assignme">${date}</span>`);
-        dateElement.title = fakeDataTitle();
-        dateElement.classList.add('rounded', 'border', 'px-1');
-        dateElement.style.backgroundColor = 'rgba(255, 204, 0, 0.25)';
+        const dateElement = generateSimulatedValue(date, SIMULATED_CLASS);
 
         for (const child of fieldElement.children) this.hideForSimulation(child);
         fieldElement.append(dateElement);
@@ -213,10 +239,12 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
     addUserTag(username, avatarSrc) {
         const fieldElement = document.getElementsByName(this.activeModel.user_field)?.[0];
         if (!fieldElement) return false;
-        const containerElement = fieldElement.querySelector(this.activeModel.input_selector);
+        // Single value field: when the input markup is unknown (other Odoo version), replace the whole field content
+        const containerElement =
+            fieldElement.querySelector(this.activeModel.input_selector) ??
+            (this.activeModel.list ? null : fieldElement);
         if (!containerElement) return false;
-        const tagElement = generateUserAvatarTag(username, avatarSrc);
-        tagElement.title = fakeDataTitle();
+        const tagElement = generateUserAvatarTag(username, avatarSrc, SIMULATED_CLASS);
 
         if (!this.activeModel.list) {
             for (const child of containerElement.children) this.hideForSimulation(child);
@@ -228,19 +256,20 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
     }
 
     removeUserInUI() {
-        for (const element of document.querySelectorAll('.joorney-simulated-ui-assignme')) {
+        for (const element of document.querySelectorAll(`.${SIMULATED_CLASS}`)) {
             element.remove();
         }
         for (const element of document.querySelectorAll(`[${SIMULATED_HIDDEN_ATTR}]`)) {
-            element.style.display = '';
+            element.style.removeProperty('display');
             element.removeAttribute(SIMULATED_HIDDEN_ATTR);
         }
     }
 
     // Odoo (OWL) owns the field DOM: removing its nodes leaves dangling refs that crash on the next render
     // (e.g. AutoComplete.onWillUpdateProps after pager navigation). Hide them instead, restored by removeUserInUI.
+    // !important: Odoo field roots often use Bootstrap d-flex (display: flex !important), which beats inline display
     hideForSimulation(element) {
-        element.style.display = 'none';
+        element.style.setProperty('display', 'none', 'important');
         element.setAttribute(SIMULATED_HIDDEN_ATTR, '');
     }
 }
