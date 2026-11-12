@@ -6,6 +6,7 @@ import ChecklistManager from '../src/checklist/manager.js';
 import { stringToHTML } from '../src/html_generator.js';
 import { Runtime, isDevMode } from '../src/utils/browser.js';
 import { getAnnounce } from '../src/utils/check_version.js';
+import { initI18n } from '../src/utils/i18n.js';
 import { updateSupportedDevelopmentVersion, updateSupportedVersion } from '../src/utils/version.js';
 import { initImportExport } from './import_export.js';
 import { PAGES } from './menu.js';
@@ -91,6 +92,7 @@ async function loadPage(page) {
     const response = await fetch(page.path);
     const data = await response.text();
     const { features, currentSettings } = await getFeaturesAndCurrentSettings();
+    await initI18n();
     document.getElementById(PAGE_CONTAINER).innerHTML = data;
     page.loader(features, currentSettings);
     updateActiveMenu(page.id);

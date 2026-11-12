@@ -1,6 +1,7 @@
 import { reloadTabFeatures } from '../../popup/src/tab_features.js';
 import { Runtime, StorageSync, Tabs, sendTabMessage } from '../utils/browser.js';
 import { featureIDToPascalCase } from '../utils/features.js';
+import { featureName } from '../utils/i18n.js';
 import { MESSAGE_ACTION } from '../utils/messaging.js';
 
 export default class PopupFeature {
@@ -78,8 +79,7 @@ export class PopupCustomizableFeature extends PopupFeature {
         const container = document.querySelector(`div[data-feature-customization="${this.configuration.id}"]`);
         if (!container) throw new Error(`Invalid state for feature: ${this.configuration.id}`);
         container.classList.remove('d-none');
-        document.getElementById(`joorney-popup-feature-${this.configuration.id}-label`).innerHTML =
-            this.configuration.display_name;
+        document.getElementById(`joorney-popup-feature-${this.configuration.id}-label`).textContent = featureName(this.configuration);
 
         this.render(currentSettings[`${this.configuration.id}Enabled`]);
     }

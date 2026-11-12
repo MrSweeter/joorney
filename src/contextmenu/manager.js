@@ -3,6 +3,7 @@ import { clearHost } from '../api/cache.js';
 import { openRunbotWithVersionMenuItem } from '../features/autoOpenRunbot/configuration.js';
 import { isAuthorizedFeature, isAuthorizedLimitedFeature } from '../utils/authorize.js';
 import { Console, ContextMenus, Runtime, StorageSync, Tabs, sendTabMessage } from '../utils/browser.js';
+import { featureName, getLanguage, resolveLanguage, translate } from '../utils/i18n.js';
 import { MESSAGE_ACTION } from '../utils/messaging.js';
 import { sanitizeURL } from '../utils/util.js';
 import { clearLocalCacheMenuItem, optionMenuItem, separatorMenuItem } from './item.js';
@@ -27,14 +28,16 @@ async function buildContextMenu(initiator) {
     CONTEXT_MENU_DYNAMIC_ITEM_IDS.length = 0;
 
     const items = [];
-    const dynamicItems = await getItems();
+    // Built without tab: system or static language, updateContext switches to the tab language ('odoo' mode)
+    const lang = await resolveLanguage();
+    const dynamicItems = await getItems(undefined, true, lang);
 
     for (const item of dynamicItems.filter((i) => !i.parentId)) {
         items.push(
             createContextMenuItem(
                 {
                     id: item.id,
-                    title: item.title ?? item.path ?? 'Unknown item',
+                    title: item.title ?? item.path ?? translate(lang, 'contextMenu_unknownItem'),
                     contexts: item.contexts ?? ['all'],
                     visible: false,
                 },
@@ -49,7 +52,7 @@ async function buildContextMenu(initiator) {
             createContextMenuItem(
                 {
                     id: item.id,
-                    title: item.title ?? item.path ?? 'Unknown item',
+                    title: item.title ?? item.path ?? translate(lang, 'contextMenu_unknownItem'),
                     contexts: item.contexts ?? ['all'],
                     visible: false,
                     parentId: item.parentId,
@@ -61,8 +64,15 @@ async function buildContextMenu(initiator) {
     }
 
     if (dynamicItems.length > 0) items.push(createContextMenuItem(separatorMenuItem, initiator));
-    items.push(createContextMenuItem(clearLocalCacheMenuItem, initiator));
-    items.push(createContextMenuItem(optionMenuItem, initiator));
+    items.push(
+        createContextMenuItem(
+            { ...clearLocalCacheMenuItem, title: translate(lang, 'contextMenu_clearCache') },
+            initiator
+        )
+    );
+    items.push(
+        createContextMenuItem({ ...optionMenuItem, title: translate(lang, 'contextMenu_openOptions') }, initiator)
+    );
 
     await Promise.all(items);
 }
@@ -77,10 +87,13 @@ export async function updateContext(tabId) {
         const tab = await Tabs.get(tabId);
         if (!tab.active) return;
         if (!tab.url.startsWith('http')) return;
+        const lang = await resolveLanguage({ origin: new URL(tab.url).origin });
+        if (generation !== updateGeneration) return;
+        await updateStaticItems(lang);
         const odooInfo = await sendTabMessage(tab.id, MESSAGE_ACTION.TO_CONTENT.REQUEST_ODOO_INFO);
         if (!odooInfo || !odooInfo.isOdoo) return;
         if (generation !== updateGeneration) return;
-        await updateContextMenu(tab, odooInfo.isOdoo, odooInfo.version, generation);
+        await updateContextMenu(tab, odooInfo.isOdoo, odooInfo.version, generation, lang);
     } catch (error) {
         // Error: No tab with id (from Tabs.get) is expected
         if (`${error}`.includes(tabId)) Console.log(`background.js - updateContext: ${error}`);
@@ -88,8 +101,15 @@ export async function updateContext(tabId) {
     }
 }
 
-async function updateContextMenu(tab, isOdoo, version, generation) {
-    const dynamicItems = await getItems(tab);
+async function updateStaticItems(lang) {
+    await Promise.all([
+        ContextMenus.update(clearLocalCacheMenuItem.id, { title: translate(lang, 'contextMenu_clearCache') }),
+        ContextMenus.update(optionMenuItem.id, { title: translate(lang, 'contextMenu_openOptions') }),
+    ]);
+}
+
+async function updateContextMenu(tab, isOdoo, version, generation, lang) {
+    const dynamicItems = await getItems(tab, true, lang);
     if (generation !== updateGeneration) return;
 
     const itemsUpdate = [];
@@ -97,7 +117,7 @@ async function updateContextMenu(tab, isOdoo, version, generation) {
         itemsUpdate.push(
             ContextMenus.update(item.id, {
                 visible: isOdoo === true && item.active,
-                title: formatTitle(item.title ?? item.path ?? 'Unknown item', { version }),
+                title: formatTitle(item.title ?? item.path ?? translate(lang, 'contextMenu_unknownItem'), { version }),
                 parentId: null,
             })
         );
@@ -156,8 +176,8 @@ async function createContextMenuItem(createProperties, initiator) {
     });
 }
 
-async function getItems(tab = undefined, toArray = true) {
-    const featureItems = await getFeaturesItems(tab);
+async function getItems(tab = undefined, toArray = true, lang = undefined) {
+    const featureItems = await getFeaturesItems(tab, lang);
 
     if (!toArray) return featureItems;
 
@@ -169,7 +189,7 @@ async function getItems(tab = undefined, toArray = true) {
     return items;
 }
 
-async function getFeaturesItems(tab) {
+async function getFeaturesItems(tab, lang) {
     let url = undefined;
     if (tab) {
         if (!tab.url) return {};
@@ -201,7 +221,7 @@ async function getFeaturesItems(tab) {
         const parentActive = !allFavorite && activeFavoriteCount !== activeMenuCount && activeMenuCount > 1;
         result[id] = {
             id: id,
-            title: feature.display_name,
+            title: featureName(feature, lang),
             contexts: ['all'],
             order: Number.MAX_SAFE_INTEGER,
             active: isActive && parentActive,
@@ -210,6 +230,11 @@ async function getFeaturesItems(tab) {
         for (const menu of menusArray) {
             result[menu.id] = {
                 ...menu,
+                // Built-in entry, not editable by the user: show the translated title instead of the
+                // English copy saved in storage at install. Remove if this title ever becomes editable.
+                ...(menu.id === openRunbotWithVersionMenuItem.id && {
+                    title: translate(lang ?? getLanguage(), 'autoOpenRunbot_menu_openWithVersion'),
+                }),
                 parentId: parentActive ? (menu.favorite ? undefined : id) : undefined,
                 active: isActive && menu.active,
             };
