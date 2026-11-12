@@ -1,5 +1,6 @@
 import { PopupCustomizableFeature } from '../../generic/popup.js';
 import { Runtime } from '../../utils/browser.js';
+import { t } from '../../utils/i18n.js';
 
 export default class AwesomeLoadingSharePopupFeature extends PopupCustomizableFeature {
     constructor(configuration) {
@@ -14,7 +15,7 @@ export default class AwesomeLoadingSharePopupFeature extends PopupCustomizableFe
 
         const { images, selected } = await this.getImagesConfiguration();
 
-        awesomeLoadingImage.innerHTML = '<option value="" selected>Default</option>';
+        awesomeLoadingImage.replaceChildren(new Option(t('common_default'), '', false, true));
         awesomeLoadingImage.disabled = !enabled;
         awesomeLoadingImagePreview.src = selected;
         awesomeLoadingImagePreview.style.opacity = enabled ? 1 : 0.25;

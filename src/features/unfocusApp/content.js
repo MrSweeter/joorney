@@ -1,7 +1,9 @@
 import ContentFeature from '../../generic/content.js';
+import { escapeHTML } from '../../html_generator.js';
 import { isOdooWebsite, isStillSameWebsite } from '../../utils/authorize.js';
 import { StorageSync } from '../../utils/browser.js';
 import { isDarkCookie } from '../../utils/cookies.js';
+import { t } from '../../utils/i18n.js';
 import { sanitizeURL, sleep } from '../../utils/util.js';
 import configuration from './configuration.js';
 
@@ -72,7 +74,7 @@ export default class UnfocusApp extends ContentFeature {
             }
 
             const isUnfocus = state === UNFOCUS_STATE.UNFOCUS;
-            divElement.innerHTML = `<i title="Change focus state" class="joorney-focus-app fa
+            divElement.innerHTML = `<i title="${escapeHTML(t('unfocusApp_changeFocusState'))}" class="joorney-focus-app fa
                 ${isUnfocus ? UNFOCUS_ICON : FOCUS_ICON} me-1" data-joorney-state="${state}">
             </i>${divElement.innerHTML}`.trim();
         }

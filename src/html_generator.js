@@ -1,3 +1,5 @@
+import { featureName, t } from './utils/i18n.js';
+
 const joorneySimulatedStyleWarning = 'background-color: rgba(252, 163, 17, 0.25)';
 const joorneySimulatedStyleError = 'background-color: rgba(252, 17, 17, 0.25)';
 
@@ -19,13 +21,13 @@ export function stringToHTML(str) {
 export function generateLimitedFeatureOptionButtonItem(feature) {
     return stringToHTML(`
 		<label
-			title="[Limited Feature] ${feature.display_name ?? feature.id}"
+			title="[Limited Feature] ${escapeHTML(featureName(feature))}"
 			for="joorney_${feature.id}_limited_feature"
 		>
 			<input id="joorney_${feature.id}_limited_feature" class="input-hide" type="checkbox" />
 			<div class="limited-feature-wrapper d-flex">
 				<i class="joorney-font-icon-size fa-regular me-2"></i>
-				<p>${feature.display_name ?? feature.id}</p>
+				<p>${escapeHTML(featureName(feature))}</p>
 			</div>
 		</label>
 	`);
@@ -35,7 +37,7 @@ export function generateFeatureOptionListItem(feature) {
     return stringToHTML(`
 		<label
 			id="joorney_${feature.id}_feature"
-			title="[Feature] ${feature.display_name ?? feature.id}"
+			title="[Feature] ${escapeHTML(featureName(feature))}"
 			data-feature="${feature.id}"
 			class="draggable-feature" draggable="true"
 		>
@@ -43,7 +45,7 @@ export function generateFeatureOptionListItem(feature) {
 				<div class="icon-wrapper pe-1">
 					${feature.icon}
 				</div>
-				<p>${feature.display_name ?? feature.id}</p>
+				<p>${escapeHTML(featureName(feature))}</p>
 			</div>
 		</label>
 	`);
@@ -51,7 +53,7 @@ export function generateFeatureOptionListItem(feature) {
 
 export function generateFeatureOptionTableHeadItem(feature) {
     return stringToHTML(`
-		<th title="[Feature Origin] ${feature.display_name ?? feature.id}" class="icon-wrapper-head">
+		<th title="[Feature Origin] ${escapeHTML(featureName(feature))}" class="icon-wrapper-head">
 			<div class="icon-wrapper" id="joorney_origins_filter_feature_header_${feature.id}">
 				${feature.icon}
 			</div>
@@ -62,7 +64,7 @@ export function generateFeatureOptionTableHeadItem(feature) {
 export function generateFeaturePopupToggleItem(feature) {
     return stringToHTML(`
 		<label
-			title="[Feature] ${feature.display_name ?? feature.id}"
+			title="${escapeHTML(t('popup_featureTitle', featureName(feature)))}"
 			for="${feature.id}Feature"
 			class="m-2 d-flex justify-content-center align-items-center"
 		>
@@ -77,7 +79,7 @@ export function generateFeaturePopupToggleItem(feature) {
 export function generateTabFeaturePopupToggleItem(feature) {
     return stringToHTML(`
 		<label
-			title="[Feature Origin] ${feature.display_name ?? feature.id}"
+			title="${escapeHTML(t('popup_featureOriginTitle', featureName(feature)))}"
 			for="${feature.id}FeatureTab"
 			class=""
 		>
@@ -151,7 +153,7 @@ export function generateMessage(messageID, authorName, avatarSrc, bodyContent, d
     const messageElement = stringToHTML(`
 		<div class="o-mail-Message position-relative py-1 mt-2 px-3 rounded border">
 			<button class="o-mail-Message-jumpTo d-none btn m-1 position-absolute top-0 end-0 rounded-pill badge badge-secondary" style="z-index: 1;">
-				Jump
+				${escapeHTML(t('common_jump'))}
 			</button>
 			<div class="o-mail-Message-core position-relative d-flex flex-shrink-0">
 				<div class="o-mail-Message-sidebar d-flex flex-shrink-0">

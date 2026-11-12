@@ -9,7 +9,8 @@
         "build": "rollup -c",
         "dev": "rollup -c -w",
         "clean-build": "rm -rf ./bundle && rm -rf ./docs",
-        "cloc": "cloc --exclude-dir=node_modules,bundle,docs,lib ."
+        "cloc": "cloc --exclude-dir=node_modules,bundle,docs,lib .",
+        "i18n-check": "node scripts/i18n_check.js"
     },
     "devDependencies": {
         "@biomejs/biome": "1.8.3",

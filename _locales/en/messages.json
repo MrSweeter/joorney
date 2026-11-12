@@ -1,0 +1,484 @@
+{
+    "ext_name": {
+        "message": "%EXT_NAME%",
+        "description": "Extension name (manifest), %EXT_NAME% is replaced at build time (dev/prod). Max 75 characters"
+    },
+    "ext_description": {
+        "message": "Improve your Odoo Journey! Makes your Odoo experience more enjoyable and productive by adding some cool features and effects.",
+        "description": "Extension description (manifest, Chrome Web Store). Max 132 characters"
+    },
+    "command_enableDisable": {
+        "message": "Enable or Disable extension features on the current origin",
+        "description": "Keyboard shortcut description (chrome://extensions/shortcuts)"
+    },
+    "badge_off": {
+        "message": "OFF",
+        "description": "Toolbar badge when Joorney is disabled on the current origin. Max ~4 characters"
+    },
+    "language_title": {
+        "message": "Language",
+        "description": "Preferences page: Language card title"
+    },
+    "language_description": {
+        "message": "Choose the language used by Joorney.",
+        "description": "Preferences page: Language card description"
+    },
+    "language_mode_system": {
+        "message": "Use system (browser language)",
+        "description": "Language mode option: follow the browser language"
+    },
+    "language_mode_odoo": {
+        "message": "Use Odoo (user language)",
+        "description": "Language mode option: follow the language of the Odoo user"
+    },
+    "language_mode_static": {
+        "message": "Choose a language",
+        "description": "Language mode option: always use the language picked in the next select"
+    },
+    "language_hint": {
+        "message": "Reload Odoo tabs to apply the change. The extension name and description always follow the browser language.",
+        "description": "Preferences page: hint under the language selects"
+    },
+    "common_default": {
+        "message": "Default",
+        "description": "Default option of a select (popup, Awesome Loading image)"
+    },
+    "popup_options": {
+        "message": "Options",
+        "description": "Popup: tooltip of the button opening the options page"
+    },
+    "popup_invalidWebsite": {
+        "message": "This website is not compatible with Joorney extension",
+        "description": "Popup: shown on non-web pages (chrome://, file://...)"
+    },
+    "popup_featureTitle": {
+        "message": "[Feature] $feature$",
+        "description": "Popup: tooltip of a feature toggle (global state)",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Pin Message"
+            }
+        }
+    },
+    "popup_featureOriginTitle": {
+        "message": "[Feature Origin] $feature$",
+        "description": "Popup: tooltip of a feature toggle for the current origin",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Pin Message"
+            }
+        }
+    },
+    "popup_originState": {
+        "message": "Origin state for:",
+        "description": "Popup: label before the current origin URL"
+    },
+    "popup_saveOrigin": {
+        "message": "Save this origin",
+        "description": "Popup: button saving the current origin"
+    },
+    "popup_saveOriginConfiguration": {
+        "message": "Save origin configuration",
+        "description": "Popup: tooltip of the button saving the origin configuration"
+    },
+    "popup_saveReload": {
+        "message": "Save & Reload",
+        "description": "Popup: button saving the origin configuration and reloading the tab"
+    },
+    "feature_adminDebugLoginRunbot_name": {
+        "message": "[Runbot] Admin Debug Login",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_ambient_name": {
+        "message": "Ambient",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_assignMeTask_name": {
+        "message": "Assign Me Task",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_autoOpenRunbot_name": {
+        "message": "[Runbot] Auto Open",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_awesomeLoadingLarge_name": {
+        "message": "Awesome Loading Large",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_awesomeLoadingSmall_name": {
+        "message": "Awesome Loading Small",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_awesomeStyle_name": {
+        "message": "Awesome Style",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_contextOdooMenus_name": {
+        "message": "Context OdooMenus",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_followUnfollow_name": {
+        "message": "Follow/Unfollow",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_impersonateLoginRunbot_name": {
+        "message": "[Runbot] Impersonate Login",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_newServerActionCode_name": {
+        "message": "New Server Action Code",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_pinMessage_name": {
+        "message": "Pin Message",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_saveKnowledge_name": {
+        "message": "Save Knowledge",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_showMyBadge_name": {
+        "message": "Show My Badge",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_starringPriorityEffect_name": {
+        "message": "Starring Effect",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_themeSwitch_name": {
+        "message": "Theme Switch",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_tooltipMetadata_name": {
+        "message": "Tooltip Metadata",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_unfocusApp_name": {
+        "message": "Unfocus App",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "themeSwitch_mode_system": {
+        "message": "System",
+        "description": "Theme Switch mode: follow the system theme"
+    },
+    "themeSwitch_mode_dark": {
+        "message": "Dark mode",
+        "description": "Theme Switch mode: always dark"
+    },
+    "themeSwitch_mode_light": {
+        "message": "Light mode",
+        "description": "Theme Switch mode: always light"
+    },
+    "themeSwitch_mode_location": {
+        "message": "Based on configured location (sunrise/sunset)",
+        "description": "Theme Switch mode: dark between sunset and sunrise at the configured location"
+    },
+    "themeSwitch_mode_time": {
+        "message": "Dark mode based on configured time",
+        "description": "Theme Switch mode: dark between the configured hours"
+    },
+    "unfocusApp_popup_reorder": {
+        "message": "Enable unfocus app reorder",
+        "description": "Popup: tooltip of the Unfocus App reorder switch"
+    },
+    "unfocusApp_popup_share": {
+        "message": "Enable unfocus app configuration share between hosts",
+        "description": "Popup: tooltip of the Unfocus App switch sharing the configuration between hosts"
+    },
+    "pinMessage_popup_selfAuthor": {
+        "message": "Manage pin for current user messages only?",
+        "description": "Popup: tooltip of the Pin Message switch limiting pins to the current user messages"
+    },
+    "pinMessage_popup_defaultShown": {
+        "message": "Show pinned message section on load?",
+        "description": "Popup: tooltip of the Pin Message switch opening the pinned section on load"
+    },
+    "contextMenu_openOptions": {
+        "message": "Open options",
+        "description": "Right-click menu: open the options page"
+    },
+    "contextMenu_clearCache": {
+        "message": "Clear cache for this host",
+        "description": "Right-click menu: clear the Joorney cache of the current host"
+    },
+    "contextMenu_unknownItem": {
+        "message": "Unknown item",
+        "description": "Right-click menu: fallback title of an item without title"
+    },
+    "omnibox_openChromeWebStore": {
+        "message": "Open Chrome Web Store",
+        "description": "Address bar suggestion (keyword \"joorney\")"
+    },
+    "omnibox_openGithubRepository": {
+        "message": "Open GitHub repository",
+        "description": "Address bar suggestion (keyword \"joorney\")"
+    },
+    "omnibox_openGithubPage": {
+        "message": "Open GitHub Page",
+        "description": "Address bar suggestion (keyword \"joorney\")"
+    },
+    "omnibox_disabled": {
+        "message": "The functionality to open a runbot from URL is currently disabled. Open options to enable \"[Runbot] Auto Open\"!",
+        "description": "Address bar default suggestion when [Runbot] Auto Open is disabled. XML: escape & and <"
+    },
+    "omnibox_openInput": {
+        "message": "Open <match>%s</match> <dim>(if found)</dim>",
+        "description": "Address bar default suggestion. XML: keep %s (user input), <match> and <dim> markup"
+    },
+    "omnibox_openRunbotVersion": {
+        "message": "Open Runbot for version '$version$'",
+        "description": "Address bar suggestion opening runbot for an Odoo version",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "18.0"
+            }
+        }
+    },
+    "autoOpenRunbot_menu_openWithVersion": {
+        "message": "Open runbot with version %version%",
+        "description": "Right-click menu on runbot: %version% is replaced by the Odoo version"
+    },
+    "common_fakeDataTitle": {
+        "message": "This element is not part of the original application; it was added artificially by Joorney.\nIf unsure, please reload the page!",
+        "description": "Tooltip on UI simulated by Joorney inside Odoo (not real data)"
+    },
+    "common_error_buttonContext": {
+        "message": "Button context is not the same as the url context: '$button$' vs '$url$'",
+        "description": "Error when a Joorney button belongs to another record than the current URL",
+        "placeholders": {
+            "button": {
+                "content": "$1",
+                "example": "42"
+            },
+            "url": {
+                "content": "$2",
+                "example": "43"
+            }
+        }
+    },
+    "common_jump": {
+        "message": "Jump",
+        "description": "Button on a simulated Odoo chatter message, jumps to the original message"
+    },
+    "toast_limitReached": {
+        "message": "You have reached the notification limit ($max$). Notification logged to console.",
+        "description": "Notification shown when too many notifications are displayed",
+        "placeholders": {
+            "max": {
+                "content": "$1",
+                "example": "5"
+            }
+        }
+    },
+    "toast_badgeNotification": {
+        "message": "notification",
+        "description": "Notification badge for Joorney own notifications (not linked to a feature)"
+    },
+    "assignMeTask_buttonLabel": {
+        "message": "Assign to me",
+        "description": "Button added in Odoo forms (task, ticket, equipment)"
+    },
+    "assignMeTask_buttonTitle": {
+        "message": "Page will be reloaded, use wheel click to open in another tab",
+        "description": "Tooltip of the Assign me button"
+    },
+    "assignMeTask_error_title": {
+        "message": "An error occurred during record assignment",
+        "description": "Notification title when the assignment fails"
+    },
+    "assignMeTask_label_assignees": {
+        "message": "Assignees",
+        "description": "Odoo field label (project task), shown in the simulated tracking message. Use the Odoo wording"
+    },
+    "assignMeTask_label_assignedTo": {
+        "message": "Assigned to",
+        "description": "Odoo field label (helpdesk ticket), shown in the simulated tracking message. Use the Odoo wording"
+    },
+    "assignMeTask_label_technician": {
+        "message": "Technician",
+        "description": "Odoo field label (maintenance equipment), shown in the simulated tracking message. Use the Odoo wording"
+    },
+    "saveKnowledge_buttonLabel": {
+        "message": "Save",
+        "description": "Button added on Odoo Knowledge articles"
+    },
+    "saveKnowledge_error_title": {
+        "message": "An error occurred during article save",
+        "description": "Notification title when the article save fails"
+    },
+    "pinMessage_starButtonTitle": {
+        "message": "Odoo: Mark as Todo | Joorney UI override: Pin",
+        "description": "Tooltip of the Odoo star button, replaced by a pin"
+    },
+    "pinMessage_starIconTitle": {
+        "message": "Odoo: Todo/Starred | Pinned",
+        "description": "Tooltip of the Odoo star icon, replaced by a pin"
+    },
+    "pinMessage_toggleLabel": {
+        "message": "Show pinned message",
+        "description": "Accessible label of the chatter button showing pinned messages"
+    },
+    "pinMessage_sectionTitle": {
+        "message": "Pinned Messages",
+        "description": "Chatter section title listing pinned messages"
+    },
+    "pinMessage_warning_tooManyPins": {
+        "message": "...There are more than $max$ pinned messages! Only yours are displayed",
+        "description": "Chatter warning when the record has too many pinned messages",
+        "placeholders": {
+            "max": {
+                "content": "$1",
+                "example": "5"
+            }
+        }
+    },
+    "pinMessage_warning_tooManyOwnPins": {
+        "message": "...You have more than $max$ pinned messages!",
+        "description": "Chatter warning when the current user has too many pinned messages",
+        "placeholders": {
+            "max": {
+                "content": "$1",
+                "example": "5"
+            }
+        }
+    },
+    "followUnfollow_follow": {
+        "message": "Follow",
+        "description": "Chatter button imitating Odoo: use the Odoo wording"
+    },
+    "followUnfollow_unfollow": {
+        "message": "Unfollow",
+        "description": "Chatter button imitating Odoo (hover when following): use the Odoo wording"
+    },
+    "followUnfollow_following": {
+        "message": "Following",
+        "description": "Chatter button imitating Odoo (state): use the Odoo wording"
+    },
+    "tooltipMetadata_copyModel": {
+        "message": "[Joorney] Copy technical name to clipboard",
+        "description": "Tooltip of the model technical name added in the breadcrumb"
+    },
+    "tooltipMetadata_windowActionId": {
+        "message": "Window Action ID",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_xmlId": {
+        "message": "XML ID",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_name": {
+        "message": "Name",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_model": {
+        "message": "Model",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_filterDomain": {
+        "message": "[Filters] Domain",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_filterContext": {
+        "message": "[Filters] Context",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_filterLimit": {
+        "message": "[Filters] Limit",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_filterFilter": {
+        "message": "[Filters] Filter",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_id": {
+        "message": "ID",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_noUpdate": {
+        "message": "No Update",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_createUser": {
+        "message": "Creation User",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_createDate": {
+        "message": "Creation Date",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_writeUser": {
+        "message": "Latest Modification by",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_writeDate": {
+        "message": "Latest Modification Date",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "impersonateLoginRunbot_loginAs": {
+        "message": "Login as $login$",
+        "description": "Tooltip of the runbot login buttons",
+        "placeholders": {
+            "login": {
+                "content": "$1",
+                "example": "admin"
+            }
+        }
+    },
+    "adminDebugLoginRunbot_buttonTitle": {
+        "message": "Open runbot as admin and with debug mode enabled",
+        "description": "Tooltip of the runbot rocket button"
+    },
+    "runbot_error_notRunbotLink": {
+        "message": "Not a runbot link: $url$",
+        "description": "Error (button tooltip) when the link is not a runbot one",
+        "placeholders": {
+            "url": {
+                "content": "$1",
+                "example": "https://example.com/runbot/run/123"
+            }
+        }
+    },
+    "runbot_error_noTab": {
+        "message": "No tab to open runbot from",
+        "description": "Error (button tooltip) when no tab can open runbot"
+    },
+    "runbot_error_noResponse": {
+        "message": "Extension not responding, reload the page",
+        "description": "Error (button tooltip) when the extension background does not answer"
+    },
+    "showMyBadge_more": {
+        "message": "More...",
+        "description": "Tooltip of the icon linking to all badges"
+    },
+    "unfocusApp_changeFocusState": {
+        "message": "Change focus state",
+        "description": "Tooltip of the icon switching an Odoo app between focused and unfocused"
+    },
+    "contextOdooMenus_error_title": {
+        "message": "An error occurred during menu opening",
+        "description": "Notification title when a menu from the right-click menu cannot be opened"
+    },
+    "contextOdooMenus_error_notFound": {
+        "message": "Menu '$path$' not found.",
+        "description": "Error when no Odoo menu matches the configured path",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Sales / Orders"
+            }
+        }
+    },
+    "contextOdooMenus_error_tooMany": {
+        "message": "Too many menus found for path $path$.",
+        "description": "Error when several Odoo menus match the configured path",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Sales / Orders"
+            }
+        }
+    }
+}

@@ -1,5 +1,6 @@
 import LimitedRunbotContentFeature from '../../shared/limited/runbot_content.js';
 import { Console } from '../../utils/browser.js';
+import { t } from '../../utils/i18n.js';
 import configuration from './configuration.js';
 
 export default class AdminDebugLoginRunbotContentFeature extends LimitedRunbotContentFeature {
@@ -28,7 +29,7 @@ export default class AdminDebugLoginRunbotContentFeature extends LimitedRunbotCo
                 newBtn.onclick = (e) => this.openEventRunbot(e, false);
                 newBtn.onauxclick = (e) => this.openEventRunbot(e, true);
                 newBtn.href = btn.href;
-                newBtn.title = 'Open runbot as admin and with debug mode enabled';
+                newBtn.title = t('adminDebugLoginRunbot_buttonTitle');
                 btn.after(newBtn);
             }
         }

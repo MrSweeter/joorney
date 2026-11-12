@@ -1,10 +1,11 @@
 import { importFeatureBackgroundTriggerFile, importFeatureContentFile } from '../configuration.js';
-import { getWebsiteOff } from '../src/api/local.js';
+import { getWebsiteOff, setOdooLanguage } from '../src/api/local.js';
 import { getMenu } from '../src/api/odoo.js';
-import { loadSessionInfo } from '../src/api/session.js';
+import { SessionKey, getSessionData, loadSessionInfo } from '../src/api/session.js';
 import { getRunbotOpenUrl } from '../src/shared/limited/runbot_content.js';
 import { ToastManager, loadToast } from '../src/toast/index.js';
 import { Console, Runtime, sendRuntimeMessage } from '../src/utils/browser.js';
+import { initI18n, t } from '../src/utils/i18n.js';
 import { MESSAGE_ACTION } from '../src/utils/messaging.js';
 import { createActionMenuURL } from '../src/utils/url_manager.js';
 import { getOdooVersion } from '../src/utils/version.js';
@@ -41,6 +42,7 @@ async function onVersionLoaded() {
 
     updateLandingPage();
 
+    await loadLanguage();
     await updateTabState(url);
     const versionInfo = getOdooVersion();
     // Toast must be ready before features, they may notify during loading
@@ -129,6 +131,14 @@ async function loadFeatures(url, versionInfo, trigger) {
 
 //#endregion
 
+async function loadLanguage() {
+    const origin = window.location.origin;
+    const odooLang = getSessionData(SessionKey.USER_CONTEXT)?.lang;
+    // Remembered for the popup and context menu ('odoo' language mode), they don't run in the page
+    if (odooLang) await setOdooLanguage(origin, odooLang).catch((ex) => Console.warn(ex));
+    await initI18n({ origin, odooLang });
+}
+
 export async function updateTabState(url) {
     const offs = await getWebsiteOff();
     if (offs.has(new URL(url).origin)) {
@@ -151,10 +161,10 @@ async function openPathMenu(menupath) {
         const result = await getMenu(menupath);
 
         if (result.length === 0) {
-            throw new Error(`Menu '${menupath}' not found.`);
+            throw new Error(t('contextOdooMenus_error_notFound', menupath));
         }
         if (result.length > 1) {
-            throw new Error(`Too much menu found for path ${menupath}.`);
+            throw new Error(t('contextOdooMenus_error_tooMany', menupath));
         }
         const menu = result[0];
         const windowActionID = menu.action.split(',')[1];
@@ -162,7 +172,7 @@ async function openPathMenu(menupath) {
 
         openURL(createActionMenuURL(url, windowActionID));
     } catch (err) {
-        ToastManager.warn('contextOdooMenus', 'An error occur during menu opening', err.message);
+        ToastManager.warn('contextOdooMenus', t('contextOdooMenus_error_title'), err.message);
     }
 }
 

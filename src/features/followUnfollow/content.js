@@ -1,5 +1,6 @@
 import ContentFeature from '../../generic/content.js';
-import { stringToHTML } from '../../html_generator.js';
+import { escapeHTML, stringToHTML } from '../../html_generator.js';
+import { t } from '../../utils/i18n.js';
 import { sleep } from '../../utils/util.js';
 import configuration from './configuration.js';
 
@@ -10,9 +11,9 @@ const mailFollowersButtonClass = "o-mail-Followers-button"
 const followedIconClass = "fa-user"
 const unfollowedIconClass = "fa-user-o"
 
-const followLabel = "Follow"
-const unfollowLabel = "Unfollow"
-const followingLabel = "Following"
+const followLabel = () => t('followUnfollow_follow')
+const unfollowLabel = () => t('followUnfollow_unfollow')
+const followingLabel = () => t('followUnfollow_following')
 
 export default class FollowUnfollowContentFeature extends ContentFeature {
     constructor() {
@@ -33,17 +34,12 @@ export default class FollowUnfollowContentFeature extends ContentFeature {
         const label = e.target.querySelector(`.${buttonLabelClass}`);
         label.classList.remove('text-warning');
 
-        if (label.textContent.trim() === followingLabel) {
-            label.classList.add('text-warning');
-            label.textContent = unfollowLabel;
-        }
+        if (label.textContent.trim() === followingLabel()) label.classList.add('text-warning');
     }
 
     onMouseLeave(e) {
         const label = e.target.querySelector(`.${buttonLabelClass}`);
         label.classList.remove('text-warning');
-
-        if (label.textContent.trim() === unfollowLabel) label.textContent = followingLabel;
     }
 
     async onClick(e, followed, userButton, icon) {
@@ -71,11 +67,8 @@ export default class FollowUnfollowContentFeature extends ContentFeature {
 
         const followed = mailFollowersIcon.classList.contains(followedIconClass);
 
-        const followButton = stringToHTML(`<button class="${buttonClass} btn px-0 my-2 ${followed ? 'text-success' : ''}">
-            <div class="position-relative">
-                <span class="d-flex invisible text-nowrap">__________</span>
-                <span class="${buttonLabelClass} position-absolute end-0 top-0 border-bottom border-warning border-1"> ${followed ? followingLabel : followLabel} </span>
-            </div>
+        const followButton = stringToHTML(`<button class="${buttonClass} btn px-0 my-2 text-nowrap ${followed ? 'text-success' : ''}" title="${escapeHTML(followed ? unfollowLabel() : followLabel())}">
+            <span class="${buttonLabelClass} border-bottom border-warning border-1">${escapeHTML(followed ? followingLabel() : followLabel())}</span>
         </button>`);
 
         followButton.addEventListener('mouseenter', this.onMouseEnter)
