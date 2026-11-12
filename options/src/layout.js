@@ -1,6 +1,7 @@
 import { getFeaturesAndCurrentSettings } from '../../configuration.js';
 import { stringToHTML } from '../../src/html_generator.js';
 import { Runtime } from '../../src/utils/browser.js';
+import { initI18n } from '../../src/utils/i18n.js';
 
 /**
  * Options page layout: menu rendering and page loading.
@@ -44,6 +45,7 @@ async function loadPage(page, onPageLoaded) {
     const response = await fetch(page.path);
     const data = await response.text();
     const { features, currentSettings } = await getFeaturesAndCurrentSettings();
+    await initI18n();
     document.getElementById(PAGE_CONTAINER).innerHTML = data;
     page.loader(features, currentSettings);
     updateActiveMenu(page.id);
