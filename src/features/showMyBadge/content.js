@@ -31,6 +31,7 @@ export default class ShowMyBadgeContentFeature extends ContentFeature {
     }
 
     handleMutation(mutations) {
+        if (this.unloadIfOrphaned()) return;
         // [ODOO] < 19.0
         function getOldCard() {
             const avatarCardMutationNode = mutations
