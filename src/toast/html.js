@@ -1,13 +1,14 @@
 import { escapeHTML, stringToHTML } from '../html_generator.js';
 import { featureName, t } from '../utils/i18n.js';
+import ToastStyle from './toast.css';
 
 const html = String.raw;
-const css = String.raw;
 
 export const toastFadeInOutDurationMillis = 500;
 export const toastDelayMillis = 100;
 export const toastDurationMillis = 3000;
 
+// Keep in sync with toast.css
 export const ToastContainerElementID = 'joorney-toast-container';
 
 // Date.now() alone collides when two toasts are created in the same millisecond
@@ -16,6 +17,7 @@ export function generateToastID(prefix) {
     toastCounter += 1;
     return `${prefix}-${Date.now()}-${toastCounter}`;
 }
+// Keep in sync with toast.css
 const ToastItemElementClass = 'joorney-toasty';
 
 const iconForType = {
@@ -25,100 +27,6 @@ const iconForType = {
     info: 'fa fa-info-circle',
 };
 
-const ToastStyle = css`
-    #${ToastContainerElementID} {
-        display: flex;
-        flex-direction: column;
-        padding: 16px;
-        position: fixed;
-        top: 32px;
-        width: 100%;
-        z-index: 9999;
-        pointer-events: none;
-        font-family: Roboto, sans-serif;
-    }
-
-    .${ToastItemElementClass} {
-        display: none;
-        opacity: 0;
-        align-self: end;
-        padding: 16px;
-        margin-bottom: 10px;
-        border-radius: 4px;
-        min-width: 300px;
-        max-width: 600px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        position: relative;
-        overflow: hidden;
-        pointer-events: auto;
-    }
-
-    .${ToastItemElementClass}-success .toast-progress {
-        background-color: #4caf50;
-    }
-
-    .${ToastItemElementClass}-danger .toast-progress {
-        background-color: #f44336;
-    }
-
-    .${ToastItemElementClass}-info .toast-progress {
-        background-color: #2196f3;
-    }
-
-    .${ToastItemElementClass}-warning .toast-progress {
-        background-color: #ff9800;
-    }
-
-    .toast-icon {
-        margin-right: 10px;
-        font-size: 24px;
-    }
-
-    .toast-content {
-        flex-grow: 1;
-        align-content: center;
-    }
-
-    .toast-title {
-        font-weight: bold;
-        margin-bottom: 5px;
-    }
-
-    .toast-text {
-        max-width: 500px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    .toast-feature span {
-        background-color: rgba(128, 128, 128, .25);
-    }
-
-    .toast-close {
-        cursor: pointer;
-        position: absolute;
-        top: 8px;
-        right: 8px;
-        font-size: 16px;
-        background: transparent;
-        border: none;
-    }
-
-    .toast-progress {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        height: 5px;
-        animation: progressBar ${toastDurationMillis}ms linear forwards;
-        animation-delay: ${toastDelayMillis + toastFadeInOutDurationMillis}ms;
-    }
-
-    @keyframes progressBar {
-        from { width: 100%; }
-        to { width: 0%; }
-    }
-  `.trim();
-
 const ToastContainer = html`
     <div id="${ToastContainerElementID}">
         <style>${ToastStyle}</style>
@@ -127,6 +35,12 @@ const ToastContainer = html`
 
 export function buildContainer() {
     const container = stringToHTML(ToastContainer);
+    // Timings stay defined in JS (also used by toast/index.js), toast.css reads them through variables
+    container.style.setProperty('--joorney-toast-duration', `${toastDurationMillis}ms`);
+    container.style.setProperty(
+        '--joorney-toast-progress-delay',
+        `${toastDelayMillis + toastFadeInOutDurationMillis}ms`
+    );
     return container;
 }
 
