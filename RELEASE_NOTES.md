@@ -1,5 +1,15 @@
 # Joorney Release Notes
 
+## [2.7.0.17] Odoo 20 and stability
+
+-   Odoo 20.0 support (saas-20.x available in developer mode)
+-   Odoo 16 is no longer supported: Joorney now requires Odoo 17.0 or later
+    -   "Awesome Loading Large" and "Save Knowledge" (Odoo 16 only) are disabled
+-   Updated feature: "Assign Me" also works on Helpdesk tickets [:link:](https://mrsweeter.github.io/joorney/feature.html#assignMeTask)
+-   Security: Odoo data displayed by Joorney is now escaped
+-   More reliable background worker, context menu and notifications
+-   Bug fixes (Ambient, Theme Switch, Checklist, Pin Message, runbot features, ...)
+
 ## [2.6.0.16] New feature: Follow/Unfollow
 
 -  Follow or unfollow a record in Odoo [:link:](https://mrsweeter.github.io/joorney/feature.html#followUnfollow)
