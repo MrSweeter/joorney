@@ -2,19 +2,20 @@
     "manifest_version": 3,
     "version": "2.7.0.%BUILD%",
     "version_name": "2.7.0.%MINIMAL_ODOO_VERSION%%ENV_SUFFIX%",
-    "name": "%EXT_NAME%",
-    "description": "Improve your Odoo Journey! Makes your Odoo experience more enjoyable and productive by adding some cool features and effects.",
+    "default_locale": "en",
+    "name": "__MSG_ext_name__",
+    "description": "__MSG_ext_description__",
     "author": "Vanden Bergh Gaëtan",
     "homepage_url": "https://mrsweeter.github.io/joorney/?style=odoo",
     "action": {
-        "default_title": "%EXT_NAME%",
+        "default_title": "__MSG_ext_name__",
         "default_popup": "popup/index.html",
         "default_icon": "images/icon_128.png"
     },
     "commands": {
         "enable-disable-temporary": {
             "suggested_key": "Alt+Shift+F",
-            "description": "Enable or Disable extension features on the current origin"
+            "description": "__MSG_command_enableDisable__"
         }
     },
     "omnibox": {

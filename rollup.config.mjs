@@ -34,9 +34,21 @@ export default () => {
                         },
                     ],
                 }),
+                copy({
+                    // flatten: false keeps the <lang>/ folders; a folder copy can't take a transform
+                    flatten: false,
+                    targets: [
+                        {
+                            src: '_locales/*/messages.json',
+                            dest: `${bundleOutput}/_locales`,
+                            transform: (contents, _) => placeholder(contents.toString()),
+                        },
+                    ],
+                }),
                 copy({ targets: [{ src: 'images', dest: bundleOutput }] }),
                 // Icon font + stylesheet, shared by the extension pages and injected in Odoo pages (web accessible)
                 copy({ targets: [{ src: 'assets/icons/*.{css,woff2}', dest: `${bundleOutput}/assets/icons` }] }),
+                watchAssets({ assets: ['manifest.json', '_locales/**/*.json'] }),
             ],
         },
         getContentConfig(bundleOutput, defaultPlugins),
