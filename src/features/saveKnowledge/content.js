@@ -3,6 +3,7 @@ import ContentFeature from '../../generic/content.js';
 import { generateActionButton } from '../../html_generator.js';
 import { ToastManager } from '../../toast/index.js';
 import { isStillSamePage } from '../../utils/authorize.js';
+import { t } from '../../utils/i18n.js';
 import { getModelAndID_fromURL } from '../../utils/url_manager.js';
 import configuration from './configuration.js';
 
@@ -64,8 +65,7 @@ export default class SaveKnowledgeContentFeature extends ContentFeature {
                 undefined
             );
             if (!articleID) return;
-            if (article.id !== articleID)
-                throw new Error(`Button context is not the same as the url context: '${article.id}' vs '${articleID}'`);
+            if (article.id !== articleID) throw new Error(t('common_error_buttonContext', article.id, articleID));
 
             // body_0 is the ID use when you can edit an article body
             const body = (document.getElementById('body_0') ?? document.getElementById('body'))?.innerHTML;
@@ -75,7 +75,7 @@ export default class SaveKnowledgeContentFeature extends ContentFeature {
                 body: body,
             });
         } catch (err) {
-            ToastManager.warn(this.configuration.id, 'An error occurred during article save', err.message);
+            ToastManager.warn(this.configuration.id, t('saveKnowledge_error_title'), err.message);
         }
     }
 
@@ -88,8 +88,8 @@ export default class SaveKnowledgeContentFeature extends ContentFeature {
     appendSaveButtonToDom(article) {
         const saveButton = generateActionButton({
             name: 'joorney_action_save_article',
-            label: 'Save',
-            title: 'Save the article content',
+            label: t('saveKnowledge_buttonLabel'),
+            title: t('saveKnowledge_buttonTitle'),
             icon: { fa: 'fa-floppy-o', oi: 'save' },
         });
         this.updateSaveEvent(saveButton, article);

@@ -5,7 +5,7 @@ import { getSessionData, loadSessionInfo, SessionKey } from '../src/api/session.
 import { getRunbotOpenUrl } from '../src/shared/limited/runbot_content.js';
 import { loadToast, ToastManager } from '../src/toast/index.js';
 import { Console, Runtime, sendRuntimeMessage } from '../src/utils/browser.js';
-import { initI18n } from '../src/utils/i18n.js';
+import { initI18n, t } from '../src/utils/i18n.js';
 import { MESSAGE_ACTION } from '../src/utils/messaging.js';
 import { createActionMenuURL } from '../src/utils/url_manager.js';
 import { getOdooVersion } from '../src/utils/version.js';
@@ -161,10 +161,10 @@ async function openPathMenu(menupath) {
         const result = await getMenu(menupath);
 
         if (result.length === 0) {
-            throw new Error(`Menu '${menupath}' not found.`);
+            throw new Error(t('contextOdooMenus_error_notFound', menupath));
         }
         if (result.length > 1) {
-            throw new Error(`Too much menu found for path ${menupath}.`);
+            throw new Error(t('contextOdooMenus_error_tooMany', menupath));
         }
         const menu = result[0];
         const windowActionID = menu.action.split(',')[1];
@@ -172,7 +172,10 @@ async function openPathMenu(menupath) {
 
         openURL(createActionMenuURL(url, windowActionID));
     } catch (err) {
-        ToastManager.warn('contextOdooMenus', 'An error occur during menu opening', err.message);
+        // OdooAPIException message is the raw JSON error: show the Odoo message
+        const message =
+            err.type === 'OdooAPIException' ? (err.error?.data?.message ?? err.error?.message) : err.message;
+        ToastManager.warn('contextOdooMenus', t('contextOdooMenus_error_title'), message ?? t('common_error_title'));
     }
 }
 
