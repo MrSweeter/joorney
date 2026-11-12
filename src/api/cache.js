@@ -1,5 +1,6 @@
 import { Console, Runtime, StorageSync } from '../utils/browser.js';
 import { getLocalCache, setLocalCache } from './local.js';
+import { SessionKey, getSessionData } from './session.js';
 
 /**
  * Caches the result of a function call for a specified amount of time.
@@ -26,7 +27,8 @@ export async function cache(cachingTime, call, callID, ...params) {
         data = await call();
         fromCache = false;
 
-        if (cachingTime > 0) await saveCacheCall(cachingTime, callID, data, ...params);
+        // Never cache JSON-RPC errors (session expired, access error...)
+        if (cachingTime > 0 && data && !data.error) await saveCacheCall(cachingTime, callID, data, ...params);
     }
     return { fromCache, data };
 }
@@ -41,6 +43,14 @@ export async function clearHost(host) {
     const cache = await getLocalCache();
     delete cache[host === Runtime.id ? `joorney://${Runtime.id}` : host];
     await setLocalCache(cache);
+}
+
+// Same host can serve several databases/users (localhost:8069)
+function getCacheScope(params) {
+    const db = getSessionData(SessionKey.DB);
+    const uid = getSessionData(SessionKey.UID);
+    if (db === undefined && uid === undefined) return params;
+    return [db, uid, ...params];
 }
 
 function getHost() {
@@ -62,7 +72,7 @@ async function _checkHostsExpiration(cache, now) {
 
 async function saveCacheCall(expireAfterMinute, call, result, ...params) {
     const { cacheEncodingBase64 } = await StorageSync.get({ cacheEncodingBase64: true });
-    const hash = jbtoa(JSON.stringify(params), cacheEncodingBase64);
+    const hash = jbtoa(JSON.stringify(getCacheScope(params)), cacheEncodingBase64);
     const host = getHost();
 
     let cache = await getLocalCache();
@@ -85,7 +95,7 @@ async function saveCacheCall(expireAfterMinute, call, result, ...params) {
 
 async function readCacheCall(call, ...params) {
     const { cacheEncodingBase64 } = await StorageSync.get({ cacheEncodingBase64: true });
-    const hash = jbtoa(JSON.stringify(params), cacheEncodingBase64);
+    const hash = jbtoa(JSON.stringify(getCacheScope(params)), cacheEncodingBase64);
     const host = getHost();
     let cache = await getLocalCache();
     cache = cache?.[host]?.[call]?.[hash];

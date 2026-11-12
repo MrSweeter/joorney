@@ -1,4 +1,4 @@
-import { features } from '../../configuration.js';
+import { loadFeaturesConfiguration } from '../../configuration.js';
 import { clearHost } from '../api/cache.js';
 import { openRunbotWithVersionMenuItem } from '../features/autoOpenRunbot/configuration.js';
 import { isAuthorizedFeature, isAuthorizedLimitedFeature } from '../utils/authorize.js';
@@ -8,12 +8,21 @@ import { sanitizeURL } from '../utils/util.js';
 import { clearLocalCacheMenuItem, optionMenuItem, separatorMenuItem } from './item.js';
 
 const CONTEXT_MENU_DYNAMIC_ITEM_IDS = [];
+// Serialize menu (re)creation: overlapping removeAll/create calls fail with "duplicate id"
+let menuBuild = Promise.resolve();
+// Only the latest context update is applied (tab activation, window focus and tab load fire together)
+let updateGeneration = 0;
 
 export async function disableDynamicItems() {
     return Promise.all(CONTEXT_MENU_DYNAMIC_ITEM_IDS.map((id) => ContextMenus.update(id, { visible: false })));
 }
 
-export async function createContextMenu(initiator) {
+export function createContextMenu(initiator) {
+    menuBuild = menuBuild.then(() => buildContextMenu(initiator)).catch((err) => Console.error(err));
+    return menuBuild;
+}
+
+async function buildContextMenu(initiator) {
     await ContextMenus.removeAll();
     CONTEXT_MENU_DYNAMIC_ITEM_IDS.length = 0;
 
@@ -59,15 +68,19 @@ export async function createContextMenu(initiator) {
 }
 
 export async function updateContext(tabId) {
-    disableDynamicItems();
+    const generation = ++updateGeneration;
 
     try {
+        await menuBuild;
+        await disableDynamicItems();
+
         const tab = await Tabs.get(tabId);
         if (!tab.active) return;
         if (!tab.url.startsWith('http')) return;
         const odooInfo = await sendTabMessage(tab.id, MESSAGE_ACTION.TO_CONTENT.REQUEST_ODOO_INFO);
         if (!odooInfo || !odooInfo.isOdoo) return;
-        updateContextMenu(tab, odooInfo.isOdoo, odooInfo.version);
+        if (generation !== updateGeneration) return;
+        await updateContextMenu(tab, odooInfo.isOdoo, odooInfo.version, generation);
     } catch (error) {
         // Error: No tab with id (from Tabs.get) is expected
         if (`${error}`.includes(tabId)) Console.log(`background.js - updateContext: ${error}`);
@@ -75,8 +88,9 @@ export async function updateContext(tabId) {
     }
 }
 
-async function updateContextMenu(tab, isOdoo, version) {
+async function updateContextMenu(tab, isOdoo, version, generation) {
     const dynamicItems = await getItems(tab);
+    if (generation !== updateGeneration) return;
 
     const itemsUpdate = [];
     for (const item of dynamicItems) {
@@ -135,6 +149,7 @@ async function createContextMenuItem(createProperties, initiator) {
             if (err) {
                 console.error(`initiator: ${initiator}\n${err}`);
                 reject(`initiator: ${initiator}\n${err}`);
+                return;
             }
             resolve();
         });
@@ -159,9 +174,10 @@ async function getFeaturesItems(tab) {
     if (tab) {
         if (!tab.url) return {};
         url = sanitizeURL(tab.url);
-        if (!url.origin || !url.origin.startsWith('http')) return;
+        if (!url.origin || !url.origin.startsWith('http')) return {};
     }
 
+    const features = await loadFeaturesConfiguration();
     const contextFeatures = features.filter((f) => f.trigger.context);
     const allFavorite = contextFeatures.length === 1;
 

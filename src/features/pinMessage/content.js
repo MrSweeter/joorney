@@ -115,16 +115,20 @@ export default class PinMessageContentFeature extends ContentFeature {
     }
 
     unload() {
+        super.unload();
         this.pinMessageChatterObserver?.disconnect();
     }
 
+    // Popup options are read from storage on each load
+    async onPopupMessage(_msg) {}
+
     handleChatterMutation(mutations) {
         for (const mutation of mutations) {
-            if (mutation.type !== 'childList') return;
+            if (mutation.type !== 'childList') continue;
 
             for (const node of mutation.addedNodes) {
                 if (node.nodeType === 1 && node.matches('.o-mail-Message')) {
-                    if (ignore_message_with_selector.some((s) => node.querySelector(s))) return;
+                    if (ignore_message_with_selector.some((s) => node.querySelector(s))) continue;
                     this.appendPinButtonToMessage(node);
                 }
             }

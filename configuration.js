@@ -21,7 +21,7 @@ export const baseSettings = {
         // },
     },
 
-    supportedVersions: ['19.0'],
+    supportedVersions: ['20.0'],
     supportedDevVersions: [],
 
     // Experimental
@@ -35,9 +35,17 @@ export const extensionFeatureState = FeaturesState;
 const activeFeaturesList = Object.keys(FeaturesState).filter((k) => FeaturesState[k]);
 
 export let features = [];
-export async function loadFeaturesConfiguration() {
-    features = await Promise.all(activeFeaturesList.map((f) => importFeatureConfigurationFile(f)));
-    Console.info(features);
+let featuresLoading = undefined;
+// Memoized: every caller awaits the same loading, avoid using 'features' before it is filled
+export function loadFeaturesConfiguration() {
+    featuresLoading ??= Promise.all(activeFeaturesList.map((f) => importFeatureConfigurationFile(f))).then(
+        (loadedFeatures) => {
+            features = loadedFeatures;
+            Console.info(features);
+            return features;
+        }
+    );
+    return featuresLoading;
 }
 
 export function importFeatureConfigurationFile(featureID) {

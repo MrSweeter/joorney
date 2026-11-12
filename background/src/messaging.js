@@ -1,8 +1,8 @@
-import { features, importFeatureBackgroundFile } from '../../configuration.js';
+import { importFeatureBackgroundFile, loadFeaturesConfiguration } from '../../configuration.js';
 import { createContextMenu, updateContext } from '../../src/contextmenu/manager.js';
 import { MESSAGE_ACTION } from '../../src/utils/messaging.js';
 import { updateTabState } from './keyboard_shortcut.js';
-import { getFinalRunbotURL } from './runbot.js';
+import { openRunbotAdminDebug } from './runbot.js';
 
 export async function handleMessage(message, sender) {
     if (message.action) return handleAction(message, sender);
@@ -14,15 +14,15 @@ async function handleAction(message, sender) {
 
     switch (message.action) {
         case MESSAGE_ACTION.TO_BACKGROUND.GET_FEATURES_LIST: {
-            callback = Promise.resolve({ features: features });
+            callback = loadFeaturesConfiguration().then((features) => ({ features: features }));
             break;
         }
-        case MESSAGE_ACTION.TO_BACKGROUND.GET_FINAL_RUNBOT_URL: {
-            callback = getFinalRunbotURL(message);
+        case MESSAGE_ACTION.TO_BACKGROUND.OPEN_RUNBOT_ADMIN_DEBUG: {
+            callback = openRunbotAdminDebug(message, sender);
             break;
         }
         case MESSAGE_ACTION.TO_BACKGROUND.UPDATE_EXT_STATUS: {
-            callback = updateTabState(message);
+            callback = updateTabState(message, sender);
             break;
         }
         case MESSAGE_ACTION.TO_BACKGROUND.RECREATE_MENU: {
@@ -35,6 +35,7 @@ async function handleAction(message, sender) {
             break;
         }
         case MESSAGE_ACTION.TO_BACKGROUND.TAB_LOADED: {
+            if (!sender.tab) return undefined;
             callback = updateContext(sender.tab.id);
             break;
         }
@@ -44,9 +45,9 @@ async function handleAction(message, sender) {
 }
 
 async function handleFeature(feature, tab, args) {
+    const features = await loadFeaturesConfiguration();
     if (!features.some((f) => f.id === feature)) return undefined;
 
-    return importFeatureBackgroundFile(feature).then((featureModule) => {
-        featureModule.load(tab, args);
-    });
+    const featureModule = await importFeatureBackgroundFile(feature);
+    return featureModule.load(tab, args);
 }

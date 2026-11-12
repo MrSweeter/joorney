@@ -11,6 +11,7 @@ export default class AutoOpenRunbotContentFeature extends LimitedRunbotContentFe
 
     async loadFeature(url) {
         if (!this.isRunbotPageWithAutoOpenHash(url)) return;
+        if (this.getOpenData(url) === 'login') return;
 
         this.loadPath(url);
     }
@@ -20,6 +21,7 @@ export default class AutoOpenRunbotContentFeature extends LimitedRunbotContentFe
         try {
             if (!path && !version) {
                 window.location = 'https://runbot.odoo.com/';
+                return;
             }
             if (!path && version) {
                 const searchPath = `${searchVersionPath}${version}`;
@@ -29,7 +31,7 @@ export default class AutoOpenRunbotContentFeature extends LimitedRunbotContentFe
                 window.location = `https://runbot.odoo.com/${finalPath}`;
                 return;
             }
-            await this.openRunbot(`https://runbot.odoo.com/${path}`, false);
+            await this.openRunbot(path, false);
         } catch (error) {
             if (batchOffset) {
                 Console.warn(error);
@@ -54,8 +56,8 @@ export default class AutoOpenRunbotContentFeature extends LimitedRunbotContentFe
         // FOR EACH VERSION ROW
         for (let i = 0; i < rows.length; i++) {
             const row = rows[i];
-            const version = sanitizeVersion(row.querySelector('div.one_line a b').textContent);
-            if (version !== openVersion) continue;
+            const versionText = row.querySelector(':scope > div:first-child div.text-truncate a b')?.textContent;
+            if (!versionText || sanitizeVersion(versionText) !== openVersion) continue;
 
             const batches = row.querySelectorAll('div.batch_slots');
 
@@ -67,9 +69,9 @@ export default class AutoOpenRunbotContentFeature extends LimitedRunbotContentFe
                 // FOR EACH SUBGROUP BUILD OF BATCH
                 for (let k = 0; k < groups.length; k++) {
                     const group = groups[k];
-                    const type = group.querySelector('a.slot_name span').textContent.toLowerCase();
+                    const type = group.querySelector('a.slot_name span')?.textContent.toLowerCase();
 
-                    if (!type.startsWith('enterprise')) continue;
+                    if (!type?.startsWith('enterprise')) continue;
 
                     const signInButtons = group.getElementsByClassName('fa fa-sign-in btn btn-info');
                     const spinGearIcons = group.getElementsByClassName('fa-cog fa-spin');

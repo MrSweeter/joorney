@@ -56,6 +56,9 @@ function analyzeConfiguration(jsonFile) {
         const finalConfiguration = await runMigration(jsonFile, migrateVersion, currentVersion);
 
         await StorageSync.set(finalConfiguration);
+        // Migrators set obsolete keys to undefined, 'set' ignores them: remove them explicitly
+        const obsoleteKeys = Object.keys(finalConfiguration).filter((k) => finalConfiguration[k] === undefined);
+        if (obsoleteKeys.length > 0) await StorageSync.remove(obsoleteKeys);
 
         button.innerHTML = 'Download new configuration';
         runButton.onclick = () => {

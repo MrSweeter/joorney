@@ -9,7 +9,7 @@ import {
     sendTabMessage,
 } from '../src/utils/browser.js';
 
-import { features, getCurrentSettings, loadFeaturesConfiguration } from '../configuration.js';
+import { getCurrentSettings, loadFeaturesConfiguration } from '../configuration.js';
 import { checkHostsExpiration } from '../src/api/cache.js';
 import { createContextMenu, onContextMenuItemClick, updateContext } from '../src/contextmenu/manager.js';
 import AmbientManager from '../src/features/ambient/ambient_manager.js';
@@ -20,10 +20,12 @@ import { checkCommandShortcuts, handleCommands } from './src/keyboard_shortcut.j
 import { handleMessage } from './src/messaging.js';
 import { initOmni } from './src/omnibox.js';
 import { listenRequest } from './src/request.js';
+import { onRunbotNavigationCommitted } from './src/runbot.js';
 
 // [ODOO] < 17.2 On page # path change
 WebNavigation.onReferenceFragmentUpdated.addListener((e) => {
-    if (e.url.startsWith('http')) {
+    // Ignore iframe navigation (website editor, html field, report preview...)
+    if (e.frameId === 0 && e.url.startsWith('http')) {
         sendTabMessage(e.tabId, MESSAGE_ACTION.TO_CONTENT.TAB_NAVIGATION, {
             url: e.url,
             navigator: true,
@@ -34,7 +36,7 @@ WebNavigation.onReferenceFragmentUpdated.addListener((e) => {
 
 // [ODOO] 17.2+
 WebNavigation.onHistoryStateUpdated.addListener((e) => {
-    if (e.url.startsWith('http')) {
+    if (e.frameId === 0 && e.url.startsWith('http')) {
         sendTabMessage(e.tabId, MESSAGE_ACTION.TO_CONTENT.TAB_NAVIGATION, {
             url: e.url,
             navigator: true,
@@ -43,10 +45,14 @@ WebNavigation.onHistoryStateUpdated.addListener((e) => {
     }
 });
 
+// Admin/debug login on runbot builds opened through the background (see openRunbotAdminDebug)
+WebNavigation.onCommitted.addListener(onRunbotNavigationCommitted);
+
 Runtime.onInstalled.addListener(async (details) => {
     const isInstall = details.reason === Runtime.OnInstalledReason.INSTALL;
     if (isInstall) {
-        const settingsOrDefault = getCurrentSettings(features);
+        const features = await loadFeaturesConfiguration();
+        const settingsOrDefault = await getCurrentSettings(features);
         await StorageSync.set(settingsOrDefault);
         checkCommandShortcuts();
     }
@@ -77,27 +83,26 @@ Runtime.onMessage.addListener((message, sender) => {
 
 ContextMenus.onClicked.addListener(onContextMenuItemClick);
 
+// Listeners must be registered synchronously, MV3 does not dispatch the waking event to listeners added later
+handleCommands();
+initOmni();
+
 async function main() {
-    // Add some delay to avoid initialization side effect
-    // await sleep(1000);
+    // Start loading features immediately, messages handlers await the same promise
+    loadFeaturesConfiguration();
 
-    await checkVersion();
-    handleCommands();
+    try {
+        await checkVersion();
+    } catch (e) {
+        Console.error(e);
+    }
     await checkHostsExpiration();
-
-    await loadFeaturesConfiguration();
-
-    initOmni();
 
     await createContextMenu('main');
 
-    listenRequest();
+    await listenRequest();
 
     await AmbientManager.computeEvents();
 }
 
-try {
-    main();
-} catch (e) {
-    console.error(e)
-}
+main().catch((e) => Console.error(e));

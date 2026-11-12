@@ -43,13 +43,13 @@ async function onVersionLoaded() {
 
     await updateTabState(url);
     const versionInfo = getOdooVersion();
+    // Toast must be ready before features, they may notify during loading
+    await loadToast(versionInfo);
     await loadFeatures(url, versionInfo, 'background');
     await loadFeatures(url, versionInfo, 'load');
 
-    loadToast(versionInfo);
-
     Runtime.onMessage.addListener((message, sender) => {
-        return handleMessage(message, sender)
+        return handleMessage(message, sender);
     });
 
     sendRuntimeMessage(MESSAGE_ACTION.TO_BACKGROUND.TAB_LOADED);
@@ -111,14 +111,19 @@ async function loadFeatures(url, versionInfo, trigger) {
     }
 
     for (const feature of features) {
-        const key = `${trigger}:${feature.id}`;
+        // 'load' and 'navigate' share the same instance, otherwise the 'load' one is never unloaded
+        const key = trigger === 'background' ? `background:${feature.id}` : feature.id;
         if (loadedFeatures.has(key)) {
             loadedFeatures.get(key).unload();
             loadedFeatures.delete(key);
         }
-        const loader = await importer(feature);
-        loadedFeatures.set(key, loader);
-        loader.load(url, versionInfo);
+        try {
+            const loader = await importer(feature);
+            loadedFeatures.set(key, loader);
+            Promise.resolve(loader.load(url, versionInfo)).catch((ex) => Console.warn(ex));
+        } catch (ex) {
+            Console.warn(ex);
+        }
     }
 }
 

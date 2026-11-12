@@ -1,5 +1,6 @@
 import { getDataset, getDatasetWithIDs } from '../../api/odoo.js';
 import ContentFeature from '../../generic/content.js';
+import { escapeHTML } from '../../html_generator.js';
 import { createRecordFormURL } from '../../utils/url_manager.js';
 import configuration from './configuration.js';
 
@@ -25,6 +26,7 @@ export default class ShowMyBadgeContentFeature extends ContentFeature {
     }
 
     unload() {
+        super.unload();
         this.overlayShowMyBadgeObserver?.disconnect();
     }
 
@@ -149,9 +151,7 @@ export default class ShowMyBadgeContentFeature extends ContentFeature {
                 window.location,
                 'gamification.badge',
                 b.badge_id[0]
-            )}"><img class="rounded" title="${b.display_name || b.badge_name}\n${
-                b.comment || ''
-            }" style="height: 30px" src="https://${window.location.host}/web/image?model=gamification.badge&id=${
+            )}"><img class="rounded" title="${escapeHTML(`${b.display_name || b.badge_name}\n${b.comment || ''}`)}" style="height: 30px" src="https://${window.location.host}/web/image?model=gamification.badge&id=${
                 b.badge_id[0]
             }&field=image_128"></a>`.trim()
         );

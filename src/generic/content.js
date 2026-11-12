@@ -1,6 +1,6 @@
 import { ToastManager } from '../toast/index.js';
 import { isAuthorizedFeature, isSupportedFeature } from '../utils/authorize.js';
-import { Runtime, Console } from '../utils/browser.js';
+import { Console, Runtime } from '../utils/browser.js';
 import { NotYetImplemented } from '../utils/error.js';
 import { MESSAGE_ACTION } from '../utils/messaging.js';
 import { sanitizeURL } from '../utils/util.js';
@@ -15,7 +15,7 @@ export default class ContentFeature {
 
         this.onDocumentDOMChange = this.onDocumentDOMChange.bind(this);
         this._observer = null;
-
+        this._unloaded = false;
     }
 
     async load(urlArg, versionInfo) {
@@ -24,9 +24,11 @@ export default class ContentFeature {
         const url = sanitizeURL(urlArg);
 
         if (!(await isAuthorizedFeature(this.configuration.id, url))) return;
+        // Unloaded during the checks above (fast navigation): don't attach listeners nobody will remove
+        if (this._unloaded) return;
         this.versionInfo = versionInfo;
 
-        this.loadFeature(url);
+        Promise.resolve(this.loadFeature(url)).catch((ex) => Console.warn(ex));
         this.handlePopupMessage();
 
         this.observeRequest();
@@ -47,7 +49,7 @@ export default class ContentFeature {
 
     async onRequestCompleted(_msg) {}
 
-    observeDOMChange()  {
+    observeDOMChange() {
         if (!this.configuration.trigger.ondom) return;
         this._observer = new MutationObserver(this.onDocumentDOMChange);
         this._observer.observe(document.documentElement, { childList: true, subtree: true });
@@ -71,6 +73,7 @@ export default class ContentFeature {
     }
 
     unload() {
+        this._unloaded = true;
         if (this._runtimeOnRequestListener) {
             Runtime.onMessage.removeListener(this._runtimeOnRequestListener);
             this._runtimeOnRequestListener = null;
@@ -79,8 +82,8 @@ export default class ContentFeature {
             Runtime.onMessage.removeListener(this._runtimePopupListener);
             this._runtimePopupListener = null;
         }
-        this._observer?.disconnect()
-        this._observer = null
+        this._observer?.disconnect();
+        this._observer = null;
     }
 
     async onPopupMessage(_msg) {
