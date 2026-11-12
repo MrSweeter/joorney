@@ -51,8 +51,24 @@ export default class ContentFeature {
 
     observeDOMChange() {
         if (!this.configuration.trigger.ondom) return;
-        this._observer = new MutationObserver(this.onDocumentDOMChange);
+        this._observer = new MutationObserver((mutations) => {
+            if (this.unloadIfOrphaned()) return;
+            this.onDocumentDOMChange(mutations);
+        });
         this._observer.observe(document.documentElement, { childList: true, subtree: true });
+    }
+
+    /**
+     * After an extension reload or update, this script is orphaned (no runtime id): it keeps running until the page
+     * reloads, without background messages, and extension storage calls throw. Navigation-triggered features go idle,
+     * but the feature's own observers and listeners would keep rendering with outdated code and state.
+     * Call it first in callbacks the page triggers by itself (observers, DOM listeners).
+     * @returns {boolean} true when orphaned, the feature is then unloaded
+     */
+    unloadIfOrphaned() {
+        if (Runtime?.id) return false;
+        this.unload();
+        return true;
     }
 
     async onDocumentDOMChange(_mutations) {}

@@ -25,6 +25,11 @@ export default class FollowUnfollowContentFeature extends ContentFeature {
         /* Nothing to load, document observer manage the logic */
     }
 
+    unload() {
+        super.unload();
+        this.followButtonObserver.disconnect();
+    }
+
     async onDocumentDOMChange(mutations) {
         for (const mutation of mutations) {
             if (mutation.addedNodes.length && mutation.addedNodes[0].classList?.contains(mailFollowersButtonClass))
@@ -93,6 +98,7 @@ export default class FollowUnfollowContentFeature extends ContentFeature {
     }
 
     handleButtonMutation(mutations) {
+        if (this.unloadIfOrphaned()) return;
         for (const mutation of mutations) {
             if (mutation.type === 'attributes' && mutation.attributeName === 'class') this.appendFollowButton();
         }

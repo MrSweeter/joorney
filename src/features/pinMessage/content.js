@@ -123,6 +123,7 @@ export default class PinMessageContentFeature extends ContentFeature {
     async onPopupMessage(_msg) {}
 
     handleChatterMutation(mutations) {
+        if (this.unloadIfOrphaned()) return;
         for (const mutation of mutations) {
             if (mutation.type !== 'childList') continue;
 
