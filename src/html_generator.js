@@ -153,7 +153,7 @@ export function generateMessage(messageID, authorName, avatarSrc, bodyContent, d
     const messageElement = stringToHTML(`
 		<div class="o-mail-Message position-relative py-1 mt-2 px-3 rounded border">
 			<button class="o-mail-Message-jumpTo d-none btn m-1 position-absolute top-0 end-0 rounded-pill badge badge-secondary" style="z-index: 1;">
-				Jump
+				${escapeHTML(t('common_jump'))}
 			</button>
 			<div class="o-mail-Message-core position-relative d-flex flex-shrink-0">
 				<div class="o-mail-Message-sidebar d-flex flex-shrink-0">

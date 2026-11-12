@@ -3,7 +3,7 @@
         "message": "%EXT_NAME%"
     },
     "ext_description": {
-        "message": "Améliorez votre parcours Odoo ! Une expérience Odoo plus agréable et productive grâce à des fonctionnalités et effets sympas."
+        "message": "Améliorez votre parcours Odoo ! Une expérience Odoo plus agréable et productive grâce à des fonctionnalités et effets sympas."
     },
     "command_enableDisable": {
         "message": "Activer ou désactiver les fonctionnalités de l'extension sur l'origine actuelle"
@@ -57,7 +57,7 @@
         }
     },
     "popup_originState": {
-        "message": "État de l'origine :"
+        "message": "État de l'origine :"
     },
     "popup_saveOrigin": {
         "message": "Enregistrer cette origine"
@@ -69,58 +69,58 @@
         "message": "Enregistrer et recharger"
     },
     "feature_adminDebugLoginRunbot_name": {
-        "message": "[Runbot] Connexion admin (debug)"
+        "message": "[Runbot] Connexion admin (mode développeur)"
     },
     "feature_ambient_name": {
-        "message": "Ambiance"
+        "message": "Effets d'ambiance"
     },
     "feature_assignMeTask_name": {
-        "message": "M'assigner"
+        "message": "Bouton « M'assigner »"
     },
     "feature_autoOpenRunbot_name": {
-        "message": "[Runbot] Ouverture automatique"
+        "message": "[Runbot] Ouverture rapide"
     },
     "feature_awesomeLoadingLarge_name": {
-        "message": "Awesome Loading (grand)"
+        "message": "Chargement personnalisé (grand)"
     },
     "feature_awesomeLoadingSmall_name": {
-        "message": "Awesome Loading (petit)"
+        "message": "Chargement personnalisé (petit)"
     },
     "feature_awesomeStyle_name": {
-        "message": "Awesome Style"
+        "message": "Style personnalisé"
     },
     "feature_contextOdooMenus_name": {
-        "message": "Menus Odoo contextuels"
+        "message": "Menus Odoo au clic droit"
     },
     "feature_followUnfollow_name": {
         "message": "Suivre/Ne plus suivre"
     },
     "feature_impersonateLoginRunbot_name": {
-        "message": "[Runbot] Connexion en tant que"
+        "message": "[Runbot] Connexion en tant qu'utilisateur"
     },
     "feature_newServerActionCode_name": {
-        "message": "Code des nouvelles actions serveur"
+        "message": "Nouvelle action de serveur en code"
     },
     "feature_pinMessage_name": {
-        "message": "Épingler les messages"
+        "message": "Messages épinglés"
     },
     "feature_saveKnowledge_name": {
-        "message": "Enregistrer Knowledge"
+        "message": "Enregistrer l'article"
     },
     "feature_showMyBadge_name": {
-        "message": "Afficher mon badge"
+        "message": "Afficher mes badges"
     },
     "feature_starringPriorityEffect_name": {
-        "message": "Effet étoiles"
+        "message": "Explosion d'étoiles"
     },
     "feature_themeSwitch_name": {
-        "message": "Changement de thème"
+        "message": "Thème automatique"
     },
     "feature_tooltipMetadata_name": {
-        "message": "Métadonnées en infobulle"
+        "message": "Métadonnées"
     },
     "feature_unfocusApp_name": {
-        "message": "Applications en retrait"
+        "message": "Masquer les applications"
     },
     "themeSwitch_mode_system": {
         "message": "Système"
@@ -138,16 +138,16 @@
         "message": "Mode sombre selon les heures configurées"
     },
     "unfocusApp_popup_reorder": {
-        "message": "Activer le tri des applications en retrait"
+        "message": "Activer la réorganisation des applications masquées"
     },
     "unfocusApp_popup_share": {
-        "message": "Partager la configuration des applications en retrait entre les hôtes"
+        "message": "Partager la configuration des applications masquées entre les hôtes"
     },
     "pinMessage_popup_selfAuthor": {
-        "message": "Épingler uniquement les messages de l'utilisateur actuel ?"
+        "message": "Épingler uniquement les messages de l'utilisateur actuel ?"
     },
     "pinMessage_popup_defaultShown": {
-        "message": "Afficher la section des messages épinglés au chargement ?"
+        "message": "Afficher la section des messages épinglés au chargement ?"
     },
     "contextMenu_openOptions": {
         "message": "Ouvrir les options"
@@ -168,7 +168,7 @@
         "message": "Ouvrir la page GitHub"
     },
     "omnibox_disabled": {
-        "message": "L'ouverture d'un runbot depuis l'URL est désactivée. Activez « [Runbot] Ouverture automatique » dans les options !"
+        "message": "L'ouverture d'un runbot depuis l'URL est désactivée. Activez « [Runbot] Ouverture rapide » dans les options !"
     },
     "omnibox_openInput": {
         "message": "Ouvrir <match>%s</match> <dim>(si trouvé)</dim>"
@@ -184,5 +184,198 @@
     },
     "autoOpenRunbot_menu_openWithVersion": {
         "message": "Ouvrir le runbot en version %version%"
+    },
+    "common_fakeDataTitle": {
+        "message": "Cet élément ne fait pas partie de l'application d'origine ; il a été ajouté artificiellement par Joorney.\nEn cas de doute, rechargez la page !"
+    },
+    "common_error_buttonContext": {
+        "message": "Le contexte du bouton ne correspond pas à celui de l'URL : '$button$' vs '$url$'",
+        "placeholders": {
+            "button": {
+                "content": "$1",
+                "example": "42"
+            },
+            "url": {
+                "content": "$2",
+                "example": "43"
+            }
+        }
+    },
+    "common_jump": {
+        "message": "Aller au message"
+    },
+    "toast_limitReached": {
+        "message": "Vous avez atteint la limite de notifications ($max$). Notification affichée dans la console.",
+        "placeholders": {
+            "max": {
+                "content": "$1",
+                "example": "5"
+            }
+        }
+    },
+    "toast_badgeNotification": {
+        "message": "notification"
+    },
+    "assignMeTask_buttonLabel": {
+        "message": "M'assigner"
+    },
+    "assignMeTask_buttonTitle": {
+        "message": "La page sera rechargée, utilisez le clic molette pour ouvrir dans un autre onglet"
+    },
+    "assignMeTask_error_title": {
+        "message": "Une erreur est survenue lors de l'assignation de l'enregistrement"
+    },
+    "assignMeTask_label_assignees": {
+        "message": "Assignés"
+    },
+    "assignMeTask_label_assignedTo": {
+        "message": "Assigné à"
+    },
+    "assignMeTask_label_technician": {
+        "message": "Technicien"
+    },
+    "saveKnowledge_buttonLabel": {
+        "message": "Enregistrer"
+    },
+    "saveKnowledge_error_title": {
+        "message": "Une erreur est survenue lors de l'enregistrement de l'article"
+    },
+    "pinMessage_starButtonTitle": {
+        "message": "Odoo : Marquer comme à faire | Remplacé par Joorney : Épingler"
+    },
+    "pinMessage_starIconTitle": {
+        "message": "Odoo : À faire/Favori | Épinglé"
+    },
+    "pinMessage_toggleLabel": {
+        "message": "Afficher les messages épinglés"
+    },
+    "pinMessage_sectionTitle": {
+        "message": "Messages épinglés"
+    },
+    "pinMessage_warning_tooManyPins": {
+        "message": "...Il y a plus de $max$ messages épinglés ! Seuls les vôtres sont affichés",
+        "placeholders": {
+            "max": {
+                "content": "$1",
+                "example": "5"
+            }
+        }
+    },
+    "pinMessage_warning_tooManyOwnPins": {
+        "message": "...Vous avez plus de $max$ messages épinglés !",
+        "placeholders": {
+            "max": {
+                "content": "$1",
+                "example": "5"
+            }
+        }
+    },
+    "followUnfollow_follow": {
+        "message": "Suivre"
+    },
+    "followUnfollow_unfollow": {
+        "message": "Ne plus suivre"
+    },
+    "followUnfollow_following": {
+        "message": "Abonné(e)"
+    },
+    "tooltipMetadata_copyModel": {
+        "message": "[Joorney] Copier le nom technique dans le presse-papiers"
+    },
+    "tooltipMetadata_windowActionId": {
+        "message": "ID de l'action de fenêtre"
+    },
+    "tooltipMetadata_xmlId": {
+        "message": "ID XML"
+    },
+    "tooltipMetadata_name": {
+        "message": "Nom"
+    },
+    "tooltipMetadata_model": {
+        "message": "Modèle"
+    },
+    "tooltipMetadata_filterDomain": {
+        "message": "[Filtres] Domaine"
+    },
+    "tooltipMetadata_filterContext": {
+        "message": "[Filtres] Contexte"
+    },
+    "tooltipMetadata_filterLimit": {
+        "message": "[Filtres] Limite"
+    },
+    "tooltipMetadata_filterFilter": {
+        "message": "[Filtres] Filtre"
+    },
+    "tooltipMetadata_id": {
+        "message": "ID"
+    },
+    "tooltipMetadata_noUpdate": {
+        "message": "Pas de mise à jour"
+    },
+    "tooltipMetadata_createUser": {
+        "message": "Créateur"
+    },
+    "tooltipMetadata_createDate": {
+        "message": "Date de création"
+    },
+    "tooltipMetadata_writeUser": {
+        "message": "Dernière modification par"
+    },
+    "tooltipMetadata_writeDate": {
+        "message": "Date de dernière modification"
+    },
+    "impersonateLoginRunbot_loginAs": {
+        "message": "Se connecter en tant que $login$",
+        "placeholders": {
+            "login": {
+                "content": "$1",
+                "example": "admin"
+            }
+        }
+    },
+    "adminDebugLoginRunbot_buttonTitle": {
+        "message": "Ouvrir le runbot en admin avec le mode développeur activé"
+    },
+    "runbot_error_notRunbotLink": {
+        "message": "Ce n'est pas un lien runbot : $url$",
+        "placeholders": {
+            "url": {
+                "content": "$1",
+                "example": "https://example.com/runbot/run/123"
+            }
+        }
+    },
+    "runbot_error_noTab": {
+        "message": "Aucun onglet depuis lequel ouvrir le runbot"
+    },
+    "runbot_error_noResponse": {
+        "message": "L'extension ne répond pas, rechargez la page"
+    },
+    "showMyBadge_more": {
+        "message": "Plus..."
+    },
+    "unfocusApp_changeFocusState": {
+        "message": "Masquer/afficher (double-clic : mettre en avant)"
+    },
+    "contextOdooMenus_error_title": {
+        "message": "Une erreur est survenue lors de l'ouverture du menu"
+    },
+    "contextOdooMenus_error_notFound": {
+        "message": "Menu '$path$' introuvable.",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Sales / Orders"
+            }
+        }
+    },
+    "contextOdooMenus_error_tooMany": {
+        "message": "Trop de menus trouvés pour le chemin $path$.",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Sales / Orders"
+            }
+        }
     }
 }

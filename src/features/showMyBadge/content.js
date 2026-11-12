@@ -1,6 +1,7 @@
 import { getDataset, getDatasetWithIDs } from '../../api/odoo.js';
 import ContentFeature from '../../generic/content.js';
 import { escapeHTML } from '../../html_generator.js';
+import { t } from '../../utils/i18n.js';
 import { createRecordFormURL } from '../../utils/url_manager.js';
 import configuration from './configuration.js';
 
@@ -158,7 +159,7 @@ export default class ShowMyBadgeContentFeature extends ContentFeature {
 
         if (moreBadge) {
             badgesHTML.push(
-                `<i title="More..." style="height: 30px; opacity: 10%" class="d-flex align-items-center fa fa-2x fa-certificate"></i>`.trim()
+                `<i title="${escapeHTML(t('showMyBadge_more'))}" style="height: 30px; opacity: 10%" class="d-flex align-items-center fa fa-2x fa-certificate"></i>`.trim()
             );
         }
 
