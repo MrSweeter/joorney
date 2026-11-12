@@ -1,7 +1,7 @@
 import { getDataset } from '../../api/odoo.js';
 import { getSessionData, SessionKey } from '../../api/session.js';
 import ContentFeature from '../../generic/content.js';
-import { generateMessage, stringToHTML } from '../../html_generator.js';
+import { ensureJoorneyStyle, generateMessage, stringToHTML } from '../../html_generator.js';
 import { isStillSamePage } from '../../utils/authorize.js';
 import { StorageSync } from '../../utils/browser.js';
 import { getModelAndID_fromURL } from '../../utils/url_manager.js';
@@ -176,9 +176,10 @@ export default class PinMessageContentFeature extends ContentFeature {
         const threadOpened = this.chatter.querySelector('.joorney-pinned-mail-Thread') != null;
         this.chatter.querySelector('.joorney-pinned-mail-Thread')?.remove();
         if (this.pins.length === 0) return;
+        ensureJoorneyStyle();
         const previous = this.chatter.querySelector('button.text-action');
         const btn = stringToHTML(`
-            <button id="joorney-pin-message-toggle" class="btn btn-link text-action px-1 d-flex align-items-center my-2" aria-label="Show pinned message">
+            <button id="joorney-pin-message-toggle" class="btn btn-link joorney-accent px-1 d-flex align-items-center my-2" aria-label="Show pinned message" title="Show pinned message">
                 <i class="fa fa-thumb-tack fa-lg me-1"></i>
                 <sup>${this.pins.length}</sup>
             </button>
@@ -200,7 +201,10 @@ export default class PinMessageContentFeature extends ContentFeature {
             <div class="joorney-pinned-mail-Thread position-relative flex-grow-1 d-flex flex-column overflow-auto pb-4">
                 <div class="d-flex align-items-center">
                     <hr class="flex-grow-1" />
-                    <span class="p-3 fw-bold"> Pinned Messages <span class="text-muted opacity-75">[Joorney]</span></span>
+                    <span class="p-3 fw-bold d-flex align-items-center gap-2">
+                        Pinned Messages
+                        <span class="joorney-badge">Joorney</span>
+                    </span>
                     <hr class="flex-grow-1" />
                 </div>
                 <div id="joorney-pinned-mail-list" class="px-3 d-flex flex-column position-relative flex-grow-1"></div>
@@ -237,7 +241,7 @@ export default class PinMessageContentFeature extends ContentFeature {
         if (warning) {
             messageContainer.appendChild(
                 stringToHTML(`
-                <span class="mt-2 position-sticky alert alert-warning d-flex cursor-pointer align-items-center py-2 m-0 px-4 top-0" role="button">
+                <span class="mt-3 position-sticky top-0 joorney-sim joorney-sim--copy bg-view d-flex align-items-center py-2 px-4" role="button">
                     <span class="small">${warning}</span>
                 </span>
             `)
