@@ -8,6 +8,9 @@
     "command_enableDisable": {
         "message": "Activer ou désactiver les fonctionnalités de l'extension sur l'origine actuelle"
     },
+    "badge_off": {
+        "message": "OFF"
+    },
     "language_title": {
         "message": "Langue"
     },
@@ -25,5 +28,161 @@
     },
     "language_hint": {
         "message": "Rechargez les onglets Odoo pour appliquer le changement. Le nom et la description de l'extension suivent toujours la langue du navigateur."
+    },
+    "common_default": {
+        "message": "Par défaut"
+    },
+    "popup_options": {
+        "message": "Options"
+    },
+    "popup_invalidWebsite": {
+        "message": "Ce site web n'est pas compatible avec l'extension Joorney"
+    },
+    "popup_featureTitle": {
+        "message": "[Fonctionnalité] $feature$",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Pin Message"
+            }
+        }
+    },
+    "popup_featureOriginTitle": {
+        "message": "[Fonctionnalité par origine] $feature$",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Pin Message"
+            }
+        }
+    },
+    "popup_originState": {
+        "message": "État de l'origine :"
+    },
+    "popup_saveOrigin": {
+        "message": "Enregistrer cette origine"
+    },
+    "popup_saveOriginConfiguration": {
+        "message": "Enregistrer la configuration de l'origine"
+    },
+    "popup_saveReload": {
+        "message": "Enregistrer et recharger"
+    },
+    "feature_adminDebugLoginRunbot_name": {
+        "message": "[Runbot] Connexion admin (debug)"
+    },
+    "feature_ambient_name": {
+        "message": "Ambiance"
+    },
+    "feature_assignMeTask_name": {
+        "message": "M'assigner"
+    },
+    "feature_autoOpenRunbot_name": {
+        "message": "[Runbot] Ouverture automatique"
+    },
+    "feature_awesomeLoadingLarge_name": {
+        "message": "Awesome Loading (grand)"
+    },
+    "feature_awesomeLoadingSmall_name": {
+        "message": "Awesome Loading (petit)"
+    },
+    "feature_awesomeStyle_name": {
+        "message": "Awesome Style"
+    },
+    "feature_contextOdooMenus_name": {
+        "message": "Menus Odoo contextuels"
+    },
+    "feature_followUnfollow_name": {
+        "message": "Suivre/Ne plus suivre"
+    },
+    "feature_impersonateLoginRunbot_name": {
+        "message": "[Runbot] Connexion en tant que"
+    },
+    "feature_newServerActionCode_name": {
+        "message": "Code des nouvelles actions serveur"
+    },
+    "feature_pinMessage_name": {
+        "message": "Épingler les messages"
+    },
+    "feature_saveKnowledge_name": {
+        "message": "Enregistrer Knowledge"
+    },
+    "feature_showMyBadge_name": {
+        "message": "Afficher mon badge"
+    },
+    "feature_starringPriorityEffect_name": {
+        "message": "Effet étoiles"
+    },
+    "feature_themeSwitch_name": {
+        "message": "Changement de thème"
+    },
+    "feature_tooltipMetadata_name": {
+        "message": "Métadonnées en infobulle"
+    },
+    "feature_unfocusApp_name": {
+        "message": "Applications en retrait"
+    },
+    "themeSwitch_mode_system": {
+        "message": "Système"
+    },
+    "themeSwitch_mode_dark": {
+        "message": "Mode sombre"
+    },
+    "themeSwitch_mode_light": {
+        "message": "Mode clair"
+    },
+    "themeSwitch_mode_location": {
+        "message": "Selon la localisation configurée (lever/coucher du soleil)"
+    },
+    "themeSwitch_mode_time": {
+        "message": "Mode sombre selon les heures configurées"
+    },
+    "unfocusApp_popup_reorder": {
+        "message": "Activer le tri des applications en retrait"
+    },
+    "unfocusApp_popup_share": {
+        "message": "Partager la configuration des applications en retrait entre les hôtes"
+    },
+    "pinMessage_popup_selfAuthor": {
+        "message": "Épingler uniquement les messages de l'utilisateur actuel ?"
+    },
+    "pinMessage_popup_defaultShown": {
+        "message": "Afficher la section des messages épinglés au chargement ?"
+    },
+    "contextMenu_openOptions": {
+        "message": "Ouvrir les options"
+    },
+    "contextMenu_clearCache": {
+        "message": "Vider le cache pour cet hôte"
+    },
+    "contextMenu_unknownItem": {
+        "message": "Élément inconnu"
+    },
+    "omnibox_openChromeWebStore": {
+        "message": "Ouvrir le Chrome Web Store"
+    },
+    "omnibox_openGithubRepository": {
+        "message": "Ouvrir le dépôt GitHub"
+    },
+    "omnibox_openGithubPage": {
+        "message": "Ouvrir la page GitHub"
+    },
+    "omnibox_disabled": {
+        "message": "L'ouverture d'un runbot depuis l'URL est désactivée. Activez « [Runbot] Ouverture automatique » dans les options !"
+    },
+    "omnibox_openInput": {
+        "message": "Ouvrir <match>%s</match> <dim>(si trouvé)</dim>"
+    },
+    "omnibox_openRunbotVersion": {
+        "message": "Ouvrir le runbot pour la version '$version$'",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "18.0"
+            }
+        }
+    },
+    "autoOpenRunbot_menu_openWithVersion": {
+        "message": "Ouvrir le runbot en version %version%"
     }
 }

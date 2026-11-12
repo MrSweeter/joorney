@@ -1,5 +1,6 @@
-import { updateWebsiteOff } from '../../src/api/local.js';
+import { getWebsiteOff, updateWebsiteOff } from '../../src/api/local.js';
 import { Action, Commands, Tabs } from '../../src/utils/browser.js';
+import { resolveLanguage, translate } from '../../src/utils/i18n.js';
 
 // Only use this function during the initial install phase. After
 // installation the user may have intentionally unassigned commands.
@@ -46,12 +47,14 @@ async function enableDisableTabExtension(tab, forceOff = undefined) {
     const tabId = tab.id;
     const origin = new URL(tab.url).origin;
 
-    let isOFF = (await Action.getBadgeText({ tabId: tabId })) === 'OFF';
+    // State from the persisted origins (also used by the content script on load), the badge text is translated
+    let isOFF = (await getWebsiteOff()).has(origin);
     if (forceOff) {
         isOFF = false;
     }
 
-    const badgeText = { tabId: tabId, text: isOFF ? '' : 'OFF' };
+    const lang = await resolveLanguage({ origin });
+    const badgeText = { tabId: tabId, text: isOFF ? '' : translate(lang, 'badge_off') };
 
     if (isOFF) {
         Action.enable(tabId);

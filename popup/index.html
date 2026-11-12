@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8" />
         <title>Joorney</title>
         <!-- Font Awesome -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
@@ -20,11 +21,11 @@
     <!-- width = p16 + (10 icons (m8+50+m8)) + settings (38) + p16 -->
     <body class="p-3 joorney-body-background" style="width: 730px;">
         <button id="popupIcon" class="btn btn-floating">
-            <i class="fa-solid fa-wrench" title="Options"></i>
+            <i class="fa-solid fa-wrench" data-i18n-title="popup_options" title="Options"></i>
         </button>
 
         <div id="joorney-invalid-website" class="d-flex p-5 justify-content-center align-items-center">
-            <h6 class="m-0">This website is not compatible with Joorney extension</h6>
+            <h6 class="m-0" data-i18n="popup_invalidWebsite">This website is not compatible with Joorney extension</h6>
         </div>
 
         <div id="joorney-popup-configuration" class="d-flex d-none row justify-content-center">
@@ -35,7 +36,7 @@
                     <label id="joorney-popup-feature-awesomeLoadingLarge-label" class="h6"></label>
                     <div class="col-12 d-flex align-items-center ">
                         <select class="ms-2 my-1 form-select" id="updateAwesomeLoadingLargeImage">
-                            <option value="" disabled selected>Default</option>
+                            <option value="" disabled selected data-i18n="common_default">Default</option>
                         </select>
                         <img id="awesomeLoadingLargeImagePreview" class="ms-2 joorney-awe-loading-preview" loading="lazy" src="https://i.imgur.com/zTauRWm.gif" />
                     </div>
@@ -44,7 +45,7 @@
                     <label id="joorney-popup-feature-awesomeLoadingSmall-label" class="h6"></label>
                     <div class="col-12 d-flex align-items-center ">
                         <select class="ms-2 my-1 form-select" id="updateAwesomeLoadingSmallImage">
-                            <option value="" disabled selected>Default</option>
+                            <option value="" disabled selected data-i18n="common_default">Default</option>
                         </select>
                         <img id="awesomeLoadingSmallImagePreview" class="ms-2 joorney-awe-loading-preview" loading="lazy" src="https://i.imgur.com/zTauRWm.gif" />
                     </div>
@@ -53,11 +54,11 @@
                     <label id="joorney-popup-feature-themeSwitch-label" class="h6"></label>
                     <div class="col-12 d-flex align-items-center ">
                         <select id="joorney_theme_switch_mode_switcher" class="ms-2 my-1 form-select">
-                            <option value="system" selected>System</option>
-                            <option value="autoDark" selected>Dark mode</option>
-                            <option value="autoLight" selected>Light Mode</option>
-                            <option value="dynamicLocation" selected>Based on configured location (sunrise/sunset)</option>
-                            <option value="dynamicTime" selected>Dark mode based on configured time</option>
+                            <option value="system" selected data-i18n="themeSwitch_mode_system">System</option>
+                            <option value="autoDark" selected data-i18n="themeSwitch_mode_dark">Dark mode</option>
+                            <option value="autoLight" selected data-i18n="themeSwitch_mode_light">Light Mode</option>
+                            <option value="dynamicLocation" selected data-i18n="themeSwitch_mode_location">Based on configured location (sunrise/sunset)</option>
+                            <option value="dynamicTime" selected data-i18n="themeSwitch_mode_time">Dark mode based on configured time</option>
                         </select>
                     </div>
                 </div>
@@ -65,11 +66,11 @@
                     <div data-feature-customization="unfocusApp" class="d-none col-6">
                         <label id="joorney-popup-feature-unfocusApp-label" class="h6"></label>
                         <div class="col-12 d-flex align-items-center ">
-                            <label id="joorney_unfocus_app_order_switcher" class="ua-switch text-center me-2" title="Enable unfocus app reorder">
+                            <label id="joorney_unfocus_app_order_switcher" class="ua-switch text-center me-2" data-i18n-title="unfocusApp_popup_reorder" title="Enable unfocus app reorder">
                                 <input id="joorney_unfocus_app_order_input" type="checkbox" />
                                 <i class="ua-slider ua-round ua-order"></i>
                             </label>
-                            <label id="joorney_unfocus_app_share_switcher" class="ua-switch text-center" title="Enable unfocus app configuration share between host">
+                            <label id="joorney_unfocus_app_share_switcher" class="ua-switch text-center" data-i18n-title="unfocusApp_popup_share" title="Enable unfocus app configuration share between host">
                                 <input id="joorney_unfocus_app_share_input" type="checkbox" />
                                 <i class="ua-slider ua-round ua-share"></i>
                             </label>
@@ -79,11 +80,11 @@
                     <div data-feature-customization="pinMessage" class="d-none col-6">
                         <label id="joorney-popup-feature-pinMessage-label" class="h6"></label>
                         <div class="col-12 d-flex align-items-center ">
-                            <label id="joorney_pin_message_self_author_switcher" class="pm-switch text-center me-2" title="Manage pin for current user messages only?">
+                            <label id="joorney_pin_message_self_author_switcher" class="pm-switch text-center me-2" data-i18n-title="pinMessage_popup_selfAuthor" title="Manage pin for current user messages only?">
                                 <input id="joorney_pin_message_self_author_input" type="checkbox" />
                                 <i class="pm-slider pm-round pm-author"></i>
                             </label>
-                            <label id="joorney_pin_message_default_shown_switcher" class="pm-switch text-center me-2" title="Show pinned message section on load?">
+                            <label id="joorney_pin_message_default_shown_switcher" class="pm-switch text-center me-2" data-i18n-title="pinMessage_popup_defaultShown" title="Show pinned message section on load?">
                                 <input id="joorney_pin_message_default_shown_input" type="checkbox" />
                                 <i class="pm-slider pm-round pm-shown"></i>
                             </label>
@@ -96,15 +97,15 @@
 
             <div class="col-12">
                 <div class="d-flex align-items-center">
-                    <p class="m-0 text-muted small" style="flex: 1; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">Origin state for: <span id="currentTabUrl"></span></p>
-                    <button title="Save this origin" id="saveOriginButton" disabled class="float-end ms-2 btn btn-success btn-sm">Save this origin</button>
+                    <p class="m-0 text-muted small" style="flex: 1; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;"><span data-i18n="popup_originState">Origin state for:</span> <span id="currentTabUrl"></span></p>
+                    <button title="Save this origin" data-i18n-title="popup_saveOrigin" data-i18n="popup_saveOrigin" id="saveOriginButton" disabled class="float-end ms-2 btn btn-success btn-sm">Save this origin</button>
                 </div>
                 <div id="tabFeaturesList" class="mt-1">
                     <div id="tabFeaturesContainer" style="flex: 1;">
                         <!-- DYNAMIC CONTENT -->
                     </div>
 
-                    <button title="Save Origin configuration button" id="saveButton" disabled class="float-end ms-2 btn btn-success btn-sm">Save & Reload</button>
+                    <button title="Save Origin configuration button" data-i18n-title="popup_saveOriginConfiguration" data-i18n="popup_saveReload" id="saveButton" disabled class="float-end ms-2 btn btn-success btn-sm">Save & Reload</button>
                 </div>
             </div>
         </div>

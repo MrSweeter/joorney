@@ -1,6 +1,7 @@
 import { getRunbotOpenUrl } from '../../src/shared/limited/runbot_content.js';
 import { OmniBox, Runtime, StorageSync, Tabs } from '../../src/utils/browser.js';
 import { SUPPORTED_VERSION } from '../../src/utils/constant.js';
+import { resolveLanguage, translate } from '../../src/utils/i18n.js';
 
 // Must be called synchronously at service worker startup, MV3 only dispatches the waking event to those listeners
 export function initOmni() {
@@ -21,37 +22,37 @@ const STATIC_LINK = {
     CHROMEWEBSTORE: {
         suggestionStart: ['chrome', 'store'],
         keyword: 'chromewebstore',
-        description: 'Open Chrome Web Store',
+        descriptionKey: 'omnibox_openChromeWebStore',
         url: `https://chromewebstore.google.com/detail/${Runtime.id}`,
     },
     GITHUB: {
         suggestionStart: ['git'],
         keyword: 'githubrepository',
-        description: 'Open GitHub repository',
+        descriptionKey: 'omnibox_openGithubRepository',
         url: 'https://github.com/MrSweeter/joorney',
     },
     WEBSITE: {
         suggestionStart: ['web'],
         keyword: 'websitepage',
-        description: 'Open Github Page',
+        descriptionKey: 'omnibox_openGithubPage',
         url: 'https://mrsweeter.github.io/joorney/?style=odoo',
     },
 };
 
+// Omnibox isn't bound to an Odoo page: 'odoo' language mode falls back to the system language
 async function onStarted() {
+    const lang = await resolveLanguage();
     if (!(await isOmniboxEnabled())) {
-        await OmniBox.setDefaultSuggestion({
-            description:
-                'The functionality to open a runbot from URL is currently disabled. Open options to enabled "Auto Open Runbot"!',
-        });
+        await OmniBox.setDefaultSuggestion({ description: translate(lang, 'omnibox_disabled') });
     } else {
-        await OmniBox.setDefaultSuggestion({ description: 'Open <match>%s</match> <dim>(if found)</dim>' });
+        // XML description: %s is the user input, <match>/<dim> are omnibox markup
+        await OmniBox.setDefaultSuggestion({ description: translate(lang, 'omnibox_openInput') });
     }
 }
 
 async function onChange(text, suggest) {
     if (!(await isOmniboxEnabled())) return;
-    const suggestions = getSuggestions(text);
+    const suggestions = getSuggestions(text, await resolveLanguage());
     suggest(suggestions);
 }
 
@@ -76,10 +77,10 @@ async function openURL(url) {
     }
 }
 
-function getSuggestions(keyword) {
+function getSuggestions(keyword, lang) {
     for (const link of Object.values(STATIC_LINK)) {
         if (link.suggestionStart?.some((start) => keyword.startsWith(start))) {
-            return [{ content: link.keyword, description: link.description }];
+            return [{ content: link.keyword, description: translate(lang, link.descriptionKey) }];
         }
     }
 
@@ -90,11 +91,11 @@ function getSuggestions(keyword) {
         .filter((v) => v.keyword.startsWith(keyword))
         .map((version) => ({
             content: version.keyword,
-            description: `Open Runbot for version '${version.value}'`,
+            description: translate(lang, 'omnibox_openRunbotVersion', version.value),
         }));
     suggestions.push({
         content: 'rb:master',
-        description: `Open Runbot for version 'master'`,
+        description: translate(lang, 'omnibox_openRunbotVersion', 'master'),
     });
     return suggestions;
 }
