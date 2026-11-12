@@ -260,8 +260,16 @@
         }
     },
     "common_jump": {
-        "message": "Jump",
-        "description": "Button on a simulated Odoo chatter message, jumps to the original message"
+        "message": "Jump to message",
+        "description": "Tooltip of the icon button on a pinned message copy, jumps to the original message"
+    },
+    "common_simulatedBadge": {
+        "message": "Joorney",
+        "description": "Badge on UI simulated or copied by Joorney inside Odoo, keep it short (brand name)"
+    },
+    "common_injectedButtonTitle": {
+        "message": "Not standard Odoo: provided by the Joorney extension",
+        "description": "Tooltip line added to every button injected by Joorney inside Odoo"
     },
     "toast_limitReached": {
         "message": "You have reached the notification limit ($max$). Notification logged to console.",
@@ -304,6 +312,10 @@
     "saveKnowledge_buttonLabel": {
         "message": "Save",
         "description": "Button added on Odoo Knowledge articles"
+    },
+    "saveKnowledge_buttonTitle": {
+        "message": "Save the article content",
+        "description": "Tooltip of the Save button added on Odoo Knowledge articles"
     },
     "saveKnowledge_error_title": {
         "message": "An error occurred during article save",

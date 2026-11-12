@@ -126,16 +126,39 @@ export default class TooltipMetadataContentFeature extends ContentFeature {
                         box-shadow: 0 0.125rem 0.25rem rgba(252, 163, 17, 0.075);
                         transform: translateX(-90%);
                     }
-                    #joorney-tooltip-metadata th, #joorney-tooltip-metadata td {
-                        padding-right: 50px;
-                    }
-                    #joorney-tooltip-metadata th:first-child {
-                        width: 1%;
-                        white-space: nowrap;
-                    }
-
-                    #joorney-tooltip-metadata td:last-child {
+                    #joorney-tooltip-metadata table {
+                        border-collapse: collapse;
+                        margin: 0;
+                        max-width: 600px;
                         width: 100%;
+                        font-size: inherit;
+                        color: inherit;
+                        background: transparent;
+                    }
+                    #joorney-tooltip-metadata th, #joorney-tooltip-metadata td {
+                        padding: 4px 8px;
+                        vertical-align: top;
+                        text-align: start;
+                        color: inherit;
+                        background: transparent;
+                        border: none;
+                        border-bottom: 1px solid rgba(252, 163, 17, 0.15);
+                    }
+                    #joorney-tooltip-metadata th {
+                        font-weight: 600;
+                        white-space: nowrap;
+                        width: 1%;
+                        padding-right: 24px;
+                    }
+                    #joorney-tooltip-metadata td {
+                        width: 100%;
+                        word-break: break-word;
+                    }
+                    #joorney-tooltip-metadata tr:nth-child(even) {
+                        background: rgba(127, 127, 127, 0.06);
+                    }
+                    #joorney-tooltip-metadata tr:last-child > * {
+                        border-bottom: none;
                     }
                     .o_debug_manager:hover:not(:has(.dropdown.show)) #joorney-tooltip-metadata {
                         display: flex;
@@ -144,7 +167,7 @@ export default class TooltipMetadataContentFeature extends ContentFeature {
                         border-color: rgba(252, 163, 17, 1) !important
                     }
                 </style>
-                <table class="table table-sm table-striped" style="max-width: 600px; width: 100%">
+                <table>
                     ${rows.join('\n')}
                 </table>
             </div>
