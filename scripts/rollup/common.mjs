@@ -9,8 +9,19 @@ import featureRegistry from './feature_registry.js';
 const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const isProd = () => process.env.NODE_ENV === 'production';
 
+// Import .css files from JS as a string, for styles injected in Odoo pages with a <style>
+function cssText() {
+    return {
+        name: 'css-text',
+        transform(code, id) {
+            if (!id.endsWith('.css')) return null;
+            return { code: `export default ${JSON.stringify(code)};`, map: { mappings: '' } };
+        },
+    };
+}
+
 export function getDefaultPlugins() {
-    return [featureRegistry({ rootDir: ROOT_DIR }), resolve(), json()];
+    return [featureRegistry({ rootDir: ROOT_DIR }), resolve(), json(), cssText()];
 }
 
 export function getESMOutput(file) {
