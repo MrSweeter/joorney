@@ -1,0 +1,145 @@
+.joorney-sim,
+.joorney-action-btn,
+.joorney-sim-mark,
+.joorney-badge,
+.joorney-accent {
+    --joorney-orange: #fca311;
+    --joorney-sim-rgb: 252, 163, 17;
+    --joorney-ink: #13213c;
+}
+
+.joorney-sim {
+    position: relative;
+    border: 2px dashed rgb(var(--joorney-sim-rgb));
+    border-radius: 6px;
+    background-image: repeating-linear-gradient(
+        -45deg,
+        rgba(var(--joorney-sim-rgb), 0.16) 0 6px,
+        transparent 6px 12px
+    );
+}
+.joorney-sim.joorney-sim--error {
+    --joorney-sim-rgb: 230, 57, 70;
+    --joorney-ink: #fff;
+}
+.joorney-sim.joorney-sim--copy {
+    background-image: none;
+    background-color: rgba(var(--joorney-sim-rgb), 0.06);
+}
+.joorney-sim[data-joorney-badge]::after {
+    content: attr(data-joorney-badge);
+    position: absolute;
+    top: -0.75em;
+    right: 10px;
+    padding: 0 6px;
+    border-radius: 999px;
+    background-color: rgb(var(--joorney-sim-rgb));
+    color: var(--joorney-ink);
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.joorney-sim-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    min-width: 14px;
+    height: 14px;
+    padding: 0 3px;
+    border-radius: 999px;
+    background-color: var(--joorney-orange);
+    color: var(--joorney-ink);
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.joorney-badge {
+    display: inline-block;
+    padding: 0 8px;
+    border-radius: 999px;
+    background-color: var(--joorney-orange);
+    color: var(--joorney-ink);
+    font-size: 0.7em;
+    font-weight: 700;
+    line-height: 1.6;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    vertical-align: middle;
+}
+.joorney-accent,
+.btn.joorney-accent,
+.btn.joorney-accent:hover {
+    color: var(--joorney-orange);
+}
+
+.joorney-sim-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    max-width: 100%;
+    padding: 0 6px 0 2px;
+    border-radius: 999px;
+    vertical-align: middle;
+}
+.joorney-sim-inline img {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Frame around Odoo message markup: the content keeps the real chatter design, the frame says Joorney */
+.joorney-sim-frame {
+    margin: 12px 8px 4px;
+    padding: 4px 0;
+}
+
+/* Odoo button shape (.btn / .btn-sm), Joorney colors */
+.btn.joorney-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border: 1px dashed var(--joorney-orange);
+    background-color: rgba(252, 163, 17, 0.15);
+    color: inherit;
+}
+.btn.joorney-action-btn:hover:not(:disabled),
+.btn.joorney-action-btn:focus-visible {
+    border-style: solid;
+    background-color: rgba(252, 163, 17, 0.35);
+    color: inherit;
+}
+.btn.joorney-action-btn > .fa,
+.btn.joorney-action-btn > .oi {
+    color: var(--joorney-orange);
+}
+/* Icon button inside the Odoo many2one row, aligned like its own external button */
+.btn.joorney-action-btn.joorney-action-icon {
+    align-self: center;
+    flex-shrink: 0;
+    padding: 4px 8px;
+}
+
+.joorney-flash {
+    animation: joorney-flash 1s ease-out;
+}
+@keyframes joorney-flash {
+    from {
+        outline: 3px dashed rgba(252, 163, 17, 1);
+        outline-offset: 2px;
+        background-color: rgba(252, 163, 17, 0.25);
+    }
+    to {
+        outline: 3px dashed rgba(252, 163, 17, 0);
+        outline-offset: 2px;
+        background-color: rgba(252, 163, 17, 0);
+    }
+}

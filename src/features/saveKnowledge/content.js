@@ -1,6 +1,6 @@
 import { writeRecord } from '../../api/odoo.js';
 import ContentFeature from '../../generic/content.js';
-import { escapeHTML } from '../../html_generator.js';
+import { generateActionButton } from '../../html_generator.js';
 import { ToastManager } from '../../toast/index.js';
 import { isStillSamePage } from '../../utils/authorize.js';
 import { t } from '../../utils/i18n.js';
@@ -86,14 +86,12 @@ export default class SaveKnowledgeContentFeature extends ContentFeature {
     }
 
     appendSaveButtonToDom(article) {
-        const buttonTemplate = document.createElement('template');
-        buttonTemplate.innerHTML = `
-            <button class="btn btn-warning" name="joorney_action_save_article" type="object">
-                <span>${escapeHTML(t('saveKnowledge_buttonLabel'))}</span>
-            </button>
-        `.trim();
-
-        const saveButton = buttonTemplate.content.firstChild;
+        const saveButton = generateActionButton({
+            name: 'joorney_action_save_article',
+            label: t('saveKnowledge_buttonLabel'),
+            title: t('saveKnowledge_buttonTitle'),
+            icon: { fa: 'fa-floppy-o', oi: 'save' },
+        });
         this.updateSaveEvent(saveButton, article);
 
         let statusBarButtons = document.getElementsByClassName('o_knowledge_add_buttons')[0];
