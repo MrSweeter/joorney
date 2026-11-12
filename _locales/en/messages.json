@@ -1,0 +1,72 @@
+{
+    "ext_name": {
+        "message": "%EXT_NAME%",
+        "description": "Extension name (manifest), %EXT_NAME% is replaced at build time (dev/prod). Max 75 characters"
+    },
+    "ext_description": {
+        "message": "Improve your Odoo Journey! Makes your Odoo experience more enjoyable and productive by adding some cool features and effects.",
+        "description": "Extension description (manifest, Chrome Web Store). Max 132 characters"
+    },
+    "command_enableDisable": {
+        "message": "Enable or Disable extension features on the current origin",
+        "description": "Keyboard shortcut description (chrome://extensions/shortcuts)"
+    },
+    "language_title": {
+        "message": "Language",
+        "description": "Preferences page: Language card title"
+    },
+    "language_description": {
+        "message": "Language of the texts added by Joorney: popup, options, buttons and notifications in Odoo, right-click menu and address bar suggestions.",
+        "description": "Preferences page: Language card description"
+    },
+    "language_mode_system": {
+        "message": "Use system (browser language)",
+        "description": "Language mode option: follow the browser language"
+    },
+    "language_mode_odoo": {
+        "message": "Use Odoo (user language)",
+        "description": "Language mode option: follow the language of the Odoo user"
+    },
+    "language_mode_static": {
+        "message": "Choose a language",
+        "description": "Language mode option: always use the language picked in the next select"
+    },
+    "language_mode_system_help": {
+        "message": "Follows the display language of your browser.",
+        "description": "Preferences page: explanation of the \"Use system\" language mode"
+    },
+    "language_mode_odoo_help": {
+        "message": "Follows the language of the Odoo user on each database.",
+        "description": "Preferences page: explanation of the \"Use Odoo\" language mode"
+    },
+    "language_mode_static_help": {
+        "message": "Always uses the language selected here, whatever the browser or Odoo language.",
+        "description": "Preferences page: explanation of the \"Choose a language\" mode"
+    },
+    "language_current": {
+        "message": "Current language: $language$",
+        "description": "Preferences page: language currently used by the options page",
+        "placeholders": {
+            "language": {
+                "content": "$1",
+                "example": "Français"
+            }
+        }
+    },
+    "language_mode_odoo_outside": {
+        "message": "Outside Odoo pages (options, address bar, a database not opened yet): the browser language.",
+        "description": "Preferences page: \"Use Odoo\" mode note, language used where no Odoo user is known"
+    },
+    "language_hint_reload": {
+        "message": "Reload any open Odoo tabs to apply the change.",
+        "description": "Preferences page: language note"
+    },
+    "language_hint_fallback": {
+        "message": "Unsupported languages fall back to English.",
+        "description": "Preferences page: language note"
+    },
+    "language_hint_chrome": {
+        "message": "In Chrome, the extension name and description follow the browser language.",
+        "description": "Preferences page: language note (chrome://extensions, Web Store)"
+    }
+}

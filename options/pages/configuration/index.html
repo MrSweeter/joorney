@@ -6,6 +6,37 @@
 <link href="./css/configuration/unfocus_app.css" rel="stylesheet">
 
 <div class="row pt-1 pb-0 p-5 mx-0 text-center">
+    <!--#region Language -->
+    <div id="joorney_language_card">
+        <h4 class="text-start mt-3 d-flex align-items-center gap-2">
+            <span data-i18n="language_title">Language</span>
+            <span id="joorney_language_current" class="badge badge-secondary" style="font-size: 0.55em"></span>
+        </h4>
+        <p class="text-start mb-2" data-i18n="language_description">
+            Language of the texts added by Joorney: popup, options, buttons and notifications in Odoo, right-click menu and address bar suggestions.
+        </p>
+        <div class="d-flex flex-wrap gap-2 align-items-center">
+            <select id="joorney_language_mode" class="form-select w-auto">
+                <option value="system" data-i18n="language_mode_system">Use system (browser language)</option>
+                <option value="odoo" data-i18n="language_mode_odoo">Use Odoo (user language)</option>
+                <option value="static" data-i18n="language_mode_static">Choose a language</option>
+            </select>
+            <select id="joorney_language_static" class="form-select w-auto d-none"></select>
+        </div>
+        <div class="small text-start text-muted mt-2">
+            <span class="d-none" data-language-help="system" data-i18n="language_mode_system_help">Follows the display language of your browser.</span>
+            <span class="d-none" data-language-help="odoo" data-i18n="language_mode_odoo_help">Follows the language of the Odoo user on each database.</span>
+            <span class="d-none" data-language-help="static" data-i18n="language_mode_static_help">Always uses the language selected here, whatever the browser or Odoo language.</span>
+            <ul class="mb-0 mt-1 ps-3">
+                <li class="d-none" data-language-help="odoo" data-i18n="language_mode_odoo_outside">Outside Odoo pages (options, address bar, a database not opened yet): the browser language.</li>
+                <li data-i18n="language_hint_reload">Reload any open Odoo tabs to apply the change.</li>
+                <li data-i18n="language_hint_fallback">Unsupported languages fall back to English.</li>
+                <li data-i18n="language_hint_chrome">In Chrome, the extension name and description follow the browser language.</li>
+            </ul>
+        </div>
+    </div>
+    <!--#endregion-->
+
     <!--#region Awesome Loading -->
     <div data-feature-customization="awesomeLoading" class="d-none">
         <h4 class="text-start mt-3 feature-collapse-toggle">
