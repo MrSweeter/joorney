@@ -1,4 +1,5 @@
 import JoorneyStyle from './html_generator.css';
+import { featureName, t } from './utils/i18n.js';
 import { iconHTML } from './utils/icons.js';
 
 //#region Joorney injected style
@@ -77,13 +78,13 @@ export function stringToHTML(str) {
 export function generateLimitedFeatureOptionButtonItem(feature) {
     return stringToHTML(`
 		<label
-			title="[Limited Feature] ${feature.display_name ?? feature.id}"
+			title="[Limited Feature] ${escapeHTML(featureName(feature))}"
 			for="joorney_${feature.id}_limited_feature"
 		>
 			<input id="joorney_${feature.id}_limited_feature" class="input-hide" type="checkbox" />
 			<div class="limited-feature-wrapper d-flex">
 				<i class="joorney-icon joorney-font-icon-size me-2" aria-hidden="true"></i>
-				<p>${feature.display_name ?? feature.id}</p>
+				<p>${escapeHTML(featureName(feature))}</p>
 			</div>
 		</label>
 	`);
@@ -93,7 +94,7 @@ export function generateFeatureOptionListItem(feature) {
     return stringToHTML(`
 		<label
 			id="joorney_${feature.id}_feature"
-			title="[Feature] ${feature.display_name ?? feature.id}"
+			title="[Feature] ${escapeHTML(featureName(feature))}"
 			data-feature="${feature.id}"
 			class="draggable-feature" draggable="true"
 		>
@@ -101,7 +102,7 @@ export function generateFeatureOptionListItem(feature) {
 				<div class="icon-wrapper pe-1">
 					${iconHTML(feature.icon, { filled: true })}
 				</div>
-				<p>${feature.display_name ?? feature.id}</p>
+				<p>${escapeHTML(featureName(feature))}</p>
 			</div>
 		</label>
 	`);
@@ -109,7 +110,7 @@ export function generateFeatureOptionListItem(feature) {
 
 export function generateFeatureOptionTableHeadItem(feature) {
     return stringToHTML(`
-		<th title="[Feature Origin] ${feature.display_name ?? feature.id}" class="icon-wrapper-head">
+		<th title="[Feature Origin] ${escapeHTML(featureName(feature))}" class="icon-wrapper-head">
 			<div class="icon-wrapper" id="joorney_origins_filter_feature_header_${feature.id}">
 				${iconHTML(feature.icon, { filled: true })}
 			</div>
@@ -120,7 +121,7 @@ export function generateFeatureOptionTableHeadItem(feature) {
 export function generateFeaturePopupToggleItem(feature) {
     return stringToHTML(`
 		<label
-			title="[Feature] ${feature.display_name ?? feature.id}"
+			title="${escapeHTML(t('popup_featureTitle', featureName(feature)))}"
 			for="${feature.id}Feature"
 			class="m-2 d-flex justify-content-center align-items-center"
 		>
@@ -135,7 +136,7 @@ export function generateFeaturePopupToggleItem(feature) {
 export function generateTabFeaturePopupToggleItem(feature) {
     return stringToHTML(`
 		<label
-			title="[Feature Origin] ${feature.display_name ?? feature.id}"
+			title="${escapeHTML(t('popup_featureOriginTitle', featureName(feature)))}"
 			for="${feature.id}FeatureTab"
 			class=""
 		>
