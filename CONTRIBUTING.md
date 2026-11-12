@@ -17,6 +17,7 @@ Thank you for considering contributing to this project! Below is a guide on how 
 2. **Install Dependencies**:
    `npm install`
 3. **Make Your Changes**: Implement the desired modifications.
+    - User-facing text goes in `_locales/<lang>/messages.json` (every language) and is read with `t('key')` from `src/utils/i18n.js`, or `data-i18n*` attributes + `applyI18n()` in HTML. Check the keys with `npm run i18n-check`.
 4. **Build for Development/Testing**:
    `npm run dev`
 5. **Update** the `CONTRIBUTORS.md` file to add your name.
