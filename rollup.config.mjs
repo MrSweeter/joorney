@@ -7,7 +7,18 @@ import copy from 'rollup-plugin-copy';
 import watchAssets from 'rollup-plugin-watch-assets';
 import { SUPPORTED_VERSION } from './src/utils/constant.js';
 
-const defaultPlugins = [resolve(), json(), dynamicImportVars({ exclude: ['features_state.json'] })];
+// Import .css files from JS as a string, for styles injected in Odoo pages with a <style>
+function cssText() {
+    return {
+        name: 'css-text',
+        transform(code, id) {
+            if (!id.endsWith('.css')) return null;
+            return { code: `export default ${JSON.stringify(code)};`, map: { mappings: '' } };
+        },
+    };
+}
+
+const defaultPlugins = [resolve(), json(), cssText(), dynamicImportVars({ exclude: ['features_state.json'] })];
 // Only for configs copying options assets (watch mode)
 const optionsWatchAssets = watchAssets({ assets: ['options/**/*.css', 'options/**/*.html'] });
 function getESMOutput(file) {
