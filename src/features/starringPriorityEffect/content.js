@@ -66,7 +66,14 @@ export default class StarringPriorityEffectContentFeature extends ContentFeature
         }
     }
 
+    unload() {
+        super.unload();
+        // Listeners are bound per instance: the next instance can't remove them
+        this.preloadFeature();
+    }
+
     addStarsGenerator(event) {
+        if (this.unloadIfOrphaned()) return;
         const element = event.target;
         const parent = element.closest('.o_priority');
         const currentPriority = Number.parseInt(parent.dataset.joorneyPriorityValue ?? 0);
@@ -75,6 +82,7 @@ export default class StarringPriorityEffectContentFeature extends ContentFeature
     }
 
     generateStars(event) {
+        if (this.unloadIfOrphaned()) return;
         const element = event.target;
         const rect = element.getBoundingClientRect();
         const sizeX = rect.right - rect.left;
