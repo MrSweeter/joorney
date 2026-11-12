@@ -1,6 +1,12 @@
 import { writeRecord } from '../../api/odoo.js';
 import { getSessionData, SessionKey } from '../../api/session.js';
-import { generateTrackingMessage, generateUserAvatarTag, stringToHTML } from '../../html_generator.js';
+import {
+    generateActionButton,
+    generateActionIconButton,
+    generateSimulatedValue,
+    generateTrackingMessage,
+    generateUserAvatarTag,
+} from '../../html_generator.js';
 import RecordFormContentFeature from '../../shared/projectTaskShare/content.js';
 import { ToastManager } from '../../toast/index.js';
 import { isStillSamePage } from '../../utils/authorize.js';
@@ -13,8 +19,9 @@ const ASSIGN_TYPE = Object.freeze({
     RELOAD: 'reload',
     REDIRECT: 'redirect',
 });
-const fakeDataTitle = `This element is not part of the original application; it was added artificially by Joorney.
-If unsure, please reload the page!`;
+// Cleanup key of every simulated node, see removeUserInUI
+const SIMULATED_CLASS = 'joorney-simulated-ui-assignme';
+const BUTTON_NAME = 'joorney_action_assign_to_me';
 
 export default class AssignMeTaskContentFeature extends RecordFormContentFeature {
     constructor() {
@@ -27,6 +34,7 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
             //     extra_fields: field names to fetch with record
             //     input_selector: HTML Query Selector,
             //     button_parent_selector: HTML Query Selector,
+            //         inside the form statusbar: labelled button, elsewhere: icon button next to the input
             // }
             'project.task': {
                 list: true,
@@ -56,7 +64,7 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
     }
 
     preloadFeature() {
-        const exist = document.getElementsByName('joorney_action_assign_to_me');
+        const exist = document.getElementsByName(BUTTON_NAME);
         for (const e of exist) e.disabled = true;
         this.removeUserInUI();
     }
@@ -81,7 +89,7 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
         const userField = this.getUserField(record);
         const userAssigned = this.activeModel.list ? userField.includes(user) : userField === user;
 
-        const exist = Array.from(document.getElementsByName('joorney_action_assign_to_me'));
+        const exist = Array.from(document.getElementsByName(BUTTON_NAME));
         // Avoid adding button if already added, remove it if user already assigned
         if (exist.length > 0) {
             for (const e of exist) {
@@ -111,19 +119,25 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
         const buttonContainer = await waitForElement(this.activeModel.button_parent_selector);
         if (!buttonContainer || this._unloaded) return;
         if (!(await isStillSamePage(0, url))) return;
-        if (document.getElementsByName('joorney_action_assign_to_me').length > 0) return;
+        if (document.getElementsByName(BUTTON_NAME).length > 0) return;
 
-        const buttonTemplate = document.createElement('template');
-        buttonTemplate.innerHTML = `
-            <button class="btn btn-warning" name="joorney_action_assign_to_me" type="object" title="Page will be reloaded, use wheel click to open in another tab">
-                <span>Assign to me</span>
-            </button>
-        `.trim();
-
-        const assignButton = buttonTemplate.content.firstChild;
+        const buttonProps = {
+            name: BUTTON_NAME,
+            label: 'Assign to me',
+            title: 'Page will be reloaded, use wheel click to open in another tab',
+            icon: { fa: 'fa-user-plus', oi: 'person_add' },
+        };
+        const inHeader = buttonContainer.closest('.o_form_statusbar') !== null;
+        if (inHeader) {
+            const assignButton = generateActionButton(buttonProps);
+            this.updateAssignMeEvent(assignButton);
+            buttonContainer.appendChild(assignButton);
+            return;
+        }
+        const assignButton = generateActionIconButton(buttonProps);
         this.updateAssignMeEvent(assignButton);
-
-        buttonContainer.appendChild(assignButton);
+        const inputRow = buttonContainer.querySelector('.o_field_many2one_selection') ?? buttonContainer;
+        inputRow.appendChild(assignButton);
     }
 
     hasConcurrentAssignment(record) {
@@ -151,7 +165,7 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
             if (response) {
                 switch (callback) {
                     case ASSIGN_TYPE.RELOAD: {
-                        for (const e of document.querySelectorAll('[name="joorney_action_assign_to_me"]')) e.remove();
+                        for (const e of Array.from(document.getElementsByName(BUTTON_NAME))) e.remove();
                         const { useSimulatedUI } = await StorageSync.get({ useSimulatedUI: false });
                         if (useSimulatedUI) this.addUserInUI(!this.hasConcurrentAssignment(record));
                         else window.location.reload();
@@ -180,17 +194,20 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
         // Fake chat message
         const chatParent = document.querySelector('.o-mail-Chatter-content .o-mail-Thread')?.firstChild;
         if (!chatParent) return false;
-        const previousElement = chatParent.querySelector('.o-mail-Message, .o-mail-DateSection');
-        if (!previousElement) return false;
-        const messageElement = generateTrackingMessage(
-            userName,
-            userName,
-            this.activeModel.label,
-            avatarSrc,
-            new Date(),
-            isWarning
+        // Simulated messages reuse Odoo message markup inside their frame: skip them
+        const previousElement = Array.from(chatParent.querySelectorAll('.o-mail-Message, .o-mail-DateSection')).find(
+            (e) => !e.closest(`.${SIMULATED_CLASS}`)
         );
-        messageElement.title = fakeDataTitle;
+        if (!previousElement) return false;
+        const messageElement = generateTrackingMessage({
+            authorName: userName,
+            newValue: userName,
+            fieldName: this.activeModel.label,
+            avatarSrc,
+            date: new Date(),
+            isWarning,
+            extraClass: SIMULATED_CLASS,
+        });
 
         this.addUserTag(userName, avatarSrc);
         previousElement.before(messageElement);
@@ -216,10 +233,7 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
     addDateTag(date) {
         const fieldElement = document.getElementsByName(this.activeModel.date_field)?.[0];
         if (!fieldElement) return false;
-        const dateElement = stringToHTML(`<span class="joorney-simulated-ui-assignme">${date}</span>`);
-        dateElement.title = fakeDataTitle;
-        dateElement.classList.add('rounded', 'border', 'px-1');
-        dateElement.style.backgroundColor = 'rgba(255, 204, 0, 0.25)';
+        const dateElement = generateSimulatedValue(date, SIMULATED_CLASS);
 
         for (const child of fieldElement.children) this.hideForSimulation(child);
         fieldElement.append(dateElement);
@@ -234,8 +248,7 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
             fieldElement.querySelector(this.activeModel.input_selector) ??
             (this.activeModel.list ? null : fieldElement);
         if (!containerElement) return false;
-        const tagElement = generateUserAvatarTag(username, avatarSrc);
-        tagElement.title = fakeDataTitle;
+        const tagElement = generateUserAvatarTag(username, avatarSrc, SIMULATED_CLASS);
 
         if (!this.activeModel.list) {
             for (const child of containerElement.children) this.hideForSimulation(child);
@@ -247,7 +260,7 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
     }
 
     removeUserInUI() {
-        for (const element of document.querySelectorAll('.joorney-simulated-ui-assignme')) {
+        for (const element of document.querySelectorAll(`.${SIMULATED_CLASS}`)) {
             element.remove();
         }
         for (const element of document.querySelectorAll(`[${SIMULATED_HIDDEN_ATTR}]`)) {
