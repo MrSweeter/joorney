@@ -169,11 +169,7 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
             document.querySelector('.o_user_avatar, .oe_topbar_avatar')?.src ??
             document.querySelector('.o_user_menu img')?.src;
         if (!avatarSrc || avatarSrc.length <= 0) return false;
-        const userName = document
-            .querySelector(
-                '.o_user_avatar ~ .oe_topbar_name, .oe_topbar_avatar ~ .oe_topbar_name, .o_user_menu .oe_topbar_name'
-            )
-            ?.textContent?.trim();
+        const userName = getSessionData(SessionKey.NAME) || this.getTopbarUserName();
         if (!userName || userName.length <= 0) return false;
 
         // Fake chat message
@@ -198,6 +194,18 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
         if (this.activeModel.date_field) this.addDateTag(new Date().toLocaleDateString());
 
         return true;
+    }
+
+    getTopbarUserName() {
+        const topbarName = document.querySelector(
+            '.o_user_avatar ~ .oe_topbar_name, .oe_topbar_avatar ~ .oe_topbar_name, .o_user_menu .oe_topbar_name'
+        );
+        // [ODOO] 17.0+ .oe_topbar_name also holds <mark>db name</mark>: keep its own text only
+        return Array.from(topbarName?.childNodes ?? [])
+            .filter((n) => n.nodeType === Node.TEXT_NODE)
+            .map((n) => n.textContent)
+            .join('')
+            .trim();
     }
 
     addDateTag(date) {
