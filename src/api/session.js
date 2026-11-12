@@ -4,6 +4,7 @@ export const SessionKey = {
     PARTNER_ID: 'partner_id',
     SERVER_VERSION_INFO: 'server_version_info',
     DB: 'db',
+    USER_CONTEXT: 'user_context',
 };
 
 export function isDebugSession() {

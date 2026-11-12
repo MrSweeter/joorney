@@ -6,6 +6,22 @@
 <link href="./css/configuration/unfocus_app.css" rel="stylesheet" />
 
 <div class="row pt-1 pb-0 p-5 mx-0 text-center">
+    <!--#region Language -->
+    <div id="joorney_language_card">
+        <h4 class="text-start mt-3" data-i18n="language_title">Language</h4>
+        <p class="text-start mb-2" data-i18n="language_description">Choose the language used by Joorney.</p>
+        <div class="d-flex flex-wrap gap-2 align-items-center">
+            <select id="joorney_language_mode" class="form-select w-auto">
+                <option value="system" data-i18n="language_mode_system">Use system (browser language)</option>
+                <option value="odoo" data-i18n="language_mode_odoo">Use Odoo (user language)</option>
+                <option value="static" data-i18n="language_mode_static">Choose a language</option>
+            </select>
+            <select id="joorney_language_static" class="form-select w-auto d-none"></select>
+        </div>
+        <small class="d-block text-start text-muted mt-1" data-i18n="language_hint"></small>
+    </div>
+    <!--#endregion-->
+
     <!--#region Awesome Loading -->
     <div data-feature-customization="awesomeLoading" class="d-none">
         <h4 class="text-start mt-3 feature-collapse-toggle">

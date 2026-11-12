@@ -21,6 +21,10 @@ export const baseSettings = {
         // },
     },
 
+    // 'system' | 'odoo' | 'static' (src/utils/i18n.js)
+    languageMode: 'system',
+    languageStatic: 'en',
+
     supportedVersions: ['20.0'],
     supportedDevVersions: [],
 

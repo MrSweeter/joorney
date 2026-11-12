@@ -84,7 +84,19 @@ export default () => {
                         },
                     ],
                 }),
+                copy({
+                    // flatten: false keeps the <lang>/ folders; a folder copy can't take a transform
+                    flatten: false,
+                    targets: [
+                        {
+                            src: '_locales/*/messages.json',
+                            dest: `${bundleOutput}/_locales`,
+                            transform: (contents, _) => placeholder(contents.toString()),
+                        },
+                    ],
+                }),
                 copy({ targets: [{ src: 'images', dest: bundleOutput }] }),
+                watchAssets({ assets: ['manifest.json', '_locales/**/*.json'] }),
             ],
         },
         {
