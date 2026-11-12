@@ -1,6 +1,7 @@
 let SESSION_INFO = undefined;
 export const SessionKey = {
     UID: 'uid',
+    NAME: 'name',
     PARTNER_ID: 'partner_id',
     SERVER_VERSION_INFO: 'server_version_info',
     DB: 'db',
