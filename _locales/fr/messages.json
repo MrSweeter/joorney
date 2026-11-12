@@ -220,5 +220,219 @@
     },
     "autoOpenRunbot_menu_openWithVersion": {
         "message": "Ouvrir le runbot en version %version%"
+    },
+    "common_fakeDataTitle": {
+        "message": "Cet élément ne fait pas partie de l'application d'origine ; il a été ajouté artificiellement par Joorney.\nEn cas de doute, rechargez la page !"
+    },
+    "common_error_buttonContext": {
+        "message": "Le contexte du bouton ne correspond pas à celui de l'URL : '$button$' vs '$url$'",
+        "placeholders": {
+            "button": {
+                "content": "$1",
+                "example": "42"
+            },
+            "url": {
+                "content": "$2",
+                "example": "43"
+            }
+        }
+    },
+    "common_jump": {
+        "message": "Aller au message"
+    },
+    "common_simulatedBadge": {
+        "message": "Joorney"
+    },
+    "common_injectedButtonTitle": {
+        "message": "Pas standard Odoo : fourni par l'extension Joorney"
+    },
+    "common_error_title": {
+        "message": "Une erreur inattendue est survenue"
+    },
+    "toast_limitReached": {
+        "message": "Vous avez atteint la limite de notifications ($max$). Notification affichée dans la console.",
+        "placeholders": {
+            "max": {
+                "content": "$1",
+                "example": "5"
+            }
+        }
+    },
+    "toast_badgeNotification": {
+        "message": "notification"
+    },
+    "toast_cachedTitle": {
+        "message": "[cache] $title$",
+        "placeholders": {
+            "title": {
+                "content": "$1",
+                "example": "odoo.exceptions.AccessError"
+            }
+        }
+    },
+    "assignMeTask_buttonLabel": {
+        "message": "M'assigner"
+    },
+    "assignMeTask_buttonTitle": {
+        "message": "La page sera rechargée, utilisez le clic molette pour ouvrir dans un autre onglet"
+    },
+    "assignMeTask_error_title": {
+        "message": "Une erreur est survenue lors de l'assignation de l'enregistrement"
+    },
+    "assignMeTask_label_assignees": {
+        "message": "Assignés"
+    },
+    "assignMeTask_label_assignedTo": {
+        "message": "Assigné à"
+    },
+    "assignMeTask_label_technician": {
+        "message": "Technicien"
+    },
+    "saveKnowledge_buttonLabel": {
+        "message": "Enregistrer"
+    },
+    "saveKnowledge_buttonTitle": {
+        "message": "Enregistrer le contenu de l'article"
+    },
+    "saveKnowledge_error_title": {
+        "message": "Une erreur est survenue lors de l'enregistrement de l'article"
+    },
+    "pinMessage_starButtonTitle": {
+        "message": "Odoo : Marquer comme à faire | Remplacé par Joorney : Épingler"
+    },
+    "pinMessage_starIconTitle": {
+        "message": "Odoo : À faire/Favori | Épinglé"
+    },
+    "pinMessage_toggleLabel": {
+        "message": "Afficher les messages épinglés"
+    },
+    "pinMessage_sectionTitle": {
+        "message": "Messages épinglés"
+    },
+    "pinMessage_warning_tooManyPins": {
+        "message": "...Il y a plus de $max$ messages épinglés ! Seuls les vôtres sont affichés",
+        "placeholders": {
+            "max": {
+                "content": "$1",
+                "example": "5"
+            }
+        }
+    },
+    "pinMessage_warning_tooManyOwnPins": {
+        "message": "...Vous avez plus de $max$ messages épinglés !",
+        "placeholders": {
+            "max": {
+                "content": "$1",
+                "example": "5"
+            }
+        }
+    },
+    "followUnfollow_follow": {
+        "message": "Suivre"
+    },
+    "followUnfollow_unfollow": {
+        "message": "Ne plus suivre"
+    },
+    "followUnfollow_following": {
+        "message": "Abonné(e)"
+    },
+    "tooltipMetadata_copyModel": {
+        "message": "[Joorney] Copier le nom technique dans le presse-papiers"
+    },
+    "tooltipMetadata_windowActionId": {
+        "message": "ID de l'action de fenêtre"
+    },
+    "tooltipMetadata_xmlId": {
+        "message": "ID XML"
+    },
+    "tooltipMetadata_name": {
+        "message": "Nom"
+    },
+    "tooltipMetadata_model": {
+        "message": "Modèle"
+    },
+    "tooltipMetadata_filterDomain": {
+        "message": "[Filtres] Domaine"
+    },
+    "tooltipMetadata_filterContext": {
+        "message": "[Filtres] Contexte"
+    },
+    "tooltipMetadata_filterLimit": {
+        "message": "[Filtres] Limite"
+    },
+    "tooltipMetadata_filterFilter": {
+        "message": "[Filtres] Filtre"
+    },
+    "tooltipMetadata_id": {
+        "message": "ID"
+    },
+    "tooltipMetadata_noUpdate": {
+        "message": "Pas de mise à jour"
+    },
+    "tooltipMetadata_createUser": {
+        "message": "Créateur"
+    },
+    "tooltipMetadata_createDate": {
+        "message": "Date de création"
+    },
+    "tooltipMetadata_writeUser": {
+        "message": "Dernière modification par"
+    },
+    "tooltipMetadata_writeDate": {
+        "message": "Date de dernière modification"
+    },
+    "impersonateLoginRunbot_loginAs": {
+        "message": "Se connecter en tant que $login$",
+        "placeholders": {
+            "login": {
+                "content": "$1",
+                "example": "admin"
+            }
+        }
+    },
+    "adminDebugLoginRunbot_buttonTitle": {
+        "message": "Ouvrir le runbot en admin avec le mode développeur activé"
+    },
+    "runbot_error_notRunbotLink": {
+        "message": "Ce n'est pas un lien runbot : $url$",
+        "placeholders": {
+            "url": {
+                "content": "$1",
+                "example": "https://example.com/runbot/run/123"
+            }
+        }
+    },
+    "runbot_error_noTab": {
+        "message": "Aucun onglet depuis lequel ouvrir le runbot"
+    },
+    "runbot_error_noResponse": {
+        "message": "L'extension ne répond pas, rechargez la page"
+    },
+    "unfocusApp_changeFocusState": {
+        "message": "Masquer/afficher (double-clic : mettre en avant)"
+    },
+    "contextOdooMenus_error_title": {
+        "message": "Une erreur est survenue lors de l'ouverture du menu"
+    },
+    "contextOdooMenus_error_notFound": {
+        "message": "Menu '$path$' introuvable.",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Sales / Orders"
+            }
+        }
+    },
+    "contextOdooMenus_error_tooMany": {
+        "message": "Trop de menus trouvés pour le chemin $path$.",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Sales / Orders"
+            }
+        }
+    },
+    "showMyBadge_title": {
+        "message": "Badges"
     }
 }

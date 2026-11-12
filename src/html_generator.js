@@ -1,5 +1,5 @@
 import JoorneyStyle from './html_generator.css';
-import { featureName, t } from './utils/i18n.js';
+import { featureName, getLocaleTag, t } from './utils/i18n.js';
 import { iconHTML } from './utils/icons.js';
 
 //#region Joorney injected style
@@ -16,8 +16,7 @@ export function ensureJoorneyStyle() {
     (document.head ?? document.documentElement).appendChild(style);
 }
 
-const fakeDataTitle = `This element is not part of the original application; it was added artificially by Joorney.
-If unsure, please reload the page!`;
+const fakeDataTitle = () => t('common_fakeDataTitle');
 
 // [ODOO] 20.0+ icons are Material Symbols (oi + data-icon ligature), Font Awesome before.
 // Detected from the page: generators have no version context. The 20.0 font is a subset, only use
@@ -35,8 +34,8 @@ function odooIconHTML(icon) {
         return `<i class="oi" data-icon="${escapeHTML(icon.oi)}" aria-hidden="true"></i>`;
     return `<i class="fa ${escapeHTML(icon.fa)}" aria-hidden="true"></i>`;
 }
-const injectedButtonTitle = 'Not standard Odoo: provided by the Joorney extension';
-const injectedTitle = (title) => (title ? `${title}\n${injectedButtonTitle}` : injectedButtonTitle);
+const injectedTitle = (title) =>
+    title ? `${title}\n${t('common_injectedButtonTitle')}` : t('common_injectedButtonTitle');
 //#endregion
 
 export function escapeHTML(value) {
@@ -150,7 +149,8 @@ export function generateTabFeaturePopupToggleItem(feature) {
 
 //#region Simulated data & copies
 function formatDateTime(date) {
-    return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+    const locale = getLocaleTag();
+    return `${date.toLocaleDateString(locale)} ${date.toLocaleTimeString(locale)}`;
 }
 
 /**
@@ -160,7 +160,7 @@ function formatDateTime(date) {
 export function generateUserAvatarTag(userName, avatarSrc, extraClass = '') {
     ensureJoorneyStyle();
     return stringToHTML(`
-		<span class="joorney-sim joorney-sim-inline ${extraClass}" title="${escapeHTML(`${userName}\n${fakeDataTitle}`)}">
+		<span class="joorney-sim joorney-sim-inline ${extraClass}" title="${escapeHTML(`${userName}\n${fakeDataTitle()}`)}">
 			<img src="${escapeHTML(avatarSrc)}" alt="" />
 			<span class="text-truncate">${escapeHTML(userName)}</span>
 			<span class="joorney-sim-mark">J</span>
@@ -174,7 +174,7 @@ export function generateUserAvatarTag(userName, avatarSrc, extraClass = '') {
 export function generateSimulatedValue(text, extraClass = '') {
     ensureJoorneyStyle();
     return stringToHTML(`
-		<span class="joorney-sim joorney-sim-inline ${extraClass}" title="${escapeHTML(fakeDataTitle)}">
+		<span class="joorney-sim joorney-sim-inline ${extraClass}" title="${escapeHTML(fakeDataTitle())}">
 			<span class="joorney-sim-mark">J</span>
 			<span class="text-truncate">${escapeHTML(text)}</span>
 		</span>
@@ -199,8 +199,8 @@ export function generateTrackingMessage({
     return stringToHTML(`
 		<div
 			class="joorney-sim joorney-sim-frame ${isWarning ? '' : 'joorney-sim--error'} ${extraClass}"
-			data-joorney-badge="Joorney"
-			title="${escapeHTML(fakeDataTitle)}"
+			data-joorney-badge="${escapeHTML(t('common_simulatedBadge'))}"
+			title="${escapeHTML(fakeDataTitle())}"
 		>
 			<div class="o-mail-Message position-relative py-1 px-3">
 				<div class="o-mail-Message-core position-relative d-flex flex-shrink-0">
@@ -247,14 +247,14 @@ export function generateTrackingMessage({
 export function generateMessage(messageID, authorName, avatarSrc, bodyContent, date, hasOriginal) {
     ensureJoorneyStyle();
     const messageElement = stringToHTML(`
-		<div class="joorney-sim joorney-sim--copy joorney-sim-frame mx-0" data-joorney-badge="Joorney">
+		<div class="joorney-sim joorney-sim--copy joorney-sim-frame mx-0" data-joorney-badge="${escapeHTML(t('common_simulatedBadge'))}">
 			<div class="o-mail-Message position-relative py-1 px-3">
 				<button
 					type="button"
 					class="joorney-sim-jump d-none btn btn-sm joorney-action-btn joorney-action-icon m-1 position-absolute top-0 end-0"
 					style="z-index: 1;"
-					title="Jump to message"
-					aria-label="Jump to message"
+					title="${escapeHTML(t('common_jump'))}"
+					aria-label="${escapeHTML(t('common_jump'))}"
 				>
 					${odooIconHTML({ fa: 'fa-arrow-right', oi: 'arrow_forward' })}
 				</button>

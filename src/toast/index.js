@@ -2,10 +2,12 @@ import { baseSettings } from '../../configuration.js';
 import { escapeHTML, stringToHTML } from '../html_generator.js';
 import { isSupportedOdoo } from '../utils/authorize.js';
 import { Console, StorageSync } from '../utils/browser.js';
+import { t } from '../utils/i18n.js';
 import {
     buildContainer,
     buildToastItem,
     generateToastID,
+    getToastBadge,
     ToastContainerElementID,
     toastDelayMillis,
     toastDurationMillis,
@@ -90,12 +92,7 @@ export const ToastManager = {
 
         if (!force && Object.keys(existingToast).length >= maximumNotification) {
             this._log(feature, title, message, type, false);
-            this._ui(
-                'notification',
-                '',
-                `You have reached the notification limit (${maximumNotification}). Notification logged to console.`,
-                'warning'
-            );
+            this._ui('notification', '', t('toast_limitReached', maximumNotification), 'warning');
             return true;
         }
 
@@ -192,7 +189,7 @@ export const ToastManager = {
 
         const features = toast.getElementsByClassName('toast-feature')[0];
         const featureBadge = stringToHTML(`
-                <span class="badge rounded-pill">${escapeHTML(feature)}</span>
+                <span class="badge rounded-pill">${escapeHTML(getToastBadge(feature))}</span>
             `);
         features?.appendChild(featureBadge);
 

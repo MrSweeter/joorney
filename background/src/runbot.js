@@ -22,8 +22,12 @@ async function setPendingTab(tabId, expiresAt) {
 export async function openRunbotAdminDebug(request, sender) {
     try {
         const url = new URL(request.href);
-        if (url.host !== 'runbot.odoo.com') return { error: `Not a runbot link: ${request.href}` };
-        if (!sender.tab) return { error: 'No tab to open runbot from' };
+        // Known errors return a message key, translated by the page (runbot_content.js): the background has no page
+        // language. Unexpected ones (catch) return the exception text as 'error'.
+        if (url.host !== 'runbot.odoo.com') {
+            return { errorKey: 'runbot_error_notRunbotLink', errorArgs: [request.href] };
+        }
+        if (!sender.tab) return { errorKey: 'runbot_error_noTab' };
 
         // Mark the tab as pending before navigating, the redirection may commit before an awaited write
         const tabId = request.newTab

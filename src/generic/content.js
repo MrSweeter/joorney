@@ -2,6 +2,7 @@ import { ToastManager } from '../toast/index.js';
 import { isAuthorizedFeature, isSupportedFeature } from '../utils/authorize.js';
 import { Console, Runtime } from '../utils/browser.js';
 import { NotYetImplemented } from '../utils/error.js';
+import { t } from '../utils/i18n.js';
 import { MESSAGE_ACTION } from '../utils/messaging.js';
 import { sanitizeURL } from '../utils/util.js';
 
@@ -112,30 +113,18 @@ export default class ContentFeature {
         } catch (e) {
             if (e.type === 'OdooAPIException') {
                 const error = e.error;
+                // Odoo exception name (technical, not translated) and message (Odoo user language)
+                const title = e.fromCache ? t('toast_cachedTitle', error.data.name) : error.data.name;
                 switch (error.data.name) {
                     case 'odoo.exceptions.AccessError':
-                        ToastManager.warn(
-                            this.configuration.id,
-                            `${e.fromCache ? '[cache] ' : ''}${error.data.name}`,
-                            error.data.message
-                        );
-                        break;
                     case 'builtins.ValueError':
-                        ToastManager.warn(
-                            this.configuration.id,
-                            `${e.fromCache ? '[cache] ' : ''}${error.data.name}`,
-                            error.data.message
-                        );
+                        ToastManager.warn(this.configuration.id, title, error.data.message);
                         break;
                     default:
-                        ToastManager.error(
-                            this.configuration.id,
-                            `${e.fromCache ? '[cache] ' : ''}${error.data.name}`,
-                            error.data.message
-                        );
+                        ToastManager.error(this.configuration.id, title, error.data.message);
                 }
             } else {
-                ToastManager.error(this.configuration.id, `${e.name}`, e.message);
+                ToastManager.error(this.configuration.id, t('common_error_title'), e.message);
             }
         }
         return fallback;
