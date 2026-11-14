@@ -12,6 +12,27 @@ export function escapeHTML(value) {
         .replaceAll("'", '&#39;');
 }
 
+/**
+ * Placeholder image for records without one: a colored tile with the initials of the label.
+ * @param {string} label used for the initials, and for a stable hue when no color is given
+ * @param {string} [color] any CSS color
+ * @returns {string} an SVG data URI, usable as an <img> src
+ */
+export function generateInitialsImageURI(label, color = undefined) {
+    const words = `${label ?? ''}`.match(/[\p{L}\p{N}]+/gu) ?? [];
+    const initials = (words.length > 1 ? `${words[0][0]}${words[1][0]}` : (words[0] ?? '?').slice(0, 2)).toUpperCase();
+
+    let fill = color;
+    if (!fill) {
+        let hash = 0;
+        for (const char of `${label ?? ''}`) hash = (hash * 31 + char.codePointAt(0)) % 360;
+        fill = `hsl(${hash} 45% 50%)`;
+    }
+
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"><rect width="30" height="30" rx="6" fill="${escapeHTML(fill)}"/><text x="15" y="15" dy=".35em" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fff">${escapeHTML(initials)}</text></svg>`;
+    return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+}
+
 export function stringToHTML(str) {
     const template = document.createElement('template');
     template.innerHTML = str.trim();

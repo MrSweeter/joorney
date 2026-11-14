@@ -1,11 +1,17 @@
 import { getDataset, getDatasetWithIDs } from '../../api/odoo.js';
 import ContentFeature from '../../generic/content.js';
-import { escapeHTML } from '../../html_generator.js';
+import { escapeHTML, generateInitialsImageURI } from '../../html_generator.js';
+import { Console } from '../../utils/browser.js';
 import { createRecordFormURL } from '../../utils/url_manager.js';
 import { waitForElement } from '../../utils/util.js';
 import configuration from './configuration.js';
 
 const MAX_BADGES = 8;
+const LEVEL_COLORS = {
+    gold: '#d4af37',
+    silver: '#a8a9ad',
+    bronze: '#cd7f32',
+};
 
 function badgeLabel(badge) {
     return badge.badge_name || badge.display_name || '';
@@ -131,6 +137,7 @@ export default class ShowMyBadgeContentFeature extends ContentFeature {
             'badge_name',
             'badge_id',
         ]);
+        const withoutImage = await this.getBadgeIDsWithoutImage(badges.map((b) => b.badge_id[0]));
         const levelMapping = {
             bronze: 1,
             silver: 2,
@@ -138,8 +145,29 @@ export default class ShowMyBadgeContentFeature extends ContentFeature {
         };
         for (const b of badges) {
             b.lvl = levelMapping[b.level] ?? 0;
+            b.hasImage = !withoutImage.has(b.badge_id[0]);
         }
         return badges.sort((a, b) => b.lvl - a.lvl);
+    }
+
+    async getBadgeIDsWithoutImage(badgeIDs) {
+        try {
+            const records = await getDataset(
+                'gamification.badge',
+                [
+                    ['id', 'in', [...new Set(badgeIDs)]],
+                    ['image_1920', '=', false],
+                ],
+                ['id'],
+                undefined,
+                60
+            );
+            return new Set(records.map((r) => r.id));
+        } catch (e) {
+            // Not blocking: fall back on Odoo's own image (or its placeholder)
+            Console.warn(e);
+            return new Set();
+        }
     }
 
     getBadgesNode(badges) {
@@ -147,7 +175,9 @@ export default class ShowMyBadgeContentFeature extends ContentFeature {
         const hiddenBadges = badges.slice(MAX_BADGES);
 
         const badgesHTML = shownBadges.map((b) => {
-            const src = `/web/image?model=gamification.badge&id=${b.badge_id[0]}&field=image_128`;
+            const src = b.hasImage
+                ? `/web/image?model=gamification.badge&id=${b.badge_id[0]}&field=image_128`
+                : generateInitialsImageURI(badgeLabel(b), LEVEL_COLORS[b.level]);
             const title = escapeHTML(`${badgeLabel(b)}\n${b.comment || ''}`);
             const url = createRecordFormURL(window.location, 'gamification.badge', b.badge_id[0]);
             return `<a href="${url}"><img class="rounded" title="${title}" style="height: 30px" src="${src}"></a>`;
