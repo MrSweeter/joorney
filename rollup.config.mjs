@@ -35,6 +35,8 @@ export default () => {
                     ],
                 }),
                 copy({ targets: [{ src: 'images', dest: bundleOutput }] }),
+                // Icon font + stylesheet, shared by the extension pages and injected in Odoo pages (web accessible)
+                copy({ targets: [{ src: 'assets/icons/*.{css,woff2}', dest: `${bundleOutput}/assets/icons` }] }),
             ],
         },
         getContentConfig(bundleOutput, defaultPlugins),
@@ -90,6 +92,7 @@ export default () => {
                             src: ['gh-page/public/*'],
                             dest: `${publicOutput}`,
                         },
+                        { src: 'assets/icons/*.{css,woff2}', dest: `${publicOutput}/assets/icons` },
                     ],
                 }),
                 watchAssets({ assets: ['gh-page/**/*.css', 'gh-page/**/*.html'] }),

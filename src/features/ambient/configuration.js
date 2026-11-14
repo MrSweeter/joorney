@@ -1,7 +1,7 @@
 export default {
     id: 'ambient',
     display_name: 'Ambient',
-    icon: '<i class="fa-solid fa-mountain-sun"></i>', // '<i class="fa-solid fa-panorama"></i>'
+    icon: 'landscape',
     trigger: {
         background: false,
         load: true,

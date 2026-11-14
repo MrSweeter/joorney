@@ -1,7 +1,7 @@
 export default {
     id: 'adminDebugLoginRunbot',
     display_name: '[Runbot] Admin Debug Login',
-    icon: '<i class="fa-solid fa-rocket"></i>',
+    icon: 'rocket_launch',
     trigger: {
         load: true,
         navigate: true,

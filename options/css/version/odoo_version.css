@@ -13,9 +13,8 @@
     margin: 2px;
 }
 
-/*https://fontawesome.com/icons/circle?f=classic&s=regular*/
 .odoo-version-wrapper i::before {
-    content: "\f111";
+    content: "radio_button_unchecked";
 }
 
 .odoo-version-wrapper:hover {
@@ -31,10 +30,9 @@
 input:checked + .odoo-version-wrapper {
     border: solid 2px var(--joorney-odoo-primary);
 }
-/*https://fontawesome.com/icons/circle-check?f=classic&s=solid*/
 input:checked + .odoo-version-wrapper i::before {
-    content: "\f058";
-    font-weight: 900;
+    content: "check_circle";
+    font-variation-settings: "FILL" 1;
     color: var(--joorney-odoo-primary);
 }
 

@@ -1,7 +1,7 @@
 export default {
     id: 'contextOdooMenus',
     display_name: 'Context OdooMenus',
-    icon: '<i class="fa-solid fa-location-arrow"></i>',
+    icon: 'near_me',
     trigger: {
         background: false,
         load: false,

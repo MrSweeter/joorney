@@ -42,12 +42,14 @@ input:indeterminate + .pm-slider {
     color: var(--joorney-primary);
     -webkit-transition: 0.4s;
     transition: 0.4s;
-    font-family: "Font Awesome 6 Free", sans-serif;
-    font-weight: 900;
+    font-family: "Joorney Icons", sans-serif;
+    font-weight: normal;
     font-style: normal;
     font-variant: normal;
-    font-size: 1rem;
+    font-variation-settings: "FILL" 1;
+    font-size: 1.2rem;
     line-height: 26px;
+    text-rendering: geometricPrecision;
 }
 
 input:checked + .pm-slider:before {
@@ -58,7 +60,7 @@ input:checked + .pm-slider:before {
 }
 
 input:indeterminate + .pm-slider:before {
-    content: "\3f";
+    content: "question_mark";
     background-color: rgb(136, 136, 136);
     -webkit-transform: translateX(13px);
     -ms-transform: translateX(13px);
@@ -74,17 +76,17 @@ input:indeterminate + .pm-slider:before {
 }
 
 .pm-author:before {
-    content: "\f086";
+    content: "forum";
 }
 
 input:checked + .pm-author:before {
-    content: "\f075";
+    content: "chat_bubble";
 }
 
 .pm-shown:before {
-    content: "\f070";
+    content: "visibility_off";
 }
 
 input:checked + .pm-shown:before {
-    content: "\f06e";
+    content: "visibility";
 }

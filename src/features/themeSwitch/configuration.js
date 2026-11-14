@@ -1,7 +1,7 @@
 export default {
     id: 'themeSwitch',
     display_name: 'Theme Switch',
-    icon: '<i class="fa-solid fa-sun"></i>',
+    icon: 'light_mode',
     trigger: {
         background: true,
         load: false,

@@ -1,5 +1,6 @@
 import OptionCustomizationFeature from '../../generic/option_customization.js';
 import { StorageSync, sendRuntimeMessage } from '../../utils/browser.js';
+import { iconHTML } from '../../utils/icons.js';
 import { MESSAGE_ACTION } from '../../utils/messaging.js';
 import configuration from './configuration.js';
 
@@ -153,10 +154,10 @@ export default class ContextOdooMenusOptionCustomizationFeature extends OptionCu
         <tr style="opacity: ${menu.active ? '1' : '0.5'}" ${!menu.active ? 'disabled' : ''}>
             <td class="p-1 ps-3" title="${menu.order}" style="vertical-align: middle">
                 <button class="btn p-2 order-up-button-${menu.id}" ${isFirst ? 'disabled style="opacity: 0"' : 0}>
-                    <i class="fa fa-caret-up text-success"></i>
+                    <i class="joorney-icon joorney-icon-filled text-success" data-icon="arrow_drop_up" aria-hidden="true"></i>
                 </button>
                 <button class="btn p-2 order-down-button-${menu.id}" ${isLast ? 'disabled style="opacity: 0"' : 0}>
-                    <i class="fa fa-caret-down text-danger"></i>
+                    <i class="joorney-icon joorney-icon-filled text-danger" data-icon="arrow_drop_down" aria-hidden="true"></i>
                 </button>
             </td>
             <td class="p-1" style="vertical-align: middle">
@@ -176,25 +177,25 @@ export default class ContextOdooMenusOptionCustomizationFeature extends OptionCu
                         menu.active ? '' : 'text-muted'
                     } border-0 btn-floating"
                     title="${menu.favorite ? 'Favorite' : 'Not favorite'}">
-                    <i style="font-size: 1.2em" class="fa fa-${menu.favorite ? 'solid' : 'regular'} fa-star"></i>
+                    ${iconHTML('star', { filled: menu.favorite, attributes: 'style="font-size: 1.2em"' })}
                 </button>
                 <button
                     class="joorney_contextOdooMenus_record_toggle_${menu.id} btn btn-outline-success ${
                         menu.active ? '' : 'text-muted'
                     } border-0 btn-floating"
                     title="${menu.active ? 'Disable' : 'Enable'} quick menu">
-                    <i style="font-size: 1.2em" class="fa fa-toggle-${menu.active ? 'on' : 'off'}"></i>
+                    ${iconHTML(menu.active ? 'toggle_on' : 'toggle_off', { filled: true, attributes: 'style="font-size: 1.2em"' })}
                 </button>
                 <button
                     class="joorney_contextOdooMenus_record_update_button_${menu.id} btn btn-outline-success border-0 btn-floating"
                     title="Save modification"
                     disabled>
-                    ${menu.active ? '<i class="fa fa-save" style="font-size: 1.2em"></i>' : ''}
+                    ${menu.active ? '<i class="joorney-icon joorney-icon-filled" data-icon="save" aria-hidden="true" style="font-size: 1.2em"></i>' : ''}
                 </button>
                 <button
                     class="joorney_contextOdooMenus_record_remove_button_${menu.id} btn btn-outline-danger border-0 btn-floating"
                     title="Delete quick menu">
-                    <i style="font-size: 1.2em" class="fa fa-trash"></i>
+                    <i style="font-size: 1.2em" class="joorney-icon joorney-icon-filled" data-icon="delete" aria-hidden="true"></i>
                 </button>
             </td>
         </tr>

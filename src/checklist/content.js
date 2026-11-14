@@ -2,6 +2,7 @@ import { PAGES } from '../../options/menu.js';
 import { Console, StorageLocal } from '../../src/utils/browser.js';
 import { sleep } from '../../src/utils/util.js';
 import { stringToHTML } from '../html_generator.js';
+import { setIcon } from '../utils/icons.js';
 import { Checklist, getNextTourID } from './index.js';
 import { tours } from './tour.js';
 
@@ -52,7 +53,8 @@ export default class ChecklistContent {
                 if (!isComplete) await sleep(100);
             }
         };
-        titleIcon.className = 'fa-solid fa-clipboard-list fa-2xs';
+        titleIcon.className = 'joorney-icon joorney-icon-filled joorney-icon-2xs';
+        setIcon(titleIcon, 'assignment');
         titleIcon.title = 'Wave a magic wand and deem all steps magically done!';
 
         const tourState = tourStore[this.tour.id];
@@ -89,7 +91,7 @@ export default class ChecklistContent {
 			<div class="checklist-item">
 				<input type="checkbox" id="${step.id}" ${done ? 'checked' : ''} ${done ? 'disabled' : ''} />
 				<label for="${step.id}">
-					<p class="m-0">${step.name} <i class="joorney_checklist_target_btn fa-solid fa-arrows-to-eye fa-xs d-none"></i></p>
+					<p class="m-0">${step.name} <i class="joorney-icon joorney-icon-filled joorney-icon-xs joorney_checklist_target_btn d-none" data-icon="visibility" aria-hidden="true"></i></p>
 					<small class="text-muted">${step.description}</small>
 				</label>
 			</div>
@@ -213,7 +215,8 @@ export default class ChecklistContent {
         const titleIcon = document.getElementById('joorney_checklist_tour_title_markall_done');
         titleIcon.onclick = null;
         titleIcon.title = '';
-        titleIcon.className = 'fa-solid fa-clipboard-check text-success fa-2xs';
+        titleIcon.className = 'joorney-icon joorney-icon-filled text-success joorney-icon-2xs';
+        setIcon(titleIcon, 'assignment_turned_in');
     }
 
     async congrats(isShow) {
