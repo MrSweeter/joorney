@@ -20,7 +20,7 @@ export default class AmbientManager {
     }
 
     async getAmbientForDate(date) {
-        let ambient = undefined;
+        let ambient;
         const { ambientStatus } = await StorageSync.get({ ambientStatus: {} });
 
         if (!ambient) ambient = await this.getComputedEventForDate(date);
@@ -34,8 +34,8 @@ export default class AmbientManager {
     }
 
     getEventForDate(date, events) {
-        let from = undefined;
-        let to = undefined;
+        let from;
+        let to;
 
         for (const event of events) {
             if (event.date_from && event.date_to) {

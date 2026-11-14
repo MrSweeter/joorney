@@ -54,7 +54,7 @@ function parseURL_V1(searchParams) {
 
     if (searchParams.has('id')) {
         const id = searchParams.get('id');
-        if (isNumeric(id)) state.resId = Number.parseInt(id);
+        if (isNumeric(id)) state.resId = Number.parseInt(id, 10);
         state.view_type = searchParams.get('view_type');
     } else if (searchParams.get('view_type') === 'form') {
         state.resId = 'new';
@@ -63,13 +63,13 @@ function parseURL_V1(searchParams) {
 
     if (searchParams.has('action')) {
         const action = searchParams.get('action');
-        if (isNumeric(action)) state.action = Number.parseInt(action);
+        if (isNumeric(action)) state.action = Number.parseInt(action, 10);
         if (action === 'studio') state.action = action;
     }
 
     if (searchParams.has('active_id')) {
         const active_id = searchParams.get('active_id');
-        if (isNumeric(active_id)) state.active_id = Number.parseInt(active_id);
+        if (isNumeric(active_id)) state.active_id = Number.parseInt(active_id, 10);
     }
 
     if (searchParams.has('model')) {
@@ -91,20 +91,20 @@ function parseURL_V2(pathname) {
         const [left, right] = [splitPath[i - 1], splitPath[i + 1]];
 
         if (isNumeric(left)) {
-            action.active_id = Number.parseInt(left);
+            action.active_id = Number.parseInt(left, 10);
         }
 
         if (right === 'new') {
             action.resId = 'new';
             action.view_type = 'form';
         } else if (isNumeric(right)) {
-            action.resId = Number.parseInt(right);
+            action.resId = Number.parseInt(right, 10);
         }
 
         if (part.startsWith('action-')) {
             // Ignore xml_id, Odoo override it with ID
             const actionId = part.slice(7);
-            if (isNumeric(actionId)) action.action = Number.parseInt(actionId);
+            if (isNumeric(actionId)) action.action = Number.parseInt(actionId, 10);
         } else if (part.startsWith('m-')) {
             action.model = part.slice(2);
         } else if (part.includes('.')) {

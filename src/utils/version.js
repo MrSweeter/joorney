@@ -1,7 +1,7 @@
 import { baseSettings } from '../../configuration.js';
 // import { getVersionInfo } from '../api/odoo.js';
-import { SessionKey, getSessionData } from '../api/session.js';
-import { StorageSync, isDevMode } from './browser.js';
+import { getSessionData, SessionKey } from '../api/session.js';
+import { isDevMode, StorageSync } from './browser.js';
 import { setSupportedDevelopmentVersion, setSupportedVersion } from './constant.js';
 
 const DEFAULT_VERSION = { isOdoo: false };

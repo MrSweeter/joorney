@@ -2,7 +2,7 @@ import { loadFeaturesConfiguration } from '../../configuration.js';
 import { clearHost } from '../api/cache.js';
 import { openRunbotWithVersionMenuItem } from '../features/autoOpenRunbot/configuration.js';
 import { isAuthorizedFeature, isAuthorizedLimitedFeature } from '../utils/authorize.js';
-import { Console, ContextMenus, Runtime, StorageSync, Tabs, sendTabMessage } from '../utils/browser.js';
+import { Console, ContextMenus, Runtime, StorageSync, sendTabMessage, Tabs } from '../utils/browser.js';
 import { MESSAGE_ACTION } from '../utils/messaging.js';
 import { sanitizeURL } from '../utils/util.js';
 import { clearLocalCacheMenuItem, optionMenuItem, separatorMenuItem } from './item.js';
@@ -78,7 +78,7 @@ export async function updateContext(tabId) {
         if (!tab.active) return;
         if (!tab.url.startsWith('http')) return;
         const odooInfo = await sendTabMessage(tab.id, MESSAGE_ACTION.TO_CONTENT.REQUEST_ODOO_INFO);
-        if (!odooInfo || !odooInfo.isOdoo) return;
+        if (!odooInfo?.isOdoo) return;
         if (generation !== updateGeneration) return;
         await updateContextMenu(tab, odooInfo.isOdoo, odooInfo.version, generation);
     } catch (error) {
@@ -170,11 +170,11 @@ async function getItems(tab = undefined, toArray = true) {
 }
 
 async function getFeaturesItems(tab) {
-    let url = undefined;
+    let url;
     if (tab) {
         if (!tab.url) return {};
         url = sanitizeURL(tab.url);
-        if (!url.origin || !url.origin.startsWith('http')) return {};
+        if (!url.origin?.startsWith('http')) return {};
     }
 
     const features = await loadFeaturesConfiguration();

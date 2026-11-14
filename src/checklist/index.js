@@ -4,7 +4,7 @@ import { store as preferencesStore } from './steps/preferences.js';
 import { store as technicalStore } from './steps/technical.js';
 import { store as versionsStore } from './steps/versions.js';
 
-// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
+// biome-ignore lint/complexity/noStaticOnlyClass: shared checklist state, used as a namespace
 export class Checklist {
     static manager = undefined;
     static bubble = undefined;

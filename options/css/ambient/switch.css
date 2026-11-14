@@ -151,7 +151,7 @@
 }
 
 .vc-handle:before {
-    content: '';
+    content: "";
     top: 50%;
     left: 50%;
     position: absolute !important;

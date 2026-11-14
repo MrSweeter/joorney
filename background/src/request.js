@@ -1,5 +1,5 @@
 import { loadFeaturesConfiguration } from '../../configuration';
-import { Console, Tabs, WebRequest, sendTabMessage } from '../../src/utils/browser';
+import { Console, sendTabMessage, Tabs, WebRequest } from '../../src/utils/browser';
 import { MESSAGE_ACTION } from '../../src/utils/messaging';
 
 export async function listenRequest() {

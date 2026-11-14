@@ -1,7 +1,7 @@
 import { baseSettings } from '../../configuration.js';
 import { getWebsiteOff } from '../api/local.js';
 import { Console, StorageSync } from './browser.js';
-import { ValueIsNaN, sanitizeURL, sleep } from './util.js';
+import { sanitizeURL, sleep, ValueIsNaN } from './util.js';
 import { sanitizeVersion } from './version.js';
 
 export const regexSchemePrefix = 'regex://';

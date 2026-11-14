@@ -1,9 +1,9 @@
-<link href="./css/configuration/theme_switch.css" rel="stylesheet" />
-<link href="./css/configuration/awesome_loading.css" rel="stylesheet" />
-<link href="./css/configuration/task_setup.css" rel="stylesheet" />
-<link href="./css/configuration/save_knowledge.css" rel="stylesheet" />
-<link href="./css/configuration/awesome_style.css" rel="stylesheet" />
-<link href="./css/configuration/unfocus_app.css" rel="stylesheet" />
+<link href="./css/configuration/theme_switch.css" rel="stylesheet">
+<link href="./css/configuration/awesome_loading.css" rel="stylesheet">
+<link href="./css/configuration/task_setup.css" rel="stylesheet">
+<link href="./css/configuration/save_knowledge.css" rel="stylesheet">
+<link href="./css/configuration/awesome_style.css" rel="stylesheet">
+<link href="./css/configuration/unfocus_app.css" rel="stylesheet">
 
 <div class="row pt-1 pb-0 p-5 mx-0 text-center">
     <!--#region Awesome Loading -->
@@ -27,12 +27,12 @@
                         <td colspan="3"></td>
                     </tr>
                     <tr class="table-secondary">
-                        <td class="py-0"><img loading="lazy" id="joorney_awe_loading_new_image_preview" class="joorney-awe-loading-preview" src="" /></td>
+                        <td class="py-0"><img loading="lazy" id="joorney_awe_loading_new_image_preview" class="joorney-awe-loading-preview" src="" alt="New loading GIF preview"></td>
                         <td class="p-1 joorney-valign-middle">
-                            <input type="text" class="form-control border border-0" id="joorney_awe_loading_new_image" placeholder="" aria-label="Image URL" />
+                            <input type="text" class="form-control border border-0" id="joorney_awe_loading_new_image" placeholder="" aria-label="Image URL">
                         </td>
                         <td class="p-1 joorney-valign-middle">
-                            <button title="Add image" id="joorney_awe_loading_new_image_save" class="btn btn-success btn-floating">
+                            <button type="button" title="Add image" id="joorney_awe_loading_new_image_save" class="btn btn-success btn-floating">
                                 <i class="fa fa-plus"></i>
                             </button>
                         </td>
@@ -62,7 +62,7 @@
 }"
                 spellcheck="false"
             ></textarea>
-            <button title="Save" id="joorney_awe_style_save" class="btn btn-success"><i class="fa fa-floppy-disk me-1"></i> Save (ctrl+s)</button>
+            <button type="button" title="Save" id="joorney_awe_style_save" class="btn btn-success"><i class="fa fa-floppy-disk me-1"></i> Save (ctrl+s)</button>
         </div>
     </div>
     <!--#endregion-->
@@ -77,13 +77,13 @@
             <div class="col-12 row mb-3">
                 <div class="col-6">
                     <h6 class="text-center">Light image URL for superfocus</h6>
-                    <input type="text" class="form-control border border-0 mb-1" id="joorney_unfocus_app_light_image_input" placeholder="" />
-                    <img alt="Light Image for superfocus" id="joorney_unfocus_app_light_image" />
+                    <input type="text" class="form-control border border-0 mb-1" id="joorney_unfocus_app_light_image_input" placeholder="">
+                    <img alt="Light superfocus background" id="joorney_unfocus_app_light_image">
                 </div>
                 <div class="col-6">
                     <h6 class="text-center">Dark image URL for superfocus</h6>
-                    <input type="text" class="form-control border border-0 mb-1" id="joorney_unfocus_app_dark_image_input" placeholder="" />
-                    <img alt="Dark Image for superfocus" id="joorney_unfocus_app_dark_image" />
+                    <input type="text" class="form-control border border-0 mb-1" id="joorney_unfocus_app_dark_image_input" placeholder="">
+                    <img alt="Dark superfocus background" id="joorney_unfocus_app_dark_image">
                 </div>
             </div>
 
@@ -120,19 +120,19 @@
                     <tr>
                         <td>
                             <div class="input-group">
-                                <input id="joorney_theme_switch_latitude" type="text" class="form-control border border-0" />
+                                <input id="joorney_theme_switch_latitude" type="text" class="form-control border border-0">
                                 <span class="input-group-text border border-0">/</span>
-                                <input id="joorney_theme_switch_longitude" type="text" class="form-control border border-0" />
-                                <button id="joorney_theme_switch_get_location_button" class="btn btn-secondary" title="Get current location">
+                                <input id="joorney_theme_switch_longitude" type="text" class="form-control border border-0">
+                                <button type="button" id="joorney_theme_switch_get_location_button" class="btn btn-secondary" title="Get current location">
                                     <i class="fa-solid fa-lg fa-location-crosshairs"></i>
                                 </button>
                             </div>
                         </td>
                         <td>
                             <div class="input-group">
-                                <input id="joorney_theme_switch_dark_start" type="time" class="form-control border border-0" />
+                                <input id="joorney_theme_switch_dark_start" type="time" class="form-control border border-0">
                                 <span class="input-group-text border border-0">/</span>
-                                <input id="joorney_theme_switch_dark_stop" type="time" class="form-control border border-0" />
+                                <input id="joorney_theme_switch_dark_stop" type="time" class="form-control border border-0">
                             </div>
                         </td>
                     </tr>
@@ -153,7 +153,7 @@
             </div>
 
             <div class="feature-collapse-content">
-                <button id="joorney_contextOdooMenus_delete_all" class="btn btn-sm btn-outline-danger">Delete All</button>
+                <button type="button" id="joorney_contextOdooMenus_delete_all" class="btn btn-sm btn-outline-danger">Delete All</button>
             </div>
         </div>
         <div class="feature-collapse-content">
@@ -173,10 +173,10 @@
                     <tr class="table-secondary">
                         <td></td>
                         <td class="p-1" style="vertical-align: middle">
-                            <input type="text" class="form-control border border-0" id="joorney_contextOdooMenus_new_path" placeholder="Lunch / Configuration / Products" />
+                            <input type="text" class="form-control border border-0" id="joorney_contextOdooMenus_new_path" placeholder="Lunch / Configuration / Products">
                         </td>
                         <td class="p-1" style="vertical-align: middle">
-                            <button id="joorney_contextOdooMenus_new_save" class="btn btn-success">Add</button>
+                            <button type="button" id="joorney_contextOdooMenus_new_save" class="btn btn-success">Add</button>
                         </td>
                     </tr>
                     <tr>

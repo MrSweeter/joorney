@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path, { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import archiver from 'archiver';
+import { ZipArchive } from 'archiver';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -14,7 +14,7 @@ function zip(folder, outputFolder, outputFilename) {
     console.log(`Output file will be: ${outputPath}`);
 
     const output = fs.createWriteStream(outputPath);
-    const archive = archiver('zip', {
+    const archive = new ZipArchive({
         zlib: { level: 9 },
     });
 

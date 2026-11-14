@@ -1,5 +1,5 @@
 import { getDataset } from '../../api/odoo.js';
-import { SessionKey, getSessionData } from '../../api/session.js';
+import { getSessionData, SessionKey } from '../../api/session.js';
 import ContentFeature from '../../generic/content.js';
 import { generateMessage, stringToHTML } from '../../html_generator.js';
 import { isStillSamePage } from '../../utils/authorize.js';

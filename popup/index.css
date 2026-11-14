@@ -7,7 +7,7 @@
 }
 
 .joorney-body-background {
-    background-image: url('/images/background-popup.png');
+    background-image: url("/images/background-popup.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

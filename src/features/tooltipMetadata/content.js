@@ -47,7 +47,7 @@ export default class TooltipMetadataContentFeature extends ContentFeature {
         const breadcrumbList = document.querySelector('ol.breadcrumb');
         const lastItem = document.querySelector('.o_last_breadcrumb_item');
         const container =
-            (breadcrumbList ? lastItem?.parentElement ?? breadcrumbList : breadcrumbList) ??
+            (breadcrumbList ? (lastItem?.parentElement ?? breadcrumbList) : breadcrumbList) ??
             document.querySelector('.o_breadcrumb'); // ?? document.querySelector('.o_control_panel_navigation') no breadcrumb?
         if (!container) return;
 

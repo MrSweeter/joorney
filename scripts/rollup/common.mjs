@@ -49,7 +49,7 @@ function getBuildDate() {
 }
 
 function getMinimalOdooVersionSupported() {
-    return Number.parseInt(SUPPORTED_VERSION[0]);
+    return Number.parseInt(SUPPORTED_VERSION[0], 10);
 }
 
 export function placeholder(strArg) {

@@ -42,7 +42,7 @@ input:indeterminate + .ua-slider {
     color: var(--joorney-primary);
     -webkit-transition: 0.4s;
     transition: 0.4s;
-    font-family: 'Font Awesome 6 Free';
+    font-family: "Font Awesome 6 Free", sans-serif;
     font-weight: 900;
     font-style: normal;
     font-variant: normal;
@@ -58,7 +58,7 @@ input:checked + .ua-slider:before {
 }
 
 input:indeterminate + .ua-slider:before {
-    content: '\3f';
+    content: "\3f";
     background-color: rgb(136, 136, 136);
     -webkit-transform: translateX(13px);
     -ms-transform: translateX(13px);
@@ -74,17 +74,17 @@ input:indeterminate + .ua-slider:before {
 }
 
 .ua-order:before {
-    content: '\f0dc';
+    content: "\f0dc";
 }
 
 input:checked + .ua-order:before {
-    content: '\f0dc';
+    content: "\f0dc";
 }
 
 .ua-share:before {
-    content: '\f21b'; /*f4fb*/
+    content: "\f21b"; /*f4fb*/
 }
 
 input:checked + .ua-share:before {
-    content: '\f1e0';
+    content: "\f1e0";
 }
