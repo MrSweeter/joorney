@@ -44,7 +44,8 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
                 user_field: 'technician_user_id',
                 label: 'Technician',
                 date_field: 'assign_date',
-                input_selector: '.o_many2one .o_field_many2one_selection',
+                // [ODOO] 19.0+ wraps it in .o_many2one, < 19.0 has it directly in the field root
+                input_selector: '.o_field_many2one_selection',
                 button_parent_selector: "div[name='technician_user_id']",
             },
         });
@@ -168,11 +169,7 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
             document.querySelector('.o_user_avatar, .oe_topbar_avatar')?.src ??
             document.querySelector('.o_user_menu img')?.src;
         if (!avatarSrc || avatarSrc.length <= 0) return false;
-        const userName = document
-            .querySelector(
-                '.o_user_avatar ~ .oe_topbar_name, .oe_topbar_avatar ~ .oe_topbar_name, .o_user_menu .oe_topbar_name'
-            )
-            ?.textContent?.trim();
+        const userName = getSessionData(SessionKey.NAME) || this.getTopbarUserName();
         if (!userName || userName.length <= 0) return false;
 
         // Fake chat message
@@ -199,6 +196,18 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
         return true;
     }
 
+    getTopbarUserName() {
+        const topbarName = document.querySelector(
+            '.o_user_avatar ~ .oe_topbar_name, .oe_topbar_avatar ~ .oe_topbar_name, .o_user_menu .oe_topbar_name'
+        );
+        // [ODOO] 17.0+ .oe_topbar_name also holds <mark>db name</mark>: keep its own text only
+        return Array.from(topbarName?.childNodes ?? [])
+            .filter((n) => n.nodeType === Node.TEXT_NODE)
+            .map((n) => n.textContent)
+            .join('')
+            .trim();
+    }
+
     addDateTag(date) {
         const fieldElement = document.getElementsByName(this.activeModel.date_field)?.[0];
         if (!fieldElement) return false;
@@ -215,7 +224,10 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
     addUserTag(username, avatarSrc) {
         const fieldElement = document.getElementsByName(this.activeModel.user_field)?.[0];
         if (!fieldElement) return false;
-        const containerElement = fieldElement.querySelector(this.activeModel.input_selector);
+        // Single value field: when the input markup is unknown (other Odoo version), replace the whole field content
+        const containerElement =
+            fieldElement.querySelector(this.activeModel.input_selector) ??
+            (this.activeModel.list ? null : fieldElement);
         if (!containerElement) return false;
         const tagElement = generateUserAvatarTag(username, avatarSrc);
         tagElement.title = fakeDataTitle;
@@ -234,15 +246,16 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
             element.remove();
         }
         for (const element of document.querySelectorAll(`[${SIMULATED_HIDDEN_ATTR}]`)) {
-            element.style.display = '';
+            element.style.removeProperty('display');
             element.removeAttribute(SIMULATED_HIDDEN_ATTR);
         }
     }
 
     // Odoo (OWL) owns the field DOM: removing its nodes leaves dangling refs that crash on the next render
     // (e.g. AutoComplete.onWillUpdateProps after pager navigation). Hide them instead, restored by removeUserInUI.
+    // !important: Odoo field roots often use Bootstrap d-flex (display: flex !important), which beats inline display
     hideForSimulation(element) {
-        element.style.display = 'none';
+        element.style.setProperty('display', 'none', 'important');
         element.setAttribute(SIMULATED_HIDDEN_ATTR, '');
     }
 }
