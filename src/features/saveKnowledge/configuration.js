@@ -1,7 +1,7 @@
 export default {
     id: 'saveKnowledge',
     display_name: 'Save Knowledge',
-    icon: '<i class="fa-solid fa-bookmark"></i>',
+    icon: 'bookmark',
     trigger: {
         load: true,
         navigate: true,

@@ -193,7 +193,7 @@ function renderOrigin(idx, origin, features) {
 					class="joorney_origins_filter_origin_delete_${idx} btn btn-outline-danger border-0 btn-floating"
 					title="Delete origin"
 				>
-					<i class="joorney-font-icon-size fa fa-trash"></i>
+					<i class="joorney-icon joorney-icon-filled joorney-font-icon-size" data-icon="delete" aria-hidden="true"></i>
 				</button>
 			</td>
 		</tr>

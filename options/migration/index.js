@@ -37,10 +37,10 @@ function analyzeConfiguration(jsonFile) {
     }
     document.getElementById('error_message').innerHTML = '';
 
-    let migrateListString = `<h3><span class="badge badge-success py-1 px-3">${migrateVersion}</span></h3><i class="fa-solid fa-arrow-right-long mx-3"></i>`;
+    let migrateListString = `<h3><span class="badge badge-success py-1 px-3">${migrateVersion}</span></h3><i class="joorney-icon joorney-icon-filled mx-3" data-icon="arrow_right_alt" aria-hidden="true"></i>`;
     for (let i = migrateVersion; i < currentVersion - 1; i++) {
         migrateListString += `<h3><span class="badge badge-info py-1 px-3">${i + 1}</span></h3>
-        <i class="fa-solid fa-arrow-right-long mx-3"></i>`;
+        <i class="joorney-icon joorney-icon-filled mx-3" data-icon="arrow_right_alt" aria-hidden="true"></i>`;
     }
     migrateListString += `<h3><span class="badge badge-success py-1 px-3">${currentVersion}</span></h3>`;
     document.getElementById('migration_list').innerHTML = migrateListString;
@@ -52,7 +52,8 @@ function analyzeConfiguration(jsonFile) {
         document.getElementById('joorney_import_storage_sync_file').value = null;
         const button = e.currentTarget;
         button.disabled = true;
-        button.innerHTML = '<i class="fa-solid fa-spin fa-spinner"></i>';
+        button.innerHTML =
+            '<i class="joorney-icon joorney-icon-filled joorney-icon-spin" data-icon="progress_activity" aria-hidden="true"></i>';
         const finalConfiguration = await runMigration(jsonFile, migrateVersion, currentVersion);
 
         await StorageSync.set(finalConfiguration);

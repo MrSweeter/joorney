@@ -1,7 +1,7 @@
 export default {
     id: 'starringPriorityEffect',
     display_name: 'Starring Effect',
-    icon: '<i class="fa-solid fa-star"></i>',
+    icon: 'star',
     trigger: {
         load: true,
         navigate: true,

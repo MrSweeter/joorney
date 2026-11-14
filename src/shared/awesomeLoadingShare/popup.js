@@ -33,7 +33,8 @@ export default class AwesomeLoadingSharePopupFeature extends PopupCustomizableFe
 
             const optionButton = document.createElement('div');
             optionButton.style.cursor = 'pointer';
-            optionButton.innerHTML = '<i class="fa-solid fa-up-right-from-square"></i>';
+            optionButton.innerHTML =
+                '<i class="joorney-icon joorney-icon-filled" data-icon="open_in_new" aria-hidden="true"></i>';
             optionButton.onclick = () => Runtime.openOptionsPage();
 
             awesomeLoadingImage.parentNode.appendChild(optionButton);
