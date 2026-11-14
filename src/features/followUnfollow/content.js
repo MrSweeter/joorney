@@ -7,8 +7,22 @@ const buttonClass = "joorney_follow_unfollow_button"
 const buttonLabelClass = "joorney_follow_unfollow_btn_label"
 const mailFollowersButtonClass = "o-mail-Followers-button"
 
+// Odoo < 20: <i class="fa fa-user|fa-user-o"/>, Odoo 20+: <i class="oi [oi-filled]" data-icon="person"/>
 const followedIconClass = "fa-user"
 const unfollowedIconClass = "fa-user-o"
+const followedOdooIconClass = "oi-filled"
+const followersIconSelector = `i.${followedIconClass}, i.${unfollowedIconClass}, i.oi[data-icon="person"]`
+
+const isOdooIcon = (icon) => icon.classList.contains("oi")
+const isFollowedIcon = (icon) => icon.classList.contains(isOdooIcon(icon) ? followedOdooIconClass : followedIconClass)
+function setFollowedIcon(icon, followed) {
+    if (isOdooIcon(icon)) {
+        icon.classList.toggle(followedOdooIconClass, followed);
+        return;
+    }
+    icon.classList.remove(followedIconClass, unfollowedIconClass);
+    icon.classList.add(followed ? followedIconClass : unfollowedIconClass);
+}
 
 const followLabel = "Follow"
 const unfollowLabel = "Unfollow"
@@ -21,7 +35,10 @@ export default class FollowUnfollowContentFeature extends ContentFeature {
         this.followButtonObserver = new MutationObserver(this.handleButtonMutation);
     }
 
-    async loadFeature(url) { /* Nothing to load, document observer manage the logic */ }
+    async loadFeature(url) {
+        // The chatter may already be rendered when the feature loads
+        this.appendFollowButton();
+    }
 
     unload() {
         super.unload();
@@ -29,9 +46,14 @@ export default class FollowUnfollowContentFeature extends ContentFeature {
     }
 
     async onDocumentDOMChange(mutations) {
-        for (const mutation of mutations) {
-            if (mutation.addedNodes.length && mutation.addedNodes[0].classList?.contains(mailFollowersButtonClass)) this.appendFollowButton();
-        }
+        // The followers button can be added alone or inside a bigger subtree (Odoo 20 mounts the whole chatter at once)
+        const selector = `button.${mailFollowersButtonClass}`;
+        const hasFollowersButton = mutations.some((mutation) =>
+            Array.from(mutation.addedNodes).some(
+                (node) => node.nodeType === Node.ELEMENT_NODE && (node.matches(selector) || node.querySelector(selector))
+            )
+        );
+        if (hasFollowersButton) this.appendFollowButton();
     }
 
     onMouseEnter(e) {
@@ -52,9 +74,7 @@ export default class FollowUnfollowContentFeature extends ContentFeature {
     }
 
     async onClick(e, followed, userButton, icon) {
-        const newClass = followed ? unfollowedIconClass : followedIconClass;
-        icon.classList.remove(followedIconClass, unfollowedIconClass);
-        icon.classList.add(newClass);
+        setFollowedIcon(icon, !followed);
 
         userButton.click();
         await sleep(200);
@@ -71,10 +91,10 @@ export default class FollowUnfollowContentFeature extends ContentFeature {
         if (document.querySelector('.o-mail-Chatter-follow')) return;
 
         const mailFollowersButton = document.querySelector(`button.${mailFollowersButtonClass}`);
-        const mailFollowersIcon = mailFollowersButton?.querySelector("i.fa");
+        const mailFollowersIcon = mailFollowersButton?.querySelector(followersIconSelector);
         if (!mailFollowersIcon) return;
 
-        const followed = mailFollowersIcon.classList.contains(followedIconClass);
+        const followed = isFollowedIcon(mailFollowersIcon);
 
         const followButton = stringToHTML(`<button class="${buttonClass} btn px-0 my-2 ${followed ? 'text-success' : ''}">
             <div class="position-relative">
