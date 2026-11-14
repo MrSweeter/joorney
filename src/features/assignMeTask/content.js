@@ -3,8 +3,9 @@ import { SessionKey, getSessionData } from '../../api/session.js';
 import { generateTrackingMessage, generateUserAvatarTag, stringToHTML } from '../../html_generator.js';
 import RecordFormContentFeature from '../../shared/projectTaskShare/content.js';
 import { ToastManager } from '../../toast/index.js';
+import { isStillSamePage } from '../../utils/authorize.js';
 import { StorageSync } from '../../utils/browser.js';
-import { toOdooBackendDate } from '../../utils/util.js';
+import { toOdooBackendDate, waitForElement } from '../../utils/util.js';
 import configuration from './configuration.js';
 
 const SIMULATED_HIDDEN_ATTR = 'data-joorney-simulated-hidden';
@@ -66,7 +67,7 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
         return value ? value[0] : false;
     }
 
-    async loadFeatureWithRecord(model, record) {
+    async loadFeatureWithRecord(model, record, url) {
         const user = await this.tryCatch(() => getSessionData(SessionKey.UID), undefined);
         if (!user) return;
 
@@ -95,7 +96,7 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
         }
         if (userAssigned) return;
 
-        this.appendAssignMeButtonToDom();
+        await this.appendAssignMeButtonToDom(url);
     }
 
     updateAssignMeEvent(btn) {
@@ -106,7 +107,12 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
         };
     }
 
-    appendAssignMeButtonToDom() {
+    async appendAssignMeButtonToDom(url) {
+        const buttonContainer = await waitForElement(this.activeModel.button_parent_selector);
+        if (!buttonContainer || this._unloaded) return;
+        if (!(await isStillSamePage(0, url))) return;
+        if (document.getElementsByName('joorney_action_assign_to_me').length > 0) return;
+
         const buttonTemplate = document.createElement('template');
         buttonTemplate.innerHTML = `
             <button class="btn btn-warning" name="joorney_action_assign_to_me" type="object" title="Page will be reloaded, use wheel click to open in another tab">
@@ -117,8 +123,7 @@ export default class AssignMeTaskContentFeature extends RecordFormContentFeature
         const assignButton = buttonTemplate.content.firstChild;
         this.updateAssignMeEvent(assignButton);
 
-        const buttonContainer = document.querySelector(this.activeModel.button_parent_selector);
-        if (buttonContainer) buttonContainer.appendChild(assignButton);
+        buttonContainer.appendChild(assignButton);
     }
 
     hasConcurrentAssignment(record) {
