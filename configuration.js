@@ -10,6 +10,7 @@ import { Console, StorageSync, sendRuntimeMessage } from './src/utils/browser.js
 import { MESSAGE_ACTION } from './src/utils/messaging.js';
 
 export const baseSettings = {
+    // Bumping it requires a migrate_<N>.js registered in MIGRATORS below
     configurationVersion: 2,
     toastMode: 'ui',
     toastType: JSON.stringify({
@@ -96,8 +97,17 @@ export function importFeaturePopupFile(featureID) {
     return importFeatureFile(popupLoaders, featureID, 'popup').then((f) => new f.default());
 }
 
-export function importMigratorFile(fromVersion) {
-    return import(`./options/migration/migrator/migrate_${fromVersion}.js`).then((f) => f.default);
+// Static imports, no template-literal import() in the build (see scripts/rollup/feature_registry.js):
+// one entry per options/migration/migrator/migrate_<version>.js, add it when bumping configurationVersion
+const MIGRATORS = {
+    0: () => import('./options/migration/migrator/migrate_0.js'),
+    1: () => import('./options/migration/migrator/migrate_1.js'),
+};
+
+export async function importMigratorFile(fromVersion) {
+    const loader = MIGRATORS[fromVersion];
+    if (!loader) throw new Error(`No migrator from configuration version ${fromVersion}`);
+    return (await loader()).default;
 }
 
 export async function getFeaturesAndCurrentSettings() {

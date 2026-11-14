@@ -30,7 +30,9 @@ function getActiveFeatureIDs(featureState) {
  * Generate the 'virtual:joorney-features/*' modules:
  * - 'virtual:joorney-features/state': the content of features_state.json
  * - 'virtual:joorney-features/<file>': a static import per feature having this file (content, popup...)
- * Static imports are required, a template-literal import (dynamic-import-vars) would inline every feature folder.
+ * Static imports, not a template-literal import: Rollup cannot resolve `./${featureID}/x.js` by itself, the files
+ * would be missing from the bundle, and a glob plugin (dynamic-import-vars) would bundle every feature folder,
+ * disabled ones included. Migrators follow the same rule with a static map (MIGRATORS in configuration.js).
  * One module per file type, so an entry not using a type (popup in content.js) tree-shakes it.
  * @param {object} options
  * @param {string} options.rootDir repository root
