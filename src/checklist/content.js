@@ -32,8 +32,8 @@ export default class ChecklistContent {
         this.doneSteps = new Set();
 
         await this.congrats(false);
-        document.getElementById('joorney_checklist_tour_title').innerText = this.tour.title;
-        document.getElementById('joorney_checklist_tour_description').innerText = this.tour.description;
+        document.getElementById('joorney_checklist_tour_title').textContent = this.tour.title;
+        document.getElementById('joorney_checklist_tour_description').textContent = this.tour.description;
 
         const stepIDs = Object.keys(this.tour.steps);
         const tourStore = stepIDs.length > 0 ? await StorageLocal.get(this.tour.store) : {};
@@ -228,17 +228,17 @@ export default class ChecklistContent {
         const secondaryButton = document.getElementById('joorney_checklist_congrats_secondary');
         const nextTourID = await getNextTourID();
         if (nextTourID) {
-            mainButton.innerText = 'Next';
+            mainButton.textContent = 'Next';
             mainButton.onclick = () => {
                 if (isShow) this.nextTour(nextTourID);
             };
-            secondaryButton.innerText = 'Restart';
+            secondaryButton.textContent = 'Restart';
             secondaryButton.onclick = () => {
                 if (isShow) this.restart();
             };
             secondaryButton.classList.remove('d-none');
         } else {
-            mainButton.innerText = 'Restart';
+            mainButton.textContent = 'Restart';
             mainButton.onclick = () => {
                 if (isShow) this.restart();
             };

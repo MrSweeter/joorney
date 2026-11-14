@@ -682,8 +682,8 @@ export function shapeFromText(textData, flips = { vertical: false, horizontal: f
 // the result to avoid the performance penalty at runtime
 // cf custom_path.js
 export function shapeFromPath(pathData) {
-    let path = undefined;
-    let matrix = undefined;
+    let path;
+    let matrix;
 
     if (typeof pathData === 'string') {
         path = pathData;
@@ -703,8 +703,6 @@ export function shapeFromPath(pathData) {
         let minY = maxSize;
         let maxX = 0;
         let maxY = 0;
-        let width = undefined;
-        let height = undefined;
 
         // do some line skipping... this is faster than checking
         // every pixel and will be mostly still correct
@@ -719,8 +717,8 @@ export function shapeFromPath(pathData) {
             }
         }
 
-        width = maxX - minX;
-        height = maxY - minY;
+        const width = maxX - minX;
+        const height = maxY - minY;
 
         const maxDesiredSize = 10;
         const scale = Math.min(maxDesiredSize / width, maxDesiredSize / height);

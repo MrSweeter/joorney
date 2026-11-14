@@ -5,7 +5,7 @@ import AmbientLoader from './ambient_loader.js';
 import AmbientManager from './ambient_manager.js';
 import configuration from './configuration.js';
 
-let ambientConfetti = undefined;
+let ambientConfetti;
 
 export default class AmbientContentFeature extends ContentFeature {
     constructor() {

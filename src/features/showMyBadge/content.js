@@ -57,6 +57,7 @@ export default class ShowMyBadgeContentFeature extends ContentFeature {
         const emailNode = avatarCardMutationNode.querySelector('div.o_card_user_infos a[href^="mailto:"]');
         if (!emailNode) return;
         const email = emailNode.href.replace('mailto:', '');
+        // biome-ignore lint/performance/useDomNodeTextContent: the displayed name, without the hidden text of Odoo's DOM
         const name = avatarCardMutationNode.querySelector('div.o_card_user_infos span').innerText;
         if (!email) return;
         this.appendBadges(avatarCardMutationNode, email, name);
@@ -72,8 +73,9 @@ export default class ShowMyBadgeContentFeature extends ContentFeature {
 
         // [ODOO] 19.0+ buttonsNode
         // [ODOO] < 19.0 infoNode
-        const containerNode = buttonsNode?.parentNode.innerText === infoNode.innerText ? buttonsNode : infoNode;
+        // biome-ignore lint/performance/useDomNodeTextContent: compares the visible text of Odoo's rendered DOM
         const before = buttonsNode?.parentNode.innerText === infoNode.innerText;
+        const containerNode = before ? buttonsNode : infoNode;
 
         const emailNode = card.querySelector('div.o_card_user_infos a[href^="mailto:"]');
         const email = emailNode.href.replace('mailto:', '');

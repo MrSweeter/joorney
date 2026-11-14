@@ -3,7 +3,7 @@ import { getWebsiteOff } from '../src/api/local.js';
 import { getMenu } from '../src/api/odoo.js';
 import { loadSessionInfo } from '../src/api/session.js';
 import { getRunbotOpenUrl } from '../src/shared/limited/runbot_content.js';
-import { ToastManager, loadToast } from '../src/toast/index.js';
+import { loadToast, ToastManager } from '../src/toast/index.js';
 import { Console, Runtime, sendRuntimeMessage } from '../src/utils/browser.js';
 import { MESSAGE_ACTION } from '../src/utils/messaging.js';
 import { createActionMenuURL } from '../src/utils/url_manager.js';
@@ -93,7 +93,7 @@ function addNavigationListener() {
 }
 
 function canContinue(url) {
-    if (!url || !url.startsWith('http')) return false;
+    if (!url?.startsWith('http')) return false;
     return true;
     // TODO[VERSION] Limited feature like runbot, can work without version check
     // const { isOdoo, version } = getOdooVersion();

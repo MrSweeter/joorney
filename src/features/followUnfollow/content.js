@@ -35,7 +35,7 @@ export default class FollowUnfollowContentFeature extends ContentFeature {
         this.followButtonObserver = new MutationObserver(this.handleButtonMutation);
     }
 
-    async loadFeature(url) {
+    async loadFeature(_url) {
         // The chatter may already be rendered when the feature loads
         this.appendFollowButton();
     }
@@ -98,7 +98,8 @@ export default class FollowUnfollowContentFeature extends ContentFeature {
 
         const followed = isFollowedIcon(mailFollowersIcon);
 
-        const followButton = stringToHTML(`<button class="${buttonClass} btn px-0 my-2 ${followed ? 'text-success' : ''}">
+        const followButton =
+            stringToHTML(`<button class="${buttonClass} btn px-0 my-2 ${followed ? 'text-success' : ''}">
             <div class="position-relative">
                 <span class="d-flex invisible text-nowrap">__________</span>
                 <span class="${buttonLabelClass} position-absolute end-0 top-0 border-bottom border-warning border-1"> ${followed ? followingLabel : followLabel} </span>

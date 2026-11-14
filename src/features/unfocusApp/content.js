@@ -140,13 +140,13 @@ export default class UnfocusApp extends ContentFeature {
         if (currentState === undefined) currentState = UNFOCUS_STATE.DEFAULT;
         if (currentState === true) currentState = UNFOCUS_STATE.UNFOCUS; // true was the previous version logic
 
-        const newState = this.clickCount > UNFOCUS_STATE.MAX ? UNFOCUS_STATE.MAX : this.clickCount;
+        const newState = Math.min(this.clickCount, UNFOCUS_STATE.MAX);
 
         if (
             currentState === UNFOCUS_STATE.UNFOCUS ||
             (currentState !== newState && currentState > UNFOCUS_STATE.UNFOCUS)
         ) {
-            unfocusAppOrigins[origin][app] = this.clickCount > UNFOCUS_STATE.MAX ? UNFOCUS_STATE.MAX : this.clickCount;
+            unfocusAppOrigins[origin][app] = Math.min(this.clickCount, UNFOCUS_STATE.MAX);
         } else {
             unfocusAppOrigins[origin][app] = UNFOCUS_STATE.UNFOCUS;
         }

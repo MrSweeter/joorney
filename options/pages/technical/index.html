@@ -1,38 +1,38 @@
-<link href="./css/technical/json.css" rel="stylesheet" />
+<link href="./css/technical/json.css" rel="stylesheet">
 <style>
-    .tip-separator {
-        color: var(--joorney-secondary);
-    }
+.tip-separator {
+    color: var(--joorney-secondary);
+}
 </style>
 
 <div id="joorney_chaos_mode" class="container d-none pt-5">
     <h3 class="text-danger">[Chaos Mode] What are you doing here? You should not use these buttons!!!</h3>
-    <button class="btn btn-danger d-none" id="joorney_chaos_destroy_local_storage">Destroy Local-Storage</button>
-    <button class="btn btn-danger d-none" id="joorney_chaos_destroy_sync_storage">Destroy Sync-Storage</button>
+    <button type="button" class="btn btn-danger d-none" id="joorney_chaos_destroy_local_storage">Destroy Local-Storage</button>
+    <button type="button" class="btn btn-danger d-none" id="joorney_chaos_destroy_sync_storage">Destroy Sync-Storage</button>
 </div>
 
 <div class="container pt-5">
     <h3 class="mb-3">Experimental</h3>
     <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" id="joorney_experimentalDeveloperModeUI" />
+        <input class="form-check-input" type="checkbox" id="joorney_experimentalDeveloperModeUI">
         <label class="form-check-label" for="joorney_experimentalDeveloperModeUI">Developer Mode</label>
         <p><small class="text-muted">Developer Mode will allow you to use some Odoo/Joorney development flow (e.g: master branch)</small></p>
     </div>
 
     <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" id="joorney_experimentalSimulatedUI" />
+        <input class="form-check-input" type="checkbox" id="joorney_experimentalSimulatedUI">
         <label class="form-check-label" for="joorney_experimentalSimulatedUI">Use simulated UI</label>
         <p><small class="text-muted">Instead of reloading the page when assigning task using the "Assign Me" feature, append a simulated UI elements.</small></p>
     </div>
 
     <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" id="joorney_experimentalOmniboxFocusCurrentTab" />
+        <input class="form-check-input" type="checkbox" id="joorney_experimentalOmniboxFocusCurrentTab">
         <label class="form-check-label" for="joorney_experimentalOmniboxFocusCurrentTab">Omnibox: open in current tab</label>
         <p><small class="text-muted">Default behaviour will open the omnibox result in a new tab.</small></p>
     </div>
 
     <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" id="joorney_experimentalBase64CacheEncoding" />
+        <input class="form-check-input" type="checkbox" id="joorney_experimentalBase64CacheEncoding">
         <label class="form-check-label" for="joorney_experimentalBase64CacheEncoding">Cache encoding: Base64</label>
         <p><small class="text-muted">Convert locally cached data to Base64 encoding.</small></p>
     </div>
@@ -58,16 +58,16 @@
             </tr>
             <tr class="table-secondary">
                 <td class="p-1 joorney-valign-middle">
-                    <input type="text" class="form-control border border-0" id="joorney_window_action_fallback_new_origin" placeholder="https://www.odoo.com" />
+                    <input type="text" class="form-control border border-0" id="joorney_window_action_fallback_new_origin" placeholder="https://www.odoo.com">
                 </td>
                 <td class="p-1 joorney-valign-middle">
-                    <input type="text" class="form-control border border-0" id="joorney_window_action_fallback_new_action_path" placeholder="all-tasks" />
+                    <input type="text" class="form-control border border-0" id="joorney_window_action_fallback_new_action_path" placeholder="all-tasks">
                 </td>
                 <td class="p-1 joorney-valign-middle">
-                    <input type="text" class="form-control border border-0" id="joorney_window_action_fallback_new_action_model" placeholder="project.task" />
+                    <input type="text" class="form-control border border-0" id="joorney_window_action_fallback_new_action_model" placeholder="project.task">
                 </td>
                 <td class="p-1 joorney-valign-middle">
-                    <button title="Add fallback" id="joorney_window_action_fallback_new_path_save" class="btn btn-success btn-floating">
+                    <button type="button" title="Add fallback" id="joorney_window_action_fallback_new_path_save" class="btn btn-success btn-floating">
                         <i class="fa fa-plus"></i>
                     </button>
                 </td>

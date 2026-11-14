@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Inter:300,400,500,600&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Caveat:700&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Inter:300,400,500,600&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Caveat:700&display=swap");
 
 :root {
     --joorney-primary: #fca311;
@@ -12,7 +12,7 @@ html,
 body {
     margin: 0;
     color: var(--joorney-primary-text);
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 body {
@@ -21,7 +21,7 @@ body {
 }
 
 .geometric-background {
-    background-image: url('./assets/background.png');
+    background-image: url("./assets/background.png");
     background-position: top;
     background-size: cover;
 }
@@ -37,7 +37,7 @@ body {
 }
 
 .odoo-font {
-    font-family: 'Inter', 'Roboto', sans-serif;
+    font-family: "Inter", "Roboto", sans-serif;
 }
 
 .text-primary {
@@ -174,7 +174,7 @@ ol {
 
 /* Odoo Style */
 body.odoo-style .caveat {
-    font-family: 'Caveat', 'Roboto', sans-serif;
+    font-family: "Caveat", "Roboto", sans-serif;
     font-weight: 700;
 }
 
@@ -185,15 +185,15 @@ body.odoo-style .text-paint {
 }
 
 body.odoo-style .text-paint-yellow {
-    background-image: url('./assets/text-paint-odoo/text-paint-yellow.svg');
+    background-image: url("./assets/text-paint-odoo/text-paint-yellow.svg");
 }
 
 body.odoo-style .text-paint-red {
-    background-image: url('./assets/text-paint-odoo/text-paint-red.svg');
+    background-image: url("./assets/text-paint-odoo/text-paint-red.svg");
 }
 
 body.odoo-style .text-paint-blue {
-    background-image: url('./assets/text-paint-odoo/text-paint-blue.svg');
+    background-image: url("./assets/text-paint-odoo/text-paint-blue.svg");
 }
 
 body.odoo-style #view-type-bar {

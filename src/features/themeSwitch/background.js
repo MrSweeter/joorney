@@ -49,9 +49,9 @@ export default class ThemeSwitchBackgroundFeature extends BackgroundFeature {
             }
             case 'dynamicTime': {
                 let start = themeSwitchDarkStartTime.split(':');
-                start = Number.parseInt(start[0]) * 60 + Number.parseInt(start[1]);
+                start = Number.parseInt(start[0], 10) * 60 + Number.parseInt(start[1], 10);
                 let stop = themeSwitchDarkStopTime.split(':');
-                stop = Number.parseInt(stop[0]) * 60 + Number.parseInt(stop[1]);
+                stop = Number.parseInt(stop[0], 10) * 60 + Number.parseInt(stop[1], 10);
 
                 if (start < stop) expectedMode = time > start && time < stop ? 'dark' : 'light';
                 else expectedMode = time > start || time < stop ? 'dark' : 'light';
