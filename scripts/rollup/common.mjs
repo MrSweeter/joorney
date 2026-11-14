@@ -1,6 +1,5 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import dynamicImportVars from '@rollup/plugin-dynamic-import-vars';
 import json from '@rollup/plugin-json';
 import resolve from '@rollup/plugin-node-resolve';
 import copy from 'rollup-plugin-copy';
@@ -11,13 +10,7 @@ const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'
 const isProd = () => process.env.NODE_ENV === 'production';
 
 export function getDefaultPlugins() {
-    return [
-        featureRegistry({ rootDir: ROOT_DIR }),
-        resolve(),
-        json(),
-        // Only the migrators still use a template-literal import, features go through the registry
-        dynamicImportVars({ exclude: ['features_state.json'] }),
-    ];
+    return [featureRegistry({ rootDir: ROOT_DIR }), resolve(), json()];
 }
 
 export function getESMOutput(file) {
