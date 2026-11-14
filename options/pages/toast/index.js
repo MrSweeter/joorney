@@ -105,3 +105,12 @@ async function showMockToast() {
         );
     }
 }
+
+// Options menu entry, see options/menu.js
+export const PAGE = {
+    id: 'page-toast',
+    tour: 'tour_toasts',
+    label: 'Notifications',
+    path: './pages/toast/index.html',
+    loader: loadPage,
+};

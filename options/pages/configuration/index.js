@@ -9,3 +9,12 @@ async function loadFeatures(features) {
         importFeatureCustomizationFile(feature.id).then((featureModule) => featureModule.load());
     }
 }
+
+// Options menu entry, see options/menu.js
+export const PAGE = {
+    id: 'page-configuration',
+    tour: 'tour_preferences',
+    label: 'Preferences',
+    path: './pages/configuration/index.html',
+    loader: loadPage,
+};
