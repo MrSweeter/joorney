@@ -12,15 +12,15 @@ export default class RecordFormContentFeature extends ContentFeature {
 
     async loadFeature(url) {
         this.preloadFeature();
-        if (!(await isStillSamePage(2500, url))) return;
+        if (!(await isStillSamePage(300, url))) return;
         const modelRecord = await this.getRecord(url);
         // Avoid applying a late response to another record (fast pager navigation)
         if (!(await isStillSamePage(0, url))) return;
-        if (modelRecord) this.loadFeatureWithRecord(modelRecord.model, modelRecord.record);
+        if (modelRecord) await this.loadFeatureWithRecord(modelRecord.model, modelRecord.record, url);
     }
 
     preloadFeature() {}
-    loadFeatureWithRecord(_model, _record) {}
+    loadFeatureWithRecord(_model, _record, _url) {}
 
     async getRecord(url) {
         const recordID = await this.tryCatch(

@@ -20,6 +20,25 @@ export async function sleep(timeMS) {
     return await new Promise((r) => setTimeout(r, timeMS));
 }
 
+export function waitForElement(selector, timeMS = 5000, root = document) {
+    const existing = root.querySelector(selector);
+    if (existing) return Promise.resolve(existing);
+
+    return new Promise((resolve) => {
+        const done = (element) => {
+            observer.disconnect();
+            clearTimeout(timer);
+            resolve(element);
+        };
+        const observer = new MutationObserver(() => {
+            const element = root.querySelector(selector);
+            if (element) done(element);
+        });
+        const timer = setTimeout(() => done(null), timeMS);
+        observer.observe(root === document ? document.documentElement : root, { childList: true, subtree: true });
+    });
+}
+
 export function yyyymmdd_hhmmssToDate(datetimeStr) {
     const [dateStr, timeStr] = datetimeStr.split(' ');
     return new Date(`${dateStr}T${timeStr}Z`).toISOString();
