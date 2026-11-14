@@ -46,8 +46,10 @@ function loadFeature() {
     if (!feature) return;
     window.location.hash = feature.id;
 
-    document.getElementById('feature-icon').className =
-        `fa-2x w-100 h-100 text-joorney d-flex justify-content-center align-items-center ${feature.icon}`;
+    const icon = document.getElementById('feature-icon');
+    icon.className =
+        'joorney-icon joorney-icon-filled joorney-icon-2x w-100 h-100 text-joorney d-flex justify-content-center align-items-center';
+    icon.dataset.icon = feature.icon;
     document.getElementById('feature-title').innerHTML = feature.title;
     document.getElementById('feature-description').innerHTML = `
         ${feature.deprecatedReason ? `<span class="text-danger">[DEPRECATED] ${feature.deprecatedReason}</span><br />` : ''}

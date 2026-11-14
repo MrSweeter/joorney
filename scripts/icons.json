@@ -57,6 +57,8 @@
         "stop",
         "swap_horiz",
         "swap_vert",
+        "swipe_left",
+        "swipe_right",
         "theater_comedy",
         "toggle_off",
         "toggle_on",
