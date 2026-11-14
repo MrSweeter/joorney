@@ -43,7 +43,7 @@ export const extensionFeatureState = FeaturesState;
 const activeFeaturesList = Object.keys(FeaturesState).filter((k) => !k.startsWith('__') && FeaturesState[k]);
 
 export let features = [];
-let featuresLoading = undefined;
+let featuresLoading;
 // Memoized: every caller awaits the same loading, avoid using 'features' before it is filled
 export function loadFeaturesConfiguration() {
     featuresLoading ??= Promise.all(activeFeaturesList.map((f) => importFeatureConfigurationFile(f))).then(

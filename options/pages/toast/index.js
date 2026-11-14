@@ -3,14 +3,14 @@ import { ToastManager } from '../../../src/toast/index.js';
 import { StorageSync } from '../../../src/utils/browser.js';
 import { sleep } from '../../../src/utils/util.js';
 
-export async function loadPage(features, currentSettings) {
-    ToastManager.load();
+export async function loadPage(_features, currentSettings) {
+    await ToastManager.load();
 
     handleToastMode(currentSettings.toastMode);
     handleToastType(JSON.parse(currentSettings.toastType));
 }
 
-let joorneyCurrentToastMode = undefined;
+let joorneyCurrentToastMode;
 
 function handleToastMode(mode) {
     const radioButtons = document.querySelectorAll('.joorney-toast-mode-control input[type="radio"]');

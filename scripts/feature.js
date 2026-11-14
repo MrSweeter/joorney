@@ -3,7 +3,7 @@ Usage:
 	feature.js create <name> [<supported-version>... -b -l -n -c -o -p --overwrite]
 	feature.js update <name> [-b -l -n -o -p --overwrite]
 	feature.js delete <name>
-|
+
 Options:
     name                                Feature name ([a-zA-Z_\\s]+)
     supported-version                   Supported versions for this feature
@@ -14,14 +14,14 @@ Options:
     -o --with-customization-option      Create custom option file to allow customizable option in options page
     -p --with-customization-popup       Create custom popup file to allow customizable option in popup extension
     --overwrite                         Delete feature if already exist
+    -h --help                           Show this help
 `;
-
-import docoptImport from '@eyalsh/docopt';
-const docopt = docoptImport.default;
 
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { parseArgs } from 'node:util';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -39,8 +39,57 @@ Object.prototype.cleanStringify = function () {
     return JSON.stringify(this, null, 4).replace(/"([^"]+)":/g, '$1:');
 };
 
+const OPTIONS = {
+    'with-trigger-background': { type: 'boolean', short: 'b' },
+    'with-trigger-load': { type: 'boolean', short: 'l' },
+    'with-trigger-navigate': { type: 'boolean', short: 'n' },
+    'with-trigger-context': { type: 'boolean', short: 'c' },
+    'with-customization-option': { type: 'boolean', short: 'o' },
+    'with-customization-popup': { type: 'boolean', short: 'p' },
+    overwrite: { type: 'boolean' },
+    help: { type: 'boolean', short: 'h' },
+};
+// Arguments accepted by each command, see the usage in 'doc'
+const COMMANDS = {
+    create: { versions: true, options: Object.keys(OPTIONS) },
+    update: { versions: false, options: Object.keys(OPTIONS).filter((o) => o !== 'with-trigger-context') },
+    delete: { versions: false, options: ['help'] },
+};
+
+/**
+ * @returns {object} {<command>: true, '<name>': string, '<supported-version>': string[], '--<option>': boolean}
+ */
+function parseOptions(args) {
+    let parsed;
+    try {
+        parsed = parseArgs({ args: args, options: OPTIONS, allowPositionals: true, strict: true });
+    } catch (e) {
+        throw new Error(`${e.message}\n${doc}`);
+    }
+    const { values, positionals } = parsed;
+    if (values.help) {
+        console.info(doc);
+        process.exit(0);
+    }
+
+    const [command, name, ...versions] = positionals;
+    const accepted = COMMANDS[command];
+    if (!accepted) throw new Error(`Unknown command '${command ?? ''}'\n${doc}`);
+    if (!name) throw new Error(`Missing feature name\n${doc}`);
+    if (versions.length > 0 && !accepted.versions)
+        throw new Error(`Unexpected arguments: ${versions.join(' ')}\n${doc}`);
+    const refused = Object.keys(values).filter((o) => !accepted.options.includes(o));
+    if (refused.length > 0) throw new Error(`Option not supported by '${command}': --${refused.join(', --')}\n${doc}`);
+
+    const option = { [command]: true, '<name>': name, '<supported-version>': versions };
+    for (const key of Object.keys(OPTIONS)) {
+        option[`--${key}`] = values[key] ?? false;
+    }
+    return option;
+}
+
 try {
-    const option = docopt(doc);
+    const option = parseOptions(process.argv.slice(2));
 
     const featureName = sanitizeName(option['<name>']);
 
@@ -80,17 +129,17 @@ function createFeature(featureName, option) {
         display_name: featureName.display,
         icon: '<i class="fa-solid fa-circle-question"></i>',
         trigger: {
-            background: option['--with-trigger-background'] === 1,
-            load: option['--with-trigger-load'] === 1,
-            navigate: option['--with-trigger-navigate'] === 1,
-            context: option['--with-trigger-context'] === 1,
+            background: option['--with-trigger-background'],
+            load: option['--with-trigger-load'],
+            navigate: option['--with-trigger-navigate'],
+            context: option['--with-trigger-context'],
             // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Match_patterns
             onrequest: [],
             ondom: false,
         },
         customization: {
-            option: option['--with-customization-option'] === 1,
-            popup: option['--with-customization-popup'] === 1,
+            option: option['--with-customization-option'],
+            popup: option['--with-customization-popup'],
         },
         defaultSettings: {
             [`${featureName.id}Enabled`]: false,

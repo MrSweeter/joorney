@@ -3,7 +3,7 @@ import { isStillSamePage } from '../../utils/authorize.js';
 import Confetti from '../../utils/confetti.js';
 import configuration from './configuration.js';
 
-let starsConfetti = undefined;
+let starsConfetti;
 export default class StarringPriorityEffectContentFeature extends ContentFeature {
     constructor() {
         super(configuration);
@@ -37,7 +37,7 @@ export default class StarringPriorityEffectContentFeature extends ContentFeature
         let priority = 0;
         let checked = false;
         for (const [i, el] of stars.entries()) {
-            const starPriority = Number.parseInt(el.dataset.joorneyPriorityValue ?? 10);
+            const starPriority = Number.parseInt(el.dataset.joorneyPriorityValue ?? 10, 10);
             checked = starPriority <= newPriority;
 
             if (initialization) {
@@ -76,8 +76,8 @@ export default class StarringPriorityEffectContentFeature extends ContentFeature
         if (this.unloadIfOrphaned()) return;
         const element = event.target;
         const parent = element.closest('.o_priority');
-        const currentPriority = Number.parseInt(parent.dataset.joorneyPriorityValue ?? 0);
-        const priority = Number.parseInt(element.dataset.joorneyPriorityValue ?? 0);
+        const currentPriority = Number.parseInt(parent.dataset.joorneyPriorityValue ?? 0, 10);
+        const priority = Number.parseInt(element.dataset.joorneyPriorityValue ?? 0, 10);
         this.updateWidgetFeature(parent, priority === currentPriority ? 0 : priority);
     }
 
@@ -95,7 +95,10 @@ export default class StarringPriorityEffectContentFeature extends ContentFeature
         setTimeout(() => this.shoot(x, y), 100);
         setTimeout(() => this.shoot(x, y), 200);
 
-        this.updateWidgetFeature(element.closest('.o_priority'), Number.parseInt(element.dataset.joorneyPriorityValue));
+        this.updateWidgetFeature(
+            element.closest('.o_priority'),
+            Number.parseInt(element.dataset.joorneyPriorityValue, 10)
+        );
     }
 
     async shoot(x, y) {

@@ -42,7 +42,7 @@ input:indeterminate + .pm-slider {
     color: var(--joorney-primary);
     -webkit-transition: 0.4s;
     transition: 0.4s;
-    font-family: 'Font Awesome 6 Free';
+    font-family: "Font Awesome 6 Free", sans-serif;
     font-weight: 900;
     font-style: normal;
     font-variant: normal;
@@ -58,7 +58,7 @@ input:checked + .pm-slider:before {
 }
 
 input:indeterminate + .pm-slider:before {
-    content: '\3f';
+    content: "\3f";
     background-color: rgb(136, 136, 136);
     -webkit-transform: translateX(13px);
     -ms-transform: translateX(13px);
@@ -74,17 +74,17 @@ input:indeterminate + .pm-slider:before {
 }
 
 .pm-author:before {
-    content: '\f086';
+    content: "\f086";
 }
 
 input:checked + .pm-author:before {
-    content: '\f075';
+    content: "\f075";
 }
 
 .pm-shown:before {
-    content: '\f070';
+    content: "\f070";
 }
 
 input:checked + .pm-shown:before {
-    content: '\f06e';
+    content: "\f06e";
 }

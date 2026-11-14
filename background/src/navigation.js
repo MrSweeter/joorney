@@ -1,4 +1,4 @@
-import { WebNavigation, sendTabMessage } from '../../src/utils/browser.js';
+import { sendTabMessage, WebNavigation } from '../../src/utils/browser.js';
 import { MESSAGE_ACTION } from '../../src/utils/messaging.js';
 
 export function listenNavigation() {

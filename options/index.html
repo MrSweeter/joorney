@@ -1,18 +1,18 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
     <head>
         <title>Joorney Configuration</title>
-        <link rel="icon" type="image/x+icon" href="./../images/icon_128.svg" />
-        <meta charset="utf-8" />
+        <link rel="icon" type="image/x+icon" href="./../images/icon_128.svg">
+        <meta charset="utf-8">
         <!-- Font Awesome -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
         <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
         <!-- MDB -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.1/mdb.min.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.1/mdb.min.css" rel="stylesheet">
 
-        <link href="./index.css" rel="stylesheet" />
-        <link href="./checklist.css" rel="stylesheet" />
+        <link href="./index.css" rel="stylesheet">
+        <link href="./checklist.css" rel="stylesheet">
         <script src="index.js"></script>
     </head>
     <body class="joorney-body-background d-flex flex-column">
@@ -20,7 +20,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light" id="joorney-navig-menu">
             <div class="container-fluid">
                 <div id="joorney-brand-debug" class="navbar-brand" title="Debug mode">
-                    <img loading="lazy" src="/images/icon_128.png" class="mx-2" height="20" alt="Joorney Logo" />
+                    <img loading="lazy" src="/images/icon_128.png" class="mx-2" height="20" alt="Joorney Logo">
                     <small>Joorney Configuration</small>
                 </div>
                 <ul id="joorney-menu-items-container" class="navbar-nav"></ul>
@@ -31,11 +31,11 @@
                 </ul>
 
                 <div class="d-flex align-items-center">
-                    <input type="file" accept=".json" class="form-control form-control-sm" id="joorney_import_storage_sync_file" />
-                    <button class="btn" id="joorney_import_storage_sync" title="Import settings">
+                    <input type="file" accept=".json" class="form-control form-control-sm" id="joorney_import_storage_sync_file">
+                    <button type="button" class="btn" id="joorney_import_storage_sync" title="Import settings">
                         <i class="fas fa-cloud-arrow-up"></i>
                     </button>
-                    <button class="btn" id="joorney_export_storage_sync" title="Export settings">
+                    <button type="button" class="btn" id="joorney_export_storage_sync" title="Export settings">
                         <i class="fas fa-cloud-arrow-down"></i>
                     </button>
                     <a class="btn btn-success d-none" id="joorney_migrate_configuration" href="./migration/index.html" target="_blank">MIGRATE</a>
@@ -47,7 +47,7 @@
         <!-- Announcement -->
         <div class="d-none">
             <div id="joorney-announcement" class="alert alert-info rounded mx-5 mt-3">
-                <button id="ja-close" class="btn-close small position-absolute top-0 end-0 mt-2 me-2 opacity-50 d-none"></button>
+                <button type="button" id="ja-close" class="btn-close small position-absolute top-0 end-0 mt-2 me-2 opacity-50 d-none"></button>
                 <p class="fw-bold mb-0 d-none"><span id="ja-version">[X.Y.Z]</span><span id="ja-title">Title</span></p>
                 <p id="ja-description" class="d-none mb-0">Description</p>
             </div>
@@ -57,13 +57,13 @@
         <div id="joorney-page-container" class="flex-fill"></div>
 
         <!-- Onboard -->
-        <div id="bubble" class="bubble opacity-0"><img class="w-100" src="/images/bubble.png" /></div>
+        <div id="bubble" class="bubble opacity-0"><img class="w-100" src="/images/bubble.png" alt=""></div>
         <button id="joorney_checklist_show_btn" class="d-none btn btn-floating" type="button" title="Show onboarding-checklist"><i class="fa-solid fa-list-check"></i></button>
         <div id="joorney_checklist" class="onboarding-checklist overflow-hidden" style="max-height: 80%;">
             <button id="joorney_checklist_hide_btn" class="btn btn-floating position-absolute top-0 end-0 shadow-0" type="button" title="Close"><i class="fa-solid fa-xmark"></i></button>
             <div class="justify-content-between d-flex flex-column">
                 <h3 class="m-0"><span id="joorney_checklist_tour_title">Discover Joorney</span> <i id="joorney_checklist_tour_title_markall_done" class="fa-solid fa-clipboard-list"></i></h3>
-                <h6 id="joorney_checklist_tour_description" class="text-muted"></h6>
+                <h6 id="joorney_checklist_tour_description" class="text-muted">Follow the steps below</h6>
             </div>
             <div class="progress rounded" style="height: 8px;">
                 <div id="joorney_checklist_tour_progress" class="progress-bar rounded" role="progressbar" style="width: 25%;"></div>
@@ -73,12 +73,12 @@
                     <h4 class="card-title text-success">Congratulations!</h4>
                     <p class="card-text">You've completed the onboarding checklist. Great job!</p>
                     <div class="d-flex flex-column">
-                        <button id="joorney_checklist_congrats_primary" class="btn btn-success">Restart</button>
-                        <button id="joorney_checklist_congrats_secondary" class="btn btn-tertiary text-decoration-underline">Restart</button>
+                        <button type="button" id="joorney_checklist_congrats_primary" class="btn btn-success">Restart</button>
+                        <button type="button" id="joorney_checklist_congrats_secondary" class="btn btn-tertiary text-decoration-underline">Restart</button>
                     </div>
                 </div>
             </div>
-            <hr id="joorney_checklist_congrats_separator" class="d-none" />
+            <hr id="joorney_checklist_congrats_separator" class="d-none">
             <div class="position-relative">
                 <div id="joorney_checklist_steps_list" class="mt-3">
                     <!-- DYNAMIC CONTENT -->

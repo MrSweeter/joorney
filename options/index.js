@@ -9,7 +9,7 @@ import { load as loadShortcut } from './src/keyboard_shortcut.js';
 import { loadManifest, loadMenus } from './src/layout.js';
 
 async function onDOMContentLoaded() {
-    document.getElementById('copyright-year').innerText = new Date().getFullYear();
+    document.getElementById('copyright-year').textContent = new Date().getFullYear();
     //document.getElementById('copyright-link').href = Runtime.getManifest().homepage_url; Not public API
 
     initImportExport();
@@ -67,7 +67,7 @@ async function loadAnnouncement(announce) {
     let show = false;
     if (announce.title) {
         document.getElementById('ja-title').innerHTML = announce.title;
-        document.getElementById('ja-version').innerText = announce.version ? `[${announce.version}] ` : '';
+        document.getElementById('ja-version').textContent = announce.version ? `[${announce.version}] ` : '';
         document.getElementById('ja-title').parentElement.classList.toggle('d-none');
         show = true;
     }

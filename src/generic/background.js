@@ -15,7 +15,7 @@ export default class BackgroundFeature {
         if (!tab.url) return;
         const url = sanitizeURL(tab.url);
         const origin = url.origin;
-        if (!origin || !origin.startsWith('http')) return;
+        if (!origin?.startsWith('http')) return;
 
         if (!(await isAuthorizedFeature(this.configuration.id, url))) return;
 

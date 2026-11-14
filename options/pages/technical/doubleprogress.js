@@ -60,7 +60,7 @@ export default class DoubleProgressBar {
     loadPartial() {
         this.partialBar.innerHTML = '';
         this.partialBar.title = `${this.total}`;
-        let usageElement = undefined;
+        let usageElement;
         let i = 0;
         for (const section of this.sections) {
             usageElement = this.getSectionElement(

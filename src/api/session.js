@@ -1,4 +1,4 @@
-let SESSION_INFO = undefined;
+let SESSION_INFO;
 export const SessionKey = {
     UID: 'uid',
     NAME: 'name',
@@ -19,10 +19,10 @@ export function getSessionData(key) {
 export async function loadSessionInfo() {
     if (SESSION_INFO) return;
     const scripts = document.querySelectorAll('script[type="text/javascript"]');
-    const script = Array.from(scripts).find((s) => s.innerText.includes('odoo.__session_info__'));
+    const script = Array.from(scripts).find((s) => s.textContent.includes('odoo.__session_info__'));
     if (!script) return;
     const regex = /odoo\.__session_info__\s*=\s*(\{.*\});/;
-    const match = script.innerText.match(regex);
+    const match = script.textContent.match(regex);
     if (match) {
         await saveSession(JSON.parse(match[1]));
     }

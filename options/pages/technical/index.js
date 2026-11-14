@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 import { baseSettings } from '../../../configuration';
 import { extensionFeatureState } from '../../../configuration.js';
 import { handleExpanderClick } from '../../../lib/json-formatter/collapse.js';
@@ -8,7 +7,7 @@ import { getLocal, getStorageUsage } from '../../../src/api/local.js';
 import { getOnboardingProgressData } from '../../../src/checklist/index.js';
 import { tours } from '../../../src/checklist/tour.js';
 import { stringToHTML } from '../../../src/html_generator';
-import { StorageLocal, StorageSync, isDevMode } from '../../../src/utils/browser.js';
+import { isDevMode, StorageLocal, StorageSync } from '../../../src/utils/browser.js';
 import { sleep } from '../../../src/utils/util.js';
 import { updateSupportedDevelopmentVersion } from '../../../src/utils/version.js';
 import DoubleProgressBar from './doubleprogress.js';
@@ -218,7 +217,7 @@ function loadWindowActionFallback(windowActionFallbacks) {
 function renderOriginFallback(origin, values, container) {
     if (Object.keys(values).length === 0) return;
 
-    const idx = uuidv4();
+    const idx = crypto.randomUUID();
     const originID = `joorney_window_action_fallback_origin_delete_${idx}`;
     const originRow = stringToHTML(`
         <tr>
@@ -243,7 +242,7 @@ function renderOriginFallback(origin, values, container) {
 }
 
 function renderFallback(origin, actionPath, actionModel, container) {
-    const idx = uuidv4();
+    const idx = crypto.randomUUID();
     const originID = `joorney_window_action_fallback_delete_${idx}`;
     const fallbackRow = stringToHTML(`
         <tr>
@@ -309,7 +308,7 @@ async function loadChaos() {
     for (const action of actions) {
         const actionElement = document.getElementById(action.id);
         actionElement.onclick = (e) => {
-            confirmChaos(e.target.innerText, action.action);
+            confirmChaos(e.target.textContent, action.action);
         };
         actionElement.classList.remove('d-none');
     }

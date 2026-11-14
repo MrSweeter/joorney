@@ -3,10 +3,10 @@ import { escapeHTML, stringToHTML } from '../html_generator.js';
 import { isSupportedOdoo } from '../utils/authorize.js';
 import { Console, StorageSync } from '../utils/browser.js';
 import {
-    ToastContainerElementID,
     buildContainer,
     buildToastItem,
     generateToastID,
+    ToastContainerElementID,
     toastDelayMillis,
     toastDurationMillis,
     toastFadeInOutDurationMillis,

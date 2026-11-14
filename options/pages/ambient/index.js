@@ -3,14 +3,14 @@ import { ambients, estimateAmbientDuration } from '../../../src/features/ambient
 import AmbientLoader from '../../../src/features/ambient/ambient_loader.js';
 import AmbientManager from '../../../src/features/ambient/ambient_manager.js';
 import { stringToHTML } from '../../../src/html_generator.js';
-import { StorageSync, createTitleFromJSON } from '../../../src/utils/browser.js';
+import { createTitleFromJSON, StorageSync } from '../../../src/utils/browser.js';
 import Confetti from '../../../src/utils/confetti.js';
 import { setCancellableTimeout } from '../../../src/utils/timeout.js';
 import { toLocaleDateStringFormatted, toLocaleDateTimeStringFormatted } from '../../../src/utils/util.js';
 
-let ambientConfetti = undefined;
-let ambientManager = undefined;
-let ambientLoader = undefined;
+let ambientConfetti;
+let ambientManager;
+let ambientLoader;
 const ambientsData = {};
 
 export async function loadPage(_features, _currentSettings) {
@@ -165,7 +165,7 @@ function playAmbient(event) {
     }
     const estimatedDuration = estimateAmbientDuration(ambient);
 
-    document.getElementById('joorney-playing-ambient-info').innerText =
+    document.getElementById('joorney-playing-ambient-info').textContent =
         `Ambient: "${ambient.name}" - Duration: ${estimatedDuration}ms`;
 
     ambientLoader?.load(ambient);
@@ -185,7 +185,7 @@ function playAmbient(event) {
 
 function stopAmbient() {
     ambientLoader.stop();
-    document.getElementById('joorney-playing-ambient-info').innerText = '';
+    document.getElementById('joorney-playing-ambient-info').textContent = '';
     enableAllButtons();
 }
 
