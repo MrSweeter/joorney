@@ -56,7 +56,8 @@ body {
 }
 
 .feature-collapse-indicator {
-    font-size: 18px;
+    /* arrow_drop_up is a small triangle in its box: 28px matches the former 18px caret */
+    font-size: 28px;
     transition: transform 0.3s ease;
     transform: rotate(90deg);
 }

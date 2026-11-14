@@ -116,7 +116,7 @@ export default class AwesomeLoadingShareOptionCustomizationFeature extends Optio
                         class="joorney_awe_loading_image_delete_${idx} btn btn-outline-danger border-0 btn-floating"
                         title="Delete image"
                     >
-                        <i class="joorney-font-icon-size fa fa-trash"></i>
+                        <i class="joorney-icon joorney-icon-filled joorney-font-icon-size" data-icon="delete" aria-hidden="true"></i>
                     </button>
                 </td>
             </tr>

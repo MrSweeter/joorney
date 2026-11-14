@@ -1,7 +1,7 @@
 export default {
     id: 'awesomeLoadingLarge',
     display_name: 'Awesome Loading Large',
-    icon: '<i class="fa-solid fa-circle-notch"></i>',
+    icon: 'progress_activity',
     trigger: {
         load: true,
         navigate: true,

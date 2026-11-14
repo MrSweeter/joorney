@@ -1,7 +1,7 @@
 export default {
     id: 'followUnfollow',
     display_name: 'Follow/Unfollow',
-    icon: '<i class="fa-solid fa-user-check"></i>',
+    icon: 'how_to_reg',
     trigger: {
         background: false,
         load: true,

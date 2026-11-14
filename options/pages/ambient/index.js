@@ -5,6 +5,7 @@ import AmbientManager from '../../../src/features/ambient/ambient_manager.js';
 import { stringToHTML } from '../../../src/html_generator.js';
 import { createTitleFromJSON, StorageSync } from '../../../src/utils/browser.js';
 import Confetti from '../../../src/utils/confetti.js';
+import { setIcon } from '../../../src/utils/icons.js';
 import { setCancellableTimeout } from '../../../src/utils/timeout.js';
 import { toLocaleDateStringFormatted, toLocaleDateTimeStringFormatted } from '../../../src/utils/util.js';
 
@@ -35,7 +36,7 @@ async function loadAmbientList() {
         container.appendChild(
             stringToHTML(`
             <div class="d-flex justify-content-between bg-body-tertiary p-2 border-bottom" data-ambient-category-id="${id}">
-                <h6 class="m-0"><span class="ambient-category-toggle me-1 opacity-25" style="cursor: pointer;"><i class="fa-fw fa-solid fa-chevron-down"></i></span>${category.name}</h6>
+                <h6 class="m-0"><span class="ambient-category-toggle me-1 opacity-25" style="cursor: pointer;"><i class="joorney-icon joorney-icon-filled joorney-icon-fw" data-icon="expand_more" aria-hidden="true"></i></span>${category.name}</h6>
                 <p class="m-0">
                     <small class="text-decoration-underline ambient-category-all-toggle" style="cursor: pointer;">All</small>
                     &nbsp;/&nbsp;
@@ -73,7 +74,7 @@ async function loadAmbientList() {
                 stringToHTML(`
                 <li class="list-collapsible show list-group-item d-flex justify-content-between align-items-center" data-ambient-id="${v.id}" title='${createTitleFromJSON(v)}'>
                     <div class="d-flex align-items-center">
-                        <button class="joorney-play-ambient btn me-3"><i class="fa-fw fa-solid fa-play"></i></button>
+                        <button class="joorney-play-ambient btn me-3"><i class="joorney-icon joorney-icon-filled joorney-icon-fw" data-icon="play_arrow" aria-hidden="true"></i></button>
                         <label class="form-check-label">
                             <p class="m-0" >${name}${todayAmbient?.id === v.id ? ' <span title="This effect is currently active for today" class="badge badge-success rounded-pill">active</span>' : ''}</p>
                             ${description ? `<span class="small text-muted">${description}</span>` : ''}
@@ -173,9 +174,7 @@ function playAmbient(event) {
         stopAmbient();
     }, estimatedDuration + 1000);
 
-    const iconClass = button.querySelector('i').classList;
-    iconClass.remove('fa-pause');
-    iconClass.add('fa-stop');
+    setIcon(button.querySelector('i'), 'stop');
     button.onclick = () => {
         timeout.trigger();
     };
@@ -193,10 +192,7 @@ function disableAllButtons() {
     for (const btn of document.getElementsByClassName('joorney-play-ambient')) {
         btn.onclick = null;
         btn.setAttribute('disabled', true);
-        const iconClass = btn.querySelector('i').classList;
-        iconClass.add('fa-pause');
-        iconClass.remove('fa-play');
-        iconClass.remove('fa-stop');
+        setIcon(btn.querySelector('i'), 'pause');
     }
 }
 
@@ -204,10 +200,7 @@ function enableAllButtons() {
     for (const btn of document.getElementsByClassName('joorney-play-ambient')) {
         btn.onclick = playAmbient;
         btn.removeAttribute('disabled');
-        const iconClass = btn.querySelector('i').classList;
-        iconClass.add('fa-play');
-        iconClass.remove('fa-pause');
-        iconClass.remove('fa-stop');
+        setIcon(btn.querySelector('i'), 'play_arrow');
     }
 }
 

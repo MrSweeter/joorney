@@ -96,6 +96,9 @@ try {
     if (option.create) {
         createFeature(featureName, option);
         updateFeatureState(featureName.id, true);
+        console.info(
+            `Set the icon of ${featureName.id} in its configuration file (Material Symbols name), add a new name to scripts/icons.json then run npm run icons:fetch`
+        );
     }
     if (option.update) {
         const hasChange = updateFeature(featureName, option);
@@ -127,7 +130,7 @@ function createFeature(featureName, option) {
     const configuration = {
         id: featureName.id,
         display_name: featureName.display,
-        icon: '<i class="fa-solid fa-circle-question"></i>',
+        icon: 'help',
         trigger: {
             background: option['--with-trigger-background'],
             load: option['--with-trigger-load'],

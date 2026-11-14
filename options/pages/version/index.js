@@ -3,6 +3,7 @@ import { stringToHTML } from '../../../src/html_generator.js';
 import { includeVersion } from '../../../src/utils/authorize.js';
 import { StorageSync } from '../../../src/utils/browser.js';
 import { SUPPORTED_DEV_VERSION, SUPPORTED_VERSION } from '../../../src/utils/constant.js';
+import { iconHTML } from '../../../src/utils/icons.js';
 
 export async function loadPage(features, currentSettings) {
     loadSupportedOdoo(currentSettings, features);
@@ -35,7 +36,7 @@ function loadSupportedOdoo(currentSettings, features, isdev = false) {
 			>
 				<input id="joorney_${versionID}_version" class="input-hide" type="checkbox" />
 				<div class="${toggleClass} d-flex align-items-center justify-content-center">
-					<i class="joorney-font-icon-size fa-regular me-2"></i>
+					<i class="joorney-icon joorney-font-icon-size me-2" aria-hidden="true"></i>
 					<p>${version}</p>
 				</div>
 			</label>
@@ -62,7 +63,7 @@ async function loadSupportedFeature(features, supportedVersions) {
     const header = stringToHTML(`
         <tr>
             <th class="text-end opacity-50">Compatibility</th>
-            <th class="text-center" style="width: 32px"><i class="fa-solid fa-icons"></i></th>
+            <th class="text-center" style="width: 32px"><i class="joorney-icon joorney-icon-filled" data-icon="category" aria-hidden="true"></i></th>
             ${SUPPORTED_VERSION.map((v) => `<th class="text-center">${v}</th>`).join('')}
         </tr>
     `);
@@ -85,7 +86,7 @@ async function loadSupportedFeature(features, supportedVersions) {
                 </th>
                 <th>
                     <div class="icon-wrapper">
-                        ${feature.icon}
+                        ${iconHTML(feature.icon, { filled: true })}
                     </div>
                 </th>
                 ${versions

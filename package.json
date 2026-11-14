@@ -6,6 +6,7 @@
     "scripts": {
         "prod": "npm run clean-build && NODE_ENV=production npm run build && npm run zip",
         "zip": "node scripts/zip_bundle.js",
+        "icons:fetch": "node scripts/fetch-icons.js",
         "build": "rollup -c",
         "dev": "rollup -c -w",
         "clean-build": "rm -rf ./bundle && rm -rf ./docs",

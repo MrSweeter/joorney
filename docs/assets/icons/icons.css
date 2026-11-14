@@ -1,0 +1,84 @@
+/*
+ * Joorney icons: Material Symbols Outlined subset (Apache-2.0), regenerate with `npm run icons:fetch`.
+ * Usage: <i class="joorney-icon" data-icon="delete" aria-hidden="true"></i>, see src/utils/icons.js.
+ * Same markup as Odoo 20 (<i class="oi" data-icon="…">), with a Joorney font name and classes so it never clashes with
+ * Odoo's own icons in the pages content scripts inject it into (injectIconStylesheet in src/utils/icons.js).
+ */
+@font-face {
+    font-family: "Joorney Icons";
+    font-style: normal;
+    font-weight: 400;
+    /* Avoid flashing the ligature names ("arrow_forward") before the font is loaded */
+    font-display: block;
+    src: url("joorney_icons.woff2") format("woff2");
+}
+
+.joorney-icon {
+    display: inline-block;
+    font-family: "Joorney Icons", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    white-space: nowrap;
+    direction: ltr;
+    vertical-align: -0.125em;
+    font-variation-settings: "FILL" 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+.joorney-icon::before {
+    display: inline-block;
+    /* The ligature name stays out of the DOM text (textContent of buttons and labels) */
+    content: attr(data-icon);
+    /* Material glyphs are drawn smaller than Font Awesome ones in their box: enlarge them like Odoo's subset font does.
+       No vertical shift: it would decenter icons in flex/grid containers, the element's vertical-align handles text. */
+    transform: scale(1.2);
+    text-rendering: geometricPrecision;
+    word-break: keep-all;
+}
+
+.joorney-icon-filled {
+    font-variation-settings: "FILL" 1;
+}
+
+/* Sizes, same scale as the Font Awesome helpers they replace */
+.joorney-icon-2xs {
+    font-size: 0.625em;
+}
+.joorney-icon-xs {
+    font-size: 0.75em;
+}
+.joorney-icon-lg {
+    font-size: 1.25em;
+}
+.joorney-icon-2x {
+    font-size: 2em;
+}
+.joorney-icon-2xl {
+    font-size: 2em;
+}
+.joorney-icon-4x {
+    font-size: 4em;
+}
+.joorney-icon-fw {
+    width: 1.25em;
+    text-align: center;
+}
+
+.joorney-icon-spin {
+    animation: joorney-icon-spin 1s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .joorney-icon-spin {
+        animation: none;
+    }
+}
+
+@keyframes joorney-icon-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

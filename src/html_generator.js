@@ -1,3 +1,5 @@
+import { iconHTML } from './utils/icons.js';
+
 const joorneySimulatedStyleWarning = 'background-color: rgba(252, 163, 17, 0.25)';
 const joorneySimulatedStyleError = 'background-color: rgba(252, 17, 17, 0.25)';
 
@@ -24,7 +26,7 @@ export function generateLimitedFeatureOptionButtonItem(feature) {
 		>
 			<input id="joorney_${feature.id}_limited_feature" class="input-hide" type="checkbox" />
 			<div class="limited-feature-wrapper d-flex">
-				<i class="joorney-font-icon-size fa-regular me-2"></i>
+				<i class="joorney-icon joorney-font-icon-size me-2" aria-hidden="true"></i>
 				<p>${feature.display_name ?? feature.id}</p>
 			</div>
 		</label>
@@ -41,7 +43,7 @@ export function generateFeatureOptionListItem(feature) {
 		>
 			<div class="feature-wrapper d-flex">
 				<div class="icon-wrapper pe-1">
-					${feature.icon}
+					${iconHTML(feature.icon, { filled: true })}
 				</div>
 				<p>${feature.display_name ?? feature.id}</p>
 			</div>
@@ -53,7 +55,7 @@ export function generateFeatureOptionTableHeadItem(feature) {
     return stringToHTML(`
 		<th title="[Feature Origin] ${feature.display_name ?? feature.id}" class="icon-wrapper-head">
 			<div class="icon-wrapper" id="joorney_origins_filter_feature_header_${feature.id}">
-				${feature.icon}
+				${iconHTML(feature.icon, { filled: true })}
 			</div>
 		</th>
 	`);
@@ -68,7 +70,7 @@ export function generateFeaturePopupToggleItem(feature) {
 		>
 			<input id="${feature.id}Feature" type="checkbox" />
 			<div class="icon-wrapper ${feature.limited ? 'limited-feature' : ''}">
-				${feature.icon}
+				${iconHTML(feature.icon, { filled: true })}
 			</div>
 		</label>
 	`);
@@ -83,7 +85,7 @@ export function generateTabFeaturePopupToggleItem(feature) {
 		>
 			<input id="${feature.id}FeatureTab" type="checkbox" />
 			<div class="icon-wrapper-tab">
-				${feature.icon}
+				${iconHTML(feature.icon, { filled: true })}
 			</div>
 		</label>
 	`);
