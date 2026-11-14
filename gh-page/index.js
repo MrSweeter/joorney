@@ -1,5 +1,10 @@
 import { features } from './configuration.js';
 
+// Same markup as the extension (src/utils/icons.js), styled by assets/icons/icons.css
+function featureIcon(feature, classes) {
+    return `<i class="joorney-icon joorney-icon-filled ${classes}" data-icon="${feature.icon}" aria-hidden="true"></i>`;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('copyright-year').innerHTML = new Date().getFullYear();
 
@@ -39,7 +44,7 @@ function loadFeature(feature, viewType, container) {
         case 'grid': {
             template.innerHTML = `
             <a class="feature-box p-4 m-3" title="[Odoo Feature] ${feature.id}" href="./feature.html#${feature.id}">
-                <i class="${feature.icon} fa-4x h-100 text-center text-dark d-flex justify-content-center align-items-center"></i>
+                ${featureIcon(feature, 'joorney-icon-4x h-100 text-center text-dark d-flex justify-content-center align-items-center')}
             </a>
             `.trim();
             container.classList.add('row');
@@ -54,7 +59,7 @@ function loadFeature(feature, viewType, container) {
                     <div class="card-body d-flex flex-column">
                         <div class="card-title w-100 px-0 col-2 d-flex align-items-center justify-content-start">
                             <a class="d-flex justify-content-center align-items-center me-3" style="height: 32px; min-width: 32px; background-color: var(--joorney-primary); border-radius: 8px;" title="[Odoo Feature] ${feature.id}" href="./feature.html#${feature.id}">
-                                <i class="${feature.icon} fa-1x h-100 text-center text-dark d-flex justify-content-center align-items-center"></i>
+                                ${featureIcon(feature, 'h-100 text-center text-dark d-flex justify-content-center align-items-center')}
                             </a>
                             <p class="m-0"><strong>${feature.title}</strong></p>
                         </div>
@@ -77,7 +82,7 @@ function loadFeature(feature, viewType, container) {
             <div class="row d-flex align-items-center feature-row">
                 <div class="px-0 col-11 col-lg-2 d-flex align-items-center justify-content-start">
                     <a class="d-flex justify-content-center align-items-center mx-3" style="height: 32px; min-width: 32px; background-color: var(--joorney-primary); border-radius: 8px;" title="[Odoo Feature] ${feature.id}" href="./feature.html#${feature.id}">
-                        <i class="${feature.icon} fa-1x h-100 text-center text-dark d-flex justify-content-center align-items-center"></i>
+                        ${featureIcon(feature, 'h-100 text-center text-dark d-flex justify-content-center align-items-center')}
                     </a>
                     <p class="m-0"><strong>${feature.title}</strong></p>
                 </div>
@@ -91,7 +96,7 @@ function loadFeature(feature, viewType, container) {
                     </a>
                 </div>
                 <a class="col-1 d-flex d-lg-none justify-content-center px-0 btn btn-link text-joorney" title="[Odoo Feature] ${feature.id}" href="./feature.html#${feature.id}">
-                    <i class="fa-solid fa-chevron-right"></i>
+                    <i class="joorney-icon" data-icon="chevron_right" aria-hidden="true"></i>
                 </a>
             </div>
             `.trim();

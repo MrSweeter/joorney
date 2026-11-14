@@ -24,7 +24,7 @@
         <link href="https://fonts.googleapis.com/css?family=Caveat:700&display=swap" rel="stylesheet" media="screen">
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" media="screen">
 
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" media="screen">
+        <link href="./assets/icons/icons.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.1/mdb.min.css" rel="stylesheet" media="screen">
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js" media="screen"></script>
 
@@ -43,10 +43,10 @@
                     aria-expanded="false"
                     aria-label="Toggle navigation"
                 >
-                    <i class="fas fa-bars"></i>
+                    <i class="joorney-icon" data-icon="menu" aria-hidden="true"></i>
                 </button>
                 <a class="d-lg-flex d-none position-absolute" href="./index.html">
-                    <span class="small text-muted opacity-50 caveat"><i class="fa-solid fa-arrow-left"></i> Home</span>
+                    <span class="small text-muted opacity-50 caveat"><i class="joorney-icon" data-icon="arrow_back" aria-hidden="true"></i> Home</span>
                     <!-- <img src="./assets/icon_128.svg" height="20" alt="Joorney logo" /> -->
                 </a>
 
@@ -56,25 +56,33 @@
                             <span id="feature-navbar-np2" class="nav-link opacity-50" href="#">?</span>
                         </li>
                         <li class="d-lg-flex d-none">
-                            <span class="nav-link disabled"><i class="fa-solid fa-xs fa-circle joorney-landing-extension-state"></i></span>
+                            <span class="nav-link disabled"
+                                ><i class="joorney-icon joorney-icon-filled joorney-icon-xs joorney-landing-extension-state" data-icon="circle" aria-hidden="true"></i></span
+                            >
                         </li>
                         <li class="nav-item col-lg-2">
                             <span id="feature-navbar-np1" class="nav-link opacity-75" href="#">?</span>
                         </li>
                         <li class="d-lg-flex d-none">
-                            <span class="nav-link disabled"><i class="fa-solid fa-xs fa-circle joorney-landing-extension-state"></i></span>
+                            <span class="nav-link disabled"
+                                ><i class="joorney-icon joorney-icon-filled joorney-icon-xs joorney-landing-extension-state" data-icon="circle" aria-hidden="true"></i></span
+                            >
                         </li>
                         <li class="nav-item col-lg-2">
                             <span id="feature-navbar-active" class="nav-link active" href="#">?</span>
                         </li>
                         <li class="d-lg-flex d-none">
-                            <span class="nav-link disabled"><i class="fa-solid fa-xs fa-circle joorney-landing-extension-state"></i></span>
+                            <span class="nav-link disabled"
+                                ><i class="joorney-icon joorney-icon-filled joorney-icon-xs joorney-landing-extension-state" data-icon="circle" aria-hidden="true"></i></span
+                            >
                         </li>
                         <li class="nav-item col-lg-2">
                             <span id="feature-navbar-nn1" class="nav-link opacity-75" href="#">?</span>
                         </li>
                         <li class="d-lg-flex d-none">
-                            <span class="nav-link disabled"><i class="fa-solid fa-xs fa-circle joorney-landing-extension-state"></i></span>
+                            <span class="nav-link disabled"
+                                ><i class="joorney-icon joorney-icon-filled joorney-icon-xs joorney-landing-extension-state" data-icon="circle" aria-hidden="true"></i></span
+                            >
                         </li>
                         <li class="nav-item col-lg-2">
                             <span id="feature-navbar-nn2" class="nav-link opacity-50" href="#">?</span>
@@ -86,12 +94,12 @@
 
         <div class="position-fixed row m-0 vw-100 justify-content-between opacity-25" style="pointer-events: none;">
             <div id="joorney-previous-feature" class="vh-100 d-flex pb-lg-5 pb-4 align-items-end justify-content-center switch-feature" style="width: 8rem; pointer-events: all;">
-                <i class="d-none d-lg-inline-block fa-2xl fa-solid fa-chevron-left"></i>
-                <i class="d-inline-block d-lg-none fa-2xl fa-solid fa-hand-point-left"></i>
+                <i class="joorney-icon joorney-icon-2xl d-none d-lg-inline-block" data-icon="chevron_left" aria-hidden="true"></i>
+                <i class="joorney-icon joorney-icon-2xl d-inline-block d-lg-none" data-icon="swipe_left" aria-hidden="true"></i>
             </div>
             <div id="joorney-next-feature" class="vh-100 align-left d-flex pb-lg-5 pb-4 align-items-end justify-content-center switch-feature" style="width: 8rem; pointer-events: all;">
-                <i class="d-none d-lg-inline-block fa-2xl fa-solid fa-chevron-right"></i>
-                <i class="d-inline-block d-lg-none fa-2xl fa-solid fa-hand-point-right"></i>
+                <i class="joorney-icon joorney-icon-2xl d-none d-lg-inline-block" data-icon="chevron_right" aria-hidden="true"></i>
+                <i class="joorney-icon joorney-icon-2xl d-inline-block d-lg-none" data-icon="swipe_right" aria-hidden="true"></i>
             </div>
         </div>
 
@@ -148,7 +156,7 @@
                                 <p class="m-0 m-lg-auto mb-lg-3">Sunrise/Sunset time is provided by <a href="https://sunrisesunset.io/">SunriseSunset.io</a></p>
                             </li>
                             <li>
-                                <p class="m-0 m-lg-auto mb-lg-3">Icons are provided by <a href="https://fontawesome.com/icons">Font Awesome</a></p>
+                                <p class="m-0 m-lg-auto mb-lg-3">Icons are provided by <a href="https://fonts.google.com/icons">Material Symbols</a></p>
                             </li>
                             <li>
                                 <p class="m-0 m-lg-auto mb-lg-3">Illustrations are provided by <a href="https://storyset.com/business">Storyset</a></p>

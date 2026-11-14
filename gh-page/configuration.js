@@ -3,7 +3,7 @@
 export const features = [
     {
         id: 'assignMeTask',
-        icon: 'fa-solid fa-user-plus',
+        icon: 'person_add',
         title: 'Assign Me',
         longDescription:
             '<em>Assign Me</em> is a feature that enhances task management by adding a convenient button to the task form. This button allows you to quickly assign any task to yourself with a single click. Whether you are organizing your workload or taking on new responsibilities, <em>Assign Me</em> streamlines the process, ensuring you can take ownership of tasks efficiently.',
@@ -21,7 +21,7 @@ export const features = [
     },
     {
         id: 'saveKnowledge',
-        icon: 'fa-solid fa-bookmark',
+        icon: 'bookmark',
         title: 'Save Article',
         longDescription:
             '<em>Save Article</em> simplifies content management by adding a save button to the top right corner of article pages. This button ensures that you can easily save important articles for later reference with just one click. This feature is perfect for users who frequently research or need to keep track of various articles and information.',
@@ -39,7 +39,7 @@ export const features = [
     },
     {
         id: 'unfocusApp',
-        icon: 'fa-solid fa-ghost',
+        icon: 'widgets',
         title: 'Unfocus Apps',
         longDescription:
             '<em>Unfocus Apps</em> helps you maintain productivity by allowing you to hide apps that are not frequently used. By clicking the star next to the app name on the Odoo home page, you can toggle the visibility of these apps, focusing on those more relevant to your work. Additionally, you can highlight an app by double-clicking the star to add a background image around the app icon.',
@@ -59,7 +59,7 @@ export const features = [
     },
     {
         id: 'newServerActionCode',
-        icon: 'fa-solid fa-code',
+        icon: 'code_blocks',
         title: 'Server Action Code',
         longDescription:
             '<em>Server Action Code</em> optimizes your workflow by automatically selecting "Execute code" as the type for Server Action. This allows you to focus directly on writing code without manually setting the action type, making the coding process more efficient and streamlined.',
@@ -77,7 +77,7 @@ export const features = [
     },
     {
         id: 'tooltipMetadata',
-        icon: 'fa-solid fa-file-lines',
+        icon: 'description',
         title: 'Tooltip Metadata',
         longDescription: `<em>Tooltip Metadata</em> provides quick access to record metadata. By hovering over the debug icon, you can instantly view the current record's metadata, making it easier to gather essential information without navigating away from the current view.`,
         textDescription: 'Show you current record metadata by hovering the debug icon.',
@@ -95,7 +95,7 @@ export const features = [
     },
     {
         id: 'contextOdooMenus',
-        icon: 'fa-solid fa-location-arrow',
+        icon: 'near_me',
         title: 'Context OdooMenus',
         longDescription: `<em>Context OdooMenus</em> integrates Odoo's menus into the browser context menu. This addition allows you to access Odoo's functionalities directly from the browser's right-click menu, providing a more seamless and integrated user experience.`,
         textDescription: "Add Odoo's menus to the browser context menu",
@@ -113,7 +113,7 @@ export const features = [
     },
     {
         id: 'autoOpenRunbot',
-        icon: 'fa-solid fa-jet-fighter',
+        icon: 'flight',
         title: 'Auto-Open Runbot',
         longDescription:
             '<em>Auto-Open Runbot</em> facilitates quick access to specific runbot instances. By adding a search parameter to the URL, you can open a runbot instance in a specific version as an admin user in debug mode. For example, accessing a runbot in version 17.0 can be done through a URL like <a target="_blank" href="https://runbot.odoo.com?joorney-runbot=17.0">https://runbot.odoo.com?joorney-runbot=17.0</a>.',
@@ -133,7 +133,7 @@ export const features = [
     },
     {
         id: 'impersonateLoginRunbot',
-        icon: 'fa-solid fa-masks-theater',
+        icon: 'theater_comedy',
         title: 'Impersonate User',
         longDescription:
             '<em>Impersonate User</em> allows you to test and support effectively by impersonating default users on a runbot, such as admin, demo, or portal. This feature adds options to the login page menu, enabling you to select and impersonate different default users for various purposes.',
@@ -152,7 +152,7 @@ export const features = [
     },
     {
         id: 'adminDebugLoginRunbot',
-        icon: 'fa-solid fa-rocket',
+        icon: 'rocket_launch',
         title: 'Admin-Debug Login',
         longDescription:
             '<em>Admin-Debug Login</em> provides an easy way to open a runbot instance from the runbot page as an admin user in debug mode. This feature adds a new icon next to the database name, allowing you to access the runbot instance with a single click, facilitating easier debugging and developer tasks.',
@@ -170,7 +170,7 @@ export const features = [
     },
     {
         id: 'themeSwitch',
-        icon: 'fa-solid fa-sun',
+        icon: 'light_mode',
         title: 'Switch <span class="odoo">Odoo</span> Theme',
         longDescription:
             '<em>Switch Odoo Theme</em> allows you to dynamically change the Odoo theme based on configured options. You can switch themes depending on location, time range, or simply choose a preferred one, enhancing the visual and functional experience of using Odoo.',
@@ -188,7 +188,7 @@ export const features = [
     },
     {
         id: 'awesomeStyle',
-        icon: 'fa-brands fa-css3-alt',
+        icon: 'css',
         title: 'Awesome CSS',
         longDescription:
             '<em>Awesome CSS</em> gives you the power to customize the appearance of your Odoo database page by applying custom CSS styles. This feature is perfect for users who want to personalize and enhance the visual aspects of their Odoo interface.',
@@ -208,7 +208,7 @@ export const features = [
     {
         id: 'awesomeLoading',
         sub: ['awesomeLoadingLarge', 'awesomeLoadingSmall'],
-        icon: 'fa-solid fa-spinner',
+        icon: 'progress_activity',
         title: 'Awesome Loading',
         longDescription:
             '<em>Awesome Loading</em> allows you to customize the loading design of Odoo. You can choose between a large loading design, which displays a spinning circle in fullscreen, or a small one, which shows a "Loading" text at the bottom right of the page. This feature enhances the user experience during load times.<br /><br /><i>Note that the large loading has been removed in Odoo 17.0</i>',
@@ -226,7 +226,7 @@ export const features = [
     },
     {
         id: 'starringPriorityEffect',
-        icon: 'fa-solid fa-star',
+        icon: 'star',
         title: 'Stars Effect',
         longDescription:
             '<em>Stars Effect</em> adds a touch of magic to prioritization. When you prioritize a record, it triggers a stars particles effect, adding a visually pleasing element to management and making the prioritization process more engaging.',
@@ -245,7 +245,7 @@ export const features = [
     },
     {
         id: 'showMyBadge',
-        icon: 'fa-solid fa-certificate',
+        icon: 'workspace_premium',
         title: 'Show my Badge',
         longDescription: `<em>Show My Badge</em> displays user badges in the user card, highlighting achievements. This feature is ideal for recognizing and showcasing users' accomplishments within the Odoo interface, promoting a sense of achievement and community.`,
         textDescription: "Show user's badges in the user card.",
@@ -262,7 +262,7 @@ export const features = [
     },
     {
         id: 'pinMessage',
-        icon: 'fa-solid fa-thumbtack',
+        icon: 'keep',
         title: 'Pin Message',
         longDescription: `<em>Pin Message</em> allows users to quickly pin important messages of the chatter. By pinning a message, you ensure that critical information is easily accessible. Enhance communication efficiency by keeping key message highlighted and easy to find.<br /><br /><i>Note that due to high dependency to Odoo chatter, it's not the stablest feature!</i>`,
         textDescription: 'Pin message to the top of chatter fo easy access.',
@@ -281,7 +281,7 @@ export const features = [
     },
     {
         id: 'ambient',
-        icon: 'fa-solid fa-mountain-sun',
+        icon: 'landscape',
         title: 'Ambient',
         longDescription: `<em>Ambient Effects</em> brings a touch of magic to your Odoo main menu by adding particle effects for special events and days. Whether it's falling snow during winter, flying pumpkins for Halloween, or colorful fireworks on New Year's Eve, these effects create a visually engaging atmosphere that enhances the user experience. Bring your Odoo to life with dynamic and festive animations!<br /><br /><i>Note that this feature can have impact on performance and can be disabled by event/effect in options.</i>`,
         textDescription: 'Add particle effects like snow, pumpkins, and fireworks to enhance user engagement.',
@@ -298,7 +298,7 @@ export const features = [
     },
     {
         id: 'followUnfollow',
-        icon: 'fa-solid fa-user-check',
+        icon: 'how_to_reg',
         title: 'Follow/Unfollow',
         longDescription:
             '<em>Follow/Unfollow</em> adds a quick action next to the mail followers button so you can toggle follow state without opening the full dropdown. It makes it easier to manage subscriptions directly from the record view.',
