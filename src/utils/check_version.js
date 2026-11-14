@@ -5,12 +5,16 @@ import { updateSupportedDevelopmentVersion, updateSupportedVersion } from './ver
 
 const fetchVersion = 'https://raw.githubusercontent.com/MrSweeter/joorney/master/manifest.json';
 
+export async function refreshSupportedVersions() {
+    const odooData = (await getOdooData()) ?? {};
+    await updateSupportedVersion(odooData.availableOdooVersions);
+    await updateSupportedDevelopmentVersion(odooData.developmentOdooVersions);
+}
+
 export async function checkVersion() {
     const installType = await getInstallType();
 
-    const odooData = await getOdooData();
-    updateSupportedVersion(odooData?.availableOdooVersions);
-    await updateSupportedDevelopmentVersion(odooData?.developmentOdooVersions);
+    await refreshSupportedVersions();
 
     if (!['development', 'other'].includes(installType)) return;
     const res = await fetch(fetchVersion);

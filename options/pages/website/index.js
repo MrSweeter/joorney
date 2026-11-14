@@ -15,3 +15,13 @@ async function loadFeatures(features) {
         importFeatureOptionFile(feature.id).then((featureModule) => featureModule.load());
     }
 }
+
+// Options menu entry, see options/menu.js
+export const PAGE = {
+    id: 'page-website',
+    tour: 'tour_hostControls',
+    label: 'Hosts control',
+    path: './pages/website/index.html',
+    loader: loadPage,
+    default: true,
+};

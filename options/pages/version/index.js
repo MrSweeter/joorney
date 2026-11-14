@@ -105,3 +105,12 @@ async function loadSupportedFeature(features, supportedVersions) {
 function sanitizeVersionID(version) {
     return version.replace('.', '_');
 }
+
+// Options menu entry, see options/menu.js
+export const PAGE = {
+    id: 'page-version',
+    tour: 'tour_versions',
+    label: 'Versions',
+    path: './pages/version/index.html',
+    loader: loadPage,
+};
