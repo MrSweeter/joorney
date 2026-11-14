@@ -2,27 +2,37 @@ import { getDataset, getDatasetWithIDs } from '../../api/odoo.js';
 import ContentFeature from '../../generic/content.js';
 import { escapeHTML } from '../../html_generator.js';
 import { createRecordFormURL } from '../../utils/url_manager.js';
+import { waitForElement } from '../../utils/util.js';
 import configuration from './configuration.js';
+
+const MAX_BADGES = 8;
+
+function badgeLabel(badge) {
+    return badge.badge_name || badge.display_name || '';
+}
 
 export default class ShowMyBadgeContentFeature extends ContentFeature {
     constructor() {
         super(configuration);
         this.handleMutation = this.handleMutation.bind(this);
         this.overlayShowMyBadgeObserver = new MutationObserver(this.handleMutation);
+        // card -> { email, section } already handled: every overlay mutation rescans the cards
+        this.handledCards = new WeakMap();
     }
 
     async loadFeature(_) {
-        this.observe();
+        await this.observe();
     }
 
-    observe() {
-        const overlays = document.getElementsByClassName('o-overlay-container');
-        if (overlays.length !== 1) return;
+    async observe() {
+        // [ODOO] 18.0 the overlay container can be mounted after the page load
+        const overlayTarget = await waitForElement('.o-overlay-container', 10000);
+        if (!overlayTarget || this._unloaded) return;
 
-        const overlayTarget = overlays[0];
+        this.overlayTarget = overlayTarget;
         const observerOptions = { childList: true, subtree: true };
         this.overlayShowMyBadgeObserver.disconnect();
-        this.overlayShowMyBadgeObserver.observe(overlayTarget, observerOptions);
+        this.overlayShowMyBadgeObserver.observe(this.overlayTarget, observerOptions);
     }
 
     unload() {
@@ -30,63 +40,56 @@ export default class ShowMyBadgeContentFeature extends ContentFeature {
         this.overlayShowMyBadgeObserver?.disconnect();
     }
 
-    handleMutation(mutations) {
+    handleMutation(_mutations) {
         if (this.unloadIfOrphaned()) return;
-        // [ODOO] < 19.0
-        function getOldCard() {
-            const avatarCardMutationNode = mutations
-                .filter((m) => m.type === 'childList' && m.addedNodes?.length > 0)
-                .flatMap((m) => Array.from(m.addedNodes))
-                .find((n) => n.nodeName === 'DIV' && n.className.includes('o_avatar_card'));
-            return avatarCardMutationNode;
-        }
+        // Scan instead of matching the mutation shape: it differs by version (card added directly < 19,
+        // infos filled after the store fetch in 19, card mounted already filled inside the popover in 20)
+        for (const card of this.overlayTarget?.querySelectorAll('.o_avatar_card') ?? []) {
+            const email = this.getCardEmail(card);
+            if (!email) continue;
+            const handled = this.handledCards.get(card);
+            if (handled?.email === email) {
+                // Odoo re-renders can drop foreign nodes: put the section back
+                if (handled.section && !card.contains(handled.section)) this.placeSection(card, handled.section);
+                continue;
+            }
 
-        // [ODOO] 19.0+
-        function getNewCard() {
-            const avatarCardMutationNode = mutations.filter(
-                (m) =>
-                    m.target.className.includes('o_card_user_infos') &&
-                    Array.from(m.addedNodes ?? [])?.filter((n) => !n.className?.includes('joorney-badge-container'))
-                        ?.length > 0
-            )?.[0]?.target?.parentNode;
-            return avatarCardMutationNode;
+            // biome-ignore lint/performance/useDomNodeTextContent: the displayed name, without the hidden text of Odoo's DOM
+            const name = card.querySelector('div.o_card_user_infos span')?.innerText;
+            if (!name) continue;
+            this.appendBadges(card, email, name);
         }
-
-        const avatarCardMutationNode = getNewCard() ?? getOldCard();
-        if (!avatarCardMutationNode) return;
-        const emailNode = avatarCardMutationNode.querySelector('div.o_card_user_infos a[href^="mailto:"]');
-        if (!emailNode) return;
-        const email = emailNode.href.replace('mailto:', '');
-        // biome-ignore lint/performance/useDomNodeTextContent: the displayed name, without the hidden text of Odoo's DOM
-        const name = avatarCardMutationNode.querySelector('div.o_card_user_infos span').innerText;
-        if (!email) return;
-        this.appendBadges(avatarCardMutationNode, email, name);
     }
 
-    async appendBadges(card, emailArg, nameArg) {
-        const badges = await this.tryCatch(() => this.loadBadgesForUser(emailArg, nameArg), undefined);
+    getCardEmail(card) {
+        const emailNode = card.querySelector('div.o_card_user_infos a[href^="mailto:"]');
+        return emailNode?.href.replace('mailto:', '');
+    }
+
+    async appendBadges(card, email, name) {
+        const handled = { email, section: undefined };
+        this.handledCards.set(card, handled);
+        this.removeSection(card);
+
+        const badges = await this.tryCatch(() => this.loadBadgesForUser(email, name), undefined);
+        // The card may have switched to another user while loading
+        if (this.handledCards.get(card) !== handled) return;
         if (!badges || badges.length === 0) return;
 
-        const infoNode = card.querySelector('div.o_card_user_infos')?.parentNode;
-        if (!infoNode) return;
-        const buttonsNode = card.querySelector('div.o_avatar_card_buttons');
+        handled.section = this.getBadgesNode(badges);
+        this.placeSection(card, handled.section);
+    }
 
-        // [ODOO] 19.0+ buttonsNode
-        // [ODOO] < 19.0 infoNode
-        // biome-ignore lint/performance/useDomNodeTextContent: compares the visible text of Odoo's rendered DOM
-        const before = buttonsNode?.parentNode.innerText === infoNode.innerText;
-        const containerNode = before ? buttonsNode : infoNode;
+    // Own footer appended to the card, never inside Odoo's (only rendered when a module fills it)
+    placeSection(card, section) {
+        card.append(section);
+        // [ODOO] 18.0 Bootstrap 5.3 takes the footer padding from variables only defined on .card,
+        // and the 18.0 avatar card is not a .card
+        if (Number.parseFloat(getComputedStyle(section).paddingLeft) === 0) section.classList.add('px-3', 'py-2');
+    }
 
-        const emailNode = card.querySelector('div.o_card_user_infos a[href^="mailto:"]');
-        const email = emailNode.href.replace('mailto:', '');
-        if (email !== emailArg) return;
-
-        for (const el of document.getElementsByClassName('joorney-badge-container')) el.remove();
-        if (before) {
-            containerNode.before(this.getBadgesNode(badges));
-            return;
-        }
-        containerNode.after(this.getBadgesNode(badges));
+    removeSection(card) {
+        for (const el of card.querySelectorAll('.joorney-badge-container')) el.remove();
     }
 
     async loadBadgesForUser(email, name) {
@@ -140,35 +143,32 @@ export default class ShowMyBadgeContentFeature extends ContentFeature {
     }
 
     getBadgesNode(badges) {
-        if (!badges || badges.length === 0) return;
+        const shownBadges = badges.slice(0, MAX_BADGES);
+        const hiddenBadges = badges.slice(MAX_BADGES);
 
-        let badgesList = badges;
-        let moreBadge = false;
-        if (badgesList.length >= 8) {
-            badgesList = badgesList.slice(0, 8);
-            moreBadge = true;
-        }
+        const badgesHTML = shownBadges.map((b) => {
+            const src = `/web/image?model=gamification.badge&id=${b.badge_id[0]}&field=image_128`;
+            const title = escapeHTML(`${badgeLabel(b)}\n${b.comment || ''}`);
+            const url = createRecordFormURL(window.location, 'gamification.badge', b.badge_id[0]);
+            return `<a href="${url}"><img class="rounded" title="${title}" style="height: 30px" src="${src}"></a>`;
+        });
 
-        const badgesHTML = badgesList.map((b) =>
-            `<a href="${createRecordFormURL(
-                window.location,
-                'gamification.badge',
-                b.badge_id[0]
-            )}"><img class="rounded" title="${escapeHTML(`${b.display_name || b.badge_name}\n${b.comment || ''}`)}" style="height: 30px" src="https://${window.location.host}/web/image?model=gamification.badge&id=${
-                b.badge_id[0]
-            }&field=image_128"></a>`.trim()
-        );
-
-        if (moreBadge) {
+        if (hiddenBadges.length > 0) {
+            const title = escapeHTML(hiddenBadges.map(badgeLabel).join('\n'));
             badgesHTML.push(
-                `<i title="More..." style="height: 30px; opacity: 10%" class="d-flex align-items-center fa fa-2x fa-certificate"></i>`.trim()
+                `<span title="${title}" class="badge rounded-pill bg-300 text-body fw-bold">+${hiddenBadges.length}</span>`
             );
         }
 
         const template = document.createElement('template');
         template.innerHTML = `
-            <div class="d-flex mt-3 mb-3 gap-2 justify-content-end flex-wrap joorney-badge-container">
-                ${badgesHTML.join('\n')}
+            <div class="card-footer d-flex flex-column gap-3 rounded-bottom bg-100 joorney-badge-container">
+                <div>
+                    <span class="fw-bold">Badges</span>
+                    <div class="d-flex flex-wrap align-items-center gap-2 mt-1">
+                        ${badgesHTML.join('\n')}
+                    </div>
+                </div>
             </div>
         `.trim();
 
