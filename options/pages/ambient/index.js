@@ -225,3 +225,12 @@ function setupSlider() {
         sliderIconElement.style.left = sliderValue;
     });
 }
+
+// Options menu entry, see options/menu.js
+export const PAGE = {
+    id: 'page-ambient',
+    tour: undefined,
+    label: 'Ambient',
+    path: './pages/ambient/index.html',
+    loader: loadPage,
+};

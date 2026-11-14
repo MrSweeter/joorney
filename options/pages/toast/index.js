@@ -42,7 +42,7 @@ function handleToastType(types) {
 
 async function showMockToast() {
     if (!joorneyCurrentToastMode) return;
-    let { toastType } = await StorageSync.get("toastType");
+    let { toastType } = await StorageSync.get('toastType');
     toastType = toastType ? JSON.parse(toastType) : baseSettings.toastType;
 
     if (
@@ -105,3 +105,12 @@ async function showMockToast() {
         );
     }
 }
+
+// Options menu entry, see options/menu.js
+export const PAGE = {
+    id: 'page-toast',
+    tour: 'tour_toasts',
+    label: 'Notifications',
+    path: './pages/toast/index.html',
+    loader: loadPage,
+};

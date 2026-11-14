@@ -1,4 +1,8 @@
-import { importFeatureBackgroundFile, loadFeaturesConfiguration } from '../../configuration.js';
+import {
+    getFeaturesListResponse,
+    importFeatureBackgroundFile,
+    loadFeaturesConfiguration,
+} from '../../configuration.js';
 import { createContextMenu, updateContext } from '../../src/contextmenu/manager.js';
 import { MESSAGE_ACTION } from '../../src/utils/messaging.js';
 import { updateTabState } from './keyboard_shortcut.js';
@@ -14,7 +18,7 @@ async function handleAction(message, sender) {
 
     switch (message.action) {
         case MESSAGE_ACTION.TO_BACKGROUND.GET_FEATURES_LIST: {
-            callback = loadFeaturesConfiguration().then((features) => ({ features: features }));
+            callback = getFeaturesListResponse();
             break;
         }
         case MESSAGE_ACTION.TO_BACKGROUND.OPEN_RUNBOT_ADMIN_DEBUG: {

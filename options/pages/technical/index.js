@@ -329,3 +329,13 @@ async function confirmChaos(name, action) {
     }
 }
 //#endregion
+
+// Options menu entry, see options/menu.js
+export const PAGE = {
+    id: 'page-technical',
+    tour: 'tour_technical',
+    label: 'Developers',
+    path: './pages/technical/index.html',
+    loader: loadPage,
+    technical: true,
+};

@@ -1,49 +1,19 @@
-import {
-    Console,
-    ContextMenus,
-    Runtime,
-    StorageSync,
-    Tabs,
-    WebNavigation,
-    Windows,
-    sendTabMessage,
-} from '../src/utils/browser.js';
+import { Console, ContextMenus, Runtime, StorageSync, Tabs, WebNavigation, Windows } from '../src/utils/browser.js';
 
 import { getCurrentSettings, loadFeaturesConfiguration } from '../configuration.js';
 import { checkHostsExpiration } from '../src/api/cache.js';
 import { createContextMenu, onContextMenuItemClick, updateContext } from '../src/contextmenu/manager.js';
 import AmbientManager from '../src/features/ambient/ambient_manager.js';
 import { checkVersion, openOption } from '../src/utils/check_version.js';
-import { MESSAGE_ACTION } from '../src/utils/messaging.js';
 import { sleep } from '../src/utils/util.js';
 import { checkCommandShortcuts, handleCommands } from './src/keyboard_shortcut.js';
 import { handleMessage } from './src/messaging.js';
+import { listenNavigation } from './src/navigation.js';
 import { initOmni } from './src/omnibox.js';
 import { listenRequest } from './src/request.js';
 import { onRunbotNavigationCommitted } from './src/runbot.js';
 
-// [ODOO] < 17.2 On page # path change
-WebNavigation.onReferenceFragmentUpdated.addListener((e) => {
-    // Ignore iframe navigation (website editor, html field, report preview...)
-    if (e.frameId === 0 && e.url.startsWith('http')) {
-        sendTabMessage(e.tabId, MESSAGE_ACTION.TO_CONTENT.TAB_NAVIGATION, {
-            url: e.url,
-            navigator: true,
-            fragment: true,
-        });
-    }
-});
-
-// [ODOO] 17.2+
-WebNavigation.onHistoryStateUpdated.addListener((e) => {
-    if (e.frameId === 0 && e.url.startsWith('http')) {
-        sendTabMessage(e.tabId, MESSAGE_ACTION.TO_CONTENT.TAB_NAVIGATION, {
-            url: e.url,
-            navigator: true,
-            history: true,
-        });
-    }
-});
+listenNavigation();
 
 // Admin/debug login on runbot builds opened through the background (see openRunbotAdminDebug)
 WebNavigation.onCommitted.addListener(onRunbotNavigationCommitted);
