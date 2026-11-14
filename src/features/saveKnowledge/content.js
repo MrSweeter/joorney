@@ -70,7 +70,7 @@ export default class SaveKnowledgeContentFeature extends ContentFeature {
             const body = (document.getElementById('body_0') ?? document.getElementById('body'))?.innerHTML;
             if (!body) return;
 
-            await writeRecord('knowledge.article', Number.parseInt(articleID), {
+            await writeRecord('knowledge.article', Number.parseInt(articleID, 10), {
                 body: body,
             });
         } catch (err) {

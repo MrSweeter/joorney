@@ -14,7 +14,7 @@ body {
 }
 
 .joorney-body-background {
-    background-image: url('/images/background.png');
+    background-image: url("/images/background.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -70,11 +70,11 @@ body {
 }
 
 /* OVERRIDE */
-.form-check-input[type='checkbox']:checked:focus,
-.form-check-input[type='checkbox']:checked {
+.form-check-input[type="checkbox"]:checked:focus,
+.form-check-input[type="checkbox"]:checked {
     background-color: var(--joorney-secondary);
 }
 
-.form-switch .form-check-input:checked[type='checkbox']:after {
+.form-switch .form-check-input:checked[type="checkbox"]:after {
     background-color: var(--joorney-secondary);
 }

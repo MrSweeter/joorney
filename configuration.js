@@ -1,8 +1,16 @@
-import FeaturesState from './features_state.json';
+import backgroundLoaders from 'virtual:joorney-features/background';
+import backgroundTriggerLoaders from 'virtual:joorney-features/background_trigger';
+import configurationLoaders from 'virtual:joorney-features/configuration';
+import contentLoaders from 'virtual:joorney-features/content';
+import optionLoaders from 'virtual:joorney-features/option';
+import optionCustomizationLoaders from 'virtual:joorney-features/option_customization';
+import popupLoaders from 'virtual:joorney-features/popup';
+import FeaturesState from 'virtual:joorney-features/state';
 import { Console, StorageSync, sendRuntimeMessage } from './src/utils/browser.js';
 import { MESSAGE_ACTION } from './src/utils/messaging.js';
 
 export const baseSettings = {
+    // Bumping it requires a migrate_<N>.js registered in MIGRATORS below
     configurationVersion: 2,
     toastMode: 'ui',
     toastType: JSON.stringify({
@@ -35,7 +43,7 @@ export const extensionFeatureState = FeaturesState;
 const activeFeaturesList = Object.keys(FeaturesState).filter((k) => !k.startsWith('__') && FeaturesState[k]);
 
 export let features = [];
-let featuresLoading = undefined;
+let featuresLoading;
 // Memoized: every caller awaits the same loading, avoid using 'features' before it is filled
 export function loadFeaturesConfiguration() {
     featuresLoading ??= Promise.all(activeFeaturesList.map((f) => importFeatureConfigurationFile(f))).then(
@@ -48,36 +56,58 @@ export function loadFeaturesConfiguration() {
     return featuresLoading;
 }
 
+export function getFeaturesListResponse() {
+    return loadFeaturesConfiguration().then((features) => ({ features: features }));
+}
+
+// Only the features of this build are in the registry (see scripts/rollup/feature_registry.js)
+async function importFeatureFile(loaders, featureID, file) {
+    const loader = loaders[featureID];
+    if (!loader) throw new Error(`Feature '${featureID}' has no '${file}' file in this build`);
+    return loader();
+}
+
 export function importFeatureConfigurationFile(featureID) {
-    return import(`./src/features/${featureID}/configuration.js`).then((f) => f.default);
+    return importFeatureFile(configurationLoaders, featureID, 'configuration').then((f) => f.default);
 }
 
 export function importFeatureContentFile(featureID) {
-    return import(`./src/features/${featureID}/content.js`).then((f) => new f.default());
+    return importFeatureFile(contentLoaders, featureID, 'content').then((f) => new f.default());
 }
 
 export function importFeatureBackgroundTriggerFile(featureID) {
-    return import(`./src/features/${featureID}/background_trigger.js`).then((f) => new f.default());
+    return importFeatureFile(backgroundTriggerLoaders, featureID, 'background_trigger').then((f) => new f.default());
 }
 
 export function importFeatureBackgroundFile(featureID) {
-    return import(`./src/features/${featureID}/background.js`).then((f) => new f.default());
+    return importFeatureFile(backgroundLoaders, featureID, 'background').then((f) => new f.default());
 }
 
 export function importFeatureOptionFile(featureID) {
-    return import(`./src/features/${featureID}/option.js`).then((f) => new f.default());
+    return importFeatureFile(optionLoaders, featureID, 'option').then((f) => new f.default());
 }
 
 export function importFeatureCustomizationFile(featureID) {
-    return import(`./src/features/${featureID}/option_customization.js`).then((f) => new f.default());
+    return importFeatureFile(optionCustomizationLoaders, featureID, 'option_customization').then(
+        (f) => new f.default()
+    );
 }
 
 export function importFeaturePopupFile(featureID) {
-    return import(`./src/features/${featureID}/popup.js`).then((f) => new f.default());
+    return importFeatureFile(popupLoaders, featureID, 'popup').then((f) => new f.default());
 }
 
-export function importMigratorFile(fromVersion) {
-    return import(`./options/migration/migrator/migrate_${fromVersion}.js`).then((f) => f.default);
+// Static imports, no template-literal import() in the build (see scripts/rollup/feature_registry.js):
+// one entry per options/migration/migrator/migrate_<version>.js, add it when bumping configurationVersion
+const MIGRATORS = {
+    0: () => import('./options/migration/migrator/migrate_0.js'),
+    1: () => import('./options/migration/migrator/migrate_1.js'),
+};
+
+export async function importMigratorFile(fromVersion) {
+    const loader = MIGRATORS[fromVersion];
+    if (!loader) throw new Error(`No migrator from configuration version ${fromVersion}`);
+    return (await loader()).default;
 }
 
 export async function getFeaturesAndCurrentSettings() {

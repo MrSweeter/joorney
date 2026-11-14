@@ -3,14 +3,14 @@ import { ToastManager } from '../../../src/toast/index.js';
 import { StorageSync } from '../../../src/utils/browser.js';
 import { sleep } from '../../../src/utils/util.js';
 
-export async function loadPage(features, currentSettings) {
-    ToastManager.load();
+export async function loadPage(_features, currentSettings) {
+    await ToastManager.load();
 
     handleToastMode(currentSettings.toastMode);
     handleToastType(JSON.parse(currentSettings.toastType));
 }
 
-let joorneyCurrentToastMode = undefined;
+let joorneyCurrentToastMode;
 
 function handleToastMode(mode) {
     const radioButtons = document.querySelectorAll('.joorney-toast-mode-control input[type="radio"]');
@@ -42,7 +42,7 @@ function handleToastType(types) {
 
 async function showMockToast() {
     if (!joorneyCurrentToastMode) return;
-    let { toastType } = await StorageSync.get("toastType");
+    let { toastType } = await StorageSync.get('toastType');
     toastType = toastType ? JSON.parse(toastType) : baseSettings.toastType;
 
     if (
@@ -105,3 +105,12 @@ async function showMockToast() {
         );
     }
 }
+
+// Options menu entry, see options/menu.js
+export const PAGE = {
+    id: 'page-toast',
+    tour: 'tour_toasts',
+    label: 'Notifications',
+    path: './pages/toast/index.html',
+    loader: loadPage,
+};

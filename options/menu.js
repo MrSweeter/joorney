@@ -1,53 +1,8 @@
-import { loadPage as loadAmbientPage } from './pages/ambient/index.js';
-import { loadPage as loadConfigurationPage } from './pages/configuration/index.js';
-import { loadPage as loadTechnicalPage } from './pages/technical/index.js';
-import { loadPage as loadToastPage } from './pages/toast/index.js';
-import { loadPage as loadVersionPage } from './pages/version/index.js';
-import { loadPage as loadWebsitePage } from './pages/website/index.js';
+import { PAGE as AMBIENT_PAGE } from './pages/ambient/index.js';
+import { PAGE as CONFIGURATION_PAGE } from './pages/configuration/index.js';
+import { PAGE as TECHNICAL_PAGE } from './pages/technical/index.js';
+import { PAGE as TOAST_PAGE } from './pages/toast/index.js';
+import { PAGE as VERSION_PAGE } from './pages/version/index.js';
+import { PAGE as WEBSITE_PAGE } from './pages/website/index.js';
 
-export const PAGES = [
-    {
-        id: 'page-website',
-        tour: 'tour_hostControls',
-        label: 'Hosts control',
-        path: './pages/website/index.html',
-        loader: loadWebsitePage,
-        default: true,
-    },
-    {
-        id: 'page-configuration',
-        tour: 'tour_preferences',
-        label: 'Preferences',
-        path: './pages/configuration/index.html',
-        loader: loadConfigurationPage,
-    },
-    {
-        id: 'page-version',
-        tour: 'tour_versions',
-        label: 'Versions',
-        path: './pages/version/index.html',
-        loader: loadVersionPage,
-    },
-    {
-        id: 'page-toast',
-        tour: 'tour_toasts',
-        label: 'Notifications',
-        path: './pages/toast/index.html',
-        loader: loadToastPage,
-    },
-    {
-        id: 'page-ambient',
-        tour: undefined,
-        label: 'Ambient',
-        path: './pages/ambient/index.html',
-        loader: loadAmbientPage,
-    },
-    {
-        id: 'page-technical',
-        tour: 'tour_technical',
-        label: 'Developers',
-        path: './pages/technical/index.html',
-        loader: loadTechnicalPage,
-        technical: true,
-    },
-];
+export const PAGES = [WEBSITE_PAGE, CONFIGURATION_PAGE, VERSION_PAGE, TOAST_PAGE, AMBIENT_PAGE, TECHNICAL_PAGE];

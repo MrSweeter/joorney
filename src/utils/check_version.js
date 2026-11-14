@@ -1,16 +1,20 @@
 import { getAnnounceData, getOdooData } from '../api/github.js';
 import { getAnnounceCloseStatus } from '../api/local.js';
-import { Action, Runtime, getInstallType } from './browser.js';
+import { Action, getInstallType, Runtime } from './browser.js';
 import { updateSupportedDevelopmentVersion, updateSupportedVersion } from './version.js';
 
 const fetchVersion = 'https://raw.githubusercontent.com/MrSweeter/joorney/master/manifest.json';
 
+export async function refreshSupportedVersions() {
+    const odooData = (await getOdooData()) ?? {};
+    await updateSupportedVersion(odooData.availableOdooVersions);
+    await updateSupportedDevelopmentVersion(odooData.developmentOdooVersions);
+}
+
 export async function checkVersion() {
     const installType = await getInstallType();
 
-    const odooData = await getOdooData();
-    updateSupportedVersion(odooData?.availableOdooVersions);
-    await updateSupportedDevelopmentVersion(odooData?.developmentOdooVersions);
+    await refreshSupportedVersions();
 
     if (!['development', 'other'].includes(installType)) return;
     const res = await fetch(fetchVersion);
@@ -59,7 +63,7 @@ export async function getAnnounce() {
     const currentVersion = Runtime.getManifest().version_name;
     const announces = await getAnnounceData();
     const announce = announces[currentVersion];
-    if (!announce || !announce.hash) return undefined;
+    if (!announce?.hash) return undefined;
     if (announce.closeable !== false) {
         const status = await getAnnounceCloseStatus(announce.hash);
         if (status) return undefined;

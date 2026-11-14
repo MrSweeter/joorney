@@ -1,31 +1,23 @@
-import { getFeaturesAndCurrentSettings } from '../configuration.js';
-import { getOdooData } from '../src/api/github.js';
 import { closeAnnounce } from '../src/api/local.js';
 import { getNextTourID } from '../src/checklist/index.js';
 import ChecklistManager from '../src/checklist/manager.js';
-import { stringToHTML } from '../src/html_generator.js';
-import { Runtime, isDevMode } from '../src/utils/browser.js';
-import { getAnnounce } from '../src/utils/check_version.js';
-import { updateSupportedDevelopmentVersion, updateSupportedVersion } from '../src/utils/version.js';
+import { isDevMode } from '../src/utils/browser.js';
+import { getAnnounce, refreshSupportedVersions } from '../src/utils/check_version.js';
 import { initImportExport } from './import_export.js';
 import { PAGES } from './menu.js';
 import { load as loadShortcut } from './src/keyboard_shortcut.js';
-
-const MENU_ITEMS_CONTAINER = 'joorney-menu-items-container';
-const PAGE_CONTAINER = 'joorney-page-container';
+import { loadManifest, loadMenus } from './src/layout.js';
 
 async function onDOMContentLoaded() {
-    document.getElementById('copyright-year').innerText = new Date().getFullYear();
+    document.getElementById('copyright-year').textContent = new Date().getFullYear();
     //document.getElementById('copyright-link').href = Runtime.getManifest().homepage_url; Not public API
 
     initImportExport();
 
     const announce = await getAnnounce();
-    const odooData = await getOdooData();
-    updateSupportedVersion(odooData?.availableOdooVersions);
-    await updateSupportedDevelopmentVersion(odooData?.developmentOdooVersions);
+    await refreshSupportedVersions();
 
-    await loadMenus(announce);
+    await loadOptionMenus(announce);
     loadShortcut();
 
     const searchParams = new URLSearchParams(window.location.search);
@@ -47,16 +39,9 @@ function toggleTechnicalMenus(force = undefined) {
     }
 }
 
-async function loadMenus(announce) {
-    const container = document.getElementById(MENU_ITEMS_CONTAINER);
-    container.innerHTML = '';
-    for (const page of PAGES) {
-        loadMenu(page, container);
-    }
-
+async function loadOptionMenus(announce) {
     const defaultMenu = await getDefaultMenu(PAGES, announce);
-
-    document.getElementById(defaultMenu.id).click();
+    loadMenus(PAGES, defaultMenu, (page) => updateMenuTour(page.tour));
 }
 
 async function getDefaultMenu(pageMenus, announce) {
@@ -72,38 +57,6 @@ async function getDefaultMenu(pageMenus, announce) {
     return defaultMenu;
 }
 
-function loadMenu(page, container) {
-    const template = document.createElement('template');
-    template.innerHTML = `
-        <li id="${page.id}" class="joorney-menu-item ${page.technical ? 'joorney-tech-menu' : ''} nav-item nav-link">
-            ${page.label}
-        </li>
-    `.trim();
-
-    template.content.firstChild.onclick = () => {
-        loadPage(page);
-    };
-
-    container.appendChild(template.content.firstChild);
-}
-
-async function loadPage(page) {
-    const response = await fetch(page.path);
-    const data = await response.text();
-    const { features, currentSettings } = await getFeaturesAndCurrentSettings();
-    document.getElementById(PAGE_CONTAINER).innerHTML = data;
-    page.loader(features, currentSettings);
-    updateActiveMenu(page.id);
-    updateMenuTour(page.tour);
-}
-
-function updateActiveMenu(menu) {
-    for (const e of document.getElementsByClassName('joorney-menu-item')) {
-        if (e.id === menu) e.classList.add('active');
-        else e.classList.remove('active');
-    }
-}
-
 function updateMenuTour(tourID) {
     ChecklistManager.onboard(tourID);
 }
@@ -114,7 +67,7 @@ async function loadAnnouncement(announce) {
     let show = false;
     if (announce.title) {
         document.getElementById('ja-title').innerHTML = announce.title;
-        document.getElementById('ja-version').innerText = announce.version ? `[${announce.version}] ` : '';
+        document.getElementById('ja-version').textContent = announce.version ? `[${announce.version}] ` : '';
         document.getElementById('ja-title').parentElement.classList.toggle('d-none');
         show = true;
     }
@@ -131,14 +84,4 @@ async function loadAnnouncement(announce) {
         document.getElementById('ja-close').classList.toggle('d-none');
     }
     if (show) announceElement.parentElement.classList.toggle('d-none');
-}
-
-async function loadManifest() {
-    const manifest = Runtime.getManifest();
-    const element = document.getElementById('joorney-manifest');
-    element.innerHTML = '';
-    const versionElement = stringToHTML(
-        `<p class="small m-0 text-muted opacity-25 position-absolute">Joorney ${manifest.version_name} (${manifest.version})`
-    );
-    element.appendChild(versionElement);
 }

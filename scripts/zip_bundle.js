@@ -1,15 +1,10 @@
 import fs from 'node:fs';
 import path, { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import archiver from 'archiver';
+import { ZipArchive } from 'archiver';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-
-// import manifestJSON from '../bundle/manifest.json' with { type: 'json' }; // eslint failing
-// Use fs.readFileSync to read the JSON file
-const manifestPath = path.join(__dirname, '..', 'bundle', 'manifest.json');
-const manifestJSON = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
 
 function zip(folder, outputFolder, outputFilename) {
     const inputPath = path.join(__dirname, '..', folder);
@@ -19,7 +14,7 @@ function zip(folder, outputFolder, outputFilename) {
     console.log(`Output file will be: ${outputPath}`);
 
     const output = fs.createWriteStream(outputPath);
-    const archive = archiver('zip', {
+    const archive = new ZipArchive({
         zlib: { level: 9 },
     });
 
@@ -62,18 +57,26 @@ function deleteExistingVersion(outputFolder, deleteFormat) {
     }
 }
 
-function main() {
-    const bundlePath = './bundle';
-    const outputFolder = 'store/artefacts';
+/**
+ * Zip a build folder, named after its manifest version, replacing the archives of the same version.
+ * @param {string} [bundleFolder] build folder, relative to the repository root
+ * @param {string} [outputFolder] archive folder, relative to the repository root
+ * @param {string} [zipPrefix] archive name before the version
+ */
+export function zipBundle(bundleFolder = 'bundle', outputFolder = 'store/artefacts', zipPrefix = 'joorney') {
+    const manifestPath = path.join(__dirname, '..', bundleFolder, 'manifest.json');
+    const manifestJSON = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
+    const bundlePath = `./${bundleFolder}`;
 
     const version = manifestJSON.version;
 
     const versionNoBuild = version.split('.').slice(0, 3).join('-');
-    const deleteFormat = `joorney_${versionNoBuild}`;
+    const deleteFormat = `${zipPrefix}_${versionNoBuild}`;
     deleteExistingVersion(outputFolder, deleteFormat);
 
-    const zipName = `joorney_${version.replaceAll('.', '-')}.zip`;
+    const zipName = `${zipPrefix}_${version.replaceAll('.', '-')}.zip`;
     zip(bundlePath, outputFolder, zipName);
 }
 
-main();
+// Run as a script (npm run zip), not when imported
+if (process.argv[1] === __filename) zipBundle();

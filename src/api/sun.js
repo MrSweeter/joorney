@@ -5,8 +5,8 @@ import { getSunSchedule, setSunSchedule } from './local.js';
 function parseTime12h(timeStr) {
     const match = /^(\d{1,2}):(\d{2})(?::\d{2})?\s*(AM|PM)$/i.exec(`${timeStr ?? ''}`.trim());
     if (!match) return undefined;
-    const hours = Number.parseInt(match[1]) % 12;
-    const minutes = Number.parseInt(match[2]);
+    const hours = Number.parseInt(match[1], 10) % 12;
+    const minutes = Number.parseInt(match[2], 10);
     const isPM = match[3].toUpperCase() === 'PM';
     return (hours + (isPM ? 12 : 0)) * 60 + minutes;
 }

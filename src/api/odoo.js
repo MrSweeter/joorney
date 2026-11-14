@@ -60,7 +60,7 @@ async function getActionWindow_fromLoadRun(idOrPath, cachingTime = 60) {
         idOrPath
     );
 
-    if (!data || !data.result) data = undefined;
+    if (!data?.result) data = undefined;
 
     if (data && data.result.type === 'ir.actions.server') {
         ({ fromCache, data } = await cache(
@@ -125,7 +125,7 @@ export async function getVersionInfo(urlArg) {
         'getVersionInfo',
         url.origin
     );
-    if (!data || !data.result) return undefined;
+    if (!data?.result) return undefined;
     return parseInfo(data.result);
 }
 
@@ -314,7 +314,7 @@ export async function getFutureEventWithName(domain, host) {
     );
     if (!data) return undefined;
     if (data.error) return undefined;
-    if (!data.result || data.result.length !== 1) return undefined;
+    if (data.result?.length !== 1) return undefined;
     return data.result[0];
 }
 //#endregion

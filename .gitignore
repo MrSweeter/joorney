@@ -1,9 +1,9 @@
 .*
 !.gitignore
-!.eslintrc.json
-.eslintignore
-!.prettierrc.json
 !.pre-commit-config.yaml
+!.vscode/
+.vscode/*
+!.vscode/extensions.json
 
 .DS_Store
 

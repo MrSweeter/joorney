@@ -1,6 +1,6 @@
 import { Console, Runtime, StorageSync } from '../utils/browser.js';
 import { getLocalCache, setLocalCache } from './local.js';
-import { SessionKey, getSessionData } from './session.js';
+import { getSessionData, SessionKey } from './session.js';
 
 /**
  * Caches the result of a function call for a specified amount of time.
@@ -18,7 +18,7 @@ import { SessionKey, getSessionData } from './session.js';
  *          - `data` (any): The cached data or the result of the function call.
  */
 export async function cache(cachingTime, call, callID, ...params) {
-    let data = undefined;
+    let data;
     let fromCache = true;
     if (cachingTime > 0) {
         data = await readCacheCall(callID, ...params);

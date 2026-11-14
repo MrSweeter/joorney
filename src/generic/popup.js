@@ -1,5 +1,5 @@
 import { reloadTabFeatures } from '../../popup/src/tab_features.js';
-import { Runtime, StorageSync, Tabs, sendTabMessage } from '../utils/browser.js';
+import { Runtime, StorageSync, sendTabMessage, Tabs } from '../utils/browser.js';
 import { featureIDToPascalCase } from '../utils/features.js';
 import { MESSAGE_ACTION } from '../utils/messaging.js';
 

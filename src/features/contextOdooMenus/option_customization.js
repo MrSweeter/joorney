@@ -139,9 +139,9 @@ export default class ContextOdooMenusOptionCustomizationFeature extends OptionCu
         container.innerHTML = '';
 
         const menusArray = Object.values(menus).sort((a, b) => a.order - b.order);
-        menusArray.forEach((menu, index) =>
-            this.renderOne(menu, index === 0, index === menusArray.length - 1, container)
-        );
+        menusArray.forEach((menu, index) => {
+            this.renderOne(menu, index === 0, index === menusArray.length - 1, container);
+        });
 
         this.displayError();
     }

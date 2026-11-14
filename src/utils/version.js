@@ -1,7 +1,7 @@
 import { baseSettings } from '../../configuration.js';
 // import { getVersionInfo } from '../api/odoo.js';
-import { SessionKey, getSessionData } from '../api/session.js';
-import { StorageSync, isDevMode } from './browser.js';
+import { getSessionData, SessionKey } from '../api/session.js';
+import { isDevMode, StorageSync } from './browser.js';
 import { setSupportedDevelopmentVersion, setSupportedVersion } from './constant.js';
 
 const DEFAULT_VERSION = { isOdoo: false };
@@ -13,7 +13,8 @@ export function updateSupportedVersion(versionsArg) {
     if (isFallback) versions = ['20.0']; // Use current Odoo long-term version
     versions = versions.map((v) => sanitizeVersion(v));
     setSupportedVersion(versions);
-    if (!isFallback) checkVersionIntegrity(versions);
+    if (!isFallback) return checkVersionIntegrity(versions);
+    return Promise.resolve();
 }
 
 export async function updateSupportedDevelopmentVersion(devVersionArg) {
@@ -48,5 +49,5 @@ async function checkVersionIntegrity(versions, isDev) {
     const settings = await StorageSync.get(baseSettings);
 
     const safe = settings[settingKey].filter((v) => versions.includes(v));
-    StorageSync.set({ [settingKey]: safe });
+    await StorageSync.set({ [settingKey]: safe });
 }

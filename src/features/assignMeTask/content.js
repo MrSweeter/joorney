@@ -1,5 +1,5 @@
 import { writeRecord } from '../../api/odoo.js';
-import { SessionKey, getSessionData } from '../../api/session.js';
+import { getSessionData, SessionKey } from '../../api/session.js';
 import { generateTrackingMessage, generateUserAvatarTag, stringToHTML } from '../../html_generator.js';
 import RecordFormContentFeature from '../../shared/projectTaskShare/content.js';
 import { ToastManager } from '../../toast/index.js';
