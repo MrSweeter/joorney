@@ -9,6 +9,7 @@ export async function refreshSupportedVersions() {
     const odooData = (await getOdooData()) ?? {};
     await updateSupportedVersion(odooData.availableOdooVersions);
     await updateSupportedDevelopmentVersion(odooData.developmentOdooVersions);
+    return odooData;
 }
 
 export async function checkVersion() {

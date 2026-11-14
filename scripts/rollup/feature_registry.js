@@ -18,7 +18,7 @@ function getFeatureStatePath(rootDir) {
     return path.join(rootDir, 'features_state.json');
 }
 
-function readFeatureState(rootDir) {
+export function readFeatureState(rootDir) {
     return JSON.parse(fs.readFileSync(getFeatureStatePath(rootDir), 'utf-8'));
 }
 
@@ -28,7 +28,7 @@ function getActiveFeatureIDs(featureState) {
 
 /**
  * Generate the 'virtual:joorney-features/*' modules:
- * - 'virtual:joorney-features/state': the content of features_state.json
+ * - 'virtual:joorney-features/state': the content of features_state.json, or the given features when featureIDs is set
  * - 'virtual:joorney-features/<file>': a static import per feature having this file (content, popup...)
  * Static imports, not a template-literal import: Rollup cannot resolve `./${featureID}/x.js` by itself, the files
  * would be missing from the bundle, and a glob plugin (dynamic-import-vars) would bundle every feature folder,
@@ -36,11 +36,13 @@ function getActiveFeatureIDs(featureState) {
  * One module per file type, so an entry not using a type (popup in content.js) tree-shakes it.
  * @param {object} options
  * @param {string} options.rootDir repository root
+ * @param {string[]} [options.featureIDs] features to bundle, default to the active ones of features_state.json
  */
-export default function featureRegistry({ rootDir }) {
+export default function featureRegistry({ rootDir, featureIDs = undefined }) {
     const featuresDir = path.join(rootDir, 'src', 'features');
 
     function getFeatureState(ctx) {
+        if (featureIDs) return Object.fromEntries(featureIDs.map((f) => [f, true]));
         ctx.addWatchFile(getFeatureStatePath(rootDir));
         return readFeatureState(rootDir);
     }

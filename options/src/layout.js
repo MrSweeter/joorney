@@ -3,7 +3,8 @@ import { stringToHTML } from '../../src/html_generator.js';
 import { Runtime } from '../../src/utils/browser.js';
 
 /**
- * Options page layout: menu rendering and page loading.
+ * Options page layout shared by the full (options/index.js) and lite (lite/options/index.js) options:
+ * menu rendering and page loading.
  */
 
 const MENU_ITEMS_CONTAINER = 'joorney-menu-items-container';
@@ -57,12 +58,15 @@ function updateActiveMenu(menu) {
     }
 }
 
-export function loadManifest() {
+/**
+ * @param {string} name displayed before the version
+ */
+export function loadManifest(name = 'Joorney') {
     const manifest = Runtime.getManifest();
     const element = document.getElementById('joorney-manifest');
     element.innerHTML = '';
     const versionElement = stringToHTML(
-        `<p class="small m-0 text-muted opacity-25 position-absolute">Joorney ${manifest.version_name} (${manifest.version})`
+        `<p class="small m-0 text-muted opacity-25 position-absolute">${name} ${manifest.version_name} (${manifest.version})`
     );
     element.appendChild(versionElement);
 }

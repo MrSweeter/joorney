@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Joorney Configuration</title>
+        <link rel="icon" type="image/x+icon" href="./../images/icon_128.svg">
+        <meta charset="utf-8">
+        <!-- Font Awesome -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+        <!-- MDB -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.1/mdb.min.css" rel="stylesheet">
+
+        <link href="./index.css" rel="stylesheet">
+        <script src="index.js"></script>
+    </head>
+    <body class="joorney-body-background d-flex flex-column">
+        <!-- Menu -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" id="joorney-navig-menu">
+            <div class="container-fluid">
+                <div class="navbar-brand">
+                    <img loading="lazy" src="/images/icon_128.png" class="mx-2" height="20" alt="Joorney Logo">
+                    <small id="joorney-brand-name">Joorney Configuration</small>
+                </div>
+                <ul id="joorney-menu-items-container" class="navbar-nav me-auto"></ul>
+            </div>
+        </nav>
+        <div id="joorney-manifest"></div>
+
+        <!-- Content -->
+        <div id="joorney-page-container" class="flex-fill"></div>
+
+        <!-- Footer -->
+        <footer class="text-center">
+            <div class="text-center p-3">
+                &copy; <span id="copyright-year">2023</span>
+                All rights reserved :
+                <a id="copyright-link" href="https://github.com/MrSweeter/joorney">Joorney</a>
+            </div>
+        </footer>
+    </body>
+</html>

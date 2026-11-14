@@ -31,6 +31,21 @@ Thank you for considering contributing to this project! Below is a guide on how 
 2. **Load the Extension**: Follow [this guide](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked) to load the unpacked extension.
 3. **Reload if Needed**: Depending on the changes, you might need to reload the extension. See [here](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#reload) for instructions.
 
+### Lite Feature Build
+
+Build a minimal extension containing only the selected feature(s), with a trimmed background and options (hosts control, versions, notifications and the feature preferences):
+
+```sh
+FEATURE=assignMeTask npm run build:lite          # bundle-lite/assignMeTask/
+FEATURE=assignMeTask,pinMessage npm run dev:lite # several features, watch mode
+FEATURE=assignMeTask npm run prod:lite           # production build + zip in bundle-lite/
+```
+
+- Once installed, the selected features and every available Odoo version are enabled, so no configuration is needed.
+- Only content features are supported (`load`, `navigate`, `onrequest`, `ondom` triggers). Background trigger (`themeSwitch`), context menu (`contextOdooMenus`), runbot (`limited`) and `ambient` features need the full build: the build stops and lists the supported features.
+- The manifest only keeps the needed permissions (`webRequest` for `onrequest` features, no `contextMenus`, `cookies`, keyboard shortcut or omnibox).
+- Don't enable the same feature in the full Joorney extension at the same time: both inject their elements in the page.
+
 ## Preparing for Release
 
 1. **Update Files**:

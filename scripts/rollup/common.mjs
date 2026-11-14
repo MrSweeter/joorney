@@ -6,11 +6,14 @@ import copy from 'rollup-plugin-copy';
 import { SUPPORTED_VERSION } from '../../src/utils/constant.js';
 import featureRegistry from './feature_registry.js';
 
-const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
-const isProd = () => process.env.NODE_ENV === 'production';
+export const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+export const isProd = () => process.env.NODE_ENV === 'production';
 
-export function getDefaultPlugins() {
-    return [featureRegistry({ rootDir: ROOT_DIR }), resolve(), json()];
+/**
+ * @param {string[]} [featureIDs] features to bundle, default to the active ones of features_state.json
+ */
+export function getDefaultPlugins(featureIDs = undefined) {
+    return [featureRegistry({ rootDir: ROOT_DIR, featureIDs: featureIDs }), resolve(), json()];
 }
 
 export function getESMOutput(file) {
@@ -88,15 +91,16 @@ export function getContentConfig(output, plugins) {
  * Popup bundle and assets.
  * @param {string} output bundle folder
  * @param {object[]} plugins
+ * @param {object[]} [targets] rollup-plugin-copy targets of the popup assets, default to all of them
  */
-export function getPopupConfig(output, plugins) {
-    const targets = [
+export function getPopupConfig(output, plugins, targets = undefined) {
+    const copyTargets = targets ?? [
         { src: ['popup/index.html', 'popup/index.css'], dest: `${output}/popup` },
         { src: 'popup/css/*', dest: `${output}/popup/css` },
     ];
     return {
         input: 'popup/index.js',
         output: getESMOutput(`${output}/popup/index.js`),
-        plugins: [...plugins, copy({ targets: targets })],
+        plugins: [...plugins, copy({ targets: copyTargets })],
     };
 }
