@@ -1,6 +1,6 @@
 import { importFeatureCustomizationFile } from '../../../configuration.js';
 import { StorageSync } from '../../../src/utils/browser.js';
-import { applyI18n, initI18n, LANGUAGE_MODE, LANGUAGES } from '../../../src/utils/i18n.js';
+import { getLanguage, LANGUAGE_MODE, LANGUAGES, t } from '../../../src/utils/i18n.js';
 
 export async function loadPage(features, currentSettings) {
     loadLanguage(currentSettings);
@@ -15,7 +15,6 @@ async function loadFeatures(features) {
 
 //#region Language
 async function loadLanguage(currentSettings) {
-    const card = document.getElementById('joorney_language_card');
     const modeSelect = document.getElementById('joorney_language_mode');
     const staticSelect = document.getElementById('joorney_language_static');
 
@@ -27,24 +26,31 @@ async function loadLanguage(currentSettings) {
     );
     modeSelect.value = currentSettings.languageMode;
     staticSelect.classList.toggle('d-none', modeSelect.value !== LANGUAGE_MODE.STATIC);
+    for (const help of document.querySelectorAll('#joorney_language_card [data-language-help]')) {
+        help.classList.toggle('d-none', help.dataset.languageHelp !== modeSelect.value);
+    }
+    // Resolved by the options page initI18n(): in 'odoo' mode, the last Odoo language seen
+    const current = getLanguage();
+    const currentLabel = LANGUAGES[current]?.label ?? current;
+    const currentBadge = document.getElementById('joorney_language_current');
+    currentBadge.textContent = currentLabel;
+    currentBadge.title = t('language_current', currentLabel);
 
-    const refresh = async () => {
-        staticSelect.classList.toggle('d-none', modeSelect.value !== LANGUAGE_MODE.STATIC);
-        await initI18n();
-        applyI18n(card);
+    // Reload to render the whole options page (menu, checklist, dynamic rows) in the new language
+    const refresh = () => {
+        const url = new URL(window.location.href);
+        url.searchParams.set('page', PAGE.id);
+        window.location.replace(url);
     };
 
     modeSelect.onchange = async () => {
         await StorageSync.set({ languageMode: modeSelect.value });
-        await refresh();
+        refresh();
     };
     staticSelect.onchange = async () => {
         await StorageSync.set({ languageStatic: staticSelect.value });
-        await refresh();
+        refresh();
     };
-
-    await initI18n();
-    applyI18n(card);
 }
 //#endregion
 
@@ -52,7 +58,7 @@ async function loadLanguage(currentSettings) {
 export const PAGE = {
     id: 'page-configuration',
     tour: 'tour_preferences',
-    label: 'Preferences',
+    labelKey: 'options_menu_preferences',
     path: './pages/configuration/index.html',
     loader: loadPage,
 };

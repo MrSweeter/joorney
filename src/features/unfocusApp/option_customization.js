@@ -1,5 +1,7 @@
 import OptionCustomizationFeature from '../../generic/option_customization.js';
+import { escapeHTML } from '../../html_generator.js';
 import { Console, StorageSync } from '../../utils/browser.js';
+import { t } from '../../utils/i18n.js';
 import configuration from './configuration.js';
 
 export default class UnfocusAppOptionCustomizationFeature extends OptionCustomizationFeature {
@@ -24,7 +26,7 @@ export default class UnfocusAppOptionCustomizationFeature extends OptionCustomiz
     }
 
     async deleteUnfocusAppOrigin(origin) {
-        if (confirm(`Are you sure you want to remove origin: ${origin}?`)) {
+        if (confirm(t('options_confirmRemoveOrigin', origin))) {
             const origins = await this.readUnfocusAppOrigins();
             delete origins[origin];
             await this.renderOriginsObject(origins);
@@ -70,7 +72,7 @@ export default class UnfocusAppOptionCustomizationFeature extends OptionCustomiz
 			<td class="p-1 joorney-valign-middle">
 				<button
 					class="joorney_unfocus_app_origin_delete_${idx} btn btn-outline-danger border-0 btn-floating"
-					title="Delete origin"
+					title="${escapeHTML(t('options_deleteOrigin'))}"
 				>
 					<i class="joorney-icon joorney-icon-filled joorney-font-icon-size" data-icon="delete" aria-hidden="true"></i>
 				</button>

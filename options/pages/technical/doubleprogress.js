@@ -1,4 +1,5 @@
 import { stringToHTML } from '../../../src/html_generator.js';
+import { t } from '../../../src/utils/i18n.js';
 
 const colors = [
     'red',
@@ -37,7 +38,7 @@ export default class DoubleProgressBar {
         this.loadPartial();
 
         this.switcher.onclick = () => this.switch();
-        this.label.innerHTML = `${progressName}: ${this.total} / ${this.maximum} bytes`;
+        this.label.textContent = t('optionsTechnical_storageUsage', progressName, this.total, this.maximum);
     }
 
     switch() {

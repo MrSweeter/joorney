@@ -1,5 +1,7 @@
 import OptionCustomizationFeature from '../../generic/option_customization.js';
+import { escapeHTML } from '../../html_generator.js';
 import { StorageSync, sendRuntimeMessage } from '../../utils/browser.js';
+import { t } from '../../utils/i18n.js';
 import { iconHTML } from '../../utils/icons.js';
 import { MESSAGE_ACTION } from '../../utils/messaging.js';
 import configuration from './configuration.js';
@@ -77,7 +79,7 @@ export default class ContextOdooMenusOptionCustomizationFeature extends OptionCu
     }
 
     async remove(id, path) {
-        if (confirm(`Are you sure you want to remove the menu: ${path}?`)) {
+        if (confirm(t('contextOdooMenus_option_confirmRemove', path))) {
             const menus = await this.getItems();
             delete menus[id];
             await this.saveAndRender(menus, true);
@@ -85,13 +87,13 @@ export default class ContextOdooMenusOptionCustomizationFeature extends OptionCu
     }
 
     async removeAll() {
-        if (confirm('Are you sure you want to delete all menus?')) {
+        if (confirm(t('contextOdooMenus_option_confirmRemoveAll'))) {
             await this.saveAndRender({}, true);
         }
     }
 
     async updateOrCreate(id, pathArg, overwrite) {
-        if (!pathArg) throw new Error('Missing path');
+        if (!pathArg) throw new Error(t('contextOdooMenus_option_error_missingPath'));
 
         const menus = await this.getItems();
 
@@ -102,11 +104,11 @@ export default class ContextOdooMenusOptionCustomizationFeature extends OptionCu
         if (!overwrite) {
             const ids = Object.keys(menus);
             if (ids.includes(id)) {
-                throw new Error(`This id is already registered (should not happen): ${id}`);
+                throw new Error(t('contextOdooMenus_option_error_idExists', id));
             }
             const items = Object.values(menus);
             if (items.some((s) => s.path === path)) {
-                throw new Error(`This path is already registered: ${path}`);
+                throw new Error(t('contextOdooMenus_option_error_pathExists', path));
             }
             nextPosition = Math.max(...items.map((s) => s.order)) + 1;
         }
@@ -176,25 +178,25 @@ export default class ContextOdooMenusOptionCustomizationFeature extends OptionCu
                     class="joorney_contextOdooMenus_record_favorite_${menu.id} btn btn-outline-warning ${
                         menu.active ? '' : 'text-muted'
                     } border-0 btn-floating"
-                    title="${menu.favorite ? 'Favorite' : 'Not favorite'}">
+                    title="${escapeHTML(menu.favorite ? t('contextOdooMenus_option_favorite') : t('contextOdooMenus_option_notFavorite'))}">
                     ${iconHTML('star', { filled: menu.favorite, attributes: 'style="font-size: 1.2em"' })}
                 </button>
                 <button
                     class="joorney_contextOdooMenus_record_toggle_${menu.id} btn btn-outline-success ${
                         menu.active ? '' : 'text-muted'
                     } border-0 btn-floating"
-                    title="${menu.active ? 'Disable' : 'Enable'} quick menu">
+                    title="${escapeHTML(menu.active ? t('contextOdooMenus_option_disable') : t('contextOdooMenus_option_enable'))}">
                     ${iconHTML(menu.active ? 'toggle_on' : 'toggle_off', { filled: true, attributes: 'style="font-size: 1.2em"' })}
                 </button>
                 <button
                     class="joorney_contextOdooMenus_record_update_button_${menu.id} btn btn-outline-success border-0 btn-floating"
-                    title="Save modification"
+                    title="${escapeHTML(t('contextOdooMenus_option_save'))}"
                     disabled>
                     ${menu.active ? '<i class="joorney-icon joorney-icon-filled" data-icon="save" aria-hidden="true" style="font-size: 1.2em"></i>' : ''}
                 </button>
                 <button
                     class="joorney_contextOdooMenus_record_remove_button_${menu.id} btn btn-outline-danger border-0 btn-floating"
-                    title="Delete quick menu">
+                    title="${escapeHTML(t('contextOdooMenus_option_delete'))}">
                     <i style="font-size: 1.2em" class="joorney-icon joorney-icon-filled" data-icon="delete" aria-hidden="true"></i>
                 </button>
             </td>

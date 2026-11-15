@@ -167,6 +167,7 @@ export function estimateAmbientDuration(ambient) {
 export const ambients = {
     compute: {
         name: 'Computed Events',
+        nameKey: 'ambient_category_computed',
         ambients: [
             {
                 name: `Odoo Experience ${new Date().getFullYear()}`,
@@ -183,6 +184,7 @@ export const ambients = {
             },
             {
                 name: 'Future Odoo Experience',
+                nameKey: 'ambient_futureOdooExperience',
                 id: 'future-odoo-experience-cpt',
                 computeDates: async () => {
                     return await getOdooEventDate([
@@ -199,6 +201,7 @@ export const ambients = {
     },
     event: {
         name: 'Events',
+        nameKey: 'ambient_category_events',
         ambients: [
             // {
             //     name: 'Developer Test',
@@ -211,6 +214,7 @@ export const ambients = {
             // },
             {
                 name: 'Happy Birthday Odoo!',
+                nameKey: 'ambient_odooBirthday',
                 id: 'odoo-birthday-evt',
                 // date: '2005-02-22T12:00:00Z', // TinyERP
                 // date: '2009-04-14T12:00:00Z', // OpenERP
@@ -222,6 +226,7 @@ export const ambients = {
             },
             {
                 name: 'New Year, Countdown',
+                nameKey: 'ambient_newYearCountdown',
                 id: 'new-year-evt',
                 date_from: `${new Date().getFullYear()}-12-31T23:59:30`,
                 date_to: `${new Date().getFullYear() + 1}-01-01T00:00:30`,
@@ -258,9 +263,11 @@ export const ambients = {
     },
     yearly: {
         name: 'Every year, one day',
+        nameKey: 'ambient_category_yearly',
         ambients: [
             {
                 name: 'New Year',
+                nameKey: 'ambient_newYear',
                 id: 'new-year-yly',
                 day: 1,
                 month: 1,
@@ -270,6 +277,7 @@ export const ambients = {
             },
             {
                 name: "Valentine's Day",
+                nameKey: 'ambient_valentine',
                 id: 'valentine-yly',
                 day: 14,
                 month: 2,
@@ -280,6 +288,7 @@ export const ambients = {
             },
             {
                 name: "Lucky Day (St. Patrick's)",
+                nameKey: 'ambient_stPatrick',
                 id: 'patrick-yly',
                 day: 17,
                 month: 3,
@@ -334,6 +343,7 @@ export const ambients = {
             },
             {
                 name: "April Fool's",
+                nameKey: 'ambient_aprilFool',
                 id: 'aprilfool-yly',
                 day: 1,
                 month: 4,
@@ -370,6 +380,7 @@ export const ambients = {
             },
             {
                 name: 'Halloween Night',
+                nameKey: 'ambient_halloween',
                 id: 'halloween-yly',
                 day: 31,
                 month: 10,
@@ -380,6 +391,7 @@ export const ambients = {
             },
             {
                 name: "New Year's Eve",
+                nameKey: 'ambient_newYearEve',
                 id: 'new-year-eve-yly',
                 day: 31,
                 month: 12,

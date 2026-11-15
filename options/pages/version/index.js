@@ -1,8 +1,9 @@
 import { baseSettings } from '../../../configuration.js';
-import { stringToHTML } from '../../../src/html_generator.js';
+import { escapeHTML, stringToHTML } from '../../../src/html_generator.js';
 import { includeVersion } from '../../../src/utils/authorize.js';
 import { StorageSync } from '../../../src/utils/browser.js';
 import { SUPPORTED_DEV_VERSION, SUPPORTED_VERSION } from '../../../src/utils/constant.js';
+import { featureName, t } from '../../../src/utils/i18n.js';
 import { iconHTML } from '../../../src/utils/icons.js';
 
 export async function loadPage(features, currentSettings) {
@@ -30,7 +31,7 @@ function loadSupportedOdoo(currentSettings, features, isdev = false) {
         const versionID = sanitizeVersionID(version);
         const versionElement = stringToHTML(`
 			<label
-				title="[Odoo Version] ${version}"
+				title="${escapeHTML(t('optionsVersions_versionTitle', version))}"
 				for="joorney_${versionID}_version"
 				style="width: 200px"
 			>
@@ -62,7 +63,7 @@ async function loadSupportedFeature(features, supportedVersions) {
 
     const header = stringToHTML(`
         <tr>
-            <th class="text-end opacity-50">Compatibility</th>
+            <th class="text-end opacity-50">${escapeHTML(t('optionsVersions_compatibility'))}</th>
             <th class="text-center" style="width: 32px"><i class="joorney-icon joorney-icon-filled" data-icon="category" aria-hidden="true"></i></th>
             ${SUPPORTED_VERSION.map((v) => `<th class="text-center">${v}</th>`).join('')}
         </tr>
@@ -82,7 +83,7 @@ async function loadSupportedFeature(features, supportedVersions) {
         const versionRow = stringToHTML(`
             <tr>
                 <th class="text-end">
-                    <span>${feature.display_name ?? feature.id}</span>
+                    <span>${escapeHTML(featureName(feature))}</span>
                 </th>
                 <th>
                     <div class="icon-wrapper">
@@ -93,7 +94,7 @@ async function loadSupportedFeature(features, supportedVersions) {
                     .map(
                         (v) =>
                             `<td class="text-center table-${v.feature ? (v.odoo ? 'success' : 'warning') : 'danger'}">
-                                <span class="opacity-25">${v.feature ? (v.odoo ? 'YES' : 'OFF') : 'NO'}</span>
+                                <span class="opacity-25">${escapeHTML(v.feature ? (v.odoo ? t('optionsVersions_yes') : t('optionsVersions_off')) : t('optionsVersions_no'))}</span>
                             </td>`
                     )
                     .join('')}
@@ -111,7 +112,7 @@ function sanitizeVersionID(version) {
 export const PAGE = {
     id: 'page-version',
     tour: 'tour_versions',
-    label: 'Versions',
+    labelKey: 'options_menu_versions',
     path: './pages/version/index.html',
     loader: loadPage,
 };

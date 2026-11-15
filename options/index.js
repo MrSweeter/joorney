@@ -3,12 +3,16 @@ import { getNextTourID } from '../src/checklist/index.js';
 import ChecklistManager from '../src/checklist/manager.js';
 import { isDevMode } from '../src/utils/browser.js';
 import { getAnnounce, refreshSupportedVersions } from '../src/utils/check_version.js';
+import { applyI18n, initI18n } from '../src/utils/i18n.js';
 import { initImportExport } from './import_export.js';
 import { PAGES } from './menu.js';
 import { load as loadShortcut } from './src/keyboard_shortcut.js';
 import { loadManifest, loadMenus } from './src/layout.js';
 
 async function onDOMContentLoaded() {
+    // Before the menus and the checklist: they render translated text
+    await initI18n();
+    applyI18n(document);
     document.getElementById('copyright-year').textContent = new Date().getFullYear();
     //document.getElementById('copyright-link').href = Runtime.getManifest().homepage_url; Not public API
 
@@ -45,6 +49,11 @@ async function loadOptionMenus(announce) {
 }
 
 async function getDefaultMenu(pageMenus, announce) {
+    // Reopened page after a reload (language change)
+    const pageParam = new URLSearchParams(window.location.search).get('page');
+    const pageMenu = pageParam && pageMenus.find((m) => m.id === pageParam);
+    if (pageMenu) return pageMenu;
+
     if (announce?.menu) {
         const menu = pageMenus.find((m) => m.id === announce.menu);
         if (menu) return menu;

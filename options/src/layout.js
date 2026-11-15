@@ -1,7 +1,7 @@
 import { getFeaturesAndCurrentSettings } from '../../configuration.js';
-import { stringToHTML } from '../../src/html_generator.js';
+import { escapeHTML, stringToHTML } from '../../src/html_generator.js';
 import { Runtime } from '../../src/utils/browser.js';
-import { initI18n } from '../../src/utils/i18n.js';
+import { applyI18n, initI18n, t } from '../../src/utils/i18n.js';
 
 /**
  * Options page layout: menu rendering and page loading.
@@ -30,7 +30,7 @@ function loadMenu(page, container, onPageLoaded) {
     const template = document.createElement('template');
     template.innerHTML = `
         <li id="${page.id}" class="joorney-menu-item ${page.technical ? 'joorney-tech-menu' : ''} nav-item nav-link">
-            ${page.label}
+            ${escapeHTML(t(page.labelKey))}
         </li>
     `.trim();
 
@@ -46,7 +46,9 @@ async function loadPage(page, onPageLoaded) {
     const data = await response.text();
     const { features, currentSettings } = await getFeaturesAndCurrentSettings();
     await initI18n();
-    document.getElementById(PAGE_CONTAINER).innerHTML = data;
+    const container = document.getElementById(PAGE_CONTAINER);
+    container.innerHTML = data;
+    applyI18n(container);
     page.loader(features, currentSettings);
     updateActiveMenu(page.id);
     onPageLoaded?.(page);

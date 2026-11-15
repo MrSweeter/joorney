@@ -1,7 +1,8 @@
 import { baseSettings, getCurrentSettings } from '../../configuration.js';
-import { generateFeatureOptionTableHeadItem, stringToHTML } from '../../src/html_generator.js';
+import { escapeHTML, generateFeatureOptionTableHeadItem, stringToHTML } from '../../src/html_generator.js';
 import { regexSchemePrefix } from '../../src/utils/authorize.js';
-import { StorageSync, sendRuntimeMessage } from '../../src/utils/browser.js';
+import { Console, StorageSync, sendRuntimeMessage } from '../../src/utils/browser.js';
+import { t } from '../../src/utils/i18n.js';
 import { MESSAGE_ACTION } from '../../src/utils/messaging.js';
 import { updateFeatureOriginInputs } from './features.js';
 
@@ -10,7 +11,7 @@ export async function createOriginsFilterOrigin() {
     const origin = document.getElementById('joorney_origins_filter_new_origin');
     let originString = origin.value.trim();
     if (!originString) {
-        renderOriginsFilterError('Missing origin');
+        renderOriginsFilterError(t('options_error_missingOrigin'));
         return;
     }
 
@@ -24,7 +25,8 @@ export async function createOriginsFilterOrigin() {
             await renderOriginsObject(origins);
             origin.value = '';
         } catch (ex) {
-            renderOriginsFilterError(ex);
+            Console.warn(ex);
+            renderOriginsFilterError(t('optionsHosts_error_invalidRegex'));
         }
         return;
     }
@@ -32,7 +34,7 @@ export async function createOriginsFilterOrigin() {
     originString = originString.trim().toLowerCase().replace(/\s/g, '');
 
     if (origins[originString]) {
-        renderOriginsFilterError('Origin already added');
+        renderOriginsFilterError(t('optionsHosts_error_originExists'));
         return;
     }
 
@@ -42,7 +44,8 @@ export async function createOriginsFilterOrigin() {
         await renderOriginsObject(origins);
         origin.value = '';
     } catch (ex) {
-        renderOriginsFilterError(ex);
+        Console.warn(ex);
+        renderOriginsFilterError(t('options_error_invalidOrigin'));
     }
 }
 
@@ -52,7 +55,7 @@ async function readOriginsFilterOrigins() {
 }
 
 export async function deleteOriginsFilterOrigin(origin) {
-    if (confirm(`Are you sure you want to remove origin: ${origin}?`)) {
+    if (confirm(t('options_confirmRemoveOrigin', origin))) {
         const origins = await readOriginsFilterOrigins();
         delete origins[origin];
         await renderOriginsObject(origins);
@@ -106,7 +109,9 @@ async function renderOriginsObject(origins) {
     const tableHeader = document.querySelector('#joorney_origins_filter_table thead tr');
     tableHeader.innerHTML = '';
     tableHeader.appendChild(
-        stringToHTML(`<th class="joorney-origins_filter-origin-input" title="Odoo Database Origin">Origins</th>`)
+        stringToHTML(
+            `<th class="joorney-origins_filter-origin-input" title="${escapeHTML(t('optionsHosts_originsTitle'))}">${escapeHTML(t('options_origins'))}</th>`
+        )
     );
     for (const f of features) tableHeader.appendChild(generateFeatureOptionTableHeadItem(f));
     tableHeader.appendChild(stringToHTML(`<th class="py-0 joorney-valign-middle action-head"></th>`));
@@ -191,7 +196,7 @@ function renderOrigin(idx, origin, features) {
 			<td class="p-1 joorney-valign-middle">
 				<button
 					class="joorney_origins_filter_origin_delete_${idx} btn btn-outline-danger border-0 btn-floating"
-					title="Delete origin"
+					title="${escapeHTML(t('options_deleteOrigin'))}"
 				>
 					<i class="joorney-icon joorney-icon-filled joorney-font-icon-size" data-icon="delete" aria-hidden="true"></i>
 				</button>
