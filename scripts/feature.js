@@ -96,6 +96,7 @@ try {
     if (option.create) {
         createFeature(featureName, option);
         updateFeatureState(featureName.id, true);
+        updateFeatureLocales(featureName, true);
         console.info(
             `Set the icon of ${featureName.id} in its configuration file (Material Symbols name), add a new name to scripts/icons.json then run npm run icons:fetch`
         );
@@ -107,6 +108,7 @@ try {
     if (option.delete) {
         deleteFeature(featureName);
         updateFeatureState(featureName.id, false);
+        updateFeatureLocales(featureName, false);
     }
 } catch (e) {
     console.error(e.message);
@@ -121,6 +123,25 @@ function updateFeatureState(featureID, add) {
     }
     state[featureID] = add ? true : undefined;
     fs.writeFileSync(stateFile, `${JSON.stringify(state, null, 4)}\n`, 'utf8');
+}
+
+// Feature name key (src/utils/i18n.js featureName), English value as placeholder for every language
+function updateFeatureLocales(featureName, add) {
+    const localesFolder = `${__dirname}/../_locales`;
+    const key = `feature_${featureName.id}_name`;
+
+    for (const lang of fs.readdirSync(localesFolder)) {
+        const messagesFile = `${localesFolder}/${lang}/messages.json`;
+        if (!fs.existsSync(messagesFile)) continue;
+
+        const messages = JSON.parse(fs.readFileSync(messagesFile, 'utf8'));
+        if (add && key in messages) continue;
+        if (add) messages[key] = { message: featureName.display };
+        else delete messages[key];
+
+        fs.writeFileSync(messagesFile, `${JSON.stringify(messages, null, 4)}\n`, 'utf8');
+    }
+    if (add) console.info(`Translate '${key}' in _locales/*/messages.json`);
 }
 
 //#region CRUD

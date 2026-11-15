@@ -1,5 +1,7 @@
 import OptionCustomizationFeature from '../../generic/option_customization.js';
+import { escapeHTML } from '../../html_generator.js';
 import { Console, StorageSync } from '../../utils/browser.js';
+import { t } from '../../utils/i18n.js';
 
 export default class AwesomeLoadingShareOptionCustomizationFeature extends OptionCustomizationFeature {
     async load() {
@@ -25,7 +27,7 @@ export default class AwesomeLoadingShareOptionCustomizationFeature extends Optio
         const imageInput = document.getElementById('joorney_awe_loading_new_image');
         let imageUrl = imageInput.value;
         if (!imageUrl) {
-            this.renderAwesomeLoadingError('Missing url');
+            this.renderAwesomeLoadingError(t('optionsPreferences_error_missingUrl'));
             return;
         }
 
@@ -39,7 +41,8 @@ export default class AwesomeLoadingShareOptionCustomizationFeature extends Optio
             await this.renderImagesList(images);
             imageInput.value = '';
         } catch (ex) {
-            this.renderAwesomeLoadingError(ex);
+            Console.warn(ex);
+            this.renderAwesomeLoadingError(t('optionsPreferences_error_invalidUrl'));
         }
     }
 
@@ -51,7 +54,7 @@ export default class AwesomeLoadingShareOptionCustomizationFeature extends Optio
     }
 
     async deleteAwesomeLoadingImage(imageUrl) {
-        if (confirm(`Are you sure you want to remove image: ${imageUrl}?`)) {
+        if (confirm(t('optionsPreferences_confirmRemoveImage', imageUrl))) {
             const images = await this.readAwesomeLoadingImages();
             await this.renderImagesList(images.filter((img) => img !== imageUrl));
         }
@@ -114,7 +117,7 @@ export default class AwesomeLoadingShareOptionCustomizationFeature extends Optio
                 <td class="p-1 joorney-valign-middle">
                     <button
                         class="joorney_awe_loading_image_delete_${idx} btn btn-outline-danger border-0 btn-floating"
-                        title="Delete image"
+                        title="${escapeHTML(t('optionsPreferences_deleteImage'))}"
                     >
                         <i class="joorney-icon joorney-icon-filled joorney-font-icon-size" data-icon="delete" aria-hidden="true"></i>
                     </button>

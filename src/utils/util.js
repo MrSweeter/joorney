@@ -44,16 +44,17 @@ export function yyyymmdd_hhmmssToDate(datetimeStr) {
     return new Date(`${dateStr}T${timeStr}Z`).toISOString();
 }
 
-export function toLocaleDateStringFormatted(date) {
-    return date.toLocaleDateString([], { year: '2-digit', month: '2-digit', day: '2-digit' });
+// locale: BCP 47 tag (e.g. getLocaleTag() from i18n.js), defaults to the browser locale
+export function toLocaleDateStringFormatted(date, locale = []) {
+    return date.toLocaleDateString(locale, { year: '2-digit', month: '2-digit', day: '2-digit' });
 }
 
-export function toLocaleTimeStringFormatted(date) {
-    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+export function toLocaleTimeStringFormatted(date, locale = []) {
+    return date.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' });
 }
 
-export function toLocaleDateTimeStringFormatted(date) {
-    return `${toLocaleDateStringFormatted(date)} ${toLocaleTimeStringFormatted(date)}`;
+export function toLocaleDateTimeStringFormatted(date, locale = []) {
+    return `${toLocaleDateStringFormatted(date, locale)} ${toLocaleTimeStringFormatted(date, locale)}`;
 }
 
 export function toOdooBackendDate(date) {

@@ -10,7 +10,11 @@ const LOCAL_DEFAULT = {
     joorney_sunset: 23 * 60 + 59,
     joorney_date: '',
     joorneyLocalCacheCall: {},
+    odooLanguages: {},
 };
+
+// Runbot builds each have their own origin: keep only the most recent ones
+const MAX_ODOO_LANGUAGES = 50;
 
 async function setLocal(obj) {
     if (hasUnknownKey(obj, LOCAL_DEFAULT)) {
@@ -52,6 +56,23 @@ export async function updateWebsiteOff(origin, disabled) {
     if (disabled) offs.add(origin);
     else offs.delete(origin);
     await StorageLocal.set({ offs: Array.from(offs) });
+}
+
+// Odoo user language, per origin (i18n 'odoo' mode outside Odoo pages)
+export async function getOdooLanguage(origin) {
+    const { odooLanguages } = await StorageLocal.get({ odooLanguages: LOCAL_DEFAULT.odooLanguages });
+    return odooLanguages[origin];
+}
+
+export async function setOdooLanguage(origin, lang) {
+    const { odooLanguages } = await StorageLocal.get({ odooLanguages: LOCAL_DEFAULT.odooLanguages });
+    if (odooLanguages[origin] === lang) return;
+    // Re-insert so key order is the recency order
+    delete odooLanguages[origin];
+    odooLanguages[origin] = lang;
+    const origins = Object.keys(odooLanguages);
+    for (const old of origins.slice(0, Math.max(0, origins.length - MAX_ODOO_LANGUAGES))) delete odooLanguages[old];
+    await setLocal({ odooLanguages });
 }
 
 // Cache

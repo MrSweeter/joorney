@@ -4,6 +4,7 @@ import ContentFeature from '../../generic/content.js';
 import { escapeHTML, stringToHTML } from '../../html_generator.js';
 import { isStillSamePage } from '../../utils/authorize.js';
 import { isDarkCookie } from '../../utils/cookies.js';
+import { t } from '../../utils/i18n.js';
 import { getActionWindow_fromURL, getModelAndID_fromURL } from '../../utils/url_manager.js';
 import configuration from './configuration.js';
 
@@ -52,7 +53,7 @@ export default class TooltipMetadataContentFeature extends ContentFeature {
         if (!container) return;
 
         const element = stringToHTML(
-            `<span id="${spanID}" style="align-content: center; margin-left: 4px; line-height: initial; font-style: italic; color: darkgoldenrod; cursor: copy" title="[Joorney] Copy technical name to clipboard" >(${escapeHTML(model)})</span>`
+            `<span id="${spanID}" style="align-content: center; margin-left: 4px; line-height: initial; font-style: italic; color: darkgoldenrod; cursor: copy" title="${escapeHTML(t('tooltipMetadata_copyModel'))}" >(${escapeHTML(model)})</span>`
         );
         element.onclick = () => navigator.clipboard.writeText(model);
         container.appendChild(element);
@@ -67,29 +68,29 @@ export default class TooltipMetadataContentFeature extends ContentFeature {
 
     appendActionWindowTooltip(actionWindow) {
         this.appendTooltip([
-            { label: 'Window Action ID', value: actionWindow.id },
-            { label: 'XML ID', value: actionWindow.xmlid },
-            { label: 'Name', value: actionWindow.name },
-            { label: 'Model', value: actionWindow.res_model },
+            { label: t('tooltipMetadata_windowActionId'), value: actionWindow.id },
+            { label: t('tooltipMetadata_xmlId'), value: actionWindow.xmlid },
+            { label: t('tooltipMetadata_name'), value: actionWindow.name },
+            { label: t('tooltipMetadata_model'), value: actionWindow.res_model },
             {
-                label: '[Filters] Domain',
+                label: t('tooltipMetadata_filterDomain'),
                 value: actionWindow.domain ? `${actionWindow.domain}`.trim() : false,
             },
-            { label: '[Filters] Context', value: actionWindow.context?.trim() },
-            { label: '[Filters] Limit', value: actionWindow.limit },
-            { label: '[Filters] Filter', value: actionWindow.filter },
+            { label: t('tooltipMetadata_filterContext'), value: actionWindow.context?.trim() },
+            { label: t('tooltipMetadata_filterLimit'), value: actionWindow.limit },
+            { label: t('tooltipMetadata_filterFilter'), value: actionWindow.filter },
         ]);
     }
 
     appendRecordMetadataTooltip(metadata) {
         this.appendTooltip([
-            { label: 'ID', value: metadata.id },
-            { label: 'XML ID', value: metadata.xmlid },
-            { label: 'No Update', value: metadata.noupdate },
-            { label: 'Creation User', value: metadata.create_uid?.[1] ?? metadata.create_uid },
-            { label: 'Creation Date', value: metadata.create_date },
-            { label: 'Latest Modification by', value: metadata.write_uid?.[1] ?? metadata.write_uid },
-            { label: 'Latest Modification Date', value: metadata.write_date },
+            { label: t('tooltipMetadata_id'), value: metadata.id },
+            { label: t('tooltipMetadata_xmlId'), value: metadata.xmlid },
+            { label: t('tooltipMetadata_noUpdate'), value: metadata.noupdate },
+            { label: t('tooltipMetadata_createUser'), value: metadata.create_uid?.[1] ?? metadata.create_uid },
+            { label: t('tooltipMetadata_createDate'), value: metadata.create_date },
+            { label: t('tooltipMetadata_writeUser'), value: metadata.write_uid?.[1] ?? metadata.write_uid },
+            { label: t('tooltipMetadata_writeDate'), value: metadata.write_date },
         ]);
     }
 

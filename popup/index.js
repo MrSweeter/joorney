@@ -1,12 +1,16 @@
 import { getFeaturesAndCurrentSettings, importFeaturePopupFile } from '../configuration.js';
 import { generateFeaturePopupToggleItem, generateTabFeaturePopupToggleItem } from '../src/html_generator.js';
 import { Runtime, Tabs } from '../src/utils/browser.js';
+import { applyI18n, initI18n } from '../src/utils/i18n.js';
 import { reloadTabFeatures } from './src/tab_features.js';
 
 window.onload = async () => {
     const tabs = await Tabs.query({ active: true, currentWindow: true });
     const currentTab = tabs[0];
-    if (!currentTab.url.startsWith('http')) return;
+    const isWebsite = currentTab.url?.startsWith('http');
+    await initI18n({ origin: isWebsite ? new URL(currentTab.url).origin : undefined });
+    applyI18n();
+    if (!isWebsite) return;
 
     document.getElementById('joorney-invalid-website').remove();
     document.getElementById('joorney-popup-configuration').classList.remove('d-none');

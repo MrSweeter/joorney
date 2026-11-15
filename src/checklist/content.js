@@ -1,7 +1,8 @@
 import { PAGES } from '../../options/menu.js';
 import { Console, StorageLocal } from '../../src/utils/browser.js';
 import { sleep } from '../../src/utils/util.js';
-import { stringToHTML } from '../html_generator.js';
+import { escapeHTML, stringToHTML } from '../html_generator.js';
+import { t } from '../utils/i18n.js';
 import { setIcon } from '../utils/icons.js';
 import { Checklist, getNextTourID } from './index.js';
 import { tours } from './tour.js';
@@ -33,8 +34,8 @@ export default class ChecklistContent {
         this.doneSteps = new Set();
 
         await this.congrats(false);
-        document.getElementById('joorney_checklist_tour_title').textContent = this.tour.title;
-        document.getElementById('joorney_checklist_tour_description').textContent = this.tour.description;
+        document.getElementById('joorney_checklist_tour_title').textContent = t(this.tour.titleKey);
+        document.getElementById('joorney_checklist_tour_description').textContent = t(this.tour.descriptionKey);
 
         const stepIDs = Object.keys(this.tour.steps);
         const tourStore = stepIDs.length > 0 ? await StorageLocal.get(this.tour.store) : {};
@@ -55,7 +56,7 @@ export default class ChecklistContent {
         };
         titleIcon.className = 'joorney-icon joorney-icon-filled joorney-icon-2xs';
         setIcon(titleIcon, 'assignment');
-        titleIcon.title = 'Wave a magic wand and deem all steps magically done!';
+        titleIcon.title = t('checklist_markAllDone_tooltip');
 
         const tourState = tourStore[this.tour.id];
         const lastTourVersion = tourStore[`${this.tour.id}_version`];
@@ -91,8 +92,8 @@ export default class ChecklistContent {
 			<div class="checklist-item">
 				<input type="checkbox" id="${step.id}" ${done ? 'checked' : ''} ${done ? 'disabled' : ''} />
 				<label for="${step.id}">
-					<p class="m-0">${step.name} <i class="joorney-icon joorney-icon-filled joorney-icon-xs joorney_checklist_target_btn d-none" data-icon="visibility" aria-hidden="true"></i></p>
-					<small class="text-muted">${step.description}</small>
+					<p class="m-0">${escapeHTML(t(step.nameKey))} <i class="joorney-icon joorney-icon-filled joorney-icon-xs joorney_checklist_target_btn d-none" data-icon="visibility" aria-hidden="true"></i></p>
+					${step.descriptionKey ? `<small class="text-muted">${escapeHTML(t(step.descriptionKey))}</small>` : ''}
 				</label>
 			</div>
 		`);
@@ -231,17 +232,17 @@ export default class ChecklistContent {
         const secondaryButton = document.getElementById('joorney_checklist_congrats_secondary');
         const nextTourID = await getNextTourID();
         if (nextTourID) {
-            mainButton.textContent = 'Next';
+            mainButton.textContent = t('checklist_next');
             mainButton.onclick = () => {
                 if (isShow) this.nextTour(nextTourID);
             };
-            secondaryButton.textContent = 'Restart';
+            secondaryButton.textContent = t('checklist_restart');
             secondaryButton.onclick = () => {
                 if (isShow) this.restart();
             };
             secondaryButton.classList.remove('d-none');
         } else {
-            mainButton.textContent = 'Restart';
+            mainButton.textContent = t('checklist_restart');
             mainButton.onclick = () => {
                 if (isShow) this.restart();
             };

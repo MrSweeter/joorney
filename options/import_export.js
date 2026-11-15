@@ -1,5 +1,6 @@
 import { baseSettings, getFeaturesAndCurrentSettings } from '../configuration.js';
 import { Runtime, StorageSync, Tabs } from '../src/utils/browser.js';
+import { t } from '../src/utils/i18n.js';
 
 function importOptions(file) {
     const reader = new FileReader();
@@ -27,7 +28,7 @@ async function exportOptions() {
 }
 
 function confirmImport(file) {
-    if (file && confirm('Do you confirm file upload?')) {
+    if (file && confirm(t('options_confirmImport'))) {
         importOptions(file);
     }
 }

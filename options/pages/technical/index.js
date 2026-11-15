@@ -6,8 +6,9 @@ import { getOdooData } from '../../../src/api/github.js';
 import { getLocal, getStorageUsage } from '../../../src/api/local.js';
 import { getOnboardingProgressData } from '../../../src/checklist/index.js';
 import { tours } from '../../../src/checklist/tour.js';
-import { stringToHTML } from '../../../src/html_generator';
-import { isDevMode, StorageLocal, StorageSync } from '../../../src/utils/browser.js';
+import { escapeHTML, stringToHTML } from '../../../src/html_generator';
+import { Console, isDevMode, StorageLocal, StorageSync } from '../../../src/utils/browser.js';
+import { featureName, t } from '../../../src/utils/i18n.js';
 import { sleep } from '../../../src/utils/util.js';
 import { updateSupportedDevelopmentVersion } from '../../../src/utils/version.js';
 import DoubleProgressBar from './doubleprogress.js';
@@ -62,17 +63,17 @@ async function loadStorage(features, currentSettings) {
     let sections = [];
     for (const feature of features) {
         sections.push({
-            label: feature.display_name,
+            label: featureName(feature),
             usage: await StorageSync.getBytesInUse(Object.keys(feature.defaultSettings)),
         });
     }
     sections.push({
-        label: 'Base',
+        label: t('optionsTechnical_storage_base'),
         usage: await StorageSync.getBytesInUse(Object.keys(baseSettings)),
     });
 
     new DoubleProgressBar(
-        'Sync Storage',
+        t('optionsTechnical_storage_sync'),
         'joorney-sync-storage-progress-label',
         'joorney-sync-storage-progress-switch',
         'joorney-sync-storage-byteUsageTotal',
@@ -85,33 +86,33 @@ async function loadStorage(features, currentSettings) {
     sections = [];
     for (const tour of Object.values(tours)) {
         sections.push({
-            label: `[Onboard] ${tour.title}`,
+            label: t('optionsTechnical_storage_onboard', t(tour.titleKey)),
             usage: await getStorageUsage(...Object.keys(tour.store)),
         });
     }
     sections.push({
-        label: 'Cache',
+        label: t('optionsTechnical_storage_cache'),
         usage: await getStorageUsage('joorneyLocalCacheCall'),
     });
     sections.push({
-        label: 'Extension Off',
+        label: t('optionsTechnical_storage_off'),
         usage: await getStorageUsage('offs'),
     });
     sections.push({
-        label: 'Extension Announcement',
+        label: t('optionsTechnical_storage_announcement'),
         usage: await getStorageUsage('journey_announces'),
     });
     sections.push({
-        label: 'Ambient computed events',
+        label: t('optionsTechnical_storage_ambient'),
         usage: await getStorageUsage('ambient_dates'),
     });
     sections.push({
-        label: 'Sunrise / Sunset ',
+        label: t('optionsTechnical_storage_sun'),
         usage: await getStorageUsage('joorney_sunrise', 'joorney_sunset', 'joorney_date'),
     });
 
     new DoubleProgressBar(
-        'Local Storage',
+        t('optionsTechnical_storage_local'),
         'joorney-local-storage-progress-label',
         'joorney-local-storage-progress-switch',
         'joorney-local-storage-byteUsageTotal',
@@ -168,17 +169,17 @@ async function createFallback() {
     const model = document.getElementById('joorney_window_action_fallback_new_action_model')?.value?.trim();
 
     if (!originString) {
-        renderFallbackError('Missing origin');
+        renderFallbackError(t('options_error_missingOrigin'));
         return;
     }
 
     if (!path) {
-        renderFallbackError('Missing path');
+        renderFallbackError(t('optionsTechnical_error_missingPath'));
         return;
     }
 
     if (!model) {
-        renderFallbackError('Missing model');
+        renderFallbackError(t('optionsTechnical_error_missingModel'));
         return;
     }
 
@@ -194,7 +195,8 @@ async function createFallback() {
 
         loadWindowActionFallback(windowActionFallbacks);
     } catch (ex) {
-        renderFallbackError(ex);
+        Console.warn(ex);
+        renderFallbackError(t('options_error_invalidOrigin'));
     }
 }
 
@@ -225,7 +227,7 @@ function renderOriginFallback(origin, values, container) {
             <td class="joorney-valign-middle">
                 <button
                     class="${originID} btn btn-outline-danger border-0 btn-floating"
-                    title="Delete all fallbacks"
+                    title="${escapeHTML(t('optionsTechnical_deleteAllFallbacks'))}"
                 >
                     <i class="joorney-icon joorney-icon-filled joorney-font-icon-size" data-icon="delete" aria-hidden="true"></i>
                 </button>
@@ -252,7 +254,7 @@ function renderFallback(origin, actionPath, actionModel, container) {
             <td class="joorney-valign-middle">
                 <button
                     class="${originID} btn btn-outline-danger border-0 btn-floating"
-                    title="Delete fallback"
+                    title="${escapeHTML(t('optionsTechnical_deleteFallback'))}"
                 >
                     <i class="joorney-icon joorney-icon-filled joorney-font-icon-size" data-icon="delete" aria-hidden="true"></i>
                 </button>
@@ -270,7 +272,7 @@ async function readFallbacks() {
 }
 
 async function deleteOriginsFallback(origin) {
-    if (confirm(`Are you sure you want to remove origin: ${origin}?`)) {
+    if (confirm(t('options_confirmRemoveOrigin', origin))) {
         const windowActionFallbacks = await readFallbacks();
         delete windowActionFallbacks[origin];
         StorageSync.set({ windowActionFallbacks });
@@ -280,7 +282,7 @@ async function deleteOriginsFallback(origin) {
 }
 
 async function deleteFallbackPath(origin, actionPath) {
-    if (confirm(`Are you sure you want to remove path "${actionPath}" for origin "${origin}"?`)) {
+    if (confirm(t('optionsTechnical_confirmRemoveFallback', actionPath, origin))) {
         const windowActionFallbacks = await readFallbacks();
         delete windowActionFallbacks[origin]?.[actionPath];
         if (Object.keys(windowActionFallbacks[origin]).length === 0) {
@@ -316,14 +318,14 @@ async function loadChaos() {
 }
 
 async function confirmChaos(name, action) {
-    if (confirm(`Confirm "${name}". This page will be reloaded!!!`)) {
+    if (confirm(t('optionsTechnical_confirmChaos', name))) {
         const isdev = await isDevMode();
         const ischaos = new URL(window.location.href).searchParams.get('chaos');
         if (isdev && ischaos) {
             action();
             window.location.reload();
         } else {
-            alert('DEVELOPMENT MODE NOT ACTIVE');
+            alert(t('optionsTechnical_devModeInactive'));
         }
     }
 }
@@ -333,7 +335,7 @@ async function confirmChaos(name, action) {
 export const PAGE = {
     id: 'page-technical',
     tour: 'tour_technical',
-    label: 'Developers',
+    labelKey: 'options_menu_developers',
     path: './pages/technical/index.html',
     loader: loadPage,
     technical: true,

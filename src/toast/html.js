@@ -1,4 +1,5 @@
 import { escapeHTML, stringToHTML } from '../html_generator.js';
+import { featureName, t } from '../utils/i18n.js';
 import ToastStyle from './toast.css';
 
 const html = String.raw;
@@ -43,6 +44,11 @@ export function buildContainer() {
     return container;
 }
 
+// 'notification': Joorney own notifications; other ids without name (options demo) fall back to the id
+export function getToastBadge(feature) {
+    return feature === 'notification' ? t('toast_badgeNotification') : featureName({ id: feature });
+}
+
 export function buildToastItem(feature, title, message, type, large) {
     const toastID = generateToastID('toast');
     const textHeight = !large ? 'height: 20px; white-space: nowrap;' : '';
@@ -53,7 +59,7 @@ export function buildToastItem(feature, title, message, type, large) {
                 <div>
                     <strong>Joorney: </strong>
                     <span class="toast-feature">
-                        <span class="badge rounded-pill">${escapeHTML(feature)}</span>
+                        <span class="badge rounded-pill">${escapeHTML(getToastBadge(feature))}</span>
                     </span>
                 </span>
                 <div class="toast-title">${escapeHTML(title)}</div>

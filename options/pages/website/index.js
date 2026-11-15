@@ -20,7 +20,7 @@ async function loadFeatures(features) {
 export const PAGE = {
     id: 'page-website',
     tour: 'tour_hostControls',
-    label: 'Hosts control',
+    labelKey: 'options_menu_hosts',
     path: './pages/website/index.html',
     loader: loadPage,
     default: true,

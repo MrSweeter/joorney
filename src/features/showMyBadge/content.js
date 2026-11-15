@@ -2,6 +2,7 @@ import { getDataset, getDatasetWithIDs } from '../../api/odoo.js';
 import ContentFeature from '../../generic/content.js';
 import { escapeHTML, generateInitialsImageURI } from '../../html_generator.js';
 import { Console } from '../../utils/browser.js';
+import { t } from '../../utils/i18n.js';
 import { createRecordFormURL } from '../../utils/url_manager.js';
 import { waitForElement } from '../../utils/util.js';
 import configuration from './configuration.js';
@@ -194,7 +195,7 @@ export default class ShowMyBadgeContentFeature extends ContentFeature {
         template.innerHTML = `
             <div class="card-footer d-flex flex-column gap-3 rounded-bottom bg-100 joorney-badge-container">
                 <div>
-                    <span class="fw-bold">Badges</span>
+                    <span class="fw-bold">${escapeHTML(t('showMyBadge_title'))}</span>
                     <div class="d-flex flex-wrap align-items-center gap-2 mt-1">
                         ${badgesHTML.join('\n')}
                     </div>
