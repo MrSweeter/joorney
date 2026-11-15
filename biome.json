@@ -46,6 +46,7 @@
         "includes": [
             "**",
             "!!**/bundle",
+            "!!**/bundle-lite",
             "!**/node_modules",
             "!!**/docs",
             "!**/*.md",

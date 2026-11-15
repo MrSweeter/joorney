@@ -6,8 +6,9 @@ export async function listenRequest() {
     const features = await loadFeaturesConfiguration();
     const urls = features.flatMap((f) => f.trigger.onrequest || []);
 
-    WebRequest.onCompleted.removeListener(requestComplete);
+    // No onrequest feature: a lite build has no webRequest permission, chrome.webRequest is undefined
     if (urls.length === 0) return;
+    WebRequest.onCompleted.removeListener(requestComplete);
     WebRequest.onCompleted.addListener(requestComplete, { urls: urls }, []);
 }
 

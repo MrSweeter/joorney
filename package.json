@@ -10,6 +10,9 @@
         "build": "rollup -c",
         "dev": "rollup -c -w",
         "lint": "biome check .",
+        "build:lite": "rollup -c rollup.lite.config.mjs",
+        "dev:lite": "rollup -c rollup.lite.config.mjs -w",
+        "prod:lite": "NODE_ENV=production npm run build:lite && node scripts/zip_lite.js",
         "clean-build": "rm -rf ./bundle && rm -rf ./docs",
         "cloc": "cloc --exclude-dir=node_modules,bundle,docs,lib ."
     },
