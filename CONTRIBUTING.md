@@ -24,6 +24,7 @@ Thank you for considering contributing to this project! Below is a guide on how 
 6. **Commit and Submit a Pull Request**: Provide details on what has been changed and why.
     - Use clear, descriptive, and atomic commits.
     - Link to any relevant GitHub issues in your PR description. Here's a helpful [reference guide](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#referencing-issues-and-pull-requests) [closing keyword](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue).
+    - The CI checks every PR: `biome ci`, `npm run i18n-check` and a production build. Run `npm run lint` and `npm run i18n-check` before pushing.
 
 ## Building the Project
 

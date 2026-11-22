@@ -1,5 +1,6 @@
 .*
 !.gitignore
+!.github/
 !.pre-commit-config.yaml
 !.vscode/
 .vscode/*

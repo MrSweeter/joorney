@@ -1,0 +1,62 @@
+name: Bug report
+description: Something in the extension does not work as expected.
+labels: [bug]
+body:
+    - type: textarea
+      id: what
+      attributes:
+          label: What happened?
+          description: What did you do, what did you see?
+      validations:
+          required: true
+    - type: textarea
+      id: expected
+      attributes:
+          label: What did you expect?
+      validations:
+          required: true
+    - type: input
+      id: feature
+      attributes:
+          label: Feature concerned
+          description: As named in the popup or the options page, if you know it.
+          placeholder: Assign me, Pinned message, Theme switch…
+    - type: input
+      id: extension_version
+      attributes:
+          label: Extension version
+          description: Shown in chrome://extensions (Details) or in the options page.
+          placeholder: 2.8.0.17
+      validations:
+          required: true
+    - type: input
+      id: odoo_version
+      attributes:
+          label: Odoo version
+          placeholder: 18.0, saas-19.2…
+      validations:
+          required: true
+    - type: dropdown
+      id: hosting
+      attributes:
+          label: Odoo hosting
+          options: [Odoo Online, Odoo.sh, On-premise, Runbot, Other]
+      validations:
+          required: true
+    - type: dropdown
+      id: browser
+      attributes:
+          label: Browser
+          options: [Chrome, Edge, Brave, Opera, Other Chromium browser]
+      validations:
+          required: true
+    - type: textarea
+      id: errors
+      attributes:
+          label: Console errors
+          description: From the page console (F12) or the service worker console (chrome://extensions → Inspect views).
+          render: text
+    - type: textarea
+      id: screenshots
+      attributes:
+          label: Screenshots
