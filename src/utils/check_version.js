@@ -59,14 +59,51 @@ export async function openOption(force = false, previousVersionFull = false) {
     }
 }
 
-export async function getAnnounce() {
-    const currentVersion = Runtime.getManifest().version_name;
-    const announces = await getAnnounceData();
-    const announce = announces[currentVersion];
-    if (!announce?.hash) return undefined;
-    if (announce.closeable !== false) {
-        const status = await getAnnounceCloseStatus(announce.hash);
-        if (status) return undefined;
+const ANNOUNCE_KINDS = ['release', 'info', 'warning'];
+const ANNOUNCE_MAX_ITEMS = 8;
+const ANNOUNCE_ICON = /^[a-z0-9_]{1,40}$/;
+
+function text(value, max = 600) {
+    return typeof value === 'string' ? value.trim().slice(0, max) : '';
+}
+
+function sanitizeItems(items) {
+    if (!Array.isArray(items)) return [];
+    return items
+        .filter((item) => item && typeof item === 'object')
+        .map((item) => ({
+            icon: ANNOUNCE_ICON.test(item.icon) ? item.icon : 'check',
+            title: text(item.title, 120),
+            description: text(item.description),
+        }))
+        .filter((item) => item.title)
+        .slice(0, ANNOUNCE_MAX_ITEMS);
+}
+
+function sanitizeNotes(notes) {
+    try {
+        const url = new URL(notes);
+        return url.protocol === 'https:' ? url.href : '';
+    } catch {
+        return '';
     }
-    return { ...announce, version: removeBuildFromVersion(currentVersion), closeable: announce.closeable === true };
+}
+
+export async function getAnnounce({ includeClosed = false } = {}) {
+    const currentVersion = Runtime.getManifest().version_name.replace(/-dev$/, '');
+    const announces = await getAnnounceData();
+    const announce = announces?.[currentVersion];
+    if (!announce?.hash) return undefined;
+    const closeable = announce.closeable !== false;
+    const closed = closeable && Boolean(await getAnnounceCloseStatus(announce.hash));
+    if (closed && !includeClosed) return undefined;
+    return {
+        ...announce,
+        version: removeBuildFromVersion(currentVersion),
+        closeable,
+        closed,
+        kind: ANNOUNCE_KINDS.includes(announce.kind) ? announce.kind : 'release',
+        items: sanitizeItems(announce.items),
+        notes: sanitizeNotes(announce.notes),
+    };
 }

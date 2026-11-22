@@ -16,6 +16,7 @@
         <link href="./css/ui/navbar.css" rel="stylesheet">
         <link href="./css/ui/feature_card.css" rel="stylesheet">
         <link href="./css/ui/modal.css" rel="stylesheet">
+        <link href="./css/ui/announce.css" rel="stylesheet">
         <link href="./index.css" rel="stylesheet">
         <link href="./checklist.css" rel="stylesheet">
         <script src="index.js"></script>
@@ -43,14 +44,8 @@
             </button>
         </nav>
 
-        <!-- Announcement -->
-        <div class="d-none">
-            <div id="joorney-announcement" class="alert alert-info rounded mx-5 mt-3">
-                <button type="button" id="ja-close" class="btn-close small position-absolute top-0 end-0 mt-2 me-2 opacity-50 d-none"></button>
-                <p class="fw-bold mb-0 d-none"><span id="ja-version">[X.Y.Z]</span><span id="ja-title">Title</span></p>
-                <p id="ja-description" class="d-none mb-0">Description</p>
-            </div>
-        </div>
+        <!-- Announcement: rendered by options/index.js (loadAnnouncement) -->
+        <div id="joorney-announcement" class="joorney-announce-wrap" hidden></div>
 
         <!-- Content -->
         <div id="joorney-page-container" class="flex-fill"></div>
@@ -103,6 +98,11 @@
                 &copy; <span id="copyright-year">2023</span>
                 <span data-i18n="options_allRightsReserved">All rights reserved:</span>
                 <a id="copyright-link" href="https://github.com/MrSweeter/joorney">Joorney</a>
+            </div>
+            <div class="pb-2">
+                <button type="button" id="joorney-announce-restore" class="joorney-link-btn is-strong joorney-announce-restore" hidden>
+                    <i class="joorney-icon" data-icon="campaign" aria-hidden="true"></i><span data-i18n="options_announce_restore">Announcements</span>
+                </button>
             </div>
             <div><span data-i18n="options_poweredBySunrise">Theme Switch based on location is powered by</span> <a href="https://sunrisesunset.io/">SunriseSunset.io</a></div>
         </footer>

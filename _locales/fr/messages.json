@@ -684,6 +684,51 @@
     "options_poweredBySunrise": {
         "message": "Le changement de thème selon la localisation utilise"
     },
+    "options_announce_newIn": {
+        "message": "Nouveauté $version$",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "2.8"
+            }
+        }
+    },
+    "options_announce_label_release": {
+        "message": "Annonce de version"
+    },
+    "options_announce_label_info": {
+        "message": "Annonce"
+    },
+    "options_announce_label_warning": {
+        "message": "Annonce d'avertissement"
+    },
+    "options_announce_seeWhatsNew": {
+        "message": "Voir les nouveautés"
+    },
+    "options_announce_seeDetails": {
+        "message": "Voir les détails"
+    },
+    "options_announce_hideDetails": {
+        "message": "Masquer les détails"
+    },
+    "options_announce_openPage": {
+        "message": "Ouvrir $page$",
+        "placeholders": {
+            "page": {
+                "content": "$1",
+                "example": "Versions"
+            }
+        }
+    },
+    "options_announce_fullNotes": {
+        "message": "Notes de version complètes"
+    },
+    "options_announce_close": {
+        "message": "Fermer l'annonce"
+    },
+    "options_announce_restore": {
+        "message": "Annonces"
+    },
     "options_confirmImport": {
         "message": "Confirmer l'import du fichier ?"
     },

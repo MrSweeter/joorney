@@ -875,6 +875,62 @@
         "message": "Theme Switch based on location is powered by",
         "description": "Options footer, followed by the \"SunriseSunset.io\" link"
     },
+    "options_announce_newIn": {
+        "message": "New in $version$",
+        "description": "Announcement banner: chip of a release announcement",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "2.8"
+            }
+        }
+    },
+    "options_announce_label_release": {
+        "message": "Release announcement",
+        "description": "Announcement banner: accessible name of a release announcement"
+    },
+    "options_announce_label_info": {
+        "message": "Announcement",
+        "description": "Announcement banner: accessible name of an information announcement"
+    },
+    "options_announce_label_warning": {
+        "message": "Warning announcement",
+        "description": "Announcement banner: accessible name of a warning announcement"
+    },
+    "options_announce_seeWhatsNew": {
+        "message": "See what's new",
+        "description": "Announcement banner: button showing the details of a release"
+    },
+    "options_announce_seeDetails": {
+        "message": "See details",
+        "description": "Announcement banner: button showing the details of an announcement"
+    },
+    "options_announce_hideDetails": {
+        "message": "Hide details",
+        "description": "Announcement banner: button hiding the details"
+    },
+    "options_announce_openPage": {
+        "message": "Open $page$",
+        "description": "Announcement banner: button opening the page the announcement is about",
+        "placeholders": {
+            "page": {
+                "content": "$1",
+                "example": "Versions"
+            }
+        }
+    },
+    "options_announce_fullNotes": {
+        "message": "Full release notes",
+        "description": "Announcement banner: link to the release notes"
+    },
+    "options_announce_close": {
+        "message": "Close announcement",
+        "description": "Announcement banner: close button"
+    },
+    "options_announce_restore": {
+        "message": "Announcements",
+        "description": "Options footer: link showing the closed announcement again"
+    },
     "options_confirmImport": {
         "message": "Do you confirm the file upload?",
         "description": "Confirmation before importing a settings file"

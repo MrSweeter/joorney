@@ -45,6 +45,13 @@ export async function closeAnnounce(announce) {
     await StorageLocal.set({ journey_announces });
 }
 
+// Un-close: the hash is removed (not set to false), so the storage stays as if it was never closed
+export async function reopenAnnounce(announce) {
+    const { journey_announces } = await StorageLocal.get({ journey_announces: LOCAL_DEFAULT.journey_announces });
+    delete journey_announces[announce.hash];
+    await StorageLocal.set({ journey_announces });
+}
+
 // Off website
 export async function getWebsiteOff() {
     const { offs } = await StorageLocal.get({ offs: LOCAL_DEFAULT.offs });
