@@ -43,7 +43,7 @@
     ],
     "web_accessible_resources": [
         {
-            "resources": ["assets/icons/icons.css", "assets/icons/joorney_icons.woff2"],
+            "resources": ["assets/icons/icons.css", "assets/icons/joorney_icons.woff2", "images/loading/joorney.svg"],
             "matches": ["http://*/*", "https://*/*"]
         }
     ],

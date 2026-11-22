@@ -17,8 +17,9 @@ export default {
     defaultSettings: {
         awesomeLoadingSmallEnabled: false,
         awesomeLoadingSmallWhitelistMode: false,
-        awesomeLoadingSmallImage: '',
+        awesomeLoadingSmallImage: 'joorney://loader',
         awesomeLoadingImages: [
+            'joorney://loader',
             'https://github.githubassets.com/images/mona-loading-dark.gif',
             'https://media.tenor.com/nBt6RZkFJh8AAAAi/never-gonna.gif',
             'https://static.wikia.nocookie.net/fbbc7304-c0ac-44dc-9ccd-a839ee627a9a/scale-to-width/370',

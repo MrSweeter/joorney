@@ -2,6 +2,7 @@ import OptionCustomizationFeature from '../../generic/option_customization.js';
 import { escapeHTML } from '../../html_generator.js';
 import { Console, StorageSync } from '../../utils/browser.js';
 import { t } from '../../utils/i18n.js';
+import { JOORNEY_LOADER, JOORNEY_LOADER_LABEL, resolveLoaderImage, withBuiltInLoader } from './loader.js';
 
 export default class AwesomeLoadingShareOptionCustomizationFeature extends OptionCustomizationFeature {
     async load() {
@@ -89,21 +90,26 @@ export default class AwesomeLoadingShareOptionCustomizationFeature extends Optio
     }
 
     async renderImagesList(imagesArg) {
-        const images = Array.from(new Set(imagesArg)).sort();
+        // The built-in loader is injected at render time, so it is never stored (nor removable).
+        const images = Array.from(new Set(imagesArg))
+            .filter((img) => img !== JOORNEY_LOADER)
+            .sort();
         await StorageSync.set({ awesomeLoadingImages: images });
 
         const container = document.getElementById('joorney_awe_loading_images_table_body');
         container.innerHTML = '';
-        for (const [id, image] of images.entries()) container.appendChild(this.renderImage(id, image));
+        for (const [id, image] of withBuiltInLoader(images).entries())
+            container.appendChild(this.renderImage(id, image));
         this.renderAwesomeLoadingError();
     }
 
     renderImage(idx, image) {
+        const builtIn = image === JOORNEY_LOADER;
         const imageTemplate = document.createElement('template');
         imageTemplate.innerHTML = `
             <tr>
                 <td class="p-1 joorney-valign-middle">
-                    <img class="joorney-awe-loading-preview" loading="lazy" src="${image}" />
+                    <img class="joorney-awe-loading-preview" loading="lazy" src="${escapeHTML(resolveLoaderImage(image))}" />
                 </td>
                 <td class="p-1 joorney-valign-middle">
                     <input
@@ -111,23 +117,27 @@ export default class AwesomeLoadingShareOptionCustomizationFeature extends Optio
                         class="joorney-bg-white form-control border border-0"
                         type="text"
                         disabled
-                        value="${image}"
+                        value="${escapeHTML(builtIn ? JOORNEY_LOADER_LABEL : image)}"
                     />
                 </td>
                 <td class="p-1 joorney-valign-middle">
-                    <button
+                    ${
+                        builtIn
+                            ? ''
+                            : `<button
                         class="joorney_awe_loading_image_delete_${idx} btn btn-outline-danger border-0 btn-floating"
                         title="${escapeHTML(t('optionsPreferences_deleteImage'))}"
                     >
                         <i class="joorney-icon joorney-icon-filled joorney-font-icon-size" data-icon="delete" aria-hidden="true"></i>
-                    </button>
+                    </button>`
+                    }
                 </td>
             </tr>
         `.trim();
 
         const imageElement = imageTemplate.content.firstChild;
         const deleteButton = imageElement.getElementsByClassName(`joorney_awe_loading_image_delete_${idx}`)[0];
-        deleteButton.onclick = () => this.deleteAwesomeLoadingImage(image);
+        if (deleteButton) deleteButton.onclick = () => this.deleteAwesomeLoadingImage(image);
 
         return imageElement;
     }
