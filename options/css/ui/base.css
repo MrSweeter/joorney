@@ -441,3 +441,34 @@
     overflow-wrap: anywhere;
 }
 /*#endregion */
+
+/*#region Pills */
+/* Single choice filter, e.g. a category */
+.joorney-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.joorney-pill {
+    height: 32px;
+    padding: 0 14px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--joorney-text-soft);
+    cursor: pointer;
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border-strong);
+    border-radius: 16px;
+}
+
+.joorney-pill:hover {
+    background: var(--joorney-hover);
+}
+
+.joorney-pill[aria-pressed="true"] {
+    color: #fff;
+    background: var(--joorney-navy);
+    border-color: var(--joorney-navy);
+}
+/*#endregion */

@@ -1059,9 +1059,45 @@
         "message": "Choose where each feature runs. Per-host exceptions are on Home.",
         "description": "Options features page: subtitle"
     },
-    "optionsFeatures_preview": {
-        "message": "Right-click a feature (or long press it) for its actions. Drag and drop between states is still on Home.",
-        "description": "Options features page: temporary help until the drag and drop board"
+    "optionsFeatures_search": {
+        "message": "Search features",
+        "description": "Features page: label of the search field"
+    },
+    "optionsFeatures_searchPlaceholder": {
+        "message": "Name or description",
+        "description": "Features page: placeholder of the search field"
+    },
+    "optionsFeatures_empty": {
+        "message": "Nothing here. Drop features to move them.",
+        "description": "Features page: empty zone"
+    },
+    "optionsFeatures_count": {
+        "message": "$count$ features",
+        "description": "Features page: accessible name of a zone count",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "4"
+            }
+        }
+    },
+    "optionsFeatures_moved": {
+        "message": "$feature$ moved to $state$",
+        "description": "Features page: screen reader announcement after a move",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Booster"
+            },
+            "state": {
+                "content": "$2",
+                "example": "Deactivated"
+            }
+        }
+    },
+    "optionsFeatures_runbotNote": {
+        "message": "Runbot features only run on runbot origins and ignore host lists.",
+        "description": "Features page: runbot section note"
     },
     "optionsImportExport_title": {
         "message": "Import, export and migrate",
@@ -2220,6 +2256,24 @@
             "duration": {
                 "content": "$2",
                 "example": "3000"
+            }
+        }
+    },
+    "optionsHome_categories": {
+        "message": "Category filter",
+        "description": "Options home page: accessible name of the category pills"
+    },
+    "optionsHome_categoryAll": {
+        "message": "All",
+        "description": "Options home page: category pill showing every category"
+    },
+    "optionsHome_runbotGlobal": {
+        "message": "$feature$ globally",
+        "description": "Options home page: accessible name of the global switch of a runbot feature",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Auto Open"
             }
         }
     }

@@ -1,0 +1,211 @@
+/* Features page: the global state board, options/pages/features */
+
+.joorney-features {
+    max-width: 1280px;
+}
+
+.joorney-fb-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: flex-end;
+    margin-bottom: 16px;
+}
+
+.joorney-fb-search {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: min(240px, 100%);
+}
+
+.joorney-fb-search label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-fb-search input:focus {
+    outline: 2px solid var(--joorney-navy);
+    outline-offset: 1px;
+}
+
+.joorney-fb-zones {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: 16px;
+    align-items: start;
+}
+
+.joorney-fb-zone {
+    overflow: hidden;
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-card);
+    box-shadow: var(--joorney-shadow);
+}
+
+.joorney-fb-zonehead {
+    padding: 12px 14px;
+    border-bottom: 2px solid;
+}
+
+.joorney-fb-zonetop {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.joorney-fb-zonetitle {
+    flex: 1;
+    margin: 0;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.joorney-fb-zonecount {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-width: 24px;
+    height: 22px;
+    padding: 0 6px;
+    font-size: 12px;
+    font-weight: 700;
+    background: var(--joorney-surface);
+    border-radius: 11px;
+}
+
+.joorney-fb-zonehelp {
+    margin: 4px 0 8px;
+    font-size: 12.5px;
+    line-height: 1.4;
+}
+
+.joorney-fb-zone.is-everywhere .joorney-fb-zonehead {
+    color: var(--joorney-state-everywhere-text);
+    background: var(--joorney-state-everywhere-tint);
+    border-color: var(--joorney-state-everywhere);
+}
+
+.joorney-fb-zone.is-listed .joorney-fb-zonehead {
+    color: var(--joorney-state-listed-text);
+    background: var(--joorney-state-listed-tint);
+    border-color: var(--joorney-state-listed);
+}
+
+.joorney-fb-zone.is-deactivated .joorney-fb-zonehead {
+    color: var(--joorney-state-off-text);
+    background: var(--joorney-state-off-tint);
+    border-color: var(--joorney-state-off);
+}
+
+.joorney-fb-drop {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-sizing: border-box;
+    min-height: 240px;
+    padding: 12px;
+    margin: 12px;
+    border: 2px dashed var(--joorney-border-strong);
+    border-radius: var(--joorney-radius-card);
+}
+
+.joorney-fb-zone.is-everywhere .joorney-fb-drop {
+    background: #f4f7fd;
+    border-color: #a9bdf0;
+}
+
+.joorney-fb-zone.is-listed .joorney-fb-drop {
+    background: #fff9ec;
+    border-color: #f5c777;
+}
+
+.joorney-fb-zone.is-deactivated .joorney-fb-drop {
+    background: #f6f7f9;
+}
+
+.joorney-fb-zone.is-everywhere .joorney-fb-drop.is-over {
+    background: var(--joorney-state-everywhere-tint);
+    border-color: var(--joorney-state-everywhere);
+    border-style: solid;
+}
+
+.joorney-fb-zone.is-listed .joorney-fb-drop.is-over {
+    background: var(--joorney-state-listed-tint);
+    border-color: var(--joorney-state-listed);
+    border-style: solid;
+}
+
+.joorney-fb-zone.is-deactivated .joorney-fb-drop.is-over {
+    background: var(--joorney-state-off-tint);
+    border-color: var(--joorney-state-off);
+    border-style: solid;
+}
+
+.joorney-fb-empty {
+    margin: auto;
+    padding: 24px 0;
+    font-size: 13px;
+    color: var(--joorney-text-muted);
+    text-align: center;
+}
+
+.joorney-fb-drop .joorney-fcard.is-dragging {
+    opacity: 0.45;
+}
+
+/* Just dropped: the card background fades back (feature_card.css transition) */
+.joorney-fb-drop .joorney-fcard.is-moved {
+    background: #ffe7b3;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .joorney-fb-drop .joorney-fcard {
+        transition: none;
+    }
+}
+
+.joorney-fb-runbot {
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-card);
+    box-shadow: var(--joorney-shadow);
+}
+
+.joorney-fb-runbot h2 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.joorney-fb-runbot-toggle {
+    justify-content: space-between;
+    width: 100%;
+}
+
+.joorney-fb-runbot-toggle .joorney-icon {
+    flex: none;
+    color: var(--joorney-text-muted);
+    transition: transform 0.15s ease;
+}
+
+.joorney-fb-runbot-toggle[aria-expanded="true"] .joorney-icon {
+    transform: rotate(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .joorney-fb-runbot-toggle .joorney-icon {
+        transition: none;
+    }
+}
+
+.joorney-fb-runbot p {
+    margin: 4px 0 12px;
+    font-size: 13px;
+    color: var(--joorney-text-muted);
+}

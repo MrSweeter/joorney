@@ -832,8 +832,39 @@
     "optionsFeatures_subtitle": {
         "message": "Choisissez où chaque fonctionnalité s'exécute. Les exceptions par hôte sont sur l'accueil."
     },
-    "optionsFeatures_preview": {
-        "message": "Faites un clic droit sur une fonctionnalité (ou un appui long) pour ses actions. Le glisser-déposer entre les états est encore sur l'accueil."
+    "optionsFeatures_search": {
+        "message": "Rechercher une fonctionnalité"
+    },
+    "optionsFeatures_searchPlaceholder": {
+        "message": "Nom ou description"
+    },
+    "optionsFeatures_empty": {
+        "message": "Rien ici. Déposez des fonctionnalités pour les déplacer."
+    },
+    "optionsFeatures_count": {
+        "message": "$count$ fonctionnalité(s)",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "4"
+            }
+        }
+    },
+    "optionsFeatures_moved": {
+        "message": "$feature$ déplacée vers $state$",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Booster"
+            },
+            "state": {
+                "content": "$2",
+                "example": "Deactivated"
+            }
+        }
+    },
+    "optionsFeatures_runbotNote": {
+        "message": "Les fonctionnalités Runbot ne s'exécutent que sur les origines runbot et ignorent les listes d'hôtes."
     },
     "optionsImportExport_title": {
         "message": "Importer, exporter et migrer"
@@ -1742,6 +1773,21 @@
             "duration": {
                 "content": "$2",
                 "example": "3000"
+            }
+        }
+    },
+    "optionsHome_categories": {
+        "message": "Filtre par catégorie"
+    },
+    "optionsHome_categoryAll": {
+        "message": "Toutes"
+    },
+    "optionsHome_runbotGlobal": {
+        "message": "$feature$ globalement",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Auto Open"
             }
         }
     }
