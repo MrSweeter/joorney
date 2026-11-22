@@ -1315,23 +1315,9 @@
         "message": "Open migration",
         "description": "Options import/export page: link to the migration page, settings outdated"
     },
-    "options_limitedFeatureTitle": {
-        "message": "[Limited Feature] $feature$",
-        "description": "Options: tooltip of a limited feature toggle",
-        "placeholders": {
-            "feature": {
-                "content": "$1",
-                "example": "Assign Me"
-            }
-        }
-    },
     "options_origins": {
         "message": "Origins",
         "description": "Options: heading / column of Odoo database origins (URL scheme + host)"
-    },
-    "options_addOrigin": {
-        "message": "Add origin",
-        "description": "Options: tooltip of the button adding an origin"
     },
     "options_deleteOrigin": {
         "message": "Delete origin",
@@ -1800,42 +1786,6 @@
     "optionsImportExport_migrateFile": {
         "message": "Migrate a file",
         "description": "Options import/export page: link to the migration page, settings up to date"
-    },
-    "optionsHosts_limitedFeatures": {
-        "message": "Limited Features",
-        "description": "Options hosts page: heading of the limited features"
-    },
-    "optionsHosts_features": {
-        "message": "Features",
-        "description": "Options hosts page: heading of the features"
-    },
-    "optionsHosts_whitelist": {
-        "message": "Only on listed hosts",
-        "description": "Options hosts page: column of the features running only on the hosts listed for them (storage: <id>WhitelistMode true)"
-    },
-    "optionsHosts_whitelistHelp": {
-        "message": "Runs only on the hosts listed and checked in the \"Origins\" section below",
-        "description": "Options hosts page: help of \"Only on listed hosts\""
-    },
-    "optionsHosts_blacklist": {
-        "message": "Everywhere except listed hosts",
-        "description": "Options hosts page: column of the features running everywhere except on the hosts listed for them (storage: <id>WhitelistMode false)"
-    },
-    "optionsHosts_blacklistHelp": {
-        "message": "Runs on every host, except the hosts listed and checked in the \"Origins\" section below",
-        "description": "Options hosts page: help of \"Everywhere except listed hosts\""
-    },
-    "optionsHosts_disable": {
-        "message": "Deactivated",
-        "description": "Options hosts page: column of the deactivated features"
-    },
-    "optionsHosts_originInput": {
-        "message": "Origin filter",
-        "description": "Options hosts page: accessible label of the new origin input"
-    },
-    "optionsHosts_originsTitle": {
-        "message": "Odoo database origin",
-        "description": "Options hosts page: tooltip of the origins column"
     },
     "optionsHosts_error_invalidRegex": {
         "message": "Invalid regular expression",

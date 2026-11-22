@@ -210,7 +210,6 @@ function createFeature(featureName, option) {
 
     updateFeature(featureName, option);
 
-    createFileWithTemplate(featureName, 'option.js', '');
     if (!configuration.customization.popup) {
         createFileWithTemplate(featureName, 'popup.js', '');
     }
@@ -231,6 +230,10 @@ function updateFeature(featureName, option) {
 
     if (option['--with-customization-option']) {
         fileCreated = createFileWithTemplate(featureName, 'option_customization.js', '') || fileCreated;
+        // The feature page only shows the blocks it knows: without them, its Settings card stays empty
+        console.info(
+            `Register the Settings block of ${featureName.id}: its markup in BLOCKS (options/pages/feature/settings.js) and its help in settingsHelp (options/pages/feature/index.js)`
+        );
     }
 
     if (option['--with-customization-popup']) {

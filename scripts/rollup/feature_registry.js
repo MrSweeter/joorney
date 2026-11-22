@@ -4,15 +4,7 @@ import path from 'node:path';
 const FEATURE_REGISTRY_ID = 'virtual:joorney-features';
 
 // Optional files of a feature folder, see configuration.js importFeature*File
-const FEATURE_FILES = [
-    'configuration',
-    'content',
-    'background_trigger',
-    'background',
-    'option',
-    'option_customization',
-    'popup',
-];
+const FEATURE_FILES = ['configuration', 'content', 'background_trigger', 'background', 'option_customization', 'popup'];
 
 function getFeatureStatePath(rootDir) {
     return path.join(rootDir, 'features_state.json');

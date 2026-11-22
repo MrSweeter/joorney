@@ -2,8 +2,6 @@
     --joorney-primary: #13213c;
     --joorney-primary-bg: #e5e5e5;
     --joorney-secondary: #fca311;
-    --joorney-secondary-bg: #e5e5e5;
-    --joorney-limited-secondary: #a75000;
     --joorney-odoo-primary: #714b67;
     --joorney-odoo-secondary: #017e84;
 }
@@ -28,10 +26,6 @@ body {
 
 .joorney-font-icon-size {
     font-size: 1.2em;
-}
-
-.joorney-modified-input {
-    background-color: #fffdaf !important;
 }
 
 .input-hide {

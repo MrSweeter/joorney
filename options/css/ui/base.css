@@ -476,3 +476,7 @@
     border-color: var(--joorney-navy);
 }
 /*#endregion */
+
+.action-head {
+    width: 5%;
+}

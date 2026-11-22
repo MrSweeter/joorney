@@ -1041,20 +1041,8 @@
     "optionsImportExport_openMigration": {
         "message": "Ouvrir la migration"
     },
-    "options_limitedFeatureTitle": {
-        "message": "[Fonctionnalité limitée] $feature$",
-        "placeholders": {
-            "feature": {
-                "content": "$1",
-                "example": "Assign Me"
-            }
-        }
-    },
     "options_origins": {
         "message": "Origines"
-    },
-    "options_addOrigin": {
-        "message": "Ajouter une origine"
     },
     "options_deleteOrigin": {
         "message": "Supprimer l'origine"
@@ -1423,33 +1411,6 @@
     },
     "optionsImportExport_migrateFile": {
         "message": "Migrer un fichier"
-    },
-    "optionsHosts_limitedFeatures": {
-        "message": "Fonctionnalités limitées"
-    },
-    "optionsHosts_features": {
-        "message": "Fonctionnalités"
-    },
-    "optionsHosts_whitelist": {
-        "message": "Uniquement sur les hôtes listés"
-    },
-    "optionsHosts_whitelistHelp": {
-        "message": "Fonctionne uniquement sur les hôtes cochés dans la section « Origines » ci-dessous"
-    },
-    "optionsHosts_blacklist": {
-        "message": "Partout sauf sur les hôtes listés"
-    },
-    "optionsHosts_blacklistHelp": {
-        "message": "Fonctionne sur tous les hôtes, sauf ceux cochés dans la section « Origines » ci-dessous"
-    },
-    "optionsHosts_disable": {
-        "message": "Désactivées"
-    },
-    "optionsHosts_originInput": {
-        "message": "Filtre d'origine"
-    },
-    "optionsHosts_originsTitle": {
-        "message": "Origine de la base de données Odoo"
     },
     "optionsHosts_error_invalidRegex": {
         "message": "Expression régulière invalide"

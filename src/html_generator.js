@@ -74,49 +74,6 @@ export function stringToHTML(str) {
     return template.content.firstChild;
 }
 
-export function generateLimitedFeatureOptionButtonItem(feature) {
-    return stringToHTML(`
-		<label
-			title="${escapeHTML(t('options_limitedFeatureTitle', featureName(feature)))}"
-			for="joorney_${feature.id}_limited_feature"
-		>
-			<input id="joorney_${feature.id}_limited_feature" class="input-hide" type="checkbox" />
-			<div class="limited-feature-wrapper d-flex">
-				<i class="joorney-icon joorney-font-icon-size me-2" aria-hidden="true"></i>
-				<p>${escapeHTML(featureName(feature))}</p>
-			</div>
-		</label>
-	`);
-}
-
-export function generateFeatureOptionListItem(feature) {
-    return stringToHTML(`
-		<label
-			id="joorney_${feature.id}_feature"
-			title="${escapeHTML(t('popup_featureTitle', featureName(feature)))}"
-			data-feature="${feature.id}"
-			class="draggable-feature" draggable="true"
-		>
-			<div class="feature-wrapper d-flex">
-				<div class="icon-wrapper pe-1">
-					${iconHTML(feature.icon, { filled: true })}
-				</div>
-				<p>${escapeHTML(featureName(feature))}</p>
-			</div>
-		</label>
-	`);
-}
-
-export function generateFeatureOptionTableHeadItem(feature) {
-    return stringToHTML(`
-		<th title="${escapeHTML(t('popup_featureOriginTitle', featureName(feature)))}" class="icon-wrapper-head">
-			<div class="icon-wrapper" id="joorney_origins_filter_feature_header_${feature.id}">
-				${iconHTML(feature.icon, { filled: true })}
-			</div>
-		</th>
-	`);
-}
-
 export function generateFeaturePopupToggleItem(feature) {
     return stringToHTML(`
 		<label
