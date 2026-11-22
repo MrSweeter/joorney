@@ -2,6 +2,9 @@ export default {
     id: 'starringPriorityEffect',
     display_name: 'Starring Effect',
     icon: 'star',
+    category: 'ui',
+    tags: ['fun', 'project'],
+    video: '',
     trigger: {
         load: true,
         navigate: true,

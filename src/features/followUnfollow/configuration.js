@@ -2,6 +2,9 @@ export default {
     id: 'followUnfollow',
     display_name: 'Follow/Unfollow',
     icon: 'how_to_reg',
+    category: 'productivity',
+    tags: ['chatter'],
+    video: '',
     trigger: {
         background: false,
         load: true,

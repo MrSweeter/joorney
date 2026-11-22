@@ -2,6 +2,9 @@ export default {
     id: 'adminDebugLoginRunbot',
     display_name: '[Runbot] Admin Debug Login',
     icon: 'rocket_launch',
+    category: 'runbot',
+    tags: ['runbot', 'debug'],
+    video: '',
     trigger: {
         load: true,
         navigate: true,

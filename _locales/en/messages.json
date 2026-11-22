@@ -197,6 +197,218 @@
         "message": "Unfocus App",
         "description": "Feature name (popup, options, right-click menu)"
     },
+    "feature_awesomeLoadingSmall_description": {
+        "message": "Replace the small Odoo loading text with a custom design.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_awesomeLoadingSmall_details": {
+        "message": "Change the \"Loading\" indicator shown at the bottom right of the page while Odoo loads. Pick one of the available designs, with a live preview in the options.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_awesomeLoadingLarge_description": {
+        "message": "Replace the fullscreen Odoo loading spinner with a custom design.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_awesomeLoadingLarge_details": {
+        "message": "Change the large fullscreen loading design of Odoo. Note that the large loading has been removed in Odoo 17.0, so this feature only applies to older versions.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_awesomeStyle_description": {
+        "message": "Apply custom CSS styles on your Odoo database page.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_awesomeStyle_details": {
+        "message": "Personalize the appearance of your Odoo interface by applying your own CSS. It is perfect to tweak colors, spacing or hide elements without any technical setup beyond a few lines of CSS.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_themeSwitch_description": {
+        "message": "Switch the Odoo theme dynamically based on a configured option.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_themeSwitch_details": {
+        "message": "Change the Odoo theme depending on your location, a time range, or simply your preferred one. Note that Odoo now manages this with a user preference, a real backend switch instead of a frontend-only one.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_ambient_description": {
+        "message": "Add particle effects like snow, pumpkins, and fireworks to enhance user engagement.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_ambient_details": {
+        "message": "Bring your Odoo main menu to life with particle effects for special events and days: falling snow in winter, flying pumpkins for Halloween, fireworks on New Year's Eve. Effects can have an impact on performance, so each event or effect can be turned off in the options.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_starringPriorityEffect_description": {
+        "message": "Trigger a stars particles effect when you prioritize a record.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_starringPriorityEffect_details": {
+        "message": "Adds a bit of magic to prioritization: when you set the priority of a record or ticket, a stars particles effect gives instant and pleasant visual confirmation.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_unfocusApp_description": {
+        "message": "Hide the apps that you are not using frequently, so you can focus on the ones that are more relevant to your work.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_unfocusApp_details": {
+        "message": "Click the star next to an app name on the Odoo home page to hide or show it, which reduces clutter and keeps your essential apps at hand. Double-click the star to highlight an app with a background image around its icon.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_assignMeTask_description": {
+        "message": "Add a new button to the task form that you can click to assign yourself the task.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_assignMeTask_details": {
+        "message": "Adds a button to the task form to assign any task to yourself in one click. Before Odoo 16.3, Odoo had a standard button for it, this feature brings it back. As it is not standard, the button reloads the page, which can lose navigation history. A developer option appends a simulated UI instead of reloading.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_pinMessage_description": {
+        "message": "Pin message to the top of chatter for easy access.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_pinMessage_details": {
+        "message": "Quickly pin important messages of the chatter so critical information stays at the top and easy to find. It reuses the standard star of a message and turns it into a pin. It depends heavily on the Odoo chatter, so it is not the most stable feature. This feature has been added in standard versions of Odoo.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_followUnfollow_description": {
+        "message": "Add a fast follow/unfollow toggle beside the mail followers button.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_followUnfollow_details": {
+        "message": "Adds a quick action next to the followers button to follow or unfollow a record with a single click. You no longer need to open the full followers menu just to change your subscription.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_showMyBadge_description": {
+        "message": "Show user's badges in the user card.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_showMyBadge_details": {
+        "message": "Displays the badges of a user in their user card, highlighting achievements and rewards. It makes profiles more informative and promotes a sense of achievement and community.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_contextOdooMenus_description": {
+        "message": "Add Odoo's menus to the browser context menu.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_contextOdooMenus_details": {
+        "message": "Access Odoo menus directly from the right-click menu of your browser. It saves steps to reach a feature and makes the navigation more seamless.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_saveKnowledge_description": {
+        "message": "Add a new button on the top right corner of the article page that you can click to force the save of it.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_saveKnowledge_details": {
+        "message": "Adds a save button to the top right corner of article pages, to save an article for sure with one click. Between the addition of the Knowledge app and Odoo 17.0 there was no easy way to force the save. This feature has been added in standard versions of Odoo.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_tooltipMetadata_description": {
+        "message": "Show you current record metadata by hovering the debug icon.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_tooltipMetadata_details": {
+        "message": "Hover the debug icon to instantly see the metadata of the current record, without navigating away from the current view. It saves clicks and page loads when you analyze or troubleshoot a record.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_newServerActionCode_description": {
+        "message": "Automatically select \"Execute code\" as type for Server Action.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_newServerActionCode_details": {
+        "message": "Automatically selects \"Execute code\" as the type of a new server action. Developers can focus directly on writing and testing code, without the extra step of setting the action type.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_autoOpenRunbot_description": {
+        "message": "Open a runbot instance in a specific version by adding ?joorney-runbot=17.0 to the runbot URL, like https://runbot.odoo.com?joorney-runbot=17.0",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_autoOpenRunbot_details": {
+        "message": "Adds a search parameter to the runbot URL to open an instance in a specific version, as an admin user in debug mode. For example, https://runbot.odoo.com?joorney-runbot=17.0 opens a runbot in version 17.0. Change the parameter to reach other versions.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_impersonateLoginRunbot_description": {
+        "message": "Impersonate a default user on a runbot, such as admin, demo, or portal.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_impersonateLoginRunbot_details": {
+        "message": "Adds options to the login page menu of a runbot to log in as a default user such as admin, demo or portal. It is handy to test and support with the point of view of different user roles and to identify user-specific issues.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_adminDebugLoginRunbot_description": {
+        "message": "Open a runbot instance from the runbot page as an admin user in debug mode.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_adminDebugLoginRunbot_details": {
+        "message": "Adds an icon next to the database name on the runbot page, to open the instance as an admin user in debug mode with a single click. It reduces the steps needed to access and debug runbot instances.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "category_ui": {
+        "message": "Look & feel",
+        "description": "Feature category label (options)"
+    },
+    "category_productivity": {
+        "message": "Productivity",
+        "description": "Feature category label (options)"
+    },
+    "category_technical": {
+        "message": "Technical",
+        "description": "Feature category label (options)"
+    },
+    "category_runbot": {
+        "message": "Runbot (limited)",
+        "description": "Feature category label (options)"
+    },
+    "tag_loading": {
+        "message": "Loading",
+        "description": "Feature tag label (options)"
+    },
+    "tag_fun": {
+        "message": "Fun",
+        "description": "Feature tag label (options)"
+    },
+    "tag_css": {
+        "message": "CSS",
+        "description": "Feature tag label (options)"
+    },
+    "tag_theme": {
+        "message": "Theme",
+        "description": "Feature tag label (options)"
+    },
+    "tag_seasonal": {
+        "message": "Seasonal",
+        "description": "Feature tag label (options)"
+    },
+    "tag_homeMenu": {
+        "message": "Home menu",
+        "description": "Feature tag label (options)"
+    },
+    "tag_project": {
+        "message": "Project",
+        "description": "Feature tag label (options)"
+    },
+    "tag_chatter": {
+        "message": "Chatter",
+        "description": "Feature tag label (options)"
+    },
+    "tag_gamification": {
+        "message": "Gamification",
+        "description": "Feature tag label (options)"
+    },
+    "tag_navigation": {
+        "message": "Navigation",
+        "description": "Feature tag label (options)"
+    },
+    "tag_debug": {
+        "message": "Debug",
+        "description": "Feature tag label (options)"
+    },
+    "tag_runbot": {
+        "message": "Runbot",
+        "description": "Feature tag label (options)"
+    },
+    "tag_knowledge": {
+        "message": "Knowledge",
+        "description": "Feature tag label (options)"
+    },
     "themeSwitch_mode_system": {
         "message": "System",
         "description": "Theme Switch mode: follow the system theme"

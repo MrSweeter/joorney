@@ -152,6 +152,165 @@
     "feature_unfocusApp_name": {
         "message": "Masquer les applications"
     },
+    "feature_awesomeLoadingSmall_description": {
+        "message": "Remplace le petit texte de chargement d'Odoo par un design personnalisé."
+    },
+    "feature_awesomeLoadingSmall_details": {
+        "message": "Change l'indicateur « Chargement » affiché en bas à droite de la page pendant le chargement d'Odoo. Choisissez parmi les designs disponibles, avec un aperçu en direct dans les options."
+    },
+    "feature_awesomeLoadingLarge_description": {
+        "message": "Remplace le grand indicateur de chargement plein écran d'Odoo par un design personnalisé."
+    },
+    "feature_awesomeLoadingLarge_details": {
+        "message": "Change le grand design de chargement plein écran d'Odoo. Le grand chargement a été retiré dans Odoo 17.0, cette fonctionnalité ne s'applique donc qu'aux versions plus anciennes."
+    },
+    "feature_awesomeStyle_description": {
+        "message": "Applique des styles CSS personnalisés sur la page de votre base de données Odoo."
+    },
+    "feature_awesomeStyle_details": {
+        "message": "Personnalisez l'apparence de votre interface Odoo en appliquant votre propre CSS. Idéal pour ajuster les couleurs, les espacements ou masquer des éléments avec quelques lignes de CSS."
+    },
+    "feature_themeSwitch_description": {
+        "message": "Change le thème d'Odoo dynamiquement selon une option configurée."
+    },
+    "feature_themeSwitch_details": {
+        "message": "Change le thème d'Odoo selon votre localisation, une plage horaire, ou simplement votre préférence. Odoo gère désormais cela avec une préférence utilisateur, un vrai changement côté serveur plutôt que seulement côté interface."
+    },
+    "feature_ambient_description": {
+        "message": "Ajoute des effets de particules (neige, citrouilles, feux d'artifice) pour rendre Odoo plus vivant."
+    },
+    "feature_ambient_details": {
+        "message": "Donnez vie au menu principal d'Odoo avec des effets de particules pour les événements et jours spéciaux : neige en hiver, citrouilles volantes pour Halloween, feux d'artifice pour le Nouvel An. Les effets peuvent avoir un impact sur les performances, chaque événement ou effet peut donc être désactivé dans les options."
+    },
+    "feature_starringPriorityEffect_description": {
+        "message": "Déclenche un effet de particules en étoiles lorsque vous priorisez un enregistrement."
+    },
+    "feature_starringPriorityEffect_details": {
+        "message": "Ajoute une touche de magie à la priorisation : lorsque vous définissez la priorité d'un enregistrement ou d'un ticket, un effet de particules en étoiles offre une confirmation visuelle immédiate et agréable."
+    },
+    "feature_unfocusApp_description": {
+        "message": "Masque les applications peu utilisées pour vous concentrer sur celles qui comptent pour votre travail."
+    },
+    "feature_unfocusApp_details": {
+        "message": "Cliquez sur l'étoile à côté du nom d'une application sur la page d'accueil d'Odoo pour la masquer ou l'afficher, ce qui désencombre l'écran et garde vos applications essentielles à portée de main. Double-cliquez sur l'étoile pour mettre une application en avant avec une image de fond autour de son icône."
+    },
+    "feature_assignMeTask_description": {
+        "message": "Ajoute un bouton au formulaire de tâche pour vous l'assigner en un clic."
+    },
+    "feature_assignMeTask_details": {
+        "message": "Ajoute un bouton au formulaire de tâche pour vous assigner n'importe quelle tâche en un clic. Avant Odoo 16.3, Odoo avait un bouton standard pour cela, cette fonctionnalité le remet en place. Comme il n'est pas standard, le bouton recharge la page, ce qui peut faire perdre l'historique de navigation. Une option développeur ajoute plutôt une interface simulée, sans rechargement."
+    },
+    "feature_pinMessage_description": {
+        "message": "Épingle un message en haut du chatter pour y accéder facilement."
+    },
+    "feature_pinMessage_details": {
+        "message": "Épinglez rapidement les messages importants du chatter pour que les informations critiques restent en haut et faciles à trouver. Elle réutilise l'étoile standard d'un message pour en faire une épingle. Elle dépend fortement du chatter d'Odoo, ce n'est donc pas la fonctionnalité la plus stable. Cette fonctionnalité a été ajoutée dans les versions standard d'Odoo."
+    },
+    "feature_followUnfollow_description": {
+        "message": "Ajoute un bouton rapide pour suivre ou ne plus suivre à côté du bouton des abonnés."
+    },
+    "feature_followUnfollow_details": {
+        "message": "Ajoute une action rapide à côté du bouton des abonnés pour suivre ou ne plus suivre un enregistrement en un clic. Plus besoin d'ouvrir tout le menu des abonnés pour changer votre abonnement."
+    },
+    "feature_showMyBadge_description": {
+        "message": "Affiche les badges de l'utilisateur dans sa carte utilisateur."
+    },
+    "feature_showMyBadge_details": {
+        "message": "Affiche les badges d'un utilisateur dans sa carte utilisateur, pour mettre en valeur ses réalisations et récompenses. Les profils deviennent plus informatifs et cela renforce le sentiment d'accomplissement et de communauté."
+    },
+    "feature_contextOdooMenus_description": {
+        "message": "Ajoute les menus d'Odoo au menu contextuel du navigateur."
+    },
+    "feature_contextOdooMenus_details": {
+        "message": "Accédez aux menus d'Odoo directement depuis le menu clic droit de votre navigateur. Cela réduit le nombre d'étapes pour atteindre une fonctionnalité et fluidifie la navigation."
+    },
+    "feature_saveKnowledge_description": {
+        "message": "Ajoute un bouton en haut à droite de la page d'un article pour forcer son enregistrement."
+    },
+    "feature_saveKnowledge_details": {
+        "message": "Ajoute un bouton d'enregistrement en haut à droite des pages d'article, pour être sûr d'enregistrer un article en un clic. Entre l'arrivée de l'application Connaissances et Odoo 17.0, il n'existait pas de moyen simple de forcer l'enregistrement. Cette fonctionnalité a été ajoutée dans les versions standard d'Odoo."
+    },
+    "feature_tooltipMetadata_description": {
+        "message": "Affiche les métadonnées de l'enregistrement courant en survolant l'icône de débogage."
+    },
+    "feature_tooltipMetadata_details": {
+        "message": "Survolez l'icône de débogage pour voir instantanément les métadonnées de l'enregistrement courant, sans quitter la vue actuelle. Cela économise des clics et des chargements de page lors de l'analyse ou du dépannage d'un enregistrement."
+    },
+    "feature_newServerActionCode_description": {
+        "message": "Sélectionne automatiquement « Exécuter du code » comme type d'action de serveur."
+    },
+    "feature_newServerActionCode_details": {
+        "message": "Sélectionne automatiquement « Exécuter du code » comme type d'une nouvelle action de serveur. Les développeurs peuvent se concentrer directement sur l'écriture et le test du code, sans l'étape supplémentaire de choix du type d'action."
+    },
+    "feature_autoOpenRunbot_description": {
+        "message": "Ouvre une instance runbot dans une version précise en ajoutant ?joorney-runbot=17.0 à l'URL du runbot, comme https://runbot.odoo.com?joorney-runbot=17.0"
+    },
+    "feature_autoOpenRunbot_details": {
+        "message": "Ajoute un paramètre de recherche à l'URL du runbot pour ouvrir une instance dans une version précise, en tant qu'administrateur en mode débogage. Par exemple, https://runbot.odoo.com?joorney-runbot=17.0 ouvre un runbot en version 17.0. Modifiez le paramètre pour atteindre d'autres versions."
+    },
+    "feature_impersonateLoginRunbot_description": {
+        "message": "Se connecte en tant qu'utilisateur par défaut sur un runbot, comme admin, demo ou portail."
+    },
+    "feature_impersonateLoginRunbot_details": {
+        "message": "Ajoute des options au menu de la page de connexion d'un runbot pour se connecter en tant qu'utilisateur par défaut comme admin, demo ou portail. Pratique pour tester et assister du point de vue de différents rôles et repérer les problèmes propres à un utilisateur."
+    },
+    "feature_adminDebugLoginRunbot_description": {
+        "message": "Ouvre une instance runbot depuis la page du runbot en tant qu'administrateur en mode débogage."
+    },
+    "feature_adminDebugLoginRunbot_details": {
+        "message": "Ajoute une icône à côté du nom de la base de données sur la page du runbot, pour ouvrir l'instance en tant qu'administrateur en mode débogage en un clic. Cela réduit les étapes nécessaires pour accéder aux instances runbot et les déboguer."
+    },
+    "category_ui": {
+        "message": "Apparence"
+    },
+    "category_productivity": {
+        "message": "Productivité"
+    },
+    "category_technical": {
+        "message": "Technique"
+    },
+    "category_runbot": {
+        "message": "Runbot (limité)"
+    },
+    "tag_loading": {
+        "message": "Chargement"
+    },
+    "tag_fun": {
+        "message": "Fun"
+    },
+    "tag_css": {
+        "message": "CSS"
+    },
+    "tag_theme": {
+        "message": "Thème"
+    },
+    "tag_seasonal": {
+        "message": "Saisonnier"
+    },
+    "tag_homeMenu": {
+        "message": "Menu d'accueil"
+    },
+    "tag_project": {
+        "message": "Projet"
+    },
+    "tag_chatter": {
+        "message": "Chatter"
+    },
+    "tag_gamification": {
+        "message": "Gamification"
+    },
+    "tag_navigation": {
+        "message": "Navigation"
+    },
+    "tag_debug": {
+        "message": "Débogage"
+    },
+    "tag_runbot": {
+        "message": "Runbot"
+    },
+    "tag_knowledge": {
+        "message": "Connaissances"
+    },
     "themeSwitch_mode_system": {
         "message": "Système"
     },

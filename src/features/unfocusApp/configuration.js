@@ -2,6 +2,9 @@ export default {
     id: 'unfocusApp',
     display_name: 'Unfocus App',
     icon: 'widgets',
+    category: 'ui',
+    tags: ['homeMenu', 'navigation'],
+    video: '',
     trigger: {
         load: true,
         navigate: true,

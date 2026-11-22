@@ -2,6 +2,9 @@ export default {
     id: 'awesomeStyle',
     display_name: 'Awesome Style',
     icon: 'css',
+    category: 'ui',
+    tags: ['css'],
+    video: '',
     trigger: {
         load: true,
         navigate: true,

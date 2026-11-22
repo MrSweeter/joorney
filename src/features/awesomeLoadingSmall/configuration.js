@@ -2,6 +2,9 @@ export default {
     id: 'awesomeLoadingSmall',
     display_name: 'Awesome Loading Small',
     icon: 'progress_activity',
+    category: 'ui',
+    tags: ['loading', 'fun'],
+    video: '',
     trigger: {
         load: true,
         navigate: true,

@@ -2,6 +2,9 @@ export default {
     id: 'themeSwitch',
     display_name: 'Theme Switch',
     icon: 'light_mode',
+    category: 'ui',
+    tags: ['theme'],
+    video: '',
     trigger: {
         background: true,
         load: false,

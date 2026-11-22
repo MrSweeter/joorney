@@ -2,6 +2,9 @@ export default {
     id: 'contextOdooMenus',
     display_name: 'Context OdooMenus',
     icon: 'near_me',
+    category: 'productivity',
+    tags: ['navigation'],
+    video: '',
     trigger: {
         background: false,
         load: false,
