@@ -44,6 +44,14 @@ export const baseSettings = {
 };
 
 export const extensionFeatureState = FeaturesState;
+
+export const defaultEnabledFeatures = [
+    'awesomeLoadingSmall',
+    'tooltipMetadata',
+    'contextOdooMenus',
+    'starringPriorityEffect',
+    'showMyBadge',
+];
 const activeFeaturesList = Object.keys(FeaturesState).filter((k) => !k.startsWith('__') && FeaturesState[k]);
 
 export let features = [];

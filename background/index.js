@@ -1,4 +1,9 @@
-import { getCurrentSettings, loadFeaturesConfiguration } from '../configuration.js';
+import {
+    defaultEnabledFeatures,
+    extensionFeatureState,
+    getCurrentSettings,
+    loadFeaturesConfiguration,
+} from '../configuration.js';
 import { checkHostsExpiration } from '../src/api/cache.js';
 import { createContextMenu, onContextMenuItemClick, updateContext } from '../src/contextmenu/manager.js';
 import AmbientManager from '../src/features/ambient/ambient_manager.js';
@@ -17,12 +22,43 @@ listenNavigation();
 // Admin/debug login on runbot builds opened through the background (see openRunbotAdminDebug)
 WebNavigation.onCommitted.addListener(onRunbotNavigationCommitted);
 
+// Only features shipped in this build can be turned on, others have no storage keys to write.
+// An install also happens on a second device or after a reinstall, where Chrome sync already holds the
+// user's choices: read before the defaults are written, and only enable the features never set.
+async function getDefaultFeaturesToEnable() {
+    try {
+        const ids = defaultEnabledFeatures.filter((id) => extensionFeatureState[id]);
+        const stored = await StorageSync.get(ids.map((id) => `${id}Enabled`));
+        return ids.filter((id) => stored[`${id}Enabled`] === undefined);
+    } catch (e) {
+        // Must never break the install flow (options page opening, shortcuts)
+        Console.error(e);
+        return [];
+    }
+}
+
+async function enableDefaultFeatures(ids) {
+    try {
+        const defaults = {};
+        for (const id of ids) {
+            defaults[`${id}Enabled`] = true;
+            defaults[`${id}WhitelistMode`] = false;
+        }
+        await StorageSync.set(defaults);
+    } catch (e) {
+        // Must never break the install flow (options page opening, shortcuts)
+        Console.error(e);
+    }
+}
+
 Runtime.onInstalled.addListener(async (details) => {
     const isInstall = details.reason === Runtime.OnInstalledReason.INSTALL;
     if (isInstall) {
+        const toEnable = await getDefaultFeaturesToEnable();
         const features = await loadFeaturesConfiguration();
         const settingsOrDefault = await getCurrentSettings(features);
         await StorageSync.set(settingsOrDefault);
+        await enableDefaultFeatures(toEnable);
         checkCommandShortcuts();
     }
     await sleep(1000);
