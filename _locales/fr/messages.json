@@ -1548,9 +1548,6 @@
     "optionsVersions_legendUnselected": {
         "message": "Version non sélectionnée"
     },
-    "optionsNotifications_title": {
-        "message": "Mode et type"
-    },
     "optionsNotifications_showMe": {
         "message": "Montrer"
     },
@@ -1564,7 +1561,7 @@
         "message": "Nulle part"
     },
     "optionsNotifications_mode_disabledHint": {
-        "message": "(désactivé)"
+        "message": "Désactivées"
     },
     "optionsNotifications_mode_log": {
         "message": "Console des outils de développement"
@@ -1990,6 +1987,42 @@
             }
         }
     },
+    "optionsNotifications_subtitle": {
+        "message": "Mode et type des notifications affichées par Joorney."
+    },
+    "optionsNotifications_display": {
+        "message": "Affichage"
+    },
+    "optionsNotifications_modeLabel": {
+        "message": "Mode de notification"
+    },
+    "optionsNotifications_mode_logHint": {
+        "message": "Écrites dans la console du navigateur"
+    },
+    "optionsNotifications_mode_uiHint": {
+        "message": "Notification compacte, une ligne"
+    },
+    "optionsNotifications_mode_largeUiHint": {
+        "message": "Notification avec le message complet"
+    },
+    "optionsNotifications_types": {
+        "message": "Types"
+    },
+    "optionsNotifications_preview": {
+        "message": "Aperçu"
+    },
+    "optionsNotifications_previewType": {
+        "message": "Aperçu : $type$",
+        "placeholders": {
+            "type": {
+                "content": "$1",
+                "example": "Warning"
+            }
+        }
+    },
+    "optionsNotifications_close": {
+        "message": "Fermer"
+    },
     "optionsFeature_settingsHelpAmbient": {
         "message": "Quelles ambiances peuvent se jouer sur le menu d'accueil d'Odoo, et un aperçu de chacune."
     },
@@ -2043,5 +2076,11 @@
     },
     "optionsFeature_settingsHelpAwesomeLoading": {
         "message": "Choisissez le chargeur affiché pendant que Odoo charge. La popup propose le même choix."
+    },
+    "optionsNotifications_loggedHint": {
+        "message": "Écrit dans la console des outils de développement (F12)."
+    },
+    "optionsNotifications_disabledHint": {
+        "message": "Les notifications sont désactivées : rien n'est affiché."
     }
 }

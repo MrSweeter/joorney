@@ -1,44 +1,163 @@
 <link href="./css/toast/index.css" rel="stylesheet">
 
-<div class="container pt-5">
-    <div class="d-flex align-items-center">
-        <h3 data-i18n="optionsNotifications_title">Mode & type</h3>
-        <div class="ms-3"><button type="button" id="joorney-toast-mode-showme" class="btn btn-sm btn-secondary" data-i18n="optionsNotifications_showMe">Show me</button></div>
-    </div>
-    <small class="text-muted" data-i18n="optionsNotifications_reloadHint">You will need to reload tabs to apply the change.</small>
+<div id="joorney-toasts" class="joorney-page joorney-toasts">
+    <h1 class="joorney-page-title" data-i18n="options_menu_notifications">Notifications</h1>
+    <p class="joorney-page-subtitle">
+        <span data-i18n="optionsNotifications_subtitle">Mode and type of the notifications Joorney shows.</span>
+        <span data-i18n="optionsNotifications_reloadHint">You will need to reload tabs to apply the change.</span>
+    </p>
 
-    <p data-i18n="optionsNotifications_modeHelp">Choose where to receive notifications (information, warning, error).</p>
-    <div class="joorney-toast-mode-control radio-control rounded d-flex w-100">
-        <input type="radio" name="joorney-toast-mode-control" id="joorney-toast-mode-disabled" value="disabled">
-        <label for="joorney-toast-mode-disabled" class="text-center rounded"
-            ><span data-i18n="optionsNotifications_mode_disabled">Nowhere</span> <small class="opacity-50" data-i18n="optionsNotifications_mode_disabledHint">(disable)</small></label
-        >
-        <input type="radio" name="joorney-toast-mode-control" id="joorney-toast-mode-log" value="log">
-        <label for="joorney-toast-mode-log" class="text-center rounded" data-i18n="optionsNotifications_mode_log">Devtools console</label>
-        <input type="radio" name="joorney-toast-mode-control" id="joorney-toast-mode-small" value="ui" checked>
-        <label for="joorney-toast-mode-small" class="text-center rounded" data-i18n="optionsNotifications_mode_ui">Standard UI</label>
-        <input type="radio" name="joorney-toast-mode-control" id="joorney-toast-mode-large" value="large-ui">
-        <label for="joorney-toast-mode-large" class="text-center rounded" data-i18n="optionsNotifications_mode_largeUi">Large UI</label>
-    </div>
+    <section class="joorney-panel" aria-labelledby="joorney_toast_display_title">
+        <div class="joorney-toast-head">
+            <h2 class="joorney-panel-title" id="joorney_toast_display_title" data-i18n="optionsNotifications_display">Display</h2>
+            <p class="joorney-help joorney-toast-hint" id="joorney-toast-hint" role="status"></p>
+            <button type="button" id="joorney-toast-mode-showme" class="joorney-btn">
+                <i class="joorney-icon" data-icon="play_arrow" aria-hidden="true"></i><span data-i18n="optionsNotifications_showMe">Show me</span>
+            </button>
+        </div>
+        <p class="joorney-help" data-i18n="optionsNotifications_modeHelp">Choose where to receive notifications (information, warning, error).</p>
+        <!-- Radios are visually hidden but real: the tiles are their labels (also targeted by the Notifications tour) -->
+        <div class="joorney-toast-tiles" role="radiogroup" aria-label="Notification mode" data-i18n-aria-label="optionsNotifications_modeLabel">
+            <label class="joorney-toast-tile" for="joorney-toast-mode-disabled">
+                <input type="radio" name="joorney-toast-mode" id="joorney-toast-mode-disabled" value="disabled">
+                <svg viewBox="0 0 160 90" aria-hidden="true">
+                    <rect width="160" height="90" fill="#f3f4f7" />
+                    <rect width="160" height="12" fill="#714b67" />
+                    <rect x="10" y="24" width="60" height="5" rx="2" fill="#dde1e8" />
+                    <rect x="10" y="36" width="90" height="5" rx="2" fill="#dde1e8" />
+                    <rect x="10" y="48" width="70" height="5" rx="2" fill="#dde1e8" />
+                    <circle cx="124" cy="52" r="14" fill="none" stroke="#5b6474" stroke-width="3" />
+                    <path d="M114 62 L134 42" stroke="#5b6474" stroke-width="3" />
+                </svg>
+                <span class="joorney-toast-tile-label"><i class="joorney-icon" data-icon="block" aria-hidden="true"></i><span data-i18n="optionsNotifications_mode_disabled">Nowhere</span></span>
+                <span class="joorney-toast-tile-hint" data-i18n="optionsNotifications_mode_disabledHint">Deactivated</span>
+            </label>
+            <label class="joorney-toast-tile" for="joorney-toast-mode-log">
+                <input type="radio" name="joorney-toast-mode" id="joorney-toast-mode-log" value="log">
+                <svg viewBox="0 0 160 90" aria-hidden="true">
+                    <rect width="160" height="90" fill="#1e2430" />
+                    <rect y="0" width="160" height="12" fill="#2d3545" />
+                    <rect x="10" y="22" width="40" height="5" rx="2" fill="#fca311" />
+                    <rect x="56" y="22" width="70" height="5" rx="2" fill="#8892a6" />
+                    <rect x="10" y="36" width="30" height="5" rx="2" fill="#2456c9" />
+                    <rect x="46" y="36" width="90" height="5" rx="2" fill="#8892a6" />
+                    <rect x="10" y="50" width="50" height="5" rx="2" fill="#fca311" />
+                    <rect x="66" y="50" width="60" height="5" rx="2" fill="#8892a6" />
+                </svg>
+                <span class="joorney-toast-tile-label"
+                    ><i class="joorney-icon" data-icon="terminal" aria-hidden="true"></i><span data-i18n="optionsNotifications_mode_log">Devtools console</span></span
+                >
+                <span class="joorney-toast-tile-hint" data-i18n="optionsNotifications_mode_logHint">Written in the browser console</span>
+            </label>
+            <label class="joorney-toast-tile" for="joorney-toast-mode-small">
+                <input type="radio" name="joorney-toast-mode" id="joorney-toast-mode-small" value="ui">
+                <svg viewBox="0 0 160 90" aria-hidden="true">
+                    <rect width="160" height="90" fill="#f3f4f7" />
+                    <rect width="160" height="12" fill="#714b67" />
+                    <rect x="10" y="24" width="60" height="5" rx="2" fill="#dde1e8" />
+                    <rect x="10" y="36" width="90" height="5" rx="2" fill="#dde1e8" />
+                    <rect x="10" y="48" width="70" height="5" rx="2" fill="#dde1e8" />
+                    <rect x="86" y="18" width="68" height="20" rx="3" fill="#fff3cd" stroke="#ffecb5" />
+                    <rect x="92" y="23" width="30" height="4" rx="2" fill="#664d03" />
+                    <rect x="92" y="30" width="52" height="3" rx="1" fill="#664d03" opacity=".6" />
+                    <rect x="86" y="35" width="40" height="3" fill="#ff9800" />
+                </svg>
+                <span class="joorney-toast-tile-label"><i class="joorney-icon" data-icon="notifications" aria-hidden="true"></i><span data-i18n="optionsNotifications_mode_ui">Standard UI</span></span>
+                <span class="joorney-toast-tile-hint" data-i18n="optionsNotifications_mode_uiHint">Compact toast, one line</span>
+            </label>
+            <label class="joorney-toast-tile" for="joorney-toast-mode-large">
+                <input type="radio" name="joorney-toast-mode" id="joorney-toast-mode-large" value="large-ui">
+                <svg viewBox="0 0 160 90" aria-hidden="true">
+                    <rect width="160" height="90" fill="#f3f4f7" />
+                    <rect width="160" height="12" fill="#714b67" />
+                    <rect x="10" y="24" width="60" height="5" rx="2" fill="#dde1e8" />
+                    <rect x="10" y="36" width="90" height="5" rx="2" fill="#dde1e8" />
+                    <rect x="10" y="48" width="70" height="5" rx="2" fill="#dde1e8" />
+                    <rect x="70" y="18" width="84" height="40" rx="3" fill="#f8d7da" stroke="#f5c2c7" />
+                    <rect x="78" y="25" width="40" height="5" rx="2" fill="#842029" />
+                    <rect x="78" y="35" width="68" height="3" rx="1" fill="#842029" opacity=".6" />
+                    <rect x="78" y="41" width="60" height="3" rx="1" fill="#842029" opacity=".6" />
+                    <rect x="78" y="47" width="46" height="3" rx="1" fill="#842029" opacity=".6" />
+                    <rect x="70" y="53" width="60" height="5" fill="#f44336" />
+                </svg>
+                <span class="joorney-toast-tile-label"><i class="joorney-icon" data-icon="web_asset" aria-hidden="true"></i><span data-i18n="optionsNotifications_mode_largeUi">Large UI</span></span>
+                <span class="joorney-toast-tile-hint" data-i18n="optionsNotifications_mode_largeUiHint">Toast with the full message</span>
+            </label>
+        </div>
+    </section>
 
-    <p class="pt-3" data-i18n="optionsNotifications_typeHelp">Choose which type of notification you want to see</p>
-    <div class="joorney-toast-mode-control checkbox-control rounded d-flex w-100 text-uppercase">
-        <input type="checkbox" name="joorney-toast-mode-control" id="joorney-toast-mode-info" data-toast-type="info">
-        <label for="joorney-toast-mode-info" class="text-center rounded m-1"
-            ><i class="joorney-icon joorney-icon-filled text-info" data-icon="info" aria-hidden="true"></i> <span data-i18n="optionsNotifications_type_info">Info</span></label
-        >
-        <input type="checkbox" name="joorney-toast-mode-control" id="joorney-toast-mode-warn" data-toast-type="warning">
-        <label for="joorney-toast-mode-warn" class="text-center rounded m-1"
-            ><i class="joorney-icon joorney-icon-filled text-warning" data-icon="warning" aria-hidden="true"></i> <span data-i18n="optionsNotifications_type_warning">Warning</span></label
-        >
-        <input type="checkbox" name="joorney-toast-mode-control" id="joorney-toast-mode-error" data-toast-type="danger">
-        <label for="joorney-toast-mode-error" class="text-center rounded m-1"
-            ><i class="joorney-icon joorney-icon-filled text-danger" data-icon="error" aria-hidden="true"></i> <span data-i18n="optionsNotifications_type_error">Error</span></label
-        >
-        <input type="checkbox" name="joorney-toast-mode-control" id="joorney-toast-mode-success" data-toast-type="success">
-        <label for="joorney-toast-mode-success" class="text-center rounded m-1"
-            ><i class="joorney-icon joorney-icon-filled text-success" data-icon="check_circle" aria-hidden="true"></i>
-            <span data-i18n="optionsNotifications_type_success">Success</span></label
-        >
-    </div>
+    <section class="joorney-panel" aria-labelledby="joorney_toast_types_title">
+        <h2 class="joorney-panel-title" id="joorney_toast_types_title" data-i18n="optionsNotifications_types">Types</h2>
+        <p class="joorney-help" data-i18n="optionsNotifications_typeHelp">Choose which type of notification you want to see</p>
+        <div class="joorney-toast-types">
+            <div class="joorney-toast-type" data-toast-type="info">
+                <span class="joorney-toast-dot" aria-hidden="true"></span>
+                <i class="joorney-icon joorney-icon-filled joorney-toast-type-icon" data-icon="info" aria-hidden="true"></i>
+                <label class="joorney-toast-type-label" for="joorney-toast-mode-info" id="joorney-toast-type-info-label" data-i18n="optionsNotifications_type_info">Info</label>
+                <button type="button" class="joorney-btn is-secondary joorney-toast-preview" data-toast-preview="info">
+                    <i class="joorney-icon" data-icon="visibility" aria-hidden="true"></i><span data-i18n="optionsNotifications_preview">Preview</span>
+                </button>
+                <button
+                    type="button"
+                    role="switch"
+                    aria-checked="false"
+                    class="joorney-switch"
+                    id="joorney-toast-mode-info"
+                    data-toast-type="info"
+                    aria-labelledby="joorney-toast-type-info-label"
+                ></button>
+            </div>
+            <div class="joorney-toast-type" data-toast-type="warning">
+                <span class="joorney-toast-dot" aria-hidden="true"></span>
+                <i class="joorney-icon joorney-icon-filled joorney-toast-type-icon" data-icon="warning" aria-hidden="true"></i>
+                <label class="joorney-toast-type-label" for="joorney-toast-mode-warn" id="joorney-toast-type-warn-label" data-i18n="optionsNotifications_type_warning">Warning</label>
+                <button type="button" class="joorney-btn is-secondary joorney-toast-preview" data-toast-preview="warning">
+                    <i class="joorney-icon" data-icon="visibility" aria-hidden="true"></i><span data-i18n="optionsNotifications_preview">Preview</span>
+                </button>
+                <button
+                    type="button"
+                    role="switch"
+                    aria-checked="false"
+                    class="joorney-switch"
+                    id="joorney-toast-mode-warn"
+                    data-toast-type="warning"
+                    aria-labelledby="joorney-toast-type-warn-label"
+                ></button>
+            </div>
+            <div class="joorney-toast-type" data-toast-type="danger">
+                <span class="joorney-toast-dot" aria-hidden="true"></span>
+                <i class="joorney-icon joorney-icon-filled joorney-toast-type-icon" data-icon="error" aria-hidden="true"></i>
+                <label class="joorney-toast-type-label" for="joorney-toast-mode-error" id="joorney-toast-type-error-label" data-i18n="optionsNotifications_type_error">Error</label>
+                <button type="button" class="joorney-btn is-secondary joorney-toast-preview" data-toast-preview="danger">
+                    <i class="joorney-icon" data-icon="visibility" aria-hidden="true"></i><span data-i18n="optionsNotifications_preview">Preview</span>
+                </button>
+                <button
+                    type="button"
+                    role="switch"
+                    aria-checked="false"
+                    class="joorney-switch"
+                    id="joorney-toast-mode-error"
+                    data-toast-type="danger"
+                    aria-labelledby="joorney-toast-type-error-label"
+                ></button>
+            </div>
+            <div class="joorney-toast-type" data-toast-type="success">
+                <span class="joorney-toast-dot" aria-hidden="true"></span>
+                <i class="joorney-icon joorney-icon-filled joorney-toast-type-icon" data-icon="check_circle" aria-hidden="true"></i>
+                <label class="joorney-toast-type-label" for="joorney-toast-mode-success" id="joorney-toast-type-success-label" data-i18n="optionsNotifications_type_success">Success</label>
+                <button type="button" class="joorney-btn is-secondary joorney-toast-preview" data-toast-preview="success">
+                    <i class="joorney-icon" data-icon="visibility" aria-hidden="true"></i><span data-i18n="optionsNotifications_preview">Preview</span>
+                </button>
+                <button
+                    type="button"
+                    role="switch"
+                    aria-checked="false"
+                    class="joorney-switch"
+                    id="joorney-toast-mode-success"
+                    data-toast-type="success"
+                    aria-labelledby="joorney-toast-type-success-label"
+                ></button>
+            </div>
+        </div>
+    </section>
 </div>

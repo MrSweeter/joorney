@@ -1963,10 +1963,6 @@
         "message": "Version not selected",
         "description": "Options versions page: legend: greyed column"
     },
-    "optionsNotifications_title": {
-        "message": "Mode & type",
-        "description": "Options notifications page: heading"
-    },
     "optionsNotifications_showMe": {
         "message": "Show me",
         "description": "Options notifications page: button showing demo notifications"
@@ -1984,8 +1980,8 @@
         "description": "Options notifications page: mode, notifications disabled"
     },
     "optionsNotifications_mode_disabledHint": {
-        "message": "(disable)",
-        "description": "Options notifications page: hint after \"Nowhere\""
+        "message": "Deactivated",
+        "description": "Options notifications page: hint under the Nowhere tile"
     },
     "optionsNotifications_mode_log": {
         "message": "Devtools console",
@@ -2531,6 +2527,52 @@
             }
         }
     },
+    "optionsNotifications_subtitle": {
+        "message": "Mode and type of the notifications Joorney shows.",
+        "description": "Options notifications page: subtitle (followed by the reload hint)"
+    },
+    "optionsNotifications_display": {
+        "message": "Display",
+        "description": "Options notifications page: heading of the mode card"
+    },
+    "optionsNotifications_modeLabel": {
+        "message": "Notification mode",
+        "description": "Options notifications page: accessible name of the mode tiles group"
+    },
+    "optionsNotifications_mode_logHint": {
+        "message": "Written in the browser console",
+        "description": "Options notifications page: hint under the Devtools console tile"
+    },
+    "optionsNotifications_mode_uiHint": {
+        "message": "Compact toast, one line",
+        "description": "Options notifications page: hint under the Standard UI tile"
+    },
+    "optionsNotifications_mode_largeUiHint": {
+        "message": "Toast with the full message",
+        "description": "Options notifications page: hint under the Large UI tile"
+    },
+    "optionsNotifications_types": {
+        "message": "Types",
+        "description": "Options notifications page: heading of the types card"
+    },
+    "optionsNotifications_preview": {
+        "message": "Preview",
+        "description": "Options notifications page: button showing a sample notification of a type"
+    },
+    "optionsNotifications_previewType": {
+        "message": "Preview $type$",
+        "description": "Options notifications page: accessible name of the preview button of a type",
+        "placeholders": {
+            "type": {
+                "content": "$1",
+                "example": "Warning"
+            }
+        }
+    },
+    "optionsNotifications_close": {
+        "message": "Close",
+        "description": "Options notifications page: accessible name of the close button of a preview toast"
+    },
     "optionsFeature_settingsHelpAmbient": {
         "message": "Which ambients may play on the Odoo home menu, and a preview of each one.",
         "description": "Options feature page: help of the Ambient settings card"
@@ -2598,5 +2640,13 @@
     "optionsFeature_settingsHelpAwesomeLoading": {
         "message": "Pick the loader shown while Odoo loads. The popup offers the same choice.",
         "description": "Options feature page: help of the Awesome Loading settings card"
+    },
+    "optionsNotifications_loggedHint": {
+        "message": "Written in the devtools console (F12).",
+        "description": "Options notifications page: hint after a preview in console mode"
+    },
+    "optionsNotifications_disabledHint": {
+        "message": "Notifications are deactivated: nothing is shown.",
+        "description": "Options notifications page: hint after a preview when notifications are deactivated"
     }
 }
