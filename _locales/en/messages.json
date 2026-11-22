@@ -1903,17 +1903,65 @@
         "message": "Compatibility",
         "description": "Options versions page: header of the feature compatibility table"
     },
-    "optionsVersions_yes": {
-        "message": "YES",
-        "description": "Options versions page: feature supported and version enabled (uppercase, short)"
+    "optionsVersions_subtitle": {
+        "message": "Choose the Odoo versions Joorney works on, and see which feature runs on which version.",
+        "description": "Options versions page: page subtitle"
     },
-    "optionsVersions_off": {
-        "message": "OFF",
-        "description": "Options versions page: feature supported but version disabled (uppercase, short)"
+    "optionsVersions_versionsHelp": {
+        "message": "Joorney only acts on databases running a selected version. Selected versions are saved as you click.",
+        "description": "Options versions page: help text of the Odoo versions card"
     },
-    "optionsVersions_no": {
-        "message": "NO",
-        "description": "Options versions page: feature not supported (uppercase, short)"
+    "optionsVersions_groupStable": {
+        "message": "Stable",
+        "description": "Options versions page: heading of the stable versions group (x.0)"
+    },
+    "optionsVersions_groupIntermediate": {
+        "message": "Intermediate (saas)",
+        "description": "Options versions page: heading of the intermediate versions group (saas)"
+    },
+    "optionsVersions_groupDev": {
+        "message": "Development",
+        "description": "Options versions page: heading of the development versions group, developer mode only"
+    },
+    "optionsVersions_devNote": {
+        "message": "Development versions are not part of the compatibility matrix below.",
+        "description": "Options versions page: note under the development versions"
+    },
+    "optionsVersions_compatibilityHelp": {
+        "message": "Each feature and the Odoo versions it supports. Columns of versions you did not select are greyed.",
+        "description": "Options versions page: help text of the compatibility card"
+    },
+    "optionsVersions_feature": {
+        "message": "Feature",
+        "description": "Options versions page: matrix header of the feature column"
+    },
+    "optionsVersions_matrixLabel": {
+        "message": "Compatibility matrix",
+        "description": "Options versions page: accessible name of the scrollable matrix"
+    },
+    "optionsVersions_supported": {
+        "message": "Supported",
+        "description": "Options versions page: screen reader text of a cell: feature supported, version selected"
+    },
+    "optionsVersions_supportedOff": {
+        "message": "Supported, version not selected",
+        "description": "Options versions page: screen reader text of a cell: feature supported, version not selected"
+    },
+    "optionsVersions_unsupported": {
+        "message": "Not supported",
+        "description": "Options versions page: screen reader text of a cell: feature not supported"
+    },
+    "optionsVersions_legendSupported": {
+        "message": "Supported",
+        "description": "Options versions page: legend: supported"
+    },
+    "optionsVersions_legendUnsupported": {
+        "message": "Not supported",
+        "description": "Options versions page: legend: not supported"
+    },
+    "optionsVersions_legendUnselected": {
+        "message": "Version not selected",
+        "description": "Options versions page: legend: greyed column"
     },
     "optionsNotifications_title": {
         "message": "Mode & type",

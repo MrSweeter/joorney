@@ -1503,14 +1503,50 @@
     "optionsVersions_compatibility": {
         "message": "Compatibilité"
     },
-    "optionsVersions_yes": {
-        "message": "OUI"
+    "optionsVersions_subtitle": {
+        "message": "Choisissez les versions d'Odoo sur lesquelles Joorney agit et voyez quelle fonctionnalité tourne sur quelle version."
     },
-    "optionsVersions_off": {
-        "message": "OFF"
+    "optionsVersions_versionsHelp": {
+        "message": "Joorney n'agit que sur les bases tournant sur une version sélectionnée. Les versions sont enregistrées dès que vous cliquez."
     },
-    "optionsVersions_no": {
-        "message": "NON"
+    "optionsVersions_groupStable": {
+        "message": "Stables"
+    },
+    "optionsVersions_groupIntermediate": {
+        "message": "Intermédiaires (saas)"
+    },
+    "optionsVersions_groupDev": {
+        "message": "Développement"
+    },
+    "optionsVersions_devNote": {
+        "message": "Les versions de développement ne font pas partie de la matrice de compatibilité ci-dessous."
+    },
+    "optionsVersions_compatibilityHelp": {
+        "message": "Chaque fonctionnalité et les versions d'Odoo qu'elle supporte. Les colonnes des versions non sélectionnées sont grisées."
+    },
+    "optionsVersions_feature": {
+        "message": "Fonctionnalité"
+    },
+    "optionsVersions_matrixLabel": {
+        "message": "Matrice de compatibilité"
+    },
+    "optionsVersions_supported": {
+        "message": "Supportée"
+    },
+    "optionsVersions_supportedOff": {
+        "message": "Supportée, version non sélectionnée"
+    },
+    "optionsVersions_unsupported": {
+        "message": "Non supportée"
+    },
+    "optionsVersions_legendSupported": {
+        "message": "Supportée"
+    },
+    "optionsVersions_legendUnsupported": {
+        "message": "Non supportée"
+    },
+    "optionsVersions_legendUnselected": {
+        "message": "Version non sélectionnée"
     },
     "optionsNotifications_title": {
         "message": "Mode et type"

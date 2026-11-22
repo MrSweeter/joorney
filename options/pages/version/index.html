@@ -1,27 +1,37 @@
-<link href="./css/website/features.css" rel="stylesheet">
 <link href="./css/version/odoo_version.css" rel="stylesheet">
 
-<div class="row pt-3 pb-0 p-5  mx-0">
-    <div class="col-6 offset-3">
-        <h6 data-i18n="optionsVersions_versions">Odoo versions</h6>
-        <div id="joorney-odoo-versions" class="py-3 px-2 h-100 border border-2 rounded d-flex flex-wrap align-content-start justify-content-center">
-            <!-- DYNAMIC CONTENT -->
-        </div>
-    </div>
-    <div class="col-3">
-        <h6 data-i18n="optionsVersions_development">Odoo development</h6>
-        <div id="joorney-odoo-dev-versions" class="py-3 px-2 h-100 border border-2 rounded d-flex flex-wrap align-content-start justify-content-center">
-            <!-- DYNAMIC CONTENT -->
-        </div>
-    </div>
-</div>
+<div id="joorney-versions" class="joorney-page joorney-versions">
+    <h1 class="joorney-page-title" data-i18n="options_menu_versions">Versions</h1>
+    <p class="joorney-page-subtitle" data-i18n="optionsVersions_subtitle">Choose the Odoo versions Joorney works on, and see which feature runs on which version.</p>
 
-<div class="row pt-3 pb-0 p-5 mx-0 opacity-50">
-    <div class="col-12 mt-3">
-        <table class="table table-bordered table-striped">
-            <!-- DYNAMIC CONTENT -->
-            <thead id="joorney-feature-versions-head"></thead>
-            <tbody id="joorney-feature-versions-body"></tbody>
-        </table>
-    </div>
+    <section class="joorney-panel" aria-labelledby="joorney_versions_title">
+        <h2 class="joorney-panel-title" id="joorney_versions_title" data-i18n="optionsVersions_versions">Odoo versions</h2>
+        <p class="joorney-help" data-i18n="optionsVersions_versionsHelp">Joorney only acts on databases running a selected version. Selected versions are saved as you click.</p>
+        <!-- Group wrappers are built by the loader; the ids below are targeted by the Versions tour -->
+        <div id="joorney-odoo-versions"></div>
+        <div id="joorney-odoo-dev-group" class="joorney-versions-group" hidden>
+            <h3 class="joorney-versions-heading">
+                <span data-i18n="optionsVersions_groupDev">Development</span>
+                <span class="joorney-chip" data-i18n="optionsVersions_development">Odoo development</span>
+            </h3>
+            <div id="joorney-odoo-dev-versions" class="joorney-versions-chips"></div>
+            <p class="joorney-help mt-2 mb-0" data-i18n="optionsVersions_devNote">Development versions are not part of the compatibility matrix below.</p>
+        </div>
+    </section>
+
+    <section class="joorney-panel" aria-labelledby="joorney_compat_title">
+        <h2 class="joorney-panel-title" id="joorney_compat_title" data-i18n="optionsVersions_compatibility">Compatibility</h2>
+        <p class="joorney-help" data-i18n="optionsVersions_compatibilityHelp">Each feature and the Odoo versions it supports. Columns of versions you did not select are greyed.</p>
+        <div class="joorney-versions-box">
+            <table class="joorney-versions-matrix" aria-label="Compatibility matrix" data-i18n-aria-label="optionsVersions_matrixLabel">
+                <thead id="joorney-feature-versions-head"></thead>
+                <tbody id="joorney-feature-versions-body"></tbody>
+            </table>
+        </div>
+        <div class="joorney-versions-legend">
+            <span><i class="joorney-icon" data-icon="check" aria-hidden="true"></i><span data-i18n="optionsVersions_legendSupported">Supported</span></span>
+            <span class="joorney-versions-unsupported"><i class="joorney-icon" data-icon="remove" aria-hidden="true"></i><span data-i18n="optionsVersions_legendUnsupported">Not supported</span></span>
+            <span><span class="joorney-versions-swatch" aria-hidden="true"></span><span data-i18n="optionsVersions_legendUnselected">Version not selected</span></span>
+        </div>
+    </section>
 </div>
