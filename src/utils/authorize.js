@@ -82,14 +82,7 @@ export async function isAuthorizedLimitedFeature(featureName, limitedOrigins, ur
     const offs = await getWebsiteOff();
     if (offs.has(origin)) return false;
 
-    // Check URL
-    if (limitedOrigins.includes(origin)) return true;
-
-    // Check Regex
-    const activeRegex = getOriginsRegex(limitedOrigins);
-    const validRegex = activeRegex.some((r) => r.test(origin));
-
-    return validRegex;
+    return originMatches(limitedOrigins, origin);
 }
 
 async function authorizeFeature(featureName, origin) {
@@ -104,10 +97,7 @@ async function authorizeFeature(featureName, origin) {
 
     if (!configuration[`${featureName}Enabled`]) return false;
 
-    const activeOrigins = getActiveFeatureOrigins(configuration.originsFilterOrigins, featureName);
-    const activeRegex = getOriginsRegex(activeOrigins);
-
-    const originExist = activeOrigins.includes(origin) || activeRegex.some((r) => r.test(origin));
+    const originExist = isOriginListedForFeature(configuration.originsFilterOrigins, featureName, origin);
 
     const isWhitelistMode = configuration[`${featureName}WhitelistMode`];
     if (isWhitelistMode) {
@@ -119,6 +109,14 @@ async function authorizeFeature(featureName, origin) {
     }
 
     return false;
+}
+
+export function originMatches(origins, origin) {
+    return origins.includes(origin) || getOriginsRegex(origins).some((r) => r.test(origin));
+}
+
+export function isOriginListedForFeature(originsFilterOrigins, featureName, origin) {
+    return originMatches(getActiveFeatureOrigins(originsFilterOrigins ?? {}, featureName), origin);
 }
 
 function getActiveFeatureOrigins(originsFilterOrigins, featureName) {

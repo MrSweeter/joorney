@@ -1,51 +1,25 @@
 import { baseSettings, getCurrentSettings } from '../../configuration.js';
 import { escapeHTML, generateFeatureOptionTableHeadItem, stringToHTML } from '../../src/html_generator.js';
-import { regexSchemePrefix } from '../../src/utils/authorize.js';
 import { Console, StorageSync, sendRuntimeMessage } from '../../src/utils/browser.js';
 import { t } from '../../src/utils/i18n.js';
 import { MESSAGE_ACTION } from '../../src/utils/messaging.js';
 import { updateFeatureOriginInputs } from './features.js';
+import { normalizeNewOrigin, OriginError } from './origins.js';
 
 //#region CRUD
 export async function createOriginsFilterOrigin() {
     const origin = document.getElementById('joorney_origins_filter_new_origin');
-    let originString = origin.value.trim();
-    if (!originString) {
-        renderOriginsFilterError(t('options_error_missingOrigin'));
-        return;
-    }
-
     const origins = await readOriginsFilterOrigins();
 
-    if (originString.startsWith(regexSchemePrefix)) {
-        let regexString = originString.replace(regexSchemePrefix, '');
-        try {
-            regexString = regexSchemePrefix + new RegExp(regexString).source;
-            origins[regexString] = {};
-            await renderOriginsObject(origins);
-            origin.value = '';
-        } catch (ex) {
-            Console.warn(ex);
-            renderOriginsFilterError(t('optionsHosts_error_invalidRegex'));
-        }
-        return;
-    }
-
-    originString = originString.trim().toLowerCase().replace(/\s/g, '');
-
-    if (origins[originString]) {
-        renderOriginsFilterError(t('optionsHosts_error_originExists'));
-        return;
-    }
-
     try {
-        originString = new URL(originString).origin;
+        const originString = normalizeNewOrigin(origin.value, origins);
         origins[originString] = {};
         await renderOriginsObject(origins);
         origin.value = '';
     } catch (ex) {
-        Console.warn(ex);
-        renderOriginsFilterError(t('options_error_invalidOrigin'));
+        if (!(ex instanceof OriginError)) throw ex;
+        if (ex.cause) Console.warn(ex.cause);
+        renderOriginsFilterError(t(ex.messageKey));
     }
 }
 
