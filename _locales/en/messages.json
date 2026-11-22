@@ -749,6 +749,16 @@
             }
         }
     },
+    "contextOdooMenus_error_noAction": {
+        "message": "Menu '$path$' opens no action: choose one of its submenus.",
+        "description": "Error when the Odoo menu matching the configured path is a parent menu without action",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Technical / Actions"
+            }
+        }
+    },
     "contextOdooMenus_error_tooMany": {
         "message": "Too many menus found for path $path$.",
         "description": "Error when several Odoo menus match the configured path",

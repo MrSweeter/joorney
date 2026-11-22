@@ -167,6 +167,9 @@ async function openPathMenu(menupath) {
             throw new Error(t('contextOdooMenus_error_tooMany', menupath));
         }
         const menu = result[0];
+        if (!menu.action) {
+            throw new Error(t('contextOdooMenus_error_noAction', menupath));
+        }
         const windowActionID = menu.action.split(',')[1];
         const url = window.location;
 

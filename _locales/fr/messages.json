@@ -582,6 +582,15 @@
             }
         }
     },
+    "contextOdooMenus_error_noAction": {
+        "message": "Le menu '$path$' n’ouvre aucune action : choisissez un de ses sous-menus.",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Technical / Actions"
+            }
+        }
+    },
     "contextOdooMenus_error_tooMany": {
         "message": "Trop de menus trouvés pour le chemin $path$.",
         "placeholders": {
