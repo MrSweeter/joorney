@@ -1,5 +1,6 @@
 import { baseSettings, getFeaturesAndCurrentSettings, importMigratorFile } from '../../configuration.js';
 import { StorageSync } from '../../src/utils/browser.js';
+import { applyI18n, initI18n, t } from '../../src/utils/i18n.js';
 
 function setupInput() {
     const importInput = document.getElementById('joorney_import_storage_sync_file');
@@ -26,12 +27,12 @@ function analyzeConfiguration(jsonFile) {
     const resume = document.getElementById('migration_resume');
 
     if (migrateVersion > currentVersion) {
-        document.getElementById('error_message').innerHTML = 'Configuration cannot be migrate to a lower version';
+        document.getElementById('error_message').textContent = t('migration_error_lowerVersion');
         if (!resume.classList.contains('d-none')) resume.classList.add('d-none');
         return;
     }
     if (migrateVersion === currentVersion) {
-        document.getElementById('error_message').innerHTML = 'Configuration cannot be migrate to the same version';
+        document.getElementById('error_message').textContent = t('migration_error_sameVersion');
         if (!resume.classList.contains('d-none')) resume.classList.add('d-none');
         return;
     }
@@ -46,7 +47,7 @@ function analyzeConfiguration(jsonFile) {
     document.getElementById('migration_list').innerHTML = migrateListString;
 
     const runButton = document.getElementById('run_migration');
-    runButton.innerHTML = 'Execute migration';
+    runButton.textContent = t('migration_execute');
     runButton.onclick = async (e) => {
         e.preventDefault();
         document.getElementById('joorney_import_storage_sync_file').value = null;
@@ -61,7 +62,7 @@ function analyzeConfiguration(jsonFile) {
         const obsoleteKeys = Object.keys(finalConfiguration).filter((k) => finalConfiguration[k] === undefined);
         if (obsoleteKeys.length > 0) await StorageSync.remove(obsoleteKeys);
 
-        button.innerHTML = 'Download new configuration';
+        button.textContent = t('migration_download');
         runButton.onclick = () => {
             downloadNewMigration(finalConfiguration);
         };
@@ -96,6 +97,8 @@ function downloadNewMigration(data) {
 }
 
 async function onDOMContentLoaded() {
+    await initI18n();
+    applyI18n(document);
     setupInput();
 }
 

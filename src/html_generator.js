@@ -77,7 +77,7 @@ export function stringToHTML(str) {
 export function generateLimitedFeatureOptionButtonItem(feature) {
     return stringToHTML(`
 		<label
-			title="[Limited Feature] ${escapeHTML(featureName(feature))}"
+			title="${escapeHTML(t('options_limitedFeatureTitle', featureName(feature)))}"
 			for="joorney_${feature.id}_limited_feature"
 		>
 			<input id="joorney_${feature.id}_limited_feature" class="input-hide" type="checkbox" />
@@ -93,7 +93,7 @@ export function generateFeatureOptionListItem(feature) {
     return stringToHTML(`
 		<label
 			id="joorney_${feature.id}_feature"
-			title="[Feature] ${escapeHTML(featureName(feature))}"
+			title="${escapeHTML(t('popup_featureTitle', featureName(feature)))}"
 			data-feature="${feature.id}"
 			class="draggable-feature" draggable="true"
 		>
@@ -109,7 +109,7 @@ export function generateFeatureOptionListItem(feature) {
 
 export function generateFeatureOptionTableHeadItem(feature) {
     return stringToHTML(`
-		<th title="[Feature Origin] ${escapeHTML(featureName(feature))}" class="icon-wrapper-head">
+		<th title="${escapeHTML(t('popup_featureOriginTitle', featureName(feature)))}" class="icon-wrapper-head">
 			<div class="icon-wrapper" id="joorney_origins_filter_feature_header_${feature.id}">
 				${iconHTML(feature.icon, { filled: true })}
 			</div>

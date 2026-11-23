@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Joorney Migration</title>
+        <title data-i18n="migration_title">Joorney Migration</title>
         <link rel="icon" type="image/x+icon" href="./../../images/icon_128.svg">
         <!-- Material Symbols (assets/icons, npm run icons:fetch) -->
         <link href="../../assets/icons/icons.css" rel="stylesheet">
@@ -19,18 +19,18 @@
             <p id="error_message" class="text-danger"></p>
 
             <div class="mb-5 w-100 d-flex flex-column justify-content-center align-items-center">
-                <h4>Select your configuration to migrate</h4>
+                <h4 data-i18n="migration_select">Select your configuration to migrate</h4>
                 <div class="d-flex justify-content-center align-items-center">
                     <input type="file" accept=".json" class="form-control form-control-sm" id="joorney_import_storage_sync_file">
-                    <span class="mx-2">or</span>
-                    <button type="button" id="migrate_current" class="btn btn-sm btn-success">Use current</button>
+                    <span class="mx-2" data-i18n="migration_or">or</span>
+                    <button type="button" id="migrate_current" class="btn btn-sm btn-success" data-i18n="migration_useCurrent">Use current</button>
                 </div>
             </div>
 
             <div id="migration_resume" class="d-none">
-                <h4>Migration</h4>
+                <h4 data-i18n="migration_heading">Migration</h4>
                 <div id="migration_list" class="d-flex justify-content-center align-items-center"></div>
-                <button type="button" id="run_migration" class="btn btn-success w-100">Execute migration</button>
+                <button type="button" id="run_migration" class="btn btn-success w-100" data-i18n="migration_execute">Execute migration</button>
             </div>
         </div>
     </body>
