@@ -91,6 +91,7 @@ export async function loadPage(features, currentSettings, params = {}) {
             awesomeLoadingSmall: t('optionsFeature_settingsHelpAwesomeLoading'),
             awesomeLoadingLarge: t('optionsFeature_settingsHelpAwesomeLoading'),
             unfocusApp: t('optionsFeature_settingsHelpUnfocusApp'),
+            contextOdooMenus: t('optionsFeature_settingsHelpContextOdooMenus'),
         }[feature.id] ?? t('optionsFeature_settingsHelp');
     let settings = await readStateSettings(features, currentSettings);
     // Another page was loaded meanwhile

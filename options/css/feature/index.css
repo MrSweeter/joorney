@@ -259,29 +259,6 @@
 /*#endregion */
 
 /*#region Settings blocks */
-.joorney-fs-table {
-    margin-bottom: 0;
-}
-
-.joorney-fs-table th {
-    font-size: 13px;
-    color: var(--joorney-text-muted);
-}
-
-.joorney-fs-table td:last-child {
-    white-space: nowrap;
-}
-
-.joorney-fs-add td {
-    background: var(--joorney-surface-soft);
-}
-
-.joorney-fs-toolbar {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 12px;
-}
-
 .joorney-fs-label {
     display: block;
     margin-bottom: 4px;
@@ -903,5 +880,574 @@ src/features/unfocusApp/content.js does it (contain, center top) */
 
 .joorney-feature .joorney-feature-error {
     margin: 6px 0 0;
+}
+/*#endregion */
+
+/*#region Context Odoo Menus */
+.joorney-cm-add {
+    padding: 16px;
+    margin-bottom: 20px;
+    background: var(--joorney-surface-soft);
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-card);
+}
+
+.joorney-cm-addrow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+.joorney-cm-addrow .joorney-input {
+    flex: 1 1 240px;
+    box-sizing: border-box;
+    height: 38px;
+}
+
+.joorney-feature .joorney-cm-hint {
+    margin: 6px 0 0;
+    font-size: 12px;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-cm-add .joorney-input[aria-invalid="true"],
+.joorney-cm-editfield .joorney-input[aria-invalid="true"] {
+    border-color: #b3541e;
+    box-shadow: 0 0 0 1px #b3541e;
+}
+
+.joorney-feature .joorney-cm-error {
+    margin: 6px 0 0;
+}
+
+/* Not overflow: hidden, the ⋮ menu of the last rows opens below the list */
+.joorney-cm-list {
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-card);
+}
+
+.joorney-cm-head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    min-height: 52px;
+    padding: 8px 12px 8px 16px;
+    background: var(--joorney-surface-soft);
+    border-bottom: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-card) var(--joorney-radius-card) 0 0;
+}
+
+.joorney-feature .joorney-cm-title {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--joorney-text);
+}
+
+.joorney-cm-filter {
+    position: relative;
+    flex: 1 1 200px;
+    max-width: 300px;
+    margin-left: auto;
+}
+
+.joorney-cm-filter .joorney-icon {
+    position: absolute;
+    top: 9px;
+    left: 10px;
+    font-size: 18px;
+    color: var(--joorney-text-muted);
+    pointer-events: none;
+}
+
+.joorney-cm-filter .joorney-input {
+    box-sizing: border-box;
+    width: 100%;
+    height: 36px;
+    padding-left: 34px;
+}
+
+.joorney-cm-headacts {
+    display: flex;
+}
+
+.joorney-cm-headacts .joorney-cm-ask {
+    padding: 4px 4px 4px 12px;
+}
+
+.joorney-cm-list .joorney-btn.is-small,
+.joorney-cm-empty .joorney-btn.is-small {
+    height: 32px;
+    padding: 0 12px;
+}
+
+.joorney-cm-list .joorney-btn .joorney-icon,
+.joorney-cm-empty .joorney-btn .joorney-icon {
+    font-size: 18px;
+}
+
+.joorney-feature .joorney-cm-note {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 8px 16px;
+    margin: 0;
+    font-size: 13px;
+    color: var(--joorney-text-soft);
+    background: var(--joorney-hover);
+}
+
+.joorney-cm-note .joorney-icon {
+    font-size: 18px;
+    color: var(--joorney-text-muted);
+}
+
+/* Section bands: amber = top level, blue = submenu; "where" is the path to these menus in the right-click menu */
+.joorney-cm-band {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    min-height: 40px;
+    padding: 8px 12px 8px 14px;
+    border-top: 1px solid var(--joorney-border);
+}
+
+.joorney-cm-band.is-top {
+    color: var(--joorney-warn-text);
+    background: var(--joorney-state-listed-tint);
+}
+
+.joorney-cm-band.is-sub {
+    color: var(--joorney-state-everywhere-text);
+    background: var(--joorney-state-everywhere-tint);
+}
+
+.joorney-cm-bandicon {
+    font-size: 20px;
+}
+
+.joorney-feature .joorney-cm-bandtitle {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: inherit;
+}
+
+.joorney-cm-band .joorney-chip {
+    background: var(--joorney-surface);
+}
+
+.joorney-cm-band.is-top .joorney-chip {
+    color: var(--joorney-state-listed-text);
+    border: 1px solid #f0d49a;
+}
+
+.joorney-cm-band.is-sub .joorney-chip {
+    color: var(--joorney-state-everywhere-text);
+    border: 1px solid #c3d1f2;
+}
+
+.joorney-cm-where {
+    margin-left: auto;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.joorney-cm-band.is-over,
+.joorney-cm-group.is-over {
+    box-shadow: inset 0 0 0 2px var(--joorney-focus);
+}
+
+.joorney-feature .joorney-cm-hintrow {
+    padding: 10px 16px 12px 46px;
+    margin: 0;
+    font-size: 13px;
+    color: var(--joorney-text-muted);
+}
+
+/* App groups of the submenu, and the switched off fold */
+.joorney-cm-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    width: 100%;
+    min-height: 38px;
+    padding: 0 12px 0 14px;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--joorney-text);
+    text-align: left;
+    cursor: pointer;
+    background: var(--joorney-surface);
+    border: 0;
+    border-top: 1px solid var(--joorney-hover);
+}
+
+.joorney-cm-band + .joorney-cm-group {
+    border-top: 0;
+}
+
+.joorney-cm-group:hover {
+    background: var(--joorney-ground);
+}
+
+.joorney-cm-chev {
+    font-size: 20px;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-cm-groupnames {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--joorney-text-muted);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Switched off: same place, parked look (gray well, dashed edge, muted rows) */
+.joorney-cm-group.joorney-cm-fold {
+    margin-top: 8px;
+    color: var(--joorney-text-soft);
+    background: var(--joorney-ground);
+    border-top: 1px dashed var(--joorney-border-strong);
+    border-radius: 0 0 var(--joorney-radius-card) var(--joorney-radius-card);
+}
+
+.joorney-cm-fold:hover {
+    background: var(--joorney-hover);
+}
+
+.joorney-cm-group.joorney-cm-fold.is-open {
+    border-radius: 0;
+}
+
+.joorney-cm-foldicon {
+    font-size: 20px;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-cm-fold .joorney-chip {
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border-strong);
+}
+
+/* Rows: grip, name and parent path, star, switch, ⋮ menu */
+.joorney-cm-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    min-height: 40px;
+    /* The path starts at 42px on every row: 10px + grip (24px) + gap (8px) when there is a grip */
+    padding: 0 8px 0 42px;
+    font-size: 14px;
+    background: var(--joorney-surface);
+    border-top: 1px solid var(--joorney-hover);
+}
+
+.joorney-cm-row.has-grip {
+    padding-left: 10px;
+}
+
+.joorney-cm-band + .joorney-cm-row {
+    border-top: 0;
+}
+
+.joorney-cm-row:last-child {
+    border-radius: 0 0 var(--joorney-radius-card) var(--joorney-radius-card);
+}
+
+/* Under its app group name (group: 14px + chevron 20px + gap 8px = 42px), one step further in */
+.joorney-cm-row.is-in {
+    padding-left: 58px;
+}
+
+.joorney-cm-row.is-off {
+    background: var(--joorney-ground);
+    border-top-color: #e2e5ea;
+}
+
+.joorney-cm-row.is-dragging {
+    opacity: 0.45;
+}
+
+.joorney-cm-row.is-over {
+    box-shadow: inset 0 2px 0 var(--joorney-focus);
+}
+
+.joorney-cm-grip {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 32px;
+    padding: 0;
+    color: #8c93a0;
+    cursor: grab;
+    background: none;
+    border: 0;
+    border-radius: 4px;
+}
+
+.joorney-cm-grip:hover {
+    color: var(--joorney-text-muted);
+    background: var(--joorney-hover);
+}
+
+.joorney-cm-grip .joorney-icon {
+    font-size: 20px;
+}
+
+/* Full path in reading order: gray parents, bold name; a long path wraps instead of being cut */
+.joorney-cm-text {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    gap: 2px;
+    align-items: center;
+    min-width: 0;
+    padding-block: 4px;
+    overflow-wrap: anywhere;
+}
+
+.joorney-cm-name {
+    font-weight: 500;
+}
+
+.joorney-cm-parent {
+    color: var(--joorney-text-muted);
+}
+
+.joorney-cm-sep {
+    font-size: 16px;
+    color: var(--joorney-border-strong);
+}
+
+.joorney-cm-row.is-off .joorney-cm-name {
+    font-weight: 400;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-cm-star.is-on {
+    color: var(--joorney-state-listed-text);
+}
+
+.joorney-cm-row .joorney-switch {
+    margin: 0 4px;
+}
+
+.joorney-cm-rel {
+    position: relative;
+    flex: none;
+}
+
+.joorney-cm-pop {
+    position: absolute;
+    top: 32px;
+    right: 0;
+    z-index: 5;
+    min-width: 200px;
+    padding: 4px 0;
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border-strong);
+    border-radius: var(--joorney-radius-control);
+    box-shadow: var(--joorney-shadow-pop);
+}
+
+.joorney-cm-pop button {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+    height: 36px;
+    padding: 0 14px;
+    font: inherit;
+    font-size: 14px;
+    color: var(--joorney-text);
+    text-align: left;
+    cursor: pointer;
+    background: none;
+    border: 0;
+}
+
+.joorney-cm-pop button:hover,
+.joorney-cm-pop button:focus-visible {
+    background: var(--joorney-hover);
+}
+
+.joorney-cm-pop .joorney-icon {
+    font-size: 18px;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-cm-pop .is-danger,
+.joorney-cm-pop .is-danger .joorney-icon {
+    color: var(--joorney-error-text);
+}
+
+.joorney-cm-row.is-edit {
+    flex-wrap: wrap;
+    padding-block: 6px;
+    background: var(--joorney-state-everywhere-tint);
+}
+
+.joorney-cm-editfield {
+    flex: 1 1 240px;
+    min-width: 0;
+}
+
+.joorney-cm-editfield .joorney-input {
+    box-sizing: border-box;
+    width: 100%;
+    height: 34px;
+}
+
+.joorney-cm-row.is-confirm {
+    padding: 0;
+}
+
+.joorney-cm-row .joorney-cm-ask {
+    margin: 6px 12px;
+}
+
+/* Narrow: the band path goes under its title */
+@media (max-width: 640px) {
+    .joorney-cm-where {
+        flex-basis: 100%;
+        margin-left: 28px;
+    }
+}
+
+.joorney-feature .joorney-cm-empty p {
+    margin: 0 0 10px;
+}
+
+/* Preview: a drawing of the browser right-click menu, built from the list like src/contextmenu/manager.js */
+.joorney-cm-preview {
+    padding: 16px;
+    margin-top: 20px;
+    background: var(--joorney-surface-soft);
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-card);
+}
+
+.joorney-cm-preview summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 10px;
+    min-height: 44px;
+    margin: -16px;
+    padding: 8px 16px;
+    cursor: pointer;
+    list-style: none;
+}
+
+.joorney-cm-preview summary::-webkit-details-marker {
+    display: none;
+}
+
+.joorney-cm-preview[open] summary {
+    margin-bottom: 0;
+}
+
+.joorney-cm-pchevron {
+    color: var(--joorney-text-muted);
+    transform: rotate(-90deg);
+    transition: transform 0.15s;
+}
+
+.joorney-cm-preview[open] .joorney-cm-pchevron {
+    transform: none;
+}
+
+.joorney-cm-ptitle {
+    font-weight: 600;
+}
+
+.joorney-cm-preview .joorney-help {
+    margin: 16px 0 14px;
+}
+
+.joorney-cm-cascade {
+    display: flex;
+    align-items: flex-start;
+    padding-bottom: 4px;
+    overflow-x: auto;
+}
+
+.joorney-cm-pmenu {
+    flex: none;
+    min-width: 200px;
+    padding: 6px 0;
+    font-size: 13px;
+    color: var(--joorney-text);
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border-strong);
+    border-radius: var(--joorney-radius-control);
+    box-shadow: var(--joorney-shadow-pop);
+}
+
+.joorney-cm-pmenu + .joorney-cm-pmenu {
+    margin-left: -4px;
+}
+
+.joorney-cm-pi {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    height: 28px;
+    padding: 0 12px;
+    white-space: nowrap;
+}
+
+.joorney-cm-pi.is-open {
+    background: var(--joorney-hover);
+}
+
+.joorney-cm-pi.is-dim {
+    color: var(--joorney-text-muted);
+}
+
+.joorney-cm-pi.is-skeleton span {
+    width: 72px;
+    height: 8px;
+    background: var(--joorney-hover);
+    border-radius: 4px;
+}
+
+.joorney-cm-psep {
+    height: 1px;
+    margin: 5px 0;
+    background: var(--joorney-border);
+}
+
+.joorney-cm-plogo {
+    flex: none;
+    width: 16px;
+    height: 16px;
+}
+
+.joorney-cm-parrow,
+.joorney-cm-pstar {
+    margin-left: auto;
+    font-size: 16px;
+}
+
+.joorney-cm-parrow {
+    color: var(--joorney-text-muted);
+}
+
+.joorney-cm-pstar {
+    color: var(--joorney-state-listed-text);
 }
 /*#endregion */

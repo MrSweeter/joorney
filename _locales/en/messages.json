@@ -769,9 +769,129 @@
             }
         }
     },
-    "contextOdooMenus_option_confirmRemove": {
-        "message": "Are you sure you want to remove the menu: $path$?",
-        "description": "Options: confirmation before deleting a quick menu",
+    "optionsContextMenus_path": {
+        "message": "Menu path",
+        "description": "Options feature page (Context Odoo Menus): label of the menu path field"
+    },
+    "optionsContextMenus_addHint": {
+        "message": "Press Enter to add. New menus go to the submenu, under their app, switched on. Write the menu names in English: the same path then works whatever language Odoo is in.",
+        "description": "Options feature page (Context Odoo Menus): hint under the field adding a menu"
+    },
+    "optionsContextMenus_errorMissing": {
+        "message": "Enter a menu path.",
+        "description": "Options feature page (Context Odoo Menus): error, empty menu path"
+    },
+    "optionsContextMenus_errorExists": {
+        "message": "Already in the list.",
+        "description": "Options feature page (Context Odoo Menus): error, the menu path is already in the list"
+    },
+    "optionsContextMenus_errorSameMenu": {
+        "message": "Already in the list as \"$path$\".",
+        "description": "Options feature page (Context Odoo Menus): error, a lone menu name and a path ending with it are the same menu",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Sales/Orders/Quotations"
+            }
+        }
+    },
+    "optionsContextMenus_errorSave": {
+        "message": "Could not save the menus, the list shows what is saved: $error$",
+        "description": "Options feature page (Context Odoo Menus): error, a change could not be saved (storage quota or error), the list is shown as stored",
+        "placeholders": {
+            "error": {
+                "content": "$1",
+                "example": "QUOTA_BYTES_PER_ITEM quota exceeded"
+            }
+        }
+    },
+    "optionsContextMenus_listTitle": {
+        "message": "Menus",
+        "description": "Options feature page (Context Odoo Menus): title of the menu list"
+    },
+    "optionsContextMenus_countOne": {
+        "message": "1 menu",
+        "description": "Options feature page (Context Odoo Menus): chip, the list holds one menu"
+    },
+    "optionsContextMenus_count": {
+        "message": "$count$ menus",
+        "description": "Options feature page (Context Odoo Menus): chip, number of menus in the list",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "8"
+            }
+        }
+    },
+    "optionsContextMenus_topCount": {
+        "message": "$count$ at the top level",
+        "description": "Options feature page (Context Odoo Menus): chip, number of menus shown outside the submenu",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "2"
+            }
+        }
+    },
+    "optionsContextMenus_subCount": {
+        "message": "$count$ in the submenu",
+        "description": "Options feature page (Context Odoo Menus): chip, number of menus grouped in the submenu",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "2"
+            }
+        }
+    },
+    "optionsContextMenus_deleteAll": {
+        "message": "Delete all",
+        "description": "Options feature page (Context Odoo Menus): button deleting every menu"
+    },
+    "optionsContextMenus_filter": {
+        "message": "Filter",
+        "description": "Options feature page (Context Odoo Menus): placeholder of the filter field of the menu list"
+    },
+    "optionsContextMenus_filterLabel": {
+        "message": "Filter the menus",
+        "description": "Options feature page (Context Odoo Menus): label of the filter field"
+    },
+    "optionsContextMenus_filterNote": {
+        "message": "Clear the filter to reorder.",
+        "description": "Options feature page (Context Odoo Menus): note above the filtered list (dragging is off while filtering)"
+    },
+    "optionsContextMenus_noMatch": {
+        "message": "No menu matches \"$filter$\".",
+        "description": "Options feature page (Context Odoo Menus): filtered list, nothing matches",
+        "placeholders": {
+            "filter": {
+                "content": "$1",
+                "example": "invoice"
+            }
+        }
+    },
+    "optionsContextMenus_sectionTop": {
+        "message": "Top level",
+        "description": "Options feature page (Context Odoo Menus): title of the band of the starred menus"
+    },
+    "optionsContextMenus_sectionSub": {
+        "message": "Submenu",
+        "description": "Options feature page (Context Odoo Menus): title of the band of the menus in the submenu"
+    },
+    "optionsContextMenus_sectionOff": {
+        "message": "Switched off",
+        "description": "Options feature page (Context Odoo Menus): title of the fold of the switched off menus"
+    },
+    "optionsContextMenus_offHelp": {
+        "message": "kept here, not in the right-click menu",
+        "description": "Options feature page (Context Odoo Menus): text of the fold of the switched off menus"
+    },
+    "optionsContextMenus_topEmpty": {
+        "message": "Star a menu to show it next to the other Joorney entries.",
+        "description": "Options feature page (Context Odoo Menus): top level band without menu"
+    },
+    "optionsContextMenus_reorder": {
+        "message": "Reorder $path$ (Up and Down arrow keys)",
+        "description": "Options feature page (Context Odoo Menus): label of the drag grip of a row",
         "placeholders": {
             "path": {
                 "content": "$1",
@@ -779,27 +899,13 @@
             }
         }
     },
-    "contextOdooMenus_option_confirmRemoveAll": {
-        "message": "Are you sure you want to delete all menus?",
-        "description": "Options: confirmation before deleting every quick menu"
+    "optionsContextMenus_reorderTitle": {
+        "message": "Drag to reorder",
+        "description": "Options feature page (Context Odoo Menus): tooltip of the drag grip"
     },
-    "contextOdooMenus_option_error_missingPath": {
-        "message": "Missing path",
-        "description": "Options: error when adding an empty menu path"
-    },
-    "contextOdooMenus_option_error_idExists": {
-        "message": "This id is already registered (should not happen): $id$",
-        "description": "Options: error, internal id conflict",
-        "placeholders": {
-            "id": {
-                "content": "$1",
-                "example": "3"
-            }
-        }
-    },
-    "contextOdooMenus_option_error_pathExists": {
-        "message": "This path is already registered: $path$",
-        "description": "Options: error when the menu path already exists",
+    "optionsContextMenus_more": {
+        "message": "More actions for $path$",
+        "description": "Options feature page (Context Odoo Menus): label of the ⋮ button and of its menu",
         "placeholders": {
             "path": {
                 "content": "$1",
@@ -807,29 +913,93 @@
             }
         }
     },
-    "contextOdooMenus_option_favorite": {
-        "message": "Favorite",
-        "description": "Options: tooltip of the favorite button (menu is favorite)"
+    "optionsContextMenus_editPath": {
+        "message": "Edit path",
+        "description": "Options feature page (Context Odoo Menus): ⋮ menu item, edit the path"
     },
-    "contextOdooMenus_option_notFavorite": {
-        "message": "Not favorite",
-        "description": "Options: tooltip of the favorite button (menu is not favorite)"
+    "optionsContextMenus_moveTop": {
+        "message": "Move to top level",
+        "description": "Options feature page (Context Odoo Menus): ⋮ menu item, star the menu"
     },
-    "contextOdooMenus_option_disable": {
-        "message": "Disable quick menu",
-        "description": "Options: tooltip of the toggle of an active quick menu"
+    "optionsContextMenus_moveSub": {
+        "message": "Move to the submenu",
+        "description": "Options feature page (Context Odoo Menus): ⋮ menu item, unstar the menu"
     },
-    "contextOdooMenus_option_enable": {
-        "message": "Enable quick menu",
-        "description": "Options: tooltip of the toggle of an inactive quick menu"
+    "optionsContextMenus_confirmDeleteAll": {
+        "message": "Delete all the menus?",
+        "description": "Options feature page (Context Odoo Menus): inline question before deleting every menu"
     },
-    "contextOdooMenus_option_save": {
-        "message": "Save modification",
-        "description": "Options: tooltip of the button saving a quick menu"
+    "optionsContextMenus_topLevel": {
+        "message": "Top level: $path$",
+        "description": "Options feature page (Context Odoo Menus): label of the star button (pressed: shown outside the submenu)",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Sales / Orders"
+            }
+        }
     },
-    "contextOdooMenus_option_delete": {
-        "message": "Delete quick menu",
-        "description": "Options: tooltip of the button deleting a quick menu"
+    "optionsContextMenus_topLevelTitle": {
+        "message": "Show at the top level, outside the submenu",
+        "description": "Options feature page (Context Odoo Menus): tooltip of the star button"
+    },
+    "optionsContextMenus_on": {
+        "message": "On: $path$",
+        "description": "Options feature page (Context Odoo Menus): label of the switch of a menu",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Sales / Orders"
+            }
+        }
+    },
+    "optionsContextMenus_confirmDelete": {
+        "message": "Delete $path$?",
+        "description": "Options feature page (Context Odoo Menus): inline question before deleting a menu",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Sales / Orders"
+            }
+        }
+    },
+    "optionsContextMenus_deleteButton": {
+        "message": "Delete",
+        "description": "Options feature page (Context Odoo Menus): button confirming the deletion of a menu"
+    },
+    "optionsContextMenus_cancel": {
+        "message": "Cancel",
+        "description": "Options feature page (Context Odoo Menus): button cancelling an edit or an inline question"
+    },
+    "optionsContextMenus_save": {
+        "message": "Save",
+        "description": "Options feature page (Context Odoo Menus): button saving the edited path"
+    },
+    "optionsContextMenus_empty": {
+        "message": "No menu yet. Add a menu path above, or start again from the default technical menus.",
+        "description": "Options feature page (Context Odoo Menus): empty menu list"
+    },
+    "optionsContextMenus_addDefaults": {
+        "message": "Add the $count$ default menus",
+        "description": "Options feature page (Context Odoo Menus): button of the empty list, adding the default technical menus",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "8"
+            }
+        }
+    },
+    "optionsContextMenus_previewTitle": {
+        "message": "Preview of the right-click menu",
+        "description": "Options feature page (Context Odoo Menus): title of the right-click menu preview"
+    },
+    "optionsContextMenus_previewHelp": {
+        "message": "What a right-click on an Odoo page shows with these settings. Starred menus sit next to the other Joorney entries, the others are grouped in a submenu. Menus switched off are left out.",
+        "description": "Options feature page (Context Odoo Menus): help of the right-click menu preview"
+    },
+    "optionsContextMenus_previewNone": {
+        "message": "No menu switched on",
+        "description": "Options feature page (Context Odoo Menus): preview, no menu is switched on"
     },
     "showMyBadge_title": {
         "message": "Badges",
@@ -1896,18 +2066,6 @@
     "optionsThemeSwitch_darkStop": {
         "message": "Dark until",
         "description": "Theme Switch settings: Dark until"
-    },
-    "optionsPreferences_deleteAll": {
-        "message": "Delete all",
-        "description": "Options preferences (Context Odoo Menus): button deleting every menu"
-    },
-    "optionsPreferences_menuName": {
-        "message": "Menu name",
-        "description": "Options preferences (Context Odoo Menus): column of menu paths"
-    },
-    "optionsPreferences_menuNameTitle": {
-        "message": "Name of ir.ui.menu, unique",
-        "description": "Options preferences (Context Odoo Menus): tooltip of the menu column, keep ir.ui.menu"
     },
     "optionsVersions_versions": {
         "message": "Odoo versions",
@@ -3096,6 +3254,10 @@
     "optionsFeature_settingsHelpUnfocusApp": {
         "message": "Pick the image shown behind the home menu, and review which apps Joorney remembers for each Odoo host.",
         "description": "Options feature page: help of the Unfocus App settings card"
+    },
+    "optionsFeature_settingsHelpContextOdooMenus": {
+        "message": "Each entry is the path of an Odoo menu: the menu names shown in Odoo, separated by /. Joorney finds the menu on the database you right-click on, so one path works on every version.",
+        "description": "Options feature page: help of the Context Odoo Menus settings card"
     },
     "optionsUnfocus_lightTitle": {
         "message": "Light background",

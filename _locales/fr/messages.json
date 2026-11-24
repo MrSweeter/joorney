@@ -600,8 +600,107 @@
             }
         }
     },
-    "contextOdooMenus_option_confirmRemove": {
-        "message": "Voulez-vous vraiment supprimer le menu : $path$ ?",
+    "optionsContextMenus_path": {
+        "message": "Chemin du menu"
+    },
+    "optionsContextMenus_addHint": {
+        "message": "Appuyez sur Entrée pour ajouter. Les nouveaux menus vont dans le sous-menu, sous leur app, activés. Écrivez les noms des menus en anglais : le même chemin fonctionne alors quelle que soit la langue d'Odoo."
+    },
+    "optionsContextMenus_errorMissing": {
+        "message": "Saisissez un chemin de menu."
+    },
+    "optionsContextMenus_errorExists": {
+        "message": "Déjà dans la liste."
+    },
+    "optionsContextMenus_errorSameMenu": {
+        "message": "Déjà dans la liste sous « $path$ ».",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Sales/Orders/Quotations"
+            }
+        }
+    },
+    "optionsContextMenus_errorSave": {
+        "message": "Impossible d’enregistrer les menus, la liste montre ce qui est enregistré : $error$",
+        "placeholders": {
+            "error": {
+                "content": "$1",
+                "example": "QUOTA_BYTES_PER_ITEM quota exceeded"
+            }
+        }
+    },
+    "optionsContextMenus_listTitle": {
+        "message": "Menus"
+    },
+    "optionsContextMenus_countOne": {
+        "message": "1 menu"
+    },
+    "optionsContextMenus_count": {
+        "message": "$count$ menus",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "8"
+            }
+        }
+    },
+    "optionsContextMenus_topCount": {
+        "message": "$count$ au premier niveau",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "2"
+            }
+        }
+    },
+    "optionsContextMenus_subCount": {
+        "message": "$count$ dans le sous-menu",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "2"
+            }
+        }
+    },
+    "optionsContextMenus_deleteAll": {
+        "message": "Tout supprimer"
+    },
+    "optionsContextMenus_filter": {
+        "message": "Filtrer"
+    },
+    "optionsContextMenus_filterLabel": {
+        "message": "Filtrer les menus"
+    },
+    "optionsContextMenus_filterNote": {
+        "message": "Videz le filtre pour réordonner."
+    },
+    "optionsContextMenus_noMatch": {
+        "message": "Aucun menu ne correspond à « $filter$ ».",
+        "placeholders": {
+            "filter": {
+                "content": "$1",
+                "example": "invoice"
+            }
+        }
+    },
+    "optionsContextMenus_sectionTop": {
+        "message": "Premier niveau"
+    },
+    "optionsContextMenus_sectionSub": {
+        "message": "Sous-menu"
+    },
+    "optionsContextMenus_sectionOff": {
+        "message": "Désactivés"
+    },
+    "optionsContextMenus_offHelp": {
+        "message": "gardés ici, absents du menu du clic droit"
+    },
+    "optionsContextMenus_topEmpty": {
+        "message": "Étoilez un menu pour l’afficher à côté des autres entrées de Joorney."
+    },
+    "optionsContextMenus_reorder": {
+        "message": "Réordonner $path$ (flèches haut et bas)",
         "placeholders": {
             "path": {
                 "content": "$1",
@@ -609,23 +708,11 @@
             }
         }
     },
-    "contextOdooMenus_option_confirmRemoveAll": {
-        "message": "Voulez-vous vraiment supprimer tous les menus ?"
+    "optionsContextMenus_reorderTitle": {
+        "message": "Glisser pour réordonner"
     },
-    "contextOdooMenus_option_error_missingPath": {
-        "message": "Chemin manquant"
-    },
-    "contextOdooMenus_option_error_idExists": {
-        "message": "Cet identifiant est déjà enregistré (ne devrait pas arriver) : $id$",
-        "placeholders": {
-            "id": {
-                "content": "$1",
-                "example": "3"
-            }
-        }
-    },
-    "contextOdooMenus_option_error_pathExists": {
-        "message": "Ce chemin est déjà enregistré : $path$",
+    "optionsContextMenus_more": {
+        "message": "Plus d’actions pour $path$",
         "placeholders": {
             "path": {
                 "content": "$1",
@@ -633,23 +720,77 @@
             }
         }
     },
-    "contextOdooMenus_option_favorite": {
-        "message": "Favori"
+    "optionsContextMenus_editPath": {
+        "message": "Modifier le chemin"
     },
-    "contextOdooMenus_option_notFavorite": {
-        "message": "Pas en favori"
+    "optionsContextMenus_moveTop": {
+        "message": "Placer au premier niveau"
     },
-    "contextOdooMenus_option_disable": {
-        "message": "Désactiver le menu rapide"
+    "optionsContextMenus_moveSub": {
+        "message": "Placer dans le sous-menu"
     },
-    "contextOdooMenus_option_enable": {
-        "message": "Activer le menu rapide"
+    "optionsContextMenus_confirmDeleteAll": {
+        "message": "Supprimer tous les menus ?"
     },
-    "contextOdooMenus_option_save": {
-        "message": "Enregistrer la modification"
+    "optionsContextMenus_topLevel": {
+        "message": "Premier niveau : $path$",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Sales / Orders"
+            }
+        }
     },
-    "contextOdooMenus_option_delete": {
-        "message": "Supprimer le menu rapide"
+    "optionsContextMenus_topLevelTitle": {
+        "message": "Afficher au premier niveau, hors du sous-menu"
+    },
+    "optionsContextMenus_on": {
+        "message": "Actif : $path$",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Sales / Orders"
+            }
+        }
+    },
+    "optionsContextMenus_confirmDelete": {
+        "message": "Supprimer $path$ ?",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Sales / Orders"
+            }
+        }
+    },
+    "optionsContextMenus_deleteButton": {
+        "message": "Supprimer"
+    },
+    "optionsContextMenus_cancel": {
+        "message": "Annuler"
+    },
+    "optionsContextMenus_save": {
+        "message": "Enregistrer"
+    },
+    "optionsContextMenus_empty": {
+        "message": "Aucun menu pour l’instant. Ajoutez un chemin de menu ci-dessus, ou repartez des menus techniques par défaut."
+    },
+    "optionsContextMenus_addDefaults": {
+        "message": "Ajouter les $count$ menus par défaut",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "8"
+            }
+        }
+    },
+    "optionsContextMenus_previewTitle": {
+        "message": "Aperçu du menu du clic droit"
+    },
+    "optionsContextMenus_previewHelp": {
+        "message": "Ce qu’affiche un clic droit sur une page Odoo avec ces réglages. Les menus étoilés sont à côté des autres entrées de Joorney, les autres sont regroupés dans un sous-menu. Les menus désactivés n’apparaissent pas."
+    },
+    "optionsContextMenus_previewNone": {
+        "message": "Aucun menu actif"
     },
     "showMyBadge_title": {
         "message": "Badges"
@@ -1496,15 +1637,6 @@
     },
     "optionsThemeSwitch_darkStop": {
         "message": "Sombre jusqu'à"
-    },
-    "optionsPreferences_deleteAll": {
-        "message": "Tout supprimer"
-    },
-    "optionsPreferences_menuName": {
-        "message": "Nom du menu"
-    },
-    "optionsPreferences_menuNameTitle": {
-        "message": "Nom du ir.ui.menu, unique"
     },
     "optionsVersions_versions": {
         "message": "Versions Odoo"
@@ -2445,6 +2577,9 @@
     },
     "optionsFeature_settingsHelpUnfocusApp": {
         "message": "Choisissez l'image affichée derrière le menu d'accueil et consultez les apps que Joorney retient pour chaque hôte Odoo."
+    },
+    "optionsFeature_settingsHelpContextOdooMenus": {
+        "message": "Chaque entrée est le chemin d’un menu Odoo : les noms de menu affichés dans Odoo, séparés par /. Joorney trouve le menu sur la base où vous faites le clic droit, un même chemin fonctionne donc sur toutes les versions."
     },
     "optionsUnfocus_lightTitle": {
         "message": "Arrière-plan clair"

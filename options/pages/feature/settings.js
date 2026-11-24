@@ -141,36 +141,44 @@ const themeSwitch = () => `
     </div>
 `;
 
+// The list and the preview are rendered by src/features/contextOdooMenus/option_customization.js
 const contextOdooMenus = () => `
-    <div class="joorney-fs-toolbar">
-        <button type="button" id="joorney_contextOdooMenus_delete_all" class="joorney-btn is-secondary" data-i18n="optionsPreferences_deleteAll">Delete all</button>
+    <div class="joorney-cm-add">
+        <label class="joorney-fs-label" for="joorney_contextOdooMenus_new_path" data-i18n="optionsContextMenus_path">Menu path</label>
+        <div class="joorney-cm-addrow">
+            <input type="text" class="joorney-input" id="joorney_contextOdooMenus_new_path" placeholder="Lunch / Configuration / Products" autocomplete="off" spellcheck="false" aria-describedby="joorney_contextOdooMenus_new_hint joorney_contextOdooMenus_new_error">
+            <button type="button" id="joorney_contextOdooMenus_new_save" class="joorney-btn">
+                ${iconHTML('add')}<span data-i18n="options_add">Add</span>
+            </button>
+        </div>
+        <p class="joorney-cm-hint" id="joorney_contextOdooMenus_new_hint" data-i18n="optionsContextMenus_addHint">Press Enter to add. New menus go to the submenu, under their app, switched on. Write the menu names in English: the same path then works whatever language Odoo is in.</p>
+        <p class="joorney-error joorney-cm-error" id="joorney_contextOdooMenus_new_error" role="alert" hidden></p>
     </div>
-    <table id="joorney_contextOdooMenus_table" class="table table-striped joorney-fs-table">
-        <thead>
-            <tr>
-                <th scope="col"></th>
-                <th scope="col" style="width: 80%" title="Name of ir.ui.menu, unique" data-i18n-title="optionsPreferences_menuNameTitle" data-i18n="optionsPreferences_menuName">Menu name</th>
-                <th scope="col" class="action-head"></th>
-            </tr>
-        </thead>
-        <tbody id="joorney_contextOdooMenus_table_body"></tbody>
-        <tfoot>
-            <tr class="joorney-fs-add">
-                <td></td>
-                <td class="p-1 joorney-valign-middle">
-                    <input type="text" class="form-control" id="joorney_contextOdooMenus_new_path" placeholder="Lunch / Configuration / Products" aria-label="Menu name" data-i18n-aria-label="optionsPreferences_menuName">
-                </td>
-                <td class="p-1 joorney-valign-middle">
-                    <button type="button" id="joorney_contextOdooMenus_new_save" class="joorney-btn">
-                        ${iconHTML('add')}<span data-i18n="options_add">Add</span>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td id="joorney_contextOdooMenus_new_error" class="text-danger" colspan="3"></td>
-            </tr>
-        </tfoot>
-    </table>
+    <div class="joorney-cm-list" id="joorney_contextOdooMenus_box">
+        <div class="joorney-cm-head">
+            <h3 class="joorney-cm-title" data-i18n="optionsContextMenus_listTitle">Menus</h3>
+            <span class="joorney-chip" id="joorney_contextOdooMenus_count"></span>
+            <div class="joorney-cm-filter">
+                ${iconHTML('search')}
+                <input type="search" class="joorney-input" id="joorney_contextOdooMenus_filter" autocomplete="off" spellcheck="false" placeholder="${escapeHTML(t('optionsContextMenus_filter'))}" aria-label="${escapeHTML(t('optionsContextMenus_filterLabel'))}">
+            </div>
+            <div class="joorney-cm-headacts" id="joorney_contextOdooMenus_head_actions"></div>
+        </div>
+        <p class="joorney-cm-note" id="joorney_contextOdooMenus_filter_note" hidden>
+            ${iconHTML('info')}<span data-i18n="optionsContextMenus_filterNote">Clear the filter to reorder.</span>
+        </p>
+        <div id="joorney_contextOdooMenus_list"></div>
+    </div>
+    <div id="joorney_contextOdooMenus_empty" hidden></div>
+    <details class="joorney-cm-preview">
+        <summary>
+            ${iconHTML('expand_more', { classes: 'joorney-cm-pchevron' })}
+            <span class="joorney-cm-ptitle" data-i18n="optionsContextMenus_previewTitle">Preview of the right-click menu</span>
+            <span class="joorney-chips" id="joorney_contextOdooMenus_preview_counts"></span>
+        </summary>
+        <p class="joorney-help" data-i18n="optionsContextMenus_previewHelp">What a right-click on an Odoo page shows with these settings. Starred menus sit next to the other Joorney entries, the others are grouped in a submenu. Menus switched off are left out.</p>
+        <div class="joorney-cm-cascade" id="joorney_contextOdooMenus_preview"></div>
+    </details>
 `;
 
 const BLOCKS = { awesomeLoading, awesomeStyle, unfocusApp, themeSwitch, contextOdooMenus };
