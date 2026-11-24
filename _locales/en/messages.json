@@ -1315,24 +1315,6 @@
         "message": "Open migration",
         "description": "Options import/export page: link to the migration page, settings outdated"
     },
-    "options_origins": {
-        "message": "Origins",
-        "description": "Options: heading / column of Odoo database origins (URL scheme + host)"
-    },
-    "options_deleteOrigin": {
-        "message": "Delete origin",
-        "description": "Options: tooltip of the button deleting an origin"
-    },
-    "options_confirmRemoveOrigin": {
-        "message": "Are you sure you want to remove the origin: $origin$?",
-        "description": "Options: confirmation before deleting an origin",
-        "placeholders": {
-            "origin": {
-                "content": "$1",
-                "example": "https://www.odoo.com"
-            }
-        }
-    },
     "options_error_missingOrigin": {
         "message": "Missing origin",
         "description": "Options: error when adding an empty origin"
@@ -1839,29 +1821,13 @@
         "message": "Save (Ctrl+S)",
         "description": "Options preferences: Awesome Style save button"
     },
-    "optionsPreferences_lightImage": {
-        "message": "Light image URL for superfocus",
-        "description": "Options preferences (Unfocus App): background image in light theme"
-    },
     "optionsPreferences_lightImageAlt": {
         "message": "Light superfocus background",
         "description": "Options preferences (Unfocus App): alt text of the light image preview"
     },
-    "optionsPreferences_darkImage": {
-        "message": "Dark image URL for superfocus",
-        "description": "Options preferences (Unfocus App): background image in dark theme"
-    },
     "optionsPreferences_darkImageAlt": {
         "message": "Dark superfocus background",
         "description": "Options preferences (Unfocus App): alt text of the dark image preview"
-    },
-    "optionsPreferences_superfocusCount": {
-        "message": "Superfocus count",
-        "description": "Options preferences (Unfocus App): column of superfocused apps count"
-    },
-    "optionsPreferences_unfocusCount": {
-        "message": "Unfocus count",
-        "description": "Options preferences (Unfocus App): column of hidden apps count"
     },
     "optionsPreferences_getLocation": {
         "message": "Get current location",
@@ -3126,5 +3092,119 @@
     "optionsTechnical_add": {
         "message": "Add",
         "description": "Options developers page: button adding a fallback"
+    },
+    "optionsFeature_settingsHelpUnfocusApp": {
+        "message": "Pick the image shown behind the home menu, and review which apps Joorney remembers for each Odoo host.",
+        "description": "Options feature page: help of the Unfocus App settings card"
+    },
+    "optionsUnfocus_lightTitle": {
+        "message": "Light background",
+        "description": "Options feature page (Unfocus App): title of the light theme image tile"
+    },
+    "optionsUnfocus_darkTitle": {
+        "message": "Dark background",
+        "description": "Options feature page (Unfocus App): title of the dark theme image tile"
+    },
+    "optionsUnfocus_imageUrl": {
+        "message": "Image URL",
+        "description": "Options feature page (Unfocus App): label of the image URL field"
+    },
+    "optionsUnfocus_defaultImage": {
+        "message": "Default image",
+        "description": "Options feature page (Unfocus App): chip in the image tile header, the image is the default one"
+    },
+    "optionsUnfocus_customImage": {
+        "message": "Custom image",
+        "description": "Options feature page (Unfocus App): chip in the image tile header, the image is one the user picked"
+    },
+    "optionsUnfocus_resetImage": {
+        "message": "Use default",
+        "description": "Options feature page (Unfocus App): button next to the image URL field, restoring the default image"
+    },
+    "optionsUnfocus_resetLightTitle": {
+        "message": "Use the default light image",
+        "description": "Options feature page (Unfocus App): tooltip of the button restoring the default light image"
+    },
+    "optionsUnfocus_resetDarkTitle": {
+        "message": "Use the default dark image",
+        "description": "Options feature page (Unfocus App): tooltip of the button restoring the default dark image"
+    },
+    "optionsUnfocus_restored": {
+        "message": "Default image restored.",
+        "description": "Options feature page (Unfocus App): status under the image URL field after restoring the default image"
+    },
+    "optionsUnfocus_undo": {
+        "message": "Undo",
+        "description": "Options feature page (Unfocus App): button putting back the image URL replaced by the default one"
+    },
+    "optionsUnfocus_invalidImage": {
+        "message": "Not an image URL: use an https:// address ending in .jpg, .png, .gif, .svg...",
+        "description": "Options feature page (Unfocus App): error under an invalid image URL"
+    },
+    "optionsUnfocus_imageSaveError": {
+        "message": "Could not save the image: $error$",
+        "description": "Options feature page (Unfocus App): error under an image URL that is valid but could not be saved (storage quota or error)",
+        "placeholders": {
+            "error": {
+                "content": "$1",
+                "example": "QUOTA_BYTES_PER_ITEM quota exceeded"
+            }
+        }
+    },
+    "optionsUnfocus_hostsTitle": {
+        "message": "Remembered apps per host",
+        "description": "Options feature page (Unfocus App): sub-heading of the host list"
+    },
+    "optionsUnfocus_superfocused": {
+        "message": "$count$ superfocused",
+        "description": "Options feature page (Unfocus App): chip of the superfocused apps of a host",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "3"
+            }
+        }
+    },
+    "optionsUnfocus_unfocused": {
+        "message": "$count$ unfocused",
+        "description": "Options feature page (Unfocus App): chip of the unfocused apps of a host",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "3"
+            }
+        }
+    },
+    "optionsUnfocus_forgetHost": {
+        "message": "Forget the apps remembered for $origin$",
+        "description": "Options feature page (Unfocus App): accessible name of the forget button of a host",
+        "placeholders": {
+            "origin": {
+                "content": "$1",
+                "example": "https://www.odoo.com"
+            }
+        }
+    },
+    "optionsUnfocus_confirmForget": {
+        "message": "Forget the apps remembered for $origin$?",
+        "description": "Options feature page (Unfocus App): inline confirmation before forgetting a host, shown in place of the host row",
+        "placeholders": {
+            "origin": {
+                "content": "$1",
+                "example": "https://www.odoo.com"
+            }
+        }
+    },
+    "optionsUnfocus_forget": {
+        "message": "Forget",
+        "description": "Options feature page (Unfocus App): button confirming the removal of a host"
+    },
+    "optionsUnfocus_cancel": {
+        "message": "Cancel",
+        "description": "Options feature page (Unfocus App): button cancelling the inline confirmation"
+    },
+    "optionsUnfocus_empty": {
+        "message": "No app unfocused yet. Unfocus an app from the Odoo home menu to see it here.",
+        "description": "Options feature page (Unfocus App): empty host list"
     }
 }

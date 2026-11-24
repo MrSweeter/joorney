@@ -1041,21 +1041,6 @@
     "optionsImportExport_openMigration": {
         "message": "Ouvrir la migration"
     },
-    "options_origins": {
-        "message": "Origines"
-    },
-    "options_deleteOrigin": {
-        "message": "Supprimer l'origine"
-    },
-    "options_confirmRemoveOrigin": {
-        "message": "Voulez-vous vraiment supprimer l'origine : $origin$ ?",
-        "placeholders": {
-            "origin": {
-                "content": "$1",
-                "example": "https://www.odoo.com"
-            }
-        }
-    },
     "options_error_missingOrigin": {
         "message": "Origine manquante"
     },
@@ -1455,23 +1440,11 @@
     "optionsPreferences_saveShortcut": {
         "message": "Enregistrer (Ctrl+S)"
     },
-    "optionsPreferences_lightImage": {
-        "message": "URL de l'image claire pour la mise en avant"
-    },
     "optionsPreferences_lightImageAlt": {
         "message": "Arrière-plan clair de mise en avant"
     },
-    "optionsPreferences_darkImage": {
-        "message": "URL de l'image sombre pour la mise en avant"
-    },
     "optionsPreferences_darkImageAlt": {
         "message": "Arrière-plan sombre de mise en avant"
-    },
-    "optionsPreferences_superfocusCount": {
-        "message": "Apps mises en avant"
-    },
-    "optionsPreferences_unfocusCount": {
-        "message": "Apps masquées"
     },
     "optionsPreferences_getLocation": {
         "message": "Utiliser la position actuelle"
@@ -2469,5 +2442,98 @@
     },
     "optionsTechnical_add": {
         "message": "Ajouter"
+    },
+    "optionsFeature_settingsHelpUnfocusApp": {
+        "message": "Choisissez l'image affichée derrière le menu d'accueil et consultez les apps que Joorney retient pour chaque hôte Odoo."
+    },
+    "optionsUnfocus_lightTitle": {
+        "message": "Arrière-plan clair"
+    },
+    "optionsUnfocus_darkTitle": {
+        "message": "Arrière-plan sombre"
+    },
+    "optionsUnfocus_imageUrl": {
+        "message": "URL de l'image"
+    },
+    "optionsUnfocus_defaultImage": {
+        "message": "Image par défaut"
+    },
+    "optionsUnfocus_customImage": {
+        "message": "Image personnalisée"
+    },
+    "optionsUnfocus_resetImage": {
+        "message": "Par défaut"
+    },
+    "optionsUnfocus_resetLightTitle": {
+        "message": "Utiliser l'image claire par défaut"
+    },
+    "optionsUnfocus_resetDarkTitle": {
+        "message": "Utiliser l'image sombre par défaut"
+    },
+    "optionsUnfocus_restored": {
+        "message": "Image par défaut rétablie."
+    },
+    "optionsUnfocus_undo": {
+        "message": "Annuler"
+    },
+    "optionsUnfocus_invalidImage": {
+        "message": "Ce n'est pas l'URL d'une image : utilisez une adresse https:// terminée par .jpg, .png, .gif, .svg..."
+    },
+    "optionsUnfocus_imageSaveError": {
+        "message": "Impossible d’enregistrer l’image : $error$",
+        "placeholders": {
+            "error": {
+                "content": "$1",
+                "example": "QUOTA_BYTES_PER_ITEM quota exceeded"
+            }
+        }
+    },
+    "optionsUnfocus_hostsTitle": {
+        "message": "Apps retenues par hôte"
+    },
+    "optionsUnfocus_superfocused": {
+        "message": "$count$ mises en avant",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "3"
+            }
+        }
+    },
+    "optionsUnfocus_unfocused": {
+        "message": "$count$ masquées",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "3"
+            }
+        }
+    },
+    "optionsUnfocus_forgetHost": {
+        "message": "Oublier les apps retenues pour $origin$",
+        "placeholders": {
+            "origin": {
+                "content": "$1",
+                "example": "https://www.odoo.com"
+            }
+        }
+    },
+    "optionsUnfocus_confirmForget": {
+        "message": "Oublier les apps retenues pour $origin$ ?",
+        "placeholders": {
+            "origin": {
+                "content": "$1",
+                "example": "https://www.odoo.com"
+            }
+        }
+    },
+    "optionsUnfocus_forget": {
+        "message": "Oublier"
+    },
+    "optionsUnfocus_cancel": {
+        "message": "Annuler"
+    },
+    "optionsUnfocus_empty": {
+        "message": "Aucune app masquée pour l'instant. Masquez une app depuis le menu d'accueil d'Odoo pour la voir ici."
     }
 }

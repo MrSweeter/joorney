@@ -37,29 +37,56 @@ const awesomeStyle = () => `
 `;
 
 const unfocusApp = () => `
-    <div class="joorney-fs-images">
-        <div>
-            <label class="joorney-fs-label" for="joorney_unfocus_app_light_image_input" data-i18n="optionsPreferences_lightImage">Light image URL for superfocus</label>
-            <input type="text" class="form-control mb-2" id="joorney_unfocus_app_light_image_input" placeholder="">
-            <img alt="Light superfocus background" data-i18n-alt="optionsPreferences_lightImageAlt" id="joorney_unfocus_app_light_image">
+    <div class="joorney-unfocus-tiles">
+        <div class="joorney-unfocus-tile">
+            <div class="joorney-unfocus-tile-head">
+                <h3 data-i18n="optionsUnfocus_lightTitle">Light background</h3>
+                <span class="joorney-chip" id="joorney_unfocus_app_light_image_label"></span>
+            </div>
+            <div class="joorney-unfocus-thumb is-light">
+                <div class="joorney-unfocus-cell">
+                    <img alt="Light superfocus background" data-i18n-alt="optionsPreferences_lightImageAlt" id="joorney_unfocus_app_light_image">
+                </div>
+            </div>
+            <label class="joorney-fs-label" for="joorney_unfocus_app_light_image_input" data-i18n="optionsUnfocus_imageUrl">Image URL</label>
+            <div class="joorney-unfocus-field">
+                <input type="text" class="joorney-input joorney-unfocus-input" id="joorney_unfocus_app_light_image_input" aria-describedby="joorney_unfocus_app_light_image_error">
+                <button type="button" class="joorney-btn is-secondary" id="joorney_unfocus_app_light_image_reset" title="Use the default light image" data-i18n-title="optionsUnfocus_resetLightTitle" hidden>
+                    ${iconHTML('restart_alt')}<span data-i18n="optionsUnfocus_resetImage">Use default</span>
+                </button>
+            </div>
+            <p class="joorney-error" id="joorney_unfocus_app_light_image_error" role="alert" hidden></p>
+            <p class="joorney-unfocus-restored" id="joorney_unfocus_app_light_image_restored" role="status" hidden>
+                ${iconHTML('check_circle')}<span data-i18n="optionsUnfocus_restored">Default image restored.</span>
+                <button type="button" class="joorney-unfocus-undo" id="joorney_unfocus_app_light_image_undo" data-i18n="optionsUnfocus_undo">Undo</button>
+            </p>
         </div>
-        <div>
-            <label class="joorney-fs-label" for="joorney_unfocus_app_dark_image_input" data-i18n="optionsPreferences_darkImage">Dark image URL for superfocus</label>
-            <input type="text" class="form-control mb-2" id="joorney_unfocus_app_dark_image_input" placeholder="">
-            <img alt="Dark superfocus background" data-i18n-alt="optionsPreferences_darkImageAlt" id="joorney_unfocus_app_dark_image">
+        <div class="joorney-unfocus-tile">
+            <div class="joorney-unfocus-tile-head">
+                <h3 data-i18n="optionsUnfocus_darkTitle">Dark background</h3>
+                <span class="joorney-chip" id="joorney_unfocus_app_dark_image_label"></span>
+            </div>
+            <div class="joorney-unfocus-thumb is-dark">
+                <div class="joorney-unfocus-cell">
+                    <img alt="Dark superfocus background" data-i18n-alt="optionsPreferences_darkImageAlt" id="joorney_unfocus_app_dark_image">
+                </div>
+            </div>
+            <label class="joorney-fs-label" for="joorney_unfocus_app_dark_image_input" data-i18n="optionsUnfocus_imageUrl">Image URL</label>
+            <div class="joorney-unfocus-field">
+                <input type="text" class="joorney-input joorney-unfocus-input" id="joorney_unfocus_app_dark_image_input" aria-describedby="joorney_unfocus_app_dark_image_error">
+                <button type="button" class="joorney-btn is-secondary" id="joorney_unfocus_app_dark_image_reset" title="Use the default dark image" data-i18n-title="optionsUnfocus_resetDarkTitle" hidden>
+                    ${iconHTML('restart_alt')}<span data-i18n="optionsUnfocus_resetImage">Use default</span>
+                </button>
+            </div>
+            <p class="joorney-error" id="joorney_unfocus_app_dark_image_error" role="alert" hidden></p>
+            <p class="joorney-unfocus-restored" id="joorney_unfocus_app_dark_image_restored" role="status" hidden>
+                ${iconHTML('check_circle')}<span data-i18n="optionsUnfocus_restored">Default image restored.</span>
+                <button type="button" class="joorney-unfocus-undo" id="joorney_unfocus_app_dark_image_undo" data-i18n="optionsUnfocus_undo">Undo</button>
+            </p>
         </div>
     </div>
-    <table id="joorney_unfocus_app_table" class="table table-striped joorney-fs-table">
-        <thead>
-            <tr>
-                <th scope="col" class="joorney-unfocus_app-origin" data-i18n="options_origins">Origins</th>
-                <th scope="col" data-i18n="optionsPreferences_superfocusCount">Superfocus count</th>
-                <th scope="col" data-i18n="optionsPreferences_unfocusCount">Unfocus count</th>
-                <th scope="col" class="action-head"></th>
-            </tr>
-        </thead>
-        <tbody id="joorney_unfocus_app_table_body"></tbody>
-    </table>
+    <h3 class="joorney-unfocus-subtitle" data-i18n="optionsUnfocus_hostsTitle">Remembered apps per host</h3>
+    <div id="joorney_unfocus_app_hosts"></div>
 `;
 
 const themeSwitch = () => `

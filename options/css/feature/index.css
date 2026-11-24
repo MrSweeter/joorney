@@ -289,25 +289,187 @@
     color: var(--joorney-text-muted);
 }
 
-.joorney-fs-images {
+.joorney-unfocus-tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+    gap: 16px;
+}
+
+.joorney-unfocus-tile {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+    min-width: 0;
+    padding: 16px;
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-card);
+}
+
+.joorney-feature .joorney-unfocus-tile h3,
+.joorney-feature .joorney-unfocus-subtitle {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--joorney-text);
+}
+
+.joorney-feature .joorney-unfocus-tile .joorney-fs-label {
+    margin: 0 0 -2px;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--joorney-text);
+}
+
+/* Title, then the Default image / Custom image chip on the right */
+.joorney-unfocus-tile-head {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: space-between;
+    align-self: stretch;
+    min-height: 24px;
+}
+
+.joorney-chip.is-custom {
+    color: var(--joorney-state-everywhere-text);
+    background: var(--joorney-state-everywhere-tint);
+}
+
+/* A piece of the Odoo home menu: the image is the background of the app cell, drawn like
+src/features/unfocusApp/content.js does it (contain, center top) */
+.joorney-unfocus-thumb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
+    height: 168px;
+    overflow: hidden;
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-control);
+}
+
+.joorney-unfocus-thumb.is-light {
+    background: #f9fafb;
+}
+
+.joorney-unfocus-thumb.is-dark {
+    background: #262a36;
+}
+
+/* Size of a real app cell (icon and name), so the image keeps the size it has in Odoo */
+.joorney-unfocus-cell {
+    position: relative;
+    width: 140px;
+    height: 108px;
+}
+
+.joorney-unfocus-cell img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center top;
+}
+
+/* The URL field and, when the image is custom, the "Use default" button that resets it */
+.joorney-unfocus-field {
     display: flex;
     flex-wrap: wrap;
-    gap: 24px;
-    margin-bottom: 16px;
+    gap: 8px;
+    align-items: center;
+    align-self: stretch;
 }
 
-.joorney-fs-images > div {
-    flex: 1 1 280px;
+.joorney-feature .joorney-unfocus-tile .joorney-unfocus-input {
+    flex: 1 1 160px;
+    box-sizing: border-box;
+}
+
+.joorney-unfocus-field .joorney-btn {
+    flex: none;
+    gap: 6px;
+}
+
+.joorney-unfocus-field .joorney-icon {
+    font-size: 18px;
+}
+
+.joorney-feature .joorney-unfocus-tile .joorney-unfocus-input[aria-invalid="true"] {
+    border-color: #b3541e;
+    box-shadow: 0 0 0 1px #b3541e;
+}
+
+.joorney-feature .joorney-unfocus-restored {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    margin: 0;
+    font-size: 13px;
+    color: var(--joorney-text-soft);
+}
+
+.joorney-unfocus-restored .joorney-icon {
+    font-size: 18px;
+    color: var(--joorney-state-everywhere-text);
+}
+
+.joorney-unfocus-undo {
+    padding: 0 2px;
+    font: inherit;
+    font-weight: 500;
+    color: var(--joorney-focus);
+    text-decoration: underline;
+    cursor: pointer;
+    background: none;
+    border: 0;
+}
+
+.joorney-feature .joorney-unfocus-subtitle {
+    margin: 24px 0 8px;
+}
+
+.joorney-unfocus-hosts {
+    overflow: hidden;
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-card);
+}
+
+.joorney-unfocus-host {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    padding: 8px 8px 8px 16px;
+    border-top: 1px solid var(--joorney-hover);
+}
+
+.joorney-unfocus-host:first-child {
+    border-top: 0;
+}
+
+.joorney-unfocus-host.is-confirm {
+    padding: 0;
+}
+
+.joorney-unfocus-name {
+    flex: 1 1 220px;
     min-width: 0;
+    font-size: 15px;
+    overflow-wrap: anywhere;
 }
 
-.joorney-fs-images img {
-    max-width: 100%;
-    max-height: 160px;
+.joorney-chip.is-superfocus {
+    color: var(--joorney-state-everywhere-text);
+    background: var(--joorney-state-everywhere-tint);
 }
 
-.joorney-unfocus_app-origin {
-    width: 60%;
+.joorney-unfocus-ask {
+    margin: 6px 12px;
 }
 
 #joorney_awe_style_container {

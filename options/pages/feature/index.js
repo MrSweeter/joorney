@@ -90,6 +90,7 @@ export async function loadPage(features, currentSettings, params = {}) {
             ambient: t('optionsFeature_settingsHelpAmbient'),
             awesomeLoadingSmall: t('optionsFeature_settingsHelpAwesomeLoading'),
             awesomeLoadingLarge: t('optionsFeature_settingsHelpAwesomeLoading'),
+            unfocusApp: t('optionsFeature_settingsHelpUnfocusApp'),
         }[feature.id] ?? t('optionsFeature_settingsHelp');
     let settings = await readStateSettings(features, currentSettings);
     // Another page was loaded meanwhile
