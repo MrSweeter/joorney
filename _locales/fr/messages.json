@@ -1473,14 +1473,56 @@
     "optionsPreferences_unfocusCount": {
         "message": "Apps masquées"
     },
-    "optionsPreferences_latLong": {
-        "message": "Latitude / Longitude"
-    },
-    "optionsPreferences_darkModeRange": {
-        "message": "Mode sombre : début / fin"
-    },
     "optionsPreferences_getLocation": {
         "message": "Utiliser la position actuelle"
+    },
+    "optionsThemeSwitch_modeLabel": {
+        "message": "Mode"
+    },
+    "optionsThemeSwitch_modeSystem": {
+        "message": "Système"
+    },
+    "optionsThemeSwitch_modeSystemHelp": {
+        "message": "Suit le jeu de couleurs du système."
+    },
+    "optionsThemeSwitch_modeLight": {
+        "message": "Clair"
+    },
+    "optionsThemeSwitch_modeLightHelp": {
+        "message": "Toujours le thème clair."
+    },
+    "optionsThemeSwitch_modeDark": {
+        "message": "Sombre"
+    },
+    "optionsThemeSwitch_modeDarkHelp": {
+        "message": "Toujours le thème sombre."
+    },
+    "optionsThemeSwitch_modeLocation": {
+        "message": "Position"
+    },
+    "optionsThemeSwitch_modeLocationHelp": {
+        "message": "Sombre entre le coucher et le lever du soleil."
+    },
+    "optionsThemeSwitch_modeTime": {
+        "message": "Plage horaire"
+    },
+    "optionsThemeSwitch_modeTimeHelp": {
+        "message": "Sombre entre deux heures."
+    },
+    "optionsThemeSwitch_noSetting": {
+        "message": "Aucun autre réglage pour ce mode."
+    },
+    "optionsThemeSwitch_latitude": {
+        "message": "Latitude"
+    },
+    "optionsThemeSwitch_longitude": {
+        "message": "Longitude"
+    },
+    "optionsThemeSwitch_darkStart": {
+        "message": "Sombre à partir de"
+    },
+    "optionsThemeSwitch_darkStop": {
+        "message": "Sombre jusqu'à"
     },
     "optionsPreferences_deleteAll": {
         "message": "Tout supprimer"

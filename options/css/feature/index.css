@@ -178,6 +178,25 @@
     border: 2px solid var(--joorney-navy);
 }
 
+.joorney-ts-opts .joorney-feature-opt {
+    flex-basis: 170px;
+}
+
+.joorney-ts-fields {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: flex-end;
+}
+
+.joorney-ts-field {
+    flex: 0 1 180px;
+}
+
+.joorney-ts-field .joorney-input {
+    width: 100%;
+}
+
 .joorney-feature-subtitle {
     margin: 0 0 4px;
     font-size: 14px;
@@ -263,17 +282,6 @@
     margin-bottom: 12px;
 }
 
-.joorney-fs-fields {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
-}
-
-.joorney-fs-group {
-    flex: 1 1 320px;
-}
-
-.joorney-fs-grouptitle,
 .joorney-fs-label {
     display: block;
     margin-bottom: 4px;

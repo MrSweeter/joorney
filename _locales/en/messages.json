@@ -1863,17 +1863,73 @@
         "message": "Unfocus count",
         "description": "Options preferences (Unfocus App): column of hidden apps count"
     },
-    "optionsPreferences_latLong": {
-        "message": "Latitude / Longitude",
-        "description": "Options preferences (Theme Switch): location column"
-    },
-    "optionsPreferences_darkModeRange": {
-        "message": "Dark mode: start / stop",
-        "description": "Options preferences (Theme Switch): dark mode hours column"
-    },
     "optionsPreferences_getLocation": {
         "message": "Get current location",
         "description": "Options preferences (Theme Switch): tooltip of the location button"
+    },
+    "optionsThemeSwitch_modeLabel": {
+        "message": "Mode",
+        "description": "Theme Switch: label of the mode choice"
+    },
+    "optionsThemeSwitch_modeSystem": {
+        "message": "System",
+        "description": "Theme Switch tile label"
+    },
+    "optionsThemeSwitch_modeSystemHelp": {
+        "message": "Follow the system colour scheme.",
+        "description": "Theme Switch settings: Follow the system colour scheme."
+    },
+    "optionsThemeSwitch_modeLight": {
+        "message": "Light",
+        "description": "Theme Switch settings: Light"
+    },
+    "optionsThemeSwitch_modeLightHelp": {
+        "message": "Always use the light theme.",
+        "description": "Theme Switch settings: Always use the light theme."
+    },
+    "optionsThemeSwitch_modeDark": {
+        "message": "Dark",
+        "description": "Theme Switch settings: Dark"
+    },
+    "optionsThemeSwitch_modeDarkHelp": {
+        "message": "Always use the dark theme.",
+        "description": "Theme Switch settings: Always use the dark theme."
+    },
+    "optionsThemeSwitch_modeLocation": {
+        "message": "Location",
+        "description": "Theme Switch settings: Location"
+    },
+    "optionsThemeSwitch_modeLocationHelp": {
+        "message": "Dark between sunset and sunrise.",
+        "description": "Theme Switch settings: Dark between sunset and sunrise."
+    },
+    "optionsThemeSwitch_modeTime": {
+        "message": "Time range",
+        "description": "Theme Switch settings: Time range"
+    },
+    "optionsThemeSwitch_modeTimeHelp": {
+        "message": "Dark between two times.",
+        "description": "Theme Switch settings: Dark between two times."
+    },
+    "optionsThemeSwitch_noSetting": {
+        "message": "No further setting for this mode.",
+        "description": "Theme Switch settings: No further setting for this mode."
+    },
+    "optionsThemeSwitch_latitude": {
+        "message": "Latitude",
+        "description": "Theme Switch settings: Latitude"
+    },
+    "optionsThemeSwitch_longitude": {
+        "message": "Longitude",
+        "description": "Theme Switch settings: Longitude"
+    },
+    "optionsThemeSwitch_darkStart": {
+        "message": "Dark from",
+        "description": "Theme Switch settings: Dark from"
+    },
+    "optionsThemeSwitch_darkStop": {
+        "message": "Dark until",
+        "description": "Theme Switch settings: Dark until"
     },
     "optionsPreferences_deleteAll": {
         "message": "Delete all",

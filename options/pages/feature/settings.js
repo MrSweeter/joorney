@@ -63,24 +63,52 @@ const unfocusApp = () => `
 `;
 
 const themeSwitch = () => `
-    <div class="joorney-fs-fields">
-        <div class="joorney-fs-group">
-            <div class="joorney-fs-grouptitle" data-i18n="optionsPreferences_latLong">Latitude / Longitude</div>
-            <div class="input-group">
-                <input id="joorney_theme_switch_latitude" type="text" class="form-control" aria-label="Latitude">
-                <span class="input-group-text">/</span>
-                <input id="joorney_theme_switch_longitude" type="text" class="form-control" aria-label="Longitude">
-                <button type="button" id="joorney_theme_switch_get_location_button" class="joorney-btn is-secondary" title="Get current location" data-i18n-title="optionsPreferences_getLocation">
-                    ${iconHTML('my_location')}<span data-i18n="optionsPreferences_getLocation">Get current location</span>
-                </button>
-            </div>
+    <div class="joorney-ts">
+        <div class="joorney-label" id="joorney-ts-mode-label" data-i18n="optionsThemeSwitch_modeLabel">Mode</div>
+        <div class="joorney-feature-opts joorney-ts-opts" role="group" aria-labelledby="joorney-ts-mode-label">
+            <button type="button" class="joorney-feature-opt" data-mode="system" aria-pressed="false">
+                <b data-i18n="optionsThemeSwitch_modeSystem">System</b>
+                <span data-i18n="optionsThemeSwitch_modeSystemHelp">Follow the system colour scheme.</span>
+            </button>
+            <button type="button" class="joorney-feature-opt" data-mode="autoLight" aria-pressed="false">
+                <b data-i18n="optionsThemeSwitch_modeLight">Light</b>
+                <span data-i18n="optionsThemeSwitch_modeLightHelp">Always use the light theme.</span>
+            </button>
+            <button type="button" class="joorney-feature-opt" data-mode="autoDark" aria-pressed="false">
+                <b data-i18n="optionsThemeSwitch_modeDark">Dark</b>
+                <span data-i18n="optionsThemeSwitch_modeDarkHelp">Always use the dark theme.</span>
+            </button>
+            <button type="button" class="joorney-feature-opt" data-mode="dynamicLocation" aria-pressed="false">
+                <b data-i18n="optionsThemeSwitch_modeLocation">Location</b>
+                <span data-i18n="optionsThemeSwitch_modeLocationHelp">Dark between sunset and sunrise.</span>
+            </button>
+            <button type="button" class="joorney-feature-opt" data-mode="dynamicTime" aria-pressed="false">
+                <b data-i18n="optionsThemeSwitch_modeTime">Time range</b>
+                <span data-i18n="optionsThemeSwitch_modeTimeHelp">Dark between two times.</span>
+            </button>
         </div>
-        <div class="joorney-fs-group">
-            <div class="joorney-fs-grouptitle" data-i18n="optionsPreferences_darkModeRange">Dark mode: start / stop</div>
-            <div class="input-group">
-                <input id="joorney_theme_switch_dark_start" type="time" class="form-control" aria-label="Dark mode start">
-                <span class="input-group-text">/</span>
-                <input id="joorney_theme_switch_dark_stop" type="time" class="form-control" aria-label="Dark mode stop">
+        <p class="joorney-help" id="joorney-ts-none" data-i18n="optionsThemeSwitch_noSetting" hidden>No further setting for this mode.</p>
+        <div class="joorney-ts-fields" id="joorney-ts-location" hidden>
+            <div class="joorney-ts-field">
+                <label class="joorney-label" for="joorney_theme_switch_latitude" data-i18n="optionsThemeSwitch_latitude">Latitude</label>
+                <input id="joorney_theme_switch_latitude" class="joorney-input" type="text" inputmode="decimal" autocomplete="off">
+            </div>
+            <div class="joorney-ts-field">
+                <label class="joorney-label" for="joorney_theme_switch_longitude" data-i18n="optionsThemeSwitch_longitude">Longitude</label>
+                <input id="joorney_theme_switch_longitude" class="joorney-input" type="text" inputmode="decimal" autocomplete="off">
+            </div>
+            <button type="button" id="joorney_theme_switch_get_location_button" class="joorney-btn is-secondary">
+                ${iconHTML('my_location')}<span data-i18n="optionsPreferences_getLocation">Get current location</span>
+            </button>
+        </div>
+        <div class="joorney-ts-fields" id="joorney-ts-time" hidden>
+            <div class="joorney-ts-field">
+                <label class="joorney-label" for="joorney_theme_switch_dark_start" data-i18n="optionsThemeSwitch_darkStart">Dark from</label>
+                <input id="joorney_theme_switch_dark_start" class="joorney-input" type="time">
+            </div>
+            <div class="joorney-ts-field">
+                <label class="joorney-label" for="joorney_theme_switch_dark_stop" data-i18n="optionsThemeSwitch_darkStop">Dark until</label>
+                <input id="joorney_theme_switch_dark_stop" class="joorney-input" type="time">
             </div>
         </div>
     </div>
