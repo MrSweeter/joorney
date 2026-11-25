@@ -129,17 +129,18 @@ export async function getVersionInfo(urlArg) {
     return parseInfo(data.result);
 }
 
-export async function getDataset(model, domain, fields, limit, cachingTime = 1) {
+export async function getDataset(model, domain, fields, limit, cachingTime = 1, context = {}) {
     const { fromCache, data } = await cache(
         cachingTime,
         async () => {
-            return await _getDataset(model, domain, fields, limit);
+            return await _getDataset(model, domain, fields, limit, context);
         },
         'getDataset',
         model,
         domain,
         fields,
-        limit
+        limit,
+        context
     );
 
     if (data.error) {
@@ -152,7 +153,7 @@ export async function getDataset(model, domain, fields, limit, cachingTime = 1) 
     return limit === 1 ? data.result[0] : data.result;
 }
 
-async function _getDataset(model, domain, fields, limit) {
+async function _getDataset(model, domain, fields, limit, context = {}) {
     const response = await fetch(
         new Request(`/web/dataset/call_kw/${model}/search_read`, {
             method: 'POST',
@@ -163,7 +164,7 @@ async function _getDataset(model, domain, fields, limit) {
                 params: {
                     args: [],
                     kwargs: {
-                        context: { active_test: false, lang: 'en_US' },
+                        context: { active_test: false, lang: 'en_US', ...context },
                         fields: fields,
                         domain: domain,
                         limit: limit,
@@ -273,7 +274,10 @@ export async function getMenu(menupath) {
         field = `parent_id.${field}`;
     }
 
-    const response = await getDataset('ir.ui.menu', domain, ['action'], 2, 600);
+    // [ODOO] < 19.0: search_read only returns the menus visible to the session, and the Technical ones only count
+    // in debug mode (ir.ui.menu search_fetch -> _filter_visible_menus): an admin who never opened ?debug=1 got
+    // "not found". Find the menu in any session, opening its action stays Odoo's call (access rights)
+    const response = await getDataset('ir.ui.menu', domain, ['action'], 2, 600, { 'ir.ui.menu.full_list': true });
     return response;
 }
 
