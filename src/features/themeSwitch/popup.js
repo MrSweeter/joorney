@@ -10,8 +10,9 @@ export default class ThemeSwitchPopupFeature extends PopupCustomizableFeature {
     async render(enabled) {
         const themeModeSwitcher = document.getElementById('joorney_theme_switch_mode_switcher');
 
+        // Same default as the options page and the background (configuration.js)
         const { themeSwitchMode } = await StorageSync.get({
-            themeSwitchMode: 'autoDark',
+            themeSwitchMode: configuration.defaultSettings.themeSwitchMode,
         });
 
         themeModeSwitcher.value = themeSwitchMode;

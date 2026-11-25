@@ -4,8 +4,11 @@ import { StorageSync, Tabs } from '../../src/utils/browser.js';
 
 export async function reloadTabFeatures() {
     const { features, currentSettings } = await getFeaturesAndCurrentSettings();
+    const modes = await StorageSync.get(
+        Object.fromEntries(features.filter((f) => !f.limited).map((f) => [`${f.id}WhitelistMode`, true]))
+    );
 
-    loadTabFeatures(features, currentSettings);
+    loadTabFeatures(features, { ...currentSettings, ...modes });
 }
 
 async function loadTabFeatures(features, configuration) {
