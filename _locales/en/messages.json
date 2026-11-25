@@ -3252,7 +3252,7 @@
         "description": "Options developers page: button adding a fallback"
     },
     "optionsFeature_settingsHelpUnfocusApp": {
-        "message": "Superfocused apps get an image behind their icon, picked to match the Odoo theme. Below, see and change which apps Joorney remembers for each Odoo host.",
+        "message": "Choose how unfocused apps behave, pick the image shown behind superfocused apps, and review which apps Joorney remembers for each Odoo host.",
         "description": "Options feature page: help of the Unfocus App settings card"
     },
     "optionsFeature_settingsHelpContextOdooMenus": {
@@ -3435,8 +3435,60 @@
         "message": "Not used while sharing",
         "description": "Options feature page (Unfocus App): chip of a host list while sharing between hosts is on"
     },
+    "optionsUnfocus_usedOnlyWhileSharing": {
+        "message": "Used only while sharing",
+        "description": "Options feature page (Unfocus App): chip of the shared list (All hosts) while sharing between hosts is off"
+    },
     "optionsUnfocus_sharingNote": {
         "message": "Sharing is on: every host uses the shared list. The per-host lists are kept, not merged, and come back when sharing is turned off.",
         "description": "Options feature page (Unfocus App): note above the host list while sharing between hosts is on"
+    },
+    "optionsFeature_settingsHelpPinMessage": {
+        "message": "Choose which messages you can pin, and whether records open with the pinned section shown.",
+        "description": "Options feature page: help of the Pin Message settings card"
+    },
+    "optionsFeature_behaviourTitle": {
+        "message": "Behaviour",
+        "description": "Options feature page: sub-heading of the switches also in the toolbar popup (Unfocus App, Pin Message)"
+    },
+    "optionsFeature_behaviourHelp": {
+        "message": "Also in the toolbar popup. Odoo tabs pick up a change on their next page load.",
+        "description": "Options feature page: help under the Behaviour sub-heading"
+    },
+    "optionsFeature_behaviourOff": {
+        "message": "This feature is deactivated. These settings apply once it is active.",
+        "description": "Options feature page: note above the Behaviour switches while the feature is deactivated"
+    },
+    "optionsUnfocus_reorder": {
+        "message": "Unfocused apps last",
+        "description": "Options feature page (Unfocus App): switch moving unfocused apps to the end of the home menu (popup: unfocusApp_popup_reorder)"
+    },
+    "optionsUnfocus_reorderHelp": {
+        "message": "On the home menu, unfocused apps move after all the others.",
+        "description": "Options feature page (Unfocus App): help of the reorder switch"
+    },
+    "optionsUnfocus_share": {
+        "message": "Share between hosts",
+        "description": "Options feature page (Unfocus App): switch sharing one app list between hosts (popup: unfocusApp_popup_share)"
+    },
+    "optionsUnfocus_shareHelp": {
+        "message": "Every Odoo host uses one shared list of apps. The per-host lists are kept, and come back when this is off.",
+        "description": "Options feature page (Unfocus App): help of the share switch"
+    },
+    "optionsPinMessage_selfAuthor": {
+        "message": "My messages only",
+        "description": "Options feature page (Pin Message): switch limiting pins to the current user (popup: pinMessage_popup_selfAuthor)"
+    },
+    "optionsPinMessage_selfAuthorHelp": {
+        "message": "The pin button shows on the messages you wrote, and the pinned section lists what you pinned. Off: pin any message and see everyone's pins.",
+        "description": "Options feature page (Pin Message): help of the 'My messages only' switch"
+    },
+    "optionsPinMessage_defaultShown": {
+        "message": "Open the pinned section on load",
+        "description": "Options feature page (Pin Message): switch showing the pinned section when a record opens (popup: pinMessage_popup_defaultShown)"
+    },
+    "optionsPinMessage_defaultShownHelp": {
+        "message": "Records open with the pinned messages already shown in the chatter.",
+        "description": "Options feature page (Pin Message): help of the 'Open the pinned section on load' switch"
     }
 }

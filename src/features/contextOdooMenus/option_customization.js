@@ -94,7 +94,7 @@ export default class ContextOdooMenusOptionCustomizationFeature extends OptionCu
     }
 
     async load() {
-        super.load();
+        await super.load();
         this.menus = await this.getItems();
         this.setup();
         // In memory only: opening the page must not rewrite the user's order. A list saved before the submenu was

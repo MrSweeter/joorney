@@ -91,6 +91,7 @@ export async function loadPage(features, currentSettings, params = {}) {
             awesomeLoadingSmall: t('optionsFeature_settingsHelpAwesomeLoading'),
             awesomeLoadingLarge: t('optionsFeature_settingsHelpAwesomeLoading'),
             unfocusApp: t('optionsFeature_settingsHelpUnfocusApp'),
+            pinMessage: t('optionsFeature_settingsHelpPinMessage'),
             contextOdooMenus: t('optionsFeature_settingsHelpContextOdooMenus'),
         }[feature.id] ?? t('optionsFeature_settingsHelp');
     let settings = await readStateSettings(features, currentSettings);
@@ -109,7 +110,7 @@ export async function loadPage(features, currentSettings, params = {}) {
         <div data-role="head"></div>
         ${
             hasSettings
-                ? `<section class="joorney-panel" aria-labelledby="joorney-feature-settings-title">
+                ? `<section class="joorney-panel" data-role="settings-panel" aria-labelledby="joorney-feature-settings-title">
                     <h2 class="joorney-panel-title" id="joorney-feature-settings-title">${escapeHTML(t('optionsFeature_settings'))}</h2>
                     <p class="joorney-help">${escapeHTML(settingsHelp)}</p>
                     <div data-role="settings"></div>
@@ -124,6 +125,7 @@ export async function loadPage(features, currentSettings, params = {}) {
     `;
     const headEl = root.querySelector('[data-role="head"]');
     const whereEl = root.querySelector('[data-role="where"]');
+    const settingsPanelEl = root.querySelector('[data-role="settings-panel"]');
     const dynamicEls = [headEl, whereEl];
     //#endregion
 
@@ -254,6 +256,8 @@ export async function loadPage(features, currentSettings, params = {}) {
 
         headEl.innerHTML = headerHTML(active);
         whereEl.innerHTML = whereHTML(active);
+        // Not re-rendered (typing is kept): its Behaviour group shows a note while deactivated
+        settingsPanelEl?.classList.toggle('is-inactive', !active);
 
         if (focus) {
             const target =
@@ -367,12 +371,15 @@ export async function loadPage(features, currentSettings, params = {}) {
         document.removeEventListener(UI_EVENTS.PAGE_CHANGE, onPageChange);
         Runtime.onMessage.removeListener(onPopupMessage);
         if (feature.id === 'ambient') unloadAmbientSettings();
+        customization?.unload();
     };
     document.addEventListener(UI_EVENTS.STATE_CHANGE, onStateChange);
     document.addEventListener(UI_EVENTS.PAGE_CHANGE, onPageChange);
     Runtime.onMessage.addListener(onPopupMessage);
     //#endregion
 
+    // The option_customization of the Settings card, unloaded with the page
+    let customization = null;
     render();
     await loadSettings();
 
@@ -393,7 +400,7 @@ export async function loadPage(features, currentSettings, params = {}) {
         }
         container.innerHTML = html;
         applyI18n(container);
-        const customization = await importFeatureCustomizationFile(feature.id);
+        customization = await importFeatureCustomizationFile(feature.id);
         await customization.load();
     }
 }

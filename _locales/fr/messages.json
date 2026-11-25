@@ -2576,7 +2576,7 @@
         "message": "Ajouter"
     },
     "optionsFeature_settingsHelpUnfocusApp": {
-        "message": "Les apps mises en avant reçoivent une image derrière leur icône, selon le thème d'Odoo. Plus bas, consultez et modifiez les apps que Joorney retient pour chaque hôte Odoo."
+        "message": "Choisissez le comportement des apps masquées, l'image derrière les apps mises en avant, et consultez les apps que Joorney retient pour chaque hôte Odoo."
     },
     "optionsFeature_settingsHelpContextOdooMenus": {
         "message": "Chaque entrée est le chemin d’un menu Odoo : les noms de menu affichés dans Odoo, séparés par /. Joorney trouve le menu sur la base où vous faites le clic droit, un même chemin fonctionne donc sur toutes les versions."
@@ -2725,7 +2725,46 @@
     "optionsUnfocus_notUsedWhileSharing": {
         "message": "Inutilisée pendant le partage"
     },
+    "optionsUnfocus_usedOnlyWhileSharing": {
+        "message": "Utilisée seulement pendant le partage"
+    },
     "optionsUnfocus_sharingNote": {
         "message": "Partage activé : tous les hôtes utilisent la liste partagée. Les listes par hôte sont conservées, sans fusion, et reviennent quand le partage est désactivé."
+    },
+    "optionsFeature_settingsHelpPinMessage": {
+        "message": "Choisissez les messages que vous pouvez épingler, et si les enregistrements s'ouvrent avec la section épinglée affichée."
+    },
+    "optionsFeature_behaviourTitle": {
+        "message": "Comportement"
+    },
+    "optionsFeature_behaviourHelp": {
+        "message": "Aussi dans la popup de la barre d'outils. Les onglets Odoo prennent un changement en compte au prochain chargement de la page."
+    },
+    "optionsFeature_behaviourOff": {
+        "message": "Cette fonctionnalité est désactivée. Ces réglages s'appliquent dès qu'elle est active."
+    },
+    "optionsUnfocus_reorder": {
+        "message": "Apps masquées à la fin"
+    },
+    "optionsUnfocus_reorderHelp": {
+        "message": "Sur le menu d'accueil, les apps masquées passent après toutes les autres."
+    },
+    "optionsUnfocus_share": {
+        "message": "Partager entre les hôtes"
+    },
+    "optionsUnfocus_shareHelp": {
+        "message": "Tous les hôtes Odoo utilisent une seule liste d'apps partagée. Les listes par hôte sont conservées, et reviennent quand ceci est désactivé."
+    },
+    "optionsPinMessage_selfAuthor": {
+        "message": "Mes messages uniquement"
+    },
+    "optionsPinMessage_selfAuthorHelp": {
+        "message": "Le bouton d'épinglage apparaît sur vos messages, et la section épinglée liste ce que vous avez épinglé. Désactivé : épinglez n'importe quel message et voyez les épingles de tout le monde."
+    },
+    "optionsPinMessage_defaultShown": {
+        "message": "Ouvrir la section épinglée au chargement"
+    },
+    "optionsPinMessage_defaultShownHelp": {
+        "message": "Les enregistrements s'ouvrent avec les messages épinglés déjà affichés dans le chatter."
     }
 }

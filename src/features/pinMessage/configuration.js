@@ -17,7 +17,7 @@ export default {
         ],
     },
     customization: {
-        option: false,
+        option: true,
         popup: true,
     },
     defaultSettings: {

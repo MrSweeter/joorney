@@ -9,7 +9,7 @@ export default class ThemeSwitchOptionCustomizationFeature extends OptionCustomi
     }
 
     async load() {
-        super.load();
+        await super.load();
         const configuration = await StorageSync.get(this.configuration.defaultSettings);
 
         this.renderMode(configuration.themeSwitchMode);

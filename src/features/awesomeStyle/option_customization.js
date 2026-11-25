@@ -10,7 +10,7 @@ export default class AwesomeStyleOptionCustomizationFeature extends OptionCustom
     }
 
     async load() {
-        super.load();
+        await super.load();
         document.getElementById('joorney_awe_style_save').onclick = this.saveAwesomeStyle;
 
         const configuration = await StorageSync.get(this.configuration.defaultSettings);

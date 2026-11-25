@@ -266,6 +266,72 @@
     color: var(--joorney-text-muted);
 }
 
+/* Behaviour group: the switches also in the toolbar popup, see settings.js behaviourHTML */
+.joorney-settings-section {
+    margin: 0 0 12px;
+}
+
+.joorney-feature .joorney-settings-subtitle {
+    margin: 0 0 4px;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--joorney-text);
+}
+
+.joorney-behaviour {
+    overflow: hidden;
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-card);
+}
+
+/* The next sub-heading of the block (Unfocus App: the images) */
+.joorney-behaviour:not(:last-child) {
+    margin-bottom: 28px;
+}
+
+.joorney-behaviour-row {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    padding: 12px 16px;
+}
+
+.joorney-behaviour-row + .joorney-behaviour-row {
+    border-top: 1px solid var(--joorney-hover);
+}
+
+.joorney-behaviour-icon {
+    color: var(--joorney-text-soft);
+}
+
+.joorney-behaviour-icon .joorney-icon {
+    font-size: 18px;
+}
+
+.joorney-behaviour-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.joorney-behaviour-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--joorney-text);
+    cursor: pointer;
+}
+
+/* Shown while the feature is deactivated: the switches stay usable, to prepare it */
+.joorney-feature .joorney-behaviour-off {
+    display: none;
+    font-size: 13px;
+}
+
+.joorney-feature .is-inactive .joorney-behaviour-off {
+    display: flex;
+}
+
 .joorney-unfocus-tiles {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));

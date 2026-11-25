@@ -43,7 +43,7 @@ export default class UnfocusAppOptionCustomizationFeature extends OptionCustomiz
     }
 
     async load() {
-        super.load();
+        await super.load();
         this.openOrigins = new Set();
         this.pendingOrigin = null;
         // The app last set back to normal, for its Undo line: { origin, app, value, state }
@@ -64,6 +64,15 @@ export default class UnfocusAppOptionCustomizationFeature extends OptionCustomiz
         this.appNames = appNames;
 
         await this.restoreImage();
+        this.renderOrigins();
+    }
+
+    // Sharing changes which list is in use: the shared one on top, the per-host ones marked as not used
+    async onSettingSwitch(key, value) {
+        if (key !== 'unfocusAppShareEnabled') return;
+        this.shareEnabled = value;
+        this.pendingOrigin = null;
+        this.restoredApp = null;
         this.renderOrigins();
     }
 
@@ -216,7 +225,11 @@ export default class UnfocusAppOptionCustomizationFeature extends OptionCustomiz
         if (this.pendingOrigin === origin) return this.renderOriginConfirm(origin, hostName);
 
         const isOpen = this.openOrigins.has(origin);
-        const isIgnored = this.shareEnabled && !isShared;
+        // Muted: the list not in use with "Share between hosts" (the per-host ones while on, the shared one while off)
+        const isIgnored = this.shareEnabled !== isShared;
+        const ignoredLabel = isShared
+            ? t('optionsUnfocus_usedOnlyWhileSharing')
+            : t('optionsUnfocus_notUsedWhileSharing');
         const panelId = `joorney_unfocus_app_apps_${index}`;
         const superfocusCount = apps.filter(({ state }) => state === UNFOCUS_STATE.SUPER).length;
         const unfocusCount = apps.filter(({ state }) => state === UNFOCUS_STATE.UNFOCUS).length;
@@ -230,7 +243,7 @@ export default class UnfocusAppOptionCustomizationFeature extends OptionCustomiz
                     </button>
                     <span class="joorney-chips">
                         ${isShared ? `<span class="joorney-chip is-shared">${iconHTML('share')}${escapeHTML(t('optionsUnfocus_sharedChip'))}</span>` : ''}
-                        ${isIgnored ? `<span class="joorney-chip is-ignored">${escapeHTML(t('optionsUnfocus_notUsedWhileSharing'))}</span>` : ''}
+                        ${isIgnored ? `<span class="joorney-chip is-ignored">${escapeHTML(ignoredLabel)}</span>` : ''}
                         ${superfocusCount ? `<span class="joorney-chip is-superfocus">${escapeHTML(t('optionsUnfocus_superfocused', String(superfocusCount)))}</span>` : ''}
                         ${unfocusCount ? `<span class="joorney-chip">${escapeHTML(t('optionsUnfocus_unfocused', String(unfocusCount)))}</span>` : ''}
                     </span>

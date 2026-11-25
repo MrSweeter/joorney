@@ -1,12 +1,37 @@
 import { escapeHTML } from '../../../src/html_generator.js';
 import { t } from '../../../src/utils/i18n.js';
 import { iconHTML } from '../../../src/utils/icons.js';
+import { switchHTML } from '../../src/ui/feature_card.js';
 
 /**
  * Markup of the customization blocks of the feature page "Settings" card, one per feature with
  * `customization.option`. The ids are the ones the src/features/<id>/option_customization.js files read;
  * texts use data-i18n (applyI18n runs on the page container after the injection).
  */
+
+function behaviourHTML(rows) {
+    const rowHTML = ({ setting, icon, labelKey, helpKey }) => {
+        const id = `joorney_behaviour_${setting}`;
+        return `
+            <div class="joorney-behaviour-row">
+                <span class="joorney-icon-box joorney-behaviour-icon">${iconHTML(icon)}</span>
+                <div class="joorney-behaviour-text">
+                    <label class="joorney-behaviour-label" for="${id}">${escapeHTML(t(labelKey))}</label>
+                    <p class="joorney-help is-small" id="${id}_help">${escapeHTML(t(helpKey))}</p>
+                </div>
+                ${switchHTML({ on: false, label: t(labelKey), attributes: `id="${id}" data-setting="${escapeHTML(setting)}" aria-describedby="${id}_help"` })}
+            </div>
+        `;
+    };
+    return `
+        <div class="joorney-settings-section">
+            <h3 class="joorney-settings-subtitle">${escapeHTML(t('optionsFeature_behaviourTitle'))}</h3>
+            <p class="joorney-help is-small">${escapeHTML(t('optionsFeature_behaviourHelp'))}</p>
+        </div>
+        <p class="joorney-note joorney-behaviour-off">${iconHTML('info')}<span>${escapeHTML(t('optionsFeature_behaviourOff'))}</span></p>
+        <div class="joorney-behaviour">${rows.map(rowHTML).join('')}</div>
+    `;
+}
 
 // Awesome Loading Large and Small share one block, and one option_customization (src/shared)
 const SHARED_BLOCK = { awesomeLoadingLarge: 'awesomeLoading', awesomeLoadingSmall: 'awesomeLoading' };
@@ -37,6 +62,20 @@ const awesomeStyle = () => `
 `;
 
 const unfocusApp = () => `
+    ${behaviourHTML([
+        {
+            setting: 'unfocusAppReorderEnabled',
+            icon: 'swap_vert',
+            labelKey: 'optionsUnfocus_reorder',
+            helpKey: 'optionsUnfocus_reorderHelp',
+        },
+        {
+            setting: 'unfocusAppShareEnabled',
+            icon: 'share',
+            labelKey: 'optionsUnfocus_share',
+            helpKey: 'optionsUnfocus_shareHelp',
+        },
+    ])}
     <div class="joorney-unfocus-section">
         <h3 class="joorney-unfocus-subtitle" data-i18n="optionsUnfocus_imageTitle">Superfocus image</h3>
         <p class="joorney-help is-small" data-i18n="optionsUnfocus_imageHelp">Painted behind superfocused apps. Joorney uses the one that matches the theme of the Odoo database.</p>
@@ -188,12 +227,24 @@ const contextOdooMenus = () => `
     </details>
 `;
 
-const BLOCKS = { awesomeLoading, awesomeStyle, unfocusApp, themeSwitch, contextOdooMenus };
+const pinMessage = () =>
+    behaviourHTML([
+        {
+            setting: 'pinMessageSelfAuthorEnabled',
+            icon: 'chat_bubble',
+            labelKey: 'optionsPinMessage_selfAuthor',
+            helpKey: 'optionsPinMessage_selfAuthorHelp',
+        },
+        {
+            setting: 'pinMessageDefaultShown',
+            icon: 'visibility',
+            labelKey: 'optionsPinMessage_defaultShown',
+            helpKey: 'optionsPinMessage_defaultShownHelp',
+        },
+    ]);
 
-/**
- * @param {string} featureID
- * @returns {string|undefined} the block wrapped in div[data-feature-customization], undefined if the feature has none
- */
+const BLOCKS = { awesomeLoading, awesomeStyle, unfocusApp, themeSwitch, contextOdooMenus, pinMessage };
+
 export function settingsBlockHTML(featureID) {
     const block = SHARED_BLOCK[featureID] ?? featureID;
     if (!BLOCKS[block]) return undefined;
