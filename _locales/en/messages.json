@@ -3437,6 +3437,10 @@
         "message": "All hosts",
         "description": "Options feature page (Unfocus App): name of the list shared by every host (Share between hosts)"
     },
+    "optionsUnfocus_runbotHost": {
+        "message": "Runbot builds",
+        "description": "Options feature page (Unfocus App): name of the list used by every runbot build (https://*.runbotNNN.odoo.com)"
+    },
     "optionsUnfocus_sharedChip": {
         "message": "Shared",
         "description": "Options feature page (Unfocus App): chip of the list shared by every host"

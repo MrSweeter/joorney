@@ -5,10 +5,10 @@ import { Console, StorageSync } from '../../utils/browser.js';
 import { t } from '../../utils/i18n.js';
 import { iconHTML } from '../../utils/icons.js';
 import configuration from './configuration.js';
+import { mergeRunbotBuilds, RUNBOT_BUILDS_ORIGIN, SHARED_ORIGIN } from './origins.js';
 
 // Same values as content.js: `true` is how older versions stored an unfocused app
 const UNFOCUS_STATE = Object.freeze({ UNFOCUS: 0, DEFAULT: 1, SUPER: 2 });
-const SHARED_ORIGIN = 'unfocus_app_shared';
 // Order of the mode buttons of an app
 const STATE_BUTTONS = [
     { state: UNFOCUS_STATE.UNFOCUS, icon: 'visibility_off', labelKey: 'optionsUnfocus_stateUnfocused' },
@@ -26,6 +26,17 @@ function readState(value) {
     if (value === true || value === UNFOCUS_STATE.UNFOCUS) return UNFOCUS_STATE.UNFOCUS;
     if (value === UNFOCUS_STATE.SUPER) return UNFOCUS_STATE.SUPER;
     return UNFOCUS_STATE.DEFAULT;
+}
+
+// The shared list first (in use while sharing is on), then the runbot builds one, then the hosts as stored
+function listRank(origin) {
+    if (origin === SHARED_ORIGIN) return 0;
+    return origin === RUNBOT_BUILDS_ORIGIN ? 1 : 2;
+}
+
+function hostLabel(origin) {
+    if (origin === SHARED_ORIGIN) return t('optionsUnfocus_sharedHost');
+    return origin === RUNBOT_BUILDS_ORIGIN ? t('optionsUnfocus_runbotHost') : origin;
 }
 
 // "hr_expense.menu_hr_expense_root" -> "Hr Expense", for an app never seen on a home menu with this browser
@@ -81,13 +92,10 @@ export default class UnfocusAppOptionCustomizationFeature extends OptionCustomiz
         const { unfocusAppOrigins } = await StorageSync.get({
             unfocusAppOrigins: this.defaultSettings.unfocusAppOrigins,
         });
-        return unfocusAppOrigins;
+        // The lists kept per runbot build before show as the runbot one, the next write saves them merged
+        return mergeRunbotBuilds(unfocusAppOrigins);
     }
 
-    /**
-     * Read again before each write: the Odoo tabs may have starred apps since the page was opened.
-     * @returns {Promise<boolean>} false when the write failed: the hosts are shown as stored, with the error
-     */
     async updateUnfocusAppOrigins(update) {
         try {
             const origins = await this.readUnfocusAppOrigins();
@@ -193,8 +201,7 @@ export default class UnfocusAppOptionCustomizationFeature extends OptionCustomiz
         const entries = origins
             .map((origin) => [origin, this.rememberedApps(origin)])
             .filter(([origin, apps]) => apps.length || origin === restoredOrigin)
-            // The shared list first: it is the one in use while sharing is on
-            .sort(([a], [b]) => (b === SHARED_ORIGIN) - (a === SHARED_ORIGIN));
+            .sort(([a], [b]) => listRank(a) - listRank(b));
 
         if (!entries.length) {
             container.appendChild(
@@ -221,7 +228,7 @@ export default class UnfocusAppOptionCustomizationFeature extends OptionCustomiz
     // Asks inline (Cancel / Forget, no confirm()): the question takes the place of the host
     renderOrigin(origin, apps, index) {
         const isShared = origin === SHARED_ORIGIN;
-        const hostName = isShared ? t('optionsUnfocus_sharedHost') : origin;
+        const hostName = hostLabel(origin);
         if (this.pendingOrigin === origin) return this.renderOriginConfirm(origin, hostName);
 
         const isOpen = this.openOrigins.has(origin);

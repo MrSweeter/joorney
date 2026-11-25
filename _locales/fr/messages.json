@@ -2728,6 +2728,9 @@
     "optionsUnfocus_sharedHost": {
         "message": "Tous les hôtes"
     },
+    "optionsUnfocus_runbotHost": {
+        "message": "Builds runbot"
+    },
     "optionsUnfocus_sharedChip": {
         "message": "Partagée"
     },

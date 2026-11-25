@@ -7,6 +7,7 @@ import { isDarkCookie } from '../../utils/cookies.js';
 import { t } from '../../utils/i18n.js';
 import { sanitizeURL, sleep } from '../../utils/util.js';
 import configuration from './configuration.js';
+import { mergeRunbotBuilds, storageOrigin } from './origins.js';
 
 const UNFOCUS_STATE = Object.freeze({
     UNFOCUS: 0,
@@ -20,7 +21,6 @@ const UNFOCUS_OPACITY = 0.1;
 const STAR_ELEMENT_CLASS = 'joorney-focus-app';
 const FOCUS_ICON = 'fa-star';
 const UNFOCUS_ICON = 'fa-star-o';
-const SHARED_ORIGIN = 'unfocus_app_shared';
 
 export default class UnfocusApp extends ContentFeature {
     constructor() {
@@ -51,8 +51,8 @@ export default class UnfocusApp extends ContentFeature {
             return this.appendUnfocusApp(url, count + 1);
         }
 
-        const origin = unfocusAppShareEnabled ? SHARED_ORIGIN : url.origin;
-        const unfocusAppList = unfocusAppOrigins[origin] || {};
+        const origin = storageOrigin(url.origin, unfocusAppShareEnabled);
+        const unfocusAppList = mergeRunbotBuilds(unfocusAppOrigins)[origin] || {};
 
         this.appendStar(elements, unfocusAppList, {
             unfocusAppLightImageURL,
@@ -148,16 +148,15 @@ export default class UnfocusApp extends ContentFeature {
     }
 
     async saveStarClick(element, event) {
-        let origin = window.location.origin;
         const parent = event.target.parentElement.parentElement;
         const app = parent.getAttribute('data-menu-xmlid');
 
         const { unfocusAppOrigins, unfocusAppShareEnabled, unfocusAppLightImageURL, unfocusAppDarkImageURL } =
             await StorageSync.get(this.defaultSettings);
 
-        if (unfocusAppShareEnabled) {
-            origin = SHARED_ORIGIN;
-        }
+        // Saved merged: the lists kept per runbot build before go into the runbot one
+        mergeRunbotBuilds(unfocusAppOrigins);
+        const origin = storageOrigin(window.location.origin, unfocusAppShareEnabled);
 
         unfocusAppOrigins[origin] = unfocusAppOrigins[origin] || {};
 
