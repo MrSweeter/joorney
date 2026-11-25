@@ -1992,11 +1992,11 @@
         "description": "Options preferences: Awesome Style save button"
     },
     "optionsPreferences_lightImageAlt": {
-        "message": "Light superfocus background",
+        "message": "Light theme superfocus image",
         "description": "Options preferences (Unfocus App): alt text of the light image preview"
     },
     "optionsPreferences_darkImageAlt": {
-        "message": "Dark superfocus background",
+        "message": "Dark theme superfocus image",
         "description": "Options preferences (Unfocus App): alt text of the dark image preview"
     },
     "optionsPreferences_getLocation": {
@@ -3252,7 +3252,7 @@
         "description": "Options developers page: button adding a fallback"
     },
     "optionsFeature_settingsHelpUnfocusApp": {
-        "message": "Pick the image shown behind the home menu, and review which apps Joorney remembers for each Odoo host.",
+        "message": "Superfocused apps get an image behind their icon, picked to match the Odoo theme. Below, see and change which apps Joorney remembers for each Odoo host.",
         "description": "Options feature page: help of the Unfocus App settings card"
     },
     "optionsFeature_settingsHelpContextOdooMenus": {
@@ -3260,11 +3260,11 @@
         "description": "Options feature page: help of the Context Odoo Menus settings card"
     },
     "optionsUnfocus_lightTitle": {
-        "message": "Light background",
+        "message": "Light theme",
         "description": "Options feature page (Unfocus App): title of the light theme image tile"
     },
     "optionsUnfocus_darkTitle": {
-        "message": "Dark background",
+        "message": "Dark theme",
         "description": "Options feature page (Unfocus App): title of the dark theme image tile"
     },
     "optionsUnfocus_imageUrl": {
@@ -3284,11 +3284,11 @@
         "description": "Options feature page (Unfocus App): button next to the image URL field, restoring the default image"
     },
     "optionsUnfocus_resetLightTitle": {
-        "message": "Use the default light image",
+        "message": "Use the default light theme image",
         "description": "Options feature page (Unfocus App): tooltip of the button restoring the default light image"
     },
     "optionsUnfocus_resetDarkTitle": {
-        "message": "Use the default dark image",
+        "message": "Use the default dark theme image",
         "description": "Options feature page (Unfocus App): tooltip of the button restoring the default dark image"
     },
     "optionsUnfocus_restored": {
@@ -3368,5 +3368,75 @@
     "optionsUnfocus_empty": {
         "message": "No app unfocused yet. Unfocus an app from the Odoo home menu to see it here.",
         "description": "Options feature page (Unfocus App): empty host list"
+    },
+    "optionsUnfocus_errorSave": {
+        "message": "Could not save the remembered apps, they are shown as saved: $error$",
+        "description": "Options feature page (Unfocus App): error, a change to the remembered apps could not be saved (storage quota or error)",
+        "placeholders": {
+            "error": {
+                "content": "$1",
+                "example": "QUOTA_BYTES_PER_ITEM quota exceeded"
+            }
+        }
+    },
+    "optionsUnfocus_imageTitle": {
+        "message": "Superfocus image",
+        "description": "Options feature page (Unfocus App): sub-heading of the light and dark theme image tiles"
+    },
+    "optionsUnfocus_imageHelp": {
+        "message": "Painted behind superfocused apps. Joorney uses the one that matches the theme of the Odoo database.",
+        "description": "Options feature page (Unfocus App): help under the superfocus image sub-heading"
+    },
+    "optionsUnfocus_hostsHelp": {
+        "message": "Apps show up here once you star them on the home menu of an Odoo host. Open a host to see its apps, and set one back to Normal to forget it.",
+        "description": "Options feature page (Unfocus App): help under the host list sub-heading; 'Normal' is the label of optionsUnfocus_stateNormal"
+    },
+    "optionsUnfocus_stateUnfocused": {
+        "message": "Unfocused",
+        "description": "Options feature page (Unfocus App): mode of an app (button and group heading): dimmed on the home menu"
+    },
+    "optionsUnfocus_stateNormal": {
+        "message": "Normal",
+        "description": "Options feature page (Unfocus App): mode of an app (button): neither dimmed nor highlighted, the app is forgotten"
+    },
+    "optionsUnfocus_stateSuperfocused": {
+        "message": "Superfocused",
+        "description": "Options feature page (Unfocus App): mode of an app (button and group heading): image behind its icon"
+    },
+    "optionsUnfocus_focusOf": {
+        "message": "Focus of $app$",
+        "description": "Options feature page (Unfocus App): accessible name of the mode buttons of an app",
+        "placeholders": {
+            "app": {
+                "content": "$1",
+                "example": "Sales"
+            }
+        }
+    },
+    "optionsUnfocus_backToNormal": {
+        "message": "$app$ is back to normal.",
+        "description": "Options feature page (Unfocus App): line shown in place of an app set back to Normal, before Undo",
+        "placeholders": {
+            "app": {
+                "content": "$1",
+                "example": "Sales"
+            }
+        }
+    },
+    "optionsUnfocus_sharedHost": {
+        "message": "All hosts",
+        "description": "Options feature page (Unfocus App): name of the list shared by every host (Share between hosts)"
+    },
+    "optionsUnfocus_sharedChip": {
+        "message": "Shared",
+        "description": "Options feature page (Unfocus App): chip of the list shared by every host"
+    },
+    "optionsUnfocus_notUsedWhileSharing": {
+        "message": "Not used while sharing",
+        "description": "Options feature page (Unfocus App): chip of a host list while sharing between hosts is on"
+    },
+    "optionsUnfocus_sharingNote": {
+        "message": "Sharing is on: every host uses the shared list. The per-host lists are kept, not merged, and come back when sharing is turned off.",
+        "description": "Options feature page (Unfocus App): note above the host list while sharing between hosts is on"
     }
 }

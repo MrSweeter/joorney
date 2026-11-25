@@ -1,3 +1,4 @@
+import { addUnfocusAppNames } from '../../api/local.js';
 import ContentFeature from '../../generic/content.js';
 import { escapeHTML } from '../../html_generator.js';
 import { isOdooWebsite, isStillSameWebsite } from '../../utils/authorize.js';
@@ -58,6 +59,18 @@ export default class UnfocusApp extends ContentFeature {
             unfocusAppDarkImageURL,
         });
         this.handleStar(unfocusAppReorderEnabled);
+        await this.rememberAppNames(elements);
+    }
+
+    // The options page lists the remembered apps by xmlid: keep the names it can show instead
+    async rememberAppNames(elements) {
+        const names = {};
+        for (const element of elements) {
+            const app = element.getAttribute('data-menu-xmlid');
+            const name = element.getElementsByClassName('o_caption')[0]?.textContent.trim();
+            if (app && name) names[app] = name;
+        }
+        await addUnfocusAppNames(names);
     }
 
     appendStar(elements, unfocusAppList, configuration) {

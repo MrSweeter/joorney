@@ -1582,10 +1582,10 @@
         "message": "Enregistrer (Ctrl+S)"
     },
     "optionsPreferences_lightImageAlt": {
-        "message": "Arrière-plan clair de mise en avant"
+        "message": "Image de mise en avant du thème clair"
     },
     "optionsPreferences_darkImageAlt": {
-        "message": "Arrière-plan sombre de mise en avant"
+        "message": "Image de mise en avant du thème sombre"
     },
     "optionsPreferences_getLocation": {
         "message": "Utiliser la position actuelle"
@@ -2576,16 +2576,16 @@
         "message": "Ajouter"
     },
     "optionsFeature_settingsHelpUnfocusApp": {
-        "message": "Choisissez l'image affichée derrière le menu d'accueil et consultez les apps que Joorney retient pour chaque hôte Odoo."
+        "message": "Les apps mises en avant reçoivent une image derrière leur icône, selon le thème d'Odoo. Plus bas, consultez et modifiez les apps que Joorney retient pour chaque hôte Odoo."
     },
     "optionsFeature_settingsHelpContextOdooMenus": {
         "message": "Chaque entrée est le chemin d’un menu Odoo : les noms de menu affichés dans Odoo, séparés par /. Joorney trouve le menu sur la base où vous faites le clic droit, un même chemin fonctionne donc sur toutes les versions."
     },
     "optionsUnfocus_lightTitle": {
-        "message": "Arrière-plan clair"
+        "message": "Thème clair"
     },
     "optionsUnfocus_darkTitle": {
-        "message": "Arrière-plan sombre"
+        "message": "Thème sombre"
     },
     "optionsUnfocus_imageUrl": {
         "message": "URL de l'image"
@@ -2600,10 +2600,10 @@
         "message": "Par défaut"
     },
     "optionsUnfocus_resetLightTitle": {
-        "message": "Utiliser l'image claire par défaut"
+        "message": "Utiliser l'image par défaut du thème clair"
     },
     "optionsUnfocus_resetDarkTitle": {
-        "message": "Utiliser l'image sombre par défaut"
+        "message": "Utiliser l'image par défaut du thème sombre"
     },
     "optionsUnfocus_restored": {
         "message": "Image par défaut rétablie."
@@ -2670,5 +2670,62 @@
     },
     "optionsUnfocus_empty": {
         "message": "Aucune app masquée pour l'instant. Masquez une app depuis le menu d'accueil d'Odoo pour la voir ici."
+    },
+    "optionsUnfocus_errorSave": {
+        "message": "Impossible d’enregistrer les applications mémorisées, elles sont affichées telles qu’enregistrées : $error$",
+        "placeholders": {
+            "error": {
+                "content": "$1",
+                "example": "QUOTA_BYTES_PER_ITEM quota exceeded"
+            }
+        }
+    },
+    "optionsUnfocus_imageTitle": {
+        "message": "Image de mise en avant"
+    },
+    "optionsUnfocus_imageHelp": {
+        "message": "Affichée derrière les apps mises en avant. Joorney utilise celle qui correspond au thème de la base Odoo."
+    },
+    "optionsUnfocus_hostsHelp": {
+        "message": "Les apps apparaissent ici dès que vous les étoilez sur le menu d'accueil d'un hôte Odoo. Ouvrez un hôte pour voir ses apps, et remettez-en une en Normale pour l'oublier."
+    },
+    "optionsUnfocus_stateUnfocused": {
+        "message": "Masquée"
+    },
+    "optionsUnfocus_stateNormal": {
+        "message": "Normale"
+    },
+    "optionsUnfocus_stateSuperfocused": {
+        "message": "Mise en avant"
+    },
+    "optionsUnfocus_focusOf": {
+        "message": "Mode de $app$",
+        "placeholders": {
+            "app": {
+                "content": "$1",
+                "example": "Sales"
+            }
+        }
+    },
+    "optionsUnfocus_backToNormal": {
+        "message": "$app$ est revenue à la normale.",
+        "placeholders": {
+            "app": {
+                "content": "$1",
+                "example": "Sales"
+            }
+        }
+    },
+    "optionsUnfocus_sharedHost": {
+        "message": "Tous les hôtes"
+    },
+    "optionsUnfocus_sharedChip": {
+        "message": "Partagée"
+    },
+    "optionsUnfocus_notUsedWhileSharing": {
+        "message": "Inutilisée pendant le partage"
+    },
+    "optionsUnfocus_sharingNote": {
+        "message": "Partage activé : tous les hôtes utilisent la liste partagée. Les listes par hôte sont conservées, sans fusion, et reviennent quand le partage est désactivé."
     }
 }

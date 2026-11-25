@@ -37,21 +37,25 @@ const awesomeStyle = () => `
 `;
 
 const unfocusApp = () => `
+    <div class="joorney-unfocus-section">
+        <h3 class="joorney-unfocus-subtitle" data-i18n="optionsUnfocus_imageTitle">Superfocus image</h3>
+        <p class="joorney-help is-small" data-i18n="optionsUnfocus_imageHelp">Painted behind superfocused apps. Joorney uses the one that matches the theme of the Odoo database.</p>
+    </div>
     <div class="joorney-unfocus-tiles">
         <div class="joorney-unfocus-tile">
             <div class="joorney-unfocus-tile-head">
-                <h3 data-i18n="optionsUnfocus_lightTitle">Light background</h3>
+                <h3>${iconHTML('light_mode')}<span data-i18n="optionsUnfocus_lightTitle">Light theme</span></h3>
                 <span class="joorney-chip" id="joorney_unfocus_app_light_image_label"></span>
             </div>
             <div class="joorney-unfocus-thumb is-light">
                 <div class="joorney-unfocus-cell">
-                    <img alt="Light superfocus background" data-i18n-alt="optionsPreferences_lightImageAlt" id="joorney_unfocus_app_light_image">
+                    <img alt="Light theme superfocus image" data-i18n-alt="optionsPreferences_lightImageAlt" id="joorney_unfocus_app_light_image">
                 </div>
             </div>
             <label class="joorney-fs-label" for="joorney_unfocus_app_light_image_input" data-i18n="optionsUnfocus_imageUrl">Image URL</label>
             <div class="joorney-unfocus-field">
                 <input type="text" class="joorney-input joorney-unfocus-input" id="joorney_unfocus_app_light_image_input" aria-describedby="joorney_unfocus_app_light_image_error">
-                <button type="button" class="joorney-btn is-secondary" id="joorney_unfocus_app_light_image_reset" title="Use the default light image" data-i18n-title="optionsUnfocus_resetLightTitle" hidden>
+                <button type="button" class="joorney-btn is-secondary" id="joorney_unfocus_app_light_image_reset" title="Use the default light theme image" data-i18n-title="optionsUnfocus_resetLightTitle" hidden>
                     ${iconHTML('restart_alt')}<span data-i18n="optionsUnfocus_resetImage">Use default</span>
                 </button>
             </div>
@@ -63,18 +67,18 @@ const unfocusApp = () => `
         </div>
         <div class="joorney-unfocus-tile">
             <div class="joorney-unfocus-tile-head">
-                <h3 data-i18n="optionsUnfocus_darkTitle">Dark background</h3>
+                <h3>${iconHTML('circle', { filled: true })}<span data-i18n="optionsUnfocus_darkTitle">Dark theme</span></h3>
                 <span class="joorney-chip" id="joorney_unfocus_app_dark_image_label"></span>
             </div>
             <div class="joorney-unfocus-thumb is-dark">
                 <div class="joorney-unfocus-cell">
-                    <img alt="Dark superfocus background" data-i18n-alt="optionsPreferences_darkImageAlt" id="joorney_unfocus_app_dark_image">
+                    <img alt="Dark theme superfocus image" data-i18n-alt="optionsPreferences_darkImageAlt" id="joorney_unfocus_app_dark_image">
                 </div>
             </div>
             <label class="joorney-fs-label" for="joorney_unfocus_app_dark_image_input" data-i18n="optionsUnfocus_imageUrl">Image URL</label>
             <div class="joorney-unfocus-field">
                 <input type="text" class="joorney-input joorney-unfocus-input" id="joorney_unfocus_app_dark_image_input" aria-describedby="joorney_unfocus_app_dark_image_error">
-                <button type="button" class="joorney-btn is-secondary" id="joorney_unfocus_app_dark_image_reset" title="Use the default dark image" data-i18n-title="optionsUnfocus_resetDarkTitle" hidden>
+                <button type="button" class="joorney-btn is-secondary" id="joorney_unfocus_app_dark_image_reset" title="Use the default dark theme image" data-i18n-title="optionsUnfocus_resetDarkTitle" hidden>
                     ${iconHTML('restart_alt')}<span data-i18n="optionsUnfocus_resetImage">Use default</span>
                 </button>
             </div>
@@ -85,7 +89,10 @@ const unfocusApp = () => `
             </p>
         </div>
     </div>
-    <h3 class="joorney-unfocus-subtitle" data-i18n="optionsUnfocus_hostsTitle">Remembered apps per host</h3>
+    <div class="joorney-unfocus-section">
+        <h3 class="joorney-unfocus-subtitle" data-i18n="optionsUnfocus_hostsTitle">Remembered apps per host</h3>
+        <p class="joorney-help is-small" data-i18n="optionsUnfocus_hostsHelp">Apps show up here once you star them on the home menu of an Odoo host. Open a host to see its apps, and set one back to Normal to forget it.</p>
+    </div>
     <div id="joorney_unfocus_app_hosts"></div>
 `;
 

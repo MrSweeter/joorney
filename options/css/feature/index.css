@@ -292,6 +292,17 @@
     color: var(--joorney-text);
 }
 
+.joorney-feature .joorney-unfocus-tile h3 {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.joorney-unfocus-tile h3 .joorney-icon {
+    font-size: 18px;
+    color: var(--joorney-text-muted);
+}
+
 .joorney-feature .joorney-unfocus-tile .joorney-fs-label {
     margin: 0 0 -2px;
     font-size: 13px;
@@ -406,8 +417,34 @@ src/features/unfocusApp/content.js does it (contain, center top) */
     border: 0;
 }
 
+/* Title and help of the image tiles and of the host list */
+.joorney-unfocus-section {
+    margin: 0 0 12px;
+}
+
+.joorney-unfocus-section ~ .joorney-unfocus-section {
+    margin-top: 28px;
+}
+
 .joorney-feature .joorney-unfocus-subtitle {
-    margin: 24px 0 8px;
+    margin: 0 0 4px;
+}
+
+.joorney-feature .joorney-unfocus-note {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    padding: 10px 12px;
+    margin: 0 0 12px;
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--joorney-state-everywhere-text);
+    background: var(--joorney-state-everywhere-tint);
+    border-radius: var(--joorney-radius-control);
+}
+
+.joorney-unfocus-note .joorney-icon {
+    font-size: 18px;
 }
 
 .joorney-unfocus-hosts {
@@ -417,32 +454,195 @@ src/features/unfocusApp/content.js does it (contain, center top) */
 }
 
 .joorney-unfocus-host {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-items: center;
-    padding: 8px 8px 8px 16px;
-    border-top: 1px solid var(--joorney-hover);
+    border-top: 1px solid var(--joorney-border);
 }
 
 .joorney-unfocus-host:first-child {
     border-top: 0;
 }
 
+/* Name (opens the host), count chips, forget button */
+.joorney-unfocus-hostrow {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    min-height: 44px;
+    padding: 4px 8px 4px 4px;
+}
+
+.joorney-unfocus-host.is-open > .joorney-unfocus-hostrow {
+    background: var(--joorney-surface-soft);
+    border-bottom: 1px solid var(--joorney-border);
+}
+
+.joorney-unfocus-disclosure {
+    flex: 1;
+    padding: 6px 8px;
+}
+
+.joorney-unfocus-disclosure:hover {
+    background: var(--joorney-hover);
+}
+
+.joorney-unfocus-disclosure .joorney-icon {
+    flex: none;
+    color: var(--joorney-text-muted);
+    transition: transform 0.15s;
+}
+
+.joorney-unfocus-disclosure[aria-expanded="false"] .joorney-icon {
+    transform: rotate(-90deg);
+}
+
+.joorney-unfocus-name {
+    min-width: 0;
+    font-size: 15px;
+    font-weight: 500;
+    overflow-wrap: anywhere;
+}
+
+/* Sharing on: the per-host lists are kept but not used */
+.joorney-unfocus-host.is-ignored .joorney-unfocus-name,
+.joorney-unfocus-host.is-ignored .joorney-chip:not(.is-ignored) {
+    opacity: 0.6;
+}
+
+.joorney-chip.is-superfocus,
+.joorney-chip.is-ignored {
+    color: var(--joorney-state-listed-text);
+    background: var(--joorney-state-listed-tint);
+}
+
+.joorney-chip.is-shared {
+    color: var(--joorney-state-everywhere-text);
+    background: var(--joorney-state-everywhere-tint);
+}
+
 .joorney-unfocus-host.is-confirm {
     padding: 0;
 }
 
-.joorney-unfocus-name {
-    flex: 1 1 220px;
-    min-width: 0;
-    font-size: 15px;
-    overflow-wrap: anywhere;
+/* The apps of an open host; 14px like the rest of the settings card text, as MDB sets the body to 16px */
+.joorney-unfocus-apps {
+    padding: 4px 12px 8px 44px;
+    font-size: 14px;
 }
 
-.joorney-chip.is-superfocus {
-    color: var(--joorney-state-everywhere-text);
-    background: var(--joorney-state-everywhere-tint);
+.joorney-unfocus-app {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    min-height: 36px;
+    padding: 2px 0 2px 6px;
+    border-top: 1px solid var(--joorney-hover);
+}
+
+.joorney-unfocus-app:first-child {
+    border-top: 0;
+}
+
+.joorney-unfocus-app.is-restored {
+    padding: 2px 10px;
+    margin: 2px 0;
+    background: var(--joorney-hover);
+    border: 0;
+    border-radius: var(--joorney-radius-control);
+}
+
+/* Name and xmlid on one line, the xmlid cut when the row is short */
+.joorney-unfocus-appname {
+    display: flex;
+    flex: 1;
+    gap: 10px;
+    align-items: baseline;
+    min-width: 0;
+}
+
+.joorney-unfocus-applabel {
+    flex: none;
+}
+
+.joorney-unfocus-appname code {
+    min-width: 0;
+    overflow: hidden;
+    font:
+        12px ui-monospace,
+        Menlo,
+        Consolas,
+        monospace;
+    color: var(--joorney-text-muted);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Unfocused / Normal / Superfocused, icon only (name in title and aria-label) */
+.joorney-unfocus-modes {
+    display: inline-flex;
+    flex: none;
+    overflow: hidden;
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border-strong);
+    border-radius: var(--joorney-radius-control);
+}
+
+.joorney-unfocus-modes button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 26px;
+    padding: 0;
+    color: var(--joorney-text-muted);
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    border-left: 1px solid var(--joorney-border-strong);
+}
+
+.joorney-unfocus-modes button:first-child {
+    border-left: 0;
+}
+
+.joorney-unfocus-modes button:hover {
+    background: var(--joorney-hover);
+}
+
+.joorney-unfocus-modes button[aria-checked="true"] {
+    color: var(--joorney-text);
+    background: #dfe3ea;
+}
+
+.joorney-unfocus-modes .joorney-icon {
+    font-size: 17px;
+}
+
+@media (max-width: 640px) {
+    .joorney-unfocus-hostrow {
+        flex-wrap: wrap;
+    }
+
+    .joorney-unfocus-disclosure {
+        flex-basis: 100%;
+    }
+
+    .joorney-unfocus-hostrow .joorney-chips {
+        flex: 1;
+        margin-left: 36px;
+    }
+
+    .joorney-unfocus-apps {
+        padding-left: 12px;
+    }
+
+    .joorney-unfocus-appname {
+        flex-direction: column;
+        gap: 0;
+        align-items: flex-start;
+    }
+
+    .joorney-unfocus-appname code {
+        max-width: 100%;
+    }
 }
 
 .joorney-unfocus-ask {
