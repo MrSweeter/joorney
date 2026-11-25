@@ -1,6 +1,6 @@
 import OptionCustomizationFeature from '../../generic/option_customization.js';
 import { escapeHTML } from '../../html_generator.js';
-import { Console, I18n, StorageSync, sendRuntimeMessage } from '../../utils/browser.js';
+import { Console, I18n, StorageSync, SYNC_ITEM_BYTES, sendRuntimeMessage, syncItemBytes } from '../../utils/browser.js';
 import { featureName, t } from '../../utils/i18n.js';
 import { iconHTML } from '../../utils/icons.js';
 import { MESSAGE_ACTION } from '../../utils/messaging.js';
@@ -18,6 +18,9 @@ const EMPTY_ID = 'joorney_contextOdooMenus_empty';
 const PREVIEW_ID = 'joorney_contextOdooMenus_preview';
 const PREVIEW_COUNTS_ID = 'joorney_contextOdooMenus_preview_counts';
 const EDIT_PATH_ID = 'joorney_contextOdooMenus_edit_path';
+const SPACE_ID = 'joorney_contextOdooMenus_space';
+// The whole list is one sync item (SYNC_ITEM_BYTES): the space note shows past SPACE_WARN
+const SPACE_WARN = 0.75;
 // Pending id of the "Delete all" question
 const ALL = '*';
 // Up to this many menus in the submenu, its app groups start open
@@ -103,15 +106,30 @@ export default class ContextOdooMenusOptionCustomizationFeature extends OptionCu
         this.render();
     }
 
+    // Stored without the id in the value (the key is the id, see toStored): put it back for the page
     async getItems() {
         const settings = await StorageSync.get(this.defaultSettings);
-        return settings[this.menusKey];
+        return Object.fromEntries(
+            Object.entries(settings[this.menusKey] ?? {}).map(([id, menu]) => [id, { ...menu, id }])
+        );
     }
 
-    /**
-     * @param {() => Promise<void>} change
-     * @returns {Promise<void>} once the change (and the ones queued before it) is saved
-     */
+    toStored() {
+        return Object.fromEntries(Object.entries(this.menus).map(([id, { id: _id, ...menu }]) => [id, menu]));
+    }
+
+    // Short ids: a uuid twice per menu was half of the space of the list
+    newMenuId() {
+        let id;
+        do id = crypto.randomUUID().slice(0, 8);
+        while (Object.hasOwn(this.menus, id));
+        return id;
+    }
+
+    storedBytes() {
+        return syncItemBytes(this.menusKey, this.toStored());
+    }
+
     run(change) {
         this.changes = this.changes.then(change).catch((error) => this.recover(error));
         return this.changes;
@@ -174,7 +192,7 @@ export default class ContextOdooMenusOptionCustomizationFeature extends OptionCu
         if (error) return;
 
         const orders = Object.values(this.menus).map((m) => m.order);
-        const id = crypto.randomUUID();
+        const id = this.newMenuId();
         this.menus[id] = {
             id,
             path,
@@ -288,9 +306,9 @@ export default class ContextOdooMenusOptionCustomizationFeature extends OptionCu
     async addDefaults() {
         await this.refresh();
         const stored = Object.values(this.menus);
-        for (const menu of Object.values(structuredClone(this.defaultSettings[this.menusKey]))) {
-            if (Object.hasOwn(this.menus, menu.id) || stored.some((m) => samePath(m.path, menu.path))) continue;
-            this.menus[menu.id] = menu;
+        for (const [id, menu] of Object.entries(structuredClone(this.defaultSettings[this.menusKey]))) {
+            if (Object.hasOwn(this.menus, id) || stored.some((m) => samePath(m.path, menu.path))) continue;
+            this.menus[id] = { ...menu, id };
         }
         await this.save('[data-action="delete-all"]');
     }
@@ -305,7 +323,7 @@ export default class ContextOdooMenusOptionCustomizationFeature extends OptionCu
 
     // Every change rebuilds the context menu: switching a menu off or on can move the others in or out of the submenu
     async persist() {
-        await StorageSync.set({ [this.menusKey]: this.menus });
+        await StorageSync.set({ [this.menusKey]: this.toStored() });
         await sendRuntimeMessage(MESSAGE_ACTION.TO_BACKGROUND.RECREATE_MENU);
     }
 
@@ -365,6 +383,12 @@ export default class ContextOdooMenusOptionCustomizationFeature extends OptionCu
                 ? t('optionsContextMenus_countOne')
                 : t('optionsContextMenus_count', String(menus.length));
         document.getElementById(HEAD_ACTIONS_ID).innerHTML = this.headActionsHTML();
+        const usage = this.storedBytes() / SYNC_ITEM_BYTES;
+        const space = document.getElementById(SPACE_ID);
+        space.hidden = usage < SPACE_WARN;
+        space.textContent = space.hidden
+            ? ''
+            : t('optionsContextMenus_space', String(Math.min(100, Math.round(usage * 100))));
         document.getElementById(FILTER_NOTE_ID).hidden = !this.filterText();
         document.getElementById(LIST_ID).innerHTML = menus.length ? this.listHTML(menus, editValue) : '';
         document.getElementById(PREVIEW_COUNTS_ID).innerHTML = this.previewCountsHTML(this.previewGroups(menus));

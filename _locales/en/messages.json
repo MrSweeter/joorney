@@ -805,6 +805,16 @@
             }
         }
     },
+    "optionsContextMenus_space": {
+        "message": "The list uses $percent$% of the space Chrome sync gives it: switched off menus you no longer need can be deleted.",
+        "description": "Options feature page (Context Odoo Menus): note shown under the add field once the saved list nears its 8 KB sync storage limit",
+        "placeholders": {
+            "percent": {
+                "content": "$1",
+                "example": "82"
+            }
+        }
+    },
     "optionsContextMenus_listTitle": {
         "message": "Menus",
         "description": "Options feature page (Context Odoo Menus): title of the menu list"

@@ -630,6 +630,15 @@
             }
         }
     },
+    "optionsContextMenus_space": {
+        "message": "La liste utilise $percent$ % de l’espace que Chrome sync lui accorde : les menus désactivés dont vous n’avez plus besoin peuvent être supprimés.",
+        "placeholders": {
+            "percent": {
+                "content": "$1",
+                "example": "82"
+            }
+        }
+    },
     "optionsContextMenus_listTitle": {
         "message": "Menus"
     },

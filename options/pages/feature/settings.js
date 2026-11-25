@@ -199,6 +199,7 @@ const contextOdooMenus = () => `
         </div>
         <p class="joorney-cm-hint" id="joorney_contextOdooMenus_new_hint" data-i18n="optionsContextMenus_addHint">Press Enter to add. New menus go to the submenu, under their app, switched on. Write the menu names in English: the same path then works whatever language Odoo is in.</p>
         <p class="joorney-error joorney-cm-error" id="joorney_contextOdooMenus_new_error" role="alert" hidden></p>
+        <p class="joorney-help is-small" id="joorney_contextOdooMenus_space" role="status" hidden></p>
     </div>
     <div class="joorney-cm-list" id="joorney_contextOdooMenus_box">
         <div class="joorney-cm-head">

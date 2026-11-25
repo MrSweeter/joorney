@@ -1,6 +1,4 @@
-// Paths are ir.ui.menu names (English), resolved at click time (api/odoo.js getMenu) and opened with the URL form
-// matching the current Odoo (url_manager.js createActionMenuURL), so the same path works on every version.
-// Ids are stable (not UUIDs) so a later release can recognise these entries.
+// Paths are ir.ui.menu names (English)
 const defaultMenuPaths = [
     ['default_settings', 'Settings/General Settings'],
     ['default_technical_actions', 'Technical/Actions/Actions'],
@@ -13,7 +11,7 @@ const defaultMenuPaths = [
 ];
 
 const defaultContextMenu = Object.fromEntries(
-    defaultMenuPaths.map(([id, path], order) => [id, { id, path, order, active: true, favorite: false }])
+    defaultMenuPaths.map(([id, path], order) => [id, { path, order, active: true, favorite: false }])
 );
 
 export default {

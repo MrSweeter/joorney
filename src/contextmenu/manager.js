@@ -215,7 +215,8 @@ async function getFeaturesItems(tab, lang) {
         if (!menus) continue;
 
         if (Object.keys(menus).length <= 0) continue;
-        const menusArray = Object.values(menus);
+        // The key is the id: lists saved by the options page no longer repeat it in the value
+        const menusArray = Object.entries(menus).map(([menuId, menu]) => ({ ...menu, id: menuId }));
         const activeMenuCount = menusArray.filter((m) => m.active).length;
         const activeFavoriteCount = menusArray.filter((m) => m.favorite).length;
 
