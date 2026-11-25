@@ -14,7 +14,8 @@ export default class AwesomeLoadingSmallContentFeature extends AwesomeLoadingSha
 
                 .o_loading_indicator {
 
-                    content: url(${image});
+                    /* Quoted and escaped: the URL is typed by the user, a ')' or '</style>' would break out */
+                    content: url("${CSS.escape(image)}");
                     background-color: unset;
 
                     /* Resize the image automatically */
