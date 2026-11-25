@@ -126,6 +126,15 @@ export default class UnfocusApp extends ContentFeature {
         await sleep(200);
         if (this.clickCount !== currentClickCount || this.clickCount === 0) return;
 
+        // Reset even when the write fails, or the next clicks would count from a stale number
+        try {
+            await this.saveStarClick(element, event);
+        } finally {
+            this.clickCount = 0;
+        }
+    }
+
+    async saveStarClick(element, event) {
         let origin = window.location.origin;
         const parent = event.target.parentElement.parentElement;
         const app = parent.getAttribute('data-menu-xmlid');
@@ -145,23 +154,26 @@ export default class UnfocusApp extends ContentFeature {
 
         const newState = Math.min(this.clickCount, UNFOCUS_STATE.MAX);
 
+        let state = UNFOCUS_STATE.UNFOCUS;
         if (
             currentState === UNFOCUS_STATE.UNFOCUS ||
             (currentState !== newState && currentState > UNFOCUS_STATE.UNFOCUS)
         ) {
-            unfocusAppOrigins[origin][app] = Math.min(this.clickCount, UNFOCUS_STATE.MAX);
-        } else {
-            unfocusAppOrigins[origin][app] = UNFOCUS_STATE.UNFOCUS;
+            state = newState;
         }
+
+        // Normal is the absence of an entry: storing it would keep the app (and its host) in the options page list
+        // and in the sync quota
+        if (state === UNFOCUS_STATE.DEFAULT) delete unfocusAppOrigins[origin][app];
+        else unfocusAppOrigins[origin][app] = state;
+        if (Object.keys(unfocusAppOrigins[origin]).length === 0) delete unfocusAppOrigins[origin];
 
         await StorageSync.set({ unfocusAppOrigins: unfocusAppOrigins });
 
-        this.updateAppElement(parent, unfocusAppOrigins[origin][app], element, {
+        this.updateAppElement(parent, state, element, {
             unfocusAppLightImageURL,
             unfocusAppDarkImageURL,
         });
-
-        this.clickCount = 0;
     }
 
     async updateAppElement(element, state, starElement, configuration) {
