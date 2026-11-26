@@ -95,6 +95,42 @@
     "popup_reload": {
         "message": "Recharger l'onglet"
     },
+    "popup_notOdoo": {
+        "message": "Pas de session Odoo sur cette page"
+    },
+    "popup_notOdooHelp": {
+        "message": "Les fonctionnalités de Joorney tournent sur les pages Odoo où vous êtes connecté."
+    },
+    "popup_showAnyway": {
+        "message": "Afficher quand même les fonctionnalités"
+    },
+    "popup_notForVersion": {
+        "message": "Pas pour Odoo $version$",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "17.0"
+            }
+        }
+    },
+    "popup_versionOff": {
+        "message": "Odoo $version$ est désactivé, aucune fonctionnalité ne tourne ici.",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "17.0"
+            }
+        }
+    },
+    "popup_versionOffRunbot": {
+        "message": "Odoo $version$ est désactivé, seules les fonctionnalités Runbot tournent ici.",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "20.0"
+            }
+        }
+    },
     "feature_adminDebugLoginRunbot_name": {
         "message": "[Runbot] Connexion admin (mode développeur)"
     },

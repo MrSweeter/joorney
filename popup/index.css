@@ -179,7 +179,7 @@ h2.joorney-popup-sechead {
     margin-bottom: 0;
 }
 
-.joorney-popup-item .joorney-fcard-chips:not(:has(.joorney-popup-settings-btn)) {
+.joorney-popup-item .joorney-fcard-chips:not(:has(.joorney-popup-settings-btn, .joorney-popup-chip)) {
     display: none;
 }
 
@@ -193,6 +193,26 @@ h2.joorney-popup-sechead {
     border-bottom-left-radius: 0;
 }
 /*#endregion */
+
+/* Not for the page's Odoo version */
+.joorney-popup-chip {
+    height: 22px;
+    margin-top: 4px;
+}
+
+.joorney-popup-note {
+    margin-bottom: 12px;
+    font-size: 12.5px;
+}
+
+.joorney-popup-note a {
+    color: inherit;
+    font-weight: 500;
+}
+
+.joorney-popup-section + .joorney-popup-empty {
+    margin-top: 14px;
+}
 
 /*#region Settings under a card */
 .joorney-popup-settings-btn {

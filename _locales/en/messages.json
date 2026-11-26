@@ -123,6 +123,48 @@
         "message": "Reload tab",
         "description": "Popup: button reloading the current tab to apply the changes"
     },
+    "popup_notOdoo": {
+        "message": "No Odoo session on this page",
+        "description": "Popup: under the host name, on a website page without an Odoo session (not logged in, not Odoo)"
+    },
+    "popup_notOdooHelp": {
+        "message": "Joorney features run on Odoo pages where you are logged in.",
+        "description": "Popup: text on a page without an Odoo session, in place of the feature list"
+    },
+    "popup_showAnyway": {
+        "message": "Show the features anyway",
+        "description": "Popup: button showing the feature switches on a page without an Odoo session (e.g. a self-hosted login page)"
+    },
+    "popup_notForVersion": {
+        "message": "Not for Odoo $version$",
+        "description": "Popup: chip on a feature that does not support the page's Odoo version",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "17.0"
+            }
+        }
+    },
+    "popup_versionOff": {
+        "message": "Odoo $version$ is turned off, so no feature runs here.",
+        "description": "Popup: note when the page's Odoo version is turned off on the options Versions page, followed by a link to it",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "17.0"
+            }
+        }
+    },
+    "popup_versionOffRunbot": {
+        "message": "Odoo $version$ is turned off, so only the Runbot features run here.",
+        "description": "Popup: note on a runbot build when the page's Odoo version is turned off on the options Versions page (the Runbot features still run), followed by a link to it",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "20.0"
+            }
+        }
+    },
     "feature_adminDebugLoginRunbot_name": {
         "message": "[Runbot] Admin Debug Login",
         "description": "Feature name (popup, options, right-click menu)"

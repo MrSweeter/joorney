@@ -14,10 +14,11 @@ import {
 } from '../options/src/ui/state.js';
 import { notifyOptionPages } from '../src/generic/popup.js';
 import { escapeHTML } from '../src/html_generator.js';
-import { originMatches } from '../src/utils/authorize.js';
-import { Console, Runtime, Tabs } from '../src/utils/browser.js';
+import { includeVersion, isSupportedOdoo, originMatches } from '../src/utils/authorize.js';
+import { Console, Runtime, sendTabMessage, Tabs } from '../src/utils/browser.js';
 import { applyI18n, categoryName, featureName, initI18n, t } from '../src/utils/i18n.js';
 import { iconHTML } from '../src/utils/icons.js';
+import { MESSAGE_ACTION } from '../src/utils/messaging.js';
 
 /**
  * Toolbar popup: the features of the tab's host, as options Home shows one host. Every write goes through
@@ -40,9 +41,21 @@ window.onload = async () => {
         renderNotWebsite();
         return;
     }
-    const { features, currentSettings } = await getFeaturesAndCurrentSettings();
-    await loadPopup(tab, origin, features, currentSettings);
+    const [{ features, currentSettings }, odoo] = await Promise.all([
+        getFeaturesAndCurrentSettings(),
+        readOdooInfo(tab),
+    ]);
+    await loadPopup(tab, origin, features, currentSettings, odoo);
 };
+
+// The features run only on pages with an Odoo session (src/utils/version.js getOdooVersion), the content script
+// tells. No answer (a tab opened before the extension was installed or updated): unknown, the popup shows everything
+async function readOdooInfo(tab) {
+    const info = await sendTabMessage(tab.id, MESSAGE_ACTION.TO_CONTENT.REQUEST_ODOO_INFO);
+    const odoo = { known: Boolean(info), isOdoo: Boolean(info?.isOdoo), version: info?.version, versionOn: true };
+    if (odoo.isOdoo && odoo.version) odoo.versionOn = await isSupportedOdoo(odoo.version);
+    return odoo;
+}
 
 // Options links of the kit are relative to the options page ('?page=...')
 function openOptions(params = '') {
@@ -79,7 +92,7 @@ function saveSet(key, values) {
     }
 }
 
-async function loadPopup(tab, origin, features, currentSettings) {
+async function loadPopup(tab, origin, features, currentSettings, odoo) {
     const root = document.getElementById('joorney-popup');
     const normal = features.filter((f) => !f.limited);
     // The Runbot features ignore host lists and run on their own hosts: only shown on one of them
@@ -95,6 +108,8 @@ async function loadPopup(tab, origin, features, currentSettings) {
         host: origin,
         expanded: readSet(EXPANDED_KEY),
         openCategories: readSet(OPEN_CATEGORIES_KEY),
+        // No Odoo session: only the Runbot features can run, the host ones stay behind "Show the features anyway"
+        showAll: !odoo.known || odoo.isOdoo,
     };
 
     // The entry the switches write to: the host's own, else a saved regex entry matching it (as the previous
@@ -111,6 +126,11 @@ async function loadPopup(tab, origin, features, currentSettings) {
             ? Boolean(view.settings[`${feature.id}Enabled`])
             : isActiveOnHost(view.settings, feature, view.host);
     const shown = () => [...runbot, ...normal];
+    // The Runbot features skip the version checks (src/shared/limited/runbot_content.js)
+    const supported = (feature) =>
+        feature.limited || !odoo.version || includeVersion(feature.supported_version ?? [], odoo.version, true);
+    // What the counts tell: switched on here, and able to run on this page's Odoo
+    const runs = (feature) => on(feature) && supported(feature) && (feature.limited || odoo.versionOn);
 
     //#region Settings blocks
     // Built once and moved into each render: the feature modules keep their nodes and listeners
@@ -154,13 +174,17 @@ async function loadPopup(tab, origin, features, currentSettings) {
         const hostEl = document.getElementById('joorney-popup-host');
         hostEl.textContent = name;
         hostEl.title = origin;
-        const count = shown().filter(on).length;
+        const info = document.getElementById('joorney-popup-hostinfo');
+        if (!view.showAll && !runbot.length) {
+            info.textContent = t('popup_notOdoo');
+            return;
+        }
+        const count = (view.showAll ? shown() : runbot).filter(runs).length;
         const via =
             view.host === origin
                 ? ''
                 : `<span class="joorney-chip" title="${escapeHTML(t('popup_viaRegex', view.host))}">${escapeHTML(t('optionsHome_regexChip'))}</span>`;
-        document.getElementById('joorney-popup-hostinfo').innerHTML =
-            `<span>${escapeHTML(t('optionsHome_hostsActive', `${count}`))}</span>${via}`;
+        info.innerHTML = `<span>${escapeHTML(t('optionsHome_hostsActive', `${count}`))}</span>${via}`;
     }
 
     function settingsToggleHTML(feature) {
@@ -185,8 +209,13 @@ async function loadPopup(tab, origin, features, currentSettings) {
             });
         }
         const deactivated = getFeatureState(view.settings, feature) === FEATURE_STATE.DEACTIVATED;
-        const status = hostStatus(view.settings, feature, view.host);
+        // Not for this page's Odoo: its switch still sets the host, for the other versions it may have
+        const versionNote = supported(feature) ? '' : t('popup_notForVersion', odoo.version);
+        const status = [hostStatus(view.settings, feature, view.host), versionNote].filter(Boolean).join('. ');
         const id = escapeHTML(feature.id);
+        const chips = versionNote
+            ? `<span class="joorney-chip joorney-popup-chip">${escapeHTML(versionNote)}</span>${settings}`
+            : settings;
         return featureCardHTML(feature, {
             switchOn: deactivated ? undefined : on(feature),
             switchLabel: `${featureName(feature)}: ${status}`,
@@ -195,10 +224,10 @@ async function loadPopup(tab, origin, features, currentSettings) {
             action: deactivated
                 ? `<button type="button" class="joorney-link-btn is-strong" data-action="activate" data-feature="${id}" data-focus="activate:${id}" aria-haspopup="menu" aria-expanded="false">${escapeHTML(t('optionsHome_activate'))}</button>`
                 : '',
-            muted: deactivated,
+            muted: deactivated || Boolean(versionNote),
             category: false,
             info: false,
-            chips: settings,
+            chips,
         });
     }
 
@@ -210,7 +239,7 @@ async function loadPopup(tab, origin, features, currentSettings) {
     // A category folds (its count stays in the heading), the Runbot section does not: it is short and only shown
     // where it is wanted
     function sectionHTML(title, list, { extra = '', category = undefined } = {}) {
-        const count = `<span class="joorney-popup-seccount">${escapeHTML(t('optionsHome_sectionCount', `${list.filter(on).length}`, `${list.length}`))}</span>`;
+        const count = `<span class="joorney-popup-seccount">${escapeHTML(t('optionsHome_sectionCount', `${list.filter(runs).length}`, `${list.length}`))}</span>`;
         const items = list.map(itemHTML).join('');
         if (!category) {
             return `
@@ -249,7 +278,28 @@ async function loadPopup(tab, origin, features, currentSettings) {
                 )
             )
             .join('');
-        return `${runbotSection}${sections}`;
+        if (!view.showAll) return `${runbotSection}${notOdooHTML()}`;
+        // First: it is about the whole page, Runbot included
+        return `${versionOffHTML()}${runbotSection}${sections}`;
+    }
+
+    function notOdooHTML() {
+        return `
+            <div class="joorney-empty joorney-popup-empty">
+                <p>${escapeHTML(t('popup_notOdooHelp'))}</p>
+                <button type="button" class="joorney-link-btn" data-action="show-all" data-focus="show-all">${escapeHTML(t('popup_showAnyway'))}</button>
+            </div>
+        `;
+    }
+
+    // The Versions page turns whole Odoo versions on or off: then no host feature runs, whatever the switches say.
+    // The Runbot features skip the version checks: on a runbot build they still run
+    function versionOffHTML() {
+        if (!odoo.isOdoo || odoo.versionOn) return '';
+        const message = runbot.length ? t('popup_versionOffRunbot', odoo.version) : t('popup_versionOff', odoo.version);
+        return `
+            <p class="joorney-note is-warning joorney-popup-note">${iconHTML('warning')}<span>${escapeHTML(message)} <a href="?page=page-version">${escapeHTML(t('options_menu_versions'))}</a></span></p>
+        `;
     }
 
     function render() {
@@ -315,6 +365,10 @@ async function loadPopup(tab, origin, features, currentSettings) {
             saveSet(EXPANDED_KEY, view.expanded);
             el.setAttribute('aria-expanded', `${open}`);
             frames.get(id).hidden = !open;
+        },
+        'show-all': () => {
+            view.showAll = true;
+            render();
         },
         section: (el) => {
             const category = el.dataset.category;
