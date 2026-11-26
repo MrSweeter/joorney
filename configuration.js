@@ -33,6 +33,9 @@ export const baseSettings = {
     languageMode: 'system',
     languageStatic: 'en',
 
+    // Home shows one table of every host and feature instead of one host at a time: heavier, so opt-in
+    optionsAdvancedHostView: false,
+
     supportedVersions: ['20.0'],
     supportedDevVersions: [],
 

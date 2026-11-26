@@ -1,13 +1,27 @@
 import { Commands, Runtime, StorageSync } from '../../../src/utils/browser.js';
 import { getLanguage, LANGUAGE_MODE, LANGUAGES, t } from '../../../src/utils/i18n.js';
 import { iconHTML } from '../../../src/utils/icons.js';
+import { setAdvancedHostView } from '../../src/host_view.js';
 
 const SHORTCUTS_URL = 'chrome://extensions/shortcuts';
 
 export async function loadPage(_features, currentSettings) {
     loadLanguage(currentSettings);
+    loadAdvancedHostView(currentSettings);
     loadShortcut();
 }
+
+//#region Advanced host view
+function loadAdvancedHostView(currentSettings) {
+    const toggle = document.getElementById('joorney_advanced_host_view');
+    toggle.setAttribute('aria-checked', currentSettings.optionsAdvancedHostView ? 'true' : 'false');
+    toggle.onclick = async () => {
+        const next = toggle.getAttribute('aria-checked') !== 'true';
+        toggle.setAttribute('aria-checked', next ? 'true' : 'false');
+        await setAdvancedHostView(next);
+    };
+}
+//#endregion
 
 //#region Language
 async function loadLanguage(currentSettings) {

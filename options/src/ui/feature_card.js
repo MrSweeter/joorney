@@ -1,7 +1,7 @@
 import { escapeHTML } from '../../../src/html_generator.js';
 import { categoryName, featureDescription, featureName, t, tagName } from '../../../src/utils/i18n.js';
 import { iconHTML } from '../../../src/utils/icons.js';
-import { FEATURE_STATE } from './state.js';
+import { FEATURE_STATE, getFeatureState, getListingHosts, isListed } from './state.js';
 
 /**
  * Compact feature card (icon tile, name, one-line description, chips, optional switch/grip, info
@@ -9,6 +9,9 @@ import { FEATURE_STATE } from './state.js';
  */
 
 export const FEATURE_PAGE_ID = 'page-feature';
+
+// Category order of every page listing features (Home, Features); categories not listed follow in their own order
+export const CATEGORY_ORDER = ['productivity', 'technical', 'ui'];
 const CARD_SELECTOR = '.joorney-fcard[data-feature-id]';
 
 const STATE_LABELS = {
@@ -44,6 +47,22 @@ export function stateLabel(state, { short = false, limited = false } = {}) {
 export function stateHelp(state) {
     const key = STATE_LABELS[state]?.helpKey;
     return key ? t(key) : '';
+}
+
+// Why a feature is on or off on a host: the switch tooltip and accessible name, on Home and in the toolbar popup
+export function hostStatus(settings, feature, host) {
+    const state = getFeatureState(settings, feature);
+    if (state === FEATURE_STATE.DEACTIVATED) return t('optionsHome_status_deactivated');
+    // A regex entry matching the host counts as listing it, even if the host's own entry does not
+    const listing = getListingHosts(settings, host, feature.id).length > 0;
+    let status;
+    if (state === FEATURE_STATE.EVERYWHERE) {
+        status = listing ? t('optionsHome_status_everywhereOff') : t('optionsHome_status_everywhereOn');
+    } else {
+        status = listing ? t('optionsHome_status_listedOn') : t('optionsHome_status_listedOff');
+    }
+    if (listing && !isListed(settings, host, feature.id)) status += ` ${t('optionsHome_status_regexNote')}.`;
+    return status;
 }
 
 export function stateBadgeHTML(state, { short = true, limited = false } = {}) {
@@ -111,6 +130,7 @@ export function featureCardHTML(feature, opts = {}) {
         info = true,
         href = featurePageURL(feature.id),
         classes = '',
+        chips = '',
     } = opts;
     const id = escapeHTML(feature.id);
     const name = featureName(feature);
@@ -152,6 +172,7 @@ export function featureCardHTML(feature, opts = {}) {
                 <div class="joorney-fcard-chips">
                     ${state ? stateBadgeHTML(state, { limited: feature.limited }) : ''}
                     ${featureChipsHTML(feature, { category, details: false })}
+                    ${chips}
                     <span class="joorney-fcard-more">${featureChipsHTML(feature, { category: false, details: true })}</span>
                 </div>
             </div>

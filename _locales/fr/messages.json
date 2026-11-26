@@ -766,22 +766,22 @@
         "message": "Migration de la configuration nécessaire"
     },
     "optionsUi_state_everywhere": {
-        "message": "Partout sauf sur les hôtes listés"
+        "message": "Active par défaut"
     },
     "optionsUi_state_everywhereShort": {
-        "message": "Partout"
+        "message": "Active par défaut"
     },
     "optionsUi_state_everywhereHelp": {
-        "message": "Fonctionne sur tous les hôtes Odoo, sauf ceux que vous listez pour elle."
+        "message": "Fonctionne sur tous les hôtes Odoo, sauf là où vous la désactivez."
     },
     "optionsUi_state_listed": {
-        "message": "Uniquement sur les hôtes listés"
+        "message": "Inactive par défaut"
     },
     "optionsUi_state_listedShort": {
-        "message": "Hôtes listés"
+        "message": "Inactive par défaut"
     },
     "optionsUi_state_listedHelp": {
-        "message": "Fonctionne uniquement sur les hôtes que vous listez pour elle."
+        "message": "Fonctionne uniquement sur les hôtes où vous l'activez."
     },
     "optionsUi_state_deactivated": {
         "message": "Désactivée"
@@ -881,7 +881,7 @@
         "message": "Fonctionnalités"
     },
     "optionsFeatures_subtitle": {
-        "message": "Choisissez où chaque fonctionnalité s'exécute. Les exceptions par hôte sont sur l'accueil."
+        "message": "Choisissez où chaque fonctionnalité s'exécute. Les choix par hôte sont sur l'accueil."
     },
     "optionsFeatures_search": {
         "message": "Rechercher une fonctionnalité"
@@ -915,7 +915,7 @@
         }
     },
     "optionsFeatures_runbotNote": {
-        "message": "Les fonctionnalités Runbot ne s'exécutent que sur les origines runbot et ignorent les listes d'hôtes."
+        "message": "Les fonctionnalités Runbot ne s'exécutent que sur les origines runbot et n'ont pas d'exception par hôte."
     },
     "optionsImportExport_title": {
         "message": "Importer, exporter et migrer"
@@ -1368,7 +1368,7 @@
         }
     },
     "migration_step_0": {
-        "message": "Le mode autoriser/refuser passe de global à propre à chaque fonctionnalité."
+        "message": "Le mode bloquer/autoriser passe de global à propre à chaque fonctionnalité."
     },
     "migration_step_1": {
         "message": "L'effet Tâche étoilée devient l'effet Priorité étoilée."
@@ -1966,6 +1966,33 @@
             }
         }
     },
+    "optionsHome_title": {
+        "message": "Hôtes"
+    },
+    "optionsHome_subtitleSimple": {
+        "message": "Choisissez quelles fonctionnalités tournent sur chaque hôte."
+    },
+    "optionsHome_subtitleAdvanced": {
+        "message": "Vue avancée : tous les hôtes et toutes les fonctionnalités d'un coup d'œil."
+    },
+    "optionsHome_viewAdvanced": {
+        "message": "Vue avancée"
+    },
+    "optionsHome_viewSimple": {
+        "message": "Vue simple"
+    },
+    "optionsHome_hosts": {
+        "message": "Hôtes"
+    },
+    "optionsHome_hostsOn": {
+        "message": "$count$ actives",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "3"
+            }
+        }
+    },
     "optionsHome_addHost": {
         "message": "Ajouter un hôte"
     },
@@ -1974,6 +2001,9 @@
     },
     "optionsHome_add": {
         "message": "Ajouter"
+    },
+    "optionsHome_regexChip": {
+        "message": "regex"
     },
     "optionsHome_removeHost": {
         "message": "Retirer $host$",
@@ -1984,11 +2014,75 @@
             }
         }
     },
+    "optionsHome_removeConfirm": {
+        "message": "Retirer $host$ et ses exceptions ?",
+        "placeholders": {
+            "host": {
+                "content": "$1",
+                "example": "https://www.odoo.com"
+            }
+        }
+    },
+    "optionsHome_removeYes": {
+        "message": "Retirer"
+    },
+    "optionsHome_removeCancel": {
+        "message": "Annuler"
+    },
+    "optionsHome_noHostSelected": {
+        "message": "Aucun hôte sélectionné"
+    },
+    "optionsHome_hostSubtitle": {
+        "message": "Choisissez les fonctionnalités actives sur cet hôte"
+    },
+    "optionsHome_allOn": {
+        "message": "Tout activer ici"
+    },
+    "optionsHome_allOff": {
+        "message": "Tout désactiver ici"
+    },
     "optionsHome_categories": {
         "message": "Filtre par catégorie"
     },
     "optionsHome_categoryAll": {
         "message": "Toutes"
+    },
+    "optionsHome_sectionCount": {
+        "message": "$on$ sur $total$ actives ici",
+        "placeholders": {
+            "on": {
+                "content": "$1",
+                "example": "2"
+            },
+            "total": {
+                "content": "$2",
+                "example": "6"
+            }
+        }
+    },
+    "optionsHome_noFeatures": {
+        "message": "Aucune fonctionnalité dans cette catégorie."
+    },
+    "optionsHome_status_everywhereOn": {
+        "message": "Active : suit son défaut (active)"
+    },
+    "optionsHome_status_everywhereOff": {
+        "message": "Inactive ici : exception, elle est active par défaut"
+    },
+    "optionsHome_status_listedOn": {
+        "message": "Active ici : exception, elle est inactive par défaut"
+    },
+    "optionsHome_status_listedOff": {
+        "message": "Inactive : suit son défaut (inactive)"
+    },
+    "optionsHome_status_deactivated": {
+        "message": "Désactivée partout"
+    },
+    "optionsHome_status_regexNote": {
+        "message": "Aussi actif ici via une entrée regex"
+    },
+    "optionsHome_activate": {
+        "message": "Activer"
     },
     "optionsHome_runbotGlobal": {
         "message": "$feature$ globalement",
@@ -1998,6 +2092,72 @@
                 "example": "Auto Open"
             }
         }
+    },
+    "optionsHome_runsNowhere": {
+        "message": "Ne tourne sur aucun hôte"
+    },
+    "optionsHome_runbotBuilds": {
+        "message": "Builds runbot"
+    },
+    "optionsHome_runbotBuildsNote": {
+        "message": "Builds runbot : toute adresse correspondant à"
+    },
+    "optionsHome_emptyTitle": {
+        "message": "Ajoutez votre premier hôte"
+    },
+    "optionsHome_emptyText": {
+        "message": "Un hôte est une adresse Odoo, comme https://www.odoo.com. Les fonctionnalités se règlent par hôte : choisissez celles qui y tournent, ou utilisez regex://... pour viser plusieurs bases à la fois."
+    },
+    "optionsHome_hostCount": {
+        "message": "$hosts$ hôtes x $features$ fonctionnalités",
+        "placeholders": {
+            "hosts": {
+                "content": "$1",
+                "example": "4"
+            },
+            "features": {
+                "content": "$2",
+                "example": "13"
+            }
+        }
+    },
+    "optionsHome_matrixLabel": {
+        "message": "Fonctionnalités par hôte"
+    },
+    "optionsHome_modeButton": {
+        "message": "$feature$ : $mode$. Changer le défaut",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Theme Switch"
+            },
+            "mode": {
+                "content": "$2",
+                "example": "On by default"
+            }
+        }
+    },
+    "optionsHome_cellLabel": {
+        "message": "$feature$ sur $host$",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Theme Switch"
+            },
+            "host": {
+                "content": "$2",
+                "example": "https://www.odoo.com"
+            }
+        }
+    },
+    "optionsHome_legendOn": {
+        "message": "Actif pour cet hôte"
+    },
+    "optionsHome_legendOff": {
+        "message": "Inactif pour cet hôte"
+    },
+    "optionsHome_legendException": {
+        "message": "Exception : diffère du défaut de la colonne"
     },
     "optionsHome_modeOnCount": {
         "message": "Active sur $count$ hôtes sur $total$",
@@ -2023,6 +2183,18 @@
     },
     "optionsHome_modeFlip": {
         "message": "Les exceptions sont gardées quand le défaut change, elles s'inversent donc."
+    },
+    "optionsHome_addHint": {
+        "message": "Un nouvel hôte n'a pas d'exception : il suit le défaut de chaque colonne."
+    },
+    "optionsHome_hostsHeader": {
+        "message": "Hôtes"
+    },
+    "optionsHome_setting_title": {
+        "message": "Vue avancée des hôtes"
+    },
+    "optionsHome_setting_text": {
+        "message": "Affiche l'accueil sous forme d'une grille de tous les hôtes et de toutes les fonctionnalités, pour relire et modifier rapidement. Désactivé : un tableau de bord par hôte."
     },
     "optionsFeature_breadcrumb": {
         "message": "Fil d'Ariane"
@@ -2064,10 +2236,10 @@
         "message": "Où la fonctionnalité s'exécute"
     },
     "optionsFeature_hostsTitle": {
-        "message": "Hôtes où cette fonctionnalité est listée"
+        "message": "Exceptions"
     },
     "optionsFeature_noHosts": {
-        "message": "Aucun hôte listé."
+        "message": "Aucune exception : elle suit le défaut sur chaque hôte."
     },
     "optionsFeature_regexChip": {
         "message": "regex"
@@ -2099,6 +2271,9 @@
     "optionsSettings_subtitle": {
         "message": "Préférences de toute l'extension."
     },
+    "optionsSettings_hosts_title": {
+        "message": "Page des hôtes"
+    },
     "optionsSettings_shortcut_title": {
         "message": "Raccourci clavier"
     },
@@ -2125,6 +2300,24 @@
                 "example": "Christmas"
             }
         }
+    },
+    "optionsHome_runbotName": {
+        "message": "Runbot"
+    },
+    "optionsHome_builtIn": {
+        "message": "intégré"
+    },
+    "optionsHome_exceptionOff": {
+        "message": "Inactive ici : exception, elle est active par défaut. Cliquez pour suivre le défaut."
+    },
+    "optionsHome_exceptionOn": {
+        "message": "Active ici : exception, elle est inactive par défaut. Cliquez pour suivre le défaut."
+    },
+    "optionsHome_followsEverywhere": {
+        "message": "Suit le défaut (active)"
+    },
+    "optionsHome_followsListed": {
+        "message": "Suit le défaut (inactive)"
     },
     "optionsNotifications_subtitle": {
         "message": "Mode et type des notifications affichées par Joorney."
@@ -2164,6 +2357,18 @@
     },
     "optionsFeature_settingsHelpAmbient": {
         "message": "Quelles ambiances peuvent se jouer sur le menu d'accueil d'Odoo, et un aperçu de chacune."
+    },
+    "optionsHome_hostsActive": {
+        "message": "$count$ actives",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "3"
+            }
+        }
+    },
+    "optionsHome_status_runbotOn": {
+        "message": "Activée : tourne sur les builds runbot"
     },
     "optionsAwl_group": {
         "message": "Loader"

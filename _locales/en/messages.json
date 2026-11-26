@@ -980,27 +980,27 @@
         "description": "Options menu: badge tooltip when the stored configuration is older than the extension"
     },
     "optionsUi_state_everywhere": {
-        "message": "Everywhere except listed hosts",
+        "message": "On by default",
         "description": "Feature state: active, runs on every Odoo host except the hosts listed for it"
     },
     "optionsUi_state_everywhereShort": {
-        "message": "Everywhere",
+        "message": "On by default",
         "description": "Feature state, short label (badge) of \"Everywhere except listed hosts\""
     },
     "optionsUi_state_everywhereHelp": {
-        "message": "Runs on every Odoo host, except the hosts you list for it.",
+        "message": "Runs on every Odoo host, except where you turn it off.",
         "description": "Feature state help: everywhere except listed hosts"
     },
     "optionsUi_state_listed": {
-        "message": "Only on listed hosts",
+        "message": "Off by default",
         "description": "Feature state: active, runs only on the hosts listed for it"
     },
     "optionsUi_state_listedShort": {
-        "message": "Listed only",
+        "message": "Off by default",
         "description": "Feature state, short label (badge) of \"Only on listed hosts\""
     },
     "optionsUi_state_listedHelp": {
-        "message": "Runs only on the hosts you list for it.",
+        "message": "Runs only on the hosts where you turn it on.",
         "description": "Feature state help: only on listed hosts"
     },
     "optionsUi_state_deactivated": {
@@ -1118,7 +1118,7 @@
         "description": "Options features page: title"
     },
     "optionsFeatures_subtitle": {
-        "message": "Choose where each feature runs. Per-host exceptions are on Home.",
+        "message": "Choose where each feature runs. Per-host choices are on Home.",
         "description": "Options features page: subtitle"
     },
     "optionsFeatures_search": {
@@ -1158,7 +1158,7 @@
         }
     },
     "optionsFeatures_runbotNote": {
-        "message": "Runbot features only run on runbot origins and ignore host lists.",
+        "message": "Runbot features only run on runbot origins and have no per-host exception.",
         "description": "Features page: runbot section note"
     },
     "optionsImportExport_title": {
@@ -1464,7 +1464,7 @@
         "description": "Onboarding checklist step title"
     },
     "checklist_hostControls_moveFeature_description": {
-        "message": "Drag and drop to activate or deactivate a feature for optimal control.",
+        "message": "Drag and drop to enable or disable a feature for optimal control.",
         "description": "Onboarding checklist step description"
     },
     "checklist_hostControls_addHost_name": {
@@ -1480,7 +1480,7 @@
         "description": "Onboarding checklist step title"
     },
     "checklist_hostControls_configureHost_description": {
-        "message": "Adjust the settings for each origin by turning features on or off with the checkboxes.",
+        "message": "Adjust the settings for each origin by enabling or disabling features using the checkboxes.",
         "description": "Onboarding checklist step description"
     },
     "checklist_hostControls_deleteHost_name": {
@@ -1732,7 +1732,7 @@
         }
     },
     "migration_step_0": {
-        "message": "Allow/deny mode moves from global to each feature.",
+        "message": "Allow/block mode moves from global to each feature.",
         "description": "Migration page: what the migration from version 0 to 1 does"
     },
     "migration_step_1": {
@@ -2495,6 +2495,40 @@
             }
         }
     },
+    "optionsHome_title": {
+        "message": "Hosts",
+        "description": "Options home page: title"
+    },
+    "optionsHome_subtitleSimple": {
+        "message": "Choose which features run on each host.",
+        "description": "Options home page: subtitle of the simple view"
+    },
+    "optionsHome_subtitleAdvanced": {
+        "message": "Advanced view: every host and feature at a glance.",
+        "description": "Options home page: subtitle of the advanced view"
+    },
+    "optionsHome_viewAdvanced": {
+        "message": "Advanced view",
+        "description": "Options home page: link switching to the advanced view"
+    },
+    "optionsHome_viewSimple": {
+        "message": "Simple view",
+        "description": "Options home page: link switching to the simple view"
+    },
+    "optionsHome_hosts": {
+        "message": "Hosts",
+        "description": "Options home page: heading of the host list"
+    },
+    "optionsHome_hostsOn": {
+        "message": "$count$ on",
+        "description": "Options home page: number of features on for a host (under its name)",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "3"
+            }
+        }
+    },
     "optionsHome_addHost": {
         "message": "Add a host",
         "description": "Options home page: label of the new host field"
@@ -2507,6 +2541,10 @@
         "message": "Add",
         "description": "Options home page: add host button"
     },
+    "optionsHome_regexChip": {
+        "message": "regex",
+        "description": "Options home page: chip of a regular expression host"
+    },
     "optionsHome_removeHost": {
         "message": "Remove $host$",
         "description": "Options home page: accessible name of the remove host button",
@@ -2517,6 +2555,40 @@
             }
         }
     },
+    "optionsHome_removeConfirm": {
+        "message": "Remove $host$ and its exceptions?",
+        "description": "Options home page: inline confirmation before removing a host",
+        "placeholders": {
+            "host": {
+                "content": "$1",
+                "example": "https://www.odoo.com"
+            }
+        }
+    },
+    "optionsHome_removeYes": {
+        "message": "Remove",
+        "description": "Options home page: confirm removing a host"
+    },
+    "optionsHome_removeCancel": {
+        "message": "Cancel",
+        "description": "Options home page: cancel removing a host"
+    },
+    "optionsHome_noHostSelected": {
+        "message": "No host selected",
+        "description": "Options home page: title when no host is selected"
+    },
+    "optionsHome_hostSubtitle": {
+        "message": "Choose which features run on this host",
+        "description": "Options home page: subtitle under the selected host"
+    },
+    "optionsHome_allOn": {
+        "message": "Turn all on here",
+        "description": "Options home page: turn the visible features on for the selected host"
+    },
+    "optionsHome_allOff": {
+        "message": "Turn all off here",
+        "description": "Options home page: turn the visible features off for the selected host"
+    },
     "optionsHome_categories": {
         "message": "Category filter",
         "description": "Options home page: accessible name of the category pills"
@@ -2524,6 +2596,52 @@
     "optionsHome_categoryAll": {
         "message": "All",
         "description": "Options home page: category pill showing every category"
+    },
+    "optionsHome_sectionCount": {
+        "message": "$on$ of $total$ on here",
+        "description": "Options home page: count under a category title",
+        "placeholders": {
+            "on": {
+                "content": "$1",
+                "example": "2"
+            },
+            "total": {
+                "content": "$2",
+                "example": "6"
+            }
+        }
+    },
+    "optionsHome_noFeatures": {
+        "message": "No feature in this category.",
+        "description": "Options home page: empty category"
+    },
+    "optionsHome_status_everywhereOn": {
+        "message": "On: follows its default (on)",
+        "description": "Options home page: card status, everywhere mode, host not listed"
+    },
+    "optionsHome_status_everywhereOff": {
+        "message": "Off here: an exception, it is on by default",
+        "description": "Options home page: card status, everywhere mode, host listed"
+    },
+    "optionsHome_status_listedOn": {
+        "message": "On here: an exception, it is off by default",
+        "description": "Options home page: card status, listed mode, host listed"
+    },
+    "optionsHome_status_listedOff": {
+        "message": "Off: follows its default (off)",
+        "description": "Options home page: card status, listed mode, host not listed"
+    },
+    "optionsHome_status_deactivated": {
+        "message": "Deactivated everywhere",
+        "description": "Options home page: card status of a deactivated feature"
+    },
+    "optionsHome_status_regexNote": {
+        "message": "Also on here through a regex entry",
+        "description": "Options home page: a regex entry still lists the feature on this host"
+    },
+    "optionsHome_activate": {
+        "message": "Activate",
+        "description": "Options home page: activate a deactivated feature"
     },
     "optionsHome_runbotGlobal": {
         "message": "$feature$ globally",
@@ -2534,6 +2652,84 @@
                 "example": "Auto Open"
             }
         }
+    },
+    "optionsHome_runsNowhere": {
+        "message": "Runs on no host",
+        "description": "Options home page: a runbot feature without origins"
+    },
+    "optionsHome_runbotBuilds": {
+        "message": "Runbot builds",
+        "description": "Options home page: chip of a runbot feature's regular expression origin"
+    },
+    "optionsHome_runbotBuildsNote": {
+        "message": "Runbot builds: any address matching",
+        "description": "Options home page: muted note under the runbot cards, followed by the regular expression"
+    },
+    "optionsHome_emptyTitle": {
+        "message": "Add your first host",
+        "description": "Options home page: empty state title"
+    },
+    "optionsHome_emptyText": {
+        "message": "A host is an Odoo address, like https://www.odoo.com. Features are set per host: pick which ones run there, or use regex://... to match many databases at once.",
+        "description": "Options home page: empty state explanation"
+    },
+    "optionsHome_hostCount": {
+        "message": "$hosts$ hosts x $features$ features",
+        "description": "Options home page: advanced view corner summary",
+        "placeholders": {
+            "hosts": {
+                "content": "$1",
+                "example": "4"
+            },
+            "features": {
+                "content": "$2",
+                "example": "13"
+            }
+        }
+    },
+    "optionsHome_matrixLabel": {
+        "message": "Features by host",
+        "description": "Options home page: accessible name of the matrix"
+    },
+    "optionsHome_modeButton": {
+        "message": "$feature$: $mode$. Change the default",
+        "description": "Options home page: accessible name of the default button of a column, it opens the default menu",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Theme Switch"
+            },
+            "mode": {
+                "content": "$2",
+                "example": "On by default"
+            }
+        }
+    },
+    "optionsHome_cellLabel": {
+        "message": "$feature$ on $host$",
+        "description": "Options home page: accessible name of a matrix cell",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Theme Switch"
+            },
+            "host": {
+                "content": "$2",
+                "example": "https://www.odoo.com"
+            }
+        }
+    },
+    "optionsHome_legendOn": {
+        "message": "On for this host",
+        "description": "Options home page: legend"
+    },
+    "optionsHome_legendOff": {
+        "message": "Off for this host",
+        "description": "Options home page: legend"
+    },
+    "optionsHome_legendException": {
+        "message": "Exception: differs from the column's default",
+        "description": "Options home page: advanced view legend, ringed dot"
     },
     "optionsHome_modeOnCount": {
         "message": "On for $count$ of $total$ hosts",
@@ -2564,6 +2760,22 @@
     "optionsHome_modeFlip": {
         "message": "Exceptions are kept when the default changes, so they flip.",
         "description": "Options home page: default menu footer, shown when the feature has exceptions"
+    },
+    "optionsHome_addHint": {
+        "message": "A new host has no exception: it follows each column's default.",
+        "description": "Options home page: hint of the add row of the matrix"
+    },
+    "optionsHome_hostsHeader": {
+        "message": "Hosts",
+        "description": "Options home page: first column header of the matrix"
+    },
+    "optionsHome_setting_title": {
+        "message": "Advanced host view",
+        "description": "Settings page: title of the advanced host view switch"
+    },
+    "optionsHome_setting_text": {
+        "message": "Show Home as one grid of every host and every feature, for quick review and edits. Off: one dashboard per host.",
+        "description": "Settings page: help of the advanced host view switch"
     },
     "optionsFeature_breadcrumb": {
         "message": "Breadcrumb",
@@ -2618,11 +2830,11 @@
         "description": "Options feature page: accessible name of the two mode buttons"
     },
     "optionsFeature_hostsTitle": {
-        "message": "Hosts with this feature listed",
+        "message": "Exceptions",
         "description": "Options feature page: title of the list of hosts"
     },
     "optionsFeature_noHosts": {
-        "message": "No host listed.",
+        "message": "No exception: it follows the default on every host.",
         "description": "Options feature page: empty list of hosts"
     },
     "optionsFeature_regexChip": {
@@ -2665,6 +2877,10 @@
         "message": "Extension-wide preferences.",
         "description": "Options Settings page: subtitle"
     },
+    "optionsSettings_hosts_title": {
+        "message": "Hosts page",
+        "description": "Options Settings page: title of the Home page card"
+    },
     "optionsSettings_shortcut_title": {
         "message": "Keyboard shortcut",
         "description": "Options Settings page: title of the shortcut card"
@@ -2698,6 +2914,30 @@
                 "example": "Christmas"
             }
         }
+    },
+    "optionsHome_runbotName": {
+        "message": "Runbot",
+        "description": "Options home page: name of the pinned built-in Runbot row"
+    },
+    "optionsHome_builtIn": {
+        "message": "built-in",
+        "description": "Options home page: chip of the pinned Runbot row"
+    },
+    "optionsHome_exceptionOff": {
+        "message": "Off here: an exception, it is on by default. Click to follow the default.",
+        "description": "Options home page: tooltip of a listed host in Everywhere mode"
+    },
+    "optionsHome_exceptionOn": {
+        "message": "On here: an exception, it is off by default. Click to follow the default.",
+        "description": "Options home page: tooltip of a listed host in Only on listed hosts mode"
+    },
+    "optionsHome_followsEverywhere": {
+        "message": "Follows the default (on)",
+        "description": "Options home page: tooltip of an unlisted host in Everywhere mode"
+    },
+    "optionsHome_followsListed": {
+        "message": "Follows the default (off)",
+        "description": "Options home page: tooltip of an unlisted host in Only on listed hosts mode"
     },
     "optionsNotifications_subtitle": {
         "message": "Mode and type of the notifications Joorney shows.",
@@ -2748,6 +2988,20 @@
     "optionsFeature_settingsHelpAmbient": {
         "message": "Which ambients may play on the Odoo home menu, and a preview of each one.",
         "description": "Options feature page: help of the Ambient settings card"
+    },
+    "optionsHome_hostsActive": {
+        "message": "$count$ active",
+        "description": "Options home page: number of active features for a host (under its name)",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "3"
+            }
+        }
+    },
+    "optionsHome_status_runbotOn": {
+        "message": "On: runs on runbot builds",
+        "description": "Options home page: tooltip of the switch of a runbot feature that is on"
     },
     "optionsAwl_group": {
         "message": "Loader",

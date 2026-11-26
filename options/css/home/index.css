@@ -1,0 +1,700 @@
+/* Home page: hosts dashboard (simple view) and hosts x features matrix (advanced view), options/pages/home */
+
+.joorney-home {
+    --joorney-mx-host-width: 300px;
+    --joorney-mx-col-width: 72px;
+    /* Exception ring: the brand orange is 2:1 on white, this one keeps 3:1 on every column tint */
+    --joorney-mx-exception: #b86e00;
+
+    max-width: 1280px;
+}
+
+/* The grid has about fifteen columns: the whole page width keeps it from scrolling sideways */
+.joorney-home.is-advanced {
+    max-width: none;
+}
+
+.joorney-home-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 8px 24px;
+    margin-bottom: 16px;
+}
+
+.joorney-home-header .joorney-page-subtitle {
+    margin-bottom: 0;
+}
+
+.joorney-home-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+.joorney-home-side {
+    flex: 0 1 300px;
+    min-width: min(260px, 100%);
+    padding: 0;
+    margin-bottom: 0;
+    overflow: hidden;
+}
+
+.joorney-home-main {
+    flex: 3 1 480px;
+    min-width: 0;
+}
+
+.joorney-home-panelhead {
+    margin: 0;
+    padding: 14px 16px;
+    font-size: 15px;
+    font-weight: 700;
+    border-bottom: 1px solid var(--joorney-border);
+}
+
+/*#region Host list */
+.joorney-home-hostlist {
+    padding: 6px;
+    margin: 0;
+    list-style: none;
+}
+
+.joorney-home-host {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    min-height: 56px;
+    padding: 2px 4px;
+    border-radius: var(--joorney-radius-control);
+}
+
+.joorney-home-host:not(.is-selected):hover {
+    background: var(--joorney-ground);
+}
+
+.joorney-home-host.is-selected {
+    background: var(--joorney-state-everywhere-tint);
+}
+
+.joorney-home-hostbtn {
+    flex: 1;
+    min-width: 0;
+    padding: 8px;
+    color: var(--joorney-text);
+    text-align: start;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    border-radius: var(--joorney-radius-control);
+}
+
+.joorney-home-hostline {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+}
+
+.joorney-home-hostname {
+    min-width: 0;
+    overflow: hidden;
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 13px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.is-selected .joorney-home-hostname {
+    font-weight: 700;
+}
+
+.joorney-home-hostcount {
+    display: block;
+    margin-top: 2px;
+    font-size: 12px;
+    color: var(--joorney-text-muted);
+}
+
+.is-selected .joorney-home-hostcount {
+    color: var(--joorney-text);
+}
+
+.joorney-home-confirm {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    gap: 6px 8px;
+    align-items: center;
+    padding: 6px 4px;
+    font-size: 13px;
+}
+
+.joorney-home-confirm > span {
+    flex: 1 1 100%;
+    word-break: break-all;
+}
+
+.joorney-home-confirm .joorney-btn {
+    height: 30px;
+    padding: 0 12px;
+    font-size: 13px;
+}
+
+.joorney-home-none {
+    margin: 0;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--joorney-text-muted);
+}
+/*#endregion */
+
+/* Pinned built-in row, set apart from the real hosts */
+.joorney-home-host.is-runbot {
+    padding-inline-start: 10px;
+}
+
+.joorney-home-host.is-runbot > .joorney-icon {
+    flex: none;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-home-host.is-runbot.is-selected > .joorney-icon {
+    color: var(--joorney-text);
+}
+
+.joorney-home-hostname.is-plain,
+.joorney-home-title.is-plain {
+    font-family: inherit;
+}
+
+.joorney-home-hostline .joorney-chip {
+    flex: none;
+}
+
+.joorney-home-hostorigins {
+    display: block;
+    margin-top: 2px;
+    overflow: hidden;
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 12px;
+    color: var(--joorney-text-muted);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.joorney-home-sep {
+    height: 1px;
+    margin: 6px 12px 8px;
+    list-style: none;
+    background: var(--joorney-border);
+}
+
+/*#region Add host form */
+.joorney-home-add {
+    padding: 14px 16px;
+}
+
+.joorney-home-side .joorney-home-add {
+    border-top: 1px solid var(--joorney-border);
+}
+
+.joorney-home-addrow {
+    display: flex;
+    gap: 8px;
+}
+
+.joorney-home-addrow .joorney-input {
+    flex: 1;
+}
+
+.joorney-home-error {
+    margin: 6px 0 0;
+}
+
+.joorney-home-empty {
+    max-width: 640px;
+}
+/*#endregion */
+
+/*#region Selected host */
+.joorney-home-head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 16px;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.joorney-home-title {
+    margin: 0;
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--joorney-text);
+    word-break: break-all;
+}
+
+.joorney-home-sub {
+    margin: 4px 0 0;
+    font-size: 14px;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-home-headbtns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.joorney-home .joorney-pills {
+    margin-bottom: 20px;
+}
+/*#endregion */
+
+/*#region Sections and cards */
+.joorney-home-ochip {
+    min-width: 0;
+    max-width: 100%;
+    padding: 2px 10px;
+    overflow: hidden;
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 12px;
+    color: var(--joorney-text-soft);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border-strong);
+    border-radius: 999px;
+}
+
+/* A Runbot card's hosts: the height of the other card chips, the full origin is the title */
+.joorney-fcard-chips .joorney-home-ochip {
+    display: inline-flex;
+    align-items: center;
+    height: 20px;
+    padding: 0 8px;
+    font-size: 11px;
+}
+
+/* What "Runbot builds" stands for, under the Runbot cards */
+.joorney-home-rbnote {
+    margin: 10px 0 0;
+    font-size: 12px;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-home-rbnote code {
+    font-size: 11.5px;
+    color: var(--joorney-text-soft);
+    word-break: break-all;
+}
+
+.joorney-home-sechead {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 8px;
+    margin: 24px 0 12px;
+}
+
+.joorney-home-sechead h2 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.joorney-home-seccount,
+.joorney-home-secnote {
+    font-size: 13px;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-home-secnote {
+    margin-inline-start: auto;
+    font-size: 12px;
+}
+
+.joorney-home-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.joorney-home-item > .joorney-fcard {
+    flex: 1;
+}
+
+.joorney-home-origins code {
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 12px;
+    word-break: break-all;
+}
+/*#endregion */
+
+/*#region Advanced matrix */
+/* Runbot: a section like the hosts one, its cards on the page */
+.joorney-home-rbsection {
+    margin-bottom: 28px;
+}
+
+.joorney-home-rbhead {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.joorney-mx-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 20px;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 12px;
+    color: var(--joorney-text-soft);
+}
+
+.joorney-mx-legend > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.joorney-mx-card {
+    margin-bottom: 0;
+    overflow: hidden;
+    padding: 0;
+}
+
+.joorney-mx-box {
+    max-height: 720px;
+    overflow: auto;
+}
+
+.joorney-mx {
+    width: max-content;
+    min-width: 100%;
+    border-spacing: 0;
+    border-collapse: separate;
+}
+
+.joorney-mx th,
+.joorney-mx td {
+    padding: 0;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    background-color: var(--joorney-surface);
+    border-bottom: 1px solid var(--joorney-border);
+}
+
+.joorney-mx .is-first {
+    position: sticky;
+    left: 0;
+    z-index: 3;
+    width: var(--joorney-mx-host-width);
+    min-width: var(--joorney-mx-host-width);
+    max-width: var(--joorney-mx-host-width);
+    padding: 8px 12px;
+    text-align: start;
+    border-right: 1px solid var(--joorney-border);
+}
+
+.joorney-mx .is-group {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    height: 36px;
+    font-size: 12px;
+    font-weight: 700;
+    background-color: var(--joorney-surface-soft);
+    border-left: 1px solid var(--joorney-border);
+}
+
+.joorney-mx thead .is-first {
+    z-index: 7;
+}
+
+.joorney-mx .is-first.is-group {
+    font-size: 13px;
+    color: var(--joorney-text-soft);
+    border-left: 0;
+}
+
+.joorney-mx .is-col {
+    position: sticky;
+    top: 36px;
+    z-index: 5;
+    width: var(--joorney-mx-col-width);
+    min-width: var(--joorney-mx-col-width);
+    padding: 8px 2px;
+}
+
+.joorney-mx thead tr:nth-child(2) .is-first {
+    top: 36px;
+    font-size: 12px;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-mx .is-gs {
+    border-left: 1px solid var(--joorney-border);
+}
+
+.joorney-mx .is-ev {
+    background-color: #f4f7fd;
+}
+
+.joorney-mx .is-li {
+    background-color: #fffaf0;
+}
+
+.joorney-mx .is-off {
+    background-color: var(--joorney-ground);
+    background-image: repeating-linear-gradient(135deg, transparent 0 5px, rgba(91, 100, 116, 0.16) 5px 6px);
+}
+
+.joorney-mx .is-hc,
+.joorney-mx tbody tr:hover > td,
+.joorney-mx tbody tr:hover > th {
+    background-color: #e3eaf9;
+}
+
+.joorney-mx-colin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.joorney-mx-fname {
+    display: -webkit-box;
+    min-height: 29px;
+    overflow: hidden;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--joorney-text);
+    text-decoration: none;
+    overflow-wrap: anywhere;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.joorney-mx-fname:hover {
+    text-decoration: underline;
+}
+
+.joorney-mx-mode {
+    display: inline-flex;
+    align-items: center;
+    max-width: 100%;
+    padding: 2px 1px 2px 5px;
+    font: inherit;
+    font-size: 10px;
+    overflow-wrap: anywhere;
+    font-weight: 500;
+    line-height: 1.2;
+    text-align: start;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 12px;
+}
+
+.joorney-mx-mode .joorney-icon {
+    flex: none;
+    font-size: 12px;
+}
+
+.joorney-mx-mode[aria-expanded="true"] {
+    box-shadow:
+        0 0 0 2px var(--joorney-surface),
+        0 0 0 4px var(--joorney-focus);
+}
+
+.joorney-mx-mode.is-ev {
+    color: var(--joorney-state-everywhere-text);
+    background: var(--joorney-state-everywhere-tint);
+    border-color: var(--joorney-state-everywhere);
+}
+
+.joorney-mx-mode.is-li {
+    color: var(--joorney-state-listed-text);
+    background: var(--joorney-state-listed-tint);
+    border-color: var(--joorney-state-listed);
+}
+
+.joorney-mx-mode.is-off {
+    color: var(--joorney-state-off-text);
+    background: var(--joorney-state-off-tint);
+    border-color: var(--joorney-state-off);
+}
+
+.joorney-mx-mode:hover {
+    filter: brightness(0.95);
+}
+
+.joorney-icon-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+}
+
+.joorney-mx tbody tr {
+    height: 64px;
+}
+
+.joorney-mx-hostcell {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.joorney-mx-hostcell .joorney-home-hostline {
+    flex: 1;
+}
+
+.joorney-mx-hostcell .joorney-icon-btn {
+    flex: none;
+    width: 28px;
+    height: 28px;
+}
+
+.joorney-mx-cell {
+    position: relative;
+}
+
+.joorney-mx-dotbtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    border-radius: var(--joorney-radius-control);
+}
+
+.joorney-mx-dotbtn::before {
+    width: 20px;
+    height: 20px;
+    content: "";
+    background: var(--joorney-surface);
+    border: 2px solid #8a93a3;
+    border-radius: 50%;
+    transition: background-color 0.12s;
+}
+
+.joorney-mx-dotbtn[aria-pressed="true"]::before {
+    background: var(--joorney-navy);
+    border-color: var(--joorney-navy);
+}
+
+.joorney-mx-dotbtn:hover:not(:disabled)::before {
+    box-shadow: 0 0 0 3px rgba(19, 33, 60, 0.15);
+}
+
+.joorney-mx-dotbtn.is-ex::before {
+    box-shadow:
+        0 0 0 2px var(--joorney-surface),
+        0 0 0 4px var(--joorney-mx-exception);
+}
+
+.joorney-mx-dotbtn.is-ex:hover:not(:disabled)::before {
+    box-shadow:
+        0 0 0 2px var(--joorney-surface),
+        0 0 0 4px var(--joorney-mx-exception),
+        0 0 0 7px rgba(19, 33, 60, 0.15);
+}
+
+.joorney-mx-dotbtn:disabled {
+    cursor: not-allowed;
+}
+
+.joorney-mx-dotbtn:disabled::before {
+    background: transparent;
+    border-color: var(--joorney-border-strong);
+}
+
+.joorney-mx-addcell {
+    padding: 10px 12px;
+    font-size: 12px;
+    color: var(--joorney-text-muted);
+    text-align: start;
+    white-space: nowrap;
+}
+
+.joorney-mx-add {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    white-space: normal;
+}
+
+.joorney-mx-add .joorney-home-add {
+    padding: 0;
+}
+
+.joorney-mx-sample {
+    display: inline-block;
+    flex: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+}
+
+.joorney-mx-sample.is-dot {
+    background: var(--joorney-navy);
+    border-radius: 50%;
+}
+
+.joorney-mx-sample.is-dotoff {
+    background: var(--joorney-surface);
+    border: 2px solid #8a93a3;
+    border-radius: 50%;
+}
+
+.joorney-mx-sample.is-dotex {
+    width: 12px;
+    height: 12px;
+    margin: 0 2px;
+    background: var(--joorney-surface);
+    border: 2px solid #8a93a3;
+    border-radius: 50%;
+    box-shadow:
+        0 0 0 2px var(--joorney-surface),
+        0 0 0 4px var(--joorney-mx-exception);
+}
+
+.joorney-mx-legendsep {
+    width: 1px;
+    height: 14px;
+    background: var(--joorney-border-strong);
+}
+
+.joorney-mx-sample.is-ev {
+    background: var(--joorney-state-everywhere-tint);
+    border: 1px solid var(--joorney-state-everywhere);
+}
+
+.joorney-mx-sample.is-li {
+    background: var(--joorney-state-listed-tint);
+    border: 1px solid var(--joorney-state-listed);
+}
+
+.joorney-mx-sample.is-off {
+    background: repeating-linear-gradient(
+        135deg,
+        var(--joorney-state-off-tint) 0 3px,
+        var(--joorney-border-strong) 3px 4px
+    );
+    border: 1px solid #8a93a3;
+}
+
+/*#endregion */

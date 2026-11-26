@@ -4,7 +4,14 @@ import { categoryName, featureDescription, featureName, t } from '../../../src/u
 import { iconHTML } from '../../../src/utils/icons.js';
 import { MESSAGE_ACTION } from '../../../src/utils/messaging.js';
 import { UI_EVENTS } from '../../src/ui/events.js';
-import { bindFeatureCards, featureCardHTML, getFeatureCard, stateHelp, stateLabel } from '../../src/ui/feature_card.js';
+import {
+    bindFeatureCards,
+    CATEGORY_ORDER,
+    featureCardHTML,
+    getFeatureCard,
+    stateHelp,
+    stateLabel,
+} from '../../src/ui/feature_card.js';
 import { openInfoModal } from '../../src/ui/info_modal.js';
 import {
     FEATURE_STATE,
@@ -20,7 +27,6 @@ import {
  * STATE_CHANGE event, so changes from Home, the popup or another tab show up too.
  */
 
-const CATEGORY_ORDER = ['ui', 'productivity', 'technical'];
 const ALL = 'all';
 const ZONES = [FEATURE_STATE.EVERYWHERE, FEATURE_STATE.LISTED, FEATURE_STATE.DEACTIVATED];
 

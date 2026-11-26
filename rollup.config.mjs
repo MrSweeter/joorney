@@ -74,7 +74,7 @@ export default () => {
         ...getOptionPages(
             bundleOutput,
             [
-                'website',
+                'home',
                 'features',
                 'feature',
                 'configuration',
