@@ -7,6 +7,7 @@ import { createContextMenu, updateContext } from '../../src/contextmenu/manager.
 import { MESSAGE_ACTION } from '../../src/utils/messaging.js';
 import { updateTabState } from './keyboard_shortcut.js';
 import { openRunbotAdminDebug } from './runbot.js';
+import { updateVersionBadge } from './version_badge.js';
 
 export async function handleMessage(message, sender) {
     if (message.action) return handleAction(message, sender);
@@ -40,6 +41,7 @@ async function handleAction(message, sender) {
         }
         case MESSAGE_ACTION.TO_BACKGROUND.TAB_LOADED: {
             if (!sender.tab) return undefined;
+            updateVersionBadge(sender.tab, message.versionInfo);
             callback = updateContext(sender.tab.id);
             break;
         }

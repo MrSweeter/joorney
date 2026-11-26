@@ -15,6 +15,16 @@
         "message": "OFF",
         "description": "Toolbar badge when Joorney is disabled on the current origin. Max ~4 characters"
     },
+    "badge_versionOffTitle": {
+        "message": "Odoo $version$ is turned off in Joorney (Versions): the Odoo features do not run on this page",
+        "description": "Toolbar icon tooltip, with an orange '!' badge, on a page whose Odoo version is turned off on the options Versions page",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "20.0"
+            }
+        }
+    },
     "language_title": {
         "message": "Language",
         "description": "Preferences page: Language card title"

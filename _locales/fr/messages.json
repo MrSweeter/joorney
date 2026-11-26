@@ -11,6 +11,15 @@
     "badge_off": {
         "message": "OFF"
     },
+    "badge_versionOffTitle": {
+        "message": "Odoo $version$ est désactivé dans Joorney (Versions), les fonctionnalités Odoo ne tournent pas sur cette page",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "20.0"
+            }
+        }
+    },
     "language_title": {
         "message": "Langue"
     },
