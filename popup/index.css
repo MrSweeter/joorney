@@ -1,187 +1,312 @@
-:root {
-    --joorney-primary: #13213c;
-    --joorney-primary-bg: #e5e5e5;
-    --joorney-secondary: #fca311;
-    --joorney-secondary-bg: #e5e5e5;
-    --joorney-limited-secondary: #a75000;
+/* Toolbar popup, on the options UI kit (options/css/ui): tokens, buttons, switch, feature cards */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
-.joorney-body-background {
-    background-image: url("/images/background-popup.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+/* Past the popup's 600px height a vertical scrollbar takes its width from the fixed body: no sideways scroll */
+html {
+    overflow-x: hidden;
 }
 
-#popupIcon {
-    padding: 0;
-    position: absolute;
-    right: 16px;
-    top: 16px;
-    width: 38px; /*≃ 2.3125rem*/
-    height: 38px;
+/* No MDB in the popup: the controls take the page font */
+button,
+input,
+select {
+    font-family: inherit;
 }
 
-input {
+body {
+    width: 600px;
+    margin: 0;
+    font-family: Roboto, "Segoe UI", system-ui, sans-serif;
+    font-size: 14px;
+    color: var(--joorney-text);
+    background: var(--joorney-ground);
+}
+
+:focus-visible {
+    outline: 2px solid var(--joorney-focus);
+    outline-offset: 2px;
+}
+
+/*#region Header */
+.joorney-popup-head {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 10px 12px;
+    color: #fff;
+    background: var(--joorney-navy);
+}
+
+.joorney-popup-logo {
+    flex: none;
+    width: 32px;
+    height: 32px;
+}
+
+.joorney-popup-host {
+    flex: 1;
+    min-width: 0;
+}
+
+.joorney-popup-hostname {
+    margin: 0;
+    overflow: hidden;
+    font-size: 15px;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.joorney-popup-hostinfo {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    min-height: 20px;
+    margin: 0;
+    font-size: 12.5px;
+    opacity: 0.85;
+}
+
+.joorney-popup-hostinfo .joorney-chip {
+    height: 18px;
+    font-size: 11px;
+}
+
+.joorney-popup-head .joorney-icon-btn,
+.joorney-popup-head .joorney-icon-btn:hover {
+    color: #fff;
+}
+
+.joorney-popup-head .joorney-icon-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+/*#endregion */
+
+/*#region Sections and cards */
+.joorney-popup-main {
+    padding: 12px;
+}
+
+.joorney-popup-bulk {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.joorney-popup-bulk .joorney-btn {
+    flex: 1;
+    height: 32px;
+    padding: 0 10px;
+    font-size: 13px;
+}
+
+.joorney-popup-section + .joorney-popup-section,
+.joorney-popup-section + .joorney-popup-bulk {
+    margin-top: 14px;
+}
+
+.joorney-popup-sechead {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin: 0 2px 6px;
+}
+
+.joorney-popup-sechead h2 {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--joorney-text-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.joorney-popup-seccount {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-popup-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* One line per card: the chips row only holds the settings button, the details show when the card is expanded */
+.joorney-popup-item .joorney-fcard {
+    align-items: center;
+    padding: 8px 10px;
+}
+
+.joorney-popup-item .joorney-fcard-desc {
+    margin-bottom: 0;
+}
+
+.joorney-popup-item .joorney-fcard-chips:not(:has(.joorney-popup-settings-btn)) {
     display: none;
 }
 
-.icon-wrapper {
+.joorney-popup-item .joorney-fcard.is-expanded .joorney-fcard-chips {
+    display: flex;
+    margin-top: 6px;
+}
+
+.joorney-popup-item:has(.joorney-popup-settings:not([hidden])) .joorney-fcard {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+/*#endregion */
+
+/*#region Settings under a card */
+.joorney-popup-settings-btn {
+    display: inline-flex;
+    gap: 4px;
+    align-items: center;
+    height: 22px;
+    margin-top: 4px;
+    padding: 0 6px 0 4px;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--joorney-text-soft);
     cursor: pointer;
-    width: 50px;
-    height: 50px;
-    background-color: var(--joorney-primary-bg);
-    display: grid;
-    place-items: center;
-    border-radius: 4px;
-    border: 1px solid var(--joorney-primary);
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
-    transition: all 200ms ease-out;
+    background: var(--joorney-hover);
+    border: 0;
+    border-radius: 11px;
 }
 
-.icon-wrapper:hover {
-    box-shadow: 0 0 6px var(--joorney-secondary);
+.joorney-popup-settings-btn:hover {
+    background: var(--joorney-border);
 }
 
-.icon-wrapper i {
-    color: var(--joorney-primary);
-    font-size: 24px;
-    transition: color 0.3s;
+.joorney-popup-settings-btn .joorney-icon {
+    font-size: 15px;
 }
 
-input:checked + .icon-wrapper i {
-    color: var(--joorney-primary-bg);
-}
-input:checked + .icon-wrapper {
-    background-color: var(--joorney-primary);
-}
-input:disabled + .icon-wrapper {
-    opacity: 0.5;
-    cursor: default;
-}
-input:disabled + .icon-wrapper:hover {
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+.joorney-popup-chevron {
+    transition: transform 0.15s;
 }
 
-.icon-wrapper.no-input i {
-    color: var(--joorney-primary) !important;
+.joorney-popup-settings-btn[aria-expanded="true"] .joorney-popup-chevron {
+    transform: rotate(180deg);
 }
 
-.icon-wrapper.no-input {
-    cursor: default;
-    background-color: var(--joorney-primary-bg) !important;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0) !important;
-    border-radius: 4px;
-    border: 1px solid var(--joorney-primary-bg) !important;
+.joorney-popup-settings {
+    padding: 4px 12px 8px;
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border);
+    border-top: 1px dashed var(--joorney-border);
+    border-radius: 0 0 var(--joorney-radius-card) var(--joorney-radius-card);
 }
 
-.icon-wrapper-sm {
-    cursor: pointer;
-    width: 40px;
-    height: 40px;
-    padding: 5px;
-    background-color: var(--joorney-primary-bg);
-    display: grid;
-    place-items: center;
-    border-radius: 4px;
-    border: 1px solid var(--joorney-secondary);
-    transition: all 200ms ease-out;
+/* The feature is off on this host: the settings stay usable, to prepare it */
+.joorney-popup-settings-off {
+    display: none;
+    gap: 6px;
+    align-items: center;
+    margin: 6px 0 2px;
+    font-size: 12px;
+    color: var(--joorney-text-muted);
 }
 
-.icon-wrapper-sm:hover {
-    box-shadow: 0 0 4px var(--joorney-secondary);
+.joorney-popup-settings.is-inactive .joorney-popup-settings-off {
+    display: flex;
 }
 
-.icon-wrapper-sm i {
-    color: var(--joorney-secondary);
-    font-size: 20px;
-    transition: color 0.3s;
-}
-
-input:checked + .icon-wrapper-sm i {
-    color: var(--joorney-secondary-bg);
-}
-input:checked + .icon-wrapper-sm {
-    background-color: var(--joorney-secondary);
-}
-input:disabled + .icon-wrapper-sm {
-    opacity: 0.5;
-    cursor: default;
-}
-input:disabled + .icon-wrapper-sm:hover {
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
-}
-
-input:disabled + .icon-wrapper-sm {
-    opacity: 0.5;
-}
-
-.icon-wrapper-tab {
-    cursor: pointer;
-    width: 30px;
-    height: 30px;
-    display: grid;
-    place-items: center;
-    margin-left: 0.25rem;
-    margin-right: 0.25rem;
-}
-
-.icon-wrapper-tab i {
-    color: var(--joorney-primary);
-    opacity: 0.25;
+.joorney-popup-settings-off .joorney-icon {
+    flex: none;
     font-size: 16px;
-    transition: color 0.3s;
 }
 
-input:not([disabled]).blacklist + .icon-wrapper-tab i {
-    opacity: 0.25;
-    color: red;
-}
-input:not([disabled]):checked.blacklist + .icon-wrapper-tab i {
-    opacity: 1;
-}
-
-input:not([disabled]).whitelist + .icon-wrapper-tab i {
-    opacity: 0.25;
-    color: green;
-}
-input:not([disabled]):checked.whitelist + .icon-wrapper-tab i {
-    opacity: 1;
+.joorney-popup-setting,
+.joorney-popup-field {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    min-height: 36px;
+    padding: 4px 0;
 }
 
-input:disabled + .icon-wrapper-tab {
-    opacity: 0.25;
-    cursor: default;
+.joorney-popup-setting + .joorney-popup-setting {
+    border-top: 1px solid var(--joorney-hover);
 }
 
-.limited-feature.icon-wrapper-sm i {
-    color: var(--joorney-limited-secondary);
-    font-size: 20px;
-    transition: color 0.3s;
+.joorney-popup-setting-icon {
+    display: flex;
+    color: var(--joorney-text-soft);
 }
 
-input:checked + .limited-feature.icon-wrapper-sm i {
-    color: var(--joorney-secondary-bg);
-}
-input:checked + .limited-feature.icon-wrapper-sm {
-    background-color: var(--joorney-limited-secondary);
-}
-input:disabled + .limited-feature.icon-wrapper-sm {
-    opacity: 0.5;
-    cursor: default;
-}
-input:disabled + .limited-feature.icon-wrapper-sm:hover {
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+.joorney-popup-setting-icon .joorney-icon {
+    font-size: 18px;
 }
 
-.limited-feature.icon-wrapper-sm {
-    border: 1px solid var(--joorney-limited-secondary);
+.joorney-popup-setting-label {
+    flex: 1;
+    min-width: 0;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--joorney-text);
+    cursor: pointer;
 }
 
-.limited-feature.icon-wrapper-sm:hover {
-    box-shadow: 0 0 4px var(--joorney-limited-secondary);
+.joorney-popup-field .joorney-popup-setting-label {
+    flex: none;
 }
 
-.limited-feature {
-    border-radius: 48px !important;
+.joorney-popup-field .joorney-input {
+    flex: 1;
+    height: 32px;
+    font-size: 13px;
 }
+
+.joorney-popup-loader-preview {
+    flex: none;
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+/*#endregion */
+
+/*#region Reload and empty state */
+.joorney-popup-reload {
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 10px 12px;
+    font-size: 12.5px;
+    color: var(--joorney-warn-text);
+    background: var(--joorney-state-listed-tint);
+    border-top: 1px solid var(--joorney-orange);
+}
+
+.joorney-popup-reload span {
+    flex: 1;
+}
+
+.joorney-popup-reload .joorney-btn {
+    height: 32px;
+}
+
+.joorney-popup-empty {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+}
+
+.joorney-popup-empty p {
+    margin: 0;
+}
+/*#endregion */

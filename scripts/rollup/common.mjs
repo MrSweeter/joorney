@@ -101,10 +101,8 @@ export function getContentConfig(output, plugins) {
  * @param {object[]} plugins
  */
 export function getPopupConfig(output, plugins) {
-    const targets = [
-        { src: ['popup/index.html', 'popup/index.css'], dest: `${output}/popup` },
-        { src: 'popup/css/*', dest: `${output}/popup/css` },
-    ];
+    // The popup also links the options UI kit (options/css/ui), copied by the options config
+    const targets = [{ src: ['popup/index.html', 'popup/index.css'], dest: `${output}/popup` }];
     return {
         input: 'popup/index.js',
         output: getESMOutput(`${output}/popup/index.js`),
