@@ -1,0 +1,45 @@
+/* Options V2 look: Joorney brand on the MDB look, light theme only. */
+:root {
+    --joorney-navy: #13213c;
+    --joorney-navy-dark: #0b1426;
+    --joorney-orange: #fca311;
+
+    --joorney-ground: #f3f4f7;
+    --joorney-surface: #fff;
+    --joorney-surface-soft: #f9fafc;
+    --joorney-border: #dde1e8;
+    --joorney-border-strong: #c4c9d2;
+    --joorney-hover: #eceef2;
+
+    --joorney-text: #13213c;
+    --joorney-text-soft: #3d4655;
+    /* Darkest grey still readable as a label: 4.5:1 on white */
+    --joorney-text-muted: #5b6474;
+
+    --joorney-focus: #2456c9;
+    --joorney-radius-card: 8px;
+    --joorney-radius-control: 6px;
+    --joorney-shadow: 0 1px 2px rgba(19, 33, 60, 0.08), 0 2px 8px rgba(19, 33, 60, 0.06);
+    --joorney-shadow-pop: 0 4px 16px rgba(19, 33, 60, 0.16);
+    --joorney-shadow-modal: 0 8px 32px rgba(19, 33, 60, 0.35);
+    --joorney-backdrop: rgba(19, 33, 60, 0.45);
+
+    /* Feature states differ in hue AND lightness (not red/green) */
+    --joorney-state-everywhere: #2456c9;
+    --joorney-state-everywhere-text: #1b429c;
+    --joorney-state-everywhere-tint: #e8eefb;
+    --joorney-state-listed: #fca311;
+    --joorney-state-listed-text: #8a5300;
+    --joorney-state-listed-tint: #fff2d9;
+    --joorney-state-off: #5b6474;
+    --joorney-state-off-text: #444c5a;
+    --joorney-state-off-tint: #eceef2;
+
+    --joorney-switch-on: #13213c;
+    --joorney-switch-off: #c4c9d2;
+
+    --joorney-warn-text: #5c3700;
+    --joorney-error-text: #8a1c1c;
+    --joorney-error-tint: #fdecec;
+    --joorney-error-border: #e3a5a5;
+}

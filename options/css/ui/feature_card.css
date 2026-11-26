@@ -1,0 +1,126 @@
+/* Compact feature card, see options/src/ui/feature_card.js */
+
+.joorney-fcard {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px;
+    color: var(--joorney-text);
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-card);
+    box-shadow: 0 1px 2px rgba(19, 33, 60, 0.08);
+    transition:
+        background-color 0.6s,
+        box-shadow 0.2s,
+        opacity 0.2s;
+}
+
+.joorney-fcard:hover {
+    box-shadow:
+        0 1px 2px rgba(19, 33, 60, 0.08),
+        0 2px 8px rgba(19, 33, 60, 0.12);
+}
+
+.joorney-fcard:focus-visible {
+    outline: 2px solid var(--joorney-focus);
+    outline-offset: 2px;
+}
+
+/* Dimmed with colors, not opacity: the texts keep a 4.5:1 contrast */
+.joorney-fcard.is-muted {
+    background: var(--joorney-surface-soft);
+}
+
+.joorney-fcard.is-muted .joorney-fcard-icon {
+    opacity: 0.55;
+}
+
+.joorney-fcard.is-muted .joorney-fcard-name,
+.joorney-fcard.is-muted .joorney-fcard-desc {
+    color: var(--joorney-text-muted);
+}
+
+/* Drag handle: dots drawn in CSS, no icon needed */
+.joorney-fcard-grip {
+    flex: none;
+    align-self: stretch;
+    width: 12px;
+    margin: 2px -2px 2px -4px;
+    cursor: grab;
+    background-image: radial-gradient(circle, var(--joorney-text-muted) 1.5px, transparent 1.6px);
+    background-size: 6px 6px;
+    background-position: center top;
+    background-repeat: space repeat;
+    border-radius: 3px;
+    opacity: 0.8;
+}
+
+.joorney-fcard-grip:hover {
+    background-color: var(--joorney-hover);
+}
+
+.joorney-fcard-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.joorney-fcard-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--joorney-text);
+    text-decoration: none;
+}
+
+a.joorney-fcard-name:hover {
+    color: var(--joorney-text);
+    text-decoration: underline;
+}
+
+.joorney-fcard-desc {
+    margin: 2px 0 6px;
+    overflow: hidden;
+    font-size: 12.5px;
+    line-height: 1.4;
+    color: var(--joorney-text-soft);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.joorney-fcard.is-expanded .joorney-fcard-desc {
+    white-space: normal;
+}
+
+.joorney-fcard-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.joorney-fcard-chips .joorney-chip,
+.joorney-fcard-chips .joorney-state-badge {
+    height: 20px;
+    font-size: 11.5px;
+}
+
+.joorney-fcard-more {
+    display: none;
+}
+
+.joorney-fcard.is-expanded .joorney-fcard-more {
+    display: contents;
+}
+
+.joorney-fcard-side {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: 6px;
+}
+
+.joorney-fcard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 10px;
+}

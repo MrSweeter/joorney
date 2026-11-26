@@ -11,38 +11,37 @@
         <!-- MDB -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.1/mdb.min.css" rel="stylesheet">
 
+        <link href="./css/ui/tokens.css" rel="stylesheet">
+        <link href="./css/ui/base.css" rel="stylesheet">
+        <link href="./css/ui/navbar.css" rel="stylesheet">
+        <link href="./css/ui/feature_card.css" rel="stylesheet">
+        <link href="./css/ui/modal.css" rel="stylesheet">
         <link href="./index.css" rel="stylesheet">
         <link href="./checklist.css" rel="stylesheet">
         <script src="index.js"></script>
     </head>
     <body class="joorney-body-background d-flex flex-column">
-        <!-- Menu -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light" id="joorney-navig-menu">
-            <div class="container-fluid">
-                <div id="joorney-brand-debug" class="navbar-brand" title="Debug mode" data-i18n-title="options_debugMode">
-                    <img loading="lazy" src="/images/icon_128.png" class="mx-2" height="20" alt="Joorney logo" data-i18n-alt="options_logoAlt">
-                    <small data-i18n="options_title">Joorney Configuration</small>
-                </div>
-                <ul id="joorney-menu-items-container" class="navbar-nav"></ul>
-                <ul class="navbar-nav me-auto">
-                    <li id="open-extension-shortcut" class="joorney-menu-item nav-item nav-link" title="Keyboard shortcuts" data-i18n-title="options_keyboardShortcuts">
-                        <i class="joorney-icon" data-icon="keyboard" aria-hidden="true"></i>
-                    </li>
-                </ul>
-
-                <div class="d-flex align-items-center">
-                    <input type="file" accept=".json" class="form-control form-control-sm" id="joorney_import_storage_sync_file">
-                    <button type="button" class="btn" id="joorney_import_storage_sync" title="Import settings" data-i18n-title="options_importSettings">
-                        <i class="joorney-icon joorney-icon-filled" data-icon="cloud_upload" aria-hidden="true"></i>
-                    </button>
-                    <button type="button" class="btn" id="joorney_export_storage_sync" title="Export settings" data-i18n-title="options_exportSettings">
-                        <i class="joorney-icon joorney-icon-filled" data-icon="cloud_download" aria-hidden="true"></i>
-                    </button>
-                    <a class="btn btn-success d-none" id="joorney_migrate_configuration" href="./migration/index.html" target="_blank" data-i18n="options_migrate">MIGRATE</a>
-                </div>
-            </div>
+        <!-- Menu: options/src/layout.js -->
+        <nav class="joorney-nav" id="joorney-navig-menu" aria-label="Main menu" data-i18n-aria-label="options_menu_main">
+            <button type="button" id="joorney-brand-debug" class="joorney-nav-brand" title="Debug mode" data-i18n-title="options_debugMode">
+                <span class="joorney-nav-logo"><img loading="lazy" src="/images/icon_128.png" alt="Joorney logo" data-i18n-alt="options_logoAlt"></span>
+                <span>Joorney</span>
+            </button>
+            <ul id="joorney-menu-items-container" class="joorney-nav-links"></ul>
+            <span class="joorney-nav-spacer"></span>
+            <span id="joorney-manifest" class="joorney-nav-version"></span>
+            <button
+                type="button"
+                id="open-extension-shortcut"
+                class="joorney-icon-btn"
+                title="Keyboard shortcuts"
+                aria-label="Keyboard shortcuts"
+                data-i18n-title="options_keyboardShortcuts"
+                data-i18n-aria-label="options_keyboardShortcuts"
+            >
+                <i class="joorney-icon" data-icon="keyboard" aria-hidden="true"></i>
+            </button>
         </nav>
-        <div id="joorney-manifest"></div>
 
         <!-- Announcement -->
         <div class="d-none">

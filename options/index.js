@@ -3,11 +3,12 @@ import { getNextTourID } from '../src/checklist/index.js';
 import ChecklistManager from '../src/checklist/manager.js';
 import { isDevMode } from '../src/utils/browser.js';
 import { getAnnounce, refreshSupportedVersions } from '../src/utils/check_version.js';
-import { applyI18n, initI18n } from '../src/utils/i18n.js';
-import { initImportExport } from './import_export.js';
+import { applyI18n, initI18n, t } from '../src/utils/i18n.js';
+import { checkConfigurationVersion } from './import_export.js';
 import { PAGES } from './menu.js';
+import { PAGE as IMPORT_EXPORT_PAGE } from './pages/importexport/index.js';
 import { load as loadShortcut } from './src/keyboard_shortcut.js';
-import { loadManifest, loadMenus } from './src/layout.js';
+import { loadManifest, loadMenus, parseRoute, setMenuBadge } from './src/layout.js';
 
 async function onDOMContentLoaded() {
     // Before the menus and the checklist: they render translated text
@@ -16,13 +17,12 @@ async function onDOMContentLoaded() {
     document.getElementById('copyright-year').textContent = new Date().getFullYear();
     //document.getElementById('copyright-link').href = Runtime.getManifest().homepage_url; Not public API
 
-    initImportExport();
-
     const announce = await getAnnounce();
     await refreshSupportedVersions();
 
     await loadOptionMenus(announce);
     loadShortcut();
+    showMigrationBadge();
 
     const searchParams = new URLSearchParams(window.location.search);
     toggleTechnicalMenus(!searchParams.get('debug') && !(await isDevMode()));
@@ -45,12 +45,20 @@ function toggleTechnicalMenus(force = undefined) {
 
 async function loadOptionMenus(announce) {
     const defaultMenu = await getDefaultMenu(PAGES, announce);
-    loadMenus(PAGES, defaultMenu, (page) => updateMenuTour(page.tour));
+    // Route parameters of the opened URL (e.g. ?page=page-feature&feature=<id>), for that page only
+    const route = parseRoute();
+    const params = route.page === defaultMenu.id ? route.params : {};
+    loadMenus(PAGES, defaultMenu, (page) => updateMenuTour(page.tour), params);
+}
+
+async function showMigrationBadge() {
+    const { outdated } = await checkConfigurationVersion();
+    setMenuBadge(IMPORT_EXPORT_PAGE.id, outdated, t('options_migrateNeeded'));
 }
 
 async function getDefaultMenu(pageMenus, announce) {
-    // Reopened page after a reload (language change)
-    const pageParam = new URLSearchParams(window.location.search).get('page');
+    // Reopened page after a reload (language change, link to a page)
+    const pageParam = parseRoute().page;
     const pageMenu = pageParam && pageMenus.find((m) => m.id === pageParam);
     if (pageMenu) return pageMenu;
 

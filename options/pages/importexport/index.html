@@ -1,0 +1,110 @@
+<link href="./css/importexport/index.css" rel="stylesheet">
+
+<div class="joorney-page">
+    <h1 class="joorney-page-title" data-i18n="optionsImportExport_title">Import, export and migrate</h1>
+    <p class="joorney-page-subtitle" data-i18n="optionsImportExport_subtitle">Back up your settings, restore them from a file, or bring an older configuration up to date.</p>
+
+    <!--#region Export -->
+    <section class="joorney-panel" aria-labelledby="joorney-export-title">
+        <h2 id="joorney-export-title" class="joorney-panel-title" data-i18n="optionsImportExport_exportTitle">Export</h2>
+        <p class="joorney-help" data-i18n="optionsImportExport_exportHelp">
+            Downloads the settings synced with your browser account (feature states and modes, hosts, preferences) as one JSON file, with its configuration version. Local cache and onboarding progress
+            are not exported.
+        </p>
+        <p class="joorney-help"><span data-i18n="optionsImportExport_fileName">File name:</span> <span id="joorney-export-file-name" class="joorney-mono"></span></p>
+        <div class="joorney-row">
+            <button type="button" id="joorney_export_storage_sync" class="joorney-btn">
+                <i class="joorney-icon" data-icon="cloud_download" aria-hidden="true"></i>
+                <span data-i18n="options_exportSettings">Export settings</span>
+            </button>
+            <span id="joorney-export-status" class="joorney-ie-status" role="status"></span>
+        </div>
+    </section>
+    <!--#endregion -->
+
+    <!--#region Import -->
+    <section class="joorney-panel" aria-labelledby="joorney-import-title">
+        <h2 id="joorney-import-title" class="joorney-panel-title" data-i18n="optionsImportExport_importTitle">Import</h2>
+        <div class="joorney-note is-warning mt-3">
+            <i class="joorney-icon" data-icon="warning" aria-hidden="true"></i>
+            <div data-i18n="optionsImportExport_importWarning">Importing overwrites your current settings with the content of the file, then reloads this page.</div>
+        </div>
+        <div id="joorney-import-drop" class="joorney-dropzone">
+            <i class="joorney-icon joorney-dropzone-icon" data-icon="cloud_upload" aria-hidden="true"></i>
+            <p data-i18n="optionsImportExport_drop">Drop a Joorney settings file (.json) here, or</p>
+            <input type="file" accept=".json,application/json" id="joorney_import_storage_sync_file" class="joorney-visually-hidden">
+            <label for="joorney_import_storage_sync_file" class="joorney-btn is-secondary joorney-file-label" data-i18n="optionsImportExport_chooseFile">Choose file</label>
+        </div>
+
+        <div id="joorney-import-error" class="joorney-note is-error mt-3 mb-0" role="alert" hidden>
+            <i class="joorney-icon" data-icon="error" aria-hidden="true"></i>
+            <span id="joorney-import-error-text"></span>
+        </div>
+
+        <div id="joorney-import-file" class="mt-3" hidden>
+            <div class="joorney-row joorney-import-file-row">
+                <i class="joorney-icon" data-icon="description" aria-hidden="true"></i>
+                <b id="joorney-import-file-name"></b>
+                <div id="joorney-import-summary" class="joorney-chips"></div>
+                <button
+                    type="button"
+                    id="joorney-import-clear"
+                    class="joorney-icon-btn"
+                    title="Remove the chosen file"
+                    aria-label="Remove the chosen file"
+                    data-i18n-title="optionsImportExport_clearFile"
+                    data-i18n-aria-label="optionsImportExport_clearFile"
+                >
+                    <i class="joorney-icon" data-icon="close" aria-hidden="true"></i>
+                </button>
+            </div>
+            <p id="joorney-import-outdated" class="joorney-help mt-3" hidden>
+                <span data-i18n="optionsImportExport_fileOutdated">This file was made by an older version. Importing it as is may leave some settings unused:</span>
+                <a id="joorney-import-migrate-link" href="?page=page-migration" data-migration-link data-i18n="optionsImportExport_fileMigrateLink">migrate it first</a>.
+            </p>
+            <p id="joorney-import-newer" class="joorney-help mt-3" data-i18n="optionsImportExport_fileNewer" hidden>This file was made by a newer version of Joorney: some settings may not be used.</p>
+
+            <button type="button" id="joorney_import_storage_sync" class="joorney-btn mt-3">
+                <i class="joorney-icon" data-icon="cloud_upload" aria-hidden="true"></i>
+                <span data-i18n="options_importSettings">Import settings</span>
+            </button>
+            <div id="joorney-import-confirm" class="joorney-note mt-3 mb-0" role="alertdialog" aria-labelledby="joorney-import-confirm-text" aria-describedby="joorney-import-confirm-detail" hidden>
+                <div>
+                    <b id="joorney-import-confirm-text" data-i18n="options_confirmImport">Do you confirm the file upload?</b>
+                    <div id="joorney-import-confirm-detail" data-i18n="optionsImportExport_confirmDetail">Your current settings will be overwritten.</div>
+                    <div class="joorney-row mt-2">
+                        <button type="button" id="joorney-import-confirm-yes" class="joorney-btn" data-i18n="optionsImportExport_confirmYes">Yes, import</button>
+                        <button type="button" id="joorney-import-confirm-no" class="joorney-btn is-secondary" data-i18n="optionsImportExport_cancel">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="joorney-import-done" class="joorney-note is-success mt-3 mb-0" role="status" hidden>
+            <i class="joorney-icon" data-icon="check_circle" aria-hidden="true"></i>
+            <span data-i18n="optionsImportExport_imported">Settings imported. Reload your open Odoo tabs to apply them.</span>
+        </div>
+    </section>
+    <!--#endregion -->
+
+    <!--#region Migrate -->
+    <section id="joorney-migrate-panel" class="joorney-panel" aria-labelledby="joorney-migrate-title">
+        <h2 id="joorney-migrate-title" class="joorney-panel-title" data-i18n="optionsImportExport_migrateTitle">Migrate</h2>
+        <div class="joorney-ie-migrate">
+            <div id="joorney-migrate-outdated" class="joorney-note is-warning" role="status" hidden>
+                <i class="joorney-icon" data-icon="warning" aria-hidden="true"></i>
+                <div id="joorney-migrate-outdated-text"></div>
+            </div>
+            <div id="joorney-migrate-uptodate" class="joorney-note is-success" role="status" hidden>
+                <i class="joorney-icon" data-icon="check_circle" aria-hidden="true"></i>
+                <div id="joorney-migrate-uptodate-text"></div>
+            </div>
+            <a class="joorney-btn" id="joorney-migrate-open" href="?page=page-migration" data-migration-link hidden>
+                <i class="joorney-icon" data-icon="arrow_forward" aria-hidden="true"></i>
+                <span data-i18n="optionsImportExport_openMigration">Open migration</span>
+            </a>
+            <a class="joorney-btn is-secondary" id="joorney-migrate-file" href="?page=page-migration" data-migration-link hidden data-i18n="optionsImportExport_migrateFile">Migrate a file</a>
+        </div>
+    </section>
+    <!--#endregion -->
+</div>

@@ -17,17 +17,25 @@ export function isOdooWebsite(urlArg) {
     return /^(.+\.odoo\.com|localhost|127\.0\.0\.\d+)$/.test(url.hostname);
 }
 
+// Compiled once per entry: the options grid matches every host against every regex entry on each render
+const compiledOrigins = new Map();
+
+function compileOriginRegex(origin) {
+    if (!compiledOrigins.has(origin)) {
+        try {
+            compiledOrigins.set(origin, new RegExp(origin.replace(regexSchemePrefix, '')));
+        } catch (err) {
+            Console.warn(`Invalid origin regex '${origin}': ${err.message}`);
+            compiledOrigins.set(origin, undefined);
+        }
+    }
+    return compiledOrigins.get(origin);
+}
+
 export function getOriginsRegex(origins) {
     return origins
         .filter((o) => o.startsWith(regexSchemePrefix))
-        .map((o) => {
-            try {
-                return new RegExp(o.replace(regexSchemePrefix, ''));
-            } catch (err) {
-                Console.warn(`Invalid origin regex '${o}': ${err.message}`);
-                return undefined;
-            }
-        })
+        .map(compileOriginRegex)
         .filter(Boolean);
 }
 

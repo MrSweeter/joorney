@@ -58,7 +58,7 @@ async function loadLanguage(currentSettings) {
 export const PAGE = {
     id: 'page-configuration',
     tour: 'tour_preferences',
-    labelKey: 'options_menu_preferences',
+    labelKey: 'options_menu_settings',
     path: './pages/configuration/index.html',
     loader: loadPage,
 };

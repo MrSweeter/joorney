@@ -73,25 +73,19 @@ export default () => {
         },
         ...getOptionPages(
             bundleOutput,
-            ['website', 'configuration', 'version', 'toast', 'ambient', 'technical'],
+            [
+                'website',
+                'features',
+                'configuration',
+                'version',
+                'toast',
+                'importexport',
+                'migration',
+                'ambient',
+                'technical',
+            ],
             [...defaultPlugins, optionsWatchAssets]
         ),
-        {
-            input: 'options/migration/index.js',
-            output: getESMOutput(`${bundleOutput}/options/migration/index.js`),
-            plugins: [
-                ...defaultPlugins,
-                optionsWatchAssets,
-                copy({
-                    targets: [
-                        {
-                            src: ['options/migration/index.html', 'options/migration/index.css'],
-                            dest: `${bundleOutput}/options/migration`,
-                        },
-                    ],
-                }),
-            ],
-        },
         {
             input: 'gh-page/index.js',
             output: getESMOutput(`${publicOutput}/index.js`),

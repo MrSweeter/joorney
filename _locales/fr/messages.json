@@ -672,9 +672,6 @@
     "options_exportSettings": {
         "message": "Exporter les paramètres"
     },
-    "options_migrate": {
-        "message": "MIGRER"
-    },
     "options_checklistShow": {
         "message": "Afficher la liste de découverte"
     },
@@ -690,12 +687,6 @@
     "options_confirmImport": {
         "message": "Confirmer l'import du fichier ?"
     },
-    "options_menu_hosts": {
-        "message": "Contrôle des hôtes"
-    },
-    "options_menu_preferences": {
-        "message": "Préférences"
-    },
     "options_menu_versions": {
         "message": "Versions"
     },
@@ -707,6 +698,266 @@
     },
     "options_menu_developers": {
         "message": "Développeurs"
+    },
+    "options_menu_main": {
+        "message": "Menu principal"
+    },
+    "options_menu_home": {
+        "message": "Accueil"
+    },
+    "options_menu_features": {
+        "message": "Fonctionnalités"
+    },
+    "options_menu_settings": {
+        "message": "Paramètres"
+    },
+    "options_menu_importExport": {
+        "message": "Importer, exporter et migrer"
+    },
+    "options_menu_more": {
+        "message": "Plus"
+    },
+    "options_menu_debugChip": {
+        "message": "débogage"
+    },
+    "options_migrateNeeded": {
+        "message": "Migration de la configuration nécessaire"
+    },
+    "optionsUi_state_everywhere": {
+        "message": "Partout sauf sur les hôtes listés"
+    },
+    "optionsUi_state_everywhereShort": {
+        "message": "Partout"
+    },
+    "optionsUi_state_everywhereHelp": {
+        "message": "Fonctionne sur tous les hôtes Odoo, sauf ceux que vous listez pour elle."
+    },
+    "optionsUi_state_listed": {
+        "message": "Uniquement sur les hôtes listés"
+    },
+    "optionsUi_state_listedShort": {
+        "message": "Hôtes listés"
+    },
+    "optionsUi_state_listedHelp": {
+        "message": "Fonctionne uniquement sur les hôtes que vous listez pour elle."
+    },
+    "optionsUi_state_deactivated": {
+        "message": "Désactivée"
+    },
+    "optionsUi_state_deactivatedHelp": {
+        "message": "Ne fonctionne jamais."
+    },
+    "optionsUi_state_active": {
+        "message": "Active"
+    },
+    "optionsUi_state_limited": {
+        "message": "Active sur ses hôtes runbot"
+    },
+    "optionsUi_versionAll": {
+        "message": "Toutes les versions"
+    },
+    "optionsUi_versionBefore": {
+        "message": "avant $version$",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "17.0"
+            }
+        }
+    },
+    "optionsUi_versionRange": {
+        "message": "$from$ à $to$ (exclue)",
+        "placeholders": {
+            "from": {
+                "content": "$1",
+                "example": "16.0"
+            },
+            "to": {
+                "content": "$2",
+                "example": "19.0"
+            }
+        }
+    },
+    "optionsUi_versionChip": {
+        "message": "Odoo $versions$",
+        "placeholders": {
+            "versions": {
+                "content": "$1",
+                "example": "16.0+"
+            }
+        }
+    },
+    "optionsUi_switchOnHere": {
+        "message": "$feature$ : active ici",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Theme Switch"
+            }
+        }
+    },
+    "optionsUi_aboutFeature": {
+        "message": "À propos de $feature$",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Theme Switch"
+            }
+        }
+    },
+    "optionsUi_dragHandle": {
+        "message": "Glisser pour déplacer"
+    },
+    "optionsUi_action_openPage": {
+        "message": "Ouvrir la page de la fonctionnalité"
+    },
+    "optionsUi_infoVideo": {
+        "message": "Vidéo de $feature$",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Theme Switch"
+            }
+        }
+    },
+    "optionsUi_videoSoon": {
+        "message": "Vidéo bientôt disponible"
+    },
+    "optionsUi_done": {
+        "message": "Terminé"
+    },
+    "optionsFeatures_title": {
+        "message": "Fonctionnalités"
+    },
+    "optionsFeatures_subtitle": {
+        "message": "Choisissez où chaque fonctionnalité s'exécute. Les exceptions par hôte sont sur l'accueil."
+    },
+    "optionsFeatures_preview": {
+        "message": "Faites un clic droit sur une fonctionnalité (ou un appui long) pour ses actions. Le glisser-déposer entre les états est encore sur l'accueil."
+    },
+    "optionsImportExport_title": {
+        "message": "Importer, exporter et migrer"
+    },
+    "optionsImportExport_subtitle": {
+        "message": "Sauvegardez vos paramètres, restaurez-les depuis un fichier ou mettez à jour une ancienne configuration."
+    },
+    "optionsImportExport_exportTitle": {
+        "message": "Exporter"
+    },
+    "optionsImportExport_exportHelp": {
+        "message": "Télécharge les paramètres synchronisés avec votre compte de navigateur (états et modes des fonctionnalités, hôtes, préférences) dans un fichier JSON, avec sa version de configuration. Le cache local et la progression de la découverte ne sont pas exportés."
+    },
+    "optionsImportExport_fileName": {
+        "message": "Nom du fichier :"
+    },
+    "optionsImportExport_exported": {
+        "message": "Téléchargement lancé."
+    },
+    "optionsImportExport_importTitle": {
+        "message": "Importer"
+    },
+    "optionsImportExport_importWarning": {
+        "message": "L'import remplace vos paramètres actuels par le contenu du fichier, puis recharge cette page."
+    },
+    "optionsImportExport_drop": {
+        "message": "Déposez ici un fichier de paramètres Joorney (.json), ou"
+    },
+    "optionsImportExport_chooseFile": {
+        "message": "Choisir un fichier"
+    },
+    "optionsImportExport_clearFile": {
+        "message": "Retirer le fichier choisi"
+    },
+    "optionsImportExport_fileOutdated": {
+        "message": "Ce fichier a été créé par une version plus ancienne. L'importer tel quel peut laisser certains paramètres inutilisés :"
+    },
+    "optionsImportExport_fileNewer": {
+        "message": "Ce fichier vient d'une version plus récente de Joorney : certains paramètres pourraient ne pas être utilisés."
+    },
+    "optionsImportExport_summaryVersion": {
+        "message": "version de configuration $version$",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "2"
+            }
+        }
+    },
+    "optionsImportExport_summaryFeatures": {
+        "message": "$count$ états de fonctionnalité",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "14"
+            }
+        }
+    },
+    "optionsImportExport_summaryHosts": {
+        "message": "$count$ hôtes",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "3"
+            }
+        }
+    },
+    "optionsImportExport_confirmDetail": {
+        "message": "Vos paramètres actuels seront remplacés."
+    },
+    "optionsImportExport_confirmYes": {
+        "message": "Oui, importer"
+    },
+    "optionsImportExport_cancel": {
+        "message": "Annuler"
+    },
+    "optionsImportExport_imported": {
+        "message": "Paramètres importés. Rechargez vos onglets Odoo ouverts pour les appliquer."
+    },
+    "optionsImportExport_error_read": {
+        "message": "Le fichier n'a pas pu être lu."
+    },
+    "optionsImportExport_error_json": {
+        "message": "Ce fichier n'est pas un JSON valide."
+    },
+    "optionsImportExport_error_notSettings": {
+        "message": "Ce fichier n'est pas un fichier de paramètres Joorney."
+    },
+    "optionsImportExport_error_version": {
+        "message": "La version de configuration de ce fichier n'est pas valide."
+    },
+    "optionsImportExport_error_shape": {
+        "message": "Les paramètres d'hôtes de ce fichier ne sont pas valides."
+    },
+    "optionsImportExport_error_write": {
+        "message": "Les paramètres n'ont pas pu être enregistrés, le fichier est peut-être trop volumineux pour le stockage synchronisé."
+    },
+    "optionsImportExport_migrateTitle": {
+        "message": "Migrer"
+    },
+    "optionsImportExport_migrateOutdated": {
+        "message": "Vos paramètres utilisent un ancien format (v$stored$). Migrez-les vers la v$expected$ pour que toutes les fonctionnalités continuent de fonctionner.",
+        "placeholders": {
+            "stored": {
+                "content": "$1",
+                "example": "0"
+            },
+            "expected": {
+                "content": "$2",
+                "example": "2"
+            }
+        }
+    },
+    "optionsImportExport_migrateUpToDate": {
+        "message": "Le format des paramètres est à jour (v$version$).",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "2"
+            }
+        }
+    },
+    "optionsImportExport_openMigration": {
+        "message": "Ouvrir la migration"
     },
     "options_limitedFeatureTitle": {
         "message": "[Fonctionnalité limitée] $feature$",
@@ -740,6 +991,15 @@
     },
     "options_error_invalidOrigin": {
         "message": "Origine invalide, utilisez une URL comme https://www.odoo.com"
+    },
+    "options_error_pageLoad": {
+        "message": "Cette page n’a pas pu être chargée, rechargez les options pour réessayer : $error$",
+        "placeholders": {
+            "error": {
+                "content": "$1",
+                "example": "Failed to fetch"
+            }
+        }
     },
     "options_add": {
         "message": "Ajouter"
@@ -931,31 +1191,135 @@
         "message": "Suivez les étapes ci-dessous"
     },
     "migration_title": {
-        "message": "Migration de Joorney"
-    },
-    "migration_select": {
-        "message": "Sélectionnez la configuration à migrer"
-    },
-    "migration_or": {
-        "message": "ou"
-    },
-    "migration_useCurrent": {
-        "message": "Utiliser la configuration actuelle"
-    },
-    "migration_heading": {
-        "message": "Migration"
+        "message": "Migrer la configuration"
     },
     "migration_execute": {
         "message": "Lancer la migration"
     },
     "migration_download": {
-        "message": "Télécharger la nouvelle configuration"
+        "message": "Télécharger le fichier migré"
     },
-    "migration_error_lowerVersion": {
-        "message": "La configuration ne peut pas être migrée vers une version inférieure"
+    "migration_subtitle": {
+        "message": "Mettez à jour les paramètres enregistrés par une ancienne version de Joorney vers le format actuel."
     },
-    "migration_error_sameVersion": {
-        "message": "La configuration ne peut pas être migrée vers la même version"
+    "migration_sourceTitle": {
+        "message": "Source"
+    },
+    "migration_sourceHelp": {
+        "message": "Choisissez les paramètres à migrer : ceux enregistrés dans ce navigateur, ou un fichier exporté auparavant."
+    },
+    "migration_current": {
+        "message": "Paramètres actuels"
+    },
+    "migration_storedVersion": {
+        "message": "v$version$ enregistrée",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "1"
+            }
+        }
+    },
+    "migration_drop": {
+        "message": "Déposez un export .json ici ou"
+    },
+    "migration_stepsTitle": {
+        "message": "Étapes"
+    },
+    "migration_stepsHelp": {
+        "message": "Chaque étape s'exécute dans l'ordre, de la version de vos paramètres jusqu'à la version actuelle."
+    },
+    "migration_chainLabel": {
+        "message": "Chaîne de migration de v$from$ à v$to$",
+        "placeholders": {
+            "from": {
+                "content": "$1",
+                "example": "0"
+            },
+            "to": {
+                "content": "$2",
+                "example": "2"
+            }
+        }
+    },
+    "migration_version": {
+        "message": "v$version$",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "1"
+            }
+        }
+    },
+    "migration_stepLabel": {
+        "message": "v$from$ → v$to$",
+        "placeholders": {
+            "from": {
+                "content": "$1",
+                "example": "0"
+            },
+            "to": {
+                "content": "$2",
+                "example": "1"
+            }
+        }
+    },
+    "migration_step_0": {
+        "message": "Le mode autoriser/refuser passe de global à propre à chaque fonctionnalité."
+    },
+    "migration_step_1": {
+        "message": "L'effet Tâche étoilée devient l'effet Priorité étoilée."
+    },
+    "migration_running": {
+        "message": "Migration en cours…"
+    },
+    "migration_backupHelp": {
+        "message": "La migration remplace vos paramètres enregistrés par les paramètres migrés. Téléchargez d'abord une sauvegarde depuis Import / export si vous souhaitez conserver les anciens."
+    },
+    "migration_done": {
+        "message": "Paramètres migrés vers la v$version$ et enregistrés.",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "2"
+            }
+        }
+    },
+    "migration_backToImportExport": {
+        "message": "Retour à Import / export"
+    },
+    "migration_upToDate": {
+        "message": "Déjà à jour (v$version$), rien à migrer.",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "2"
+            }
+        }
+    },
+    "migration_error_newer": {
+        "message": "Ces paramètres viennent d'une version plus récente de Joorney (v$version$). Mettez l'extension à jour, puis importez-les.",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "3"
+            }
+        }
+    },
+    "migration_error_failed": {
+        "message": "La migration n'a pas pu être enregistrée. Réessayez."
+    },
+    "migration_confirm": {
+        "message": "Vos paramètres actuels seront remplacés par le fichier migré."
+    },
+    "migration_error_refresh": {
+        "message": "Paramètres enregistrés, mais la page n'a pas pu s'actualiser. Rechargez-la pour voir le résultat."
+    },
+    "optionsImportExport_fileMigrateLink": {
+        "message": "migrez-le d'abord"
+    },
+    "optionsImportExport_migrateFile": {
+        "message": "Migrer un fichier"
     },
     "optionsHosts_limitedFeatures": {
         "message": "Fonctionnalités limitées"
@@ -964,16 +1328,16 @@
         "message": "Fonctionnalités"
     },
     "optionsHosts_whitelist": {
-        "message": "Liste blanche"
+        "message": "Uniquement sur les hôtes listés"
     },
     "optionsHosts_whitelistHelp": {
-        "message": "Fonctionnalité désactivée par défaut, sauf si elle est cochée pour une origine dans la section « Origines » ci-dessous"
+        "message": "Fonctionne uniquement sur les hôtes cochés dans la section « Origines » ci-dessous"
     },
     "optionsHosts_blacklist": {
-        "message": "Liste noire"
+        "message": "Partout sauf sur les hôtes listés"
     },
     "optionsHosts_blacklistHelp": {
-        "message": "Fonctionnalité activée par défaut, sauf si elle est cochée pour une origine dans la section « Origines » ci-dessous"
+        "message": "Fonctionne sur tous les hôtes, sauf ceux cochés dans la section « Origines » ci-dessous"
     },
     "optionsHosts_disable": {
         "message": "Désactivées"

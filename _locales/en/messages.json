@@ -8,7 +8,7 @@
         "description": "Extension description (manifest, Chrome Web Store). Max 132 characters"
     },
     "command_enableDisable": {
-        "message": "Enable or Disable extension features on the current origin",
+        "message": "Turn extension features on or off on the current origin",
         "description": "Keyboard shortcut description (chrome://extensions/shortcuts)"
     },
     "badge_off": {
@@ -470,7 +470,7 @@
         "description": "Address bar suggestion (keyword \"joorney\")"
     },
     "omnibox_disabled": {
-        "message": "The functionality to open a runbot from URL is currently disabled. Open options to enable \"$feature$\"!",
+        "message": "Opening a runbot from the URL is deactivated. Activate \"$feature$\" in the options!",
         "description": "Address bar default suggestion when [Runbot] Auto Open is disabled. XML: escape & and <",
         "placeholders": {
             "feature": {
@@ -859,10 +859,6 @@
         "message": "Export settings",
         "description": "Options header: tooltip of the export button"
     },
-    "options_migrate": {
-        "message": "MIGRATE",
-        "description": "Options header: button opening the configuration migration page (uppercase)"
-    },
     "options_checklistShow": {
         "message": "Show onboarding checklist",
         "description": "Options: tooltip of the floating button showing the onboarding checklist"
@@ -883,14 +879,6 @@
         "message": "Do you confirm the file upload?",
         "description": "Confirmation before importing a settings file"
     },
-    "options_menu_hosts": {
-        "message": "Hosts control",
-        "description": "Options menu entry: features per host"
-    },
-    "options_menu_preferences": {
-        "message": "Preferences",
-        "description": "Options menu entry: feature preferences"
-    },
     "options_menu_versions": {
         "message": "Versions",
         "description": "Options menu entry: Odoo versions"
@@ -906,6 +894,328 @@
     "options_menu_developers": {
         "message": "Developers",
         "description": "Options menu entry: technical settings (debug mode only)"
+    },
+    "options_menu_main": {
+        "message": "Main menu",
+        "description": "Options navbar: accessible name of the main menu"
+    },
+    "options_menu_home": {
+        "message": "Home",
+        "description": "Options menu entry: home page (features per host)"
+    },
+    "options_menu_features": {
+        "message": "Features",
+        "description": "Options menu entry: global state of the features"
+    },
+    "options_menu_settings": {
+        "message": "Settings",
+        "description": "Options \"More\" menu entry: extension-wide settings"
+    },
+    "options_menu_importExport": {
+        "message": "Import, export and migrate",
+        "description": "Options \"More\" menu entry: settings file import/export and configuration migration"
+    },
+    "options_menu_more": {
+        "message": "More",
+        "description": "Options navbar: dropdown button with the other pages"
+    },
+    "options_menu_debugChip": {
+        "message": "debug",
+        "description": "Options \"More\" menu: chip beside the developer entry, only shown in debug mode"
+    },
+    "options_migrateNeeded": {
+        "message": "Configuration migration needed",
+        "description": "Options menu: badge tooltip when the stored configuration is older than the extension"
+    },
+    "optionsUi_state_everywhere": {
+        "message": "Everywhere except listed hosts",
+        "description": "Feature state: active, runs on every Odoo host except the hosts listed for it"
+    },
+    "optionsUi_state_everywhereShort": {
+        "message": "Everywhere",
+        "description": "Feature state, short label (badge) of \"Everywhere except listed hosts\""
+    },
+    "optionsUi_state_everywhereHelp": {
+        "message": "Runs on every Odoo host, except the hosts you list for it.",
+        "description": "Feature state help: everywhere except listed hosts"
+    },
+    "optionsUi_state_listed": {
+        "message": "Only on listed hosts",
+        "description": "Feature state: active, runs only on the hosts listed for it"
+    },
+    "optionsUi_state_listedShort": {
+        "message": "Listed only",
+        "description": "Feature state, short label (badge) of \"Only on listed hosts\""
+    },
+    "optionsUi_state_listedHelp": {
+        "message": "Runs only on the hosts you list for it.",
+        "description": "Feature state help: only on listed hosts"
+    },
+    "optionsUi_state_deactivated": {
+        "message": "Deactivated",
+        "description": "Feature state: never runs"
+    },
+    "optionsUi_state_deactivatedHelp": {
+        "message": "Never runs.",
+        "description": "Feature state help: deactivated"
+    },
+    "optionsUi_state_active": {
+        "message": "Active",
+        "description": "Feature state of a runbot (limited) feature that is on"
+    },
+    "optionsUi_state_limited": {
+        "message": "Active on its runbot hosts",
+        "description": "Feature state of a runbot (limited) feature that is on, long label"
+    },
+    "optionsUi_versionAll": {
+        "message": "All versions",
+        "description": "Supported Odoo versions of a feature: no restriction"
+    },
+    "optionsUi_versionBefore": {
+        "message": "before $version$",
+        "description": "Supported Odoo versions of a feature: lower than a version",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "17.0"
+            }
+        }
+    },
+    "optionsUi_versionRange": {
+        "message": "$from$ to $to$ (excluded)",
+        "description": "Supported Odoo versions of a feature: from a version up to another one, the last one not included",
+        "placeholders": {
+            "from": {
+                "content": "$1",
+                "example": "16.0"
+            },
+            "to": {
+                "content": "$2",
+                "example": "19.0"
+            }
+        }
+    },
+    "optionsUi_versionChip": {
+        "message": "Odoo $versions$",
+        "description": "Feature chip with its supported Odoo versions",
+        "placeholders": {
+            "versions": {
+                "content": "$1",
+                "example": "16.0+"
+            }
+        }
+    },
+    "optionsUi_switchOnHere": {
+        "message": "$feature$: on here",
+        "description": "Feature card switch: accessible name, the switch turns the feature on/off on the selected host",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Theme Switch"
+            }
+        }
+    },
+    "optionsUi_aboutFeature": {
+        "message": "About $feature$",
+        "description": "Feature card: info button opening the feature details",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Theme Switch"
+            }
+        }
+    },
+    "optionsUi_dragHandle": {
+        "message": "Drag to move",
+        "description": "Feature card: tooltip of the drag handle"
+    },
+    "optionsUi_action_openPage": {
+        "message": "Open feature page",
+        "description": "Feature action: open the page of the feature"
+    },
+    "optionsUi_infoVideo": {
+        "message": "Video of $feature$",
+        "description": "Feature info window: accessible name of the video",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Theme Switch"
+            }
+        }
+    },
+    "optionsUi_videoSoon": {
+        "message": "Video coming soon",
+        "description": "Feature info window: shown instead of the video when there is none yet"
+    },
+    "optionsUi_done": {
+        "message": "Done",
+        "description": "Button closing a window"
+    },
+    "optionsFeatures_title": {
+        "message": "Features",
+        "description": "Options features page: title"
+    },
+    "optionsFeatures_subtitle": {
+        "message": "Choose where each feature runs. Per-host exceptions are on Home.",
+        "description": "Options features page: subtitle"
+    },
+    "optionsFeatures_preview": {
+        "message": "Right-click a feature (or long press it) for its actions. Drag and drop between states is still on Home.",
+        "description": "Options features page: temporary help until the drag and drop board"
+    },
+    "optionsImportExport_title": {
+        "message": "Import, export and migrate",
+        "description": "Options import/export page: title"
+    },
+    "optionsImportExport_subtitle": {
+        "message": "Back up your settings, restore them from a file, or bring an older configuration up to date.",
+        "description": "Options import/export page: subtitle"
+    },
+    "optionsImportExport_exportTitle": {
+        "message": "Export",
+        "description": "Options import/export page: export section title"
+    },
+    "optionsImportExport_exportHelp": {
+        "message": "Downloads the settings synced with your browser account (feature states and modes, hosts, preferences) as one JSON file, with its configuration version. Local cache and onboarding progress are not exported.",
+        "description": "Options import/export page: export help"
+    },
+    "optionsImportExport_fileName": {
+        "message": "File name:",
+        "description": "Options import/export page: label before the exported file name"
+    },
+    "optionsImportExport_exported": {
+        "message": "Download started.",
+        "description": "Options import/export page: status after a click on export"
+    },
+    "optionsImportExport_importTitle": {
+        "message": "Import",
+        "description": "Options import/export page: import section title"
+    },
+    "optionsImportExport_importWarning": {
+        "message": "Importing overwrites your current settings with the content of the file, then reloads this page.",
+        "description": "Options import/export page: warning before importing"
+    },
+    "optionsImportExport_drop": {
+        "message": "Drop a Joorney settings file (.json) here, or",
+        "description": "Options import/export page: drop zone text, followed by the \"Choose file\" button"
+    },
+    "optionsImportExport_chooseFile": {
+        "message": "Choose file",
+        "description": "Options import/export page: file picker button"
+    },
+    "optionsImportExport_clearFile": {
+        "message": "Remove the chosen file",
+        "description": "Options import/export page: button clearing the chosen file"
+    },
+    "optionsImportExport_fileOutdated": {
+        "message": "This file was made by an older version. Importing it as is may leave some settings unused:",
+        "description": "Options import/export page: the chosen file has an older configuration version, followed by a link to the migration"
+    },
+    "optionsImportExport_fileNewer": {
+        "message": "This file was made by a newer version of Joorney: some settings may not be used.",
+        "description": "Options import/export page: the chosen file has a newer configuration version"
+    },
+    "optionsImportExport_summaryVersion": {
+        "message": "configuration version $version$",
+        "description": "Options import/export page: chip, configuration version of the chosen file",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "2"
+            }
+        }
+    },
+    "optionsImportExport_summaryFeatures": {
+        "message": "$count$ feature states",
+        "description": "Options import/export page: chip, number of feature states in the chosen file",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "14"
+            }
+        }
+    },
+    "optionsImportExport_summaryHosts": {
+        "message": "$count$ hosts",
+        "description": "Options import/export page: chip, number of hosts in the chosen file",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "3"
+            }
+        }
+    },
+    "optionsImportExport_confirmDetail": {
+        "message": "Your current settings will be overwritten.",
+        "description": "Options import/export page: inline import confirmation, under \"Do you confirm the file upload?\""
+    },
+    "optionsImportExport_confirmYes": {
+        "message": "Yes, import",
+        "description": "Options import/export page: confirm the import"
+    },
+    "optionsImportExport_cancel": {
+        "message": "Cancel",
+        "description": "Options import/export page: cancel the import"
+    },
+    "optionsImportExport_imported": {
+        "message": "Settings imported. Reload your open Odoo tabs to apply them.",
+        "description": "Options import/export page: after a successful import"
+    },
+    "optionsImportExport_error_read": {
+        "message": "The file could not be read.",
+        "description": "Options import/export page: import error"
+    },
+    "optionsImportExport_error_json": {
+        "message": "This file is not valid JSON.",
+        "description": "Options import/export page: import error"
+    },
+    "optionsImportExport_error_notSettings": {
+        "message": "This file is not a Joorney settings file.",
+        "description": "Options import/export page: import error, the JSON is not an object of settings"
+    },
+    "optionsImportExport_error_version": {
+        "message": "This file has an invalid configuration version.",
+        "description": "Options import/export page: import error, configurationVersion is not a whole number"
+    },
+    "optionsImportExport_error_shape": {
+        "message": "This file has invalid host settings.",
+        "description": "Options import/export page: import error, originsFilterOrigins or windowActionFallbacks is not an object of objects"
+    },
+    "optionsImportExport_error_write": {
+        "message": "The settings could not be saved, the file may be too large for synced storage.",
+        "description": "Options import/export page: import error, chrome.storage.sync rejected the write (quota)"
+    },
+    "optionsImportExport_migrateTitle": {
+        "message": "Migrate",
+        "description": "Options import/export page: migration section title"
+    },
+    "optionsImportExport_migrateOutdated": {
+        "message": "Your settings use an older format (v$stored$). Migrate them to v$expected$ to keep every feature working.",
+        "description": "Options import/export page: the stored configuration version is lower than the expected one",
+        "placeholders": {
+            "stored": {
+                "content": "$1",
+                "example": "0"
+            },
+            "expected": {
+                "content": "$2",
+                "example": "2"
+            }
+        }
+    },
+    "optionsImportExport_migrateUpToDate": {
+        "message": "Settings format is up to date (v$version$).",
+        "description": "Options import/export page: the stored configuration version is the expected one",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "2"
+            }
+        }
+    },
+    "optionsImportExport_openMigration": {
+        "message": "Open migration",
+        "description": "Options import/export page: link to the migration page, settings outdated"
     },
     "options_limitedFeatureTitle": {
         "message": "[Limited Feature] $feature$",
@@ -946,6 +1256,16 @@
     "options_error_invalidOrigin": {
         "message": "Invalid origin, use a URL like https://www.odoo.com",
         "description": "Options: error when the origin is not a valid URL"
+    },
+    "options_error_pageLoad": {
+        "message": "This page could not be loaded, reload the options to try again: $error$",
+        "description": "Options: error shown in place of a page that failed to load",
+        "placeholders": {
+            "error": {
+                "content": "$1",
+                "example": "Failed to fetch"
+            }
+        }
     },
     "options_add": {
         "message": "Add",
@@ -1020,7 +1340,7 @@
         "description": "Onboarding checklist step title"
     },
     "checklist_hostControls_moveFeature_description": {
-        "message": "Drag and drop to enable or disable a feature for optimal control.",
+        "message": "Drag and drop to activate or deactivate a feature for optimal control.",
         "description": "Onboarding checklist step description"
     },
     "checklist_hostControls_addHost_name": {
@@ -1036,7 +1356,7 @@
         "description": "Onboarding checklist step title"
     },
     "checklist_hostControls_configureHost_description": {
-        "message": "Adjust the settings for each origin by enabling or disabling features using the checkboxes.",
+        "message": "Adjust the settings for each origin by turning features on or off with the checkboxes.",
         "description": "Onboarding checklist step description"
     },
     "checklist_hostControls_deleteHost_name": {
@@ -1200,40 +1520,162 @@
         "description": "Onboarding checklist: description before a tour is loaded"
     },
     "migration_title": {
-        "message": "Joorney Migration",
-        "description": "Migration page title (browser tab)"
-    },
-    "migration_select": {
-        "message": "Select your configuration to migrate",
-        "description": "Migration page: file selection heading"
-    },
-    "migration_or": {
-        "message": "or",
-        "description": "Migration page: between the file input and the \"Use current\" button"
-    },
-    "migration_useCurrent": {
-        "message": "Use current",
-        "description": "Migration page: button migrating the current configuration"
-    },
-    "migration_heading": {
-        "message": "Migration",
-        "description": "Migration page: heading of the migration summary"
+        "message": "Migrate configuration",
+        "description": "Migration page: title"
     },
     "migration_execute": {
-        "message": "Execute migration",
+        "message": "Run migration",
         "description": "Migration page: button running the migration"
     },
     "migration_download": {
-        "message": "Download new configuration",
-        "description": "Migration page: button downloading the migrated configuration"
+        "message": "Download migrated file",
+        "description": "Migration page: button downloading the migrated settings"
     },
-    "migration_error_lowerVersion": {
-        "message": "The configuration cannot be migrated to a lower version",
-        "description": "Migration page error"
+    "migration_subtitle": {
+        "message": "Bring settings saved by an older Joorney up to the current format.",
+        "description": "Migration page: subtitle"
     },
-    "migration_error_sameVersion": {
-        "message": "The configuration cannot be migrated to the same version",
-        "description": "Migration page error"
+    "migration_sourceTitle": {
+        "message": "Source",
+        "description": "Migration page: source section title"
+    },
+    "migration_sourceHelp": {
+        "message": "Choose which settings to migrate: the ones stored in this browser, or a file exported earlier.",
+        "description": "Migration page: source section help"
+    },
+    "migration_current": {
+        "message": "Current settings",
+        "description": "Migration page: choice migrating the settings stored in this browser"
+    },
+    "migration_storedVersion": {
+        "message": "Stored v$version$",
+        "description": "Migration page: chip, configuration version of the stored settings",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "1"
+            }
+        }
+    },
+    "migration_drop": {
+        "message": "Drop a .json export here or",
+        "description": "Migration page: dropzone text, followed by the \"Choose file\" button"
+    },
+    "migration_stepsTitle": {
+        "message": "Steps",
+        "description": "Migration page: steps section title"
+    },
+    "migration_stepsHelp": {
+        "message": "Each step runs in order, from the version of your settings to the current one.",
+        "description": "Migration page: steps section help"
+    },
+    "migration_chainLabel": {
+        "message": "Migration chain from v$from$ to v$to$",
+        "description": "Migration page: accessible label of the version chain",
+        "placeholders": {
+            "from": {
+                "content": "$1",
+                "example": "0"
+            },
+            "to": {
+                "content": "$2",
+                "example": "2"
+            }
+        }
+    },
+    "migration_version": {
+        "message": "v$version$",
+        "description": "Migration page: a configuration version in the chain",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "1"
+            }
+        }
+    },
+    "migration_stepLabel": {
+        "message": "v$from$ → v$to$",
+        "description": "Migration page: chip naming one migration step",
+        "placeholders": {
+            "from": {
+                "content": "$1",
+                "example": "0"
+            },
+            "to": {
+                "content": "$2",
+                "example": "1"
+            }
+        }
+    },
+    "migration_step_0": {
+        "message": "Allow/deny mode moves from global to each feature.",
+        "description": "Migration page: what the migration from version 0 to 1 does"
+    },
+    "migration_step_1": {
+        "message": "Starring task effect becomes Starring priority effect.",
+        "description": "Migration page: what the migration from version 1 to 2 does"
+    },
+    "migration_running": {
+        "message": "Migrating…",
+        "description": "Migration page: button label while the migration runs"
+    },
+    "migration_backupHelp": {
+        "message": "Running replaces your stored settings with the migrated ones. Download a backup from Import / export first if you want to keep the old ones.",
+        "description": "Migration page: help under the run button"
+    },
+    "migration_done": {
+        "message": "Settings migrated to v$version$ and saved.",
+        "description": "Migration page: success note",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "2"
+            }
+        }
+    },
+    "migration_backToImportExport": {
+        "message": "Back to Import / export",
+        "description": "Migration page: link back to Import / export"
+    },
+    "migration_upToDate": {
+        "message": "Already up to date (v$version$), nothing to migrate.",
+        "description": "Migration page: the chosen settings already use the current version",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "2"
+            }
+        }
+    },
+    "migration_error_newer": {
+        "message": "These settings come from a newer Joorney (v$version$). Update the extension, then import them.",
+        "description": "Migration page: the chosen settings have a newer version",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "3"
+            }
+        }
+    },
+    "migration_error_failed": {
+        "message": "The migration could not be saved. Try again.",
+        "description": "Migration page: a migrator or a storage write failed"
+    },
+    "migration_confirm": {
+        "message": "Your current settings will be replaced by the migrated file.",
+        "description": "Migration page: confirmation before saving a migrated file"
+    },
+    "migration_error_refresh": {
+        "message": "Settings saved, but the page could not refresh. Reload it to see the result.",
+        "description": "Migration page: the settings were saved, then refreshing the page failed"
+    },
+    "optionsImportExport_fileMigrateLink": {
+        "message": "migrate it first",
+        "description": "Options import/export page: link to the migration, ends the sentence of the outdated file hint"
+    },
+    "optionsImportExport_migrateFile": {
+        "message": "Migrate a file",
+        "description": "Options import/export page: link to the migration page, settings up to date"
     },
     "optionsHosts_limitedFeatures": {
         "message": "Limited Features",
@@ -1244,24 +1686,24 @@
         "description": "Options hosts page: heading of the features"
     },
     "optionsHosts_whitelist": {
-        "message": "Whitelist",
-        "description": "Options hosts page: column of features disabled by default"
+        "message": "Only on listed hosts",
+        "description": "Options hosts page: column of the features running only on the hosts listed for them (storage: <id>WhitelistMode true)"
     },
     "optionsHosts_whitelistHelp": {
-        "message": "Feature disabled by default, unless listed and checked in the \"Origins\" section below",
-        "description": "Options hosts page: whitelist help"
+        "message": "Runs only on the hosts listed and checked in the \"Origins\" section below",
+        "description": "Options hosts page: help of \"Only on listed hosts\""
     },
     "optionsHosts_blacklist": {
-        "message": "Blacklist",
-        "description": "Options hosts page: column of features enabled by default"
+        "message": "Everywhere except listed hosts",
+        "description": "Options hosts page: column of the features running everywhere except on the hosts listed for them (storage: <id>WhitelistMode false)"
     },
     "optionsHosts_blacklistHelp": {
-        "message": "Feature enabled by default, unless listed and checked in the \"Origins\" section below",
-        "description": "Options hosts page: blacklist help"
+        "message": "Runs on every host, except the hosts listed and checked in the \"Origins\" section below",
+        "description": "Options hosts page: help of \"Everywhere except listed hosts\""
     },
     "optionsHosts_disable": {
-        "message": "Disable",
-        "description": "Options hosts page: column of disabled features"
+        "message": "Deactivated",
+        "description": "Options hosts page: column of the deactivated features"
     },
     "optionsHosts_originInput": {
         "message": "Origin filter",

@@ -1,6 +1,7 @@
 import { getFeaturesAndCurrentSettings } from '../../configuration.js';
+import { addHost, setHostListing } from '../../options/src/ui/state.js';
 import { getOriginsRegex, regexSchemePrefix } from '../../src/utils/authorize.js';
-import { StorageSync, Tabs } from '../../src/utils/browser.js';
+import { Console, StorageSync, Tabs } from '../../src/utils/browser.js';
 
 export async function reloadTabFeatures() {
     const { features, currentSettings } = await getFeaturesAndCurrentSettings();
@@ -48,8 +49,14 @@ function setupSaveOriginButton(features, configuration, currentTabID, origins, o
     saveOriginButton.style.display = 'flex';
     tabFeaturesList.style.display = 'none';
     saveOriginButton.onclick = async () => {
-        origins[originString] = {};
-        await StorageSync.set({ originsFilterOrigins: origins });
+        try {
+            await addHost(originString);
+        } catch (ex) {
+            // A tab that can't be a host (chrome://, file://...) or a host added meanwhile from the options page
+            Console.warn(ex);
+            saveOriginButton.disabled = true;
+            return;
+        }
         reloadTabFeatures();
     };
     saveOriginButton.disabled = false;
@@ -70,13 +77,13 @@ function setupFeatures(featuresArg, configuration, currentTabID, origins, origin
 
     const saveButton = document.getElementById('saveButton');
     saveButton.onclick = async () => {
-        const originConfiguration = {};
+        const listedById = {};
         for (const f of features) {
             const featureInput = document.getElementById(`${f}FeatureTab`);
-            originConfiguration[f] = featureInput.checked;
+            listedById[f] = featureInput.checked;
         }
-        origins[originString] = originConfiguration;
-        await StorageSync.set({ originsFilterOrigins: origins });
+        // Read and written at save time by the options state: a host list changed since the popup opened is kept
+        await setHostListing(originString, listedById);
         Tabs.reload(currentTabID);
     };
     saveButton.disabled = false;
