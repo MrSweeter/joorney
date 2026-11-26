@@ -144,8 +144,6 @@ export async function loadPage(features, currentSettings) {
                           featureCardHTML(feature, {
                               grip: true,
                               muted: state === FEATURE_STATE.DEACTIVATED,
-                              // The feature page does not exist yet
-                              href: null,
                               classes:
                                   previousStates && previousStates[feature.id] !== states[feature.id] ? 'is-moved' : '',
                           })
@@ -192,11 +190,9 @@ export async function loadPage(features, currentSettings) {
             .map((feature) => {
                 const enabled = Boolean(settings[`${feature.id}Enabled`]);
                 return featureCardHTML(feature, {
-                    state: getFeatureState(settings, feature),
                     switchOn: enabled,
                     switchLabel: t('optionsHome_runbotGlobal', featureName(feature)),
                     muted: !enabled,
-                    href: null,
                     category: false,
                 });
             })
@@ -323,7 +319,7 @@ export async function loadPage(features, currentSettings) {
     };
     //#endregion
 
-    const showInfo = (id) => openInfoModal(byID(id), settings, { openPage: false });
+    const showInfo = (id) => openInfoModal(byID(id), settings);
     //#endregion
 
     root.addEventListener('click', onClick);
@@ -341,7 +337,6 @@ export async function loadPage(features, currentSettings) {
             onSwitch: (id, value) => setFeatureActive(byID(id), value),
         });
     }
-
     // Coalesce the events of a bulk write into one render
     let refreshTimer;
     const onStateChange = () => {

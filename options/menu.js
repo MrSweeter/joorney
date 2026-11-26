@@ -1,5 +1,5 @@
-import { PAGE as AMBIENT_PAGE } from './pages/ambient/index.js';
 import { PAGE as CONFIGURATION_PAGE } from './pages/configuration/index.js';
+import { PAGE as FEATURE_PAGE } from './pages/feature/index.js';
 import { PAGE as FEATURES_PAGE } from './pages/features/index.js';
 import { PAGE as IMPORT_EXPORT_PAGE } from './pages/importexport/index.js';
 import { PAGE as MIGRATION_PAGE } from './pages/migration/index.js';
@@ -15,12 +15,12 @@ export const PAGES = [
     // Home: the hosts page until the Home dashboard replaces it
     WEBSITE_PAGE,
     FEATURES_PAGE,
+    // Route only (?page=page-feature&feature=<id>), Features stays the active entry
+    FEATURE_PAGE,
     VERSION_PAGE,
     { ...CONFIGURATION_PAGE, group: MORE, icon: 'build' },
     { ...TOAST_PAGE, group: MORE, icon: 'chat_bubble' },
     { ...IMPORT_EXPORT_PAGE, group: MORE, icon: 'swap_vert' },
-    // Until the ambient customization moves to its feature page
-    { ...AMBIENT_PAGE, group: MORE, icon: 'landscape' },
     // Route only (?page=page-migration), Import / export stays the active entry
     MIGRATION_PAGE,
     { ...TECHNICAL_PAGE, group: MORE, icon: 'code_blocks' },

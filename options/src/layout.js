@@ -99,7 +99,7 @@ function setupRouting() {
 //#region Menus
 /**
  * Render the menu of the pages and open the default one.
- * Pages without group are top items; group 'more' goes in the "More" dropdown, 'technical' pages are hidden
+ * Pages without group are top items (page.hidden: not in the menu, page.activeMenu: the entry shown active); group 'more' goes in the "More" dropdown, 'technical' pages are hidden
  * unless debug (class joorney-tech-menu, see options/index.js).
  * @param {object[]} pages page definitions, see options/menu.js
  * @param {object} defaultPage page opened first
@@ -114,7 +114,7 @@ export function loadMenus(pages, defaultPage, onPageLoaded = undefined, defaultP
     const container = document.getElementById(MENU_ITEMS_CONTAINER);
     container.innerHTML = '';
     const morePages = [];
-    for (const page of pages) {
+    for (const page of pages.filter((p) => !p.hidden)) {
         if (page.group === 'more') morePages.push(page);
         else container.appendChild(menuItemElement(page));
     }
@@ -277,7 +277,7 @@ async function loadPage(page, params = {}) {
         // The previous page already dropped its listeners (PAGE_CHANGE): do not leave it on screen
         container.innerHTML = `<p class="joorney-error" role="alert">${iconHTML('error')}${escapeHTML(t('options_error_pageLoad', error?.message ?? String(error)))}</p>`;
         currentPage = page;
-        updateActiveMenu(page.id);
+        updateActiveMenu(page.activeMenu ?? page.id);
         return;
     }
     // A newer navigation started meanwhile: let it win
@@ -288,7 +288,7 @@ async function loadPage(page, params = {}) {
     Promise.resolve(page.loader(settings.features, settings.currentSettings, params)).catch((error) =>
         Console.error(error)
     );
-    updateActiveMenu(page.id);
+    updateActiveMenu(page.activeMenu ?? page.id);
     pageLoadedCallback?.(page);
 }
 

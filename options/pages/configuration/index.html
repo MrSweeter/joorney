@@ -1,239 +1,64 @@
-<link href="./css/configuration/theme_switch.css" rel="stylesheet">
-<link href="./css/configuration/awesome_loading.css" rel="stylesheet">
-<link href="./css/configuration/task_setup.css" rel="stylesheet">
-<link href="./css/configuration/save_knowledge.css" rel="stylesheet">
-<link href="./css/configuration/awesome_style.css" rel="stylesheet">
-<link href="./css/configuration/unfocus_app.css" rel="stylesheet">
+<link href="./css/configuration/index.css" rel="stylesheet">
 
-<div class="row pt-1 pb-0 p-5 mx-0 text-center">
+<div id="joorney-settings" class="joorney-page joorney-settings">
+    <h1 class="joorney-page-title" data-i18n="optionsSettings_title">Settings</h1>
+    <p class="joorney-page-subtitle" data-i18n="optionsSettings_subtitle">Extension-wide preferences.</p>
+
     <!--#region Language -->
-    <div id="joorney_language_card">
-        <h4 class="text-start mt-3 d-flex align-items-center gap-2">
+    <section id="joorney_language_card" class="joorney-panel" aria-labelledby="joorney_language_title">
+        <h2 class="joorney-panel-title" id="joorney_language_title">
             <span data-i18n="language_title">Language</span>
-            <span id="joorney_language_current" class="badge badge-secondary" style="font-size: 0.55em"></span>
-        </h4>
-        <p class="text-start mb-2" data-i18n="language_description">
+            <span id="joorney_language_current" class="joorney-chip"></span>
+        </h2>
+        <p class="joorney-help" data-i18n="language_description">
             Language of the texts added by Joorney: popup, options, buttons and notifications in Odoo, right-click menu and address bar suggestions.
         </p>
-        <div class="d-flex flex-wrap gap-2 align-items-center">
-            <select id="joorney_language_mode" class="form-select w-auto">
-                <option value="system" data-i18n="language_mode_system">Use system (browser language)</option>
-                <option value="odoo" data-i18n="language_mode_odoo">Use Odoo (user language)</option>
-                <option value="static" data-i18n="language_mode_static">Choose a language</option>
-            </select>
-            <select id="joorney_language_static" class="form-select w-auto d-none"></select>
+        <div class="joorney-settings-radios" role="radiogroup" aria-labelledby="joorney_language_title">
+            <label class="joorney-settings-radio">
+                <input type="radio" name="joorney_language_mode" value="system">
+                <span data-i18n="language_mode_system">Use system (browser language)</span>
+            </label>
+            <label class="joorney-settings-radio">
+                <input type="radio" name="joorney_language_mode" value="odoo">
+                <span data-i18n="language_mode_odoo">Use Odoo (user language)</span>
+            </label>
+            <label class="joorney-settings-radio">
+                <input type="radio" name="joorney_language_mode" value="static">
+                <span data-i18n="language_mode_static">Choose a language</span>
+                <select id="joorney_language_static" class="joorney-input" aria-label="Language" data-i18n-aria-label="language_title"></select>
+            </label>
         </div>
-        <div class="small text-start text-muted mt-2">
-            <span class="d-none" data-language-help="system" data-i18n="language_mode_system_help">Follows the display language of your browser.</span>
-            <span class="d-none" data-language-help="odoo" data-i18n="language_mode_odoo_help">Follows the language of the Odoo user on each database.</span>
-            <span class="d-none" data-language-help="static" data-i18n="language_mode_static_help">Always uses the language selected here, whatever the browser or Odoo language.</span>
-            <ul class="mb-0 mt-1 ps-3">
-                <li class="d-none" data-language-help="odoo" data-i18n="language_mode_odoo_outside">Outside Odoo pages (options, address bar, a database not opened yet): the browser language.</li>
+        <div class="joorney-help joorney-settings-hints">
+            <p class="mb-1" data-language-help="system" data-i18n="language_mode_system_help">Follows the display language of your browser.</p>
+            <p class="mb-1" data-language-help="odoo" data-i18n="language_mode_odoo_help">Follows the language of the Odoo user on each database.</p>
+            <p class="mb-1" data-language-help="static" data-i18n="language_mode_static_help">Always uses the language selected here, whatever the browser or Odoo language.</p>
+            <ul>
+                <li data-language-help="odoo" data-i18n="language_mode_odoo_outside">Outside Odoo pages (options, address bar, a database not opened yet): the browser language.</li>
                 <li data-i18n="language_hint_reload">Reload any open Odoo tabs to apply the change.</li>
                 <li data-i18n="language_hint_fallback">Unsupported languages fall back to English.</li>
                 <li data-i18n="language_hint_chrome">In Chrome, the extension name and description follow the browser language.</li>
             </ul>
         </div>
-    </div>
+    </section>
     <!--#endregion-->
 
-    <!--#region Awesome Loading -->
-    <div data-feature-customization="awesomeLoading" class="d-none">
-        <h4 class="text-start mt-3 feature-collapse-toggle">
-            <span data-i18n="optionsPreferences_awesomeLoading">Awesome Loading</span>
-            <i class="joorney-icon joorney-icon-filled feature-collapse-indicator" data-icon="arrow_drop_up" aria-hidden="true"></i>
-        </h4>
-        <div class="feature-collapse-content">
-            <table id="joorney_awe_loading_images_table" class="table table-striped bg-light">
-                <thead class="shadow-2">
-                    <tr>
-                        <th><i class="joorney-icon joorney-icon-filled" data-icon="visibility" aria-hidden="true"></i></th>
-                        <th class="joorney-awe-loading-switch-origin-input" title="Image URL" data-i18n-title="optionsPreferences_imageUrl" data-i18n="optionsPreferences_imageUrl">Image URL</th>
-                        <th class="py-0 joorney-valign-middle action-head"></th>
-                    </tr>
-                </thead>
-                <tbody id="joorney_awe_loading_images_table_body"></tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="3"></td>
-                    </tr>
-                    <tr class="table-secondary">
-                        <td class="py-0">
-                            <img loading="lazy" id="joorney_awe_loading_new_image_preview" class="joorney-awe-loading-preview" src="" alt="Loading GIF preview" data-i18n-alt="popup_loadingPreviewAlt">
-                        </td>
-                        <td class="p-1 joorney-valign-middle">
-                            <input
-                                type="text"
-                                class="form-control border border-0"
-                                id="joorney_awe_loading_new_image"
-                                placeholder=""
-                                aria-label="Image URL"
-                                data-i18n-aria-label="optionsPreferences_imageUrl"
-                            >
-                        </td>
-                        <td class="p-1 joorney-valign-middle">
-                            <button type="button" title="Add image" data-i18n-title="optionsPreferences_addImage" id="joorney_awe_loading_new_image_save" class="btn btn-success btn-floating">
-                                <i class="joorney-icon joorney-icon-filled" data-icon="add" aria-hidden="true"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td id="joorney_awe_loading_error_footer" class="text-danger" colspan="3"></td>
-                    </tr>
-                </tfoot>
-            </table>
+    <!--#region Keyboard shortcut -->
+    <section class="joorney-panel" aria-labelledby="joorney_shortcut_title">
+        <h2 class="joorney-panel-title" id="joorney_shortcut_title" data-i18n="optionsSettings_shortcut_title">Keyboard shortcut</h2>
+        <p class="joorney-help" id="joorney_shortcut_help" data-i18n="optionsSettings_shortcut_help">Shortcut to turn Joorney on or off temporarily (the extension's only declared command).</p>
+        <div class="joorney-settings-keys" id="joorney_shortcut_keys" aria-describedby="joorney_shortcut_help"></div>
+        <div class="joorney-settings-copyrow">
+            <code class="joorney-mono" id="joorney_shortcut_url">chrome://extensions/shortcuts</code>
+            <button
+                type="button"
+                class="joorney-icon-btn"
+                id="joorney_shortcut_copy"
+                aria-label="Copy chrome://extensions/shortcuts"
+                data-i18n-aria-label="optionsSettings_shortcut_copy"
+                data-i18n-title="optionsSettings_shortcut_copy"
+            ></button>
+            <span class="joorney-settings-note" id="joorney_shortcut_note" role="status" data-i18n="optionsSettings_shortcut_change">Change it there</span>
         </div>
-    </div>
-    <!--#endregion-->
-
-    <!--#region Awesome Style -->
-    <div data-feature-customization="awesomeStyle" class="d-none">
-        <h4 class="text-start mt-3 feature-collapse-toggle">
-            <span data-i18n="feature_awesomeStyle_name">Awesome Style</span>
-            <i class="joorney-icon joorney-icon-filled feature-collapse-indicator" data-icon="arrow_drop_up" aria-hidden="true"></i>
-        </h4>
-        <div id="joorney_awe_style_container" class="col-12 feature-collapse-content">
-            <textarea
-                id="joorney_awe_style_css"
-                class="form-control col-12"
-                rows="10"
-                placeholder=".modal-dialog:has(.o_error_dialog)  {
-    max-width: 75%;
-}"
-                spellcheck="false"
-            ></textarea>
-            <button type="button" title="Save" data-i18n-title="options_save" id="joorney_awe_style_save" class="btn btn-success">
-                <i class="joorney-icon joorney-icon-filled me-1" data-icon="save" aria-hidden="true"></i>
-                <span data-i18n="optionsPreferences_saveShortcut">Save (Ctrl+S)</span>
-            </button>
-        </div>
-    </div>
-    <!--#endregion-->
-
-    <!--#region Unfocus App -->
-    <div data-feature-customization="unfocusApp" class="d-none">
-        <h4 class="text-start mt-3 feature-collapse-toggle">
-            <span data-i18n="feature_unfocusApp_name">Unfocus App</span>
-            <i class="joorney-icon joorney-icon-filled feature-collapse-indicator" data-icon="arrow_drop_up" aria-hidden="true"></i>
-        </h4>
-        <div class="feature-collapse-content">
-            <div class="col-12 row mb-3">
-                <div class="col-6">
-                    <h6 class="text-center" data-i18n="optionsPreferences_lightImage">Light image URL for superfocus</h6>
-                    <input type="text" class="form-control border border-0 mb-1" id="joorney_unfocus_app_light_image_input" placeholder="">
-                    <img alt="Light superfocus background" data-i18n-alt="optionsPreferences_lightImageAlt" id="joorney_unfocus_app_light_image">
-                </div>
-                <div class="col-6">
-                    <h6 class="text-center" data-i18n="optionsPreferences_darkImage">Dark image URL for superfocus</h6>
-                    <input type="text" class="form-control border border-0 mb-1" id="joorney_unfocus_app_dark_image_input" placeholder="">
-                    <img alt="Dark superfocus background" data-i18n-alt="optionsPreferences_darkImageAlt" id="joorney_unfocus_app_dark_image">
-                </div>
-            </div>
-
-            <table id="joorney_unfocus_app_table" class="table table-striped bg-light">
-                <thead class="shadow-2">
-                    <tr>
-                        <th class="joorney-unfocus_app-origin" data-i18n="options_origins">Origins</th>
-                        <th class="" data-i18n="optionsPreferences_superfocusCount">Superfocus count</th>
-                        <th class="" data-i18n="optionsPreferences_unfocusCount">Unfocus count</th>
-                        <th class="py-0 joorney-valign-middle action-head"></th>
-                    </tr>
-                </thead>
-                <tbody id="joorney_unfocus_app_table_body"></tbody>
-            </table>
-        </div>
-    </div>
-    <!--#endregion-->
-
-    <!--#region Theme Switch -->
-    <div data-feature-customization="themeSwitch" class="d-none">
-        <h4 class="text-start mt-3 feature-collapse-toggle">
-            <span data-i18n="feature_themeSwitch_name">Theme Switch</span>
-            <i class="joorney-icon joorney-icon-filled feature-collapse-indicator" data-icon="arrow_drop_up" aria-hidden="true"></i>
-        </h4>
-        <div class="feature-collapse-content">
-            <table class="table table-striped bg-light">
-                <thead class="shadow-2">
-                    <tr>
-                        <th style="width: 50%;" data-i18n="optionsPreferences_latLong">Latitude / Longitude</th>
-                        <th style="width: 50%;" data-i18n="optionsPreferences_darkModeRange">Dark mode: start / stop</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <div class="input-group">
-                                <input id="joorney_theme_switch_latitude" type="text" class="form-control border border-0">
-                                <span class="input-group-text border border-0">/</span>
-                                <input id="joorney_theme_switch_longitude" type="text" class="form-control border border-0">
-                                <button
-                                    type="button"
-                                    id="joorney_theme_switch_get_location_button"
-                                    class="btn btn-secondary"
-                                    title="Get current location"
-                                    data-i18n-title="optionsPreferences_getLocation"
-                                >
-                                    <i class="joorney-icon joorney-icon-filled joorney-icon-lg" data-icon="my_location" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="input-group">
-                                <input id="joorney_theme_switch_dark_start" type="time" class="form-control border border-0">
-                                <span class="input-group-text border border-0">/</span>
-                                <input id="joorney_theme_switch_dark_stop" type="time" class="form-control border border-0">
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <!--#endregion-->
-
-    <!--#region Context OdooMenus -->
-    <div data-feature-customization="contextOdooMenus" class="d-none">
-        <div class="mt-3 d-flex justify-content-between align-items-center">
-            <div>
-                <h4 class="text-start feature-collapse-toggle">
-                    <span data-i18n="feature_contextOdooMenus_name">Context Odoo Menus</span>
-                    <i class="joorney-icon joorney-icon-filled feature-collapse-indicator" data-icon="arrow_drop_up" aria-hidden="true"></i>
-                </h4>
-            </div>
-
-            <div class="feature-collapse-content">
-                <button type="button" id="joorney_contextOdooMenus_delete_all" class="btn btn-sm btn-outline-danger" data-i18n="optionsPreferences_deleteAll">Delete all</button>
-            </div>
-        </div>
-        <div class="feature-collapse-content">
-            <table id="joorney_contextOdooMenus_table" class="table table-striped bg-light">
-                <thead class="shadow-2">
-                    <tr>
-                        <th></th>
-                        <th style="width: 80%" title="Name of ir.ui.menu, unique" data-i18n-title="optionsPreferences_menuNameTitle" data-i18n="optionsPreferences_menuName">Menu name</th>
-                        <th class="py-0" style="vertical-align: middle"></th>
-                    </tr>
-                </thead>
-                <tbody id="joorney_contextOdooMenus_table_body"></tbody>
-                <tfoot>
-                    <tr>
-                        <td></td>
-                    </tr>
-                    <tr class="table-secondary">
-                        <td></td>
-                        <td class="p-1" style="vertical-align: middle">
-                            <input type="text" class="form-control border border-0" id="joorney_contextOdooMenus_new_path" placeholder="Lunch / Configuration / Products">
-                        </td>
-                        <td class="p-1" style="vertical-align: middle">
-                            <button type="button" id="joorney_contextOdooMenus_new_save" class="btn btn-success" data-i18n="options_add">Add</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td id="joorney_contextOdooMenus_new_error" class="text-danger" colspan="4"></td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-    </div>
+    </section>
     <!--#endregion-->
 </div>

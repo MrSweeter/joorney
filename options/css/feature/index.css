@@ -1,0 +1,737 @@
+/* Feature page: options/pages/feature (header, state card, settings card and the blocks of the features) */
+
+.joorney-feature {
+    max-width: 1080px;
+}
+
+.joorney-feature-crumbs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-feature-crumbs a {
+    color: var(--joorney-text);
+}
+
+.joorney-feature-crumbs [aria-current] {
+    color: var(--joorney-text);
+}
+
+/*#region Header */
+.joorney-feature-top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+}
+
+.joorney-feature-icon {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    color: var(--joorney-navy);
+    background: var(--joorney-state-everywhere-tint);
+    border-radius: 12px;
+}
+
+.joorney-feature-icon .joorney-icon {
+    font-size: 32px;
+}
+
+.joorney-feature-title {
+    flex: 1 1 320px;
+    min-width: 0;
+}
+
+.joorney-feature-title h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--joorney-text);
+}
+
+.joorney-feature-title .joorney-help {
+    margin: 2px 0 8px;
+}
+
+.joorney-feature-active {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* The big switch */
+.joorney-feature-active .joorney-switch {
+    width: 52px;
+    height: 28px;
+    border-radius: 14px;
+}
+
+.joorney-feature-active .joorney-switch::after {
+    top: 3px;
+    left: 3px;
+    width: 22px;
+    height: 22px;
+}
+
+.joorney-feature-active .joorney-switch[aria-checked="true"]::after {
+    left: 27px;
+}
+
+.joorney-feature-body {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding-top: 24px;
+    margin-top: 24px;
+    border-top: 1px solid var(--joorney-border);
+}
+
+.joorney-feature-video {
+    display: flex;
+    flex: 1 1 300px;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    max-width: 420px;
+    font-size: 14px;
+    color: #fff;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--joorney-navy);
+    border-radius: var(--joorney-radius-card);
+}
+
+.joorney-feature-video .joorney-icon {
+    font-size: 48px;
+}
+
+.joorney-feature-video video,
+.joorney-feature-video iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.joorney-feature-text {
+    flex: 1 1 300px;
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+.joorney-feature-text p {
+    margin: 0 0 12px;
+}
+/*#endregion */
+
+/*#region Where it runs */
+.joorney-panel.is-muted > :not(.joorney-panel-title, .joorney-help, .joorney-note) {
+    opacity: 0.55;
+}
+
+.joorney-feature-opts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.joorney-feature-opt {
+    display: flex;
+    flex: 1 1 280px;
+    flex-direction: column;
+    gap: 2px;
+    padding: 12px 16px;
+    font: inherit;
+    color: var(--joorney-text);
+    text-align: start;
+    cursor: pointer;
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-card);
+}
+
+.joorney-feature-opt b {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.joorney-feature-opt span {
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-feature-opt.is-selected {
+    padding: 11px 15px;
+    background: var(--joorney-ground);
+    border: 2px solid var(--joorney-navy);
+}
+
+.joorney-feature-subtitle {
+    margin: 0 0 4px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.joorney-feature-hosts {
+    padding: 0;
+    margin: 0 0 16px;
+    list-style: none;
+}
+
+.joorney-feature-host {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    padding: 8px 0;
+    font-size: 14px;
+    border-top: 1px solid var(--joorney-border);
+}
+
+.joorney-feature-host.is-empty {
+    color: var(--joorney-text-muted);
+}
+
+.joorney-feature-origin {
+    flex: 1 1 240px;
+    min-width: 0;
+    word-break: break-all;
+}
+
+.joorney-feature-add {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: flex-end;
+    padding-top: 16px;
+    border-top: 1px solid var(--joorney-border);
+}
+
+.joorney-feature-addfield {
+    flex: 1 1 280px;
+}
+
+.joorney-feature-add .joorney-input {
+    box-sizing: border-box;
+    width: 100%;
+    height: 38px;
+}
+
+.joorney-feature-foot {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: space-between;
+    font-size: 14px;
+    color: var(--joorney-text-muted);
+}
+/*#endregion */
+
+/*#region Settings blocks */
+.joorney-fs-table {
+    margin-bottom: 0;
+}
+
+.joorney-fs-table th {
+    font-size: 13px;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-fs-table td:last-child {
+    white-space: nowrap;
+}
+
+.joorney-fs-add td {
+    background: var(--joorney-surface-soft);
+}
+
+.joorney-fs-toolbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 12px;
+}
+
+.joorney-fs-fields {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.joorney-fs-group {
+    flex: 1 1 320px;
+}
+
+.joorney-fs-grouptitle,
+.joorney-fs-label {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 13px;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-fs-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-bottom: 16px;
+}
+
+.joorney-fs-images > div {
+    flex: 1 1 280px;
+    min-width: 0;
+}
+
+.joorney-fs-images img {
+    max-width: 100%;
+    max-height: 160px;
+}
+
+.joorney-unfocus_app-origin {
+    width: 60%;
+}
+
+#joorney_awe_style_container {
+    position: relative;
+}
+
+#joorney_awe_style_container .joorney-btn {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+}
+/*#endregion */
+
+/*#region Awesome Loading tiles */
+.joorney-awl-tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 12px;
+}
+
+.joorney-awl-tile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-card);
+}
+
+.joorney-awl-tile.is-selected {
+    border: 2px solid var(--joorney-navy);
+    box-shadow:
+        0 0 0 2px var(--joorney-surface),
+        0 0 0 4px var(--joorney-navy);
+}
+
+.joorney-awl-radio {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    padding: 10px;
+    font: inherit;
+    color: var(--joorney-text);
+    text-align: left;
+    cursor: pointer;
+    background: none;
+    border: 0;
+    border-radius: var(--joorney-radius-card);
+}
+
+.joorney-awl-tile.is-selected .joorney-awl-radio {
+    padding: 9px;
+}
+
+.joorney-awl-pv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background-color: var(--joorney-surface);
+    background-image:
+        linear-gradient(45deg, #e6e8ed 25%, transparent 25%, transparent 75%, #e6e8ed 75%),
+        linear-gradient(45deg, #e6e8ed 25%, transparent 25%, transparent 75%, #e6e8ed 75%);
+    background-position:
+        0 0,
+        8px 8px;
+    background-size: 16px 16px;
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-control);
+}
+
+.joorney-awl-pv img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+.joorney-awl-broken {
+    font-size: 40px;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-awl-name {
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    font-size: 13px;
+    font-weight: 500;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.joorney-awl-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    min-height: 22px;
+}
+
+.joorney-chip.is-selected {
+    color: #fff;
+    background: var(--joorney-navy);
+}
+
+.joorney-awl-ring {
+    flex: none;
+    width: 48px;
+    height: 48px;
+    background: var(--joorney-surface);
+    border: 5px solid #e3d5dd;
+    border-top-color: var(--joorney-odoo-primary);
+    border-radius: 50%;
+    animation: joorney-awl-spin 1s linear infinite;
+}
+
+@keyframes joorney-awl-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .joorney-awl-ring {
+        animation: none;
+    }
+}
+
+.joorney-awl-del {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    color: var(--joorney-text-muted);
+    cursor: pointer;
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-control);
+}
+
+.joorney-awl-del:hover {
+    color: var(--joorney-text);
+    background: var(--joorney-hover);
+}
+
+.joorney-awl-confirm {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    padding: 0 10px 10px;
+    font-size: 12px;
+}
+
+.joorney-awl-confirm > span {
+    flex: 1 1 100%;
+}
+
+.joorney-awl .joorney-btn.is-small {
+    height: 28px;
+    padding: 0 10px;
+    font-size: 12px;
+}
+
+.joorney-awl-add {
+    display: flex;
+}
+
+.joorney-awl-addbtn,
+.joorney-awl-addform {
+    width: 100%;
+    min-height: 196px;
+}
+
+.joorney-awl-addbtn {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--joorney-text);
+    text-align: center;
+    cursor: pointer;
+    background: var(--joorney-surface);
+    border: 1px dashed #8a93a6;
+    border-radius: var(--joorney-radius-card);
+}
+
+.joorney-awl-addbtn:hover {
+    background: var(--joorney-ground);
+}
+
+.joorney-awl-addbtn .joorney-icon {
+    font-size: 32px;
+}
+
+.joorney-awl-addform {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: center;
+    padding: 12px;
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-card);
+}
+
+.joorney-awl-addform .joorney-fs-label {
+    margin: 0;
+}
+
+.joorney-awl-input {
+    width: 100%;
+}
+
+/* The URL can wrap: the icon stays on the first line */
+.joorney-awl-error {
+    align-items: flex-start;
+}
+
+.joorney-awl-addactions {
+    display: flex;
+    gap: 6px;
+}
+/*#endregion */
+
+/*#region Ambient */
+.joorney-amb-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.joorney-amb-categoryhead {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: space-between;
+    margin: 16px 0 10px;
+}
+
+.joorney-amb-category:first-child .joorney-amb-categoryhead {
+    margin-top: 0;
+}
+
+.joorney-amb-categorytitle {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--joorney-text);
+}
+
+.joorney-amb-categoryactions {
+    display: flex;
+    flex: none;
+}
+
+.joorney-amb-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 12px;
+}
+
+.joorney-amb-tile {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px;
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-card);
+}
+
+/* Same outer size as the 1px border: no layout shift while previewing */
+.joorney-amb-tile.is-playing {
+    padding: 11px;
+    background: var(--joorney-ground);
+    border: 2px solid var(--joorney-switch-on);
+}
+
+.joorney-amb-tilehead {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.joorney-amb-icon {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+}
+
+.joorney-amb-icon.is-compute {
+    color: var(--joorney-state-listed-text);
+    background: var(--joorney-state-listed-tint);
+}
+
+.joorney-amb-icon.is-event {
+    color: var(--joorney-state-everywhere-text);
+    background: var(--joorney-state-everywhere-tint);
+}
+
+.joorney-amb-icon.is-yearly {
+    color: #8a4f7d;
+    background: color-mix(in srgb, #8a4f7d 16%, transparent);
+}
+
+.joorney-amb-tile:has([role="switch"][aria-checked="false"]) .joorney-amb-icon {
+    filter: grayscale(1);
+    opacity: 0.6;
+}
+
+.joorney-amb-name {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.joorney-amb-title {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+.joorney-amb-date {
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--joorney-text-muted);
+}
+
+/* Full viewport while an ambient plays, like on Odoo; same layer as the info modal (above the navbar) */
+.joorney-amb-stage {
+    position: fixed;
+    inset: 0;
+    z-index: 1050;
+    background: var(--joorney-navy);
+    opacity: 0;
+    transition: opacity 200ms ease;
+}
+
+.joorney-amb-stage.is-open {
+    opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .joorney-amb-stage {
+        transition: none;
+    }
+}
+
+.joorney-amb-stage .images-comparison,
+.joorney-amb-stage .themes-container {
+    height: 100%;
+}
+
+/* Any viewport ratio: crop from the top center, the screenshots have no navbar and the app grid is centered */
+.joorney-amb-stage .images-comparison img {
+    object-position: center top;
+}
+
+.joorney-amb-stage canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.joorney-amb-stagebar {
+    position: absolute;
+    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+    left: 50%;
+    z-index: 2;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    max-width: calc(100% - 32px);
+    padding: 8px 8px 8px 20px;
+    font-size: 14px;
+    color: #fff;
+    background: var(--joorney-navy);
+    border-radius: 999px;
+    box-shadow: var(--joorney-shadow-modal);
+    transform: translateX(-50%);
+}
+
+.joorney-amb-tag {
+    position: absolute;
+    top: calc(16px + env(safe-area-inset-top, 0px));
+    z-index: 1;
+    padding: 3px 10px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #fff;
+    pointer-events: none;
+    background: var(--joorney-navy);
+    border-radius: 12px;
+}
+
+.joorney-amb-tag.is-light {
+    left: 16px;
+}
+
+.joorney-amb-tag.is-dark {
+    right: 16px;
+}
+/*#endregion */
+
+/*#region Controls (their look is in ui/base.css, here only their place on the page) */
+.joorney-feature .joorney-input {
+    flex: 1;
+}
+
+.joorney-feature .joorney-feature-error {
+    margin: 6px 0 0;
+}
+/*#endregion */

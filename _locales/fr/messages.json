@@ -693,9 +693,6 @@
     "options_menu_notifications": {
         "message": "Notifications"
     },
-    "options_menu_ambient": {
-        "message": "Ambiances"
-    },
     "options_menu_developers": {
         "message": "Développeurs"
     },
@@ -789,6 +786,15 @@
     },
     "optionsUi_switchOnHere": {
         "message": "$feature$ : active ici",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Theme Switch"
+            }
+        }
+    },
+    "optionsUi_featureSettings": {
+        "message": "Paramètres de $feature$",
         "placeholders": {
             "feature": {
                 "content": "$1",
@@ -1022,6 +1028,27 @@
     },
     "options_error_invalidOrigin": {
         "message": "Origine invalide, utilisez une URL comme https://www.odoo.com"
+    },
+    "options_warning_regexAnchors": {
+        "message": "Sans ^ au début et $ à la fin, cette regex correspond aussi à des noms d’hôte plus longs : odoo\\.com correspondrait aussi à odoo.com.example.net."
+    },
+    "options_anchorRegex": {
+        "message": "L’ancrer"
+    },
+    "options_unanchoredChip": {
+        "message": "sans ^ $"
+    },
+    "options_unanchoredTitle": {
+        "message": "Sans ^ et $, cette regex correspond aussi à des noms d’hôte plus longs."
+    },
+    "options_anchorHost": {
+        "message": "Ancrer $host$ avec ^ et $ (ses fonctionnalités sont conservées)",
+        "placeholders": {
+            "host": {
+                "content": "$1",
+                "example": "regex://odoo\\.com"
+            }
+        }
     },
     "options_error_pageLoad": {
         "message": "Cette page n’a pas pu être chargée, rechargez les options pour réessayer : $error$",
@@ -1385,32 +1412,39 @@
     "optionsHosts_error_originExists": {
         "message": "Origine déjà ajoutée"
     },
-    "optionsPreferences_awesomeLoading": {
-        "message": "Chargement personnalisé"
-    },
     "optionsPreferences_imageUrl": {
         "message": "URL de l'image"
     },
-    "optionsPreferences_addImage": {
-        "message": "Ajouter une image"
-    },
     "optionsPreferences_deleteImage": {
         "message": "Supprimer l'image"
-    },
-    "optionsPreferences_confirmRemoveImage": {
-        "message": "Voulez-vous vraiment supprimer l'image : $url$ ?",
-        "placeholders": {
-            "url": {
-                "content": "$1",
-                "example": "https://i.imgur.com/zTauRWm.gif"
-            }
-        }
     },
     "optionsPreferences_error_missingUrl": {
         "message": "URL manquante"
     },
     "optionsPreferences_error_invalidUrl": {
-        "message": "URL invalide"
+        "message": "URL invalide : utilisez une adresse https complète"
+    },
+    "optionsPreferences_error_syncQuota": {
+        "message": "Trop volumineux pour la synchronisation : $size$ octets, la limite est de $limit$ octets. Rien n’a été enregistré.",
+        "placeholders": {
+            "size": {
+                "content": "$1",
+                "example": "9120"
+            },
+            "limit": {
+                "content": "$2",
+                "example": "8192"
+            }
+        }
+    },
+    "optionsPreferences_error_save": {
+        "message": "Impossible d’enregistrer : $error$",
+        "placeholders": {
+            "error": {
+                "content": "$1",
+                "example": "QUOTA_BYTES quota exceeded"
+            }
+        }
     },
     "optionsPreferences_saveShortcut": {
         "message": "Enregistrer (Ctrl+S)"
@@ -1751,6 +1785,21 @@
     "optionsAmbient_none": {
         "message": "Aucun"
     },
+    "optionsAmbient_preview": {
+        "message": "Aperçu"
+    },
+    "optionsAmbient_stop": {
+        "message": "Arrêter l'aperçu"
+    },
+    "optionsAmbient_light": {
+        "message": "Clair"
+    },
+    "optionsAmbient_dark": {
+        "message": "Sombre"
+    },
+    "optionsFeature_settingsHelpThemeSwitch": {
+        "message": "Où et quand le thème sombre s'applique automatiquement : selon la position (lever et coucher du soleil) ou une plage horaire. Le mode du thème se choisit dans la popup."
+    },
     "optionsAmbient_active": {
         "message": "actif"
     },
@@ -1759,9 +1808,6 @@
     },
     "optionsAmbient_enable": {
         "message": "Activé"
-    },
-    "optionsAmbient_disable": {
-        "message": "Désactivé"
     },
     "optionsAmbient_playingInfo": {
         "message": "Ambiance : « $name$ » - Durée : $duration$ ms",
@@ -1773,6 +1819,24 @@
             "duration": {
                 "content": "$2",
                 "example": "3000"
+            }
+        }
+    },
+    "optionsHome_addHost": {
+        "message": "Ajouter un hôte"
+    },
+    "optionsHome_addPlaceholder": {
+        "message": "https://... ou regex://..."
+    },
+    "optionsHome_add": {
+        "message": "Ajouter"
+    },
+    "optionsHome_removeHost": {
+        "message": "Retirer $host$",
+        "placeholders": {
+            "host": {
+                "content": "$1",
+                "example": "https://www.odoo.com"
             }
         }
     },
@@ -1790,5 +1854,158 @@
                 "example": "Auto Open"
             }
         }
+    },
+    "optionsFeature_breadcrumb": {
+        "message": "Fil d'Ariane"
+    },
+    "optionsFeature_notFound": {
+        "message": "Fonctionnalité introuvable"
+    },
+    "optionsFeature_notFoundText": {
+        "message": "Aucune fonctionnalité ne correspond à ce lien."
+    },
+    "optionsFeature_back": {
+        "message": "Retour à toutes les fonctionnalités"
+    },
+    "optionsFeature_alsoPopup": {
+        "message": "Aussi dans la popup"
+    },
+    "optionsFeature_alsoPopupTitle": {
+        "message": "Cette fonctionnalité a aussi des options rapides dans la popup de la barre d'outils"
+    },
+    "optionsFeature_active": {
+        "message": "Active"
+    },
+    "optionsFeature_whereTitle": {
+        "message": "Où elle s'exécute"
+    },
+    "optionsFeature_whereHelp": {
+        "message": "Choisissez sur quels hôtes Odoo cette fonctionnalité est active."
+    },
+    "optionsFeature_limitedHelp": {
+        "message": "Cette fonctionnalité ne s'exécute que sur ces hôtes runbot. Ils sont fixes."
+    },
+    "optionsFeature_deactivatedBanner": {
+        "message": "Désactivée : elle ne s'exécute nulle part"
+    },
+    "optionsFeature_modeLabel": {
+        "message": "Où la fonctionnalité s'exécute"
+    },
+    "optionsFeature_hostsTitle": {
+        "message": "Hôtes où cette fonctionnalité est listée"
+    },
+    "optionsFeature_noHosts": {
+        "message": "Aucun hôte listé."
+    },
+    "optionsFeature_regexChip": {
+        "message": "regex"
+    },
+    "optionsFeature_onHere": {
+        "message": "Active ici"
+    },
+    "optionsFeature_offHere": {
+        "message": "Inactive ici"
+    },
+    "optionsFeature_settings": {
+        "message": "Réglages"
+    },
+    "optionsFeature_settingsHelp": {
+        "message": "Options de cette fonctionnalité, enregistrées au fur et à mesure."
+    },
+    "optionsFeature_settingsMissing": {
+        "message": "Cette fonctionnalité a des paramètres, mais cette version de Joorney ne peut pas encore les afficher."
+    },
+    "optionsFeature_sync": {
+        "message": "Le dernier changement se synchronise sur votre profil Chrome."
+    },
+    "optionsFeature_ambientSlider": {
+        "message": "Comparer les thèmes clair et sombre"
+    },
+    "optionsSettings_title": {
+        "message": "Réglages"
+    },
+    "optionsSettings_subtitle": {
+        "message": "Préférences de toute l'extension."
+    },
+    "optionsSettings_shortcut_title": {
+        "message": "Raccourci clavier"
+    },
+    "optionsSettings_shortcut_help": {
+        "message": "Raccourci pour activer ou désactiver Joorney temporairement (la seule commande déclarée par l'extension)."
+    },
+    "optionsSettings_shortcut_unset": {
+        "message": "Aucun raccourci défini"
+    },
+    "optionsSettings_shortcut_change": {
+        "message": "Modifiez-le à cet endroit"
+    },
+    "optionsSettings_shortcut_copy": {
+        "message": "Copier chrome://extensions/shortcuts"
+    },
+    "optionsSettings_shortcut_copied": {
+        "message": "Copié. Collez-le dans la barre d'adresse."
+    },
+    "optionsAmbient_play": {
+        "message": "Lire $name$",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "Christmas"
+            }
+        }
+    },
+    "optionsFeature_settingsHelpAmbient": {
+        "message": "Quelles ambiances peuvent se jouer sur le menu d'accueil d'Odoo, et un aperçu de chacune."
+    },
+    "optionsAwl_group": {
+        "message": "Loader"
+    },
+    "optionsAwl_default": {
+        "message": "Par défaut (spinner d'Odoo)"
+    },
+    "optionsAwl_builtIn": {
+        "message": "Intégré"
+    },
+    "optionsAwl_inUse": {
+        "message": "Utilisé"
+    },
+    "optionsAwl_deleteLabel": {
+        "message": "Supprimer l'image $url$",
+        "placeholders": {
+            "url": {
+                "content": "$1",
+                "example": "https://example.com/loader.gif"
+            }
+        }
+    },
+    "optionsAwl_confirmRemove": {
+        "message": "Supprimer cette image ?"
+    },
+    "optionsAwl_remove": {
+        "message": "Supprimer"
+    },
+    "optionsAwl_removeLabel": {
+        "message": "Confirmer la suppression de $url$",
+        "placeholders": {
+            "url": {
+                "content": "$1",
+                "example": "https://example.com/loader.gif"
+            }
+        }
+    },
+    "optionsAwl_keep": {
+        "message": "Garder"
+    },
+    "optionsAwl_add": {
+        "message": "Ajouter une URL d'image"
+    },
+    "optionsAwl_cancel": {
+        "message": "Annuler"
+    },
+    "optionsAwl_errorDuplicate": {
+        "message": "Cette image est déjà dans la liste"
+    },
+    "optionsFeature_settingsHelpAwesomeLoading": {
+        "message": "Choisissez le chargeur affiché pendant que Odoo charge. La popup propose le même choix."
     }
 }

@@ -76,12 +76,12 @@ export default () => {
             [
                 'website',
                 'features',
+                'feature',
                 'configuration',
                 'version',
                 'toast',
                 'importexport',
                 'migration',
-                'ambient',
                 'technical',
             ],
             [...defaultPlugins, optionsWatchAssets]

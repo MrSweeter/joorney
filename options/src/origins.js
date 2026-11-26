@@ -25,11 +25,24 @@ export function isRegexOrigin(origin) {
     return `${origin ?? ''}`.startsWith(regexSchemePrefix);
 }
 
-/**
- * @param {string} value 'regex://<pattern>'
- * @returns {string} the entry with the pattern as RegExp normalised it ('regex://' + source)
- * @throws {OriginError} invalid regular expression
- */
+export function isUnanchoredRegexOrigin(value) {
+    const raw = `${value ?? ''}`.trim();
+    if (!isRegexOrigin(raw)) return false;
+    const pattern = raw.slice(regexSchemePrefix.length);
+    return Boolean(pattern) && !(pattern.startsWith('^') && pattern.endsWith('$'));
+}
+
+export function anchorRegexOrigin(value) {
+    const raw = `${value ?? ''}`.trim();
+    if (!isUnanchoredRegexOrigin(raw)) return raw;
+    return `${regexSchemePrefix}^(?:${raw.slice(regexSchemePrefix.length)})$`;
+}
+
+export function regexAnchorHintHTML(value, hintHTML, buttonHTML) {
+    const hidden = isUnanchoredRegexOrigin(value) ? '' : ' hidden';
+    return `<p class="joorney-help is-small" data-role="regex-hint" aria-live="polite"${hidden}>${hintHTML} <button type="button" class="joorney-link-btn is-strong" data-action="anchor-regex">${buttonHTML}</button></p>`;
+}
+
 function validateRegexOrigin(value) {
     const pattern = `${value}`.trim().slice(regexSchemePrefix.length);
     // An empty pattern is stored as 'regex://(?:)', which matches every origin

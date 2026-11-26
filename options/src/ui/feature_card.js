@@ -88,16 +88,10 @@ export function featureChipsHTML(feature, { category = true, details = true } = 
 //#endregion
 
 //#region Card
-/**
- * Switch markup: <button role="switch" aria-checked>, styled by options/css/ui/base.css.
- * @param {object} options
- * @param {boolean} options.on
- * @param {string} options.label accessible name
- * @param {string} [options.title] tooltip
- * @param {boolean} [options.disabled]
- * @param {string} [options.attributes] extra raw attributes (data-*, id)
- * @returns {string}
- */
+export function hasFeatureSettings(feature) {
+    return Boolean(feature.customization?.option) || feature.id === 'ambient';
+}
+
 export function switchHTML({ on, label, title = '', disabled = false, attributes = '' }) {
     return `<button type="button" role="switch" class="joorney-switch" aria-checked="${on ? 'true' : 'false'}" aria-label="${escapeHTML(label)}"${title ? ` title="${escapeHTML(title)}"` : ''}${disabled ? ' disabled' : ''}${attributes ? ` ${attributes}` : ''}></button>`;
 }
@@ -114,7 +108,7 @@ export function switchHTML({ on, label, title = '', disabled = false, attributes
  * @param {boolean} [opts.muted] dimmed (e.g. deactivated globally)
  * @param {boolean} [opts.expanded] tags and versions visible
  * @param {boolean} [opts.category] category chip (default true)
- * @param {boolean} [opts.info] info button (data-action="info", default true)
+ * @param {boolean} [opts.info] info button (data-action="info", default true), a settings link when the feature has settings
  * @param {string|null} [opts.href] name link, default featurePageURL(id); null renders plain text
  * @param {string} [opts.classes] extra classes on the card
  * @returns {string} the card HTML, root: .joorney-fcard[data-feature-id]
@@ -156,9 +150,13 @@ export function featureCardHTML(feature, opts = {}) {
                   attributes: 'data-action="switch"',
               })
             : '';
-    const infoPart = info
-        ? `<button type="button" class="joorney-icon-btn is-small" data-action="info" aria-label="${escapeHTML(t('optionsUi_aboutFeature', name))}" title="${escapeHTML(t('optionsUi_aboutFeature', name))}">${iconHTML('info')}</button>`
-        : '';
+    let infoPart = '';
+    if (info && hasFeatureSettings(feature)) {
+        const label = escapeHTML(t('optionsUi_featureSettings', name));
+        infoPart = `<a class="joorney-icon-btn is-small" href="${escapeHTML(featurePageURL(feature.id))}" aria-label="${label}" title="${label}">${iconHTML('settings')}</a>`;
+    } else if (info) {
+        infoPart = `<button type="button" class="joorney-icon-btn is-small" data-action="info" aria-label="${escapeHTML(t('optionsUi_aboutFeature', name))}" title="${escapeHTML(t('optionsUi_aboutFeature', name))}">${iconHTML('info')}</button>`;
+    }
 
     return `
         <div class="${cardClasses}" data-feature-id="${id}" data-state="${escapeHTML(state ?? '')}" tabindex="0" role="group" aria-labelledby="${nameID}"${grip ? ' draggable="true"' : ''}>

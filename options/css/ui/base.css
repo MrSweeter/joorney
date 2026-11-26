@@ -270,6 +270,10 @@
     background: var(--joorney-state-everywhere-tint);
 }
 
+.joorney-chip .joorney-icon {
+    font-size: 14px;
+}
+
 .joorney-chip.is-warning {
     color: var(--joorney-state-listed-text);
     background: var(--joorney-state-listed-tint);

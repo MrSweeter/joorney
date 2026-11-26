@@ -1,10 +1,12 @@
 import OptionCustomizationFeature from '../../generic/option_customization.js';
-import { StorageSync } from '../../utils/browser.js';
+import { Console, StorageSync, SYNC_ITEM_BYTES, syncItemBytes } from '../../utils/browser.js';
+import { t } from '../../utils/i18n.js';
 import configuration from './configuration.js';
 
 export default class AwesomeStyleOptionCustomizationFeature extends OptionCustomizationFeature {
     constructor() {
         super(configuration);
+        this.saveAwesomeStyle = this.saveAwesomeStyle.bind(this);
     }
 
     async load() {
@@ -28,9 +30,30 @@ export default class AwesomeStyleOptionCustomizationFeature extends OptionCustom
 
     async saveAwesomeStyle() {
         const textareaInput = document.getElementById('joorney_awe_style_css');
+        const css = textareaInput.value;
+
+        // Refused by the sync quota anyway: say it before trying, with the size to cut
+        const bytes = syncItemBytes('awesomeStyleCSS', css);
+        if (bytes > SYNC_ITEM_BYTES) {
+            this.showError(t('optionsPreferences_error_syncQuota', String(bytes), String(SYNC_ITEM_BYTES)));
+            return;
+        }
 
         textareaInput.disabled = true;
-        await StorageSync.set({ awesomeStyleCSS: textareaInput.value });
-        textareaInput.disabled = false;
+        try {
+            await StorageSync.set({ awesomeStyleCSS: css });
+            this.showError('');
+        } catch (error) {
+            Console.error(error);
+            this.showError(t('optionsPreferences_error_save', error?.message ?? String(error)));
+        } finally {
+            textareaInput.disabled = false;
+        }
+    }
+
+    showError(message) {
+        const errorElement = document.getElementById('joorney_awe_style_error');
+        errorElement.querySelector('span').textContent = message;
+        errorElement.hidden = !message;
     }
 }

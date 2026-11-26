@@ -17,6 +17,8 @@ export default class OptionCustomizationFeature {
         const toggleElement = container.getElementsByClassName('feature-collapse-toggle')[0];
         const contentElements = container.getElementsByClassName('feature-collapse-content');
         const indicatorElement = container.getElementsByClassName('feature-collapse-indicator')[0];
+        // The options feature page shows the block open, with no collapse header
+        if (!toggleElement || !indicatorElement) return;
 
         function toggle() {
             if (indicatorElement.classList.contains('feature-opened')) {

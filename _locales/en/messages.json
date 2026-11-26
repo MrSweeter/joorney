@@ -887,10 +887,6 @@
         "message": "Notifications",
         "description": "Options menu entry: notification settings"
     },
-    "options_menu_ambient": {
-        "message": "Ambient",
-        "description": "Options menu entry: ambient effects"
-    },
     "options_menu_developers": {
         "message": "Developers",
         "description": "Options menu entry: technical settings (debug mode only)"
@@ -1008,6 +1004,16 @@
     "optionsUi_switchOnHere": {
         "message": "$feature$: on here",
         "description": "Feature card switch: accessible name, the switch turns the feature on/off on the selected host",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Theme Switch"
+            }
+        }
+    },
+    "optionsUi_featureSettings": {
+        "message": "$feature$ settings",
+        "description": "Feature card: link to the feature settings",
         "placeholders": {
             "feature": {
                 "content": "$1",
@@ -1292,6 +1298,32 @@
     "options_error_invalidOrigin": {
         "message": "Invalid origin, use a URL like https://www.odoo.com",
         "description": "Options: error when the origin is not a valid URL"
+    },
+    "options_warning_regexAnchors": {
+        "message": "Without ^ at the start and $ at the end, this regex also matches longer host names: odoo\\.com would match odoo.com.example.net too.",
+        "description": "Options: hint under a new host field while the typed regex host has no ^ and $ anchors (it is still accepted)"
+    },
+    "options_anchorRegex": {
+        "message": "Anchor it",
+        "description": "Options: button in the hint under a new host field, rewrites the typed regex as ^(?:...)$"
+    },
+    "options_unanchoredChip": {
+        "message": "no ^ $",
+        "description": "Options: chip on a saved regex host without ^ and $ anchors (short)"
+    },
+    "options_unanchoredTitle": {
+        "message": "Without ^ and $, this regex also matches longer host names.",
+        "description": "Options: tooltip of the chip on a saved regex host without anchors"
+    },
+    "options_anchorHost": {
+        "message": "Anchor $host$ with ^ and $ (its features are kept)",
+        "description": "Options: label of the button rewriting a saved unanchored regex host as ^(?:...)$",
+        "placeholders": {
+            "host": {
+                "content": "$1",
+                "example": "regex://odoo\\.com"
+            }
+        }
     },
     "options_error_pageLoad": {
         "message": "This page could not be loaded, reload the options to try again: $error$",
@@ -1757,39 +1789,45 @@
         "message": "Origin already added",
         "description": "Options hosts page: error when the origin already exists"
     },
-    "optionsPreferences_awesomeLoading": {
-        "message": "Awesome Loading",
-        "description": "Options preferences: section of the Awesome Loading features (large and small)"
-    },
     "optionsPreferences_imageUrl": {
         "message": "Image URL",
         "description": "Options preferences: image URL column / input"
     },
-    "optionsPreferences_addImage": {
-        "message": "Add image",
-        "description": "Options preferences: tooltip of the button adding a loading image"
-    },
     "optionsPreferences_deleteImage": {
         "message": "Delete image",
         "description": "Options preferences: tooltip of the button deleting a loading image"
-    },
-    "optionsPreferences_confirmRemoveImage": {
-        "message": "Are you sure you want to remove the image: $url$?",
-        "description": "Options preferences: confirmation before deleting a loading image",
-        "placeholders": {
-            "url": {
-                "content": "$1",
-                "example": "https://i.imgur.com/zTauRWm.gif"
-            }
-        }
     },
     "optionsPreferences_error_missingUrl": {
         "message": "Missing URL",
         "description": "Options preferences: error when adding an empty image URL"
     },
     "optionsPreferences_error_invalidUrl": {
-        "message": "Invalid URL",
+        "message": "Invalid URL: use a full https address",
         "description": "Options preferences: error when the image URL is invalid"
+    },
+    "optionsPreferences_error_syncQuota": {
+        "message": "Too large to sync: $size$ bytes, the limit is $limit$ bytes. Nothing was saved.",
+        "description": "Options feature page (Awesome Style, Awesome Loading): error, the value is bigger than one sync storage item allows",
+        "placeholders": {
+            "size": {
+                "content": "$1",
+                "example": "9120"
+            },
+            "limit": {
+                "content": "$2",
+                "example": "8192"
+            }
+        }
+    },
+    "optionsPreferences_error_save": {
+        "message": "Could not save: $error$",
+        "description": "Options feature page (Awesome Style, Awesome Loading): error, the browser storage refused the change",
+        "placeholders": {
+            "error": {
+                "content": "$1",
+                "example": "QUOTA_BYTES quota exceeded"
+            }
+        }
     },
     "optionsPreferences_saveShortcut": {
         "message": "Save (Ctrl+S)",
@@ -2229,6 +2267,26 @@
         "message": "None",
         "description": "Ambient options page: link in a category header that disables all effects of the category"
     },
+    "optionsAmbient_preview": {
+        "message": "Preview",
+        "description": "Ambient options page: text button that plays an effect on the preview"
+    },
+    "optionsAmbient_stop": {
+        "message": "Stop preview",
+        "description": "Ambient options page: button of the fullscreen preview bar that stops the running effect and closes the preview"
+    },
+    "optionsAmbient_light": {
+        "message": "Light",
+        "description": "Ambient options page: badge on the light side of the preview"
+    },
+    "optionsAmbient_dark": {
+        "message": "Dark",
+        "description": "Ambient options page: badge on the dark side of the preview"
+    },
+    "optionsFeature_settingsHelpThemeSwitch": {
+        "message": "Where and when the dark theme applies automatically: by location (sunrise and sunset) or by a time range. The theme mode itself is chosen in the popup.",
+        "description": "Options feature page: help of the Theme Switch settings card"
+    },
     "optionsAmbient_active": {
         "message": "active",
         "description": "Ambient options page: small badge next to the effect that is active today (short, lowercase)"
@@ -2241,13 +2299,9 @@
         "message": "Enable",
         "description": "Ambient options page: text of an effect toggle switch when it is on (very short, the switch is 75px wide)"
     },
-    "optionsAmbient_disable": {
-        "message": "Disable",
-        "description": "Ambient options page: text of an effect toggle switch when it is off (very short, the switch is 75px wide)"
-    },
     "optionsAmbient_playingInfo": {
         "message": "Ambient: \"$name$\" - Duration: $duration$ ms",
-        "description": "Ambient options page: line under the preview while an effect is played; name = effect name, duration = estimated duration in milliseconds",
+        "description": "Ambient options page: text of the fullscreen preview bar while an effect is played; name = effect name, duration = estimated duration in milliseconds",
         "placeholders": {
             "name": {
                 "content": "$1",
@@ -2256,6 +2310,28 @@
             "duration": {
                 "content": "$2",
                 "example": "3000"
+            }
+        }
+    },
+    "optionsHome_addHost": {
+        "message": "Add a host",
+        "description": "Options home page: label of the new host field"
+    },
+    "optionsHome_addPlaceholder": {
+        "message": "https://... or regex://...",
+        "description": "Options home page: placeholder of the new host field"
+    },
+    "optionsHome_add": {
+        "message": "Add",
+        "description": "Options home page: add host button"
+    },
+    "optionsHome_removeHost": {
+        "message": "Remove $host$",
+        "description": "Options home page: accessible name of the remove host button",
+        "placeholders": {
+            "host": {
+                "content": "$1",
+                "example": "https://www.odoo.com"
             }
         }
     },
@@ -2276,5 +2352,203 @@
                 "example": "Auto Open"
             }
         }
+    },
+    "optionsFeature_breadcrumb": {
+        "message": "Breadcrumb",
+        "description": "Options feature page: accessible name of the breadcrumb"
+    },
+    "optionsFeature_notFound": {
+        "message": "Feature not found",
+        "description": "Options feature page: title when the feature id is unknown"
+    },
+    "optionsFeature_notFoundText": {
+        "message": "No feature matches this link.",
+        "description": "Options feature page: text when the feature id is unknown"
+    },
+    "optionsFeature_back": {
+        "message": "Back to all features",
+        "description": "Options feature page: link back to the Features page"
+    },
+    "optionsFeature_alsoPopup": {
+        "message": "Also in the popup",
+        "description": "Options feature page: chip of a feature that has options in the toolbar popup"
+    },
+    "optionsFeature_alsoPopupTitle": {
+        "message": "This feature also has quick options in the toolbar popup",
+        "description": "Options feature page: tooltip of the popup chip"
+    },
+    "optionsFeature_active": {
+        "message": "Active",
+        "description": "Options feature page: label of the switch when the feature is active"
+    },
+    "optionsFeature_whereTitle": {
+        "message": "Where it runs",
+        "description": "Options feature page: title of the hosts card"
+    },
+    "optionsFeature_whereHelp": {
+        "message": "Choose on which Odoo hosts this feature is active.",
+        "description": "Options feature page: help of the hosts card"
+    },
+    "optionsFeature_limitedHelp": {
+        "message": "This feature only runs on these runbot hosts. They are fixed.",
+        "description": "Options feature page: help of the hosts card of a runbot feature"
+    },
+    "optionsFeature_deactivatedBanner": {
+        "message": "Deactivated: it runs nowhere",
+        "description": "Options feature page: banner of the hosts card when the feature is deactivated"
+    },
+    "optionsFeature_modeLabel": {
+        "message": "Where the feature runs",
+        "description": "Options feature page: accessible name of the two mode buttons"
+    },
+    "optionsFeature_hostsTitle": {
+        "message": "Hosts with this feature listed",
+        "description": "Options feature page: title of the list of hosts"
+    },
+    "optionsFeature_noHosts": {
+        "message": "No host listed.",
+        "description": "Options feature page: empty list of hosts"
+    },
+    "optionsFeature_regexChip": {
+        "message": "regex",
+        "description": "Options feature page: chip next to a host given as a regular expression (short, lowercase)"
+    },
+    "optionsFeature_onHere": {
+        "message": "On here",
+        "description": "Options feature page: chip of a listed host in the \"only on listed hosts\" mode"
+    },
+    "optionsFeature_offHere": {
+        "message": "Off here",
+        "description": "Options feature page: chip of a listed host in the \"everywhere except listed hosts\" mode"
+    },
+    "optionsFeature_settings": {
+        "message": "Settings",
+        "description": "Options feature page: title of the settings card"
+    },
+    "optionsFeature_settingsHelp": {
+        "message": "Options of this feature, saved as you edit them.",
+        "description": "Options feature page: help of the settings card"
+    },
+    "optionsFeature_settingsMissing": {
+        "message": "This feature has settings, but this version of Joorney cannot show them yet.",
+        "description": "Options feature page: Settings card of a feature declaring settings whose block is not registered (developer mistake, should not happen in a release)"
+    },
+    "optionsFeature_sync": {
+        "message": "Last change syncs across your Chrome profile.",
+        "description": "Options feature page: footer note"
+    },
+    "optionsFeature_ambientSlider": {
+        "message": "Compare the light and dark themes",
+        "description": "Options feature page (Ambient): accessible name of the preview slider"
+    },
+    "optionsSettings_title": {
+        "message": "Settings",
+        "description": "Options Settings page: title"
+    },
+    "optionsSettings_subtitle": {
+        "message": "Extension-wide preferences.",
+        "description": "Options Settings page: subtitle"
+    },
+    "optionsSettings_shortcut_title": {
+        "message": "Keyboard shortcut",
+        "description": "Options Settings page: title of the shortcut card"
+    },
+    "optionsSettings_shortcut_help": {
+        "message": "Shortcut to turn Joorney on or off temporarily (the extension's only declared command).",
+        "description": "Options Settings page: help of the shortcut card"
+    },
+    "optionsSettings_shortcut_unset": {
+        "message": "No shortcut set",
+        "description": "Options Settings page: the command has no key assigned"
+    },
+    "optionsSettings_shortcut_change": {
+        "message": "Change it there",
+        "description": "Options Settings page: next to the chrome://extensions/shortcuts address"
+    },
+    "optionsSettings_shortcut_copy": {
+        "message": "Copy chrome://extensions/shortcuts",
+        "description": "Options Settings page: copy button of the shortcuts address"
+    },
+    "optionsSettings_shortcut_copied": {
+        "message": "Copied. Paste it in the address bar.",
+        "description": "Options Settings page: after copying the shortcuts address"
+    },
+    "optionsAmbient_play": {
+        "message": "Play $name$",
+        "description": "Options feature page (Ambient): accessible name of the preview button",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "Christmas"
+            }
+        }
+    },
+    "optionsFeature_settingsHelpAmbient": {
+        "message": "Which ambients may play on the Odoo home menu, and a preview of each one.",
+        "description": "Options feature page: help of the Ambient settings card"
+    },
+    "optionsAwl_group": {
+        "message": "Loader",
+        "description": "Options Awesome Loading: label of the group of loader tiles"
+    },
+    "optionsAwl_default": {
+        "message": "Default (Odoo spinner)",
+        "description": "Options Awesome Loading: tile that keeps the loading indicator of Odoo"
+    },
+    "optionsAwl_builtIn": {
+        "message": "Built-in",
+        "description": "Options Awesome Loading: chip of the loader shipped with Joorney"
+    },
+    "optionsAwl_inUse": {
+        "message": "In use",
+        "description": "Options Awesome Loading: chip of the selected loader"
+    },
+    "optionsAwl_deleteLabel": {
+        "message": "Delete image $url$",
+        "description": "Options Awesome Loading: accessible name of the delete button of an image",
+        "placeholders": {
+            "url": {
+                "content": "$1",
+                "example": "https://example.com/loader.gif"
+            }
+        }
+    },
+    "optionsAwl_confirmRemove": {
+        "message": "Remove this image?",
+        "description": "Options Awesome Loading: inline confirmation before deleting an image"
+    },
+    "optionsAwl_remove": {
+        "message": "Remove",
+        "description": "Options Awesome Loading: confirm the removal of an image"
+    },
+    "optionsAwl_removeLabel": {
+        "message": "Confirm removing $url$",
+        "description": "Options Awesome Loading: accessible name of the confirm removal button",
+        "placeholders": {
+            "url": {
+                "content": "$1",
+                "example": "https://example.com/loader.gif"
+            }
+        }
+    },
+    "optionsAwl_keep": {
+        "message": "Keep",
+        "description": "Options Awesome Loading: keep the image instead of removing it"
+    },
+    "optionsAwl_add": {
+        "message": "Add image URL",
+        "description": "Options Awesome Loading: tile that opens the field to add an image"
+    },
+    "optionsAwl_cancel": {
+        "message": "Cancel",
+        "description": "Options Awesome Loading: cancel adding an image"
+    },
+    "optionsAwl_errorDuplicate": {
+        "message": "This image is already in the list",
+        "description": "Options Awesome Loading: error when the image URL already exists"
+    },
+    "optionsFeature_settingsHelpAwesomeLoading": {
+        "message": "Pick the loader shown while Odoo loads. The popup offers the same choice.",
+        "description": "Options feature page: help of the Awesome Loading settings card"
     }
 }

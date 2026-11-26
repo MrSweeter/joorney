@@ -219,4 +219,20 @@ export function removeHost(origin) {
         return true;
     });
 }
+
+export function renameHost(from, to) {
+    return enqueue(async () => {
+        const { originsFilterOrigins: origins } = await StorageSync.get({ originsFilterOrigins: {} });
+        if (!Object.hasOwn(origins, from)) return false;
+        const key = normalizeNewOrigin(to, origins);
+        const renamed = Object.fromEntries(Object.entries(origins).map(([k, v]) => [k === from ? key : k, v]));
+        await StorageSync.set({ originsFilterOrigins: renamed });
+        notify('host-rename', {
+            ids: Object.keys(origins[from]),
+            host: key,
+            changes: { originsFilterOrigins: renamed },
+        });
+        return key;
+    });
+}
 //#endregion

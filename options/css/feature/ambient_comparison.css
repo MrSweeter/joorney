@@ -18,10 +18,11 @@
     overflow: hidden;
 }
 
+/* Clipped, not narrowed: the same size and crop as the right image, so both screenshots line up */
 .images-comparison .themes-container .left-image {
     position: absolute;
-    top: 0;
-    width: 50%;
+    inset: 0;
+    clip-path: inset(0 50% 0 0);
 }
 
 .images-comparison input.slider {
