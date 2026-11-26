@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+    - name: Website
+      url: https://mrsweeter.github.io/joorney/
+      about: Features, documentation and privacy policy.
+    - name: Chrome Web Store
+      url: https://chromewebstore.google.com/detail/joorney/mjbkdgpgjmmkmjbebpdhpcpoicbpjglb
+      about: Install the extension or leave a review.
