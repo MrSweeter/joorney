@@ -2059,10 +2059,6 @@
         "message": "Destroy sync storage",
         "description": "Options developers page: button clearing the synced storage"
     },
-    "optionsTechnical_experimental": {
-        "message": "Experimental",
-        "description": "Options developers page: heading"
-    },
     "optionsTechnical_developerMode": {
         "message": "Developer mode",
         "description": "Options developers page: switch label"
@@ -2096,7 +2092,7 @@
         "description": "Options developers page: switch help"
     },
     "optionsTechnical_fallbacks": {
-        "message": "Window actions fallback",
+        "message": "Window action fallbacks",
         "description": "Options developers page: heading"
     },
     "optionsTechnical_host": {
@@ -2111,29 +2107,27 @@
         "message": "Action model",
         "description": "Options developers page: fallback table column"
     },
-    "optionsTechnical_addFallback": {
-        "message": "Add fallback",
-        "description": "Options developers page: tooltip of the add button"
-    },
     "optionsTechnical_deleteFallback": {
-        "message": "Delete fallback",
-        "description": "Options developers page: tooltip of the delete button"
-    },
-    "optionsTechnical_deleteAllFallbacks": {
-        "message": "Delete all fallbacks",
-        "description": "Options developers page: tooltip of the delete button of an origin"
-    },
-    "optionsTechnical_confirmRemoveFallback": {
-        "message": "Are you sure you want to remove the path \"$path$\" for the origin \"$origin$\"?",
-        "description": "Options developers page: confirmation before deleting a fallback",
+        "message": "Delete fallback $path$",
+        "description": "Options developers page: accessible name of the delete button of a fallback",
         "placeholders": {
             "path": {
                 "content": "$1",
                 "example": "all-tasks"
-            },
-            "origin": {
-                "content": "$2",
-                "example": "https://www.odoo.com"
+            }
+        }
+    },
+    "optionsTechnical_deleteAllFallbacks": {
+        "message": "Delete all",
+        "description": "Options developers page: button removing every fallback of a host"
+    },
+    "optionsTechnical_confirmRemoveFallback": {
+        "message": "Remove $path$?",
+        "description": "Options developers page: inline confirmation before deleting a fallback",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "all-tasks"
             }
         }
     },
@@ -2158,6 +2152,16 @@
     "optionsTechnical_error_missingModel": {
         "message": "Missing model",
         "description": "Options developers page: fallback error"
+    },
+    "optionsTechnical_error_save": {
+        "message": "Could not save the fallback: $error$",
+        "description": "Options Developers page: error, the window action fallback could not be saved (storage quota or error)",
+        "placeholders": {
+            "error": {
+                "content": "$1",
+                "example": "QUOTA_BYTES_PER_ITEM quota exceeded"
+            }
+        }
     },
     "optionsTechnical_storage": {
         "message": "Storage",
@@ -2223,16 +2227,12 @@
         "message": "Sunrise / Sunset",
         "description": "Options developers page: storage section"
     },
-    "optionsTechnical_tipUse": {
-        "message": "Use",
-        "description": "Options developers page: tip, followed by a key combination"
-    },
     "optionsTechnical_tipSameLevel": {
-        "message": "to expand/collapse all elements at the same level",
+        "message": "expands or collapses all elements at the same level.",
         "description": "Options developers page: tip after [Ctrl/Cmd + Click]"
     },
     "optionsTechnical_tipChildren": {
-        "message": "to expand/collapse an element and all its children",
+        "message": "expands or collapses an element and all its children.",
         "description": "Options developers page: tip after [Shift + Click]"
     },
     "optionsTechnical_featuresState": {
@@ -2254,6 +2254,88 @@
     "optionsTechnical_localData": {
         "message": "Extension local data",
         "description": "Options developers page: JSON viewer heading"
+    },
+    "optionsTechnical_subtitle": {
+        "message": "Experimental flags and storage inspection, for people working on Joorney or on Odoo itself.",
+        "description": "Options developers page: subtitle"
+    },
+    "optionsTechnical_banner": {
+        "message": "Developer tools: visible because debug mode is on.",
+        "description": "Options developers page: grey banner"
+    },
+    "optionsTechnical_flags": {
+        "message": "Flags",
+        "description": "Options developers page: card title"
+    },
+    "optionsTechnical_flagsHelp": {
+        "message": "Experimental. These are saved with your synced settings.",
+        "description": "Options developers page: flags card help"
+    },
+    "optionsTechnical_fallbacksHelp": {
+        "message": "For each host, the Odoo action path (the URL part after /odoo/) and the model it opens, used when the action cannot be resolved.",
+        "description": "Options developers page: fallbacks card help"
+    },
+    "optionsTechnical_noFallbacks": {
+        "message": "No fallback yet. Add one above.",
+        "description": "Options developers page: empty fallback list"
+    },
+    "optionsTechnical_cancel": {
+        "message": "Cancel",
+        "description": "Options developers page: button cancelling an inline confirmation"
+    },
+    "optionsTechnical_confirm": {
+        "message": "Confirm",
+        "description": "Options developers page: button confirming a destructive action"
+    },
+    "optionsTechnical_storageHelp": {
+        "message": "What Joorney keeps in the browser, and how much of each quota it uses.",
+        "description": "Options developers page: storage card help"
+    },
+    "optionsTechnical_tab_sync": {
+        "message": "Sync",
+        "description": "Options developers page: storage tab"
+    },
+    "optionsTechnical_tab_local": {
+        "message": "Local",
+        "description": "Options developers page: storage tab"
+    },
+    "optionsTechnical_tab_onboarding": {
+        "message": "Onboarding",
+        "description": "Options developers page: storage tab"
+    },
+    "optionsTechnical_syncData": {
+        "message": "Sync data",
+        "description": "Options developers page: label of the switch between the sync views"
+    },
+    "optionsTechnical_swapUsage": {
+        "message": "Switch between total usage and usage by section",
+        "description": "Options developers page: tooltip of the usage bar switch"
+    },
+    "optionsTechnical_usageAria": {
+        "message": "$name$ usage: $percent$ percent",
+        "description": "Options developers page: accessible name of a usage bar",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "Sync storage"
+            },
+            "percent": {
+                "content": "$2",
+                "example": "12.5"
+            }
+        }
+    },
+    "optionsTechnical_danger": {
+        "message": "Danger zone",
+        "description": "Options developers page: card title"
+    },
+    "optionsTechnical_dangerLocked": {
+        "message": "Locked. Turn on Developer mode above to use these actions.",
+        "description": "Options developers page: danger zone note when the actions are not available"
+    },
+    "optionsTechnical_chaosDone": {
+        "message": "Done. The page will now reload.",
+        "description": "Options developers page: shown after a destructive action"
     },
     "ambient_category_computed": {
         "message": "Computed Events",
@@ -2648,5 +2730,51 @@
     "optionsNotifications_disabledHint": {
         "message": "Notifications are deactivated: nothing is shown.",
         "description": "Options notifications page: hint after a preview when notifications are deactivated"
+    },
+    "optionsTechnical_fallbackCountOne": {
+        "message": "1 fallback",
+        "description": "Options developers page: chip of a host with one fallback"
+    },
+    "optionsTechnical_fallbackCountMany": {
+        "message": "$count$ fallbacks",
+        "description": "Options developers page: chip of a host with several fallbacks",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "3"
+            }
+        }
+    },
+    "optionsTechnical_fallbackOpens": {
+        "message": "$path$ opens $model$",
+        "description": "Options developers page: accessible name of a fallback row",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "all-tasks"
+            },
+            "model": {
+                "content": "$2",
+                "example": "project.task"
+            }
+        }
+    },
+    "optionsTechnical_confirmRemoveHost": {
+        "message": "Delete all fallbacks of $origin$?",
+        "description": "Options developers page: inline confirmation before deleting a host fallbacks",
+        "placeholders": {
+            "origin": {
+                "content": "$1",
+                "example": "https://www.odoo.com"
+            }
+        }
+    },
+    "optionsTechnical_remove": {
+        "message": "Remove",
+        "description": "Options developers page: button confirming a removal inline"
+    },
+    "optionsTechnical_add": {
+        "message": "Add",
+        "description": "Options developers page: button adding a fallback"
     }
 }

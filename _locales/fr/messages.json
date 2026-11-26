@@ -1620,9 +1620,6 @@
     "optionsTechnical_destroySync": {
         "message": "Détruire le stockage synchronisé"
     },
-    "optionsTechnical_experimental": {
-        "message": "Expérimental"
-    },
     "optionsTechnical_developerMode": {
         "message": "Mode développeur"
     },
@@ -1648,7 +1645,7 @@
         "message": "Convertit les données en cache local en Base64."
     },
     "optionsTechnical_fallbacks": {
-        "message": "Actions de fenêtre de secours"
+        "message": "Replis des actions de fenêtre"
     },
     "optionsTechnical_host": {
         "message": "Hôte"
@@ -1659,25 +1656,24 @@
     "optionsTechnical_actionModel": {
         "message": "Modèle de l'action"
     },
-    "optionsTechnical_addFallback": {
-        "message": "Ajouter une action de secours"
-    },
     "optionsTechnical_deleteFallback": {
-        "message": "Supprimer l'action de secours"
-    },
-    "optionsTechnical_deleteAllFallbacks": {
-        "message": "Supprimer toutes les actions de secours"
-    },
-    "optionsTechnical_confirmRemoveFallback": {
-        "message": "Voulez-vous vraiment supprimer le chemin « $path$ » pour l'origine « $origin$ » ?",
+        "message": "Supprimer l'action de secours $path$",
         "placeholders": {
             "path": {
                 "content": "$1",
                 "example": "all-tasks"
-            },
-            "origin": {
-                "content": "$2",
-                "example": "https://www.odoo.com"
+            }
+        }
+    },
+    "optionsTechnical_deleteAllFallbacks": {
+        "message": "Tout supprimer"
+    },
+    "optionsTechnical_confirmRemoveFallback": {
+        "message": "Supprimer $path$ ?",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "all-tasks"
             }
         }
     },
@@ -1698,6 +1694,15 @@
     },
     "optionsTechnical_error_missingModel": {
         "message": "Modèle manquant"
+    },
+    "optionsTechnical_error_save": {
+        "message": "Impossible d’enregistrer le repli : $error$",
+        "placeholders": {
+            "error": {
+                "content": "$1",
+                "example": "QUOTA_BYTES_PER_ITEM quota exceeded"
+            }
+        }
     },
     "optionsTechnical_storage": {
         "message": "Stockage"
@@ -1752,14 +1757,11 @@
     "optionsTechnical_storage_sun": {
         "message": "Lever / coucher du soleil"
     },
-    "optionsTechnical_tipUse": {
-        "message": "Utilisez"
-    },
     "optionsTechnical_tipSameLevel": {
-        "message": "pour déplier/replier tous les éléments du même niveau"
+        "message": "déplie ou replie tous les éléments du même niveau."
     },
     "optionsTechnical_tipChildren": {
-        "message": "pour déplier/replier un élément et tous ses enfants"
+        "message": "déplie ou replie un élément et tous ses enfants."
     },
     "optionsTechnical_featuresState": {
         "message": "État des fonctionnalités"
@@ -1775,6 +1777,70 @@
     },
     "optionsTechnical_localData": {
         "message": "Données locales de l'extension"
+    },
+    "optionsTechnical_subtitle": {
+        "message": "Drapeaux expérimentaux et inspection du stockage, pour les personnes qui travaillent sur Joorney ou sur Odoo lui-même."
+    },
+    "optionsTechnical_banner": {
+        "message": "Outils de développement : visibles car le mode debug est activé."
+    },
+    "optionsTechnical_flags": {
+        "message": "Drapeaux"
+    },
+    "optionsTechnical_flagsHelp": {
+        "message": "Expérimental. Ces réglages sont enregistrés avec vos paramètres synchronisés."
+    },
+    "optionsTechnical_fallbacksHelp": {
+        "message": "Pour chaque hôte, le chemin de l'action Odoo (la partie de l'URL après /odoo/) et le modèle qu'elle ouvre, utilisés quand l'action ne peut pas être résolue."
+    },
+    "optionsTechnical_noFallbacks": {
+        "message": "Aucune action de secours pour l'instant. Ajoutez-en une ci-dessus."
+    },
+    "optionsTechnical_cancel": {
+        "message": "Annuler"
+    },
+    "optionsTechnical_confirm": {
+        "message": "Confirmer"
+    },
+    "optionsTechnical_storageHelp": {
+        "message": "Ce que Joorney conserve dans le navigateur, et la part de chaque quota utilisée."
+    },
+    "optionsTechnical_tab_sync": {
+        "message": "Synchronisé"
+    },
+    "optionsTechnical_tab_local": {
+        "message": "Local"
+    },
+    "optionsTechnical_tab_onboarding": {
+        "message": "Prise en main"
+    },
+    "optionsTechnical_syncData": {
+        "message": "Données synchronisées"
+    },
+    "optionsTechnical_swapUsage": {
+        "message": "Basculer entre l'usage total et l'usage par section"
+    },
+    "optionsTechnical_usageAria": {
+        "message": "Usage de $name$ : $percent$ pour cent",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "Sync storage"
+            },
+            "percent": {
+                "content": "$2",
+                "example": "12.5"
+            }
+        }
+    },
+    "optionsTechnical_danger": {
+        "message": "Zone de danger"
+    },
+    "optionsTechnical_dangerLocked": {
+        "message": "Verrouillé. Activez le mode développeur ci-dessus pour utiliser ces actions."
+    },
+    "optionsTechnical_chaosDone": {
+        "message": "Terminé. La page va maintenant se recharger."
     },
     "ambient_category_computed": {
         "message": "Événements calculés"
@@ -2082,5 +2148,45 @@
     },
     "optionsNotifications_disabledHint": {
         "message": "Les notifications sont désactivées : rien n'est affiché."
+    },
+    "optionsTechnical_fallbackCountOne": {
+        "message": "1 action de secours"
+    },
+    "optionsTechnical_fallbackCountMany": {
+        "message": "$count$ actions de secours",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "3"
+            }
+        }
+    },
+    "optionsTechnical_fallbackOpens": {
+        "message": "$path$ ouvre $model$",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "all-tasks"
+            },
+            "model": {
+                "content": "$2",
+                "example": "project.task"
+            }
+        }
+    },
+    "optionsTechnical_confirmRemoveHost": {
+        "message": "Supprimer toutes les actions de secours de $origin$ ?",
+        "placeholders": {
+            "origin": {
+                "content": "$1",
+                "example": "https://www.odoo.com"
+            }
+        }
+    },
+    "optionsTechnical_remove": {
+        "message": "Supprimer"
+    },
+    "optionsTechnical_add": {
+        "message": "Ajouter"
     }
 }

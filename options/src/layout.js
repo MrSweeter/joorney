@@ -17,7 +17,8 @@ const MENU_ITEMS_CONTAINER = 'joorney-menu-items-container';
 const PAGE_CONTAINER = 'joorney-page-container';
 const MORE_BUTTON = 'joorney-menu-more';
 const MORE_LIST = 'joorney-menu-more-list';
-const KEPT_PARAMS = ['debug'];
+// Developer switches that must survive navigation (chaos: Danger zone of the Developers page)
+const KEPT_PARAMS = ['debug', 'chaos'];
 
 let registeredPages = [];
 let pageLoadedCallback;
@@ -33,11 +34,6 @@ export function parseRoute(search = window.location.search) {
     return { page, params: Object.fromEntries(searchParams) };
 }
 
-/**
- * @param {string} pageID
- * @param {object} [params] e.g. { feature: 'themeSwitch' }
- * @returns {string} '?page=<id>&...' with the kept parameters of the current URL (debug)
- */
 export function routeURL(pageID, params = {}) {
     const current = new URLSearchParams(window.location.search);
     const searchParams = new URLSearchParams({ page: pageID });

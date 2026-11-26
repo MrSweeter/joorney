@@ -1,82 +1,98 @@
-import { stringToHTML } from '../../../src/html_generator.js';
+import { escapeHTML, stringToHTML } from '../../../src/html_generator.js';
 import { t } from '../../../src/utils/i18n.js';
+import { iconHTML } from '../../../src/utils/icons.js';
 
-const colors = [
-    'red',
-    'blue',
-    'green',
-    'yellow',
-    'orange',
-    'purple',
-    'pink',
-    'brown',
-    'cyan',
-    'magenta',
-    'lime',
-    'indigo',
-    'violet',
-    'turquoise',
-    'maroon',
-    'olive',
-    'teal',
-    'coral',
-    'gold',
+// Distinct from each other and from the track; the total bar uses the navy of the page
+const COLORS = [
+    '#2456c9',
+    '#fca311',
+    '#8a5300',
+    '#5b6474',
+    '#7aa2ff',
+    '#3b4a6b',
+    '#d98c00',
+    '#9aa3b2',
+    '#1b429c',
+    '#c4c9d2',
+    '#13213c',
+    '#b8860b',
 ];
 
+/**
+ * Storage usage bar: used vs quota, or (swapped) each section vs the used total.
+ */
 export default class DoubleProgressBar {
-    constructor(progressName, labelID, switcherID, totalBarID, partialBarID, maximum, total, sections) {
-        this.label = document.getElementById(labelID);
-        this.switcher = document.getElementById(switcherID);
-        this.totalBar = document.getElementById(totalBarID);
-        this.partialBar = document.getElementById(partialBarID);
-
+    constructor(container, name, maximum, total, sections) {
+        this.container = container;
+        this.name = name;
         this.maximum = maximum;
         this.total = total;
         this.sections = sections;
-
-        this.loadTotal();
-        this.loadPartial();
-
-        this.switcher.onclick = () => this.switch();
-        this.label.textContent = t('optionsTechnical_storageUsage', progressName, this.total, this.maximum);
+        this.bySection = false;
+        this.render();
     }
 
     switch() {
-        this.totalBar.classList.toggle('d-none');
-        this.partialBar.classList.toggle('d-none');
+        this.bySection = !this.bySection;
+        this.render();
+        this.container.querySelector('.joorney-tech-swap')?.focus();
     }
 
-    loadTotal() {
-        this.totalBar.innerHTML = '';
-        this.totalBar.title = `${this.maximum}`;
-        const usageElement = this.getSectionElement(
-            `${this.total} / ${this.maximum}`,
-            (this.total / this.maximum) * 100,
-            'var(--joorney-secondary)'
-        );
-        usageElement.onclick = () => this.switch();
-        this.totalBar.appendChild(usageElement);
+    get percent() {
+        return this.maximum ? (this.total / this.maximum) * 100 : 0;
     }
 
-    loadPartial() {
-        this.partialBar.innerHTML = '';
-        this.partialBar.title = `${this.total}`;
-        let usageElement;
-        let i = 0;
-        for (const section of this.sections) {
-            usageElement = this.getSectionElement(
-                `${section.label}: ${section.usage} / ${this.total}`,
-                (section.usage / this.total) * 100,
-                colors[i % colors.length]
-            );
-            this.partialBar.appendChild(usageElement);
-            i++;
+    segments() {
+        if (!this.bySection) {
+            return [
+                {
+                    title: `${this.total} / ${this.maximum}`,
+                    width: this.percent,
+                    color: 'var(--joorney-navy)',
+                },
+            ];
         }
+        return this.sections.map((section, i) => ({
+            title: `${section.label}: ${section.usage} / ${this.total}`,
+            width: this.total ? (section.usage / this.total) * 100 : 0,
+            color: COLORS[i % COLORS.length],
+        }));
     }
 
-    getSectionElement(label, value, color) {
-        return stringToHTML(
-            `<div title="${label}" class="progress-bar" style="width: ${value}%; background-color: ${color}"></div>`
+    render() {
+        const segments = this.segments();
+        const percent = this.percent.toFixed(1);
+        const usage = t('optionsTechnical_storageUsage', this.name, this.total, this.maximum);
+        const ariaLabel = escapeHTML(t('optionsTechnical_usageAria', this.name, percent));
+        const swapLabel = escapeHTML(t('optionsTechnical_swapUsage'));
+        const bars = segments
+            .map(
+                (s) =>
+                    `<div title="${escapeHTML(s.title)}" style="width: ${s.width.toFixed(2)}%; background: ${s.color}"></div>`
+            )
+            .join('');
+        const legend = this.bySection
+            ? `<ul class="joorney-tech-legend">${segments
+                  .map((s) => `<li><i style="background: ${s.color}"></i>${escapeHTML(s.title)}</li>`)
+                  .join('')}</ul>`
+            : '';
+
+        this.container.replaceChildren(
+            stringToHTML(`
+                <div>
+                    <div class="joorney-tech-usage-head">
+                        <b>${escapeHTML(this.name)}</b><span>${escapeHTML(usage)} (${percent}%)</span>
+                    </div>
+                    <div class="joorney-tech-usage-row">
+                        <div class="joorney-tech-bar" role="img" aria-label="${ariaLabel}">${bars}</div>
+                        <button type="button" class="joorney-icon-btn joorney-tech-swap" title="${swapLabel}" aria-label="${swapLabel}" aria-pressed="${this.bySection}">
+                            ${iconHTML('swap_horiz')}
+                        </button>
+                    </div>
+                    ${legend}
+                </div>
+            `)
         );
+        this.container.querySelector('.joorney-tech-swap').onclick = () => this.switch();
     }
 }
