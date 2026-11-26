@@ -3,7 +3,6 @@ export const store = {
     tour_settings_version: 1,
     step_settings_language: false,
     step_settings_hostsView: false,
-    step_settings_shortcut: false,
 };
 
 export const steps = {
@@ -23,12 +22,5 @@ export const steps = {
         nameKey: 'checklist_settings_hostsView_name',
         descriptionKey: 'checklist_settings_hostsView_description',
         trigger: [{ selector: '#joorney_advanced_host_view', run: 'click' }],
-        next: 'step_settings_shortcut',
-    },
-    step_settings_shortcut: {
-        id: 'step_settings_shortcut',
-        nameKey: 'checklist_settings_shortcut_name',
-        descriptionKey: 'checklist_settings_shortcut_description',
-        trigger: [{ selector: '#joorney_shortcut_copy', run: 'click' }],
     },
 };

@@ -1,5 +1,5 @@
 import { baseSettings } from '../../configuration.js';
-import { getWebsiteOff } from '../api/local.js';
+import { isWebsiteDisabled } from '../api/local.js';
 import { Console, StorageSync } from './browser.js';
 import { sanitizeURL, sleep, ValueIsNaN } from './util.js';
 import { sanitizeVersion } from './version.js';
@@ -87,15 +87,13 @@ export async function isAuthorizedLimitedFeature(featureName, limitedOrigins, ur
     if (!configuration[key]) return false;
     const origin = url.origin;
 
-    const offs = await getWebsiteOff();
-    if (offs.has(origin)) return false;
+    if (await isWebsiteDisabled(origin)) return false;
 
     return originMatches(limitedOrigins, origin);
 }
 
 async function authorizeFeature(featureName, origin) {
-    const offs = await getWebsiteOff();
-    if (offs.has(origin)) return false;
+    if (await isWebsiteDisabled(origin)) return false;
 
     const configuration = await StorageSync.get({
         originsFilterOrigins: {},

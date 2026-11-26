@@ -55,23 +55,14 @@
     </section>
     <!--#endregion-->
 
-    <!--#region Keyboard shortcut -->
-    <section class="joorney-panel" aria-labelledby="joorney_shortcut_title">
-        <h2 class="joorney-panel-title" id="joorney_shortcut_title" data-i18n="optionsSettings_shortcut_title">Keyboard shortcut</h2>
-        <p class="joorney-help" id="joorney_shortcut_help" data-i18n="optionsSettings_shortcut_help">Shortcut to turn Joorney on or off temporarily (the extension's only declared command).</p>
-        <div class="joorney-settings-keys" id="joorney_shortcut_keys" aria-describedby="joorney_shortcut_help"></div>
-        <div class="joorney-settings-copyrow">
-            <code class="joorney-mono" id="joorney_shortcut_url">chrome://extensions/shortcuts</code>
-            <button
-                type="button"
-                class="joorney-icon-btn"
-                id="joorney_shortcut_copy"
-                aria-label="Copy chrome://extensions/shortcuts"
-                data-i18n-aria-label="optionsSettings_shortcut_copy"
-                data-i18n-title="optionsSettings_shortcut_copy"
-            ></button>
-            <span class="joorney-settings-note" id="joorney_shortcut_note" role="status" data-i18n="optionsSettings_shortcut_change">Change it there</span>
-        </div>
+    <!--#region Sites where Joorney is disabled -->
+    <section class="joorney-panel" aria-labelledby="joorney_disabledsites_title">
+        <h2 class="joorney-panel-title" id="joorney_disabledsites_title" data-i18n="optionsSettings_disabledSites_title">Sites where Joorney is disabled</h2>
+        <p class="joorney-help" id="joorney_disabledsites_help" data-i18n="optionsSettings_disabledSites_help">
+            Disabled from the power button of the toolbar popup: no feature runs there. Remove a site to enable Joorney again, its open tabs follow at their next page load.
+        </p>
+        <ul class="joorney-settings-disabledsites" id="joorney_disabledsites_list" aria-labelledby="joorney_disabledsites_title" aria-describedby="joorney_disabledsites_help"></ul>
+        <p class="joorney-help mb-0" id="joorney_disabledsites_empty" data-i18n="optionsSettings_disabledSites_empty" hidden>Joorney is not disabled on any site.</p>
     </section>
     <!--#endregion-->
 </div>

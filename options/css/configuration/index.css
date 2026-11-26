@@ -49,31 +49,26 @@
     font-weight: 500;
 }
 
-.joorney-settings-keys {
-    display: flex;
-    gap: 6px;
-    align-items: center;
-    margin-bottom: 16px;
-    color: var(--joorney-text-muted);
+.joorney-settings-disabledsites {
+    padding: 0;
+    margin: 0;
+    list-style: none;
 }
 
-.joorney-settings-keys kbd {
-    padding: 3px 8px;
-    font-size: 13px;
-    color: var(--joorney-text);
-    background: var(--joorney-ground);
-    border: 1px solid var(--joorney-border-strong);
-    border-radius: 4px;
-}
-
-.joorney-settings-copyrow {
+.joorney-settings-disabledsite {
     display: flex;
-    flex-wrap: wrap;
     gap: 8px;
     align-items: center;
+    justify-content: space-between;
+    padding: 4px 0;
     font-size: 14px;
+    border-top: 1px solid var(--joorney-border);
 }
 
-.joorney-settings-note {
-    color: var(--joorney-text-muted);
+.joorney-settings-disabledsite:first-child {
+    border-top: 0;
+}
+
+.joorney-settings-disabledsite .joorney-mono {
+    overflow-wrap: anywhere;
 }

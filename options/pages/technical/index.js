@@ -229,7 +229,7 @@ async function localUsage() {
     }
     for (const { labelKey, keys } of [
         { labelKey: 'optionsTechnical_storage_cache', keys: ['joorneyLocalCacheCall'] },
-        { labelKey: 'optionsTechnical_storage_off', keys: ['offs'] },
+        { labelKey: 'optionsTechnical_storage_disabledSites', keys: ['offs'] },
         { labelKey: 'optionsTechnical_storage_announcement', keys: ['journey_announces'] },
         { labelKey: 'optionsTechnical_storage_ambient', keys: ['ambient_dates'] },
         { labelKey: 'optionsTechnical_storage_sun', keys: ['joorney_sunrise', 'joorney_sunset', 'joorney_date'] },

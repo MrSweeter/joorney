@@ -12,6 +12,7 @@ import {
     setFeatureActive,
     setHostFeature,
 } from '../options/src/ui/state.js';
+import { isWebsiteDisabled, setWebsiteDisabled } from '../src/api/local.js';
 import { notifyOptionPages } from '../src/generic/popup.js';
 import { escapeHTML } from '../src/html_generator.js';
 import { includeVersion, isSupportedOdoo, originMatches } from '../src/utils/authorize.js';
@@ -42,6 +43,13 @@ window.onload = async () => {
         renderNotWebsite();
         return;
     }
+    if (await isWebsiteDisabled(origin)) {
+        renderDisabled(tab, origin);
+        return;
+    }
+    const power = document.getElementById('joorney-popup-power');
+    power.hidden = false;
+    power.onclick = () => switchWebsite(tab, origin, true);
     const [{ features, currentSettings }, odoo] = await Promise.all([
         getFeaturesAndCurrentSettings(),
         readOdooInfo(tab),
@@ -75,6 +83,35 @@ function renderNotWebsite() {
         </div>
     `;
     root.querySelector('[data-action="options"]').onclick = () => openOptions();
+}
+
+// A site's features start or stop on a page load: reload it at once (a feature switch offers Reload instead).
+// The toolbar icon follows the stored list (background/src/toolbar_state.js watchDisabledWebsites)
+async function switchWebsite(tab, origin, disabled) {
+    await setWebsiteDisabled(origin, disabled);
+    Tabs.reload(tab.id);
+    window.close();
+}
+
+// Disabled from the header button: nothing runs on this site, its features are not listed
+function renderDisabled(tab, origin) {
+    const hostEl = document.getElementById('joorney-popup-host');
+    hostEl.textContent = origin.replace(/^https?:\/\//, '');
+    hostEl.title = origin;
+    document.getElementById('joorney-popup-hostinfo').textContent = t('popup_disabled');
+    const root = document.getElementById('joorney-popup');
+    root.innerHTML = `
+        <div class="joorney-empty joorney-popup-empty joorney-popup-disabled">
+            <span class="joorney-popup-disabled-icon">${iconHTML('power_settings_new')}</span>
+            <p class="joorney-popup-disabled-title">${escapeHTML(t('popup_disabled'))}</p>
+            <p>${escapeHTML(t('popup_disabledHelp'))}</p>
+            <button type="button" class="joorney-btn" data-action="enable">${iconHTML('power_settings_new')}${escapeHTML(t('popup_enable'))}</button>
+            <p class="joorney-popup-disabled-note">${escapeHTML(t('popup_enableReload'))}</p>
+            <button type="button" class="joorney-link-btn" data-action="manage">${escapeHTML(t('popup_manageDisabled'))}</button>
+        </div>
+    `;
+    root.querySelector('[data-action="enable"]').onclick = () => switchWebsite(tab, origin, false);
+    root.querySelector('[data-action="manage"]').onclick = () => openOptions('?page=page-configuration');
 }
 
 function readSet(key) {

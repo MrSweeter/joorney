@@ -1,14 +1,13 @@
-import { Commands, Runtime, StorageSync } from '../../../src/utils/browser.js';
+import { getDisabledWebsites, setWebsiteDisabled } from '../../../src/api/local.js';
+import { StorageSync } from '../../../src/utils/browser.js';
 import { getLanguage, LANGUAGE_MODE, LANGUAGES, t } from '../../../src/utils/i18n.js';
 import { iconHTML } from '../../../src/utils/icons.js';
 import { setAdvancedHostView } from '../../src/host_view.js';
 
-const SHORTCUTS_URL = 'chrome://extensions/shortcuts';
-
 export async function loadPage(_features, currentSettings) {
     loadLanguage(currentSettings);
     loadAdvancedHostView(currentSettings);
-    loadShortcut();
+    loadDisabledSites();
 }
 
 //#region Advanced host view
@@ -72,47 +71,35 @@ async function loadLanguage(currentSettings) {
 }
 //#endregion
 
-//#region Keyboard shortcut
-// The real binding (the user may have changed it in chrome://extensions/shortcuts), else the manifest suggestion
-async function readShortcut() {
-    const commands = await Commands?.getAll?.().catch(() => undefined);
-    const manifestCommands = Object.entries(Runtime.getManifest().commands ?? {});
-    const [name, manifestCommand] = manifestCommands[0] ?? [];
-    const command = commands?.find((c) => c.name === name) ?? commands?.[0];
-    return command ? command.shortcut : manifestCommand?.suggested_key?.default;
-}
-
-async function loadShortcut() {
-    const keys = document.getElementById('joorney_shortcut_keys');
-    const shortcut = await readShortcut();
-    // Chrome writes macOS shortcuts as symbols without separator ('⌥⇧F'): one key per character
-    const parts = shortcut ? (shortcut.includes('+') ? shortcut.split('+') : Array.from(shortcut)) : [];
-    keys.replaceChildren(
-        ...(parts.length
-            ? parts.flatMap((part, index) => {
-                  const key = document.createElement('kbd');
-                  key.textContent = part.trim();
-                  if (index === 0) return [key];
-                  const plus = document.createElement('span');
-                  plus.setAttribute('aria-hidden', 'true');
-                  plus.textContent = '+';
-                  return [plus, key];
-              })
-            : [Object.assign(document.createElement('span'), { textContent: t('optionsSettings_shortcut_unset') })])
+//#region Sites where Joorney is disabled
+// Written by the popup power button (popup/index.js), the toolbar icon of their open tabs follows the list
+async function loadDisabledSites() {
+    const list = document.getElementById('joorney_disabledsites_list');
+    const origins = [...(await getDisabledWebsites())].sort();
+    document.getElementById('joorney_disabledsites_empty').hidden = origins.length > 0;
+    list.hidden = origins.length === 0;
+    list.replaceChildren(
+        ...origins.map((origin) => {
+            const row = document.createElement('li');
+            row.className = 'joorney-settings-disabledsite';
+            const name = Object.assign(document.createElement('span'), {
+                className: 'joorney-mono',
+                textContent: origin,
+            });
+            const remove = document.createElement('button');
+            remove.type = 'button';
+            remove.className = 'joorney-icon-btn';
+            remove.title = t('optionsSettings_disabledSites_remove', origin);
+            remove.setAttribute('aria-label', remove.title);
+            remove.innerHTML = iconHTML('delete');
+            remove.onclick = async () => {
+                await setWebsiteDisabled(origin, false);
+                await loadDisabledSites();
+            };
+            row.replaceChildren(name, remove);
+            return row;
+        })
     );
-
-    const button = document.getElementById('joorney_shortcut_copy');
-    button.innerHTML = iconHTML('content_copy');
-    const note = document.getElementById('joorney_shortcut_note');
-    button.onclick = async () => {
-        try {
-            await navigator.clipboard.writeText(SHORTCUTS_URL);
-            note.textContent = t('optionsSettings_shortcut_copied');
-        } catch {
-            // Clipboard refused: the text stays selectable
-            note.textContent = t('optionsSettings_shortcut_change');
-        }
-    };
 }
 //#endregion
 

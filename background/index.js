@@ -10,12 +10,12 @@ import AmbientManager from '../src/features/ambient/ambient_manager.js';
 import { Console, ContextMenus, Runtime, StorageSync, Tabs, WebNavigation, Windows } from '../src/utils/browser.js';
 import { checkVersion, openOption } from '../src/utils/check_version.js';
 import { sleep } from '../src/utils/util.js';
-import { checkCommandShortcuts, handleCommands } from './src/keyboard_shortcut.js';
 import { handleMessage } from './src/messaging.js';
 import { listenNavigation } from './src/navigation.js';
 import { initOmni } from './src/omnibox.js';
 import { listenRequest } from './src/request.js';
 import { onRunbotNavigationCommitted } from './src/runbot.js';
+import { watchDisabledWebsites } from './src/toolbar_state.js';
 
 listenNavigation();
 
@@ -59,7 +59,6 @@ Runtime.onInstalled.addListener(async (details) => {
         const settingsOrDefault = await getCurrentSettings(features);
         await StorageSync.set(settingsOrDefault);
         await enableDefaultFeatures(toEnable);
-        checkCommandShortcuts();
     }
     await sleep(1000);
     await openOption(isInstall, details.previousVersion);
@@ -89,8 +88,8 @@ Runtime.onMessage.addListener((message, sender) => {
 ContextMenus.onClicked.addListener(onContextMenuItemClick);
 
 // Listeners must be registered synchronously, MV3 does not dispatch the waking event to listeners added later
-handleCommands();
 initOmni();
+watchDisabledWebsites();
 
 async function main() {
     // Start loading features immediately, messages handlers await the same promise

@@ -350,4 +350,36 @@ h2.joorney-popup-sechead {
 .joorney-popup-empty p {
     margin: 0;
 }
+
+/* Site where Joorney is disabled from the header power button (popup/index.js renderDisabled) */
+.joorney-popup-disabled-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    color: var(--joorney-error-text);
+    background: var(--joorney-error-tint);
+    border-radius: 50%;
+}
+
+.joorney-popup-disabled-icon .joorney-icon {
+    font-size: 28px;
+}
+
+.joorney-popup-disabled .joorney-popup-disabled-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--joorney-text);
+}
+
+.joorney-popup-disabled .joorney-btn {
+    height: 32px;
+}
+
+/* Right under its button: the reload is part of the action */
+.joorney-popup-disabled .joorney-popup-disabled-note {
+    margin-top: -6px;
+    font-size: 12px;
+}
 /*#endregion */

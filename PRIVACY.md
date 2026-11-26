@@ -21,7 +21,7 @@ Joorney is a Chrome extension that adds features and visual effects to Odoo web 
     -   your custom CSS and image addresses.
 -   **Local storage** (stays on your device):
     -   a cache of Odoo responses, kept separately for each site and user. An entry is deleted after 12 hours without use, or when you click "Clear cache" in the right-click menu;
-    -   the sites you switched off with the keyboard shortcut;
+    -   the sites where you disabled Joorney from the toolbar popup;
     -   announcements you dismissed;
     -   today's sunrise and sunset times;
     -   your progress in the onboarding checklist.

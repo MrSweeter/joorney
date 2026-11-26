@@ -1,5 +1,5 @@
 import { importFeatureBackgroundTriggerFile, importFeatureContentFile } from '../configuration.js';
-import { getWebsiteOff, setOdooLanguage } from '../src/api/local.js';
+import { setOdooLanguage } from '../src/api/local.js';
 import { getMenu } from '../src/api/odoo.js';
 import { getSessionData, loadSessionInfo, SessionKey } from '../src/api/session.js';
 import { getRunbotOpenUrl } from '../src/shared/limited/runbot_content.js';
@@ -43,7 +43,6 @@ async function onVersionLoaded() {
     updateLandingPage();
 
     await loadLanguage();
-    await updateTabState(url);
     const versionInfo = getOdooVersion();
     // Toast must be ready before features, they may notify during loading
     await loadToast(versionInfo);
@@ -138,17 +137,6 @@ async function loadLanguage() {
     // Remembered for the popup and context menu ('odoo' language mode), they don't run in the page
     if (odooLang) await setOdooLanguage(origin, odooLang).catch((ex) => Console.warn(ex));
     await initI18n({ origin, odooLang });
-}
-
-export async function updateTabState(url) {
-    const offs = await getWebsiteOff();
-    if (offs.has(new URL(url).origin)) {
-        await sendRuntimeMessage(MESSAGE_ACTION.TO_BACKGROUND.UPDATE_EXT_STATUS, {
-            forceSwitchToOFF: true,
-        });
-        return true;
-    }
-    return false;
 }
 
 function updateLandingPage() {
