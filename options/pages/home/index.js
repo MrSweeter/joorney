@@ -12,7 +12,7 @@ import {
     OriginError,
     regexAnchorHintHTML,
 } from '../../src/origins.js';
-import { UI_EVENTS } from '../../src/ui/events.js';
+import { dispatchActionDone, UI_EVENTS } from '../../src/ui/events.js';
 import {
     bindFeatureCards,
     CATEGORY_ORDER,
@@ -525,6 +525,8 @@ export async function loadPage(features, currentSettings) {
             view.selected = key;
             view.newHost = '';
             view.error = '';
+            // Before the refresh replaces the field: the Home tour step waits on it
+            dispatchActionDone(input, 'add-host');
         } catch (ex) {
             if (!(ex instanceof OriginError)) throw ex;
             view.error = t(ex.messageKey);

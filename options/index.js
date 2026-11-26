@@ -1,6 +1,4 @@
 import { closeAnnounce, reopenAnnounce } from '../src/api/local.js';
-import { getNextTourID } from '../src/checklist/index.js';
-import ChecklistManager from '../src/checklist/manager.js';
 import { escapeHTML } from '../src/html_generator.js';
 import { isDevMode } from '../src/utils/browser.js';
 import { getAnnounce, refreshSupportedVersions } from '../src/utils/check_version.js';
@@ -9,6 +7,8 @@ import { iconHTML } from '../src/utils/icons.js';
 import { checkConfigurationVersion } from './import_export.js';
 import { PAGES } from './menu.js';
 import { PAGE as IMPORT_EXPORT_PAGE } from './pages/importexport/index.js';
+import { getNextTourID } from './src/checklist/index.js';
+import ChecklistManager from './src/checklist/manager.js';
 import { load as loadShortcut } from './src/keyboard_shortcut.js';
 import { loadManifest, loadMenus, navigate, parseRoute, setMenuBadge } from './src/layout.js';
 import { UI_EVENTS } from './src/ui/events.js';
@@ -51,7 +51,8 @@ async function loadOptionMenus(announce) {
     const defaultMenu = await getDefaultMenu(PAGES, announce);
     // Route parameters of the opened URL (e.g. ?page=page-feature&feature=<id>), for that page only
     const route = parseRoute();
-    const params = route.page === defaultMenu.id ? route.params : {};
+    // Opened without a route, on the page of the next tour: that page may need params (the feature page)
+    const params = route.page === defaultMenu.id ? route.params : route.page ? {} : (defaultMenu.tourParams ?? {});
     loadMenus(PAGES, defaultMenu, (page) => updateMenuTour(page.tour), params);
 }
 

@@ -370,7 +370,7 @@ export async function loadPage(features, currentSettings) {
 // Options menu entry, see options/menu.js
 export const PAGE = {
     id: 'page-features',
-    tour: undefined,
+    tour: 'tour_features',
     labelKey: 'options_menu_features',
     path: './pages/features/index.html',
     loader: loadPage,

@@ -3,14 +3,15 @@ import { handleExpanderClick } from '../../../lib/json-formatter/collapse.js';
 import { buildDom } from '../../../lib/json-formatter/html.js';
 import { getOdooData } from '../../../src/api/github.js';
 import { getLocal, getStorageUsage } from '../../../src/api/local.js';
-import { getOnboardingProgressData } from '../../../src/checklist/index.js';
-import { tours } from '../../../src/checklist/tour.js';
 import { escapeHTML, stringToHTML } from '../../../src/html_generator.js';
 import { Console, isDevMode, StorageLocal, StorageSync } from '../../../src/utils/browser.js';
 import { featureName, t } from '../../../src/utils/i18n.js';
 import { iconHTML } from '../../../src/utils/icons.js';
 import { updateSupportedDevelopmentVersion } from '../../../src/utils/version.js';
+import { getOnboardingProgressData } from '../../src/checklist/index.js';
+import { tours } from '../../src/checklist/tour.js';
 import { isRegexOrigin, normalizeOrigin } from '../../src/origins.js';
+import { dispatchActionDone } from '../../src/ui/events.js';
 import DoubleProgressBar from './doubleprogress.js';
 
 export async function loadPage(features, currentSettings) {
@@ -301,6 +302,7 @@ async function createFallback() {
         await StorageSync.set({ windowActionFallbacks });
 
         loadWindowActionFallback(windowActionFallbacks);
+        dispatchActionDone(document.getElementById('joorney_window_action_fallback_new_path_save'), 'add-fallback');
     } catch (ex) {
         Console.error(ex);
         renderFallbackError(t('optionsTechnical_error_save', ex?.message ?? String(ex)));
@@ -365,6 +367,7 @@ function bindRemoval(row, key, question, remove) {
     confirmRow.querySelector('.joorney-tech-yes').onclick = async () => {
         pendingRemoval = null;
         await remove();
+        dispatchActionDone(document.getElementById('joorney_window_action_fallback_list'), 'remove-fallback');
     };
     return confirmRow;
 }

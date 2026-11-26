@@ -822,9 +822,6 @@
     "options_exportSettings": {
         "message": "Exporter les paramètres"
     },
-    "options_checklistShow": {
-        "message": "Afficher la liste de découverte"
-    },
     "options_close": {
         "message": "Fermer"
     },
@@ -1233,23 +1230,113 @@
     "options_save": {
         "message": "Enregistrer"
     },
-    "checklist_congratsTitle": {
-        "message": "Félicitations !"
+    "checklist_tourHome_title": {
+        "message": "Accueil : hôtes"
     },
-    "checklist_congratsText": {
-        "message": "Vous avez terminé la liste de découverte. Bravo !"
-    },
-    "checklist_tourHostControls_title": {
-        "message": "Contrôle des hôtes"
-    },
-    "checklist_tourHostControls_description": {
+    "checklist_tourHome_description": {
         "message": "Gérez les fonctionnalités par hôte !"
     },
-    "checklist_tourPreferences_title": {
-        "message": "Préférences"
+    "checklist_tourFeatures_title": {
+        "message": "Tableau des fonctionnalités"
     },
-    "checklist_tourPreferences_description": {
-        "message": "Configurez vos préférences pour de nombreuses fonctionnalités."
+    "checklist_tourFeatures_description": {
+        "message": "Trouvez, déplacez et changez l'état des fonctionnalités."
+    },
+    "checklist_tourFeature_title": {
+        "message": "Page d'une fonctionnalité"
+    },
+    "checklist_tourFeature_description": {
+        "message": "Activez une fonctionnalité, choisissez où elle s'exécute, personnalisez-la."
+    },
+    "checklist_tourSettings_title": {
+        "message": "Paramètres"
+    },
+    "checklist_tourSettings_description": {
+        "message": "Langue, page d'accueil et raccourci clavier."
+    },
+    "checklist_home_addHost_name": {
+        "message": "Ajouter un hôte"
+    },
+    "checklist_home_addHost_description": {
+        "message": "Saisissez une adresse Odoo, puis appuyez sur Entrée ou sur Ajouter. Commencez par regex:// pour cibler plusieurs bases à la fois."
+    },
+    "checklist_home_pickHost_name": {
+        "message": "Choisir un hôte"
+    },
+    "checklist_home_pickHost_description": {
+        "message": "Sélectionnez un hôte pour voir chaque fonctionnalité telle qu'elle s'y comporte."
+    },
+    "checklist_home_switchFeature_name": {
+        "message": "Changer une fonctionnalité pour cet hôte"
+    },
+    "checklist_home_switchFeature_description": {
+        "message": "Utilisez l'interrupteur d'une carte pour activer ou couper une fonctionnalité pour l'hôte sélectionné uniquement. Le réglage global ne change pas."
+    },
+    "checklist_home_bulk_name": {
+        "message": "Actions groupées"
+    },
+    "checklist_home_bulk_description": {
+        "message": "Activez ou coupez toutes les fonctionnalités de l'hôte en un clic, au lieu de changer chaque interrupteur."
+    },
+    "checklist_home_runbot_name": {
+        "message": "Fonctionnalités Runbot"
+    },
+    "checklist_home_runbot_description": {
+        "message": "Les fonctionnalités Runbot ne s'exécutent que sur les origines runbot : un seul interrupteur global, pas d'exception par hôte. Elles sont dans la ligne Runbot épinglée, ou dans le bloc Runbot au-dessus de la grille en vue avancée. Cliquez dessus pour continuer."
+    },
+    "checklist_features_zones_name": {
+        "message": "Trois zones"
+    },
+    "checklist_features_zones_description": {
+        "message": "Chaque fonctionnalité se trouve dans une zone : active par défaut (tourne sur chaque hôte sauf ses exceptions), inactive par défaut (tourne uniquement sur ses exceptions), ou désactivée. Cochez cette étape une fois lue."
+    },
+    "checklist_features_expand_name": {
+        "message": "Lire une carte"
+    },
+    "checklist_features_expand_description": {
+        "message": "Cliquez sur une carte pour afficher sa description complète, ses tags et ses versions supportées. Recliquez pour la replier."
+    },
+    "checklist_features_drag_name": {
+        "message": "Glisser pour déplacer"
+    },
+    "checklist_features_drag_description": {
+        "message": "Glissez une carte vers une autre zone pour changer son état."
+    },
+    "checklist_feature_active_name": {
+        "message": "Interrupteur Actif"
+    },
+    "checklist_feature_active_description": {
+        "message": "Activez ou désactivez la fonctionnalité avec cet interrupteur. L'activer demande son défaut : active ou inactive sur vos hôtes."
+    },
+    "checklist_feature_where_name": {
+        "message": "Où elle s'exécute"
+    },
+    "checklist_feature_where_description": {
+        "message": "Choisissez si elle est active ou inactive par défaut, puis gérez les hôtes qui font exception."
+    },
+    "checklist_feature_settings_name": {
+        "message": "Carte Réglages"
+    },
+    "checklist_feature_settings_description": {
+        "message": "Personnalisez la fonctionnalité ici. Seules les fonctionnalités avec options ont cette carte : ouvrez Theme Switch pour essayer, ou cochez cette étape à la main."
+    },
+    "checklist_settings_language_name": {
+        "message": "Langue"
+    },
+    "checklist_settings_language_description": {
+        "message": "Choisissez la langue de Joorney : système, Odoo ou une langue fixe. La page se recharge."
+    },
+    "checklist_settings_hostsView_name": {
+        "message": "Vue de la page d'accueil"
+    },
+    "checklist_settings_hostsView_description": {
+        "message": "Faites passer la page Accueil de la vue simple à la matrice avancée."
+    },
+    "checklist_settings_shortcut_name": {
+        "message": "Raccourci clavier"
+    },
+    "checklist_settings_shortcut_description": {
+        "message": "Consultez le raccourci qui active ou coupe Joorney, et copiez l'adresse où le modifier."
     },
     "checklist_tourVersions_title": {
         "message": "Versions"
@@ -1272,71 +1359,8 @@
     "checklist_markAllDone_tooltip": {
         "message": "Agitez une baguette magique et considérez toutes les étapes comme terminées !"
     },
-    "checklist_next": {
-        "message": "Suivant"
-    },
     "checklist_restart": {
         "message": "Recommencer"
-    },
-    "checklist_hostControls_moveFeature_name": {
-        "message": "Gérer les fonctionnalités"
-    },
-    "checklist_hostControls_moveFeature_description": {
-        "message": "Glissez-déposez pour activer ou désactiver une fonctionnalité et garder le contrôle."
-    },
-    "checklist_hostControls_addHost_name": {
-        "message": "Ajouter votre propre origine"
-    },
-    "checklist_hostControls_addHost_description": {
-        "message": "Ajoutez une nouvelle origine en enregistrant vos modifications ou en appuyant sur « Entrée »."
-    },
-    "checklist_hostControls_configureHost_name": {
-        "message": "Configurer votre origine"
-    },
-    "checklist_hostControls_configureHost_description": {
-        "message": "Ajustez les paramètres de chaque origine en activant ou désactivant des fonctionnalités à l'aide des cases à cocher."
-    },
-    "checklist_hostControls_deleteHost_name": {
-        "message": "Supprimer votre origine"
-    },
-    "checklist_hostControls_deleteHost_description": {
-        "message": "Lancez la suppression de l'origine et confirmez-la dans la boîte de dialogue."
-    },
-    "checklist_preferences_awesomeLoading_name": {
-        "message": "Chargement personnalisé"
-    },
-    "checklist_preferences_awesomeLoading_description": {
-        "message": "Importez et définissez un GIF de chargement pour personnaliser le chargement d'Odoo."
-    },
-    "checklist_preferences_awesomeStyle_name": {
-        "message": "Façon Stylus"
-    },
-    "checklist_preferences_awesomeStyle_description": {
-        "message": "Ajustez et personnalisez le style visuel selon vos préférences."
-    },
-    "checklist_preferences_unfocusApp_name": {
-        "message": "Arrière-plan des icônes d'application"
-    },
-    "checklist_preferences_unfocusApp_description": {
-        "message": "Personnalisez l'arrière-plan des icônes d'application, utilisé pour les applications mises en avant."
-    },
-    "checklist_preferences_themeSwitchLocation_name": {
-        "message": "Thème selon le soleil"
-    },
-    "checklist_preferences_themeSwitchLocation_description": {
-        "message": "Activez le changement automatique de thème selon les heures de lever et de coucher du soleil."
-    },
-    "checklist_preferences_themeSwitchTime_name": {
-        "message": "Thème programmé"
-    },
-    "checklist_preferences_themeSwitchTime_description": {
-        "message": "Définissez une plage horaire pour le changement automatique de thème."
-    },
-    "checklist_preferences_contextOdooMenus_name": {
-        "message": "Menus contextuels"
-    },
-    "checklist_preferences_contextOdooMenus_description": {
-        "message": "Configurez des menus Odoo à utiliser dans le menu contextuel de Joorney."
     },
     "checklist_technical_experimentalOption_name": {
         "message": "Expérimental / Avancé"
@@ -1409,12 +1433,6 @@
     },
     "checklist_versions_removeSubVersion_description": {
         "message": "Désactivez la version activée précédemment."
-    },
-    "checklist_defaultTitle": {
-        "message": "Découvrir Joorney"
-    },
-    "checklist_defaultDescription": {
-        "message": "Suivez les étapes ci-dessous"
     },
     "migration_title": {
         "message": "Migrer la configuration"
@@ -2389,7 +2407,7 @@
         "message": "Préférences de toute l'extension."
     },
     "optionsSettings_hosts_title": {
-        "message": "Page des hôtes"
+        "message": "Page d'accueil"
     },
     "optionsSettings_shortcut_title": {
         "message": "Raccourci clavier"
@@ -2417,6 +2435,130 @@
                 "example": "Christmas"
             }
         }
+    },
+    "checklist_panelTitle": {
+        "message": "Prenez Joorney en main"
+    },
+    "checklist_panelSubtitle": {
+        "message": "De courts parcours, un par page. Faites-les dans l'ordre que vous voulez."
+    },
+    "checklist_progress": {
+        "message": "$done$ sur $total$ terminés",
+        "placeholders": {
+            "done": {
+                "content": "$1",
+                "example": "2"
+            },
+            "total": {
+                "content": "$2",
+                "example": "6"
+            }
+        }
+    },
+    "checklist_hide": {
+        "message": "Masquer la liste"
+    },
+    "checklist_start": {
+        "message": "Démarrer"
+    },
+    "checklist_resume": {
+        "message": "Reprendre"
+    },
+    "checklist_startTour": {
+        "message": "Démarrer $tour$",
+        "placeholders": {
+            "tour": {
+                "content": "$1",
+                "example": "Home: hosts"
+            }
+        }
+    },
+    "checklist_resumeTour": {
+        "message": "Reprendre $tour$",
+        "placeholders": {
+            "tour": {
+                "content": "$1",
+                "example": "Home: hosts"
+            }
+        }
+    },
+    "checklist_tourSteps": {
+        "message": "$count$ étapes",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "5"
+            }
+        }
+    },
+    "checklist_tourStepsDone": {
+        "message": "$done$ étapes sur $total$",
+        "placeholders": {
+            "done": {
+                "content": "$1",
+                "example": "2"
+            },
+            "total": {
+                "content": "$2",
+                "example": "5"
+            }
+        }
+    },
+    "checklist_tourDone": {
+        "message": "Terminé"
+    },
+    "checklist_toggleSteps": {
+        "message": "Afficher les étapes de $tour$",
+        "placeholders": {
+            "tour": {
+                "content": "$1",
+                "example": "Home: hosts"
+            }
+        }
+    },
+    "checklist_markAllDone": {
+        "message": "Tout marquer comme fait"
+    },
+    "checklist_guideStep": {
+        "message": "Étape $current$ sur $total$",
+        "placeholders": {
+            "current": {
+                "content": "$1",
+                "example": "2"
+            },
+            "total": {
+                "content": "$2",
+                "example": "5"
+            }
+        }
+    },
+    "checklist_guideLabel": {
+        "message": "Parcours $tour$, $step$",
+        "placeholders": {
+            "tour": {
+                "content": "$1",
+                "example": "Home: hosts"
+            },
+            "step": {
+                "content": "$2",
+                "example": "Add a host"
+            }
+        }
+    },
+    "checklist_guideBack": {
+        "message": "Retour"
+    },
+    "checklist_guideNext": {
+        "message": "Suivant"
+    },
+    "checklist_guideFinish": {
+        "message": "Terminer"
+    },
+    "checklist_guideSkip": {
+        "message": "Passer le parcours"
+    },
+    "checklist_guideNoTarget": {
+        "message": "Cet élément n'est pas sur la page pour le moment. Continuez avec Suivant."
     },
     "optionsHome_runbotName": {
         "message": "Runbot"

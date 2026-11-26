@@ -1039,10 +1039,6 @@
         "message": "Export settings",
         "description": "Options header: tooltip of the export button"
     },
-    "options_checklistShow": {
-        "message": "Show onboarding checklist",
-        "description": "Options: tooltip of the floating button showing the onboarding checklist"
-    },
     "options_close": {
         "message": "Close",
         "description": "Generic close button tooltip"
@@ -1547,29 +1543,149 @@
         "message": "Save",
         "description": "Options: generic save button tooltip"
     },
-    "checklist_congratsTitle": {
-        "message": "Congratulations!",
-        "description": "Onboarding checklist: title when every step is done"
+    "checklist_tourHome_title": {
+        "message": "Home: hosts",
+        "description": "Onboarding checklist: tour title (Home page)"
     },
-    "checklist_congratsText": {
-        "message": "You've completed the onboarding checklist. Great job!",
-        "description": "Onboarding checklist: text when every step is done"
-    },
-    "checklist_tourHostControls_title": {
-        "message": "Hosts control",
-        "description": "Onboarding checklist: tour title (Hosts control page)"
-    },
-    "checklist_tourHostControls_description": {
+    "checklist_tourHome_description": {
         "message": "Manage features by host!",
-        "description": "Onboarding checklist: tour subtitle (Hosts control page)"
+        "description": "Onboarding checklist: tour subtitle (Home page)"
     },
-    "checklist_tourPreferences_title": {
-        "message": "Preferences",
-        "description": "Onboarding checklist: tour title (Preferences page)"
+    "checklist_tourFeatures_title": {
+        "message": "Features board",
+        "description": "Onboarding checklist: tour title (Features page)"
     },
-    "checklist_tourPreferences_description": {
-        "message": "Set up your preferences for many features.",
-        "description": "Onboarding checklist: tour subtitle (Preferences page)"
+    "checklist_tourFeatures_description": {
+        "message": "Find, move and switch features.",
+        "description": "Onboarding checklist: tour subtitle (Features page)"
+    },
+    "checklist_tourFeature_title": {
+        "message": "Feature page",
+        "description": "Onboarding checklist: tour title (a feature page)"
+    },
+    "checklist_tourFeature_description": {
+        "message": "Switch a feature, choose where it runs, customize it.",
+        "description": "Onboarding checklist: tour subtitle (a feature page)"
+    },
+    "checklist_tourSettings_title": {
+        "message": "Settings",
+        "description": "Onboarding checklist: tour title (Settings page)"
+    },
+    "checklist_tourSettings_description": {
+        "message": "Language, Home page and keyboard shortcut.",
+        "description": "Onboarding checklist: tour subtitle (Settings page)"
+    },
+    "checklist_home_addHost_name": {
+        "message": "Add a host",
+        "description": "Onboarding checklist: step title"
+    },
+    "checklist_home_addHost_description": {
+        "message": "Type an Odoo address, then press Enter or Add. Start it with regex:// to match several databases at once.",
+        "description": "Onboarding checklist: step description"
+    },
+    "checklist_home_pickHost_name": {
+        "message": "Pick a host",
+        "description": "Onboarding checklist: step title"
+    },
+    "checklist_home_pickHost_description": {
+        "message": "Select a host to see every feature as it behaves there.",
+        "description": "Onboarding checklist: step description"
+    },
+    "checklist_home_switchFeature_name": {
+        "message": "Switch a feature for this host",
+        "description": "Onboarding checklist: step title"
+    },
+    "checklist_home_switchFeature_description": {
+        "message": "Use the switch of a card to turn a feature on or off for the selected host only. The global setting stays as it is.",
+        "description": "Onboarding checklist: step description"
+    },
+    "checklist_home_bulk_name": {
+        "message": "Bulk actions",
+        "description": "Onboarding checklist: step title"
+    },
+    "checklist_home_bulk_description": {
+        "message": "Turn every feature on or off for the host in one click, instead of flipping each switch.",
+        "description": "Onboarding checklist: step description"
+    },
+    "checklist_home_runbot_name": {
+        "message": "Runbot features",
+        "description": "Onboarding checklist: step title"
+    },
+    "checklist_home_runbot_description": {
+        "message": "Runbot features only run on runbot origins: they have one global switch and no per-host exception. They live in the pinned Runbot row, or in the Runbot block above the grid in the advanced view. Click it to continue.",
+        "description": "Onboarding checklist: step description"
+    },
+    "checklist_features_zones_name": {
+        "message": "Three zones",
+        "description": "Onboarding checklist: step title"
+    },
+    "checklist_features_zones_description": {
+        "message": "Every feature sits in one zone: on by default (runs on every host except its exceptions), off by default (runs only on its exceptions), or deactivated. Tick this step when you have read it.",
+        "description": "Onboarding checklist: step description"
+    },
+    "checklist_features_expand_name": {
+        "message": "Read a card",
+        "description": "Onboarding checklist: step title"
+    },
+    "checklist_features_expand_description": {
+        "message": "Click a card to show its full description, tags and supported versions. Click it again to fold it.",
+        "description": "Onboarding checklist: step description"
+    },
+    "checklist_features_drag_name": {
+        "message": "Drag to move",
+        "description": "Onboarding checklist: step title"
+    },
+    "checklist_features_drag_description": {
+        "message": "Drag a card onto another zone to change its state.",
+        "description": "Onboarding checklist: step description"
+    },
+    "checklist_feature_active_name": {
+        "message": "Active switch",
+        "description": "Onboarding checklist: step title"
+    },
+    "checklist_feature_active_description": {
+        "message": "Activate or deactivate the feature with this switch. Activating asks for its default: on or off on your hosts.",
+        "description": "Onboarding checklist: step description"
+    },
+    "checklist_feature_where_name": {
+        "message": "Where it runs",
+        "description": "Onboarding checklist: step title"
+    },
+    "checklist_feature_where_description": {
+        "message": "Choose whether it is on or off by default, then manage the hosts that are an exception.",
+        "description": "Onboarding checklist: step description"
+    },
+    "checklist_feature_settings_name": {
+        "message": "Settings card",
+        "description": "Onboarding checklist: step title"
+    },
+    "checklist_feature_settings_description": {
+        "message": "Customize the feature here. Only features with options have this card: open Theme Switch to try it, or tick this step by hand.",
+        "description": "Onboarding checklist: step description"
+    },
+    "checklist_settings_language_name": {
+        "message": "Language",
+        "description": "Onboarding checklist: step title"
+    },
+    "checklist_settings_language_description": {
+        "message": "Choose the language of Joorney: system, Odoo or a fixed one. The page reloads.",
+        "description": "Onboarding checklist: step description"
+    },
+    "checklist_settings_hostsView_name": {
+        "message": "Home page view",
+        "description": "Onboarding checklist: step title"
+    },
+    "checklist_settings_hostsView_description": {
+        "message": "Switch the Home page between the simple view and the advanced matrix.",
+        "description": "Onboarding checklist: step description"
+    },
+    "checklist_settings_shortcut_name": {
+        "message": "Keyboard shortcut",
+        "description": "Onboarding checklist: step title"
+    },
+    "checklist_settings_shortcut_description": {
+        "message": "See the shortcut that turns Joorney on or off, and copy the address where to change it.",
+        "description": "Onboarding checklist: step description"
     },
     "checklist_tourVersions_title": {
         "message": "Versions",
@@ -1599,93 +1715,9 @@
         "message": "Wave a magic wand and deem all steps magically done!",
         "description": "Onboarding checklist: tooltip of the icon marking all steps of the tour as done"
     },
-    "checklist_next": {
-        "message": "Next",
-        "description": "Onboarding checklist: button to go to the next tour once the current one is complete"
-    },
     "checklist_restart": {
         "message": "Restart",
         "description": "Onboarding checklist: button to restart the current tour"
-    },
-    "checklist_hostControls_moveFeature_name": {
-        "message": "Manage Features",
-        "description": "Onboarding checklist step title"
-    },
-    "checklist_hostControls_moveFeature_description": {
-        "message": "Drag and drop to enable or disable a feature for optimal control.",
-        "description": "Onboarding checklist step description"
-    },
-    "checklist_hostControls_addHost_name": {
-        "message": "Add your own origin",
-        "description": "Onboarding checklist step title (origin = website URL)"
-    },
-    "checklist_hostControls_addHost_description": {
-        "message": "Add a new origin by saving your changes or pressing 'Enter'.",
-        "description": "Onboarding checklist step description"
-    },
-    "checklist_hostControls_configureHost_name": {
-        "message": "Configure your origin",
-        "description": "Onboarding checklist step title"
-    },
-    "checklist_hostControls_configureHost_description": {
-        "message": "Adjust the settings for each origin by enabling or disabling features using the checkboxes.",
-        "description": "Onboarding checklist step description"
-    },
-    "checklist_hostControls_deleteHost_name": {
-        "message": "Remove your origin",
-        "description": "Onboarding checklist step title"
-    },
-    "checklist_hostControls_deleteHost_description": {
-        "message": "Initiate and confirm origin deletion in the prompt.",
-        "description": "Onboarding checklist step description"
-    },
-    "checklist_preferences_awesomeLoading_name": {
-        "message": "Custom Loading",
-        "description": "Onboarding checklist step title (custom loading animation)"
-    },
-    "checklist_preferences_awesomeLoading_description": {
-        "message": "Upload and set a custom loading GIF for a personalized Odoo loading.",
-        "description": "Onboarding checklist step description"
-    },
-    "checklist_preferences_awesomeStyle_name": {
-        "message": "Stylus Like",
-        "description": "Onboarding checklist step title (custom CSS, like the Stylus browser extension)"
-    },
-    "checklist_preferences_awesomeStyle_description": {
-        "message": "Adjust and customize the visual style to match your preferences.",
-        "description": "Onboarding checklist step description"
-    },
-    "checklist_preferences_unfocusApp_name": {
-        "message": "App Icon Background",
-        "description": "Onboarding checklist step title"
-    },
-    "checklist_preferences_unfocusApp_description": {
-        "message": "Personalize the app icon background, used for superfocused apps.",
-        "description": "Onboarding checklist step description"
-    },
-    "checklist_preferences_themeSwitchLocation_name": {
-        "message": "Sunlight Theme Mode",
-        "description": "Onboarding checklist step title (theme follows sunrise/sunset)"
-    },
-    "checklist_preferences_themeSwitchLocation_description": {
-        "message": "Enable automatic theme switching based on sunrise and sunset times.",
-        "description": "Onboarding checklist step description"
-    },
-    "checklist_preferences_themeSwitchTime_name": {
-        "message": "Scheduled Theme Mode",
-        "description": "Onboarding checklist step title"
-    },
-    "checklist_preferences_themeSwitchTime_description": {
-        "message": "Set a time range for automatic theme switching.",
-        "description": "Onboarding checklist step description"
-    },
-    "checklist_preferences_contextOdooMenus_name": {
-        "message": "Context Menus",
-        "description": "Onboarding checklist step title (browser right-click menu)"
-    },
-    "checklist_preferences_contextOdooMenus_description": {
-        "message": "Set up some Odoo menus to use in the Joorney context menu.",
-        "description": "Onboarding checklist step description"
     },
     "checklist_technical_experimentalOption_name": {
         "message": "Experimental / Advanced",
@@ -1782,14 +1814,6 @@
     "checklist_versions_removeSubVersion_description": {
         "message": "Disable the previously enabled version.",
         "description": "Onboarding checklist step description"
-    },
-    "checklist_defaultTitle": {
-        "message": "Discover Joorney",
-        "description": "Onboarding checklist: title before a tour is loaded"
-    },
-    "checklist_defaultDescription": {
-        "message": "Follow the steps below",
-        "description": "Onboarding checklist: description before a tour is loaded"
     },
     "migration_title": {
         "message": "Migrate configuration",
@@ -3018,7 +3042,7 @@
         "description": "Options Settings page: subtitle"
     },
     "optionsSettings_hosts_title": {
-        "message": "Hosts page",
+        "message": "Home page",
         "description": "Options Settings page: title of the Home page card"
     },
     "optionsSettings_shortcut_title": {
@@ -3054,6 +3078,150 @@
                 "example": "Christmas"
             }
         }
+    },
+    "checklist_panelTitle": {
+        "message": "Get started with Joorney",
+        "description": "Onboarding checklist: title of the panel"
+    },
+    "checklist_panelSubtitle": {
+        "message": "Short tours, one per page. Do them in any order.",
+        "description": "Onboarding checklist: subtitle of the panel"
+    },
+    "checklist_progress": {
+        "message": "$done$ of $total$ done",
+        "description": "Onboarding checklist: number of finished tours, under the progress bar",
+        "placeholders": {
+            "done": {
+                "content": "$1",
+                "example": "2"
+            },
+            "total": {
+                "content": "$2",
+                "example": "6"
+            }
+        }
+    },
+    "checklist_hide": {
+        "message": "Hide checklist",
+        "description": "Onboarding checklist: button closing the panel"
+    },
+    "checklist_start": {
+        "message": "Start",
+        "description": "Onboarding checklist: button starting a tour that was not begun"
+    },
+    "checklist_resume": {
+        "message": "Resume",
+        "description": "Onboarding checklist: button resuming a tour that was begun"
+    },
+    "checklist_startTour": {
+        "message": "Start $tour$",
+        "description": "Onboarding checklist: accessible name of the start button of a tour",
+        "placeholders": {
+            "tour": {
+                "content": "$1",
+                "example": "Home: hosts"
+            }
+        }
+    },
+    "checklist_resumeTour": {
+        "message": "Resume $tour$",
+        "description": "Onboarding checklist: accessible name of the resume button of a tour",
+        "placeholders": {
+            "tour": {
+                "content": "$1",
+                "example": "Home: hosts"
+            }
+        }
+    },
+    "checklist_tourSteps": {
+        "message": "$count$ steps",
+        "description": "Onboarding checklist: number of steps of a tour, next to its description",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "5"
+            }
+        }
+    },
+    "checklist_tourStepsDone": {
+        "message": "$done$ of $total$ steps",
+        "description": "Onboarding checklist: steps done in a tour that was begun, next to its description",
+        "placeholders": {
+            "done": {
+                "content": "$1",
+                "example": "2"
+            },
+            "total": {
+                "content": "$2",
+                "example": "5"
+            }
+        }
+    },
+    "checklist_tourDone": {
+        "message": "Done",
+        "description": "Onboarding checklist: screen reader text of a finished tour"
+    },
+    "checklist_toggleSteps": {
+        "message": "Show the steps of $tour$",
+        "description": "Onboarding checklist: accessible name of the button expanding the steps of a tour",
+        "placeholders": {
+            "tour": {
+                "content": "$1",
+                "example": "Home: hosts"
+            }
+        }
+    },
+    "checklist_markAllDone": {
+        "message": "Mark all as done",
+        "description": "Onboarding checklist: button marking every step of the tour as done"
+    },
+    "checklist_guideStep": {
+        "message": "Step $current$ of $total$",
+        "description": "Onboarding checklist: position of the step in the guided walk",
+        "placeholders": {
+            "current": {
+                "content": "$1",
+                "example": "2"
+            },
+            "total": {
+                "content": "$2",
+                "example": "5"
+            }
+        }
+    },
+    "checklist_guideLabel": {
+        "message": "$tour$ tour, $step$",
+        "description": "Onboarding checklist: accessible name of the guided walk bubble",
+        "placeholders": {
+            "tour": {
+                "content": "$1",
+                "example": "Home: hosts"
+            },
+            "step": {
+                "content": "$2",
+                "example": "Add a host"
+            }
+        }
+    },
+    "checklist_guideBack": {
+        "message": "Back",
+        "description": "Onboarding checklist: guided walk: previous step"
+    },
+    "checklist_guideNext": {
+        "message": "Next",
+        "description": "Onboarding checklist: guided walk: next step"
+    },
+    "checklist_guideFinish": {
+        "message": "Finish",
+        "description": "Onboarding checklist: guided walk: last step button"
+    },
+    "checklist_guideSkip": {
+        "message": "Skip tour",
+        "description": "Onboarding checklist: guided walk: close it, the tour stays in progress"
+    },
+    "checklist_guideNoTarget": {
+        "message": "This part is not on the page right now. You can carry on with Next.",
+        "description": "Onboarding checklist: guided walk: note when the step target is not on the page"
     },
     "optionsHome_runbotName": {
         "message": "Runbot",

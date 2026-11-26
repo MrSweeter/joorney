@@ -408,7 +408,9 @@ export async function loadPage(features, currentSettings, params = {}) {
 // Options menu entry, see options/menu.js. Not listed in the navbar: Features stays the active entry.
 export const PAGE = {
     id: FEATURE_PAGE_ID,
-    tour: undefined,
+    tour: 'tour_preferences',
+    // The tour needs a feature with a Settings card; a feature page opened by a link keeps its own params
+    tourParams: { feature: 'themeSwitch' },
     labelKey: 'options_menu_features',
     hidden: true,
     activeMenu: FEATURES_PAGE_ID,

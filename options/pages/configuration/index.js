@@ -119,8 +119,7 @@ async function loadShortcut() {
 // Options menu entry, see options/menu.js
 export const PAGE = {
     id: 'page-configuration',
-    // Stale until the tours are rewritten: its steps point at the blocks that moved to the feature pages
-    tour: 'tour_preferences',
+    tour: 'tour_settings',
     labelKey: 'options_menu_settings',
     path: './pages/configuration/index.html',
     loader: loadPage,
