@@ -96,23 +96,6 @@ export function switchHTML({ on, label, title = '', disabled = false, attributes
     return `<button type="button" role="switch" class="joorney-switch" aria-checked="${on ? 'true' : 'false'}" aria-label="${escapeHTML(label)}"${title ? ` title="${escapeHTML(title)}"` : ''}${disabled ? ' disabled' : ''}${attributes ? ` ${attributes}` : ''}></button>`;
 }
 
-/**
- * @param {object} feature feature configuration
- * @param {object} [opts]
- * @param {'everywhere'|'listed'|'deactivated'} [opts.state] shows the state badge
- * @param {boolean} [opts.switchOn] shows a switch (data-action="switch") when a boolean
- * @param {string} [opts.switchLabel] accessible name of the switch (default: "<name>: on here")
- * @param {string} [opts.switchTitle] tooltip of the switch (e.g. what the click changes)
- * @param {boolean} [opts.switchDisabled]
- * @param {boolean} [opts.grip] drag handle (data-grip), the card gets draggable="true"
- * @param {boolean} [opts.muted] dimmed (e.g. deactivated globally)
- * @param {boolean} [opts.expanded] tags and versions visible
- * @param {boolean} [opts.category] category chip (default true)
- * @param {boolean} [opts.info] info button (data-action="info", default true), a settings link when the feature has settings
- * @param {string|null} [opts.href] name link, default featurePageURL(id); null renders plain text
- * @param {string} [opts.classes] extra classes on the card
- * @returns {string} the card HTML, root: .joorney-fcard[data-feature-id]
- */
 export function featureCardHTML(feature, opts = {}) {
     const {
         state,
@@ -120,6 +103,7 @@ export function featureCardHTML(feature, opts = {}) {
         switchLabel,
         switchTitle = '',
         switchDisabled = false,
+        action = '',
         grip = false,
         muted = false,
         expanded = false,
@@ -149,7 +133,7 @@ export function featureCardHTML(feature, opts = {}) {
                   disabled: switchDisabled,
                   attributes: 'data-action="switch"',
               })
-            : '';
+            : action;
     let infoPart = '';
     if (info && hasFeatureSettings(feature)) {
         const label = escapeHTML(t('optionsUi_featureSettings', name));

@@ -1,0 +1,127 @@
+/* Default menu of a feature, see options/src/ui/mode_menu.js: fixed, placed under its trigger */
+
+.joorney-mode-menu {
+    position: fixed;
+    /* Above the guided walk (checklist.css), below the navbar and the modals */
+    z-index: 112;
+    width: 340px;
+    max-width: calc(100vw - 16px);
+    padding: 6px;
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-card);
+    box-shadow: var(--joorney-shadow-pop);
+}
+
+.joorney-mode-menu-title {
+    margin: 6px 10px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-mode-menu-opt {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    padding: 9px 10px;
+    font: inherit;
+    color: var(--joorney-text);
+    text-align: start;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    border-radius: var(--joorney-radius-control);
+}
+
+.joorney-mode-menu-opt[aria-checked="true"] {
+    background: var(--joorney-surface-soft);
+}
+
+.joorney-mode-menu-opt:hover {
+    background: var(--joorney-hover);
+}
+
+.joorney-mode-menu-mark {
+    position: relative;
+    flex: none;
+    width: 18px;
+    height: 18px;
+    margin-top: 1px;
+    border: 2px solid #8a93a3;
+    border-radius: 50%;
+}
+
+.joorney-mode-menu-opt[aria-checked="true"] .joorney-mode-menu-mark {
+    border-color: var(--joorney-navy);
+}
+
+.joorney-mode-menu-opt[aria-checked="true"] .joorney-mode-menu-mark::after {
+    position: absolute;
+    inset: 3px;
+    content: "";
+    background: var(--joorney-navy);
+    border-radius: 50%;
+}
+
+.joorney-mode-menu-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.joorney-mode-menu-label {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.joorney-mode-menu-help {
+    font-size: 12px;
+    color: var(--joorney-text-soft);
+}
+
+.joorney-mode-menu-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.joorney-mode-menu-pill {
+    display: inline-flex;
+    align-items: center;
+    height: 20px;
+    padding: 0 8px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--joorney-text-soft);
+    background: var(--joorney-hover);
+    border-radius: 10px;
+}
+
+.joorney-mode-menu-pill.is-ev {
+    color: var(--joorney-state-everywhere-text);
+    background: var(--joorney-state-everywhere-tint);
+}
+
+.joorney-mode-menu-pill.is-li {
+    color: var(--joorney-state-listed-text);
+    background: var(--joorney-state-listed-tint);
+}
+
+.joorney-mode-menu-foot {
+    display: flex;
+    gap: 8px;
+    margin: 4px 0 0;
+    padding: 10px 10px 6px;
+    font-size: 12px;
+    color: var(--joorney-text-soft);
+    border-top: 1px solid var(--joorney-hover);
+}
+
+.joorney-mode-menu-foot .joorney-icon {
+    flex: none;
+    font-size: 16px;
+    color: var(--joorney-text-muted);
+}

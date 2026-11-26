@@ -1999,6 +1999,31 @@
             }
         }
     },
+    "optionsHome_modeOnCount": {
+        "message": "Active sur $count$ hôtes sur $total$",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "3"
+            },
+            "total": {
+                "content": "$2",
+                "example": "4"
+            }
+        }
+    },
+    "optionsHome_modeOnNone": {
+        "message": "Active sur aucun hôte"
+    },
+    "optionsHome_modeNewOn": {
+        "message": "Nouveaux hôtes : active"
+    },
+    "optionsHome_modeNewOff": {
+        "message": "Nouveaux hôtes : inactive"
+    },
+    "optionsHome_modeFlip": {
+        "message": "Les exceptions sont gardées quand le défaut change, elles s'inversent donc."
+    },
     "optionsFeature_breadcrumb": {
         "message": "Fil d'Ariane"
     },
@@ -2019,6 +2044,9 @@
     },
     "optionsFeature_active": {
         "message": "Active"
+    },
+    "optionsFeature_activateMenu": {
+        "message": "L'activer demande son défaut"
     },
     "optionsFeature_whereTitle": {
         "message": "Où elle s'exécute"

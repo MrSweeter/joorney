@@ -2535,6 +2535,36 @@
             }
         }
     },
+    "optionsHome_modeOnCount": {
+        "message": "On for $count$ of $total$ hosts",
+        "description": "Options home page: default menu, how many hosts the feature would run on with this default",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "3"
+            },
+            "total": {
+                "content": "$2",
+                "example": "4"
+            }
+        }
+    },
+    "optionsHome_modeOnNone": {
+        "message": "On for no host",
+        "description": "Options home page: default menu, the feature would run on no host"
+    },
+    "optionsHome_modeNewOn": {
+        "message": "New hosts: on",
+        "description": "Options home page: default menu, a host added later runs the feature"
+    },
+    "optionsHome_modeNewOff": {
+        "message": "New hosts: off",
+        "description": "Options home page: default menu, a host added later does not run the feature"
+    },
+    "optionsHome_modeFlip": {
+        "message": "Exceptions are kept when the default changes, so they flip.",
+        "description": "Options home page: default menu footer, shown when the feature has exceptions"
+    },
     "optionsFeature_breadcrumb": {
         "message": "Breadcrumb",
         "description": "Options feature page: accessible name of the breadcrumb"
@@ -2562,6 +2592,10 @@
     "optionsFeature_active": {
         "message": "Active",
         "description": "Options feature page: label of the switch when the feature is active"
+    },
+    "optionsFeature_activateMenu": {
+        "message": "Activating asks for its default",
+        "description": "Options feature page: accessible description of the switch while the feature is deactivated"
     },
     "optionsFeature_whereTitle": {
         "message": "Where it runs",

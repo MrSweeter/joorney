@@ -20,6 +20,7 @@ import {
     stateLabel,
     switchHTML,
 } from '../../src/ui/feature_card.js';
+import { openModeMenu } from '../../src/ui/mode_menu.js';
 import {
     FEATURE_MODE,
     FEATURE_STATE,
@@ -126,6 +127,8 @@ export async function loadPage(features, currentSettings, params = {}) {
 
     //#region Render
     function headerHTML(active) {
+        // Activating asks where it runs, see ACTIONS.active
+        const asksMode = !active && !feature.limited;
         const description = featureDescription(feature);
         const details = featureDetails(feature);
         const chips = [featureChipsHTML(feature)];
@@ -145,7 +148,7 @@ export async function loadPage(features, currentSettings, params = {}) {
                     </div>
                     <div class="joorney-feature-active">
                         <span id="joorney-feature-active-label">${escapeHTML(active ? t('optionsFeature_active') : t('optionsUi_state_deactivated'))}</span>
-                        ${switchHTML({ on: active, label: name, attributes: 'id="joorney-feature-active" data-action="active" aria-labelledby="joorney-feature-active-label"' })}
+                        ${switchHTML({ on: active, label: name, attributes: `id="joorney-feature-active" data-action="active" aria-labelledby="joorney-feature-active-label"${asksMode ? ` aria-haspopup="menu" aria-expanded="false" aria-description="${escapeHTML(t('optionsFeature_activateMenu'))}"` : ''}` })}
                     </div>
                 </div>
                 <div class="joorney-feature-body">
@@ -267,6 +270,7 @@ export async function loadPage(features, currentSettings, params = {}) {
     //#endregion
 
     //#region Actions
+    const MENU_OPENED = Symbol('menu opened');
     // A host in the list = "listed" for this feature: On here in listed mode, Off here in everywhere mode
     const listedAsOn = () => getFeatureMode(settings, feature) === FEATURE_MODE.LISTED;
 
@@ -287,6 +291,11 @@ export async function loadPage(features, currentSettings, params = {}) {
     const ACTIONS = {
         active: async (el) => {
             const next = el.getAttribute('aria-checked') !== 'true';
+            // Activating asks where it runs; a limited feature has no mode
+            if (next && !feature.limited) {
+                openModeMenu({ trigger: el, feature, settings });
+                return MENU_OPENED;
+            }
             await setFeatureActive(feature, next);
         },
         mode: async (el) => {
@@ -316,7 +325,8 @@ export async function loadPage(features, currentSettings, params = {}) {
         const el = event.target.closest('[data-action]');
         if (!el || !dynamicEls.some((container) => container.contains(el))) return;
         error = '';
-        await ACTIONS[el.dataset.action]?.(el);
+        // A re-render would replace the menu's trigger: its pick fires STATE_CHANGE anyway
+        if ((await ACTIONS[el.dataset.action]?.(el)) === MENU_OPENED) return;
         // Host writes that change nothing (invalid input, same value) fire no STATE_CHANGE
         await refresh();
     };
