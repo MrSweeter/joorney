@@ -2,35 +2,43 @@
 
 <div class="container pt-5">
     <div class="d-flex align-items-center">
-        <h3>Mode & Type</h3>
-        <div class="ms-3"><button type="button" id="joorney-toast-mode-showme" class="btn btn-sm btn-secondary">Show me</button></div>
+        <h3 data-i18n="optionsNotifications_title">Mode & type</h3>
+        <div class="ms-3"><button type="button" id="joorney-toast-mode-showme" class="btn btn-sm btn-secondary" data-i18n="optionsNotifications_showMe">Show me</button></div>
     </div>
-    <small class="text-muted">You will need to reload tabs to apply the change.</small>
+    <small class="text-muted" data-i18n="optionsNotifications_reloadHint">You will need to reload tabs to apply the change.</small>
 
-    <p>Choose where to receive notifications (information, warning, error).</p>
+    <p data-i18n="optionsNotifications_modeHelp">Choose where to receive notifications (information, warning, error).</p>
     <div class="joorney-toast-mode-control radio-control rounded d-flex w-100">
         <input type="radio" name="joorney-toast-mode-control" id="joorney-toast-mode-disabled" value="disabled">
-        <label for="joorney-toast-mode-disabled" class="text-center rounded">Nowhere <small class="opacity-50">(disable)</small></label>
+        <label for="joorney-toast-mode-disabled" class="text-center rounded"
+            ><span data-i18n="optionsNotifications_mode_disabled">Nowhere</span> <small class="opacity-50" data-i18n="optionsNotifications_mode_disabledHint">(disable)</small></label
+        >
         <input type="radio" name="joorney-toast-mode-control" id="joorney-toast-mode-log" value="log">
-        <label for="joorney-toast-mode-log" class="text-center rounded">Devtools console</label>
+        <label for="joorney-toast-mode-log" class="text-center rounded" data-i18n="optionsNotifications_mode_log">Devtools console</label>
         <input type="radio" name="joorney-toast-mode-control" id="joorney-toast-mode-small" value="ui" checked>
-        <label for="joorney-toast-mode-small" class="text-center rounded">Standard UI</label>
+        <label for="joorney-toast-mode-small" class="text-center rounded" data-i18n="optionsNotifications_mode_ui">Standard UI</label>
         <input type="radio" name="joorney-toast-mode-control" id="joorney-toast-mode-large" value="large-ui">
-        <label for="joorney-toast-mode-large" class="text-center rounded">Large UI</label>
+        <label for="joorney-toast-mode-large" class="text-center rounded" data-i18n="optionsNotifications_mode_largeUi">Large UI</label>
     </div>
 
-    <p class="pt-3">Choose which type of notification you want to see</p>
+    <p class="pt-3" data-i18n="optionsNotifications_typeHelp">Choose which type of notification you want to see</p>
     <div class="joorney-toast-mode-control checkbox-control rounded d-flex w-100 text-uppercase">
         <input type="checkbox" name="joorney-toast-mode-control" id="joorney-toast-mode-info" data-toast-type="info">
-        <label for="joorney-toast-mode-info" class="text-center rounded m-1"><i class="joorney-icon joorney-icon-filled text-info" data-icon="info" aria-hidden="true"></i> INFO</label>
+        <label for="joorney-toast-mode-info" class="text-center rounded m-1"
+            ><i class="joorney-icon joorney-icon-filled text-info" data-icon="info" aria-hidden="true"></i> <span data-i18n="optionsNotifications_type_info">Info</span></label
+        >
         <input type="checkbox" name="joorney-toast-mode-control" id="joorney-toast-mode-warn" data-toast-type="warning">
-        <label for="joorney-toast-mode-warn" class="text-center rounded m-1"><i class="joorney-icon joorney-icon-filled text-warning" data-icon="warning" aria-hidden="true"></i> WARN</label>
+        <label for="joorney-toast-mode-warn" class="text-center rounded m-1"
+            ><i class="joorney-icon joorney-icon-filled text-warning" data-icon="warning" aria-hidden="true"></i> <span data-i18n="optionsNotifications_type_warning">Warning</span></label
+        >
         <input type="checkbox" name="joorney-toast-mode-control" id="joorney-toast-mode-error" data-toast-type="danger">
-        <label for="joorney-toast-mode-error" class="text-center rounded m-1"><i class="joorney-icon joorney-icon-filled text-danger" data-icon="error" aria-hidden="true"></i> ERROR</label>
+        <label for="joorney-toast-mode-error" class="text-center rounded m-1"
+            ><i class="joorney-icon joorney-icon-filled text-danger" data-icon="error" aria-hidden="true"></i> <span data-i18n="optionsNotifications_type_error">Error</span></label
+        >
         <input type="checkbox" name="joorney-toast-mode-control" id="joorney-toast-mode-success" data-toast-type="success">
         <label for="joorney-toast-mode-success" class="text-center rounded m-1"
             ><i class="joorney-icon joorney-icon-filled text-success" data-icon="check_circle" aria-hidden="true"></i>
-            SUCCESS</label
+            <span data-i18n="optionsNotifications_type_success">Success</span></label
         >
     </div>
 </div>

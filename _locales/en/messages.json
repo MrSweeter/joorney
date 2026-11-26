@@ -1,0 +1,1562 @@
+{
+    "ext_name": {
+        "message": "%EXT_NAME%",
+        "description": "Extension name (manifest), %EXT_NAME% is replaced at build time (dev/prod). Max 75 characters"
+    },
+    "ext_description": {
+        "message": "Improve your Odoo Journey! Makes your Odoo experience more enjoyable and productive by adding some cool features and effects.",
+        "description": "Extension description (manifest, Chrome Web Store). Max 132 characters"
+    },
+    "command_enableDisable": {
+        "message": "Enable or Disable extension features on the current origin",
+        "description": "Keyboard shortcut description (chrome://extensions/shortcuts)"
+    },
+    "badge_off": {
+        "message": "OFF",
+        "description": "Toolbar badge when Joorney is disabled on the current origin. Max ~4 characters"
+    },
+    "language_title": {
+        "message": "Language",
+        "description": "Preferences page: Language card title"
+    },
+    "language_description": {
+        "message": "Language of the texts added by Joorney: popup, options, buttons and notifications in Odoo, right-click menu and address bar suggestions.",
+        "description": "Preferences page: Language card description"
+    },
+    "language_mode_system": {
+        "message": "Use system (browser language)",
+        "description": "Language mode option: follow the browser language"
+    },
+    "language_mode_odoo": {
+        "message": "Use Odoo (user language)",
+        "description": "Language mode option: follow the language of the Odoo user"
+    },
+    "language_mode_static": {
+        "message": "Choose a language",
+        "description": "Language mode option: always use the language picked in the next select"
+    },
+    "language_mode_system_help": {
+        "message": "Follows the display language of your browser.",
+        "description": "Preferences page: explanation of the \"Use system\" language mode"
+    },
+    "language_mode_odoo_help": {
+        "message": "Follows the language of the Odoo user on each database.",
+        "description": "Preferences page: explanation of the \"Use Odoo\" language mode"
+    },
+    "language_mode_static_help": {
+        "message": "Always uses the language selected here, whatever the browser or Odoo language.",
+        "description": "Preferences page: explanation of the \"Choose a language\" mode"
+    },
+    "language_current": {
+        "message": "Current language: $language$",
+        "description": "Preferences page: language currently used by the options page",
+        "placeholders": {
+            "language": {
+                "content": "$1",
+                "example": "Français"
+            }
+        }
+    },
+    "language_mode_odoo_outside": {
+        "message": "Outside Odoo pages (options, address bar, a database not opened yet): the browser language.",
+        "description": "Preferences page: \"Use Odoo\" mode note, language used where no Odoo user is known"
+    },
+    "language_hint_reload": {
+        "message": "Reload any open Odoo tabs to apply the change.",
+        "description": "Preferences page: language note"
+    },
+    "language_hint_fallback": {
+        "message": "Unsupported languages fall back to English.",
+        "description": "Preferences page: language note"
+    },
+    "language_hint_chrome": {
+        "message": "In Chrome, the extension name and description follow the browser language.",
+        "description": "Preferences page: language note (chrome://extensions, Web Store)"
+    },
+    "common_default": {
+        "message": "Default",
+        "description": "Default option of a select (popup, Awesome Loading image)"
+    },
+    "popup_options": {
+        "message": "Options",
+        "description": "Popup: tooltip of the button opening the options page"
+    },
+    "popup_invalidWebsite": {
+        "message": "This website is not compatible with Joorney extension",
+        "description": "Popup: shown on non-web pages (chrome://, file://...)"
+    },
+    "popup_featureTitle": {
+        "message": "[Feature] $feature$",
+        "description": "Popup: tooltip of a feature toggle (global state)",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Pin Message"
+            }
+        }
+    },
+    "popup_featureOriginTitle": {
+        "message": "[Feature Origin] $feature$",
+        "description": "Popup: tooltip of a feature toggle for the current origin",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Pin Message"
+            }
+        }
+    },
+    "popup_originState": {
+        "message": "Origin state for:",
+        "description": "Popup: label before the current origin URL"
+    },
+    "popup_saveOrigin": {
+        "message": "Save this origin",
+        "description": "Popup: button saving the current origin"
+    },
+    "popup_saveOriginConfiguration": {
+        "message": "Save origin configuration",
+        "description": "Popup: tooltip of the button saving the origin configuration"
+    },
+    "popup_saveReload": {
+        "message": "Save & Reload",
+        "description": "Popup: button saving the origin configuration and reloading the tab"
+    },
+    "popup_loadingPreviewAlt": {
+        "message": "Loading GIF preview",
+        "description": "Alt text of the loading GIF preview image (popup, options)"
+    },
+    "feature_adminDebugLoginRunbot_name": {
+        "message": "[Runbot] Admin Debug Login",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_ambient_name": {
+        "message": "Ambient",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_assignMeTask_name": {
+        "message": "Assign Me Task",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_autoOpenRunbot_name": {
+        "message": "[Runbot] Auto Open",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_awesomeLoadingLarge_name": {
+        "message": "Awesome Loading Large",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_awesomeLoadingSmall_name": {
+        "message": "Awesome Loading Small",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_awesomeStyle_name": {
+        "message": "Awesome Style",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_contextOdooMenus_name": {
+        "message": "Context Odoo Menus",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_followUnfollow_name": {
+        "message": "Follow/Unfollow",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_impersonateLoginRunbot_name": {
+        "message": "[Runbot] Impersonate Login",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_newServerActionCode_name": {
+        "message": "New Server Action Code",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_pinMessage_name": {
+        "message": "Pin Message",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_saveKnowledge_name": {
+        "message": "Save Knowledge",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_showMyBadge_name": {
+        "message": "Show My Badge",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_starringPriorityEffect_name": {
+        "message": "Starring Effect",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_themeSwitch_name": {
+        "message": "Theme Switch",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_tooltipMetadata_name": {
+        "message": "Tooltip Metadata",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "feature_unfocusApp_name": {
+        "message": "Unfocus App",
+        "description": "Feature name (popup, options, right-click menu)"
+    },
+    "themeSwitch_mode_system": {
+        "message": "System",
+        "description": "Theme Switch mode: follow the system theme"
+    },
+    "themeSwitch_mode_dark": {
+        "message": "Dark mode",
+        "description": "Theme Switch mode: always dark"
+    },
+    "themeSwitch_mode_light": {
+        "message": "Light mode",
+        "description": "Theme Switch mode: always light"
+    },
+    "themeSwitch_mode_location": {
+        "message": "Based on configured location (sunrise/sunset)",
+        "description": "Theme Switch mode: dark between sunset and sunrise at the configured location"
+    },
+    "themeSwitch_mode_time": {
+        "message": "Dark mode based on configured time",
+        "description": "Theme Switch mode: dark between the configured hours"
+    },
+    "unfocusApp_popup_reorder": {
+        "message": "Enable unfocus app reorder",
+        "description": "Popup: tooltip of the Unfocus App reorder switch"
+    },
+    "unfocusApp_popup_share": {
+        "message": "Enable unfocus app configuration share between hosts",
+        "description": "Popup: tooltip of the Unfocus App switch sharing the configuration between hosts"
+    },
+    "pinMessage_popup_selfAuthor": {
+        "message": "Manage pin for current user messages only?",
+        "description": "Popup: tooltip of the Pin Message switch limiting pins to the current user messages"
+    },
+    "pinMessage_popup_defaultShown": {
+        "message": "Show pinned message section on load?",
+        "description": "Popup: tooltip of the Pin Message switch opening the pinned section on load"
+    },
+    "contextMenu_openOptions": {
+        "message": "Open options",
+        "description": "Right-click menu: open the options page"
+    },
+    "contextMenu_clearCache": {
+        "message": "Clear cache for this host",
+        "description": "Right-click menu: clear the Joorney cache of the current host"
+    },
+    "contextMenu_unknownItem": {
+        "message": "Unknown item",
+        "description": "Right-click menu: fallback title of an item without title"
+    },
+    "omnibox_openChromeWebStore": {
+        "message": "Open Chrome Web Store",
+        "description": "Address bar suggestion (keyword \"joorney\")"
+    },
+    "omnibox_openGithubRepository": {
+        "message": "Open GitHub repository",
+        "description": "Address bar suggestion (keyword \"joorney\")"
+    },
+    "omnibox_openGithubPage": {
+        "message": "Open GitHub Page",
+        "description": "Address bar suggestion (keyword \"joorney\")"
+    },
+    "omnibox_disabled": {
+        "message": "The functionality to open a runbot from URL is currently disabled. Open options to enable \"$feature$\"!",
+        "description": "Address bar default suggestion when [Runbot] Auto Open is disabled. XML: escape & and <",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "[Runbot] Auto Open"
+            }
+        }
+    },
+    "omnibox_openInput": {
+        "message": "Open <match>%s</match> <dim>(if found)</dim>",
+        "description": "Address bar default suggestion. XML: keep %s (user input), <match> and <dim> markup"
+    },
+    "omnibox_openRunbotVersion": {
+        "message": "Open Runbot for version '$version$'",
+        "description": "Address bar suggestion opening runbot for an Odoo version",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "18.0"
+            }
+        }
+    },
+    "autoOpenRunbot_menu_openWithVersion": {
+        "message": "Open runbot with version %version%",
+        "description": "Right-click menu on runbot: %version% is replaced by the Odoo version"
+    },
+    "common_fakeDataTitle": {
+        "message": "This element is not part of the original application; it was added artificially by Joorney.\nIf unsure, please reload the page!",
+        "description": "Tooltip on UI simulated by Joorney inside Odoo (not real data)"
+    },
+    "common_error_buttonContext": {
+        "message": "Button context is not the same as the url context: '$button$' vs '$url$'",
+        "description": "Error when a Joorney button belongs to another record than the current URL",
+        "placeholders": {
+            "button": {
+                "content": "$1",
+                "example": "42"
+            },
+            "url": {
+                "content": "$2",
+                "example": "43"
+            }
+        }
+    },
+    "common_jump": {
+        "message": "Jump to message",
+        "description": "Tooltip of the icon button on a pinned message copy, jumps to the original message"
+    },
+    "common_simulatedBadge": {
+        "message": "Joorney",
+        "description": "Badge on UI simulated or copied by Joorney inside Odoo, keep it short (brand name)"
+    },
+    "common_injectedButtonTitle": {
+        "message": "Not standard Odoo: provided by the Joorney extension",
+        "description": "Tooltip line added to every button injected by Joorney inside Odoo"
+    },
+    "common_error_title": {
+        "message": "An unexpected error occurred",
+        "description": "Notification title for an unexpected error raised by a feature (the error text is shown below)"
+    },
+    "toast_limitReached": {
+        "message": "You have reached the notification limit ($max$). Notification logged to console.",
+        "description": "Notification shown when too many notifications are displayed",
+        "placeholders": {
+            "max": {
+                "content": "$1",
+                "example": "5"
+            }
+        }
+    },
+    "toast_badgeNotification": {
+        "message": "notification",
+        "description": "Notification badge for Joorney own notifications (not linked to a feature)"
+    },
+    "toast_cachedTitle": {
+        "message": "[cache] $title$",
+        "description": "Notification title of an Odoo error coming from the Joorney cache. Keep $title$ (Odoo exception name)",
+        "placeholders": {
+            "title": {
+                "content": "$1",
+                "example": "odoo.exceptions.AccessError"
+            }
+        }
+    },
+    "assignMeTask_buttonLabel": {
+        "message": "Assign to me",
+        "description": "Button added in Odoo forms (task, ticket, equipment)"
+    },
+    "assignMeTask_buttonTitle": {
+        "message": "Page will be reloaded, use wheel click to open in another tab",
+        "description": "Tooltip of the Assign me button"
+    },
+    "assignMeTask_error_title": {
+        "message": "An error occurred during record assignment",
+        "description": "Notification title when the assignment fails"
+    },
+    "assignMeTask_label_assignees": {
+        "message": "Assignees",
+        "description": "Odoo field label (project task), shown in the simulated tracking message. Use the Odoo wording"
+    },
+    "assignMeTask_label_assignedTo": {
+        "message": "Assigned to",
+        "description": "Odoo field label (helpdesk ticket), shown in the simulated tracking message. Use the Odoo wording"
+    },
+    "assignMeTask_label_technician": {
+        "message": "Technician",
+        "description": "Odoo field label (maintenance equipment), shown in the simulated tracking message. Use the Odoo wording"
+    },
+    "saveKnowledge_buttonLabel": {
+        "message": "Save",
+        "description": "Button added on Odoo Knowledge articles"
+    },
+    "saveKnowledge_buttonTitle": {
+        "message": "Save the article content",
+        "description": "Tooltip of the Save button added on Odoo Knowledge articles"
+    },
+    "saveKnowledge_error_title": {
+        "message": "An error occurred during article save",
+        "description": "Notification title when the article save fails"
+    },
+    "pinMessage_starButtonTitle": {
+        "message": "Odoo: Mark as Todo | Joorney UI override: Pin",
+        "description": "Tooltip of the Odoo star button, replaced by a pin"
+    },
+    "pinMessage_starIconTitle": {
+        "message": "Odoo: Todo/Starred | Pinned",
+        "description": "Tooltip of the Odoo star icon, replaced by a pin"
+    },
+    "pinMessage_toggleLabel": {
+        "message": "Show pinned message",
+        "description": "Accessible label of the chatter button showing pinned messages"
+    },
+    "pinMessage_sectionTitle": {
+        "message": "Pinned Messages",
+        "description": "Chatter section title listing pinned messages"
+    },
+    "pinMessage_warning_tooManyPins": {
+        "message": "...There are more than $max$ pinned messages! Only yours are displayed",
+        "description": "Chatter warning when the record has too many pinned messages",
+        "placeholders": {
+            "max": {
+                "content": "$1",
+                "example": "5"
+            }
+        }
+    },
+    "pinMessage_warning_tooManyOwnPins": {
+        "message": "...You have more than $max$ pinned messages!",
+        "description": "Chatter warning when the current user has too many pinned messages",
+        "placeholders": {
+            "max": {
+                "content": "$1",
+                "example": "5"
+            }
+        }
+    },
+    "followUnfollow_follow": {
+        "message": "Follow",
+        "description": "Chatter button imitating Odoo: use the Odoo wording"
+    },
+    "followUnfollow_unfollow": {
+        "message": "Unfollow",
+        "description": "Chatter button imitating Odoo (hover when following): use the Odoo wording"
+    },
+    "followUnfollow_following": {
+        "message": "Following",
+        "description": "Chatter button imitating Odoo (state): use the Odoo wording"
+    },
+    "tooltipMetadata_copyModel": {
+        "message": "[Joorney] Copy technical name to clipboard",
+        "description": "Tooltip of the model technical name added in the breadcrumb"
+    },
+    "tooltipMetadata_windowActionId": {
+        "message": "Window Action ID",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_xmlId": {
+        "message": "XML ID",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_name": {
+        "message": "Name",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_model": {
+        "message": "Model",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_filterDomain": {
+        "message": "[Filters] Domain",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_filterContext": {
+        "message": "[Filters] Context",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_filterLimit": {
+        "message": "[Filters] Limit",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_filterFilter": {
+        "message": "[Filters] Filter",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_id": {
+        "message": "ID",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_noUpdate": {
+        "message": "No Update",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_createUser": {
+        "message": "Creation User",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_createDate": {
+        "message": "Creation Date",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_writeUser": {
+        "message": "Latest Modification by",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "tooltipMetadata_writeDate": {
+        "message": "Latest Modification Date",
+        "description": "Label in the debug metadata tooltip (Odoo developer wording)"
+    },
+    "impersonateLoginRunbot_loginAs": {
+        "message": "Login as $login$",
+        "description": "Tooltip of the runbot login buttons",
+        "placeholders": {
+            "login": {
+                "content": "$1",
+                "example": "admin"
+            }
+        }
+    },
+    "adminDebugLoginRunbot_buttonTitle": {
+        "message": "Open runbot as admin and with debug mode enabled",
+        "description": "Tooltip of the runbot rocket button"
+    },
+    "runbot_error_notRunbotLink": {
+        "message": "Not a runbot link: $url$",
+        "description": "Error (button tooltip) when the link is not a runbot one",
+        "placeholders": {
+            "url": {
+                "content": "$1",
+                "example": "https://example.com/runbot/run/123"
+            }
+        }
+    },
+    "runbot_error_noTab": {
+        "message": "No tab to open runbot from",
+        "description": "Error (button tooltip) when no tab can open runbot"
+    },
+    "runbot_error_noResponse": {
+        "message": "Extension not responding, reload the page",
+        "description": "Error (button tooltip) when the extension background does not answer"
+    },
+    "unfocusApp_changeFocusState": {
+        "message": "Hide/show (double-click: superfocus)",
+        "description": "Tooltip of the icon switching an Odoo app between focused and unfocused"
+    },
+    "contextOdooMenus_error_title": {
+        "message": "An error occurred during menu opening",
+        "description": "Notification title when a menu from the right-click menu cannot be opened"
+    },
+    "contextOdooMenus_error_notFound": {
+        "message": "Menu '$path$' not found.",
+        "description": "Error when no Odoo menu matches the configured path",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Sales / Orders"
+            }
+        }
+    },
+    "contextOdooMenus_error_tooMany": {
+        "message": "Too many menus found for path $path$.",
+        "description": "Error when several Odoo menus match the configured path",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Sales / Orders"
+            }
+        }
+    },
+    "contextOdooMenus_option_confirmRemove": {
+        "message": "Are you sure you want to remove the menu: $path$?",
+        "description": "Options: confirmation before deleting a quick menu",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Sales / Orders"
+            }
+        }
+    },
+    "contextOdooMenus_option_confirmRemoveAll": {
+        "message": "Are you sure you want to delete all menus?",
+        "description": "Options: confirmation before deleting every quick menu"
+    },
+    "contextOdooMenus_option_error_missingPath": {
+        "message": "Missing path",
+        "description": "Options: error when adding an empty menu path"
+    },
+    "contextOdooMenus_option_error_idExists": {
+        "message": "This id is already registered (should not happen): $id$",
+        "description": "Options: error, internal id conflict",
+        "placeholders": {
+            "id": {
+                "content": "$1",
+                "example": "3"
+            }
+        }
+    },
+    "contextOdooMenus_option_error_pathExists": {
+        "message": "This path is already registered: $path$",
+        "description": "Options: error when the menu path already exists",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Sales / Orders"
+            }
+        }
+    },
+    "contextOdooMenus_option_favorite": {
+        "message": "Favorite",
+        "description": "Options: tooltip of the favorite button (menu is favorite)"
+    },
+    "contextOdooMenus_option_notFavorite": {
+        "message": "Not favorite",
+        "description": "Options: tooltip of the favorite button (menu is not favorite)"
+    },
+    "contextOdooMenus_option_disable": {
+        "message": "Disable quick menu",
+        "description": "Options: tooltip of the toggle of an active quick menu"
+    },
+    "contextOdooMenus_option_enable": {
+        "message": "Enable quick menu",
+        "description": "Options: tooltip of the toggle of an inactive quick menu"
+    },
+    "contextOdooMenus_option_save": {
+        "message": "Save modification",
+        "description": "Options: tooltip of the button saving a quick menu"
+    },
+    "contextOdooMenus_option_delete": {
+        "message": "Delete quick menu",
+        "description": "Options: tooltip of the button deleting a quick menu"
+    },
+    "showMyBadge_title": {
+        "message": "Badges",
+        "description": "Title of the badges section added to the Odoo user card"
+    },
+    "options_title": {
+        "message": "Joorney Configuration",
+        "description": "Options page title (browser tab and header)"
+    },
+    "options_debugMode": {
+        "message": "Debug mode",
+        "description": "Options header: tooltip of the logo, click shows the developer menus"
+    },
+    "options_logoAlt": {
+        "message": "Joorney logo",
+        "description": "Alt text of the logo in the options header"
+    },
+    "options_keyboardShortcuts": {
+        "message": "Keyboard shortcuts",
+        "description": "Options header: tooltip of the keyboard shortcuts button"
+    },
+    "options_importSettings": {
+        "message": "Import settings",
+        "description": "Options header: tooltip of the import button"
+    },
+    "options_exportSettings": {
+        "message": "Export settings",
+        "description": "Options header: tooltip of the export button"
+    },
+    "options_migrate": {
+        "message": "MIGRATE",
+        "description": "Options header: button opening the configuration migration page (uppercase)"
+    },
+    "options_checklistShow": {
+        "message": "Show onboarding checklist",
+        "description": "Options: tooltip of the floating button showing the onboarding checklist"
+    },
+    "options_close": {
+        "message": "Close",
+        "description": "Generic close button tooltip"
+    },
+    "options_allRightsReserved": {
+        "message": "All rights reserved:",
+        "description": "Options footer, followed by the \"Joorney\" link"
+    },
+    "options_poweredBySunrise": {
+        "message": "Theme Switch based on location is powered by",
+        "description": "Options footer, followed by the \"SunriseSunset.io\" link"
+    },
+    "options_confirmImport": {
+        "message": "Do you confirm the file upload?",
+        "description": "Confirmation before importing a settings file"
+    },
+    "options_menu_hosts": {
+        "message": "Hosts control",
+        "description": "Options menu entry: features per host"
+    },
+    "options_menu_preferences": {
+        "message": "Preferences",
+        "description": "Options menu entry: feature preferences"
+    },
+    "options_menu_versions": {
+        "message": "Versions",
+        "description": "Options menu entry: Odoo versions"
+    },
+    "options_menu_notifications": {
+        "message": "Notifications",
+        "description": "Options menu entry: notification settings"
+    },
+    "options_menu_ambient": {
+        "message": "Ambient",
+        "description": "Options menu entry: ambient effects"
+    },
+    "options_menu_developers": {
+        "message": "Developers",
+        "description": "Options menu entry: technical settings (debug mode only)"
+    },
+    "options_limitedFeatureTitle": {
+        "message": "[Limited Feature] $feature$",
+        "description": "Options: tooltip of a limited feature toggle",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Assign Me"
+            }
+        }
+    },
+    "options_origins": {
+        "message": "Origins",
+        "description": "Options: heading / column of Odoo database origins (URL scheme + host)"
+    },
+    "options_addOrigin": {
+        "message": "Add origin",
+        "description": "Options: tooltip of the button adding an origin"
+    },
+    "options_deleteOrigin": {
+        "message": "Delete origin",
+        "description": "Options: tooltip of the button deleting an origin"
+    },
+    "options_confirmRemoveOrigin": {
+        "message": "Are you sure you want to remove the origin: $origin$?",
+        "description": "Options: confirmation before deleting an origin",
+        "placeholders": {
+            "origin": {
+                "content": "$1",
+                "example": "https://www.odoo.com"
+            }
+        }
+    },
+    "options_error_missingOrigin": {
+        "message": "Missing origin",
+        "description": "Options: error when adding an empty origin"
+    },
+    "options_error_invalidOrigin": {
+        "message": "Invalid origin, use a URL like https://www.odoo.com",
+        "description": "Options: error when the origin is not a valid URL"
+    },
+    "options_add": {
+        "message": "Add",
+        "description": "Options: generic add button"
+    },
+    "options_save": {
+        "message": "Save",
+        "description": "Options: generic save button tooltip"
+    },
+    "checklist_congratsTitle": {
+        "message": "Congratulations!",
+        "description": "Onboarding checklist: title when every step is done"
+    },
+    "checklist_congratsText": {
+        "message": "You've completed the onboarding checklist. Great job!",
+        "description": "Onboarding checklist: text when every step is done"
+    },
+    "checklist_tourHostControls_title": {
+        "message": "Hosts control",
+        "description": "Onboarding checklist: tour title (Hosts control page)"
+    },
+    "checklist_tourHostControls_description": {
+        "message": "Manage features by host!",
+        "description": "Onboarding checklist: tour subtitle (Hosts control page)"
+    },
+    "checklist_tourPreferences_title": {
+        "message": "Preferences",
+        "description": "Onboarding checklist: tour title (Preferences page)"
+    },
+    "checklist_tourPreferences_description": {
+        "message": "Set up your preferences for many features.",
+        "description": "Onboarding checklist: tour subtitle (Preferences page)"
+    },
+    "checklist_tourVersions_title": {
+        "message": "Versions",
+        "description": "Onboarding checklist: tour title (Versions page)"
+    },
+    "checklist_tourVersions_description": {
+        "message": "Choose in which versions you want to use Joorney!",
+        "description": "Onboarding checklist: tour subtitle (Versions page, Odoo versions)"
+    },
+    "checklist_tourToasts_title": {
+        "message": "Notifications",
+        "description": "Onboarding checklist: tour title (Notifications page)"
+    },
+    "checklist_tourToasts_description": {
+        "message": "Set up your notification preferences!",
+        "description": "Onboarding checklist: tour subtitle (Notifications page)"
+    },
+    "checklist_tourTechnical_title": {
+        "message": "Technical / Developers",
+        "description": "Onboarding checklist: tour title (Technical/Developers page)"
+    },
+    "checklist_tourTechnical_description": {
+        "message": "Welcome to the dark side, we have cookies!",
+        "description": "Onboarding checklist: tour subtitle (Developers page), Star Wars joke"
+    },
+    "checklist_markAllDone_tooltip": {
+        "message": "Wave a magic wand and deem all steps magically done!",
+        "description": "Onboarding checklist: tooltip of the icon marking all steps of the tour as done"
+    },
+    "checklist_next": {
+        "message": "Next",
+        "description": "Onboarding checklist: button to go to the next tour once the current one is complete"
+    },
+    "checklist_restart": {
+        "message": "Restart",
+        "description": "Onboarding checklist: button to restart the current tour"
+    },
+    "checklist_hostControls_moveFeature_name": {
+        "message": "Manage Features",
+        "description": "Onboarding checklist step title"
+    },
+    "checklist_hostControls_moveFeature_description": {
+        "message": "Drag and drop to enable or disable a feature for optimal control.",
+        "description": "Onboarding checklist step description"
+    },
+    "checklist_hostControls_addHost_name": {
+        "message": "Add your own origin",
+        "description": "Onboarding checklist step title (origin = website URL)"
+    },
+    "checklist_hostControls_addHost_description": {
+        "message": "Add a new origin by saving your changes or pressing 'Enter'.",
+        "description": "Onboarding checklist step description"
+    },
+    "checklist_hostControls_configureHost_name": {
+        "message": "Configure your origin",
+        "description": "Onboarding checklist step title"
+    },
+    "checklist_hostControls_configureHost_description": {
+        "message": "Adjust the settings for each origin by enabling or disabling features using the checkboxes.",
+        "description": "Onboarding checklist step description"
+    },
+    "checklist_hostControls_deleteHost_name": {
+        "message": "Remove your origin",
+        "description": "Onboarding checklist step title"
+    },
+    "checklist_hostControls_deleteHost_description": {
+        "message": "Initiate and confirm origin deletion in the prompt.",
+        "description": "Onboarding checklist step description"
+    },
+    "checklist_preferences_awesomeLoading_name": {
+        "message": "Custom Loading",
+        "description": "Onboarding checklist step title (custom loading animation)"
+    },
+    "checklist_preferences_awesomeLoading_description": {
+        "message": "Upload and set a custom loading GIF for a personalized Odoo loading.",
+        "description": "Onboarding checklist step description"
+    },
+    "checklist_preferences_awesomeStyle_name": {
+        "message": "Stylus Like",
+        "description": "Onboarding checklist step title (custom CSS, like the Stylus browser extension)"
+    },
+    "checklist_preferences_awesomeStyle_description": {
+        "message": "Adjust and customize the visual style to match your preferences.",
+        "description": "Onboarding checklist step description"
+    },
+    "checklist_preferences_unfocusApp_name": {
+        "message": "App Icon Background",
+        "description": "Onboarding checklist step title"
+    },
+    "checklist_preferences_unfocusApp_description": {
+        "message": "Personalize the app icon background, used for superfocused apps.",
+        "description": "Onboarding checklist step description"
+    },
+    "checklist_preferences_themeSwitchLocation_name": {
+        "message": "Sunlight Theme Mode",
+        "description": "Onboarding checklist step title (theme follows sunrise/sunset)"
+    },
+    "checklist_preferences_themeSwitchLocation_description": {
+        "message": "Enable automatic theme switching based on sunrise and sunset times.",
+        "description": "Onboarding checklist step description"
+    },
+    "checklist_preferences_themeSwitchTime_name": {
+        "message": "Scheduled Theme Mode",
+        "description": "Onboarding checklist step title"
+    },
+    "checklist_preferences_themeSwitchTime_description": {
+        "message": "Set a time range for automatic theme switching.",
+        "description": "Onboarding checklist step description"
+    },
+    "checklist_preferences_contextOdooMenus_name": {
+        "message": "Context Menus",
+        "description": "Onboarding checklist step title (browser right-click menu)"
+    },
+    "checklist_preferences_contextOdooMenus_description": {
+        "message": "Set up some Odoo menus to use in the Joorney context menu.",
+        "description": "Onboarding checklist step description"
+    },
+    "checklist_technical_experimentalOption_name": {
+        "message": "Experimental / Advanced",
+        "description": "Onboarding checklist step title"
+    },
+    "checklist_technical_experimentalOption_description": {
+        "message": "Advanced options for informed users.",
+        "description": "Onboarding checklist step description"
+    },
+    "checklist_technical_addWAFallback_name": {
+        "message": "Window Actions - No access",
+        "description": "Onboarding checklist step title (Odoo 'Window Action' records)"
+    },
+    "checklist_technical_addWAFallback_description": {
+        "message": "You don't have access to 'Window Action' records? Add a model fallback here.",
+        "description": "Onboarding checklist step description"
+    },
+    "checklist_technical_removeWAFallback_name": {
+        "message": "Window Actions - Removal",
+        "description": "Onboarding checklist step title"
+    },
+    "checklist_technical_removeWAFallback_description": {
+        "message": "Revoke or adjust the fallback for 'Window Action' records as needed.",
+        "description": "Onboarding checklist step description"
+    },
+    "checklist_technical_extensionState_name": {
+        "message": "Extension State",
+        "description": "Onboarding checklist step title"
+    },
+    "checklist_technical_onboardingProgress_name": {
+        "message": "Onboarding progression",
+        "description": "Onboarding checklist step title"
+    },
+    "checklist_technical_extensionFeaturesConfiguration_name": {
+        "message": "Feature Setup",
+        "description": "Onboarding checklist step title"
+    },
+    "checklist_technical_extensionConfiguration_name": {
+        "message": "User Configuration",
+        "description": "Onboarding checklist step title"
+    },
+    "checklist_toast_showMe_name": {
+        "message": "Notification Look",
+        "description": "Onboarding checklist step title"
+    },
+    "checklist_toast_showMe_description": {
+        "message": "Display some notifications with your current configuration!",
+        "description": "Onboarding checklist step description"
+    },
+    "checklist_toast_switchMode_name": {
+        "message": "Switch Mode",
+        "description": "Onboarding checklist step title (notification display mode)"
+    },
+    "checklist_toast_switchMode_description": {
+        "message": "Change how notifications are displayed: larger, or hidden in the console!",
+        "description": "Onboarding checklist step description"
+    },
+    "checklist_toast_disableType_name": {
+        "message": "Disable Type",
+        "description": "Onboarding checklist step title (notification types: info, warning...)"
+    },
+    "checklist_toast_disableType_description": {
+        "message": "Choose your preferred notification types!",
+        "description": "Onboarding checklist step description"
+    },
+    "checklist_versions_addLTSVersion_name": {
+        "message": "Enable LTS version",
+        "description": "Onboarding checklist step title (Odoo version)"
+    },
+    "checklist_versions_addLTSVersion_description": {
+        "message": "Select and enable a new Long-Term Support (LTS) version.",
+        "description": "Onboarding checklist step description"
+    },
+    "checklist_versions_addSubVersion_name": {
+        "message": "Enable Version",
+        "description": "Onboarding checklist step title (Odoo version)"
+    },
+    "checklist_versions_addSubVersion_description": {
+        "message": "Enable a version to explore new features.",
+        "description": "Onboarding checklist step description"
+    },
+    "checklist_versions_checkCompatibility_name": {
+        "message": "Compatibility Table",
+        "description": "Onboarding checklist step title"
+    },
+    "checklist_versions_checkCompatibility_description": {
+        "message": "Review compatibility between features and versions.",
+        "description": "Onboarding checklist step description"
+    },
+    "checklist_versions_removeSubVersion_name": {
+        "message": "Disable Version",
+        "description": "Onboarding checklist step title (Odoo version)"
+    },
+    "checklist_versions_removeSubVersion_description": {
+        "message": "Disable the previously enabled version.",
+        "description": "Onboarding checklist step description"
+    },
+    "checklist_defaultTitle": {
+        "message": "Discover Joorney",
+        "description": "Onboarding checklist: title before a tour is loaded"
+    },
+    "checklist_defaultDescription": {
+        "message": "Follow the steps below",
+        "description": "Onboarding checklist: description before a tour is loaded"
+    },
+    "migration_title": {
+        "message": "Joorney Migration",
+        "description": "Migration page title (browser tab)"
+    },
+    "migration_select": {
+        "message": "Select your configuration to migrate",
+        "description": "Migration page: file selection heading"
+    },
+    "migration_or": {
+        "message": "or",
+        "description": "Migration page: between the file input and the \"Use current\" button"
+    },
+    "migration_useCurrent": {
+        "message": "Use current",
+        "description": "Migration page: button migrating the current configuration"
+    },
+    "migration_heading": {
+        "message": "Migration",
+        "description": "Migration page: heading of the migration summary"
+    },
+    "migration_execute": {
+        "message": "Execute migration",
+        "description": "Migration page: button running the migration"
+    },
+    "migration_download": {
+        "message": "Download new configuration",
+        "description": "Migration page: button downloading the migrated configuration"
+    },
+    "migration_error_lowerVersion": {
+        "message": "The configuration cannot be migrated to a lower version",
+        "description": "Migration page error"
+    },
+    "migration_error_sameVersion": {
+        "message": "The configuration cannot be migrated to the same version",
+        "description": "Migration page error"
+    },
+    "optionsHosts_limitedFeatures": {
+        "message": "Limited Features",
+        "description": "Options hosts page: heading of the limited features"
+    },
+    "optionsHosts_features": {
+        "message": "Features",
+        "description": "Options hosts page: heading of the features"
+    },
+    "optionsHosts_whitelist": {
+        "message": "Whitelist",
+        "description": "Options hosts page: column of features disabled by default"
+    },
+    "optionsHosts_whitelistHelp": {
+        "message": "Feature disabled by default, unless listed and checked in the \"Origins\" section below",
+        "description": "Options hosts page: whitelist help"
+    },
+    "optionsHosts_blacklist": {
+        "message": "Blacklist",
+        "description": "Options hosts page: column of features enabled by default"
+    },
+    "optionsHosts_blacklistHelp": {
+        "message": "Feature enabled by default, unless listed and checked in the \"Origins\" section below",
+        "description": "Options hosts page: blacklist help"
+    },
+    "optionsHosts_disable": {
+        "message": "Disable",
+        "description": "Options hosts page: column of disabled features"
+    },
+    "optionsHosts_originInput": {
+        "message": "Origin filter",
+        "description": "Options hosts page: accessible label of the new origin input"
+    },
+    "optionsHosts_originsTitle": {
+        "message": "Odoo database origin",
+        "description": "Options hosts page: tooltip of the origins column"
+    },
+    "optionsHosts_error_invalidRegex": {
+        "message": "Invalid regular expression",
+        "description": "Options hosts page: error when a regex origin is invalid"
+    },
+    "optionsHosts_error_originExists": {
+        "message": "Origin already added",
+        "description": "Options hosts page: error when the origin already exists"
+    },
+    "optionsPreferences_awesomeLoading": {
+        "message": "Awesome Loading",
+        "description": "Options preferences: section of the Awesome Loading features (large and small)"
+    },
+    "optionsPreferences_imageUrl": {
+        "message": "Image URL",
+        "description": "Options preferences: image URL column / input"
+    },
+    "optionsPreferences_addImage": {
+        "message": "Add image",
+        "description": "Options preferences: tooltip of the button adding a loading image"
+    },
+    "optionsPreferences_deleteImage": {
+        "message": "Delete image",
+        "description": "Options preferences: tooltip of the button deleting a loading image"
+    },
+    "optionsPreferences_confirmRemoveImage": {
+        "message": "Are you sure you want to remove the image: $url$?",
+        "description": "Options preferences: confirmation before deleting a loading image",
+        "placeholders": {
+            "url": {
+                "content": "$1",
+                "example": "https://i.imgur.com/zTauRWm.gif"
+            }
+        }
+    },
+    "optionsPreferences_error_missingUrl": {
+        "message": "Missing URL",
+        "description": "Options preferences: error when adding an empty image URL"
+    },
+    "optionsPreferences_error_invalidUrl": {
+        "message": "Invalid URL",
+        "description": "Options preferences: error when the image URL is invalid"
+    },
+    "optionsPreferences_saveShortcut": {
+        "message": "Save (Ctrl+S)",
+        "description": "Options preferences: Awesome Style save button"
+    },
+    "optionsPreferences_lightImage": {
+        "message": "Light image URL for superfocus",
+        "description": "Options preferences (Unfocus App): background image in light theme"
+    },
+    "optionsPreferences_lightImageAlt": {
+        "message": "Light superfocus background",
+        "description": "Options preferences (Unfocus App): alt text of the light image preview"
+    },
+    "optionsPreferences_darkImage": {
+        "message": "Dark image URL for superfocus",
+        "description": "Options preferences (Unfocus App): background image in dark theme"
+    },
+    "optionsPreferences_darkImageAlt": {
+        "message": "Dark superfocus background",
+        "description": "Options preferences (Unfocus App): alt text of the dark image preview"
+    },
+    "optionsPreferences_superfocusCount": {
+        "message": "Superfocus count",
+        "description": "Options preferences (Unfocus App): column of superfocused apps count"
+    },
+    "optionsPreferences_unfocusCount": {
+        "message": "Unfocus count",
+        "description": "Options preferences (Unfocus App): column of hidden apps count"
+    },
+    "optionsPreferences_latLong": {
+        "message": "Latitude / Longitude",
+        "description": "Options preferences (Theme Switch): location column"
+    },
+    "optionsPreferences_darkModeRange": {
+        "message": "Dark mode: start / stop",
+        "description": "Options preferences (Theme Switch): dark mode hours column"
+    },
+    "optionsPreferences_getLocation": {
+        "message": "Get current location",
+        "description": "Options preferences (Theme Switch): tooltip of the location button"
+    },
+    "optionsPreferences_deleteAll": {
+        "message": "Delete all",
+        "description": "Options preferences (Context Odoo Menus): button deleting every menu"
+    },
+    "optionsPreferences_menuName": {
+        "message": "Menu name",
+        "description": "Options preferences (Context Odoo Menus): column of menu paths"
+    },
+    "optionsPreferences_menuNameTitle": {
+        "message": "Name of ir.ui.menu, unique",
+        "description": "Options preferences (Context Odoo Menus): tooltip of the menu column, keep ir.ui.menu"
+    },
+    "optionsVersions_versions": {
+        "message": "Odoo versions",
+        "description": "Options versions page: stable versions heading"
+    },
+    "optionsVersions_development": {
+        "message": "Odoo development",
+        "description": "Options versions page: development versions heading"
+    },
+    "optionsVersions_versionTitle": {
+        "message": "[Odoo Version] $version$",
+        "description": "Options versions page: tooltip of a version toggle",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "18.0"
+            }
+        }
+    },
+    "optionsVersions_compatibility": {
+        "message": "Compatibility",
+        "description": "Options versions page: header of the feature compatibility table"
+    },
+    "optionsVersions_yes": {
+        "message": "YES",
+        "description": "Options versions page: feature supported and version enabled (uppercase, short)"
+    },
+    "optionsVersions_off": {
+        "message": "OFF",
+        "description": "Options versions page: feature supported but version disabled (uppercase, short)"
+    },
+    "optionsVersions_no": {
+        "message": "NO",
+        "description": "Options versions page: feature not supported (uppercase, short)"
+    },
+    "optionsNotifications_title": {
+        "message": "Mode & type",
+        "description": "Options notifications page: heading"
+    },
+    "optionsNotifications_showMe": {
+        "message": "Show me",
+        "description": "Options notifications page: button showing demo notifications"
+    },
+    "optionsNotifications_reloadHint": {
+        "message": "You will need to reload tabs to apply the change.",
+        "description": "Options notifications page: hint"
+    },
+    "optionsNotifications_modeHelp": {
+        "message": "Choose where to receive notifications (information, warning, error).",
+        "description": "Options notifications page: mode help"
+    },
+    "optionsNotifications_mode_disabled": {
+        "message": "Nowhere",
+        "description": "Options notifications page: mode, notifications disabled"
+    },
+    "optionsNotifications_mode_disabledHint": {
+        "message": "(disable)",
+        "description": "Options notifications page: hint after \"Nowhere\""
+    },
+    "optionsNotifications_mode_log": {
+        "message": "Devtools console",
+        "description": "Options notifications page: mode, browser console only"
+    },
+    "optionsNotifications_mode_ui": {
+        "message": "Standard UI",
+        "description": "Options notifications page: mode, standard notifications"
+    },
+    "optionsNotifications_mode_largeUi": {
+        "message": "Large UI",
+        "description": "Options notifications page: mode, large notifications"
+    },
+    "optionsNotifications_typeHelp": {
+        "message": "Choose which type of notification you want to see",
+        "description": "Options notifications page: type help"
+    },
+    "optionsNotifications_type_info": {
+        "message": "Info",
+        "description": "Options notifications page: type (shown uppercase)"
+    },
+    "optionsNotifications_type_warning": {
+        "message": "Warning",
+        "description": "Options notifications page: type (shown uppercase)"
+    },
+    "optionsNotifications_type_error": {
+        "message": "Error",
+        "description": "Options notifications page: type (shown uppercase)"
+    },
+    "optionsNotifications_type_success": {
+        "message": "Success",
+        "description": "Options notifications page: type (shown uppercase)"
+    },
+    "optionsNotifications_demo_info_title": {
+        "message": "Update Available",
+        "description": "Notifications options page: title of the demo info toast (fake example)"
+    },
+    "optionsNotifications_demo_info_message": {
+        "message": "A new software update is available for download. This update includes several new features and performance improvements. It is recommended to install the update as soon as possible. Make sure your device is connected to the internet and has sufficient battery life. Click on the update button to start the process.",
+        "description": "Notifications options page: body of the demo info toast (fake example text)"
+    },
+    "optionsNotifications_demo_warn_title": {
+        "message": "Password Expiring",
+        "description": "Notifications options page: title of the demo warning toast (fake example)"
+    },
+    "optionsNotifications_demo_warn_message": {
+        "message": "Your password will expire in 3 days. Please update it to ensure continued access to your account. It is recommended to choose a strong and unique password that you haven't used before. If you do not update your password, you may be locked out of your account. Go to the settings page to change your password.",
+        "description": "Notifications options page: body of the demo warning toast (fake example text)"
+    },
+    "optionsNotifications_demo_error_title": {
+        "message": "Connection Lost",
+        "description": "Notifications options page: title of the demo error toast (fake example)"
+    },
+    "optionsNotifications_demo_error_message": {
+        "message": "Unable to connect to the server. Please check your internet connection and try again. If the problem persists, it might be due to server maintenance or network issues on our end. We apologize for the inconvenience. You can retry the connection or contact support for further assistance.",
+        "description": "Notifications options page: body of the demo error toast (fake example text)"
+    },
+    "optionsNotifications_demo_success_title": {
+        "message": "Profile Updated",
+        "description": "Notifications options page: title of the demo success toast (fake example)"
+    },
+    "optionsNotifications_demo_success_message": {
+        "message": "Your profile has been successfully updated. All changes have been saved and are now active. You can review your updated profile information in the settings section. If you encounter any issues, please contact support. Thank you for keeping your information current.",
+        "description": "Notifications options page: body of the demo success toast (fake example text)"
+    },
+    "optionsTechnical_chaosTitle": {
+        "message": "[Chaos Mode] What are you doing here? You should not use these buttons!!!",
+        "description": "Options developers page: warning above destructive buttons"
+    },
+    "optionsTechnical_destroyLocal": {
+        "message": "Destroy local storage",
+        "description": "Options developers page: button clearing the local storage"
+    },
+    "optionsTechnical_destroySync": {
+        "message": "Destroy sync storage",
+        "description": "Options developers page: button clearing the synced storage"
+    },
+    "optionsTechnical_experimental": {
+        "message": "Experimental",
+        "description": "Options developers page: heading"
+    },
+    "optionsTechnical_developerMode": {
+        "message": "Developer mode",
+        "description": "Options developers page: switch label"
+    },
+    "optionsTechnical_developerModeHelp": {
+        "message": "Developer mode allows some Odoo/Joorney development flows (e.g. master branch)",
+        "description": "Options developers page: switch help"
+    },
+    "optionsTechnical_simulatedUi": {
+        "message": "Use simulated UI",
+        "description": "Options developers page: switch label"
+    },
+    "optionsTechnical_simulatedUiHelp": {
+        "message": "Instead of reloading the page when assigning a task with the \"Assign Me\" feature, add simulated UI elements.",
+        "description": "Options developers page: switch help"
+    },
+    "optionsTechnical_omniboxCurrentTab": {
+        "message": "Omnibox: open in current tab",
+        "description": "Options developers page: switch label"
+    },
+    "optionsTechnical_omniboxCurrentTabHelp": {
+        "message": "By default, the omnibox result opens in a new tab.",
+        "description": "Options developers page: switch help"
+    },
+    "optionsTechnical_base64Cache": {
+        "message": "Cache encoding: Base64",
+        "description": "Options developers page: switch label"
+    },
+    "optionsTechnical_base64CacheHelp": {
+        "message": "Convert locally cached data to Base64 encoding.",
+        "description": "Options developers page: switch help"
+    },
+    "optionsTechnical_fallbacks": {
+        "message": "Window actions fallback",
+        "description": "Options developers page: heading"
+    },
+    "optionsTechnical_host": {
+        "message": "Host",
+        "description": "Options developers page: fallback table column"
+    },
+    "optionsTechnical_actionPath": {
+        "message": "Action path",
+        "description": "Options developers page: fallback table column"
+    },
+    "optionsTechnical_actionModel": {
+        "message": "Action model",
+        "description": "Options developers page: fallback table column"
+    },
+    "optionsTechnical_addFallback": {
+        "message": "Add fallback",
+        "description": "Options developers page: tooltip of the add button"
+    },
+    "optionsTechnical_deleteFallback": {
+        "message": "Delete fallback",
+        "description": "Options developers page: tooltip of the delete button"
+    },
+    "optionsTechnical_deleteAllFallbacks": {
+        "message": "Delete all fallbacks",
+        "description": "Options developers page: tooltip of the delete button of an origin"
+    },
+    "optionsTechnical_confirmRemoveFallback": {
+        "message": "Are you sure you want to remove the path \"$path$\" for the origin \"$origin$\"?",
+        "description": "Options developers page: confirmation before deleting a fallback",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "all-tasks"
+            },
+            "origin": {
+                "content": "$2",
+                "example": "https://www.odoo.com"
+            }
+        }
+    },
+    "optionsTechnical_confirmChaos": {
+        "message": "Confirm \"$action$\". This page will be reloaded!!!",
+        "description": "Options developers page: confirmation before a destructive action",
+        "placeholders": {
+            "action": {
+                "content": "$1",
+                "example": "Destroy local storage"
+            }
+        }
+    },
+    "optionsTechnical_devModeInactive": {
+        "message": "DEVELOPMENT MODE NOT ACTIVE",
+        "description": "Options developers page: alert when chaos actions are used outside development mode"
+    },
+    "optionsTechnical_error_missingPath": {
+        "message": "Missing path",
+        "description": "Options developers page: fallback error"
+    },
+    "optionsTechnical_error_missingModel": {
+        "message": "Missing model",
+        "description": "Options developers page: fallback error"
+    },
+    "optionsTechnical_storage": {
+        "message": "Storage",
+        "description": "Options developers page: heading"
+    },
+    "optionsTechnical_storageUsage": {
+        "message": "$name$: $used$ / $max$ bytes",
+        "description": "Options developers page: storage usage label",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "Sync storage"
+            },
+            "used": {
+                "content": "$2",
+                "example": "1024"
+            },
+            "max": {
+                "content": "$3",
+                "example": "102400"
+            }
+        }
+    },
+    "optionsTechnical_storage_sync": {
+        "message": "Sync storage",
+        "description": "Options developers page: storage bar name"
+    },
+    "optionsTechnical_storage_local": {
+        "message": "Local storage",
+        "description": "Options developers page: storage bar name"
+    },
+    "optionsTechnical_storage_base": {
+        "message": "Base",
+        "description": "Options developers page: storage section (base settings)"
+    },
+    "optionsTechnical_storage_onboard": {
+        "message": "[Onboard] $tour$",
+        "description": "Options developers page: storage section of an onboarding tour",
+        "placeholders": {
+            "tour": {
+                "content": "$1",
+                "example": "Preferences"
+            }
+        }
+    },
+    "optionsTechnical_storage_cache": {
+        "message": "Cache",
+        "description": "Options developers page: storage section"
+    },
+    "optionsTechnical_storage_off": {
+        "message": "Extension off",
+        "description": "Options developers page: storage section (temporary disable)"
+    },
+    "optionsTechnical_storage_announcement": {
+        "message": "Extension announcement",
+        "description": "Options developers page: storage section"
+    },
+    "optionsTechnical_storage_ambient": {
+        "message": "Ambient computed events",
+        "description": "Options developers page: storage section"
+    },
+    "optionsTechnical_storage_sun": {
+        "message": "Sunrise / Sunset",
+        "description": "Options developers page: storage section"
+    },
+    "optionsTechnical_tipUse": {
+        "message": "Use",
+        "description": "Options developers page: tip, followed by a key combination"
+    },
+    "optionsTechnical_tipSameLevel": {
+        "message": "to expand/collapse all elements at the same level",
+        "description": "Options developers page: tip after [Ctrl/Cmd + Click]"
+    },
+    "optionsTechnical_tipChildren": {
+        "message": "to expand/collapse an element and all its children",
+        "description": "Options developers page: tip after [Shift + Click]"
+    },
+    "optionsTechnical_featuresState": {
+        "message": "Extension features state",
+        "description": "Options developers page: JSON viewer heading"
+    },
+    "optionsTechnical_onboarding": {
+        "message": "Extension onboarding",
+        "description": "Options developers page: JSON viewer heading"
+    },
+    "optionsTechnical_features": {
+        "message": "Extension features",
+        "description": "Options developers page: JSON viewer heading"
+    },
+    "optionsTechnical_configuration": {
+        "message": "Extension configuration",
+        "description": "Options developers page: JSON viewer heading"
+    },
+    "optionsTechnical_localData": {
+        "message": "Extension local data",
+        "description": "Options developers page: JSON viewer heading"
+    },
+    "ambient_category_computed": {
+        "message": "Computed Events",
+        "description": "Ambient options page: category header for effects whose dates are fetched from odoo.com events"
+    },
+    "ambient_category_events": {
+        "message": "Events",
+        "description": "Ambient options page: category header for effects tied to a specific date"
+    },
+    "ambient_category_yearly": {
+        "message": "Every year, one day",
+        "description": "Ambient options page: category header for effects that happen on the same day every year"
+    },
+    "ambient_futureOdooExperience": {
+        "message": "Future Odoo Experience",
+        "description": "Ambient effect name (options > Ambient): next Odoo Experience event; \"Odoo Experience\" is an event name, keep it"
+    },
+    "ambient_odooBirthday": {
+        "message": "Happy Birthday Odoo!",
+        "description": "Ambient effect name (options > Ambient): fireworks on Odoo's birthday"
+    },
+    "ambient_newYearCountdown": {
+        "message": "New Year, Countdown",
+        "description": "Ambient effect name (options > Ambient): fireworks around midnight on New Year"
+    },
+    "ambient_newYear": {
+        "message": "New Year",
+        "description": "Ambient effect name (options > Ambient): January 1st"
+    },
+    "ambient_valentine": {
+        "message": "Valentine's Day",
+        "description": "Ambient effect name (options > Ambient): February 14th"
+    },
+    "ambient_stPatrick": {
+        "message": "Lucky Day (St. Patrick's)",
+        "description": "Ambient effect name (options > Ambient): March 17th, St. Patrick's Day"
+    },
+    "ambient_aprilFool": {
+        "message": "April Fool's",
+        "description": "Ambient effect name (options > Ambient): April 1st, April Fools' Day (fish emojis)"
+    },
+    "ambient_halloween": {
+        "message": "Halloween Night",
+        "description": "Ambient effect name (options > Ambient): October 31st"
+    },
+    "ambient_newYearEve": {
+        "message": "New Year's Eve",
+        "description": "Ambient effect name (options > Ambient): December 31st"
+    },
+    "optionsAmbient_all": {
+        "message": "All",
+        "description": "Ambient options page: link in a category header that enables all effects of the category"
+    },
+    "optionsAmbient_none": {
+        "message": "None",
+        "description": "Ambient options page: link in a category header that disables all effects of the category"
+    },
+    "optionsAmbient_active": {
+        "message": "active",
+        "description": "Ambient options page: small badge next to the effect that is active today (short, lowercase)"
+    },
+    "optionsAmbient_activeTitle": {
+        "message": "This effect is currently active for today",
+        "description": "Ambient options page: tooltip of the \"active\" badge"
+    },
+    "optionsAmbient_enable": {
+        "message": "Enable",
+        "description": "Ambient options page: text of an effect toggle switch when it is on (very short, the switch is 75px wide)"
+    },
+    "optionsAmbient_disable": {
+        "message": "Disable",
+        "description": "Ambient options page: text of an effect toggle switch when it is off (very short, the switch is 75px wide)"
+    },
+    "optionsAmbient_playingInfo": {
+        "message": "Ambient: \"$name$\" - Duration: $duration$ ms",
+        "description": "Ambient options page: line under the preview while an effect is played; name = effect name, duration = estimated duration in milliseconds",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "New Year"
+            },
+            "duration": {
+                "content": "$2",
+                "example": "3000"
+            }
+        }
+    }
+}

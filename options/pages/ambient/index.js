@@ -2,9 +2,10 @@ import { getAmbientDates } from '../../../src/api/local.js';
 import { ambients, estimateAmbientDuration } from '../../../src/features/ambient/ambient.js';
 import AmbientLoader from '../../../src/features/ambient/ambient_loader.js';
 import AmbientManager from '../../../src/features/ambient/ambient_manager.js';
-import { stringToHTML } from '../../../src/html_generator.js';
+import { escapeHTML, stringToHTML } from '../../../src/html_generator.js';
 import { createTitleFromJSON, StorageSync } from '../../../src/utils/browser.js';
 import Confetti from '../../../src/utils/confetti.js';
+import { getLocaleTag, t } from '../../../src/utils/i18n.js';
 import { setIcon } from '../../../src/utils/icons.js';
 import { setCancellableTimeout } from '../../../src/utils/timeout.js';
 import { toLocaleDateStringFormatted, toLocaleDateTimeStringFormatted } from '../../../src/utils/util.js';
@@ -25,22 +26,30 @@ export async function loadPage(_features, _currentSettings) {
     loadAmbientList();
 }
 
+// Ambients/categories of src/features/ambient/ambient.js: translated name, except event names (no nameKey)
+function ambientName(ambient) {
+    return ambient.nameKey ? t(ambient.nameKey) : ambient.name;
+}
+
 async function loadAmbientList() {
     const container = document.getElementById('joorney-ambient-list');
     container.innerHTML = '';
 
     const ambient_dates = await getAmbientDates();
     const todayAmbient = await ambientManager.getAmbientForDate(new Date());
+    const locale = getLocaleTag();
+    const formatDate = (date) => toLocaleDateStringFormatted(date, locale);
+    const formatDateTime = (date) => toLocaleDateTimeStringFormatted(date, locale);
 
     for (const [id, category] of Object.entries(ambients)) {
         container.appendChild(
             stringToHTML(`
             <div class="d-flex justify-content-between bg-body-tertiary p-2 border-bottom" data-ambient-category-id="${id}">
-                <h6 class="m-0"><span class="ambient-category-toggle me-1 opacity-25" style="cursor: pointer;"><i class="joorney-icon joorney-icon-filled joorney-icon-fw" data-icon="expand_more" aria-hidden="true"></i></span>${category.name}</h6>
+                <h6 class="m-0"><span class="ambient-category-toggle me-1 opacity-25" style="cursor: pointer;"><i class="joorney-icon joorney-icon-filled joorney-icon-fw" data-icon="expand_more" aria-hidden="true"></i></span>${escapeHTML(ambientName(category))}</h6>
                 <p class="m-0">
-                    <small class="text-decoration-underline ambient-category-all-toggle" style="cursor: pointer;">All</small>
+                    <small class="text-decoration-underline ambient-category-all-toggle" style="cursor: pointer;">${escapeHTML(t('optionsAmbient_all'))}</small>
                     &nbsp;/&nbsp;
-                    <small class="text-decoration-underline ambient-category-none-toggle" style="cursor: pointer;">None</small>
+                    <small class="text-decoration-underline ambient-category-none-toggle" style="cursor: pointer;">${escapeHTML(t('optionsAmbient_none'))}</small>
                 </p>
             </div>
             `)
@@ -49,25 +58,24 @@ async function loadAmbientList() {
         for (const v of category.ambients) {
             ambientsData[v.id] = v;
 
-            let name = v.name;
+            let name = ambientName(v);
             let description = '';
             if (v.date) {
-                description = toLocaleDateStringFormatted(new Date(v.date));
+                description = formatDate(new Date(v.date));
             } else if (v.date_from && v.date_to) {
                 const from = new Date(v.date_from);
                 const to = new Date(v.date_to);
-                toLocaleDateTimeStringFormatted;
-                description = `${toLocaleDateTimeStringFormatted(from)} - ${toLocaleDateTimeStringFormatted(to)}`;
+                description = `${formatDateTime(from)} - ${formatDateTime(to)}`;
             } else if (v.month && v.day) {
                 const d = new Date();
                 d.setMonth(v.month - 1);
                 d.setDate(v.day);
-                description = toLocaleDateStringFormatted(d);
+                description = formatDate(d);
             } else if (ambient_dates[v.id]) {
                 const from = new Date(ambient_dates[v.id].date_from);
                 const to = new Date(ambient_dates[v.id].date_to);
                 name = ambient_dates[v.id].name;
-                description = `${toLocaleDateTimeStringFormatted(from)} - ${toLocaleDateTimeStringFormatted(to)}`;
+                description = `${formatDateTime(from)} - ${formatDateTime(to)}`;
             }
 
             container.appendChild(
@@ -76,15 +84,15 @@ async function loadAmbientList() {
                     <div class="d-flex align-items-center">
                         <button class="joorney-play-ambient btn me-3"><i class="joorney-icon joorney-icon-filled joorney-icon-fw" data-icon="play_arrow" aria-hidden="true"></i></button>
                         <label class="form-check-label">
-                            <p class="m-0" >${name}${todayAmbient?.id === v.id ? ' <span title="This effect is currently active for today" class="badge badge-success rounded-pill">active</span>' : ''}</p>
-                            ${description ? `<span class="small text-muted">${description}</span>` : ''}
+                            <p class="m-0" >${escapeHTML(name)}${todayAmbient?.id === v.id ? ` <span title="${escapeHTML(t('optionsAmbient_activeTitle'))}" class="badge badge-success rounded-pill">${escapeHTML(t('optionsAmbient_active'))}</span>` : ''}</p>
+                            ${description ? `<span class="small text-muted">${escapeHTML(description)}</span>` : ''}
                         </label>
                     </div>
                     <!--<span class="badge rounded-pill badge-success">Active</span>-->
                     <div class="vc-toggle-container">
                         <label class="vc-switch" style="--vc-width: 75px;">
                             <input type="checkbox" class="vc-switch-input" checked />
-                            <span class="vc-switch-label" data-on="Enable" data-off="Disable"></span>
+                            <span class="vc-switch-label" data-on="${escapeHTML(t('optionsAmbient_enable'))}" data-off="${escapeHTML(t('optionsAmbient_disable'))}"></span>
                             <span class="vc-handle"></span>
                         </label>
                     </div>
@@ -166,8 +174,11 @@ function playAmbient(event) {
     }
     const estimatedDuration = estimateAmbientDuration(ambient);
 
-    document.getElementById('joorney-playing-ambient-info').textContent =
-        `Ambient: "${ambient.name}" - Duration: ${estimatedDuration}ms`;
+    document.getElementById('joorney-playing-ambient-info').textContent = t(
+        'optionsAmbient_playingInfo',
+        ambientName(ambient),
+        `${estimatedDuration}`
+    );
 
     ambientLoader?.load(ambient);
     const timeout = setCancellableTimeout(() => {
@@ -223,7 +234,7 @@ function setupSlider() {
 export const PAGE = {
     id: 'page-ambient',
     tour: undefined,
-    label: 'Ambient',
+    labelKey: 'options_menu_ambient',
     path: './pages/ambient/index.html',
     loader: loadPage,
 };

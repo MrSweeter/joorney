@@ -1,9 +1,10 @@
 import { getDataset } from '../../api/odoo.js';
 import { getSessionData, SessionKey } from '../../api/session.js';
 import ContentFeature from '../../generic/content.js';
-import { ensureJoorneyStyle, generateMessage, stringToHTML } from '../../html_generator.js';
+import { ensureJoorneyStyle, escapeHTML, generateMessage, stringToHTML } from '../../html_generator.js';
 import { isStillSamePage } from '../../utils/authorize.js';
 import { StorageSync } from '../../utils/browser.js';
+import { t } from '../../utils/i18n.js';
 import { getModelAndID_fromURL } from '../../utils/url_manager.js';
 import { sleep } from '../../utils/util.js';
 import configuration from './configuration.js';
@@ -91,8 +92,8 @@ export default class PinMessageContentFeature extends ContentFeature {
         for (const btn of starBtnIcon) {
             btn.parentElement.title =
                 btn.parentElement.tagName === 'BUTTON'
-                    ? 'Odoo: Mark as Todo | Joorney UI override: Pin'
-                    : 'Odoo: Todo/Starred | Pinned';
+                    ? t('pinMessage_starButtonTitle')
+                    : t('pinMessage_starIconTitle');
             btn.classList.add('fa-thumb-tack');
         }
     }
@@ -179,7 +180,7 @@ export default class PinMessageContentFeature extends ContentFeature {
         ensureJoorneyStyle();
         const previous = this.chatter.querySelector('button.text-action');
         const btn = stringToHTML(`
-            <button id="joorney-pin-message-toggle" class="btn btn-link joorney-accent px-1 d-flex align-items-center my-2" aria-label="Show pinned message" title="Show pinned message">
+            <button id="joorney-pin-message-toggle" class="btn btn-link joorney-accent px-1 d-flex align-items-center my-2" aria-label="${escapeHTML(t('pinMessage_toggleLabel'))}" title="${escapeHTML(t('pinMessage_toggleLabel'))}">
                 <i class="fa fa-thumb-tack fa-lg me-1"></i>
                 <sup>${this.pins.length}</sup>
             </button>
@@ -202,8 +203,8 @@ export default class PinMessageContentFeature extends ContentFeature {
                 <div class="d-flex align-items-center">
                     <hr class="flex-grow-1" />
                     <span class="p-3 fw-bold d-flex align-items-center gap-2">
-                        Pinned Messages
-                        <span class="joorney-badge">Joorney</span>
+                        ${escapeHTML(t('pinMessage_sectionTitle'))}
+                        <span class="joorney-badge">${escapeHTML(t('common_simulatedBadge'))}</span>
                     </span>
                     <hr class="flex-grow-1" />
                 </div>
@@ -215,10 +216,10 @@ export default class PinMessageContentFeature extends ContentFeature {
         let pins = this.pins;
         let warning = '';
         if (pins.length > MAX_PIN) {
-            warning = `...There are more than ${MAX_PIN} pinned messages! Only yours are displayed`;
+            warning = t('pinMessage_warning_tooManyPins', MAX_PIN);
             pins = this.pins.filter((pin) => pin.author_id[0] === getSessionData(SessionKey.PARTNER_ID));
             if (pins.length > MAX_PIN) {
-                warning = `...You have more than ${MAX_PIN} pinned messages!`;
+                warning = t('pinMessage_warning_tooManyOwnPins', MAX_PIN);
             }
         }
 
@@ -242,7 +243,7 @@ export default class PinMessageContentFeature extends ContentFeature {
             messageContainer.appendChild(
                 stringToHTML(`
                 <span class="mt-3 position-sticky top-0 joorney-sim joorney-sim--copy bg-view d-flex align-items-center py-2 px-4" role="button">
-                    <span class="small">${warning}</span>
+                    <span class="small">${escapeHTML(warning)}</span>
                 </span>
             `)
             );

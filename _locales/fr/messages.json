@@ -1,0 +1,1216 @@
+{
+    "ext_name": {
+        "message": "%EXT_NAME%"
+    },
+    "ext_description": {
+        "message": "Améliorez votre parcours Odoo ! Une expérience Odoo plus agréable et productive grâce à des fonctionnalités et effets sympas."
+    },
+    "command_enableDisable": {
+        "message": "Activer ou désactiver les fonctionnalités de l'extension sur l'origine actuelle"
+    },
+    "badge_off": {
+        "message": "OFF"
+    },
+    "language_title": {
+        "message": "Langue"
+    },
+    "language_description": {
+        "message": "Langue des textes ajoutés par Joorney : popup, options, boutons et notifications dans Odoo, menu du clic droit et suggestions de la barre d'adresse."
+    },
+    "language_mode_system": {
+        "message": "Utiliser le système (langue du navigateur)"
+    },
+    "language_mode_odoo": {
+        "message": "Utiliser Odoo (langue de l'utilisateur)"
+    },
+    "language_mode_static": {
+        "message": "Choisir une langue"
+    },
+    "language_mode_system_help": {
+        "message": "Suit la langue d'affichage de votre navigateur."
+    },
+    "language_mode_odoo_help": {
+        "message": "Suit la langue de l'utilisateur Odoo sur chaque base de données."
+    },
+    "language_mode_static_help": {
+        "message": "Utilise toujours la langue choisie ici, quelle que soit la langue du navigateur ou d'Odoo."
+    },
+    "language_current": {
+        "message": "Langue actuelle : $language$",
+        "placeholders": {
+            "language": {
+                "content": "$1",
+                "example": "Français"
+            }
+        }
+    },
+    "language_mode_odoo_outside": {
+        "message": "En dehors des pages Odoo (options, barre d'adresse, base pas encore ouverte) : la langue du navigateur."
+    },
+    "language_hint_reload": {
+        "message": "Rechargez les onglets Odoo ouverts pour appliquer la modification."
+    },
+    "language_hint_fallback": {
+        "message": "Les langues non prises en charge s'affichent en anglais."
+    },
+    "language_hint_chrome": {
+        "message": "Dans Chrome, le nom et la description de l'extension suivent la langue du navigateur."
+    },
+    "common_default": {
+        "message": "Par défaut"
+    },
+    "popup_options": {
+        "message": "Options"
+    },
+    "popup_invalidWebsite": {
+        "message": "Ce site web n'est pas compatible avec l'extension Joorney"
+    },
+    "popup_featureTitle": {
+        "message": "[Fonctionnalité] $feature$",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Pin Message"
+            }
+        }
+    },
+    "popup_featureOriginTitle": {
+        "message": "[Fonctionnalité par origine] $feature$",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Pin Message"
+            }
+        }
+    },
+    "popup_originState": {
+        "message": "État de l'origine :"
+    },
+    "popup_saveOrigin": {
+        "message": "Enregistrer cette origine"
+    },
+    "popup_saveOriginConfiguration": {
+        "message": "Enregistrer la configuration de l'origine"
+    },
+    "popup_saveReload": {
+        "message": "Enregistrer et recharger"
+    },
+    "popup_loadingPreviewAlt": {
+        "message": "Aperçu du GIF de chargement"
+    },
+    "feature_adminDebugLoginRunbot_name": {
+        "message": "[Runbot] Connexion admin (mode développeur)"
+    },
+    "feature_ambient_name": {
+        "message": "Effets d'ambiance"
+    },
+    "feature_assignMeTask_name": {
+        "message": "Bouton « M'assigner »"
+    },
+    "feature_autoOpenRunbot_name": {
+        "message": "[Runbot] Ouverture rapide"
+    },
+    "feature_awesomeLoadingLarge_name": {
+        "message": "Chargement personnalisé (grand)"
+    },
+    "feature_awesomeLoadingSmall_name": {
+        "message": "Chargement personnalisé (petit)"
+    },
+    "feature_awesomeStyle_name": {
+        "message": "Style personnalisé"
+    },
+    "feature_contextOdooMenus_name": {
+        "message": "Menus Odoo au clic droit"
+    },
+    "feature_followUnfollow_name": {
+        "message": "Suivre/Ne plus suivre"
+    },
+    "feature_impersonateLoginRunbot_name": {
+        "message": "[Runbot] Connexion en tant qu'utilisateur"
+    },
+    "feature_newServerActionCode_name": {
+        "message": "Nouvelle action de serveur en code"
+    },
+    "feature_pinMessage_name": {
+        "message": "Messages épinglés"
+    },
+    "feature_saveKnowledge_name": {
+        "message": "Enregistrer l'article"
+    },
+    "feature_showMyBadge_name": {
+        "message": "Afficher mes badges"
+    },
+    "feature_starringPriorityEffect_name": {
+        "message": "Explosion d'étoiles"
+    },
+    "feature_themeSwitch_name": {
+        "message": "Thème automatique"
+    },
+    "feature_tooltipMetadata_name": {
+        "message": "Métadonnées"
+    },
+    "feature_unfocusApp_name": {
+        "message": "Masquer les applications"
+    },
+    "themeSwitch_mode_system": {
+        "message": "Système"
+    },
+    "themeSwitch_mode_dark": {
+        "message": "Mode sombre"
+    },
+    "themeSwitch_mode_light": {
+        "message": "Mode clair"
+    },
+    "themeSwitch_mode_location": {
+        "message": "Selon la localisation configurée (lever/coucher du soleil)"
+    },
+    "themeSwitch_mode_time": {
+        "message": "Mode sombre selon les heures configurées"
+    },
+    "unfocusApp_popup_reorder": {
+        "message": "Activer la réorganisation des applications masquées"
+    },
+    "unfocusApp_popup_share": {
+        "message": "Partager la configuration des applications masquées entre les hôtes"
+    },
+    "pinMessage_popup_selfAuthor": {
+        "message": "Épingler uniquement les messages de l'utilisateur actuel ?"
+    },
+    "pinMessage_popup_defaultShown": {
+        "message": "Afficher la section des messages épinglés au chargement ?"
+    },
+    "contextMenu_openOptions": {
+        "message": "Ouvrir les options"
+    },
+    "contextMenu_clearCache": {
+        "message": "Vider le cache pour cet hôte"
+    },
+    "contextMenu_unknownItem": {
+        "message": "Élément inconnu"
+    },
+    "omnibox_openChromeWebStore": {
+        "message": "Ouvrir le Chrome Web Store"
+    },
+    "omnibox_openGithubRepository": {
+        "message": "Ouvrir le dépôt GitHub"
+    },
+    "omnibox_openGithubPage": {
+        "message": "Ouvrir la page GitHub"
+    },
+    "omnibox_disabled": {
+        "message": "L'ouverture d'un runbot depuis l'URL est désactivée. Activez « $feature$ » dans les options !",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "[Runbot] Auto Open"
+            }
+        }
+    },
+    "omnibox_openInput": {
+        "message": "Ouvrir <match>%s</match> <dim>(si trouvé)</dim>"
+    },
+    "omnibox_openRunbotVersion": {
+        "message": "Ouvrir le runbot pour la version '$version$'",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "18.0"
+            }
+        }
+    },
+    "autoOpenRunbot_menu_openWithVersion": {
+        "message": "Ouvrir le runbot en version %version%"
+    },
+    "common_fakeDataTitle": {
+        "message": "Cet élément ne fait pas partie de l'application d'origine ; il a été ajouté artificiellement par Joorney.\nEn cas de doute, rechargez la page !"
+    },
+    "common_error_buttonContext": {
+        "message": "Le contexte du bouton ne correspond pas à celui de l'URL : '$button$' vs '$url$'",
+        "placeholders": {
+            "button": {
+                "content": "$1",
+                "example": "42"
+            },
+            "url": {
+                "content": "$2",
+                "example": "43"
+            }
+        }
+    },
+    "common_jump": {
+        "message": "Aller au message"
+    },
+    "common_simulatedBadge": {
+        "message": "Joorney"
+    },
+    "common_injectedButtonTitle": {
+        "message": "Pas standard Odoo : fourni par l'extension Joorney"
+    },
+    "common_error_title": {
+        "message": "Une erreur inattendue est survenue"
+    },
+    "toast_limitReached": {
+        "message": "Vous avez atteint la limite de notifications ($max$). Notification affichée dans la console.",
+        "placeholders": {
+            "max": {
+                "content": "$1",
+                "example": "5"
+            }
+        }
+    },
+    "toast_badgeNotification": {
+        "message": "notification"
+    },
+    "toast_cachedTitle": {
+        "message": "[cache] $title$",
+        "placeholders": {
+            "title": {
+                "content": "$1",
+                "example": "odoo.exceptions.AccessError"
+            }
+        }
+    },
+    "assignMeTask_buttonLabel": {
+        "message": "M'assigner"
+    },
+    "assignMeTask_buttonTitle": {
+        "message": "La page sera rechargée, utilisez le clic molette pour ouvrir dans un autre onglet"
+    },
+    "assignMeTask_error_title": {
+        "message": "Une erreur est survenue lors de l'assignation de l'enregistrement"
+    },
+    "assignMeTask_label_assignees": {
+        "message": "Assignés"
+    },
+    "assignMeTask_label_assignedTo": {
+        "message": "Assigné à"
+    },
+    "assignMeTask_label_technician": {
+        "message": "Technicien"
+    },
+    "saveKnowledge_buttonLabel": {
+        "message": "Enregistrer"
+    },
+    "saveKnowledge_buttonTitle": {
+        "message": "Enregistrer le contenu de l'article"
+    },
+    "saveKnowledge_error_title": {
+        "message": "Une erreur est survenue lors de l'enregistrement de l'article"
+    },
+    "pinMessage_starButtonTitle": {
+        "message": "Odoo : Marquer comme à faire | Remplacé par Joorney : Épingler"
+    },
+    "pinMessage_starIconTitle": {
+        "message": "Odoo : À faire/Favori | Épinglé"
+    },
+    "pinMessage_toggleLabel": {
+        "message": "Afficher les messages épinglés"
+    },
+    "pinMessage_sectionTitle": {
+        "message": "Messages épinglés"
+    },
+    "pinMessage_warning_tooManyPins": {
+        "message": "...Il y a plus de $max$ messages épinglés ! Seuls les vôtres sont affichés",
+        "placeholders": {
+            "max": {
+                "content": "$1",
+                "example": "5"
+            }
+        }
+    },
+    "pinMessage_warning_tooManyOwnPins": {
+        "message": "...Vous avez plus de $max$ messages épinglés !",
+        "placeholders": {
+            "max": {
+                "content": "$1",
+                "example": "5"
+            }
+        }
+    },
+    "followUnfollow_follow": {
+        "message": "Suivre"
+    },
+    "followUnfollow_unfollow": {
+        "message": "Ne plus suivre"
+    },
+    "followUnfollow_following": {
+        "message": "Abonné(e)"
+    },
+    "tooltipMetadata_copyModel": {
+        "message": "[Joorney] Copier le nom technique dans le presse-papiers"
+    },
+    "tooltipMetadata_windowActionId": {
+        "message": "ID de l'action de fenêtre"
+    },
+    "tooltipMetadata_xmlId": {
+        "message": "ID XML"
+    },
+    "tooltipMetadata_name": {
+        "message": "Nom"
+    },
+    "tooltipMetadata_model": {
+        "message": "Modèle"
+    },
+    "tooltipMetadata_filterDomain": {
+        "message": "[Filtres] Domaine"
+    },
+    "tooltipMetadata_filterContext": {
+        "message": "[Filtres] Contexte"
+    },
+    "tooltipMetadata_filterLimit": {
+        "message": "[Filtres] Limite"
+    },
+    "tooltipMetadata_filterFilter": {
+        "message": "[Filtres] Filtre"
+    },
+    "tooltipMetadata_id": {
+        "message": "ID"
+    },
+    "tooltipMetadata_noUpdate": {
+        "message": "Pas de mise à jour"
+    },
+    "tooltipMetadata_createUser": {
+        "message": "Créateur"
+    },
+    "tooltipMetadata_createDate": {
+        "message": "Date de création"
+    },
+    "tooltipMetadata_writeUser": {
+        "message": "Dernière modification par"
+    },
+    "tooltipMetadata_writeDate": {
+        "message": "Date de dernière modification"
+    },
+    "impersonateLoginRunbot_loginAs": {
+        "message": "Se connecter en tant que $login$",
+        "placeholders": {
+            "login": {
+                "content": "$1",
+                "example": "admin"
+            }
+        }
+    },
+    "adminDebugLoginRunbot_buttonTitle": {
+        "message": "Ouvrir le runbot en admin avec le mode développeur activé"
+    },
+    "runbot_error_notRunbotLink": {
+        "message": "Ce n'est pas un lien runbot : $url$",
+        "placeholders": {
+            "url": {
+                "content": "$1",
+                "example": "https://example.com/runbot/run/123"
+            }
+        }
+    },
+    "runbot_error_noTab": {
+        "message": "Aucun onglet depuis lequel ouvrir le runbot"
+    },
+    "runbot_error_noResponse": {
+        "message": "L'extension ne répond pas, rechargez la page"
+    },
+    "unfocusApp_changeFocusState": {
+        "message": "Masquer/afficher (double-clic : mettre en avant)"
+    },
+    "contextOdooMenus_error_title": {
+        "message": "Une erreur est survenue lors de l'ouverture du menu"
+    },
+    "contextOdooMenus_error_notFound": {
+        "message": "Menu '$path$' introuvable.",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Sales / Orders"
+            }
+        }
+    },
+    "contextOdooMenus_error_tooMany": {
+        "message": "Trop de menus trouvés pour le chemin $path$.",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Sales / Orders"
+            }
+        }
+    },
+    "contextOdooMenus_option_confirmRemove": {
+        "message": "Voulez-vous vraiment supprimer le menu : $path$ ?",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Sales / Orders"
+            }
+        }
+    },
+    "contextOdooMenus_option_confirmRemoveAll": {
+        "message": "Voulez-vous vraiment supprimer tous les menus ?"
+    },
+    "contextOdooMenus_option_error_missingPath": {
+        "message": "Chemin manquant"
+    },
+    "contextOdooMenus_option_error_idExists": {
+        "message": "Cet identifiant est déjà enregistré (ne devrait pas arriver) : $id$",
+        "placeholders": {
+            "id": {
+                "content": "$1",
+                "example": "3"
+            }
+        }
+    },
+    "contextOdooMenus_option_error_pathExists": {
+        "message": "Ce chemin est déjà enregistré : $path$",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Sales / Orders"
+            }
+        }
+    },
+    "contextOdooMenus_option_favorite": {
+        "message": "Favori"
+    },
+    "contextOdooMenus_option_notFavorite": {
+        "message": "Pas en favori"
+    },
+    "contextOdooMenus_option_disable": {
+        "message": "Désactiver le menu rapide"
+    },
+    "contextOdooMenus_option_enable": {
+        "message": "Activer le menu rapide"
+    },
+    "contextOdooMenus_option_save": {
+        "message": "Enregistrer la modification"
+    },
+    "contextOdooMenus_option_delete": {
+        "message": "Supprimer le menu rapide"
+    },
+    "showMyBadge_title": {
+        "message": "Badges"
+    },
+    "options_title": {
+        "message": "Configuration de Joorney"
+    },
+    "options_debugMode": {
+        "message": "Mode débogage"
+    },
+    "options_logoAlt": {
+        "message": "Logo Joorney"
+    },
+    "options_keyboardShortcuts": {
+        "message": "Raccourcis clavier"
+    },
+    "options_importSettings": {
+        "message": "Importer les paramètres"
+    },
+    "options_exportSettings": {
+        "message": "Exporter les paramètres"
+    },
+    "options_migrate": {
+        "message": "MIGRER"
+    },
+    "options_checklistShow": {
+        "message": "Afficher la liste de découverte"
+    },
+    "options_close": {
+        "message": "Fermer"
+    },
+    "options_allRightsReserved": {
+        "message": "Tous droits réservés :"
+    },
+    "options_poweredBySunrise": {
+        "message": "Le changement de thème selon la localisation utilise"
+    },
+    "options_confirmImport": {
+        "message": "Confirmer l'import du fichier ?"
+    },
+    "options_menu_hosts": {
+        "message": "Contrôle des hôtes"
+    },
+    "options_menu_preferences": {
+        "message": "Préférences"
+    },
+    "options_menu_versions": {
+        "message": "Versions"
+    },
+    "options_menu_notifications": {
+        "message": "Notifications"
+    },
+    "options_menu_ambient": {
+        "message": "Ambiances"
+    },
+    "options_menu_developers": {
+        "message": "Développeurs"
+    },
+    "options_limitedFeatureTitle": {
+        "message": "[Fonctionnalité limitée] $feature$",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Assign Me"
+            }
+        }
+    },
+    "options_origins": {
+        "message": "Origines"
+    },
+    "options_addOrigin": {
+        "message": "Ajouter une origine"
+    },
+    "options_deleteOrigin": {
+        "message": "Supprimer l'origine"
+    },
+    "options_confirmRemoveOrigin": {
+        "message": "Voulez-vous vraiment supprimer l'origine : $origin$ ?",
+        "placeholders": {
+            "origin": {
+                "content": "$1",
+                "example": "https://www.odoo.com"
+            }
+        }
+    },
+    "options_error_missingOrigin": {
+        "message": "Origine manquante"
+    },
+    "options_error_invalidOrigin": {
+        "message": "Origine invalide, utilisez une URL comme https://www.odoo.com"
+    },
+    "options_add": {
+        "message": "Ajouter"
+    },
+    "options_save": {
+        "message": "Enregistrer"
+    },
+    "checklist_congratsTitle": {
+        "message": "Félicitations !"
+    },
+    "checklist_congratsText": {
+        "message": "Vous avez terminé la liste de découverte. Bravo !"
+    },
+    "checklist_tourHostControls_title": {
+        "message": "Contrôle des hôtes"
+    },
+    "checklist_tourHostControls_description": {
+        "message": "Gérez les fonctionnalités par hôte !"
+    },
+    "checklist_tourPreferences_title": {
+        "message": "Préférences"
+    },
+    "checklist_tourPreferences_description": {
+        "message": "Configurez vos préférences pour de nombreuses fonctionnalités."
+    },
+    "checklist_tourVersions_title": {
+        "message": "Versions"
+    },
+    "checklist_tourVersions_description": {
+        "message": "Choisissez les versions dans lesquelles utiliser Joorney !"
+    },
+    "checklist_tourToasts_title": {
+        "message": "Notifications"
+    },
+    "checklist_tourToasts_description": {
+        "message": "Configurez vos préférences de notification !"
+    },
+    "checklist_tourTechnical_title": {
+        "message": "Technique / Développeurs"
+    },
+    "checklist_tourTechnical_description": {
+        "message": "Bienvenue du côté obscur, nous avons des cookies !"
+    },
+    "checklist_markAllDone_tooltip": {
+        "message": "Agitez une baguette magique et considérez toutes les étapes comme terminées !"
+    },
+    "checklist_next": {
+        "message": "Suivant"
+    },
+    "checklist_restart": {
+        "message": "Recommencer"
+    },
+    "checklist_hostControls_moveFeature_name": {
+        "message": "Gérer les fonctionnalités"
+    },
+    "checklist_hostControls_moveFeature_description": {
+        "message": "Glissez-déposez pour activer ou désactiver une fonctionnalité et garder le contrôle."
+    },
+    "checklist_hostControls_addHost_name": {
+        "message": "Ajouter votre propre origine"
+    },
+    "checklist_hostControls_addHost_description": {
+        "message": "Ajoutez une nouvelle origine en enregistrant vos modifications ou en appuyant sur « Entrée »."
+    },
+    "checklist_hostControls_configureHost_name": {
+        "message": "Configurer votre origine"
+    },
+    "checklist_hostControls_configureHost_description": {
+        "message": "Ajustez les paramètres de chaque origine en activant ou désactivant des fonctionnalités à l'aide des cases à cocher."
+    },
+    "checklist_hostControls_deleteHost_name": {
+        "message": "Supprimer votre origine"
+    },
+    "checklist_hostControls_deleteHost_description": {
+        "message": "Lancez la suppression de l'origine et confirmez-la dans la boîte de dialogue."
+    },
+    "checklist_preferences_awesomeLoading_name": {
+        "message": "Chargement personnalisé"
+    },
+    "checklist_preferences_awesomeLoading_description": {
+        "message": "Importez et définissez un GIF de chargement pour personnaliser le chargement d'Odoo."
+    },
+    "checklist_preferences_awesomeStyle_name": {
+        "message": "Façon Stylus"
+    },
+    "checklist_preferences_awesomeStyle_description": {
+        "message": "Ajustez et personnalisez le style visuel selon vos préférences."
+    },
+    "checklist_preferences_unfocusApp_name": {
+        "message": "Arrière-plan des icônes d'application"
+    },
+    "checklist_preferences_unfocusApp_description": {
+        "message": "Personnalisez l'arrière-plan des icônes d'application, utilisé pour les applications mises en avant."
+    },
+    "checklist_preferences_themeSwitchLocation_name": {
+        "message": "Thème selon le soleil"
+    },
+    "checklist_preferences_themeSwitchLocation_description": {
+        "message": "Activez le changement automatique de thème selon les heures de lever et de coucher du soleil."
+    },
+    "checklist_preferences_themeSwitchTime_name": {
+        "message": "Thème programmé"
+    },
+    "checklist_preferences_themeSwitchTime_description": {
+        "message": "Définissez une plage horaire pour le changement automatique de thème."
+    },
+    "checklist_preferences_contextOdooMenus_name": {
+        "message": "Menus contextuels"
+    },
+    "checklist_preferences_contextOdooMenus_description": {
+        "message": "Configurez des menus Odoo à utiliser dans le menu contextuel de Joorney."
+    },
+    "checklist_technical_experimentalOption_name": {
+        "message": "Expérimental / Avancé"
+    },
+    "checklist_technical_experimentalOption_description": {
+        "message": "Options avancées pour utilisateurs avertis."
+    },
+    "checklist_technical_addWAFallback_name": {
+        "message": "Actions de fenêtre - Pas d'accès"
+    },
+    "checklist_technical_addWAFallback_description": {
+        "message": "Vous n'avez pas accès aux enregistrements « Action de fenêtre » ? Ajoutez un modèle de repli ici."
+    },
+    "checklist_technical_removeWAFallback_name": {
+        "message": "Actions de fenêtre - Suppression"
+    },
+    "checklist_technical_removeWAFallback_description": {
+        "message": "Révoquez ou ajustez le repli pour les enregistrements « Action de fenêtre » selon vos besoins."
+    },
+    "checklist_technical_extensionState_name": {
+        "message": "État de l'extension"
+    },
+    "checklist_technical_onboardingProgress_name": {
+        "message": "Progression de la découverte"
+    },
+    "checklist_technical_extensionFeaturesConfiguration_name": {
+        "message": "Configuration des fonctionnalités"
+    },
+    "checklist_technical_extensionConfiguration_name": {
+        "message": "Configuration utilisateur"
+    },
+    "checklist_toast_showMe_name": {
+        "message": "Apparence des notifications"
+    },
+    "checklist_toast_showMe_description": {
+        "message": "Affichez quelques notifications avec votre configuration actuelle !"
+    },
+    "checklist_toast_switchMode_name": {
+        "message": "Changer de mode"
+    },
+    "checklist_toast_switchMode_description": {
+        "message": "Changez l'affichage des notifications : plus grandes, ou cachées dans la console !"
+    },
+    "checklist_toast_disableType_name": {
+        "message": "Désactiver des types"
+    },
+    "checklist_toast_disableType_description": {
+        "message": "Choisissez vos types de notifications préférés !"
+    },
+    "checklist_versions_addLTSVersion_name": {
+        "message": "Activer une version LTS"
+    },
+    "checklist_versions_addLTSVersion_description": {
+        "message": "Sélectionnez et activez une nouvelle version LTS (support à long terme)."
+    },
+    "checklist_versions_addSubVersion_name": {
+        "message": "Activer une version"
+    },
+    "checklist_versions_addSubVersion_description": {
+        "message": "Activez une version pour découvrir de nouvelles fonctionnalités."
+    },
+    "checklist_versions_checkCompatibility_name": {
+        "message": "Tableau de compatibilité"
+    },
+    "checklist_versions_checkCompatibility_description": {
+        "message": "Consultez la compatibilité entre fonctionnalités et versions."
+    },
+    "checklist_versions_removeSubVersion_name": {
+        "message": "Désactiver une version"
+    },
+    "checklist_versions_removeSubVersion_description": {
+        "message": "Désactivez la version activée précédemment."
+    },
+    "checklist_defaultTitle": {
+        "message": "Découvrir Joorney"
+    },
+    "checklist_defaultDescription": {
+        "message": "Suivez les étapes ci-dessous"
+    },
+    "migration_title": {
+        "message": "Migration de Joorney"
+    },
+    "migration_select": {
+        "message": "Sélectionnez la configuration à migrer"
+    },
+    "migration_or": {
+        "message": "ou"
+    },
+    "migration_useCurrent": {
+        "message": "Utiliser la configuration actuelle"
+    },
+    "migration_heading": {
+        "message": "Migration"
+    },
+    "migration_execute": {
+        "message": "Lancer la migration"
+    },
+    "migration_download": {
+        "message": "Télécharger la nouvelle configuration"
+    },
+    "migration_error_lowerVersion": {
+        "message": "La configuration ne peut pas être migrée vers une version inférieure"
+    },
+    "migration_error_sameVersion": {
+        "message": "La configuration ne peut pas être migrée vers la même version"
+    },
+    "optionsHosts_limitedFeatures": {
+        "message": "Fonctionnalités limitées"
+    },
+    "optionsHosts_features": {
+        "message": "Fonctionnalités"
+    },
+    "optionsHosts_whitelist": {
+        "message": "Liste blanche"
+    },
+    "optionsHosts_whitelistHelp": {
+        "message": "Fonctionnalité désactivée par défaut, sauf si elle est cochée pour une origine dans la section « Origines » ci-dessous"
+    },
+    "optionsHosts_blacklist": {
+        "message": "Liste noire"
+    },
+    "optionsHosts_blacklistHelp": {
+        "message": "Fonctionnalité activée par défaut, sauf si elle est cochée pour une origine dans la section « Origines » ci-dessous"
+    },
+    "optionsHosts_disable": {
+        "message": "Désactivées"
+    },
+    "optionsHosts_originInput": {
+        "message": "Filtre d'origine"
+    },
+    "optionsHosts_originsTitle": {
+        "message": "Origine de la base de données Odoo"
+    },
+    "optionsHosts_error_invalidRegex": {
+        "message": "Expression régulière invalide"
+    },
+    "optionsHosts_error_originExists": {
+        "message": "Origine déjà ajoutée"
+    },
+    "optionsPreferences_awesomeLoading": {
+        "message": "Chargement personnalisé"
+    },
+    "optionsPreferences_imageUrl": {
+        "message": "URL de l'image"
+    },
+    "optionsPreferences_addImage": {
+        "message": "Ajouter une image"
+    },
+    "optionsPreferences_deleteImage": {
+        "message": "Supprimer l'image"
+    },
+    "optionsPreferences_confirmRemoveImage": {
+        "message": "Voulez-vous vraiment supprimer l'image : $url$ ?",
+        "placeholders": {
+            "url": {
+                "content": "$1",
+                "example": "https://i.imgur.com/zTauRWm.gif"
+            }
+        }
+    },
+    "optionsPreferences_error_missingUrl": {
+        "message": "URL manquante"
+    },
+    "optionsPreferences_error_invalidUrl": {
+        "message": "URL invalide"
+    },
+    "optionsPreferences_saveShortcut": {
+        "message": "Enregistrer (Ctrl+S)"
+    },
+    "optionsPreferences_lightImage": {
+        "message": "URL de l'image claire pour la mise en avant"
+    },
+    "optionsPreferences_lightImageAlt": {
+        "message": "Arrière-plan clair de mise en avant"
+    },
+    "optionsPreferences_darkImage": {
+        "message": "URL de l'image sombre pour la mise en avant"
+    },
+    "optionsPreferences_darkImageAlt": {
+        "message": "Arrière-plan sombre de mise en avant"
+    },
+    "optionsPreferences_superfocusCount": {
+        "message": "Apps mises en avant"
+    },
+    "optionsPreferences_unfocusCount": {
+        "message": "Apps masquées"
+    },
+    "optionsPreferences_latLong": {
+        "message": "Latitude / Longitude"
+    },
+    "optionsPreferences_darkModeRange": {
+        "message": "Mode sombre : début / fin"
+    },
+    "optionsPreferences_getLocation": {
+        "message": "Utiliser la position actuelle"
+    },
+    "optionsPreferences_deleteAll": {
+        "message": "Tout supprimer"
+    },
+    "optionsPreferences_menuName": {
+        "message": "Nom du menu"
+    },
+    "optionsPreferences_menuNameTitle": {
+        "message": "Nom du ir.ui.menu, unique"
+    },
+    "optionsVersions_versions": {
+        "message": "Versions Odoo"
+    },
+    "optionsVersions_development": {
+        "message": "Développement Odoo"
+    },
+    "optionsVersions_versionTitle": {
+        "message": "[Version Odoo] $version$",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "18.0"
+            }
+        }
+    },
+    "optionsVersions_compatibility": {
+        "message": "Compatibilité"
+    },
+    "optionsVersions_yes": {
+        "message": "OUI"
+    },
+    "optionsVersions_off": {
+        "message": "OFF"
+    },
+    "optionsVersions_no": {
+        "message": "NON"
+    },
+    "optionsNotifications_title": {
+        "message": "Mode et type"
+    },
+    "optionsNotifications_showMe": {
+        "message": "Montrer"
+    },
+    "optionsNotifications_reloadHint": {
+        "message": "Rechargez les onglets pour appliquer la modification."
+    },
+    "optionsNotifications_modeHelp": {
+        "message": "Choisissez où recevoir les notifications (information, avertissement, erreur)."
+    },
+    "optionsNotifications_mode_disabled": {
+        "message": "Nulle part"
+    },
+    "optionsNotifications_mode_disabledHint": {
+        "message": "(désactivé)"
+    },
+    "optionsNotifications_mode_log": {
+        "message": "Console des outils de développement"
+    },
+    "optionsNotifications_mode_ui": {
+        "message": "Interface standard"
+    },
+    "optionsNotifications_mode_largeUi": {
+        "message": "Grande interface"
+    },
+    "optionsNotifications_typeHelp": {
+        "message": "Choisissez les types de notifications à afficher"
+    },
+    "optionsNotifications_type_info": {
+        "message": "Info"
+    },
+    "optionsNotifications_type_warning": {
+        "message": "Avertissement"
+    },
+    "optionsNotifications_type_error": {
+        "message": "Erreur"
+    },
+    "optionsNotifications_type_success": {
+        "message": "Succès"
+    },
+    "optionsNotifications_demo_info_title": {
+        "message": "Mise à jour disponible"
+    },
+    "optionsNotifications_demo_info_message": {
+        "message": "Une nouvelle mise à jour logicielle est disponible au téléchargement. Elle apporte plusieurs nouvelles fonctionnalités et des améliorations de performances. Il est recommandé de l'installer dès que possible. Assurez-vous que votre appareil est connecté à Internet et dispose d'une autonomie suffisante. Cliquez sur le bouton de mise à jour pour lancer le processus."
+    },
+    "optionsNotifications_demo_warn_title": {
+        "message": "Mot de passe bientôt expiré"
+    },
+    "optionsNotifications_demo_warn_message": {
+        "message": "Votre mot de passe expirera dans 3 jours. Veuillez le mettre à jour pour conserver l'accès à votre compte. Il est recommandé de choisir un mot de passe fort et unique, que vous n'avez jamais utilisé. Si vous ne le mettez pas à jour, l'accès à votre compte pourrait être bloqué. Rendez-vous sur la page des paramètres pour changer votre mot de passe."
+    },
+    "optionsNotifications_demo_error_title": {
+        "message": "Connexion perdue"
+    },
+    "optionsNotifications_demo_error_message": {
+        "message": "Impossible de se connecter au serveur. Veuillez vérifier votre connexion Internet et réessayer. Si le problème persiste, il peut être dû à une maintenance du serveur ou à des problèmes de réseau de notre côté. Nous nous excusons pour la gêne occasionnée. Vous pouvez réessayer la connexion ou contacter le support pour obtenir de l'aide."
+    },
+    "optionsNotifications_demo_success_title": {
+        "message": "Profil mis à jour"
+    },
+    "optionsNotifications_demo_success_message": {
+        "message": "Votre profil a bien été mis à jour. Toutes les modifications ont été enregistrées et sont désormais actives. Vous pouvez consulter les informations de votre profil dans la section des paramètres. En cas de problème, veuillez contacter le support. Merci de garder vos informations à jour."
+    },
+    "optionsTechnical_chaosTitle": {
+        "message": "[Mode chaos] Que faites-vous ici ? Vous ne devriez pas utiliser ces boutons !!!"
+    },
+    "optionsTechnical_destroyLocal": {
+        "message": "Détruire le stockage local"
+    },
+    "optionsTechnical_destroySync": {
+        "message": "Détruire le stockage synchronisé"
+    },
+    "optionsTechnical_experimental": {
+        "message": "Expérimental"
+    },
+    "optionsTechnical_developerMode": {
+        "message": "Mode développeur"
+    },
+    "optionsTechnical_developerModeHelp": {
+        "message": "Le mode développeur permet certains flux de développement Odoo/Joorney (ex. branche master)"
+    },
+    "optionsTechnical_simulatedUi": {
+        "message": "Utiliser l'interface simulée"
+    },
+    "optionsTechnical_simulatedUiHelp": {
+        "message": "Au lieu de recharger la page lors de l'assignation d'une tâche avec « Assign Me », ajoute des éléments d'interface simulés."
+    },
+    "optionsTechnical_omniboxCurrentTab": {
+        "message": "Omnibox : ouvrir dans l'onglet actuel"
+    },
+    "optionsTechnical_omniboxCurrentTabHelp": {
+        "message": "Par défaut, le résultat de l'omnibox s'ouvre dans un nouvel onglet."
+    },
+    "optionsTechnical_base64Cache": {
+        "message": "Encodage du cache : Base64"
+    },
+    "optionsTechnical_base64CacheHelp": {
+        "message": "Convertit les données en cache local en Base64."
+    },
+    "optionsTechnical_fallbacks": {
+        "message": "Actions de fenêtre de secours"
+    },
+    "optionsTechnical_host": {
+        "message": "Hôte"
+    },
+    "optionsTechnical_actionPath": {
+        "message": "Chemin de l'action"
+    },
+    "optionsTechnical_actionModel": {
+        "message": "Modèle de l'action"
+    },
+    "optionsTechnical_addFallback": {
+        "message": "Ajouter une action de secours"
+    },
+    "optionsTechnical_deleteFallback": {
+        "message": "Supprimer l'action de secours"
+    },
+    "optionsTechnical_deleteAllFallbacks": {
+        "message": "Supprimer toutes les actions de secours"
+    },
+    "optionsTechnical_confirmRemoveFallback": {
+        "message": "Voulez-vous vraiment supprimer le chemin « $path$ » pour l'origine « $origin$ » ?",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "all-tasks"
+            },
+            "origin": {
+                "content": "$2",
+                "example": "https://www.odoo.com"
+            }
+        }
+    },
+    "optionsTechnical_confirmChaos": {
+        "message": "Confirmer « $action$ ». Cette page sera rechargée !!!",
+        "placeholders": {
+            "action": {
+                "content": "$1",
+                "example": "Destroy local storage"
+            }
+        }
+    },
+    "optionsTechnical_devModeInactive": {
+        "message": "MODE DÉVELOPPEMENT INACTIF"
+    },
+    "optionsTechnical_error_missingPath": {
+        "message": "Chemin manquant"
+    },
+    "optionsTechnical_error_missingModel": {
+        "message": "Modèle manquant"
+    },
+    "optionsTechnical_storage": {
+        "message": "Stockage"
+    },
+    "optionsTechnical_storageUsage": {
+        "message": "$name$ : $used$ / $max$ octets",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "Sync storage"
+            },
+            "used": {
+                "content": "$2",
+                "example": "1024"
+            },
+            "max": {
+                "content": "$3",
+                "example": "102400"
+            }
+        }
+    },
+    "optionsTechnical_storage_sync": {
+        "message": "Stockage synchronisé"
+    },
+    "optionsTechnical_storage_local": {
+        "message": "Stockage local"
+    },
+    "optionsTechnical_storage_base": {
+        "message": "Base"
+    },
+    "optionsTechnical_storage_onboard": {
+        "message": "[Découverte] $tour$",
+        "placeholders": {
+            "tour": {
+                "content": "$1",
+                "example": "Preferences"
+            }
+        }
+    },
+    "optionsTechnical_storage_cache": {
+        "message": "Cache"
+    },
+    "optionsTechnical_storage_off": {
+        "message": "Extension désactivée"
+    },
+    "optionsTechnical_storage_announcement": {
+        "message": "Annonces de l'extension"
+    },
+    "optionsTechnical_storage_ambient": {
+        "message": "Événements d'ambiance calculés"
+    },
+    "optionsTechnical_storage_sun": {
+        "message": "Lever / coucher du soleil"
+    },
+    "optionsTechnical_tipUse": {
+        "message": "Utilisez"
+    },
+    "optionsTechnical_tipSameLevel": {
+        "message": "pour déplier/replier tous les éléments du même niveau"
+    },
+    "optionsTechnical_tipChildren": {
+        "message": "pour déplier/replier un élément et tous ses enfants"
+    },
+    "optionsTechnical_featuresState": {
+        "message": "État des fonctionnalités"
+    },
+    "optionsTechnical_onboarding": {
+        "message": "Découverte de l'extension"
+    },
+    "optionsTechnical_features": {
+        "message": "Fonctionnalités de l'extension"
+    },
+    "optionsTechnical_configuration": {
+        "message": "Configuration de l'extension"
+    },
+    "optionsTechnical_localData": {
+        "message": "Données locales de l'extension"
+    },
+    "ambient_category_computed": {
+        "message": "Événements calculés"
+    },
+    "ambient_category_events": {
+        "message": "Événements"
+    },
+    "ambient_category_yearly": {
+        "message": "Chaque année, un jour"
+    },
+    "ambient_futureOdooExperience": {
+        "message": "Prochaine Odoo Experience"
+    },
+    "ambient_odooBirthday": {
+        "message": "Joyeux anniversaire Odoo !"
+    },
+    "ambient_newYearCountdown": {
+        "message": "Nouvel An, compte à rebours"
+    },
+    "ambient_newYear": {
+        "message": "Nouvel An"
+    },
+    "ambient_valentine": {
+        "message": "Saint-Valentin"
+    },
+    "ambient_stPatrick": {
+        "message": "Jour de chance (Saint-Patrick)"
+    },
+    "ambient_aprilFool": {
+        "message": "Poisson d'avril"
+    },
+    "ambient_halloween": {
+        "message": "Nuit d'Halloween"
+    },
+    "ambient_newYearEve": {
+        "message": "Réveillon du Nouvel An"
+    },
+    "optionsAmbient_all": {
+        "message": "Tous"
+    },
+    "optionsAmbient_none": {
+        "message": "Aucun"
+    },
+    "optionsAmbient_active": {
+        "message": "actif"
+    },
+    "optionsAmbient_activeTitle": {
+        "message": "Cet effet est actif aujourd'hui"
+    },
+    "optionsAmbient_enable": {
+        "message": "Activé"
+    },
+    "optionsAmbient_disable": {
+        "message": "Désactivé"
+    },
+    "optionsAmbient_playingInfo": {
+        "message": "Ambiance : « $name$ » - Durée : $duration$ ms",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "New Year"
+            },
+            "duration": {
+                "content": "$2",
+                "example": "3000"
+            }
+        }
+    }
+}
