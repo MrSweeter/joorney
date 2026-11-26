@@ -54,7 +54,7 @@ async function onVersionLoaded() {
         return handleMessage(message, sender);
     });
 
-    // The background warns on the toolbar icon when this Odoo version is turned off (background/src/version_badge.js)
+    // The background sets the tab's toolbar icon from it (background/src/toolbar_state.js)
     sendRuntimeMessage(MESSAGE_ACTION.TO_BACKGROUND.TAB_LOADED, { versionInfo });
 
     loadedURL = url;

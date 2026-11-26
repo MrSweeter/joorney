@@ -25,6 +25,10 @@
             }
         }
     },
+    "badge_noSessionTitle": {
+        "message": "Joorney: no Odoo session on this page, nothing runs here",
+        "description": "Toolbar icon tooltip, with the grey icon, on a page without an Odoo session (not logged in, not Odoo) and no Runbot feature"
+    },
     "language_title": {
         "message": "Language",
         "description": "Preferences page: Language card title"

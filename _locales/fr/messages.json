@@ -20,6 +20,9 @@
             }
         }
     },
+    "badge_noSessionTitle": {
+        "message": "Joorney, pas de session Odoo sur cette page, rien ne tourne ici"
+    },
     "language_title": {
         "message": "Langue"
     },
