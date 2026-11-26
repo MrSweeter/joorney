@@ -95,21 +95,7 @@ body {
     padding: 12px;
 }
 
-.joorney-popup-bulk {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 12px;
-}
-
-.joorney-popup-bulk .joorney-btn {
-    flex: 1;
-    height: 32px;
-    padding: 0 10px;
-    font-size: 13px;
-}
-
-.joorney-popup-section + .joorney-popup-section,
-.joorney-popup-section + .joorney-popup-bulk {
+.joorney-popup-section + .joorney-popup-section {
     margin-top: 14px;
 }
 
@@ -127,6 +113,48 @@ body {
     color: var(--joorney-text-soft);
     text-transform: uppercase;
     letter-spacing: 0.04em;
+}
+
+/* A category heading is one button: title, count, chevron (the list folds, the count stays) */
+h2.joorney-popup-sechead {
+    margin: 0 0 6px;
+}
+
+.joorney-popup-secbtn {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    width: 100%;
+    margin: -4px 0;
+    padding: 4px 2px;
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+    background: none;
+    border: 0;
+    border-radius: var(--joorney-radius-control);
+}
+
+.joorney-popup-secbtn:hover {
+    background: var(--joorney-hover);
+}
+
+.joorney-popup-sectitle {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--joorney-text-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.joorney-popup-secbtn .joorney-popup-chevron {
+    font-size: 18px;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-popup-secbtn[aria-expanded="false"] .joorney-popup-chevron {
+    transform: rotate(-90deg);
 }
 
 .joorney-popup-seccount {

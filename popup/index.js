@@ -11,7 +11,6 @@ import {
     readStateSettings,
     setFeatureActive,
     setHostFeature,
-    setHostFeatures,
 } from '../options/src/ui/state.js';
 import { notifyOptionPages } from '../src/generic/popup.js';
 import { escapeHTML } from '../src/html_generator.js';
@@ -25,8 +24,9 @@ import { iconHTML } from '../src/utils/icons.js';
  * options/src/ui/state.js and the popup re-renders on its STATE_CHANGE event.
  */
 
-// Per browser convenience, not a setting: which settings blocks are open
+// Per browser conveniences, not settings: which settings blocks and which categories are open (all start closed)
 const EXPANDED_KEY = 'joorney_popup_expanded';
+const OPEN_CATEGORIES_KEY = 'joorney_popup_open_categories';
 
 window.onload = async () => {
     const [tab] = await Tabs.query({ active: true, currentWindow: true });
@@ -63,19 +63,19 @@ function renderNotWebsite() {
     root.querySelector('[data-action="options"]').onclick = () => openOptions();
 }
 
-function readExpanded() {
+function readSet(key) {
     try {
-        return new Set(JSON.parse(localStorage.getItem(EXPANDED_KEY) ?? '[]'));
+        return new Set(JSON.parse(localStorage.getItem(key) ?? '[]'));
     } catch {
         return new Set();
     }
 }
 
-function saveExpanded(expanded) {
+function saveSet(key, values) {
     try {
-        localStorage.setItem(EXPANDED_KEY, JSON.stringify([...expanded]));
+        localStorage.setItem(key, JSON.stringify([...values]));
     } catch {
-        // Storage blocked: the blocks just open closed next time
+        // Storage blocked: the popup just opens as on first use next time
     }
 }
 
@@ -93,7 +93,8 @@ async function loadPopup(tab, origin, features, currentSettings) {
     const view = {
         settings: await readStateSettings(features, currentSettings),
         host: origin,
-        expanded: readExpanded(),
+        expanded: readSet(EXPANDED_KEY),
+        openCategories: readSet(OPEN_CATEGORIES_KEY),
     };
 
     // The entry the switches write to: the host's own, else a saved regex entry matching it (as the previous
@@ -206,43 +207,49 @@ async function loadPopup(tab, origin, features, currentSettings) {
         return `<div class="joorney-popup-item">${cardHTML(feature)}${slot}</div>`;
     }
 
-    function sectionHTML(title, list, extra = '') {
-        const count = list.filter(on).length;
+    // A category folds (its count stays in the heading), the Runbot section does not: it is short and only shown
+    // where it is wanted
+    function sectionHTML(title, list, { extra = '', category = undefined } = {}) {
+        const count = `<span class="joorney-popup-seccount">${escapeHTML(t('optionsHome_sectionCount', `${list.filter(on).length}`, `${list.length}`))}</span>`;
+        const items = list.map(itemHTML).join('');
+        if (!category) {
+            return `
+                <section class="joorney-popup-section" aria-label="${escapeHTML(title)}">
+                    <div class="joorney-popup-sechead"><h2>${escapeHTML(title)}</h2>${extra}${count}</div>
+                    <div class="joorney-popup-list">${items}</div>
+                </section>
+            `;
+        }
+        const id = escapeHTML(category);
+        const collapsed = !view.openCategories.has(category);
         return `
             <section class="joorney-popup-section" aria-label="${escapeHTML(title)}">
-                <div class="joorney-popup-sechead">
-                    <h2>${escapeHTML(title)}</h2>${extra}
-                    <span class="joorney-popup-seccount">${escapeHTML(t('optionsHome_sectionCount', `${count}`, `${list.length}`))}</span>
-                </div>
-                <div class="joorney-popup-list">${list.map(itemHTML).join('')}</div>
+                <h2 class="joorney-popup-sechead is-toggle">
+                    <button type="button" class="joorney-popup-secbtn" data-action="section" data-category="${id}" data-focus="section:${id}" aria-expanded="${!collapsed}" aria-controls="joorney-popup-list-${id}">
+                        <span class="joorney-popup-sectitle">${escapeHTML(title)}</span>${count}${iconHTML('expand_more', { classes: 'joorney-popup-chevron' })}
+                    </button>
+                </h2>
+                <div id="joorney-popup-list-${id}" class="joorney-popup-list"${collapsed ? ' hidden' : ''}>${items}</div>
             </section>
         `;
     }
 
     function html() {
         const runbotSection = runbot.length
-            ? sectionHTML(
-                  t('optionsHome_runbotName'),
-                  runbot,
-                  `<span class="joorney-chip">${escapeHTML(t('optionsHome_builtIn'))}</span>`
-              )
+            ? sectionHTML(t('optionsHome_runbotName'), runbot, {
+                  extra: `<span class="joorney-chip">${escapeHTML(t('optionsHome_builtIn'))}</span>`,
+              })
             : '';
         const sections = categories
             .map((category) =>
                 sectionHTML(
                     categoryName(category),
-                    normal.filter((f) => f.category === category)
+                    normal.filter((f) => f.category === category),
+                    { category }
                 )
             )
             .join('');
-        return `
-            ${runbotSection}
-            <div class="joorney-popup-bulk">
-                <button type="button" class="joorney-btn is-secondary" data-action="all-on" data-focus="all-on">${iconHTML('toggle_on')}${escapeHTML(t('optionsHome_allOn'))}</button>
-                <button type="button" class="joorney-btn is-secondary" data-action="all-off" data-focus="all-off">${iconHTML('toggle_off')}${escapeHTML(t('optionsHome_allOff'))}</button>
-            </div>
-            ${sections}
-        `;
+        return `${runbotSection}${sections}`;
     }
 
     function render() {
@@ -298,26 +305,25 @@ async function loadPopup(tab, origin, features, currentSettings) {
     //#endregion
 
     //#region Actions
-    // Bulk actions skip the deactivated features: they have no host to switch on for
-    const setAll = (value) =>
-        setHostFeatures(
-            view.host,
-            normal.filter((f) => view.settings[`${f.id}Enabled`]),
-            value
-        );
-
     const ACTIONS = {
-        'all-on': () => setAll(true),
-        'all-off': () => setAll(false),
         activate: (el) => openModeMenu({ trigger: el, feature: byID(el.dataset.feature), settings: view.settings }),
         settings: (el) => {
             const id = el.dataset.feature;
             const open = !view.expanded.has(id);
             if (open) view.expanded.add(id);
             else view.expanded.delete(id);
-            saveExpanded(view.expanded);
+            saveSet(EXPANDED_KEY, view.expanded);
             el.setAttribute('aria-expanded', `${open}`);
             frames.get(id).hidden = !open;
+        },
+        section: (el) => {
+            const category = el.dataset.category;
+            const fold = view.openCategories.has(category);
+            if (fold) view.openCategories.delete(category);
+            else view.openCategories.add(category);
+            saveSet(OPEN_CATEGORIES_KEY, view.openCategories);
+            el.setAttribute('aria-expanded', `${!fold}`);
+            document.getElementById(`joorney-popup-list-${category}`).hidden = fold;
         },
     };
 
@@ -342,7 +348,7 @@ async function loadPopup(tab, origin, features, currentSettings) {
         window.close();
     };
 
-    // Coalesce the events of a bulk write into one render
+    // Coalesce quick successive writes (fast clicks) into one render
     let refreshTimer;
     document.addEventListener(UI_EVENTS.STATE_CHANGE, () => {
         markChanged();
