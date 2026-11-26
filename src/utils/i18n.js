@@ -172,6 +172,26 @@ export function featureName(feature, lang = getLanguage()) {
     return hasMessage(key, lang) ? translate(lang, key) : (feature.display_name ?? feature.id);
 }
 
+export function featureDescription(feature, lang = getLanguage()) {
+    const key = `feature_${feature.id}_description`;
+    return hasMessage(key, lang) ? translate(lang, key) : '';
+}
+
+export function featureDetails(feature, lang = getLanguage()) {
+    const key = `feature_${feature.id}_details`;
+    return hasMessage(key, lang) ? translate(lang, key) : '';
+}
+
+export function categoryName(category, lang = getLanguage()) {
+    const key = `category_${category}`;
+    return hasMessage(key, lang) ? translate(lang, key) : category;
+}
+
+export function tagName(tag, lang = getLanguage()) {
+    const key = `tag_${tag}`;
+    return hasMessage(key, lang) ? translate(lang, key) : tag;
+}
+
 const ATTRIBUTES = [
     ['data-i18n-title', 'title'],
     ['data-i18n-placeholder', 'placeholder'],

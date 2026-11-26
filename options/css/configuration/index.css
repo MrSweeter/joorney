@@ -1,0 +1,79 @@
+/* More > Settings: options/pages/configuration */
+
+.joorney-settings {
+    max-width: 880px;
+}
+
+.joorney-settings .joorney-panel-title {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.joorney-settings-radios {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.joorney-settings-radio {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    margin: 0;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.joorney-settings-radio input {
+    accent-color: var(--joorney-navy);
+}
+
+.joorney-settings-hints {
+    margin: 12px 0 0;
+}
+
+.joorney-settings-hints ul {
+    padding-inline-start: 20px;
+    margin: 0;
+}
+
+.joorney-settings-switchrow {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.joorney-settings-switchtitle {
+    font-weight: 500;
+}
+
+.joorney-settings-keys {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    margin-bottom: 16px;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-settings-keys kbd {
+    padding: 3px 8px;
+    font-size: 13px;
+    color: var(--joorney-text);
+    background: var(--joorney-ground);
+    border: 1px solid var(--joorney-border-strong);
+    border-radius: 4px;
+}
+
+.joorney-settings-copyrow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    font-size: 14px;
+}
+
+.joorney-settings-note {
+    color: var(--joorney-text-muted);
+}

@@ -1,0 +1,123 @@
+.joorney-migration-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--joorney-text);
+    text-decoration: none;
+}
+
+.joorney-migration-back:hover {
+    text-decoration: underline;
+}
+
+.joorney-migration-back .joorney-icon {
+    font-size: 18px;
+}
+
+/* Two choices side by side, stacked when the page gets narrow */
+.joorney-migration-sources {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+    gap: 16px;
+}
+
+.joorney-migration-choice,
+.joorney-migration-drop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 132px;
+    padding: 20px 16px;
+}
+
+.joorney-migration-drop p {
+    margin: 0;
+}
+
+.joorney-migration-choice {
+    font-family: inherit;
+    color: var(--joorney-text);
+    cursor: pointer;
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border-strong);
+    border-radius: var(--joorney-radius-card);
+}
+
+.joorney-migration-choice:hover {
+    background: var(--joorney-hover);
+}
+
+.joorney-migration-choice:focus-visible {
+    outline: 2px solid var(--joorney-focus);
+    outline-offset: 2px;
+}
+
+.joorney-migration-choice[aria-pressed="true"] {
+    background: var(--joorney-state-everywhere-tint);
+    border-color: var(--joorney-navy);
+}
+
+/*#region Steps */
+.joorney-migration-chain {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.joorney-migration-version {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    height: 36px;
+    padding: 0 10px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--joorney-text-muted);
+    background: var(--joorney-hover);
+    border-radius: 18px;
+}
+
+.joorney-migration-version.is-from {
+    color: var(--joorney-text);
+}
+
+.joorney-migration-version.is-target {
+    color: #fff;
+    background: var(--joorney-navy);
+}
+
+.joorney-migration-chain .joorney-icon {
+    color: var(--joorney-text-muted);
+}
+
+.joorney-migration-steps {
+    margin: 0 0 16px;
+    padding: 0;
+    list-style: none;
+}
+
+.joorney-migration-steps li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    font-size: 14px;
+    border-top: 1px solid var(--joorney-border);
+}
+
+.joorney-migration-steps span:last-child {
+    flex: 1 1 260px;
+}
+
+#joorney-migration-done .joorney-row {
+    margin-top: 16px;
+}
+/*#endregion */

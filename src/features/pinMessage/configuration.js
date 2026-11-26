@@ -2,6 +2,9 @@ export default {
     id: 'pinMessage',
     display_name: 'Pin Message',
     icon: 'keep',
+    category: 'productivity',
+    tags: ['chatter'],
+    video: '',
     trigger: {
         background: false,
         load: true,
@@ -14,7 +17,7 @@ export default {
         ],
     },
     customization: {
-        option: false,
+        option: true,
         popup: true,
     },
     defaultSettings: {

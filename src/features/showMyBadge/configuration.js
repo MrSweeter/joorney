@@ -2,6 +2,9 @@ export default {
     id: 'showMyBadge',
     display_name: 'Show My Badge',
     icon: 'workspace_premium',
+    category: 'productivity',
+    tags: ['gamification'],
+    video: '',
     trigger: {
         background: false,
         load: true,

@@ -1,0 +1,208 @@
+/* Announcement banner between the navbar and the page. Never red: warning is amber. */
+.joorney-announce-wrap {
+    display: grid;
+    grid-template-rows: 1fr;
+    opacity: 1;
+    transition:
+        grid-template-rows 0.3s ease,
+        opacity 0.2s ease;
+}
+
+.joorney-announce-wrap.is-closing {
+    grid-template-rows: 0fr;
+    opacity: 0;
+}
+
+.joorney-announce-clip {
+    min-height: 0;
+    overflow: hidden;
+}
+
+.joorney-announce-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-block: 16px 0;
+    padding-inline: 24px;
+}
+
+.joorney-announce {
+    padding: 14px 16px;
+    color: var(--joorney-text);
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-card);
+    box-shadow: var(--joorney-shadow);
+}
+
+.joorney-announce.is-warning {
+    background: var(--joorney-state-listed-tint);
+    border-color: var(--joorney-orange);
+}
+
+.joorney-announce-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.joorney-announce-tile,
+.joorney-announce-itile {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--joorney-radius-card);
+}
+
+.joorney-announce-tile {
+    width: 40px;
+    height: 40px;
+    color: var(--joorney-navy);
+    background: var(--joorney-orange);
+}
+
+.joorney-announce.is-info .joorney-announce-tile {
+    color: #fff;
+    background: var(--joorney-navy);
+}
+
+.joorney-announce.is-warning .joorney-announce-tile {
+    color: var(--joorney-state-listed-text);
+    background: var(--joorney-state-listed-tint);
+    border: 1px solid var(--joorney-orange);
+}
+
+.joorney-announce-body {
+    flex: 1 1 360px;
+    min-width: 0;
+}
+
+.joorney-announce-heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.joorney-announce-title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--joorney-text);
+}
+
+.joorney-announce-title:focus {
+    outline: none;
+}
+
+.joorney-announce-title:focus-visible {
+    outline: 2px solid var(--joorney-focus);
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+.joorney-announce-chip {
+    padding: 2px 8px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--joorney-navy);
+    background: var(--joorney-orange);
+    border-radius: 999px;
+}
+
+.joorney-announce-message {
+    margin: 4px 0 0;
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--joorney-text-soft);
+}
+
+.joorney-announce-message a,
+.joorney-announce-title a {
+    color: var(--joorney-text);
+    text-decoration: underline;
+}
+
+.joorney-announce-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.joorney-announce-actions .joorney-btn {
+    height: 36px;
+}
+
+.joorney-announce-panel {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--joorney-border);
+}
+
+.joorney-announce.is-warning .joorney-announce-panel {
+    border-top-color: var(--joorney-orange);
+}
+
+.joorney-announce-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.joorney-announce-items li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.joorney-announce-itile {
+    width: 32px;
+    height: 32px;
+    color: var(--joorney-navy);
+    background: var(--joorney-state-everywhere-tint);
+}
+
+.joorney-announce-item-title {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--joorney-text);
+}
+
+.joorney-announce-item-text {
+    display: block;
+    margin-top: 1px;
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--joorney-text-soft);
+}
+
+.joorney-announce-notes {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 14px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.joorney-announce-notes a {
+    color: var(--joorney-text);
+}
+
+.joorney-announce-restore {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .joorney-announce-wrap {
+        transition: none;
+    }
+}

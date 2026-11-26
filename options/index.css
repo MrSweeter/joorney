@@ -2,8 +2,6 @@
     --joorney-primary: #13213c;
     --joorney-primary-bg: #e5e5e5;
     --joorney-secondary: #fca311;
-    --joorney-secondary-bg: #e5e5e5;
-    --joorney-limited-secondary: #a75000;
     --joorney-odoo-primary: #714b67;
     --joorney-odoo-secondary: #017e84;
 }
@@ -14,16 +12,8 @@ body {
 }
 
 .joorney-body-background {
-    background-image: url("/images/background.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
     min-height: 100vh;
-}
-
-#joorney-brand-debug {
-    cursor: pointer;
+    background-color: var(--joorney-ground);
 }
 
 .joorney-valign-middle {
@@ -38,32 +28,8 @@ body {
     font-size: 1.2em;
 }
 
-.joorney-modified-input {
-    background-color: #fffdaf !important;
-}
-
 .input-hide {
     display: none;
-}
-
-.feature-collapse-content {
-    overflow: hidden;
-    transition: max-height 0.3s ease-in-out;
-}
-
-.feature-collapse-toggle {
-    cursor: pointer;
-}
-
-.feature-collapse-indicator {
-    /* arrow_drop_up is a small triangle in its box: 28px matches the former 18px caret */
-    font-size: 28px;
-    transition: transform 0.3s ease;
-    transform: rotate(90deg);
-}
-
-.feature-opened.feature-collapse-indicator {
-    transform: rotate(180deg);
 }
 
 .joorney-menu-item {

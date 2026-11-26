@@ -152,6 +152,165 @@
     "feature_unfocusApp_name": {
         "message": "Masquer les applications"
     },
+    "feature_awesomeLoadingSmall_description": {
+        "message": "Remplace le petit texte de chargement d'Odoo par un design personnalisé."
+    },
+    "feature_awesomeLoadingSmall_details": {
+        "message": "Change l'indicateur « Chargement » affiché en bas à droite de la page pendant le chargement d'Odoo. Choisissez parmi les designs disponibles, avec un aperçu en direct dans les options."
+    },
+    "feature_awesomeLoadingLarge_description": {
+        "message": "Remplace le grand indicateur de chargement plein écran d'Odoo par un design personnalisé."
+    },
+    "feature_awesomeLoadingLarge_details": {
+        "message": "Change le grand design de chargement plein écran d'Odoo. Le grand chargement a été retiré dans Odoo 17.0, cette fonctionnalité ne s'applique donc qu'aux versions plus anciennes."
+    },
+    "feature_awesomeStyle_description": {
+        "message": "Applique des styles CSS personnalisés sur la page de votre base de données Odoo."
+    },
+    "feature_awesomeStyle_details": {
+        "message": "Personnalisez l'apparence de votre interface Odoo en appliquant votre propre CSS. Idéal pour ajuster les couleurs, les espacements ou masquer des éléments avec quelques lignes de CSS."
+    },
+    "feature_themeSwitch_description": {
+        "message": "Change le thème d'Odoo dynamiquement selon une option configurée."
+    },
+    "feature_themeSwitch_details": {
+        "message": "Change le thème d'Odoo selon votre localisation, une plage horaire, ou simplement votre préférence. Odoo gère désormais cela avec une préférence utilisateur, un vrai changement côté serveur plutôt que seulement côté interface."
+    },
+    "feature_ambient_description": {
+        "message": "Ajoute des effets de particules (neige, citrouilles, feux d'artifice) pour rendre Odoo plus vivant."
+    },
+    "feature_ambient_details": {
+        "message": "Donnez vie au menu principal d'Odoo avec des effets de particules pour les événements et jours spéciaux : neige en hiver, citrouilles volantes pour Halloween, feux d'artifice pour le Nouvel An. Les effets peuvent avoir un impact sur les performances, chaque événement ou effet peut donc être désactivé dans les options."
+    },
+    "feature_starringPriorityEffect_description": {
+        "message": "Déclenche un effet de particules en étoiles lorsque vous priorisez un enregistrement."
+    },
+    "feature_starringPriorityEffect_details": {
+        "message": "Ajoute une touche de magie à la priorisation : lorsque vous définissez la priorité d'un enregistrement ou d'un ticket, un effet de particules en étoiles offre une confirmation visuelle immédiate et agréable."
+    },
+    "feature_unfocusApp_description": {
+        "message": "Masque les applications peu utilisées pour vous concentrer sur celles qui comptent pour votre travail."
+    },
+    "feature_unfocusApp_details": {
+        "message": "Cliquez sur l'étoile à côté du nom d'une application sur la page d'accueil d'Odoo pour la masquer ou l'afficher, ce qui désencombre l'écran et garde vos applications essentielles à portée de main. Double-cliquez sur l'étoile pour mettre une application en avant avec une image de fond autour de son icône."
+    },
+    "feature_assignMeTask_description": {
+        "message": "Ajoute un bouton au formulaire de tâche pour vous l'assigner en un clic."
+    },
+    "feature_assignMeTask_details": {
+        "message": "Ajoute un bouton au formulaire de tâche pour vous assigner n'importe quelle tâche en un clic. Avant Odoo 16.3, Odoo avait un bouton standard pour cela, cette fonctionnalité le remet en place. Comme il n'est pas standard, le bouton recharge la page, ce qui peut faire perdre l'historique de navigation. Une option développeur ajoute plutôt une interface simulée, sans rechargement."
+    },
+    "feature_pinMessage_description": {
+        "message": "Épingle un message en haut du chatter pour y accéder facilement."
+    },
+    "feature_pinMessage_details": {
+        "message": "Épinglez rapidement les messages importants du chatter pour que les informations critiques restent en haut et faciles à trouver. Elle réutilise l'étoile standard d'un message pour en faire une épingle. Elle dépend fortement du chatter d'Odoo, ce n'est donc pas la fonctionnalité la plus stable. Cette fonctionnalité a été ajoutée dans les versions standard d'Odoo."
+    },
+    "feature_followUnfollow_description": {
+        "message": "Ajoute un bouton rapide pour suivre ou ne plus suivre à côté du bouton des abonnés."
+    },
+    "feature_followUnfollow_details": {
+        "message": "Ajoute une action rapide à côté du bouton des abonnés pour suivre ou ne plus suivre un enregistrement en un clic. Plus besoin d'ouvrir tout le menu des abonnés pour changer votre abonnement."
+    },
+    "feature_showMyBadge_description": {
+        "message": "Affiche les badges de l'utilisateur dans sa carte utilisateur."
+    },
+    "feature_showMyBadge_details": {
+        "message": "Affiche les badges d'un utilisateur dans sa carte utilisateur, pour mettre en valeur ses réalisations et récompenses. Les profils deviennent plus informatifs et cela renforce le sentiment d'accomplissement et de communauté."
+    },
+    "feature_contextOdooMenus_description": {
+        "message": "Ajoute les menus d'Odoo au menu contextuel du navigateur."
+    },
+    "feature_contextOdooMenus_details": {
+        "message": "Accédez aux menus d'Odoo directement depuis le menu clic droit de votre navigateur. Cela réduit le nombre d'étapes pour atteindre une fonctionnalité et fluidifie la navigation."
+    },
+    "feature_saveKnowledge_description": {
+        "message": "Ajoute un bouton en haut à droite de la page d'un article pour forcer son enregistrement."
+    },
+    "feature_saveKnowledge_details": {
+        "message": "Ajoute un bouton d'enregistrement en haut à droite des pages d'article, pour être sûr d'enregistrer un article en un clic. Entre l'arrivée de l'application Connaissances et Odoo 17.0, il n'existait pas de moyen simple de forcer l'enregistrement. Cette fonctionnalité a été ajoutée dans les versions standard d'Odoo."
+    },
+    "feature_tooltipMetadata_description": {
+        "message": "Affiche les métadonnées de l'enregistrement courant en survolant l'icône de débogage."
+    },
+    "feature_tooltipMetadata_details": {
+        "message": "Survolez l'icône de débogage pour voir instantanément les métadonnées de l'enregistrement courant, sans quitter la vue actuelle. Cela économise des clics et des chargements de page lors de l'analyse ou du dépannage d'un enregistrement."
+    },
+    "feature_newServerActionCode_description": {
+        "message": "Sélectionne automatiquement « Exécuter du code » comme type d'action de serveur."
+    },
+    "feature_newServerActionCode_details": {
+        "message": "Sélectionne automatiquement « Exécuter du code » comme type d'une nouvelle action de serveur. Les développeurs peuvent se concentrer directement sur l'écriture et le test du code, sans l'étape supplémentaire de choix du type d'action."
+    },
+    "feature_autoOpenRunbot_description": {
+        "message": "Ouvre une instance runbot dans une version précise en ajoutant ?joorney-runbot=17.0 à l'URL du runbot, comme https://runbot.odoo.com?joorney-runbot=17.0"
+    },
+    "feature_autoOpenRunbot_details": {
+        "message": "Ajoute un paramètre de recherche à l'URL du runbot pour ouvrir une instance dans une version précise, en tant qu'administrateur en mode débogage. Par exemple, https://runbot.odoo.com?joorney-runbot=17.0 ouvre un runbot en version 17.0. Modifiez le paramètre pour atteindre d'autres versions."
+    },
+    "feature_impersonateLoginRunbot_description": {
+        "message": "Se connecte en tant qu'utilisateur par défaut sur un runbot, comme admin, demo ou portail."
+    },
+    "feature_impersonateLoginRunbot_details": {
+        "message": "Ajoute des options au menu de la page de connexion d'un runbot pour se connecter en tant qu'utilisateur par défaut comme admin, demo ou portail. Pratique pour tester et assister du point de vue de différents rôles et repérer les problèmes propres à un utilisateur."
+    },
+    "feature_adminDebugLoginRunbot_description": {
+        "message": "Ouvre une instance runbot depuis la page du runbot en tant qu'administrateur en mode débogage."
+    },
+    "feature_adminDebugLoginRunbot_details": {
+        "message": "Ajoute une icône à côté du nom de la base de données sur la page du runbot, pour ouvrir l'instance en tant qu'administrateur en mode débogage en un clic. Cela réduit les étapes nécessaires pour accéder aux instances runbot et les déboguer."
+    },
+    "category_ui": {
+        "message": "Apparence"
+    },
+    "category_productivity": {
+        "message": "Productivité"
+    },
+    "category_technical": {
+        "message": "Technique"
+    },
+    "category_runbot": {
+        "message": "Runbot (limité)"
+    },
+    "tag_loading": {
+        "message": "Chargement"
+    },
+    "tag_fun": {
+        "message": "Fun"
+    },
+    "tag_css": {
+        "message": "CSS"
+    },
+    "tag_theme": {
+        "message": "Thème"
+    },
+    "tag_seasonal": {
+        "message": "Saisonnier"
+    },
+    "tag_homeMenu": {
+        "message": "Menu d'accueil"
+    },
+    "tag_project": {
+        "message": "Projet"
+    },
+    "tag_chatter": {
+        "message": "Chatter"
+    },
+    "tag_gamification": {
+        "message": "Gamification"
+    },
+    "tag_navigation": {
+        "message": "Navigation"
+    },
+    "tag_debug": {
+        "message": "Débogage"
+    },
+    "tag_runbot": {
+        "message": "Runbot"
+    },
+    "tag_knowledge": {
+        "message": "Connaissances"
+    },
     "themeSwitch_mode_system": {
         "message": "Système"
     },
@@ -423,6 +582,15 @@
             }
         }
     },
+    "contextOdooMenus_error_noAction": {
+        "message": "Le menu '$path$' n’ouvre aucune action : choisissez un de ses sous-menus.",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Technical / Actions"
+            }
+        }
+    },
     "contextOdooMenus_error_tooMany": {
         "message": "Trop de menus trouvés pour le chemin $path$.",
         "placeholders": {
@@ -432,8 +600,116 @@
             }
         }
     },
-    "contextOdooMenus_option_confirmRemove": {
-        "message": "Voulez-vous vraiment supprimer le menu : $path$ ?",
+    "optionsContextMenus_path": {
+        "message": "Chemin du menu"
+    },
+    "optionsContextMenus_addHint": {
+        "message": "Appuyez sur Entrée pour ajouter. Les nouveaux menus vont dans le sous-menu, sous leur app, activés. Écrivez les noms des menus en anglais : le même chemin fonctionne alors quelle que soit la langue d'Odoo."
+    },
+    "optionsContextMenus_errorMissing": {
+        "message": "Saisissez un chemin de menu."
+    },
+    "optionsContextMenus_errorExists": {
+        "message": "Déjà dans la liste."
+    },
+    "optionsContextMenus_errorSameMenu": {
+        "message": "Déjà dans la liste sous « $path$ ».",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Sales/Orders/Quotations"
+            }
+        }
+    },
+    "optionsContextMenus_errorSave": {
+        "message": "Impossible d’enregistrer les menus, la liste montre ce qui est enregistré : $error$",
+        "placeholders": {
+            "error": {
+                "content": "$1",
+                "example": "QUOTA_BYTES_PER_ITEM quota exceeded"
+            }
+        }
+    },
+    "optionsContextMenus_space": {
+        "message": "La liste utilise $percent$ % de l’espace que Chrome sync lui accorde : les menus désactivés dont vous n’avez plus besoin peuvent être supprimés.",
+        "placeholders": {
+            "percent": {
+                "content": "$1",
+                "example": "82"
+            }
+        }
+    },
+    "optionsContextMenus_listTitle": {
+        "message": "Menus"
+    },
+    "optionsContextMenus_countOne": {
+        "message": "1 menu"
+    },
+    "optionsContextMenus_count": {
+        "message": "$count$ menus",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "8"
+            }
+        }
+    },
+    "optionsContextMenus_topCount": {
+        "message": "$count$ au premier niveau",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "2"
+            }
+        }
+    },
+    "optionsContextMenus_subCount": {
+        "message": "$count$ dans le sous-menu",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "2"
+            }
+        }
+    },
+    "optionsContextMenus_deleteAll": {
+        "message": "Tout supprimer"
+    },
+    "optionsContextMenus_filter": {
+        "message": "Filtrer"
+    },
+    "optionsContextMenus_filterLabel": {
+        "message": "Filtrer les menus"
+    },
+    "optionsContextMenus_filterNote": {
+        "message": "Videz le filtre pour réordonner."
+    },
+    "optionsContextMenus_noMatch": {
+        "message": "Aucun menu ne correspond à « $filter$ ».",
+        "placeholders": {
+            "filter": {
+                "content": "$1",
+                "example": "invoice"
+            }
+        }
+    },
+    "optionsContextMenus_sectionTop": {
+        "message": "Premier niveau"
+    },
+    "optionsContextMenus_sectionSub": {
+        "message": "Sous-menu"
+    },
+    "optionsContextMenus_sectionOff": {
+        "message": "Désactivés"
+    },
+    "optionsContextMenus_offHelp": {
+        "message": "gardés ici, absents du menu du clic droit"
+    },
+    "optionsContextMenus_topEmpty": {
+        "message": "Étoilez un menu pour l’afficher à côté des autres entrées de Joorney."
+    },
+    "optionsContextMenus_reorder": {
+        "message": "Réordonner $path$ (flèches haut et bas)",
         "placeholders": {
             "path": {
                 "content": "$1",
@@ -441,23 +717,11 @@
             }
         }
     },
-    "contextOdooMenus_option_confirmRemoveAll": {
-        "message": "Voulez-vous vraiment supprimer tous les menus ?"
+    "optionsContextMenus_reorderTitle": {
+        "message": "Glisser pour réordonner"
     },
-    "contextOdooMenus_option_error_missingPath": {
-        "message": "Chemin manquant"
-    },
-    "contextOdooMenus_option_error_idExists": {
-        "message": "Cet identifiant est déjà enregistré (ne devrait pas arriver) : $id$",
-        "placeholders": {
-            "id": {
-                "content": "$1",
-                "example": "3"
-            }
-        }
-    },
-    "contextOdooMenus_option_error_pathExists": {
-        "message": "Ce chemin est déjà enregistré : $path$",
+    "optionsContextMenus_more": {
+        "message": "Plus d’actions pour $path$",
         "placeholders": {
             "path": {
                 "content": "$1",
@@ -465,23 +729,77 @@
             }
         }
     },
-    "contextOdooMenus_option_favorite": {
-        "message": "Favori"
+    "optionsContextMenus_editPath": {
+        "message": "Modifier le chemin"
     },
-    "contextOdooMenus_option_notFavorite": {
-        "message": "Pas en favori"
+    "optionsContextMenus_moveTop": {
+        "message": "Placer au premier niveau"
     },
-    "contextOdooMenus_option_disable": {
-        "message": "Désactiver le menu rapide"
+    "optionsContextMenus_moveSub": {
+        "message": "Placer dans le sous-menu"
     },
-    "contextOdooMenus_option_enable": {
-        "message": "Activer le menu rapide"
+    "optionsContextMenus_confirmDeleteAll": {
+        "message": "Supprimer tous les menus ?"
     },
-    "contextOdooMenus_option_save": {
-        "message": "Enregistrer la modification"
+    "optionsContextMenus_topLevel": {
+        "message": "Premier niveau : $path$",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Sales / Orders"
+            }
+        }
     },
-    "contextOdooMenus_option_delete": {
-        "message": "Supprimer le menu rapide"
+    "optionsContextMenus_topLevelTitle": {
+        "message": "Afficher au premier niveau, hors du sous-menu"
+    },
+    "optionsContextMenus_on": {
+        "message": "Actif : $path$",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Sales / Orders"
+            }
+        }
+    },
+    "optionsContextMenus_confirmDelete": {
+        "message": "Supprimer $path$ ?",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Sales / Orders"
+            }
+        }
+    },
+    "optionsContextMenus_deleteButton": {
+        "message": "Supprimer"
+    },
+    "optionsContextMenus_cancel": {
+        "message": "Annuler"
+    },
+    "optionsContextMenus_save": {
+        "message": "Enregistrer"
+    },
+    "optionsContextMenus_empty": {
+        "message": "Aucun menu pour l’instant. Ajoutez un chemin de menu ci-dessus, ou repartez des menus techniques par défaut."
+    },
+    "optionsContextMenus_addDefaults": {
+        "message": "Ajouter les $count$ menus par défaut",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "8"
+            }
+        }
+    },
+    "optionsContextMenus_previewTitle": {
+        "message": "Aperçu du menu du clic droit"
+    },
+    "optionsContextMenus_previewHelp": {
+        "message": "Ce qu’affiche un clic droit sur une page Odoo avec ces réglages. Les menus étoilés sont à côté des autres entrées de Joorney, les autres sont regroupés dans un sous-menu. Les menus désactivés n’apparaissent pas."
+    },
+    "optionsContextMenus_previewNone": {
+        "message": "Aucun menu actif"
     },
     "showMyBadge_title": {
         "message": "Badges"
@@ -504,12 +822,6 @@
     "options_exportSettings": {
         "message": "Exporter les paramètres"
     },
-    "options_migrate": {
-        "message": "MIGRER"
-    },
-    "options_checklistShow": {
-        "message": "Afficher la liste de découverte"
-    },
     "options_close": {
         "message": "Fermer"
     },
@@ -519,14 +831,53 @@
     "options_poweredBySunrise": {
         "message": "Le changement de thème selon la localisation utilise"
     },
+    "options_announce_newIn": {
+        "message": "Nouveauté $version$",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "2.8"
+            }
+        }
+    },
+    "options_announce_label_release": {
+        "message": "Annonce de version"
+    },
+    "options_announce_label_info": {
+        "message": "Annonce"
+    },
+    "options_announce_label_warning": {
+        "message": "Annonce d'avertissement"
+    },
+    "options_announce_seeWhatsNew": {
+        "message": "Voir les nouveautés"
+    },
+    "options_announce_seeDetails": {
+        "message": "Voir les détails"
+    },
+    "options_announce_hideDetails": {
+        "message": "Masquer les détails"
+    },
+    "options_announce_openPage": {
+        "message": "Ouvrir $page$",
+        "placeholders": {
+            "page": {
+                "content": "$1",
+                "example": "Versions"
+            }
+        }
+    },
+    "options_announce_fullNotes": {
+        "message": "Notes de version complètes"
+    },
+    "options_announce_close": {
+        "message": "Fermer l'annonce"
+    },
+    "options_announce_restore": {
+        "message": "Annonces"
+    },
     "options_confirmImport": {
         "message": "Confirmer l'import du fichier ?"
-    },
-    "options_menu_hosts": {
-        "message": "Contrôle des hôtes"
-    },
-    "options_menu_preferences": {
-        "message": "Préférences"
     },
     "options_menu_versions": {
         "message": "Versions"
@@ -534,38 +885,308 @@
     "options_menu_notifications": {
         "message": "Notifications"
     },
-    "options_menu_ambient": {
-        "message": "Ambiances"
-    },
     "options_menu_developers": {
         "message": "Développeurs"
     },
-    "options_limitedFeatureTitle": {
-        "message": "[Fonctionnalité limitée] $feature$",
+    "options_menu_main": {
+        "message": "Menu principal"
+    },
+    "options_menu_home": {
+        "message": "Accueil"
+    },
+    "options_menu_features": {
+        "message": "Fonctionnalités"
+    },
+    "options_menu_settings": {
+        "message": "Paramètres"
+    },
+    "options_menu_importExport": {
+        "message": "Importer, exporter et migrer"
+    },
+    "options_menu_more": {
+        "message": "Plus"
+    },
+    "options_menu_debugChip": {
+        "message": "débogage"
+    },
+    "options_migrateNeeded": {
+        "message": "Migration de la configuration nécessaire"
+    },
+    "optionsUi_state_everywhere": {
+        "message": "Active par défaut"
+    },
+    "optionsUi_state_everywhereShort": {
+        "message": "Active par défaut"
+    },
+    "optionsUi_state_everywhereHelp": {
+        "message": "Fonctionne sur tous les hôtes Odoo, sauf là où vous la désactivez."
+    },
+    "optionsUi_state_listed": {
+        "message": "Inactive par défaut"
+    },
+    "optionsUi_state_listedShort": {
+        "message": "Inactive par défaut"
+    },
+    "optionsUi_state_listedHelp": {
+        "message": "Fonctionne uniquement sur les hôtes où vous l'activez."
+    },
+    "optionsUi_state_deactivated": {
+        "message": "Désactivée"
+    },
+    "optionsUi_state_deactivatedHelp": {
+        "message": "Ne fonctionne jamais."
+    },
+    "optionsUi_state_active": {
+        "message": "Active"
+    },
+    "optionsUi_state_limited": {
+        "message": "Active sur ses hôtes runbot"
+    },
+    "optionsUi_versionAll": {
+        "message": "Toutes les versions"
+    },
+    "optionsUi_versionBefore": {
+        "message": "avant $version$",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "17.0"
+            }
+        }
+    },
+    "optionsUi_versionRange": {
+        "message": "$from$ à $to$ (exclue)",
+        "placeholders": {
+            "from": {
+                "content": "$1",
+                "example": "16.0"
+            },
+            "to": {
+                "content": "$2",
+                "example": "19.0"
+            }
+        }
+    },
+    "optionsUi_versionChip": {
+        "message": "Odoo $versions$",
+        "placeholders": {
+            "versions": {
+                "content": "$1",
+                "example": "16.0+"
+            }
+        }
+    },
+    "optionsUi_switchOnHere": {
+        "message": "$feature$ : active ici",
         "placeholders": {
             "feature": {
                 "content": "$1",
-                "example": "Assign Me"
+                "example": "Theme Switch"
             }
         }
     },
-    "options_origins": {
-        "message": "Origines"
-    },
-    "options_addOrigin": {
-        "message": "Ajouter une origine"
-    },
-    "options_deleteOrigin": {
-        "message": "Supprimer l'origine"
-    },
-    "options_confirmRemoveOrigin": {
-        "message": "Voulez-vous vraiment supprimer l'origine : $origin$ ?",
+    "optionsUi_featureSettings": {
+        "message": "Paramètres de $feature$",
         "placeholders": {
-            "origin": {
+            "feature": {
                 "content": "$1",
-                "example": "https://www.odoo.com"
+                "example": "Theme Switch"
             }
         }
+    },
+    "optionsUi_aboutFeature": {
+        "message": "À propos de $feature$",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Theme Switch"
+            }
+        }
+    },
+    "optionsUi_dragHandle": {
+        "message": "Glisser pour déplacer"
+    },
+    "optionsUi_action_openPage": {
+        "message": "Ouvrir la page de la fonctionnalité"
+    },
+    "optionsUi_infoVideo": {
+        "message": "Vidéo de $feature$",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Theme Switch"
+            }
+        }
+    },
+    "optionsUi_videoSoon": {
+        "message": "Vidéo bientôt disponible"
+    },
+    "optionsUi_done": {
+        "message": "Terminé"
+    },
+    "optionsFeatures_title": {
+        "message": "Fonctionnalités"
+    },
+    "optionsFeatures_subtitle": {
+        "message": "Choisissez où chaque fonctionnalité s'exécute. Les choix par hôte sont sur l'accueil."
+    },
+    "optionsFeatures_search": {
+        "message": "Rechercher une fonctionnalité"
+    },
+    "optionsFeatures_searchPlaceholder": {
+        "message": "Nom ou description"
+    },
+    "optionsFeatures_empty": {
+        "message": "Rien ici. Déposez des fonctionnalités pour les déplacer."
+    },
+    "optionsFeatures_count": {
+        "message": "$count$ fonctionnalité(s)",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "4"
+            }
+        }
+    },
+    "optionsFeatures_moved": {
+        "message": "$feature$ déplacée vers $state$",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Booster"
+            },
+            "state": {
+                "content": "$2",
+                "example": "Deactivated"
+            }
+        }
+    },
+    "optionsFeatures_runbotNote": {
+        "message": "Les fonctionnalités Runbot ne s'exécutent que sur les origines runbot et n'ont pas d'exception par hôte."
+    },
+    "optionsImportExport_title": {
+        "message": "Importer, exporter et migrer"
+    },
+    "optionsImportExport_subtitle": {
+        "message": "Sauvegardez vos paramètres, restaurez-les depuis un fichier ou mettez à jour une ancienne configuration."
+    },
+    "optionsImportExport_exportTitle": {
+        "message": "Exporter"
+    },
+    "optionsImportExport_exportHelp": {
+        "message": "Télécharge les paramètres synchronisés avec votre compte de navigateur (états et modes des fonctionnalités, hôtes, préférences) dans un fichier JSON, avec sa version de configuration. Le cache local et la progression de la découverte ne sont pas exportés."
+    },
+    "optionsImportExport_fileName": {
+        "message": "Nom du fichier :"
+    },
+    "optionsImportExport_exported": {
+        "message": "Téléchargement lancé."
+    },
+    "optionsImportExport_importTitle": {
+        "message": "Importer"
+    },
+    "optionsImportExport_importWarning": {
+        "message": "L'import remplace vos paramètres actuels par le contenu du fichier, puis recharge cette page."
+    },
+    "optionsImportExport_drop": {
+        "message": "Déposez ici un fichier de paramètres Joorney (.json), ou"
+    },
+    "optionsImportExport_chooseFile": {
+        "message": "Choisir un fichier"
+    },
+    "optionsImportExport_clearFile": {
+        "message": "Retirer le fichier choisi"
+    },
+    "optionsImportExport_fileOutdated": {
+        "message": "Ce fichier a été créé par une version plus ancienne. L'importer tel quel peut laisser certains paramètres inutilisés :"
+    },
+    "optionsImportExport_fileNewer": {
+        "message": "Ce fichier vient d'une version plus récente de Joorney : certains paramètres pourraient ne pas être utilisés."
+    },
+    "optionsImportExport_summaryVersion": {
+        "message": "version de configuration $version$",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "2"
+            }
+        }
+    },
+    "optionsImportExport_summaryFeatures": {
+        "message": "$count$ états de fonctionnalité",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "14"
+            }
+        }
+    },
+    "optionsImportExport_summaryHosts": {
+        "message": "$count$ hôtes",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "3"
+            }
+        }
+    },
+    "optionsImportExport_confirmDetail": {
+        "message": "Vos paramètres actuels seront remplacés."
+    },
+    "optionsImportExport_confirmYes": {
+        "message": "Oui, importer"
+    },
+    "optionsImportExport_cancel": {
+        "message": "Annuler"
+    },
+    "optionsImportExport_imported": {
+        "message": "Paramètres importés. Rechargez vos onglets Odoo ouverts pour les appliquer."
+    },
+    "optionsImportExport_error_read": {
+        "message": "Le fichier n'a pas pu être lu."
+    },
+    "optionsImportExport_error_json": {
+        "message": "Ce fichier n'est pas un JSON valide."
+    },
+    "optionsImportExport_error_notSettings": {
+        "message": "Ce fichier n'est pas un fichier de paramètres Joorney."
+    },
+    "optionsImportExport_error_version": {
+        "message": "La version de configuration de ce fichier n'est pas valide."
+    },
+    "optionsImportExport_error_shape": {
+        "message": "Les paramètres d'hôtes de ce fichier ne sont pas valides."
+    },
+    "optionsImportExport_error_write": {
+        "message": "Les paramètres n'ont pas pu être enregistrés, le fichier est peut-être trop volumineux pour le stockage synchronisé."
+    },
+    "optionsImportExport_migrateTitle": {
+        "message": "Migrer"
+    },
+    "optionsImportExport_migrateOutdated": {
+        "message": "Vos paramètres utilisent un ancien format (v$stored$). Migrez-les vers la v$expected$ pour que toutes les fonctionnalités continuent de fonctionner.",
+        "placeholders": {
+            "stored": {
+                "content": "$1",
+                "example": "0"
+            },
+            "expected": {
+                "content": "$2",
+                "example": "2"
+            }
+        }
+    },
+    "optionsImportExport_migrateUpToDate": {
+        "message": "Le format des paramètres est à jour (v$version$).",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "2"
+            }
+        }
+    },
+    "optionsImportExport_openMigration": {
+        "message": "Ouvrir la migration"
     },
     "options_error_missingOrigin": {
         "message": "Origine manquante"
@@ -573,29 +1194,149 @@
     "options_error_invalidOrigin": {
         "message": "Origine invalide, utilisez une URL comme https://www.odoo.com"
     },
+    "options_warning_regexAnchors": {
+        "message": "Sans ^ au début et $ à la fin, cette regex correspond aussi à des noms d’hôte plus longs : odoo\\.com correspondrait aussi à odoo.com.example.net."
+    },
+    "options_anchorRegex": {
+        "message": "L’ancrer"
+    },
+    "options_unanchoredChip": {
+        "message": "sans ^ $"
+    },
+    "options_unanchoredTitle": {
+        "message": "Sans ^ et $, cette regex correspond aussi à des noms d’hôte plus longs."
+    },
+    "options_anchorHost": {
+        "message": "Ancrer $host$ avec ^ et $ (ses fonctionnalités sont conservées)",
+        "placeholders": {
+            "host": {
+                "content": "$1",
+                "example": "regex://odoo\\.com"
+            }
+        }
+    },
+    "options_error_pageLoad": {
+        "message": "Cette page n’a pas pu être chargée, rechargez les options pour réessayer : $error$",
+        "placeholders": {
+            "error": {
+                "content": "$1",
+                "example": "Failed to fetch"
+            }
+        }
+    },
     "options_add": {
         "message": "Ajouter"
     },
     "options_save": {
         "message": "Enregistrer"
     },
-    "checklist_congratsTitle": {
-        "message": "Félicitations !"
+    "checklist_tourHome_title": {
+        "message": "Accueil : hôtes"
     },
-    "checklist_congratsText": {
-        "message": "Vous avez terminé la liste de découverte. Bravo !"
-    },
-    "checklist_tourHostControls_title": {
-        "message": "Contrôle des hôtes"
-    },
-    "checklist_tourHostControls_description": {
+    "checklist_tourHome_description": {
         "message": "Gérez les fonctionnalités par hôte !"
     },
-    "checklist_tourPreferences_title": {
-        "message": "Préférences"
+    "checklist_tourFeatures_title": {
+        "message": "Tableau des fonctionnalités"
     },
-    "checklist_tourPreferences_description": {
-        "message": "Configurez vos préférences pour de nombreuses fonctionnalités."
+    "checklist_tourFeatures_description": {
+        "message": "Trouvez, déplacez et changez l'état des fonctionnalités."
+    },
+    "checklist_tourFeature_title": {
+        "message": "Page d'une fonctionnalité"
+    },
+    "checklist_tourFeature_description": {
+        "message": "Activez une fonctionnalité, choisissez où elle s'exécute, personnalisez-la."
+    },
+    "checklist_tourSettings_title": {
+        "message": "Paramètres"
+    },
+    "checklist_tourSettings_description": {
+        "message": "Langue, page d'accueil et raccourci clavier."
+    },
+    "checklist_home_addHost_name": {
+        "message": "Ajouter un hôte"
+    },
+    "checklist_home_addHost_description": {
+        "message": "Saisissez une adresse Odoo, puis appuyez sur Entrée ou sur Ajouter. Commencez par regex:// pour cibler plusieurs bases à la fois."
+    },
+    "checklist_home_pickHost_name": {
+        "message": "Choisir un hôte"
+    },
+    "checklist_home_pickHost_description": {
+        "message": "Sélectionnez un hôte pour voir chaque fonctionnalité telle qu'elle s'y comporte."
+    },
+    "checklist_home_switchFeature_name": {
+        "message": "Changer une fonctionnalité pour cet hôte"
+    },
+    "checklist_home_switchFeature_description": {
+        "message": "Utilisez l'interrupteur d'une carte pour activer ou couper une fonctionnalité pour l'hôte sélectionné uniquement. Le réglage global ne change pas."
+    },
+    "checklist_home_bulk_name": {
+        "message": "Actions groupées"
+    },
+    "checklist_home_bulk_description": {
+        "message": "Activez ou coupez toutes les fonctionnalités de l'hôte en un clic, au lieu de changer chaque interrupteur."
+    },
+    "checklist_home_runbot_name": {
+        "message": "Fonctionnalités Runbot"
+    },
+    "checklist_home_runbot_description": {
+        "message": "Les fonctionnalités Runbot ne s'exécutent que sur les origines runbot : un seul interrupteur global, pas d'exception par hôte. Elles sont dans la ligne Runbot épinglée, ou dans le bloc Runbot au-dessus de la grille en vue avancée. Cliquez dessus pour continuer."
+    },
+    "checklist_features_zones_name": {
+        "message": "Trois zones"
+    },
+    "checklist_features_zones_description": {
+        "message": "Chaque fonctionnalité se trouve dans une zone : active par défaut (tourne sur chaque hôte sauf ses exceptions), inactive par défaut (tourne uniquement sur ses exceptions), ou désactivée. Cochez cette étape une fois lue."
+    },
+    "checklist_features_expand_name": {
+        "message": "Lire une carte"
+    },
+    "checklist_features_expand_description": {
+        "message": "Cliquez sur une carte pour afficher sa description complète, ses tags et ses versions supportées. Recliquez pour la replier."
+    },
+    "checklist_features_drag_name": {
+        "message": "Glisser pour déplacer"
+    },
+    "checklist_features_drag_description": {
+        "message": "Glissez une carte vers une autre zone pour changer son état."
+    },
+    "checklist_feature_active_name": {
+        "message": "Interrupteur Actif"
+    },
+    "checklist_feature_active_description": {
+        "message": "Activez ou désactivez la fonctionnalité avec cet interrupteur. L'activer demande son défaut : active ou inactive sur vos hôtes."
+    },
+    "checklist_feature_where_name": {
+        "message": "Où elle s'exécute"
+    },
+    "checklist_feature_where_description": {
+        "message": "Choisissez si elle est active ou inactive par défaut, puis gérez les hôtes qui font exception."
+    },
+    "checklist_feature_settings_name": {
+        "message": "Carte Réglages"
+    },
+    "checklist_feature_settings_description": {
+        "message": "Personnalisez la fonctionnalité ici. Seules les fonctionnalités avec options ont cette carte : ouvrez Theme Switch pour essayer, ou cochez cette étape à la main."
+    },
+    "checklist_settings_language_name": {
+        "message": "Langue"
+    },
+    "checklist_settings_language_description": {
+        "message": "Choisissez la langue de Joorney : système, Odoo ou une langue fixe. La page se recharge."
+    },
+    "checklist_settings_hostsView_name": {
+        "message": "Vue de la page d'accueil"
+    },
+    "checklist_settings_hostsView_description": {
+        "message": "Faites passer la page Accueil de la vue simple à la matrice avancée."
+    },
+    "checklist_settings_shortcut_name": {
+        "message": "Raccourci clavier"
+    },
+    "checklist_settings_shortcut_description": {
+        "message": "Consultez le raccourci qui active ou coupe Joorney, et copiez l'adresse où le modifier."
     },
     "checklist_tourVersions_title": {
         "message": "Versions"
@@ -618,71 +1359,8 @@
     "checklist_markAllDone_tooltip": {
         "message": "Agitez une baguette magique et considérez toutes les étapes comme terminées !"
     },
-    "checklist_next": {
-        "message": "Suivant"
-    },
     "checklist_restart": {
         "message": "Recommencer"
-    },
-    "checklist_hostControls_moveFeature_name": {
-        "message": "Gérer les fonctionnalités"
-    },
-    "checklist_hostControls_moveFeature_description": {
-        "message": "Glissez-déposez pour activer ou désactiver une fonctionnalité et garder le contrôle."
-    },
-    "checklist_hostControls_addHost_name": {
-        "message": "Ajouter votre propre origine"
-    },
-    "checklist_hostControls_addHost_description": {
-        "message": "Ajoutez une nouvelle origine en enregistrant vos modifications ou en appuyant sur « Entrée »."
-    },
-    "checklist_hostControls_configureHost_name": {
-        "message": "Configurer votre origine"
-    },
-    "checklist_hostControls_configureHost_description": {
-        "message": "Ajustez les paramètres de chaque origine en activant ou désactivant des fonctionnalités à l'aide des cases à cocher."
-    },
-    "checklist_hostControls_deleteHost_name": {
-        "message": "Supprimer votre origine"
-    },
-    "checklist_hostControls_deleteHost_description": {
-        "message": "Lancez la suppression de l'origine et confirmez-la dans la boîte de dialogue."
-    },
-    "checklist_preferences_awesomeLoading_name": {
-        "message": "Chargement personnalisé"
-    },
-    "checklist_preferences_awesomeLoading_description": {
-        "message": "Importez et définissez un GIF de chargement pour personnaliser le chargement d'Odoo."
-    },
-    "checklist_preferences_awesomeStyle_name": {
-        "message": "Façon Stylus"
-    },
-    "checklist_preferences_awesomeStyle_description": {
-        "message": "Ajustez et personnalisez le style visuel selon vos préférences."
-    },
-    "checklist_preferences_unfocusApp_name": {
-        "message": "Arrière-plan des icônes d'application"
-    },
-    "checklist_preferences_unfocusApp_description": {
-        "message": "Personnalisez l'arrière-plan des icônes d'application, utilisé pour les applications mises en avant."
-    },
-    "checklist_preferences_themeSwitchLocation_name": {
-        "message": "Thème selon le soleil"
-    },
-    "checklist_preferences_themeSwitchLocation_description": {
-        "message": "Activez le changement automatique de thème selon les heures de lever et de coucher du soleil."
-    },
-    "checklist_preferences_themeSwitchTime_name": {
-        "message": "Thème programmé"
-    },
-    "checklist_preferences_themeSwitchTime_description": {
-        "message": "Définissez une plage horaire pour le changement automatique de thème."
-    },
-    "checklist_preferences_contextOdooMenus_name": {
-        "message": "Menus contextuels"
-    },
-    "checklist_preferences_contextOdooMenus_description": {
-        "message": "Configurez des menus Odoo à utiliser dans le menu contextuel de Joorney."
     },
     "checklist_technical_experimentalOption_name": {
         "message": "Expérimental / Avancé"
@@ -756,65 +1434,136 @@
     "checklist_versions_removeSubVersion_description": {
         "message": "Désactivez la version activée précédemment."
     },
-    "checklist_defaultTitle": {
-        "message": "Découvrir Joorney"
-    },
-    "checklist_defaultDescription": {
-        "message": "Suivez les étapes ci-dessous"
-    },
     "migration_title": {
-        "message": "Migration de Joorney"
-    },
-    "migration_select": {
-        "message": "Sélectionnez la configuration à migrer"
-    },
-    "migration_or": {
-        "message": "ou"
-    },
-    "migration_useCurrent": {
-        "message": "Utiliser la configuration actuelle"
-    },
-    "migration_heading": {
-        "message": "Migration"
+        "message": "Migrer la configuration"
     },
     "migration_execute": {
         "message": "Lancer la migration"
     },
     "migration_download": {
-        "message": "Télécharger la nouvelle configuration"
+        "message": "Télécharger le fichier migré"
     },
-    "migration_error_lowerVersion": {
-        "message": "La configuration ne peut pas être migrée vers une version inférieure"
+    "migration_subtitle": {
+        "message": "Mettez à jour les paramètres enregistrés par une ancienne version de Joorney vers le format actuel."
     },
-    "migration_error_sameVersion": {
-        "message": "La configuration ne peut pas être migrée vers la même version"
+    "migration_sourceTitle": {
+        "message": "Source"
     },
-    "optionsHosts_limitedFeatures": {
-        "message": "Fonctionnalités limitées"
+    "migration_sourceHelp": {
+        "message": "Choisissez les paramètres à migrer : ceux enregistrés dans ce navigateur, ou un fichier exporté auparavant."
     },
-    "optionsHosts_features": {
-        "message": "Fonctionnalités"
+    "migration_current": {
+        "message": "Paramètres actuels"
     },
-    "optionsHosts_whitelist": {
-        "message": "Liste blanche"
+    "migration_storedVersion": {
+        "message": "v$version$ enregistrée",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "1"
+            }
+        }
     },
-    "optionsHosts_whitelistHelp": {
-        "message": "Fonctionnalité désactivée par défaut, sauf si elle est cochée pour une origine dans la section « Origines » ci-dessous"
+    "migration_drop": {
+        "message": "Déposez un export .json ici ou"
     },
-    "optionsHosts_blacklist": {
-        "message": "Liste noire"
+    "migration_stepsTitle": {
+        "message": "Étapes"
     },
-    "optionsHosts_blacklistHelp": {
-        "message": "Fonctionnalité activée par défaut, sauf si elle est cochée pour une origine dans la section « Origines » ci-dessous"
+    "migration_stepsHelp": {
+        "message": "Chaque étape s'exécute dans l'ordre, de la version de vos paramètres jusqu'à la version actuelle."
     },
-    "optionsHosts_disable": {
-        "message": "Désactivées"
+    "migration_chainLabel": {
+        "message": "Chaîne de migration de v$from$ à v$to$",
+        "placeholders": {
+            "from": {
+                "content": "$1",
+                "example": "0"
+            },
+            "to": {
+                "content": "$2",
+                "example": "2"
+            }
+        }
     },
-    "optionsHosts_originInput": {
-        "message": "Filtre d'origine"
+    "migration_version": {
+        "message": "v$version$",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "1"
+            }
+        }
     },
-    "optionsHosts_originsTitle": {
-        "message": "Origine de la base de données Odoo"
+    "migration_stepLabel": {
+        "message": "v$from$ → v$to$",
+        "placeholders": {
+            "from": {
+                "content": "$1",
+                "example": "0"
+            },
+            "to": {
+                "content": "$2",
+                "example": "1"
+            }
+        }
+    },
+    "migration_step_0": {
+        "message": "Le mode bloquer/autoriser passe de global à propre à chaque fonctionnalité."
+    },
+    "migration_step_1": {
+        "message": "L'effet Tâche étoilée devient l'effet Priorité étoilée."
+    },
+    "migration_running": {
+        "message": "Migration en cours…"
+    },
+    "migration_backupHelp": {
+        "message": "La migration remplace vos paramètres enregistrés par les paramètres migrés. Téléchargez d'abord une sauvegarde depuis Import / export si vous souhaitez conserver les anciens."
+    },
+    "migration_done": {
+        "message": "Paramètres migrés vers la v$version$ et enregistrés.",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "2"
+            }
+        }
+    },
+    "migration_backToImportExport": {
+        "message": "Retour à Import / export"
+    },
+    "migration_upToDate": {
+        "message": "Déjà à jour (v$version$), rien à migrer.",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "2"
+            }
+        }
+    },
+    "migration_error_newer": {
+        "message": "Ces paramètres viennent d'une version plus récente de Joorney (v$version$). Mettez l'extension à jour, puis importez-les.",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "3"
+            }
+        }
+    },
+    "migration_error_failed": {
+        "message": "La migration n'a pas pu être enregistrée. Réessayez."
+    },
+    "migration_confirm": {
+        "message": "Vos paramètres actuels seront remplacés par le fichier migré."
+    },
+    "migration_error_refresh": {
+        "message": "Paramètres enregistrés, mais la page n'a pas pu s'actualiser. Rechargez-la pour voir le résultat."
+    },
+    "optionsImportExport_fileMigrateLink": {
+        "message": "migrez-le d'abord"
+    },
+    "optionsImportExport_migrateFile": {
+        "message": "Migrer un fichier"
     },
     "optionsHosts_error_invalidRegex": {
         "message": "Expression régulière invalide"
@@ -822,71 +1571,99 @@
     "optionsHosts_error_originExists": {
         "message": "Origine déjà ajoutée"
     },
-    "optionsPreferences_awesomeLoading": {
-        "message": "Chargement personnalisé"
-    },
     "optionsPreferences_imageUrl": {
         "message": "URL de l'image"
     },
-    "optionsPreferences_addImage": {
-        "message": "Ajouter une image"
-    },
     "optionsPreferences_deleteImage": {
         "message": "Supprimer l'image"
-    },
-    "optionsPreferences_confirmRemoveImage": {
-        "message": "Voulez-vous vraiment supprimer l'image : $url$ ?",
-        "placeholders": {
-            "url": {
-                "content": "$1",
-                "example": "https://i.imgur.com/zTauRWm.gif"
-            }
-        }
     },
     "optionsPreferences_error_missingUrl": {
         "message": "URL manquante"
     },
     "optionsPreferences_error_invalidUrl": {
-        "message": "URL invalide"
+        "message": "URL invalide : utilisez une adresse https complète"
+    },
+    "optionsPreferences_error_syncQuota": {
+        "message": "Trop volumineux pour la synchronisation : $size$ octets, la limite est de $limit$ octets. Rien n’a été enregistré.",
+        "placeholders": {
+            "size": {
+                "content": "$1",
+                "example": "9120"
+            },
+            "limit": {
+                "content": "$2",
+                "example": "8192"
+            }
+        }
+    },
+    "optionsPreferences_error_save": {
+        "message": "Impossible d’enregistrer : $error$",
+        "placeholders": {
+            "error": {
+                "content": "$1",
+                "example": "QUOTA_BYTES quota exceeded"
+            }
+        }
     },
     "optionsPreferences_saveShortcut": {
         "message": "Enregistrer (Ctrl+S)"
     },
-    "optionsPreferences_lightImage": {
-        "message": "URL de l'image claire pour la mise en avant"
-    },
     "optionsPreferences_lightImageAlt": {
-        "message": "Arrière-plan clair de mise en avant"
-    },
-    "optionsPreferences_darkImage": {
-        "message": "URL de l'image sombre pour la mise en avant"
+        "message": "Image de mise en avant du thème clair"
     },
     "optionsPreferences_darkImageAlt": {
-        "message": "Arrière-plan sombre de mise en avant"
-    },
-    "optionsPreferences_superfocusCount": {
-        "message": "Apps mises en avant"
-    },
-    "optionsPreferences_unfocusCount": {
-        "message": "Apps masquées"
-    },
-    "optionsPreferences_latLong": {
-        "message": "Latitude / Longitude"
-    },
-    "optionsPreferences_darkModeRange": {
-        "message": "Mode sombre : début / fin"
+        "message": "Image de mise en avant du thème sombre"
     },
     "optionsPreferences_getLocation": {
         "message": "Utiliser la position actuelle"
     },
-    "optionsPreferences_deleteAll": {
-        "message": "Tout supprimer"
+    "optionsThemeSwitch_modeLabel": {
+        "message": "Mode"
     },
-    "optionsPreferences_menuName": {
-        "message": "Nom du menu"
+    "optionsThemeSwitch_modeSystem": {
+        "message": "Système"
     },
-    "optionsPreferences_menuNameTitle": {
-        "message": "Nom du ir.ui.menu, unique"
+    "optionsThemeSwitch_modeSystemHelp": {
+        "message": "Suit le jeu de couleurs du système."
+    },
+    "optionsThemeSwitch_modeLight": {
+        "message": "Clair"
+    },
+    "optionsThemeSwitch_modeLightHelp": {
+        "message": "Toujours le thème clair."
+    },
+    "optionsThemeSwitch_modeDark": {
+        "message": "Sombre"
+    },
+    "optionsThemeSwitch_modeDarkHelp": {
+        "message": "Toujours le thème sombre."
+    },
+    "optionsThemeSwitch_modeLocation": {
+        "message": "Position"
+    },
+    "optionsThemeSwitch_modeLocationHelp": {
+        "message": "Sombre entre le coucher et le lever du soleil."
+    },
+    "optionsThemeSwitch_modeTime": {
+        "message": "Plage horaire"
+    },
+    "optionsThemeSwitch_modeTimeHelp": {
+        "message": "Sombre entre deux heures."
+    },
+    "optionsThemeSwitch_noSetting": {
+        "message": "Aucun autre réglage pour ce mode."
+    },
+    "optionsThemeSwitch_latitude": {
+        "message": "Latitude"
+    },
+    "optionsThemeSwitch_longitude": {
+        "message": "Longitude"
+    },
+    "optionsThemeSwitch_darkStart": {
+        "message": "Sombre à partir de"
+    },
+    "optionsThemeSwitch_darkStop": {
+        "message": "Sombre jusqu'à"
     },
     "optionsVersions_versions": {
         "message": "Versions Odoo"
@@ -906,17 +1683,50 @@
     "optionsVersions_compatibility": {
         "message": "Compatibilité"
     },
-    "optionsVersions_yes": {
-        "message": "OUI"
+    "optionsVersions_subtitle": {
+        "message": "Choisissez les versions d'Odoo sur lesquelles Joorney agit et voyez quelle fonctionnalité tourne sur quelle version."
     },
-    "optionsVersions_off": {
-        "message": "OFF"
+    "optionsVersions_versionsHelp": {
+        "message": "Joorney n'agit que sur les bases tournant sur une version sélectionnée. Les versions sont enregistrées dès que vous cliquez."
     },
-    "optionsVersions_no": {
-        "message": "NON"
+    "optionsVersions_groupStable": {
+        "message": "Stables"
     },
-    "optionsNotifications_title": {
-        "message": "Mode et type"
+    "optionsVersions_groupIntermediate": {
+        "message": "Intermédiaires (saas)"
+    },
+    "optionsVersions_groupDev": {
+        "message": "Développement"
+    },
+    "optionsVersions_devNote": {
+        "message": "Les versions de développement ne font pas partie de la matrice de compatibilité ci-dessous."
+    },
+    "optionsVersions_compatibilityHelp": {
+        "message": "Chaque fonctionnalité et les versions d'Odoo qu'elle supporte. Les colonnes des versions non sélectionnées sont grisées."
+    },
+    "optionsVersions_feature": {
+        "message": "Fonctionnalité"
+    },
+    "optionsVersions_matrixLabel": {
+        "message": "Matrice de compatibilité"
+    },
+    "optionsVersions_supported": {
+        "message": "Supportée"
+    },
+    "optionsVersions_supportedOff": {
+        "message": "Supportée, version non sélectionnée"
+    },
+    "optionsVersions_unsupported": {
+        "message": "Non supportée"
+    },
+    "optionsVersions_legendSupported": {
+        "message": "Supportée"
+    },
+    "optionsVersions_legendUnsupported": {
+        "message": "Non supportée"
+    },
+    "optionsVersions_legendUnselected": {
+        "message": "Version non sélectionnée"
     },
     "optionsNotifications_showMe": {
         "message": "Montrer"
@@ -931,7 +1741,7 @@
         "message": "Nulle part"
     },
     "optionsNotifications_mode_disabledHint": {
-        "message": "(désactivé)"
+        "message": "Désactivées"
     },
     "optionsNotifications_mode_log": {
         "message": "Console des outils de développement"
@@ -990,9 +1800,6 @@
     "optionsTechnical_destroySync": {
         "message": "Détruire le stockage synchronisé"
     },
-    "optionsTechnical_experimental": {
-        "message": "Expérimental"
-    },
     "optionsTechnical_developerMode": {
         "message": "Mode développeur"
     },
@@ -1018,7 +1825,7 @@
         "message": "Convertit les données en cache local en Base64."
     },
     "optionsTechnical_fallbacks": {
-        "message": "Actions de fenêtre de secours"
+        "message": "Replis des actions de fenêtre"
     },
     "optionsTechnical_host": {
         "message": "Hôte"
@@ -1029,25 +1836,24 @@
     "optionsTechnical_actionModel": {
         "message": "Modèle de l'action"
     },
-    "optionsTechnical_addFallback": {
-        "message": "Ajouter une action de secours"
-    },
     "optionsTechnical_deleteFallback": {
-        "message": "Supprimer l'action de secours"
-    },
-    "optionsTechnical_deleteAllFallbacks": {
-        "message": "Supprimer toutes les actions de secours"
-    },
-    "optionsTechnical_confirmRemoveFallback": {
-        "message": "Voulez-vous vraiment supprimer le chemin « $path$ » pour l'origine « $origin$ » ?",
+        "message": "Supprimer l'action de secours $path$",
         "placeholders": {
             "path": {
                 "content": "$1",
                 "example": "all-tasks"
-            },
-            "origin": {
-                "content": "$2",
-                "example": "https://www.odoo.com"
+            }
+        }
+    },
+    "optionsTechnical_deleteAllFallbacks": {
+        "message": "Tout supprimer"
+    },
+    "optionsTechnical_confirmRemoveFallback": {
+        "message": "Supprimer $path$ ?",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "all-tasks"
             }
         }
     },
@@ -1068,6 +1874,15 @@
     },
     "optionsTechnical_error_missingModel": {
         "message": "Modèle manquant"
+    },
+    "optionsTechnical_error_save": {
+        "message": "Impossible d’enregistrer le repli : $error$",
+        "placeholders": {
+            "error": {
+                "content": "$1",
+                "example": "QUOTA_BYTES_PER_ITEM quota exceeded"
+            }
+        }
     },
     "optionsTechnical_storage": {
         "message": "Stockage"
@@ -1122,14 +1937,11 @@
     "optionsTechnical_storage_sun": {
         "message": "Lever / coucher du soleil"
     },
-    "optionsTechnical_tipUse": {
-        "message": "Utilisez"
-    },
     "optionsTechnical_tipSameLevel": {
-        "message": "pour déplier/replier tous les éléments du même niveau"
+        "message": "déplie ou replie tous les éléments du même niveau."
     },
     "optionsTechnical_tipChildren": {
-        "message": "pour déplier/replier un élément et tous ses enfants"
+        "message": "déplie ou replie un élément et tous ses enfants."
     },
     "optionsTechnical_featuresState": {
         "message": "État des fonctionnalités"
@@ -1145,6 +1957,70 @@
     },
     "optionsTechnical_localData": {
         "message": "Données locales de l'extension"
+    },
+    "optionsTechnical_subtitle": {
+        "message": "Drapeaux expérimentaux et inspection du stockage, pour les personnes qui travaillent sur Joorney ou sur Odoo lui-même."
+    },
+    "optionsTechnical_banner": {
+        "message": "Outils de développement : visibles car le mode debug est activé."
+    },
+    "optionsTechnical_flags": {
+        "message": "Drapeaux"
+    },
+    "optionsTechnical_flagsHelp": {
+        "message": "Expérimental. Ces réglages sont enregistrés avec vos paramètres synchronisés."
+    },
+    "optionsTechnical_fallbacksHelp": {
+        "message": "Pour chaque hôte, le chemin de l'action Odoo (la partie de l'URL après /odoo/) et le modèle qu'elle ouvre, utilisés quand l'action ne peut pas être résolue."
+    },
+    "optionsTechnical_noFallbacks": {
+        "message": "Aucune action de secours pour l'instant. Ajoutez-en une ci-dessus."
+    },
+    "optionsTechnical_cancel": {
+        "message": "Annuler"
+    },
+    "optionsTechnical_confirm": {
+        "message": "Confirmer"
+    },
+    "optionsTechnical_storageHelp": {
+        "message": "Ce que Joorney conserve dans le navigateur, et la part de chaque quota utilisée."
+    },
+    "optionsTechnical_tab_sync": {
+        "message": "Synchronisé"
+    },
+    "optionsTechnical_tab_local": {
+        "message": "Local"
+    },
+    "optionsTechnical_tab_onboarding": {
+        "message": "Prise en main"
+    },
+    "optionsTechnical_syncData": {
+        "message": "Données synchronisées"
+    },
+    "optionsTechnical_swapUsage": {
+        "message": "Basculer entre l'usage total et l'usage par section"
+    },
+    "optionsTechnical_usageAria": {
+        "message": "Usage de $name$ : $percent$ pour cent",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "Sync storage"
+            },
+            "percent": {
+                "content": "$2",
+                "example": "12.5"
+            }
+        }
+    },
+    "optionsTechnical_danger": {
+        "message": "Zone de danger"
+    },
+    "optionsTechnical_dangerLocked": {
+        "message": "Verrouillé. Activez le mode développeur ci-dessus pour utiliser ces actions."
+    },
+    "optionsTechnical_chaosDone": {
+        "message": "Terminé. La page va maintenant se recharger."
     },
     "ambient_category_computed": {
         "message": "Événements calculés"
@@ -1188,6 +2064,21 @@
     "optionsAmbient_none": {
         "message": "Aucun"
     },
+    "optionsAmbient_preview": {
+        "message": "Aperçu"
+    },
+    "optionsAmbient_stop": {
+        "message": "Arrêter l'aperçu"
+    },
+    "optionsAmbient_light": {
+        "message": "Clair"
+    },
+    "optionsAmbient_dark": {
+        "message": "Sombre"
+    },
+    "optionsFeature_settingsHelpThemeSwitch": {
+        "message": "Où et quand le thème sombre s'applique automatiquement : selon la position (lever et coucher du soleil) ou une plage horaire. Le mode du thème se choisit dans la popup."
+    },
     "optionsAmbient_active": {
         "message": "actif"
     },
@@ -1196,9 +2087,6 @@
     },
     "optionsAmbient_enable": {
         "message": "Activé"
-    },
-    "optionsAmbient_disable": {
-        "message": "Désactivé"
     },
     "optionsAmbient_playingInfo": {
         "message": "Ambiance : « $name$ » - Durée : $duration$ ms",
@@ -1212,5 +2100,825 @@
                 "example": "3000"
             }
         }
+    },
+    "optionsHome_title": {
+        "message": "Hôtes"
+    },
+    "optionsHome_subtitleSimple": {
+        "message": "Choisissez quelles fonctionnalités tournent sur chaque hôte."
+    },
+    "optionsHome_subtitleAdvanced": {
+        "message": "Vue avancée : tous les hôtes et toutes les fonctionnalités d'un coup d'œil."
+    },
+    "optionsHome_viewAdvanced": {
+        "message": "Vue avancée"
+    },
+    "optionsHome_viewSimple": {
+        "message": "Vue simple"
+    },
+    "optionsHome_hosts": {
+        "message": "Hôtes"
+    },
+    "optionsHome_hostsOn": {
+        "message": "$count$ actives",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "3"
+            }
+        }
+    },
+    "optionsHome_addHost": {
+        "message": "Ajouter un hôte"
+    },
+    "optionsHome_addPlaceholder": {
+        "message": "https://... ou regex://..."
+    },
+    "optionsHome_add": {
+        "message": "Ajouter"
+    },
+    "optionsHome_regexChip": {
+        "message": "regex"
+    },
+    "optionsHome_removeHost": {
+        "message": "Retirer $host$",
+        "placeholders": {
+            "host": {
+                "content": "$1",
+                "example": "https://www.odoo.com"
+            }
+        }
+    },
+    "optionsHome_removeConfirm": {
+        "message": "Retirer $host$ et ses exceptions ?",
+        "placeholders": {
+            "host": {
+                "content": "$1",
+                "example": "https://www.odoo.com"
+            }
+        }
+    },
+    "optionsHome_removeYes": {
+        "message": "Retirer"
+    },
+    "optionsHome_removeCancel": {
+        "message": "Annuler"
+    },
+    "optionsHome_noHostSelected": {
+        "message": "Aucun hôte sélectionné"
+    },
+    "optionsHome_hostSubtitle": {
+        "message": "Choisissez les fonctionnalités actives sur cet hôte"
+    },
+    "optionsHome_allOn": {
+        "message": "Tout activer ici"
+    },
+    "optionsHome_allOff": {
+        "message": "Tout désactiver ici"
+    },
+    "optionsHome_categories": {
+        "message": "Filtre par catégorie"
+    },
+    "optionsHome_categoryAll": {
+        "message": "Toutes"
+    },
+    "optionsHome_sectionCount": {
+        "message": "$on$ sur $total$ actives ici",
+        "placeholders": {
+            "on": {
+                "content": "$1",
+                "example": "2"
+            },
+            "total": {
+                "content": "$2",
+                "example": "6"
+            }
+        }
+    },
+    "optionsHome_noFeatures": {
+        "message": "Aucune fonctionnalité dans cette catégorie."
+    },
+    "optionsHome_status_everywhereOn": {
+        "message": "Active : suit son défaut (active)"
+    },
+    "optionsHome_status_everywhereOff": {
+        "message": "Inactive ici : exception, elle est active par défaut"
+    },
+    "optionsHome_status_listedOn": {
+        "message": "Active ici : exception, elle est inactive par défaut"
+    },
+    "optionsHome_status_listedOff": {
+        "message": "Inactive : suit son défaut (inactive)"
+    },
+    "optionsHome_status_deactivated": {
+        "message": "Désactivée partout"
+    },
+    "optionsHome_status_regexNote": {
+        "message": "Aussi actif ici via une entrée regex"
+    },
+    "optionsHome_activate": {
+        "message": "Activer"
+    },
+    "optionsHome_runbotGlobal": {
+        "message": "$feature$ globalement",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Auto Open"
+            }
+        }
+    },
+    "optionsHome_runsNowhere": {
+        "message": "Ne tourne sur aucun hôte"
+    },
+    "optionsHome_runbotBuilds": {
+        "message": "Builds runbot"
+    },
+    "optionsHome_runbotBuildsNote": {
+        "message": "Builds runbot : toute adresse correspondant à"
+    },
+    "optionsHome_emptyTitle": {
+        "message": "Ajoutez votre premier hôte"
+    },
+    "optionsHome_emptyText": {
+        "message": "Un hôte est une adresse Odoo, comme https://www.odoo.com. Les fonctionnalités se règlent par hôte : choisissez celles qui y tournent, ou utilisez regex://... pour viser plusieurs bases à la fois."
+    },
+    "optionsHome_hostCount": {
+        "message": "$hosts$ hôtes x $features$ fonctionnalités",
+        "placeholders": {
+            "hosts": {
+                "content": "$1",
+                "example": "4"
+            },
+            "features": {
+                "content": "$2",
+                "example": "13"
+            }
+        }
+    },
+    "optionsHome_matrixLabel": {
+        "message": "Fonctionnalités par hôte"
+    },
+    "optionsHome_modeButton": {
+        "message": "$feature$ : $mode$. Changer le défaut",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Theme Switch"
+            },
+            "mode": {
+                "content": "$2",
+                "example": "On by default"
+            }
+        }
+    },
+    "optionsHome_cellLabel": {
+        "message": "$feature$ sur $host$",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Theme Switch"
+            },
+            "host": {
+                "content": "$2",
+                "example": "https://www.odoo.com"
+            }
+        }
+    },
+    "optionsHome_legendOn": {
+        "message": "Actif pour cet hôte"
+    },
+    "optionsHome_legendOff": {
+        "message": "Inactif pour cet hôte"
+    },
+    "optionsHome_legendException": {
+        "message": "Exception : diffère du défaut de la colonne"
+    },
+    "optionsHome_modeOnCount": {
+        "message": "Active sur $count$ hôtes sur $total$",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "3"
+            },
+            "total": {
+                "content": "$2",
+                "example": "4"
+            }
+        }
+    },
+    "optionsHome_modeOnNone": {
+        "message": "Active sur aucun hôte"
+    },
+    "optionsHome_modeNewOn": {
+        "message": "Nouveaux hôtes : active"
+    },
+    "optionsHome_modeNewOff": {
+        "message": "Nouveaux hôtes : inactive"
+    },
+    "optionsHome_modeFlip": {
+        "message": "Les exceptions sont gardées quand le défaut change, elles s'inversent donc."
+    },
+    "optionsHome_addHint": {
+        "message": "Un nouvel hôte n'a pas d'exception : il suit le défaut de chaque colonne."
+    },
+    "optionsHome_hostsHeader": {
+        "message": "Hôtes"
+    },
+    "optionsHome_setting_title": {
+        "message": "Vue avancée des hôtes"
+    },
+    "optionsHome_setting_text": {
+        "message": "Affiche l'accueil sous forme d'une grille de tous les hôtes et de toutes les fonctionnalités, pour relire et modifier rapidement. Désactivé : un tableau de bord par hôte."
+    },
+    "optionsFeature_breadcrumb": {
+        "message": "Fil d'Ariane"
+    },
+    "optionsFeature_notFound": {
+        "message": "Fonctionnalité introuvable"
+    },
+    "optionsFeature_notFoundText": {
+        "message": "Aucune fonctionnalité ne correspond à ce lien."
+    },
+    "optionsFeature_back": {
+        "message": "Retour à toutes les fonctionnalités"
+    },
+    "optionsFeature_alsoPopup": {
+        "message": "Aussi dans la popup"
+    },
+    "optionsFeature_alsoPopupTitle": {
+        "message": "Cette fonctionnalité a aussi des options rapides dans la popup de la barre d'outils"
+    },
+    "optionsFeature_active": {
+        "message": "Active"
+    },
+    "optionsFeature_activateMenu": {
+        "message": "L'activer demande son défaut"
+    },
+    "optionsFeature_whereTitle": {
+        "message": "Où elle s'exécute"
+    },
+    "optionsFeature_whereHelp": {
+        "message": "Choisissez sur quels hôtes Odoo cette fonctionnalité est active."
+    },
+    "optionsFeature_limitedHelp": {
+        "message": "Cette fonctionnalité ne s'exécute que sur ces hôtes runbot. Ils sont fixes."
+    },
+    "optionsFeature_deactivatedBanner": {
+        "message": "Désactivée : elle ne s'exécute nulle part"
+    },
+    "optionsFeature_modeLabel": {
+        "message": "Où la fonctionnalité s'exécute"
+    },
+    "optionsFeature_hostsTitle": {
+        "message": "Exceptions"
+    },
+    "optionsFeature_noHosts": {
+        "message": "Aucune exception : elle suit le défaut sur chaque hôte."
+    },
+    "optionsFeature_regexChip": {
+        "message": "regex"
+    },
+    "optionsFeature_onHere": {
+        "message": "Active ici"
+    },
+    "optionsFeature_offHere": {
+        "message": "Inactive ici"
+    },
+    "optionsFeature_settings": {
+        "message": "Réglages"
+    },
+    "optionsFeature_settingsHelp": {
+        "message": "Options de cette fonctionnalité, enregistrées au fur et à mesure."
+    },
+    "optionsFeature_settingsMissing": {
+        "message": "Cette fonctionnalité a des paramètres, mais cette version de Joorney ne peut pas encore les afficher."
+    },
+    "optionsFeature_sync": {
+        "message": "Le dernier changement se synchronise sur votre profil Chrome."
+    },
+    "optionsFeature_ambientSlider": {
+        "message": "Comparer les thèmes clair et sombre"
+    },
+    "optionsSettings_title": {
+        "message": "Réglages"
+    },
+    "optionsSettings_subtitle": {
+        "message": "Préférences de toute l'extension."
+    },
+    "optionsSettings_hosts_title": {
+        "message": "Page d'accueil"
+    },
+    "optionsSettings_shortcut_title": {
+        "message": "Raccourci clavier"
+    },
+    "optionsSettings_shortcut_help": {
+        "message": "Raccourci pour activer ou désactiver Joorney temporairement (la seule commande déclarée par l'extension)."
+    },
+    "optionsSettings_shortcut_unset": {
+        "message": "Aucun raccourci défini"
+    },
+    "optionsSettings_shortcut_change": {
+        "message": "Modifiez-le à cet endroit"
+    },
+    "optionsSettings_shortcut_copy": {
+        "message": "Copier chrome://extensions/shortcuts"
+    },
+    "optionsSettings_shortcut_copied": {
+        "message": "Copié. Collez-le dans la barre d'adresse."
+    },
+    "optionsAmbient_play": {
+        "message": "Lire $name$",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "Christmas"
+            }
+        }
+    },
+    "checklist_panelTitle": {
+        "message": "Prenez Joorney en main"
+    },
+    "checklist_panelSubtitle": {
+        "message": "De courts parcours, un par page. Faites-les dans l'ordre que vous voulez."
+    },
+    "checklist_progress": {
+        "message": "$done$ sur $total$ terminés",
+        "placeholders": {
+            "done": {
+                "content": "$1",
+                "example": "2"
+            },
+            "total": {
+                "content": "$2",
+                "example": "6"
+            }
+        }
+    },
+    "checklist_hide": {
+        "message": "Masquer la liste"
+    },
+    "checklist_start": {
+        "message": "Démarrer"
+    },
+    "checklist_resume": {
+        "message": "Reprendre"
+    },
+    "checklist_startTour": {
+        "message": "Démarrer $tour$",
+        "placeholders": {
+            "tour": {
+                "content": "$1",
+                "example": "Home: hosts"
+            }
+        }
+    },
+    "checklist_resumeTour": {
+        "message": "Reprendre $tour$",
+        "placeholders": {
+            "tour": {
+                "content": "$1",
+                "example": "Home: hosts"
+            }
+        }
+    },
+    "checklist_tourSteps": {
+        "message": "$count$ étapes",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "5"
+            }
+        }
+    },
+    "checklist_tourStepsDone": {
+        "message": "$done$ étapes sur $total$",
+        "placeholders": {
+            "done": {
+                "content": "$1",
+                "example": "2"
+            },
+            "total": {
+                "content": "$2",
+                "example": "5"
+            }
+        }
+    },
+    "checklist_tourDone": {
+        "message": "Terminé"
+    },
+    "checklist_toggleSteps": {
+        "message": "Afficher les étapes de $tour$",
+        "placeholders": {
+            "tour": {
+                "content": "$1",
+                "example": "Home: hosts"
+            }
+        }
+    },
+    "checklist_markAllDone": {
+        "message": "Tout marquer comme fait"
+    },
+    "checklist_guideStep": {
+        "message": "Étape $current$ sur $total$",
+        "placeholders": {
+            "current": {
+                "content": "$1",
+                "example": "2"
+            },
+            "total": {
+                "content": "$2",
+                "example": "5"
+            }
+        }
+    },
+    "checklist_guideLabel": {
+        "message": "Parcours $tour$, $step$",
+        "placeholders": {
+            "tour": {
+                "content": "$1",
+                "example": "Home: hosts"
+            },
+            "step": {
+                "content": "$2",
+                "example": "Add a host"
+            }
+        }
+    },
+    "checklist_guideBack": {
+        "message": "Retour"
+    },
+    "checklist_guideNext": {
+        "message": "Suivant"
+    },
+    "checklist_guideFinish": {
+        "message": "Terminer"
+    },
+    "checklist_guideSkip": {
+        "message": "Passer le parcours"
+    },
+    "checklist_guideNoTarget": {
+        "message": "Cet élément n'est pas sur la page pour le moment. Continuez avec Suivant."
+    },
+    "optionsHome_runbotName": {
+        "message": "Runbot"
+    },
+    "optionsHome_builtIn": {
+        "message": "intégré"
+    },
+    "optionsHome_exceptionOff": {
+        "message": "Inactive ici : exception, elle est active par défaut. Cliquez pour suivre le défaut."
+    },
+    "optionsHome_exceptionOn": {
+        "message": "Active ici : exception, elle est inactive par défaut. Cliquez pour suivre le défaut."
+    },
+    "optionsHome_followsEverywhere": {
+        "message": "Suit le défaut (active)"
+    },
+    "optionsHome_followsListed": {
+        "message": "Suit le défaut (inactive)"
+    },
+    "optionsNotifications_subtitle": {
+        "message": "Mode et type des notifications affichées par Joorney."
+    },
+    "optionsNotifications_display": {
+        "message": "Affichage"
+    },
+    "optionsNotifications_modeLabel": {
+        "message": "Mode de notification"
+    },
+    "optionsNotifications_mode_logHint": {
+        "message": "Écrites dans la console du navigateur"
+    },
+    "optionsNotifications_mode_uiHint": {
+        "message": "Notification compacte, une ligne"
+    },
+    "optionsNotifications_mode_largeUiHint": {
+        "message": "Notification avec le message complet"
+    },
+    "optionsNotifications_types": {
+        "message": "Types"
+    },
+    "optionsNotifications_preview": {
+        "message": "Aperçu"
+    },
+    "optionsNotifications_previewType": {
+        "message": "Aperçu : $type$",
+        "placeholders": {
+            "type": {
+                "content": "$1",
+                "example": "Warning"
+            }
+        }
+    },
+    "optionsNotifications_close": {
+        "message": "Fermer"
+    },
+    "optionsFeature_settingsHelpAmbient": {
+        "message": "Quelles ambiances peuvent se jouer sur le menu d'accueil d'Odoo, et un aperçu de chacune."
+    },
+    "optionsHome_hostsActive": {
+        "message": "$count$ actives",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "3"
+            }
+        }
+    },
+    "optionsHome_status_runbotOn": {
+        "message": "Activée : tourne sur les builds runbot"
+    },
+    "optionsAwl_group": {
+        "message": "Loader"
+    },
+    "optionsAwl_default": {
+        "message": "Par défaut (spinner d'Odoo)"
+    },
+    "optionsAwl_builtIn": {
+        "message": "Intégré"
+    },
+    "optionsAwl_inUse": {
+        "message": "Utilisé"
+    },
+    "optionsAwl_deleteLabel": {
+        "message": "Supprimer l'image $url$",
+        "placeholders": {
+            "url": {
+                "content": "$1",
+                "example": "https://example.com/loader.gif"
+            }
+        }
+    },
+    "optionsAwl_confirmRemove": {
+        "message": "Supprimer cette image ?"
+    },
+    "optionsAwl_remove": {
+        "message": "Supprimer"
+    },
+    "optionsAwl_removeLabel": {
+        "message": "Confirmer la suppression de $url$",
+        "placeholders": {
+            "url": {
+                "content": "$1",
+                "example": "https://example.com/loader.gif"
+            }
+        }
+    },
+    "optionsAwl_keep": {
+        "message": "Garder"
+    },
+    "optionsAwl_add": {
+        "message": "Ajouter une URL d'image"
+    },
+    "optionsAwl_cancel": {
+        "message": "Annuler"
+    },
+    "optionsAwl_errorDuplicate": {
+        "message": "Cette image est déjà dans la liste"
+    },
+    "optionsFeature_settingsHelpAwesomeLoading": {
+        "message": "Choisissez le chargeur affiché pendant que Odoo charge. La popup propose le même choix."
+    },
+    "optionsNotifications_loggedHint": {
+        "message": "Écrit dans la console des outils de développement (F12)."
+    },
+    "optionsNotifications_disabledHint": {
+        "message": "Les notifications sont désactivées : rien n'est affiché."
+    },
+    "optionsTechnical_fallbackCountOne": {
+        "message": "1 action de secours"
+    },
+    "optionsTechnical_fallbackCountMany": {
+        "message": "$count$ actions de secours",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "3"
+            }
+        }
+    },
+    "optionsTechnical_fallbackOpens": {
+        "message": "$path$ ouvre $model$",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "all-tasks"
+            },
+            "model": {
+                "content": "$2",
+                "example": "project.task"
+            }
+        }
+    },
+    "optionsTechnical_confirmRemoveHost": {
+        "message": "Supprimer toutes les actions de secours de $origin$ ?",
+        "placeholders": {
+            "origin": {
+                "content": "$1",
+                "example": "https://www.odoo.com"
+            }
+        }
+    },
+    "optionsTechnical_remove": {
+        "message": "Supprimer"
+    },
+    "optionsTechnical_add": {
+        "message": "Ajouter"
+    },
+    "optionsFeature_settingsHelpUnfocusApp": {
+        "message": "Choisissez le comportement des apps masquées, l'image derrière les apps mises en avant, et consultez les apps que Joorney retient pour chaque hôte Odoo."
+    },
+    "optionsFeature_settingsHelpContextOdooMenus": {
+        "message": "Chaque entrée est le chemin d’un menu Odoo : les noms de menu affichés dans Odoo, séparés par /. Joorney trouve le menu sur la base où vous faites le clic droit, un même chemin fonctionne donc sur toutes les versions."
+    },
+    "optionsUnfocus_lightTitle": {
+        "message": "Thème clair"
+    },
+    "optionsUnfocus_darkTitle": {
+        "message": "Thème sombre"
+    },
+    "optionsUnfocus_imageUrl": {
+        "message": "URL de l'image"
+    },
+    "optionsUnfocus_defaultImage": {
+        "message": "Image par défaut"
+    },
+    "optionsUnfocus_customImage": {
+        "message": "Image personnalisée"
+    },
+    "optionsUnfocus_resetImage": {
+        "message": "Par défaut"
+    },
+    "optionsUnfocus_resetLightTitle": {
+        "message": "Utiliser l'image par défaut du thème clair"
+    },
+    "optionsUnfocus_resetDarkTitle": {
+        "message": "Utiliser l'image par défaut du thème sombre"
+    },
+    "optionsUnfocus_restored": {
+        "message": "Image par défaut rétablie."
+    },
+    "optionsUnfocus_undo": {
+        "message": "Annuler"
+    },
+    "optionsUnfocus_invalidImage": {
+        "message": "Ce n'est pas l'URL d'une image : utilisez une adresse https:// terminée par .jpg, .png, .gif, .svg..."
+    },
+    "optionsUnfocus_imageSaveError": {
+        "message": "Impossible d’enregistrer l’image : $error$",
+        "placeholders": {
+            "error": {
+                "content": "$1",
+                "example": "QUOTA_BYTES_PER_ITEM quota exceeded"
+            }
+        }
+    },
+    "optionsUnfocus_hostsTitle": {
+        "message": "Apps retenues par hôte"
+    },
+    "optionsUnfocus_superfocused": {
+        "message": "$count$ mises en avant",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "3"
+            }
+        }
+    },
+    "optionsUnfocus_unfocused": {
+        "message": "$count$ masquées",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "3"
+            }
+        }
+    },
+    "optionsUnfocus_forgetHost": {
+        "message": "Oublier les apps retenues pour $origin$",
+        "placeholders": {
+            "origin": {
+                "content": "$1",
+                "example": "https://www.odoo.com"
+            }
+        }
+    },
+    "optionsUnfocus_confirmForget": {
+        "message": "Oublier les apps retenues pour $origin$ ?",
+        "placeholders": {
+            "origin": {
+                "content": "$1",
+                "example": "https://www.odoo.com"
+            }
+        }
+    },
+    "optionsUnfocus_forget": {
+        "message": "Oublier"
+    },
+    "optionsUnfocus_cancel": {
+        "message": "Annuler"
+    },
+    "optionsUnfocus_empty": {
+        "message": "Aucune app masquée pour l'instant. Masquez une app depuis le menu d'accueil d'Odoo pour la voir ici."
+    },
+    "optionsUnfocus_errorSave": {
+        "message": "Impossible d’enregistrer les applications mémorisées, elles sont affichées telles qu’enregistrées : $error$",
+        "placeholders": {
+            "error": {
+                "content": "$1",
+                "example": "QUOTA_BYTES_PER_ITEM quota exceeded"
+            }
+        }
+    },
+    "optionsUnfocus_imageTitle": {
+        "message": "Image de mise en avant"
+    },
+    "optionsUnfocus_imageHelp": {
+        "message": "Affichée derrière les apps mises en avant. Joorney utilise celle qui correspond au thème de la base Odoo."
+    },
+    "optionsUnfocus_hostsHelp": {
+        "message": "Les apps apparaissent ici dès que vous les étoilez sur le menu d'accueil d'un hôte Odoo. Ouvrez un hôte pour voir ses apps, et remettez-en une en Normale pour l'oublier."
+    },
+    "optionsUnfocus_stateUnfocused": {
+        "message": "Masquée"
+    },
+    "optionsUnfocus_stateNormal": {
+        "message": "Normale"
+    },
+    "optionsUnfocus_stateSuperfocused": {
+        "message": "Mise en avant"
+    },
+    "optionsUnfocus_focusOf": {
+        "message": "Mode de $app$",
+        "placeholders": {
+            "app": {
+                "content": "$1",
+                "example": "Sales"
+            }
+        }
+    },
+    "optionsUnfocus_backToNormal": {
+        "message": "$app$ est revenue à la normale.",
+        "placeholders": {
+            "app": {
+                "content": "$1",
+                "example": "Sales"
+            }
+        }
+    },
+    "optionsUnfocus_sharedHost": {
+        "message": "Tous les hôtes"
+    },
+    "optionsUnfocus_runbotHost": {
+        "message": "Builds runbot"
+    },
+    "optionsUnfocus_sharedChip": {
+        "message": "Partagée"
+    },
+    "optionsUnfocus_notUsedWhileSharing": {
+        "message": "Inutilisée pendant le partage"
+    },
+    "optionsUnfocus_usedOnlyWhileSharing": {
+        "message": "Utilisée seulement pendant le partage"
+    },
+    "optionsUnfocus_sharingNote": {
+        "message": "Partage activé : tous les hôtes utilisent la liste partagée. Les listes par hôte sont conservées, sans fusion, et reviennent quand le partage est désactivé."
+    },
+    "optionsFeature_settingsHelpPinMessage": {
+        "message": "Choisissez les messages que vous pouvez épingler, et si les enregistrements s'ouvrent avec la section épinglée affichée."
+    },
+    "optionsFeature_behaviourTitle": {
+        "message": "Comportement"
+    },
+    "optionsFeature_behaviourHelp": {
+        "message": "Aussi dans la popup de la barre d'outils. Les onglets Odoo prennent un changement en compte au prochain chargement de la page."
+    },
+    "optionsFeature_behaviourOff": {
+        "message": "Cette fonctionnalité est désactivée. Ces réglages s'appliquent dès qu'elle est active."
+    },
+    "optionsUnfocus_reorder": {
+        "message": "Apps masquées à la fin"
+    },
+    "optionsUnfocus_reorderHelp": {
+        "message": "Sur le menu d'accueil, les apps masquées passent après toutes les autres."
+    },
+    "optionsUnfocus_share": {
+        "message": "Partager entre les hôtes"
+    },
+    "optionsUnfocus_shareHelp": {
+        "message": "Tous les hôtes Odoo utilisent une seule liste d'apps partagée. Les listes par hôte sont conservées, et reviennent quand ceci est désactivé."
+    },
+    "optionsPinMessage_selfAuthor": {
+        "message": "Mes messages uniquement"
+    },
+    "optionsPinMessage_selfAuthorHelp": {
+        "message": "Le bouton d'épinglage apparaît sur vos messages, et la section épinglée liste ce que vous avez épinglé. Désactivé : épinglez n'importe quel message et voyez les épingles de tout le monde."
+    },
+    "optionsPinMessage_defaultShown": {
+        "message": "Ouvrir la section épinglée au chargement"
+    },
+    "optionsPinMessage_defaultShownHelp": {
+        "message": "Les enregistrements s'ouvrent avec les messages épinglés déjà affichés dans le chatter."
     }
 }

@@ -4,108 +4,149 @@ import { includeVersion } from '../../../src/utils/authorize.js';
 import { StorageSync } from '../../../src/utils/browser.js';
 import { SUPPORTED_DEV_VERSION, SUPPORTED_VERSION } from '../../../src/utils/constant.js';
 import { featureName, t } from '../../../src/utils/i18n.js';
-import { iconHTML } from '../../../src/utils/icons.js';
+import { iconHTML, setIcon } from '../../../src/utils/icons.js';
+import { featurePageURL } from '../../src/ui/feature_card.js';
+import { enqueue } from '../../src/ui/state.js';
 
 export async function loadPage(features, currentSettings) {
-    loadSupportedOdoo(currentSettings, features);
-    loadSupportedOdoo(currentSettings, features, true);
-    loadSupportedFeature(features, currentSettings.supportedVersions);
+    const matrixFeatures = features.filter((f) => !f.limited);
+    const renderMatrix = (versions) => loadSupportedFeature(matrixFeatures, versions);
+
+    const stable = SUPPORTED_VERSION.filter((v) => !isIntermediate(v));
+    const intermediate = SUPPORTED_VERSION.filter(isIntermediate);
+    const container = document.getElementById('joorney-odoo-versions');
+    container.innerHTML = '';
+    // Same wrapper as the development group, inside the container the tour targets
+    for (const [title, versions] of [
+        [t('optionsVersions_groupStable'), stable],
+        [t('optionsVersions_groupIntermediate'), intermediate],
+    ]) {
+        if (!versions.length) continue;
+        container.appendChild(
+            stringToHTML(`
+                <div class="joorney-versions-group">
+                    <h3 class="joorney-versions-heading">${escapeHTML(title)}</h3>
+                    <div class="joorney-versions-chips"></div>
+                </div>
+            `)
+        );
+        loadChips(container.lastElementChild.querySelector('.joorney-versions-chips'), versions, {
+            selected: currentSettings.supportedVersions,
+            storage: 'supportedVersions',
+            onChange: renderMatrix,
+        });
+    }
+
+    // Development versions only exist in developer mode (the list is empty otherwise)
+    const devGroup = document.getElementById('joorney-odoo-dev-group');
+    devGroup.hidden = SUPPORTED_DEV_VERSION.length === 0;
+    const devContainer = document.getElementById('joorney-odoo-dev-versions');
+    devContainer.innerHTML = '';
+    loadChips(devContainer, SUPPORTED_DEV_VERSION, {
+        selected: currentSettings.supportedDevVersions,
+        storage: 'supportedDevVersions',
+    });
+
+    renderMatrix(currentSettings.supportedVersions);
 }
 
-function loadSupportedOdoo(currentSettings, features, isdev = false) {
-    let containerID = 'joorney-odoo-versions';
-    let settingKey = 'supportedVersions';
-    let toggleClass = 'odoo-version-wrapper';
-    let ALL = SUPPORTED_VERSION;
-
-    if (isdev) {
-        containerID = 'joorney-odoo-dev-versions';
-        settingKey = 'supportedDevVersions';
-        toggleClass = 'dev odoo-version-wrapper';
-        ALL = SUPPORTED_DEV_VERSION;
-    }
-    const supported = currentSettings[settingKey];
-    const versionContainer = document.getElementById(containerID);
-
-    for (const version of ALL) {
+function loadChips(container, versions, { selected, storage, onChange }) {
+    for (const version of versions) {
         const versionID = sanitizeVersionID(version);
-        const versionElement = stringToHTML(`
-			<label
-				title="${escapeHTML(t('optionsVersions_versionTitle', version))}"
-				for="joorney_${versionID}_version"
-				style="width: 200px"
-			>
-				<input id="joorney_${versionID}_version" class="input-hide" type="checkbox" />
-				<div class="${toggleClass} d-flex align-items-center justify-content-center">
-					<i class="joorney-icon joorney-font-icon-size me-2" aria-hidden="true"></i>
-					<p>${version}</p>
-				</div>
-			</label>
-		`);
-        versionContainer.appendChild(versionElement);
+        const chip = stringToHTML(`
+            <label
+                class="joorney-version-chip"
+                title="${escapeHTML(t('optionsVersions_versionTitle', versionLabel(version)))}"
+                for="joorney_${versionID}_version"
+            >
+                <input id="joorney_${versionID}_version" type="checkbox" />
+                ${iconHTML('radio_button_unchecked')}
+                <span>${escapeHTML(versionLabel(version))}</span>
+            </label>
+        `);
+        container.appendChild(chip);
 
-        const versionInput = document.getElementById(`joorney_${versionID}_version`);
-        versionInput.checked = supported.includes(version);
-        versionInput.onchange = async (e) => {
-            const settings = await StorageSync.get(baseSettings);
-            let versions = new Set(settings[settingKey]);
-            e.target.checked ? versions.add(version) : versions.delete(version);
-            versions = Array.from(versions);
-            await StorageSync.set({ [settingKey]: versions });
-            if (!isdev) await loadSupportedFeature(features, versions);
+        const input = chip.querySelector('input');
+        const icon = chip.querySelector('.joorney-icon');
+        const syncIcon = () => setIcon(icon, input.checked ? 'check_circle' : 'radio_button_unchecked');
+        input.checked = selected.includes(version);
+        syncIcon();
+        input.onchange = async (e) => {
+            syncIcon();
+            const checked = e.target.checked;
+            // Queued: two quick chips would both read the same list and the second write would drop the first
+            await enqueue(async () => {
+                // Read fresh: another tab or page may have changed the list since load
+                const settings = await StorageSync.get(baseSettings);
+                let list = new Set(settings[storage]);
+                checked ? list.add(version) : list.delete(version);
+                list = Array.from(list);
+                await StorageSync.set({ [storage]: list });
+                if (onChange) await onChange(list);
+            });
         };
     }
 }
 
 async function loadSupportedFeature(features, supportedVersions) {
-    const versionContainerHead = document.getElementById('joorney-feature-versions-head');
-    versionContainerHead.innerHTML = '';
-
-    const header = stringToHTML(`
-        <tr>
-            <th class="text-end opacity-50">${escapeHTML(t('optionsVersions_compatibility'))}</th>
-            <th class="text-center" style="width: 32px"><i class="joorney-icon joorney-icon-filled" data-icon="category" aria-hidden="true"></i></th>
-            ${SUPPORTED_VERSION.map((v) => `<th class="text-center">${v}</th>`).join('')}
-        </tr>
-    `);
-    versionContainerHead.appendChild(header);
-
-    const versionContainerBody = document.getElementById('joorney-feature-versions-body');
-    versionContainerBody.innerHTML = '';
-
-    for (const feature of features.filter((f) => !f.limited)) {
-        const versions = SUPPORTED_VERSION.map((v) => {
-            return {
-                odoo: includeVersion(supportedVersions, v),
-                feature: includeVersion(feature.supported_version, v, true),
-            };
-        });
-        const versionRow = stringToHTML(`
+    const head = document.getElementById('joorney-feature-versions-head');
+    head.innerHTML = '';
+    head.appendChild(
+        stringToHTML(`
             <tr>
-                <th class="text-end">
-                    <span>${escapeHTML(featureName(feature))}</span>
-                </th>
-                <th>
-                    <div class="icon-wrapper">
-                        ${iconHTML(feature.icon, { filled: true })}
-                    </div>
-                </th>
-                ${versions
-                    .map(
-                        (v) =>
-                            `<td class="text-center table-${v.feature ? (v.odoo ? 'success' : 'warning') : 'danger'}">
-                                <span class="opacity-25">${escapeHTML(v.feature ? (v.odoo ? t('optionsVersions_yes') : t('optionsVersions_off')) : t('optionsVersions_no'))}</span>
-                            </td>`
-                    )
-                    .join('')}
+                <th class="joorney-versions-feature" scope="col">${escapeHTML(t('optionsVersions_feature'))}</th>
+                ${SUPPORTED_VERSION.map(
+                    (v) =>
+                        `<th scope="col" title="${escapeHTML(t('optionsVersions_versionTitle', versionLabel(v)))}" class="${includeVersion(supportedVersions, v) ? 'is-selected' : 'is-unselected'}"><div class="joorney-versions-label"><span>${escapeHTML(versionLabel(v))}</span></div></th>`
+                ).join('')}
             </tr>
-		`);
-        versionContainerBody.appendChild(versionRow);
+        `)
+    );
+
+    const body = document.getElementById('joorney-feature-versions-body');
+    body.innerHTML = '';
+    for (const feature of features) {
+        const name = featureName(feature);
+        const cells = SUPPORTED_VERSION.map((v) => {
+            const selected = includeVersion(supportedVersions, v);
+            const supported = includeVersion(feature.supported_version, v, true);
+            const text = supported
+                ? selected
+                    ? t('optionsVersions_supported')
+                    : t('optionsVersions_supportedOff')
+                : t('optionsVersions_unsupported');
+            return `<td class="${supported ? 'is-yes' : 'is-no joorney-versions-unsupported'} ${selected ? '' : 'is-unselected'}">
+                ${iconHTML(supported ? 'check' : 'remove')}<span class="joorney-visually-hidden">${escapeHTML(text)}</span>
+            </td>`;
+        });
+        body.appendChild(
+            stringToHTML(`
+                <tr>
+                    <th class="joorney-versions-feature" scope="row">
+                        <div class="joorney-versions-fcell">
+                            <span class="joorney-versions-ficon">${iconHTML(feature.icon, { filled: true })}</span>
+                            <a href="${escapeHTML(featurePageURL(feature.id))}">${escapeHTML(name)}</a>
+                        </div>
+                    </th>
+                    ${cells.join('')}
+                </tr>
+            `)
+        );
     }
 }
 
+// Stored versions carry no "saas-" prefix: only x.0 versions are stable, the others are intermediate (saas)
+function isIntermediate(version) {
+    return !version.endsWith('.0');
+}
+
+function versionLabel(version) {
+    return isIntermediate(version) ? `saas-${version}` : version;
+}
+
+// Used in id/for attributes: the versions come from the remote store/odoo.json, keep only id-safe characters
 function sanitizeVersionID(version) {
-    return version.replace('.', '_');
+    return `${version}`.replace(/[^a-zA-Z0-9_-]/g, '_');
 }
 
 // Options menu entry, see options/menu.js

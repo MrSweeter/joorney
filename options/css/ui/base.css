@@ -1,0 +1,482 @@
+/* Shared building blocks of the options pages: page frame, panels, buttons, chips, switch, notes. */
+
+/* Components set their own display: keep the hidden attribute stronger */
+[hidden] {
+    display: none !important;
+}
+
+.joorney-page {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-block: 24px 48px;
+    padding-inline: 24px;
+    color: var(--joorney-text);
+}
+
+.joorney-page-title {
+    margin: 4px 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--joorney-text);
+}
+
+.joorney-page-subtitle {
+    margin: 0 0 20px;
+    font-size: 14px;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-panel {
+    margin-bottom: 20px;
+    padding: 24px;
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-card);
+    box-shadow: var(--joorney-shadow);
+}
+
+.joorney-panel.is-highlighted {
+    border: 2px solid var(--joorney-orange);
+}
+
+.joorney-panel-title {
+    margin: 0 0 4px;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--joorney-text);
+}
+
+.joorney-help {
+    margin: 0 0 16px;
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--joorney-text-muted);
+}
+
+/* Help under a sub-heading of a settings block */
+.joorney-help.is-small {
+    margin: 0;
+    font-size: 13px;
+}
+
+.joorney-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+}
+
+.joorney-mono {
+    padding: 2px 6px;
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 13px;
+    color: var(--joorney-text);
+    background: var(--joorney-ground);
+    border-radius: 4px;
+    word-break: break-all;
+}
+
+.joorney-visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    white-space: nowrap !important;
+}
+
+.joorney-page :focus-visible,
+.joorney-nav :focus-visible,
+.joorney-modal :focus-visible {
+    outline: 2px solid var(--joorney-focus);
+    outline-offset: 2px;
+}
+
+/*#region Buttons */
+.joorney-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 38px;
+    padding: 0 16px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    color: #fff;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    background: var(--joorney-navy);
+    border: 1px solid var(--joorney-navy);
+    border-radius: var(--joorney-radius-control);
+}
+
+.joorney-btn:hover {
+    color: #fff;
+    background: var(--joorney-navy-dark);
+}
+
+.joorney-btn.is-secondary {
+    color: var(--joorney-text);
+    background: var(--joorney-surface);
+    border-color: var(--joorney-border-strong);
+}
+
+.joorney-btn.is-secondary:hover {
+    color: var(--joorney-text);
+    background: var(--joorney-ground);
+}
+
+.joorney-btn:disabled,
+.joorney-btn[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.joorney-icon-btn {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    color: var(--joorney-text);
+    text-decoration: none;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    border-radius: var(--joorney-radius-control);
+}
+
+.joorney-icon-btn:hover {
+    color: var(--joorney-text);
+    background: var(--joorney-hover);
+}
+
+.joorney-icon-btn.is-small {
+    width: 28px;
+    height: 28px;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-link-btn {
+    padding: 4px 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--joorney-text);
+    text-decoration: underline;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    border-radius: var(--joorney-radius-control);
+}
+
+.joorney-link-btn:hover {
+    background: var(--joorney-hover);
+}
+
+.joorney-link-btn.is-strong {
+    font-weight: 700;
+}
+
+/* Opens or folds a block; the page sets the size and turns its chevron */
+.joorney-disclosure {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    min-width: 0;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+    background: none;
+    border: 0;
+    border-radius: var(--joorney-radius-control);
+}
+
+/* Square icon in front of a title */
+.joorney-icon-box {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    color: var(--joorney-text);
+    background: var(--joorney-hover);
+    border-radius: var(--joorney-radius-control);
+}
+/*#endregion */
+
+/*#region Fields */
+.joorney-label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--joorney-text-soft);
+}
+
+/* Text input or select; the page sets its width or flex */
+.joorney-input {
+    min-width: 0;
+    height: 38px;
+    padding: 0 10px;
+    font: inherit;
+    font-size: 14px;
+    color: var(--joorney-text);
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border-strong);
+    border-radius: var(--joorney-radius-control);
+}
+
+.joorney-input::placeholder {
+    color: var(--joorney-text-muted);
+}
+/*#endregion */
+
+/*#region Chips and state badges */
+.joorney-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.joorney-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    height: 22px;
+    padding: 0 8px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--joorney-text-soft);
+    white-space: nowrap;
+    background: var(--joorney-hover);
+    border-radius: 11px;
+}
+
+.joorney-chip.is-tag {
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border-strong);
+}
+
+.joorney-chip.is-version {
+    color: var(--joorney-state-everywhere-text);
+    background: var(--joorney-state-everywhere-tint);
+}
+
+.joorney-chip .joorney-icon {
+    font-size: 14px;
+}
+
+.joorney-chip.is-warning {
+    color: var(--joorney-state-listed-text);
+    background: var(--joorney-state-listed-tint);
+}
+
+.joorney-state-badge {
+    display: inline-flex;
+    align-items: center;
+    height: 22px;
+    padding: 0 8px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+    border: 1px solid transparent;
+    border-radius: 11px;
+}
+
+.joorney-state-badge.is-everywhere {
+    color: var(--joorney-state-everywhere-text);
+    background: var(--joorney-state-everywhere-tint);
+    border-color: var(--joorney-state-everywhere);
+}
+
+.joorney-state-badge.is-listed {
+    color: var(--joorney-state-listed-text);
+    background: var(--joorney-state-listed-tint);
+    border-color: var(--joorney-state-listed);
+}
+
+.joorney-state-badge.is-deactivated {
+    color: var(--joorney-state-off-text);
+    background: var(--joorney-state-off-tint);
+    border-color: var(--joorney-state-off);
+}
+
+.joorney-state-badge.is-active {
+    color: var(--joorney-state-everywhere-text);
+    background: var(--joorney-state-everywhere-tint);
+}
+/*#endregion */
+
+/*#region Switch: <button role="switch" aria-checked> */
+.joorney-switch {
+    position: relative;
+    flex: none;
+    width: 36px;
+    height: 20px;
+    padding: 0;
+    cursor: pointer;
+    background: var(--joorney-switch-off);
+    border: 0;
+    border-radius: 10px;
+    transition: background-color 0.15s;
+}
+
+.joorney-switch::after {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    content: "";
+    background: #fff;
+    border-radius: 50%;
+    transition: left 0.15s;
+}
+
+.joorney-switch[aria-checked="true"] {
+    background: var(--joorney-switch-on);
+}
+
+.joorney-switch[aria-checked="true"]::after {
+    left: 18px;
+}
+
+.joorney-switch:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.joorney-switch:focus-visible {
+    outline: 2px solid var(--joorney-orange);
+    outline-offset: 2px;
+}
+/*#endregion */
+
+/*#region Notes and messages */
+.joorney-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin: 0 0 16px;
+    padding: 12px 16px;
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--joorney-text);
+    background: var(--joorney-hover);
+    border-radius: var(--joorney-radius-control);
+}
+
+.joorney-note > .joorney-icon {
+    flex: none;
+    margin-top: 2px;
+}
+
+.joorney-note.is-warning {
+    color: var(--joorney-warn-text);
+    background: var(--joorney-state-listed-tint);
+    border: 1px solid var(--joorney-orange);
+}
+
+.joorney-note.is-success {
+    background: var(--joorney-state-everywhere-tint);
+}
+
+.joorney-note.is-error {
+    color: var(--joorney-error-text);
+    background: var(--joorney-error-tint);
+    border: 1px solid var(--joorney-error-border);
+}
+
+/* One line under a field or a form, the icon first */
+.joorney-error {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    margin: 0;
+    font-size: 14px;
+    color: var(--joorney-error-text);
+}
+
+.joorney-error .joorney-icon {
+    flex: none;
+    font-size: 18px;
+}
+
+.joorney-error.is-small {
+    font-size: 12px;
+}
+
+.joorney-empty {
+    padding: 24px;
+    margin: 0;
+    font-size: 14px;
+    color: var(--joorney-text-muted);
+    text-align: center;
+    background: var(--joorney-surface-soft);
+    border: 1px dashed var(--joorney-border-strong);
+    border-radius: var(--joorney-radius-card);
+}
+
+/* Inline confirmation (no confirm()): the question, then its buttons */
+.joorney-ask {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    padding: 8px 12px;
+    font-size: 14px;
+    background: var(--joorney-hover);
+    border-radius: var(--joorney-radius-control);
+}
+
+.joorney-ask > span:first-child {
+    flex: 1 1 200px;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+/*#endregion */
+
+/*#region Pills */
+/* Single choice filter, e.g. a category */
+.joorney-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.joorney-pill {
+    height: 32px;
+    padding: 0 14px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--joorney-text-soft);
+    cursor: pointer;
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border-strong);
+    border-radius: 16px;
+}
+
+.joorney-pill:hover {
+    background: var(--joorney-hover);
+}
+
+.joorney-pill[aria-pressed="true"] {
+    color: #fff;
+    background: var(--joorney-navy);
+    border-color: var(--joorney-navy);
+}
+/*#endregion */
+
+.action-head {
+    width: 5%;
+}

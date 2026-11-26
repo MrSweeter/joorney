@@ -2,6 +2,9 @@ export default {
     id: 'saveKnowledge',
     display_name: 'Save Knowledge',
     icon: 'bookmark',
+    category: 'productivity',
+    tags: ['knowledge'],
+    video: '',
     trigger: {
         load: true,
         navigate: true,

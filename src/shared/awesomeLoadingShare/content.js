@@ -1,5 +1,6 @@
 import ContentFeature from '../../generic/content.js';
 import { isOdooWebsite } from '../../utils/authorize.js';
+import { resolveLoaderImage } from './loader.js';
 
 export default class AwesomeLoadingShareContentFeature extends ContentFeature {
     constructor(configuration) {
@@ -14,7 +15,7 @@ export default class AwesomeLoadingShareContentFeature extends ContentFeature {
 
         const image = await this.getLoadingImage();
         if (image) {
-            this.appendLoadingToDOM(image);
+            this.appendLoadingToDOM(resolveLoaderImage(image));
         }
     }
 
@@ -37,7 +38,7 @@ export default class AwesomeLoadingShareContentFeature extends ContentFeature {
         if (img || img === false) {
             const exist = Array.from(document.getElementsByName(this.loadingID));
             for (const e of exist) e.remove();
-            if (img && isOdooWebsite(msg.url)) this.appendLoadingToDOM(img);
+            if (img && isOdooWebsite(msg.url)) this.appendLoadingToDOM(resolveLoaderImage(img));
         }
     }
 

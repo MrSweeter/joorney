@@ -2,6 +2,9 @@ export default {
     id: 'impersonateLoginRunbot',
     display_name: '[Runbot] Impersonate Login',
     icon: 'theater_comedy',
+    category: 'runbot',
+    tags: ['runbot', 'debug'],
+    video: '',
     trigger: {
         load: true,
         navigate: true,

@@ -15,7 +15,8 @@ export default class AwesomeLoadingLargeContentFeature extends AwesomeLoadingSha
                 .o_spinner > img[src^="/web/static/img/spin."]:first-child,
                 .oe_blockui_spin > img[src="/web/static/src/img/spin.png"]:first-child {
 
-                    content: url(${image});
+                    /* Quoted and escaped: the URL is typed by the user, a ')' or '</style>' would break out */
+                    content: url("${CSS.escape(image)}");
 
                     /* Resize the image automatically */
                     max-height: 46px;

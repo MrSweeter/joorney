@@ -125,23 +125,40 @@ function updateFeatureState(featureID, add) {
     fs.writeFileSync(stateFile, `${JSON.stringify(state, null, 4)}\n`, 'utf8');
 }
 
-// Feature name key (src/utils/i18n.js featureName), English value as placeholder for every language
+// Feature keys (src/utils/i18n.js featureName/featureDescription/featureDetails), all required by
+// scripts/i18n_check.js for every src/features folder. English placeholder in every language.
 function updateFeatureLocales(featureName, add) {
     const localesFolder = `${__dirname}/../_locales`;
-    const key = `feature_${featureName.id}_name`;
+    const { default_locale } = JSON.parse(fs.readFileSync(`${__dirname}/../manifest.json`, 'utf8'));
+    const prefix = `feature_${featureName.id}`;
+    const entries = {
+        [`${prefix}_name`]: {
+            message: featureName.display,
+            description: 'Feature name (popup, options, right-click menu)',
+        },
+        [`${prefix}_description`]: {
+            message: featureName.display,
+            description: 'Feature one-line description (options)',
+        },
+        [`${prefix}_details`]: {
+            message: featureName.display,
+            description: 'Feature details, a few sentences (options)',
+        },
+    };
 
     for (const lang of fs.readdirSync(localesFolder)) {
         const messagesFile = `${localesFolder}/${lang}/messages.json`;
         if (!fs.existsSync(messagesFile)) continue;
 
         const messages = JSON.parse(fs.readFileSync(messagesFile, 'utf8'));
-        if (add && key in messages) continue;
-        if (add) messages[key] = { message: featureName.display };
-        else delete messages[key];
+        for (const [key, entry] of Object.entries(entries)) {
+            if (!add) delete messages[key];
+            else if (!(key in messages)) messages[key] = lang === default_locale ? entry : { message: entry.message };
+        }
 
         fs.writeFileSync(messagesFile, `${JSON.stringify(messages, null, 4)}\n`, 'utf8');
     }
-    if (add) console.info(`Translate '${key}' in _locales/*/messages.json`);
+    if (add) console.info(`Translate '${prefix}_{name,description,details}' in _locales/*/messages.json`);
 }
 
 //#region CRUD
@@ -152,6 +169,10 @@ function createFeature(featureName, option) {
         id: featureName.id,
         display_name: featureName.display,
         icon: 'help',
+        // 'ui' | 'productivity' | 'technical' | 'runbot'; tags are ids of tag_<id> in _locales
+        category: 'productivity',
+        tags: [],
+        video: '',
         trigger: {
             background: option['--with-trigger-background'],
             load: option['--with-trigger-load'],
@@ -189,7 +210,6 @@ function createFeature(featureName, option) {
 
     updateFeature(featureName, option);
 
-    createFileWithTemplate(featureName, 'option.js', '');
     if (!configuration.customization.popup) {
         createFileWithTemplate(featureName, 'popup.js', '');
     }
@@ -210,6 +230,10 @@ function updateFeature(featureName, option) {
 
     if (option['--with-customization-option']) {
         fileCreated = createFileWithTemplate(featureName, 'option_customization.js', '') || fileCreated;
+        // The feature page only shows the blocks it knows: without them, its Settings card stays empty
+        console.info(
+            `Register the Settings block of ${featureName.id}: its markup in BLOCKS (options/pages/feature/settings.js) and its help in settingsHelp (options/pages/feature/index.js)`
+        );
     }
 
     if (option['--with-customization-popup']) {

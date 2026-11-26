@@ -8,7 +8,7 @@
         "description": "Extension description (manifest, Chrome Web Store). Max 132 characters"
     },
     "command_enableDisable": {
-        "message": "Enable or Disable extension features on the current origin",
+        "message": "Turn extension features on or off on the current origin",
         "description": "Keyboard shortcut description (chrome://extensions/shortcuts)"
     },
     "badge_off": {
@@ -197,6 +197,218 @@
         "message": "Unfocus App",
         "description": "Feature name (popup, options, right-click menu)"
     },
+    "feature_awesomeLoadingSmall_description": {
+        "message": "Replace the small Odoo loading text with a custom design.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_awesomeLoadingSmall_details": {
+        "message": "Change the \"Loading\" indicator shown at the bottom right of the page while Odoo loads. Pick one of the available designs, with a live preview in the options.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_awesomeLoadingLarge_description": {
+        "message": "Replace the fullscreen Odoo loading spinner with a custom design.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_awesomeLoadingLarge_details": {
+        "message": "Change the large fullscreen loading design of Odoo. Note that the large loading has been removed in Odoo 17.0, so this feature only applies to older versions.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_awesomeStyle_description": {
+        "message": "Apply custom CSS styles on your Odoo database page.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_awesomeStyle_details": {
+        "message": "Personalize the appearance of your Odoo interface by applying your own CSS. It is perfect to tweak colors, spacing or hide elements without any technical setup beyond a few lines of CSS.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_themeSwitch_description": {
+        "message": "Switch the Odoo theme dynamically based on a configured option.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_themeSwitch_details": {
+        "message": "Change the Odoo theme depending on your location, a time range, or simply your preferred one. Note that Odoo now manages this with a user preference, a real backend switch instead of a frontend-only one.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_ambient_description": {
+        "message": "Add particle effects like snow, pumpkins, and fireworks to enhance user engagement.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_ambient_details": {
+        "message": "Bring your Odoo main menu to life with particle effects for special events and days: falling snow in winter, flying pumpkins for Halloween, fireworks on New Year's Eve. Effects can have an impact on performance, so each event or effect can be turned off in the options.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_starringPriorityEffect_description": {
+        "message": "Trigger a stars particles effect when you prioritize a record.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_starringPriorityEffect_details": {
+        "message": "Adds a bit of magic to prioritization: when you set the priority of a record or ticket, a stars particles effect gives instant and pleasant visual confirmation.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_unfocusApp_description": {
+        "message": "Hide the apps that you are not using frequently, so you can focus on the ones that are more relevant to your work.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_unfocusApp_details": {
+        "message": "Click the star next to an app name on the Odoo home page to hide or show it, which reduces clutter and keeps your essential apps at hand. Double-click the star to highlight an app with a background image around its icon.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_assignMeTask_description": {
+        "message": "Add a new button to the task form that you can click to assign yourself the task.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_assignMeTask_details": {
+        "message": "Adds a button to the task form to assign any task to yourself in one click. Before Odoo 16.3, Odoo had a standard button for it, this feature brings it back. As it is not standard, the button reloads the page, which can lose navigation history. A developer option appends a simulated UI instead of reloading.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_pinMessage_description": {
+        "message": "Pin message to the top of chatter for easy access.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_pinMessage_details": {
+        "message": "Quickly pin important messages of the chatter so critical information stays at the top and easy to find. It reuses the standard star of a message and turns it into a pin. It depends heavily on the Odoo chatter, so it is not the most stable feature. This feature has been added in standard versions of Odoo.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_followUnfollow_description": {
+        "message": "Add a fast follow/unfollow toggle beside the mail followers button.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_followUnfollow_details": {
+        "message": "Adds a quick action next to the followers button to follow or unfollow a record with a single click. You no longer need to open the full followers menu just to change your subscription.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_showMyBadge_description": {
+        "message": "Show user's badges in the user card.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_showMyBadge_details": {
+        "message": "Displays the badges of a user in their user card, highlighting achievements and rewards. It makes profiles more informative and promotes a sense of achievement and community.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_contextOdooMenus_description": {
+        "message": "Add Odoo's menus to the browser context menu.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_contextOdooMenus_details": {
+        "message": "Access Odoo menus directly from the right-click menu of your browser. It saves steps to reach a feature and makes the navigation more seamless.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_saveKnowledge_description": {
+        "message": "Add a new button on the top right corner of the article page that you can click to force the save of it.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_saveKnowledge_details": {
+        "message": "Adds a save button to the top right corner of article pages, to save an article for sure with one click. Between the addition of the Knowledge app and Odoo 17.0 there was no easy way to force the save. This feature has been added in standard versions of Odoo.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_tooltipMetadata_description": {
+        "message": "Show you current record metadata by hovering the debug icon.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_tooltipMetadata_details": {
+        "message": "Hover the debug icon to instantly see the metadata of the current record, without navigating away from the current view. It saves clicks and page loads when you analyze or troubleshoot a record.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_newServerActionCode_description": {
+        "message": "Automatically select \"Execute code\" as type for Server Action.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_newServerActionCode_details": {
+        "message": "Automatically selects \"Execute code\" as the type of a new server action. Developers can focus directly on writing and testing code, without the extra step of setting the action type.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_autoOpenRunbot_description": {
+        "message": "Open a runbot instance in a specific version by adding ?joorney-runbot=17.0 to the runbot URL, like https://runbot.odoo.com?joorney-runbot=17.0",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_autoOpenRunbot_details": {
+        "message": "Adds a search parameter to the runbot URL to open an instance in a specific version, as an admin user in debug mode. For example, https://runbot.odoo.com?joorney-runbot=17.0 opens a runbot in version 17.0. Change the parameter to reach other versions.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_impersonateLoginRunbot_description": {
+        "message": "Impersonate a default user on a runbot, such as admin, demo, or portal.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_impersonateLoginRunbot_details": {
+        "message": "Adds options to the login page menu of a runbot to log in as a default user such as admin, demo or portal. It is handy to test and support with the point of view of different user roles and to identify user-specific issues.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "feature_adminDebugLoginRunbot_description": {
+        "message": "Open a runbot instance from the runbot page as an admin user in debug mode.",
+        "description": "Feature one-line description (options)"
+    },
+    "feature_adminDebugLoginRunbot_details": {
+        "message": "Adds an icon next to the database name on the runbot page, to open the instance as an admin user in debug mode with a single click. It reduces the steps needed to access and debug runbot instances.",
+        "description": "Feature details, a few sentences (options)"
+    },
+    "category_ui": {
+        "message": "Look & feel",
+        "description": "Feature category label (options)"
+    },
+    "category_productivity": {
+        "message": "Productivity",
+        "description": "Feature category label (options)"
+    },
+    "category_technical": {
+        "message": "Technical",
+        "description": "Feature category label (options)"
+    },
+    "category_runbot": {
+        "message": "Runbot (limited)",
+        "description": "Feature category label (options)"
+    },
+    "tag_loading": {
+        "message": "Loading",
+        "description": "Feature tag label (options)"
+    },
+    "tag_fun": {
+        "message": "Fun",
+        "description": "Feature tag label (options)"
+    },
+    "tag_css": {
+        "message": "CSS",
+        "description": "Feature tag label (options)"
+    },
+    "tag_theme": {
+        "message": "Theme",
+        "description": "Feature tag label (options)"
+    },
+    "tag_seasonal": {
+        "message": "Seasonal",
+        "description": "Feature tag label (options)"
+    },
+    "tag_homeMenu": {
+        "message": "Home menu",
+        "description": "Feature tag label (options)"
+    },
+    "tag_project": {
+        "message": "Project",
+        "description": "Feature tag label (options)"
+    },
+    "tag_chatter": {
+        "message": "Chatter",
+        "description": "Feature tag label (options)"
+    },
+    "tag_gamification": {
+        "message": "Gamification",
+        "description": "Feature tag label (options)"
+    },
+    "tag_navigation": {
+        "message": "Navigation",
+        "description": "Feature tag label (options)"
+    },
+    "tag_debug": {
+        "message": "Debug",
+        "description": "Feature tag label (options)"
+    },
+    "tag_runbot": {
+        "message": "Runbot",
+        "description": "Feature tag label (options)"
+    },
+    "tag_knowledge": {
+        "message": "Knowledge",
+        "description": "Feature tag label (options)"
+    },
     "themeSwitch_mode_system": {
         "message": "System",
         "description": "Theme Switch mode: follow the system theme"
@@ -258,7 +470,7 @@
         "description": "Address bar suggestion (keyword \"joorney\")"
     },
     "omnibox_disabled": {
-        "message": "The functionality to open a runbot from URL is currently disabled. Open options to enable \"$feature$\"!",
+        "message": "Opening a runbot from the URL is deactivated. Activate \"$feature$\" in the options!",
         "description": "Address bar default suggestion when [Runbot] Auto Open is disabled. XML: escape & and <",
         "placeholders": {
             "feature": {
@@ -537,6 +749,16 @@
             }
         }
     },
+    "contextOdooMenus_error_noAction": {
+        "message": "Menu '$path$' opens no action: choose one of its submenus.",
+        "description": "Error when the Odoo menu matching the configured path is a parent menu without action",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Technical / Actions"
+            }
+        }
+    },
     "contextOdooMenus_error_tooMany": {
         "message": "Too many menus found for path $path$.",
         "description": "Error when several Odoo menus match the configured path",
@@ -547,9 +769,139 @@
             }
         }
     },
-    "contextOdooMenus_option_confirmRemove": {
-        "message": "Are you sure you want to remove the menu: $path$?",
-        "description": "Options: confirmation before deleting a quick menu",
+    "optionsContextMenus_path": {
+        "message": "Menu path",
+        "description": "Options feature page (Context Odoo Menus): label of the menu path field"
+    },
+    "optionsContextMenus_addHint": {
+        "message": "Press Enter to add. New menus go to the submenu, under their app, switched on. Write the menu names in English: the same path then works whatever language Odoo is in.",
+        "description": "Options feature page (Context Odoo Menus): hint under the field adding a menu"
+    },
+    "optionsContextMenus_errorMissing": {
+        "message": "Enter a menu path.",
+        "description": "Options feature page (Context Odoo Menus): error, empty menu path"
+    },
+    "optionsContextMenus_errorExists": {
+        "message": "Already in the list.",
+        "description": "Options feature page (Context Odoo Menus): error, the menu path is already in the list"
+    },
+    "optionsContextMenus_errorSameMenu": {
+        "message": "Already in the list as \"$path$\".",
+        "description": "Options feature page (Context Odoo Menus): error, a lone menu name and a path ending with it are the same menu",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Sales/Orders/Quotations"
+            }
+        }
+    },
+    "optionsContextMenus_errorSave": {
+        "message": "Could not save the menus, the list shows what is saved: $error$",
+        "description": "Options feature page (Context Odoo Menus): error, a change could not be saved (storage quota or error), the list is shown as stored",
+        "placeholders": {
+            "error": {
+                "content": "$1",
+                "example": "QUOTA_BYTES_PER_ITEM quota exceeded"
+            }
+        }
+    },
+    "optionsContextMenus_space": {
+        "message": "The list uses $percent$% of the space Chrome sync gives it: switched off menus you no longer need can be deleted.",
+        "description": "Options feature page (Context Odoo Menus): note shown under the add field once the saved list nears its 8 KB sync storage limit",
+        "placeholders": {
+            "percent": {
+                "content": "$1",
+                "example": "82"
+            }
+        }
+    },
+    "optionsContextMenus_listTitle": {
+        "message": "Menus",
+        "description": "Options feature page (Context Odoo Menus): title of the menu list"
+    },
+    "optionsContextMenus_countOne": {
+        "message": "1 menu",
+        "description": "Options feature page (Context Odoo Menus): chip, the list holds one menu"
+    },
+    "optionsContextMenus_count": {
+        "message": "$count$ menus",
+        "description": "Options feature page (Context Odoo Menus): chip, number of menus in the list",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "8"
+            }
+        }
+    },
+    "optionsContextMenus_topCount": {
+        "message": "$count$ at the top level",
+        "description": "Options feature page (Context Odoo Menus): chip, number of menus shown outside the submenu",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "2"
+            }
+        }
+    },
+    "optionsContextMenus_subCount": {
+        "message": "$count$ in the submenu",
+        "description": "Options feature page (Context Odoo Menus): chip, number of menus grouped in the submenu",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "2"
+            }
+        }
+    },
+    "optionsContextMenus_deleteAll": {
+        "message": "Delete all",
+        "description": "Options feature page (Context Odoo Menus): button deleting every menu"
+    },
+    "optionsContextMenus_filter": {
+        "message": "Filter",
+        "description": "Options feature page (Context Odoo Menus): placeholder of the filter field of the menu list"
+    },
+    "optionsContextMenus_filterLabel": {
+        "message": "Filter the menus",
+        "description": "Options feature page (Context Odoo Menus): label of the filter field"
+    },
+    "optionsContextMenus_filterNote": {
+        "message": "Clear the filter to reorder.",
+        "description": "Options feature page (Context Odoo Menus): note above the filtered list (dragging is off while filtering)"
+    },
+    "optionsContextMenus_noMatch": {
+        "message": "No menu matches \"$filter$\".",
+        "description": "Options feature page (Context Odoo Menus): filtered list, nothing matches",
+        "placeholders": {
+            "filter": {
+                "content": "$1",
+                "example": "invoice"
+            }
+        }
+    },
+    "optionsContextMenus_sectionTop": {
+        "message": "Top level",
+        "description": "Options feature page (Context Odoo Menus): title of the band of the starred menus"
+    },
+    "optionsContextMenus_sectionSub": {
+        "message": "Submenu",
+        "description": "Options feature page (Context Odoo Menus): title of the band of the menus in the submenu"
+    },
+    "optionsContextMenus_sectionOff": {
+        "message": "Switched off",
+        "description": "Options feature page (Context Odoo Menus): title of the fold of the switched off menus"
+    },
+    "optionsContextMenus_offHelp": {
+        "message": "kept here, not in the right-click menu",
+        "description": "Options feature page (Context Odoo Menus): text of the fold of the switched off menus"
+    },
+    "optionsContextMenus_topEmpty": {
+        "message": "Star a menu to show it next to the other Joorney entries.",
+        "description": "Options feature page (Context Odoo Menus): top level band without menu"
+    },
+    "optionsContextMenus_reorder": {
+        "message": "Reorder $path$ (Up and Down arrow keys)",
+        "description": "Options feature page (Context Odoo Menus): label of the drag grip of a row",
         "placeholders": {
             "path": {
                 "content": "$1",
@@ -557,27 +909,13 @@
             }
         }
     },
-    "contextOdooMenus_option_confirmRemoveAll": {
-        "message": "Are you sure you want to delete all menus?",
-        "description": "Options: confirmation before deleting every quick menu"
+    "optionsContextMenus_reorderTitle": {
+        "message": "Drag to reorder",
+        "description": "Options feature page (Context Odoo Menus): tooltip of the drag grip"
     },
-    "contextOdooMenus_option_error_missingPath": {
-        "message": "Missing path",
-        "description": "Options: error when adding an empty menu path"
-    },
-    "contextOdooMenus_option_error_idExists": {
-        "message": "This id is already registered (should not happen): $id$",
-        "description": "Options: error, internal id conflict",
-        "placeholders": {
-            "id": {
-                "content": "$1",
-                "example": "3"
-            }
-        }
-    },
-    "contextOdooMenus_option_error_pathExists": {
-        "message": "This path is already registered: $path$",
-        "description": "Options: error when the menu path already exists",
+    "optionsContextMenus_more": {
+        "message": "More actions for $path$",
+        "description": "Options feature page (Context Odoo Menus): label of the ⋮ button and of its menu",
         "placeholders": {
             "path": {
                 "content": "$1",
@@ -585,29 +923,93 @@
             }
         }
     },
-    "contextOdooMenus_option_favorite": {
-        "message": "Favorite",
-        "description": "Options: tooltip of the favorite button (menu is favorite)"
+    "optionsContextMenus_editPath": {
+        "message": "Edit path",
+        "description": "Options feature page (Context Odoo Menus): ⋮ menu item, edit the path"
     },
-    "contextOdooMenus_option_notFavorite": {
-        "message": "Not favorite",
-        "description": "Options: tooltip of the favorite button (menu is not favorite)"
+    "optionsContextMenus_moveTop": {
+        "message": "Move to top level",
+        "description": "Options feature page (Context Odoo Menus): ⋮ menu item, star the menu"
     },
-    "contextOdooMenus_option_disable": {
-        "message": "Disable quick menu",
-        "description": "Options: tooltip of the toggle of an active quick menu"
+    "optionsContextMenus_moveSub": {
+        "message": "Move to the submenu",
+        "description": "Options feature page (Context Odoo Menus): ⋮ menu item, unstar the menu"
     },
-    "contextOdooMenus_option_enable": {
-        "message": "Enable quick menu",
-        "description": "Options: tooltip of the toggle of an inactive quick menu"
+    "optionsContextMenus_confirmDeleteAll": {
+        "message": "Delete all the menus?",
+        "description": "Options feature page (Context Odoo Menus): inline question before deleting every menu"
     },
-    "contextOdooMenus_option_save": {
-        "message": "Save modification",
-        "description": "Options: tooltip of the button saving a quick menu"
+    "optionsContextMenus_topLevel": {
+        "message": "Top level: $path$",
+        "description": "Options feature page (Context Odoo Menus): label of the star button (pressed: shown outside the submenu)",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Sales / Orders"
+            }
+        }
     },
-    "contextOdooMenus_option_delete": {
-        "message": "Delete quick menu",
-        "description": "Options: tooltip of the button deleting a quick menu"
+    "optionsContextMenus_topLevelTitle": {
+        "message": "Show at the top level, outside the submenu",
+        "description": "Options feature page (Context Odoo Menus): tooltip of the star button"
+    },
+    "optionsContextMenus_on": {
+        "message": "On: $path$",
+        "description": "Options feature page (Context Odoo Menus): label of the switch of a menu",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Sales / Orders"
+            }
+        }
+    },
+    "optionsContextMenus_confirmDelete": {
+        "message": "Delete $path$?",
+        "description": "Options feature page (Context Odoo Menus): inline question before deleting a menu",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "Sales / Orders"
+            }
+        }
+    },
+    "optionsContextMenus_deleteButton": {
+        "message": "Delete",
+        "description": "Options feature page (Context Odoo Menus): button confirming the deletion of a menu"
+    },
+    "optionsContextMenus_cancel": {
+        "message": "Cancel",
+        "description": "Options feature page (Context Odoo Menus): button cancelling an edit or an inline question"
+    },
+    "optionsContextMenus_save": {
+        "message": "Save",
+        "description": "Options feature page (Context Odoo Menus): button saving the edited path"
+    },
+    "optionsContextMenus_empty": {
+        "message": "No menu yet. Add a menu path above, or start again from the default technical menus.",
+        "description": "Options feature page (Context Odoo Menus): empty menu list"
+    },
+    "optionsContextMenus_addDefaults": {
+        "message": "Add the $count$ default menus",
+        "description": "Options feature page (Context Odoo Menus): button of the empty list, adding the default technical menus",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "8"
+            }
+        }
+    },
+    "optionsContextMenus_previewTitle": {
+        "message": "Preview of the right-click menu",
+        "description": "Options feature page (Context Odoo Menus): title of the right-click menu preview"
+    },
+    "optionsContextMenus_previewHelp": {
+        "message": "What a right-click on an Odoo page shows with these settings. Starred menus sit next to the other Joorney entries, the others are grouped in a submenu. Menus switched off are left out.",
+        "description": "Options feature page (Context Odoo Menus): help of the right-click menu preview"
+    },
+    "optionsContextMenus_previewNone": {
+        "message": "No menu switched on",
+        "description": "Options feature page (Context Odoo Menus): preview, no menu is switched on"
     },
     "showMyBadge_title": {
         "message": "Badges",
@@ -637,14 +1039,6 @@
         "message": "Export settings",
         "description": "Options header: tooltip of the export button"
     },
-    "options_migrate": {
-        "message": "MIGRATE",
-        "description": "Options header: button opening the configuration migration page (uppercase)"
-    },
-    "options_checklistShow": {
-        "message": "Show onboarding checklist",
-        "description": "Options: tooltip of the floating button showing the onboarding checklist"
-    },
     "options_close": {
         "message": "Close",
         "description": "Generic close button tooltip"
@@ -657,17 +1051,65 @@
         "message": "Theme Switch based on location is powered by",
         "description": "Options footer, followed by the \"SunriseSunset.io\" link"
     },
+    "options_announce_newIn": {
+        "message": "New in $version$",
+        "description": "Announcement banner: chip of a release announcement",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "2.8"
+            }
+        }
+    },
+    "options_announce_label_release": {
+        "message": "Release announcement",
+        "description": "Announcement banner: accessible name of a release announcement"
+    },
+    "options_announce_label_info": {
+        "message": "Announcement",
+        "description": "Announcement banner: accessible name of an information announcement"
+    },
+    "options_announce_label_warning": {
+        "message": "Warning announcement",
+        "description": "Announcement banner: accessible name of a warning announcement"
+    },
+    "options_announce_seeWhatsNew": {
+        "message": "See what's new",
+        "description": "Announcement banner: button showing the details of a release"
+    },
+    "options_announce_seeDetails": {
+        "message": "See details",
+        "description": "Announcement banner: button showing the details of an announcement"
+    },
+    "options_announce_hideDetails": {
+        "message": "Hide details",
+        "description": "Announcement banner: button hiding the details"
+    },
+    "options_announce_openPage": {
+        "message": "Open $page$",
+        "description": "Announcement banner: button opening the page the announcement is about",
+        "placeholders": {
+            "page": {
+                "content": "$1",
+                "example": "Versions"
+            }
+        }
+    },
+    "options_announce_fullNotes": {
+        "message": "Full release notes",
+        "description": "Announcement banner: link to the release notes"
+    },
+    "options_announce_close": {
+        "message": "Close announcement",
+        "description": "Announcement banner: close button"
+    },
+    "options_announce_restore": {
+        "message": "Announcements",
+        "description": "Options footer: link showing the closed announcement again"
+    },
     "options_confirmImport": {
         "message": "Do you confirm the file upload?",
         "description": "Confirmation before importing a settings file"
-    },
-    "options_menu_hosts": {
-        "message": "Hosts control",
-        "description": "Options menu entry: features per host"
-    },
-    "options_menu_preferences": {
-        "message": "Preferences",
-        "description": "Options menu entry: feature preferences"
     },
     "options_menu_versions": {
         "message": "Versions",
@@ -677,45 +1119,377 @@
         "message": "Notifications",
         "description": "Options menu entry: notification settings"
     },
-    "options_menu_ambient": {
-        "message": "Ambient",
-        "description": "Options menu entry: ambient effects"
-    },
     "options_menu_developers": {
         "message": "Developers",
         "description": "Options menu entry: technical settings (debug mode only)"
     },
-    "options_limitedFeatureTitle": {
-        "message": "[Limited Feature] $feature$",
-        "description": "Options: tooltip of a limited feature toggle",
+    "options_menu_main": {
+        "message": "Main menu",
+        "description": "Options navbar: accessible name of the main menu"
+    },
+    "options_menu_home": {
+        "message": "Home",
+        "description": "Options menu entry: home page (features per host)"
+    },
+    "options_menu_features": {
+        "message": "Features",
+        "description": "Options menu entry: global state of the features"
+    },
+    "options_menu_settings": {
+        "message": "Settings",
+        "description": "Options \"More\" menu entry: extension-wide settings"
+    },
+    "options_menu_importExport": {
+        "message": "Import, export and migrate",
+        "description": "Options \"More\" menu entry: settings file import/export and configuration migration"
+    },
+    "options_menu_more": {
+        "message": "More",
+        "description": "Options navbar: dropdown button with the other pages"
+    },
+    "options_menu_debugChip": {
+        "message": "debug",
+        "description": "Options \"More\" menu: chip beside the developer entry, only shown in debug mode"
+    },
+    "options_migrateNeeded": {
+        "message": "Configuration migration needed",
+        "description": "Options menu: badge tooltip when the stored configuration is older than the extension"
+    },
+    "optionsUi_state_everywhere": {
+        "message": "On by default",
+        "description": "Feature state: active, runs on every Odoo host except the hosts listed for it"
+    },
+    "optionsUi_state_everywhereShort": {
+        "message": "On by default",
+        "description": "Feature state, short label (badge) of \"Everywhere except listed hosts\""
+    },
+    "optionsUi_state_everywhereHelp": {
+        "message": "Runs on every Odoo host, except where you turn it off.",
+        "description": "Feature state help: everywhere except listed hosts"
+    },
+    "optionsUi_state_listed": {
+        "message": "Off by default",
+        "description": "Feature state: active, runs only on the hosts listed for it"
+    },
+    "optionsUi_state_listedShort": {
+        "message": "Off by default",
+        "description": "Feature state, short label (badge) of \"Only on listed hosts\""
+    },
+    "optionsUi_state_listedHelp": {
+        "message": "Runs only on the hosts where you turn it on.",
+        "description": "Feature state help: only on listed hosts"
+    },
+    "optionsUi_state_deactivated": {
+        "message": "Deactivated",
+        "description": "Feature state: never runs"
+    },
+    "optionsUi_state_deactivatedHelp": {
+        "message": "Never runs.",
+        "description": "Feature state help: deactivated"
+    },
+    "optionsUi_state_active": {
+        "message": "Active",
+        "description": "Feature state of a runbot (limited) feature that is on"
+    },
+    "optionsUi_state_limited": {
+        "message": "Active on its runbot hosts",
+        "description": "Feature state of a runbot (limited) feature that is on, long label"
+    },
+    "optionsUi_versionAll": {
+        "message": "All versions",
+        "description": "Supported Odoo versions of a feature: no restriction"
+    },
+    "optionsUi_versionBefore": {
+        "message": "before $version$",
+        "description": "Supported Odoo versions of a feature: lower than a version",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "17.0"
+            }
+        }
+    },
+    "optionsUi_versionRange": {
+        "message": "$from$ to $to$ (excluded)",
+        "description": "Supported Odoo versions of a feature: from a version up to another one, the last one not included",
+        "placeholders": {
+            "from": {
+                "content": "$1",
+                "example": "16.0"
+            },
+            "to": {
+                "content": "$2",
+                "example": "19.0"
+            }
+        }
+    },
+    "optionsUi_versionChip": {
+        "message": "Odoo $versions$",
+        "description": "Feature chip with its supported Odoo versions",
+        "placeholders": {
+            "versions": {
+                "content": "$1",
+                "example": "16.0+"
+            }
+        }
+    },
+    "optionsUi_switchOnHere": {
+        "message": "$feature$: on here",
+        "description": "Feature card switch: accessible name, the switch turns the feature on/off on the selected host",
         "placeholders": {
             "feature": {
                 "content": "$1",
-                "example": "Assign Me"
+                "example": "Theme Switch"
             }
         }
     },
-    "options_origins": {
-        "message": "Origins",
-        "description": "Options: heading / column of Odoo database origins (URL scheme + host)"
-    },
-    "options_addOrigin": {
-        "message": "Add origin",
-        "description": "Options: tooltip of the button adding an origin"
-    },
-    "options_deleteOrigin": {
-        "message": "Delete origin",
-        "description": "Options: tooltip of the button deleting an origin"
-    },
-    "options_confirmRemoveOrigin": {
-        "message": "Are you sure you want to remove the origin: $origin$?",
-        "description": "Options: confirmation before deleting an origin",
+    "optionsUi_featureSettings": {
+        "message": "$feature$ settings",
+        "description": "Feature card: link to the feature settings",
         "placeholders": {
-            "origin": {
+            "feature": {
                 "content": "$1",
-                "example": "https://www.odoo.com"
+                "example": "Theme Switch"
             }
         }
+    },
+    "optionsUi_aboutFeature": {
+        "message": "About $feature$",
+        "description": "Feature card: info button opening the feature details",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Theme Switch"
+            }
+        }
+    },
+    "optionsUi_dragHandle": {
+        "message": "Drag to move",
+        "description": "Feature card: tooltip of the drag handle"
+    },
+    "optionsUi_action_openPage": {
+        "message": "Open feature page",
+        "description": "Feature action: open the page of the feature"
+    },
+    "optionsUi_infoVideo": {
+        "message": "Video of $feature$",
+        "description": "Feature info window: accessible name of the video",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Theme Switch"
+            }
+        }
+    },
+    "optionsUi_videoSoon": {
+        "message": "Video coming soon",
+        "description": "Feature info window: shown instead of the video when there is none yet"
+    },
+    "optionsUi_done": {
+        "message": "Done",
+        "description": "Button closing a window"
+    },
+    "optionsFeatures_title": {
+        "message": "Features",
+        "description": "Options features page: title"
+    },
+    "optionsFeatures_subtitle": {
+        "message": "Choose where each feature runs. Per-host choices are on Home.",
+        "description": "Options features page: subtitle"
+    },
+    "optionsFeatures_search": {
+        "message": "Search features",
+        "description": "Features page: label of the search field"
+    },
+    "optionsFeatures_searchPlaceholder": {
+        "message": "Name or description",
+        "description": "Features page: placeholder of the search field"
+    },
+    "optionsFeatures_empty": {
+        "message": "Nothing here. Drop features to move them.",
+        "description": "Features page: empty zone"
+    },
+    "optionsFeatures_count": {
+        "message": "$count$ features",
+        "description": "Features page: accessible name of a zone count",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "4"
+            }
+        }
+    },
+    "optionsFeatures_moved": {
+        "message": "$feature$ moved to $state$",
+        "description": "Features page: screen reader announcement after a move",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Booster"
+            },
+            "state": {
+                "content": "$2",
+                "example": "Deactivated"
+            }
+        }
+    },
+    "optionsFeatures_runbotNote": {
+        "message": "Runbot features only run on runbot origins and have no per-host exception.",
+        "description": "Features page: runbot section note"
+    },
+    "optionsImportExport_title": {
+        "message": "Import, export and migrate",
+        "description": "Options import/export page: title"
+    },
+    "optionsImportExport_subtitle": {
+        "message": "Back up your settings, restore them from a file, or bring an older configuration up to date.",
+        "description": "Options import/export page: subtitle"
+    },
+    "optionsImportExport_exportTitle": {
+        "message": "Export",
+        "description": "Options import/export page: export section title"
+    },
+    "optionsImportExport_exportHelp": {
+        "message": "Downloads the settings synced with your browser account (feature states and modes, hosts, preferences) as one JSON file, with its configuration version. Local cache and onboarding progress are not exported.",
+        "description": "Options import/export page: export help"
+    },
+    "optionsImportExport_fileName": {
+        "message": "File name:",
+        "description": "Options import/export page: label before the exported file name"
+    },
+    "optionsImportExport_exported": {
+        "message": "Download started.",
+        "description": "Options import/export page: status after a click on export"
+    },
+    "optionsImportExport_importTitle": {
+        "message": "Import",
+        "description": "Options import/export page: import section title"
+    },
+    "optionsImportExport_importWarning": {
+        "message": "Importing overwrites your current settings with the content of the file, then reloads this page.",
+        "description": "Options import/export page: warning before importing"
+    },
+    "optionsImportExport_drop": {
+        "message": "Drop a Joorney settings file (.json) here, or",
+        "description": "Options import/export page: drop zone text, followed by the \"Choose file\" button"
+    },
+    "optionsImportExport_chooseFile": {
+        "message": "Choose file",
+        "description": "Options import/export page: file picker button"
+    },
+    "optionsImportExport_clearFile": {
+        "message": "Remove the chosen file",
+        "description": "Options import/export page: button clearing the chosen file"
+    },
+    "optionsImportExport_fileOutdated": {
+        "message": "This file was made by an older version. Importing it as is may leave some settings unused:",
+        "description": "Options import/export page: the chosen file has an older configuration version, followed by a link to the migration"
+    },
+    "optionsImportExport_fileNewer": {
+        "message": "This file was made by a newer version of Joorney: some settings may not be used.",
+        "description": "Options import/export page: the chosen file has a newer configuration version"
+    },
+    "optionsImportExport_summaryVersion": {
+        "message": "configuration version $version$",
+        "description": "Options import/export page: chip, configuration version of the chosen file",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "2"
+            }
+        }
+    },
+    "optionsImportExport_summaryFeatures": {
+        "message": "$count$ feature states",
+        "description": "Options import/export page: chip, number of feature states in the chosen file",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "14"
+            }
+        }
+    },
+    "optionsImportExport_summaryHosts": {
+        "message": "$count$ hosts",
+        "description": "Options import/export page: chip, number of hosts in the chosen file",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "3"
+            }
+        }
+    },
+    "optionsImportExport_confirmDetail": {
+        "message": "Your current settings will be overwritten.",
+        "description": "Options import/export page: inline import confirmation, under \"Do you confirm the file upload?\""
+    },
+    "optionsImportExport_confirmYes": {
+        "message": "Yes, import",
+        "description": "Options import/export page: confirm the import"
+    },
+    "optionsImportExport_cancel": {
+        "message": "Cancel",
+        "description": "Options import/export page: cancel the import"
+    },
+    "optionsImportExport_imported": {
+        "message": "Settings imported. Reload your open Odoo tabs to apply them.",
+        "description": "Options import/export page: after a successful import"
+    },
+    "optionsImportExport_error_read": {
+        "message": "The file could not be read.",
+        "description": "Options import/export page: import error"
+    },
+    "optionsImportExport_error_json": {
+        "message": "This file is not valid JSON.",
+        "description": "Options import/export page: import error"
+    },
+    "optionsImportExport_error_notSettings": {
+        "message": "This file is not a Joorney settings file.",
+        "description": "Options import/export page: import error, the JSON is not an object of settings"
+    },
+    "optionsImportExport_error_version": {
+        "message": "This file has an invalid configuration version.",
+        "description": "Options import/export page: import error, configurationVersion is not a whole number"
+    },
+    "optionsImportExport_error_shape": {
+        "message": "This file has invalid host settings.",
+        "description": "Options import/export page: import error, originsFilterOrigins or windowActionFallbacks is not an object of objects"
+    },
+    "optionsImportExport_error_write": {
+        "message": "The settings could not be saved, the file may be too large for synced storage.",
+        "description": "Options import/export page: import error, chrome.storage.sync rejected the write (quota)"
+    },
+    "optionsImportExport_migrateTitle": {
+        "message": "Migrate",
+        "description": "Options import/export page: migration section title"
+    },
+    "optionsImportExport_migrateOutdated": {
+        "message": "Your settings use an older format (v$stored$). Migrate them to v$expected$ to keep every feature working.",
+        "description": "Options import/export page: the stored configuration version is lower than the expected one",
+        "placeholders": {
+            "stored": {
+                "content": "$1",
+                "example": "0"
+            },
+            "expected": {
+                "content": "$2",
+                "example": "2"
+            }
+        }
+    },
+    "optionsImportExport_migrateUpToDate": {
+        "message": "Settings format is up to date (v$version$).",
+        "description": "Options import/export page: the stored configuration version is the expected one",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "2"
+            }
+        }
+    },
+    "optionsImportExport_openMigration": {
+        "message": "Open migration",
+        "description": "Options import/export page: link to the migration page, settings outdated"
     },
     "options_error_missingOrigin": {
         "message": "Missing origin",
@@ -725,6 +1499,42 @@
         "message": "Invalid origin, use a URL like https://www.odoo.com",
         "description": "Options: error when the origin is not a valid URL"
     },
+    "options_warning_regexAnchors": {
+        "message": "Without ^ at the start and $ at the end, this regex also matches longer host names: odoo\\.com would match odoo.com.example.net too.",
+        "description": "Options: hint under a new host field while the typed regex host has no ^ and $ anchors (it is still accepted)"
+    },
+    "options_anchorRegex": {
+        "message": "Anchor it",
+        "description": "Options: button in the hint under a new host field, rewrites the typed regex as ^(?:...)$"
+    },
+    "options_unanchoredChip": {
+        "message": "no ^ $",
+        "description": "Options: chip on a saved regex host without ^ and $ anchors (short)"
+    },
+    "options_unanchoredTitle": {
+        "message": "Without ^ and $, this regex also matches longer host names.",
+        "description": "Options: tooltip of the chip on a saved regex host without anchors"
+    },
+    "options_anchorHost": {
+        "message": "Anchor $host$ with ^ and $ (its features are kept)",
+        "description": "Options: label of the button rewriting a saved unanchored regex host as ^(?:...)$",
+        "placeholders": {
+            "host": {
+                "content": "$1",
+                "example": "regex://odoo\\.com"
+            }
+        }
+    },
+    "options_error_pageLoad": {
+        "message": "This page could not be loaded, reload the options to try again: $error$",
+        "description": "Options: error shown in place of a page that failed to load",
+        "placeholders": {
+            "error": {
+                "content": "$1",
+                "example": "Failed to fetch"
+            }
+        }
+    },
     "options_add": {
         "message": "Add",
         "description": "Options: generic add button"
@@ -733,29 +1543,149 @@
         "message": "Save",
         "description": "Options: generic save button tooltip"
     },
-    "checklist_congratsTitle": {
-        "message": "Congratulations!",
-        "description": "Onboarding checklist: title when every step is done"
+    "checklist_tourHome_title": {
+        "message": "Home: hosts",
+        "description": "Onboarding checklist: tour title (Home page)"
     },
-    "checklist_congratsText": {
-        "message": "You've completed the onboarding checklist. Great job!",
-        "description": "Onboarding checklist: text when every step is done"
-    },
-    "checklist_tourHostControls_title": {
-        "message": "Hosts control",
-        "description": "Onboarding checklist: tour title (Hosts control page)"
-    },
-    "checklist_tourHostControls_description": {
+    "checklist_tourHome_description": {
         "message": "Manage features by host!",
-        "description": "Onboarding checklist: tour subtitle (Hosts control page)"
+        "description": "Onboarding checklist: tour subtitle (Home page)"
     },
-    "checklist_tourPreferences_title": {
-        "message": "Preferences",
-        "description": "Onboarding checklist: tour title (Preferences page)"
+    "checklist_tourFeatures_title": {
+        "message": "Features board",
+        "description": "Onboarding checklist: tour title (Features page)"
     },
-    "checklist_tourPreferences_description": {
-        "message": "Set up your preferences for many features.",
-        "description": "Onboarding checklist: tour subtitle (Preferences page)"
+    "checklist_tourFeatures_description": {
+        "message": "Find, move and switch features.",
+        "description": "Onboarding checklist: tour subtitle (Features page)"
+    },
+    "checklist_tourFeature_title": {
+        "message": "Feature page",
+        "description": "Onboarding checklist: tour title (a feature page)"
+    },
+    "checklist_tourFeature_description": {
+        "message": "Switch a feature, choose where it runs, customize it.",
+        "description": "Onboarding checklist: tour subtitle (a feature page)"
+    },
+    "checklist_tourSettings_title": {
+        "message": "Settings",
+        "description": "Onboarding checklist: tour title (Settings page)"
+    },
+    "checklist_tourSettings_description": {
+        "message": "Language, Home page and keyboard shortcut.",
+        "description": "Onboarding checklist: tour subtitle (Settings page)"
+    },
+    "checklist_home_addHost_name": {
+        "message": "Add a host",
+        "description": "Onboarding checklist: step title"
+    },
+    "checklist_home_addHost_description": {
+        "message": "Type an Odoo address, then press Enter or Add. Start it with regex:// to match several databases at once.",
+        "description": "Onboarding checklist: step description"
+    },
+    "checklist_home_pickHost_name": {
+        "message": "Pick a host",
+        "description": "Onboarding checklist: step title"
+    },
+    "checklist_home_pickHost_description": {
+        "message": "Select a host to see every feature as it behaves there.",
+        "description": "Onboarding checklist: step description"
+    },
+    "checklist_home_switchFeature_name": {
+        "message": "Switch a feature for this host",
+        "description": "Onboarding checklist: step title"
+    },
+    "checklist_home_switchFeature_description": {
+        "message": "Use the switch of a card to turn a feature on or off for the selected host only. The global setting stays as it is.",
+        "description": "Onboarding checklist: step description"
+    },
+    "checklist_home_bulk_name": {
+        "message": "Bulk actions",
+        "description": "Onboarding checklist: step title"
+    },
+    "checklist_home_bulk_description": {
+        "message": "Turn every feature on or off for the host in one click, instead of flipping each switch.",
+        "description": "Onboarding checklist: step description"
+    },
+    "checklist_home_runbot_name": {
+        "message": "Runbot features",
+        "description": "Onboarding checklist: step title"
+    },
+    "checklist_home_runbot_description": {
+        "message": "Runbot features only run on runbot origins: they have one global switch and no per-host exception. They live in the pinned Runbot row, or in the Runbot block above the grid in the advanced view. Click it to continue.",
+        "description": "Onboarding checklist: step description"
+    },
+    "checklist_features_zones_name": {
+        "message": "Three zones",
+        "description": "Onboarding checklist: step title"
+    },
+    "checklist_features_zones_description": {
+        "message": "Every feature sits in one zone: on by default (runs on every host except its exceptions), off by default (runs only on its exceptions), or deactivated. Tick this step when you have read it.",
+        "description": "Onboarding checklist: step description"
+    },
+    "checklist_features_expand_name": {
+        "message": "Read a card",
+        "description": "Onboarding checklist: step title"
+    },
+    "checklist_features_expand_description": {
+        "message": "Click a card to show its full description, tags and supported versions. Click it again to fold it.",
+        "description": "Onboarding checklist: step description"
+    },
+    "checklist_features_drag_name": {
+        "message": "Drag to move",
+        "description": "Onboarding checklist: step title"
+    },
+    "checklist_features_drag_description": {
+        "message": "Drag a card onto another zone to change its state.",
+        "description": "Onboarding checklist: step description"
+    },
+    "checklist_feature_active_name": {
+        "message": "Active switch",
+        "description": "Onboarding checklist: step title"
+    },
+    "checklist_feature_active_description": {
+        "message": "Activate or deactivate the feature with this switch. Activating asks for its default: on or off on your hosts.",
+        "description": "Onboarding checklist: step description"
+    },
+    "checklist_feature_where_name": {
+        "message": "Where it runs",
+        "description": "Onboarding checklist: step title"
+    },
+    "checklist_feature_where_description": {
+        "message": "Choose whether it is on or off by default, then manage the hosts that are an exception.",
+        "description": "Onboarding checklist: step description"
+    },
+    "checklist_feature_settings_name": {
+        "message": "Settings card",
+        "description": "Onboarding checklist: step title"
+    },
+    "checklist_feature_settings_description": {
+        "message": "Customize the feature here. Only features with options have this card: open Theme Switch to try it, or tick this step by hand.",
+        "description": "Onboarding checklist: step description"
+    },
+    "checklist_settings_language_name": {
+        "message": "Language",
+        "description": "Onboarding checklist: step title"
+    },
+    "checklist_settings_language_description": {
+        "message": "Choose the language of Joorney: system, Odoo or a fixed one. The page reloads.",
+        "description": "Onboarding checklist: step description"
+    },
+    "checklist_settings_hostsView_name": {
+        "message": "Home page view",
+        "description": "Onboarding checklist: step title"
+    },
+    "checklist_settings_hostsView_description": {
+        "message": "Switch the Home page between the simple view and the advanced matrix.",
+        "description": "Onboarding checklist: step description"
+    },
+    "checklist_settings_shortcut_name": {
+        "message": "Keyboard shortcut",
+        "description": "Onboarding checklist: step title"
+    },
+    "checklist_settings_shortcut_description": {
+        "message": "See the shortcut that turns Joorney on or off, and copy the address where to change it.",
+        "description": "Onboarding checklist: step description"
     },
     "checklist_tourVersions_title": {
         "message": "Versions",
@@ -785,93 +1715,9 @@
         "message": "Wave a magic wand and deem all steps magically done!",
         "description": "Onboarding checklist: tooltip of the icon marking all steps of the tour as done"
     },
-    "checklist_next": {
-        "message": "Next",
-        "description": "Onboarding checklist: button to go to the next tour once the current one is complete"
-    },
     "checklist_restart": {
         "message": "Restart",
         "description": "Onboarding checklist: button to restart the current tour"
-    },
-    "checklist_hostControls_moveFeature_name": {
-        "message": "Manage Features",
-        "description": "Onboarding checklist step title"
-    },
-    "checklist_hostControls_moveFeature_description": {
-        "message": "Drag and drop to enable or disable a feature for optimal control.",
-        "description": "Onboarding checklist step description"
-    },
-    "checklist_hostControls_addHost_name": {
-        "message": "Add your own origin",
-        "description": "Onboarding checklist step title (origin = website URL)"
-    },
-    "checklist_hostControls_addHost_description": {
-        "message": "Add a new origin by saving your changes or pressing 'Enter'.",
-        "description": "Onboarding checklist step description"
-    },
-    "checklist_hostControls_configureHost_name": {
-        "message": "Configure your origin",
-        "description": "Onboarding checklist step title"
-    },
-    "checklist_hostControls_configureHost_description": {
-        "message": "Adjust the settings for each origin by enabling or disabling features using the checkboxes.",
-        "description": "Onboarding checklist step description"
-    },
-    "checklist_hostControls_deleteHost_name": {
-        "message": "Remove your origin",
-        "description": "Onboarding checklist step title"
-    },
-    "checklist_hostControls_deleteHost_description": {
-        "message": "Initiate and confirm origin deletion in the prompt.",
-        "description": "Onboarding checklist step description"
-    },
-    "checklist_preferences_awesomeLoading_name": {
-        "message": "Custom Loading",
-        "description": "Onboarding checklist step title (custom loading animation)"
-    },
-    "checklist_preferences_awesomeLoading_description": {
-        "message": "Upload and set a custom loading GIF for a personalized Odoo loading.",
-        "description": "Onboarding checklist step description"
-    },
-    "checklist_preferences_awesomeStyle_name": {
-        "message": "Stylus Like",
-        "description": "Onboarding checklist step title (custom CSS, like the Stylus browser extension)"
-    },
-    "checklist_preferences_awesomeStyle_description": {
-        "message": "Adjust and customize the visual style to match your preferences.",
-        "description": "Onboarding checklist step description"
-    },
-    "checklist_preferences_unfocusApp_name": {
-        "message": "App Icon Background",
-        "description": "Onboarding checklist step title"
-    },
-    "checklist_preferences_unfocusApp_description": {
-        "message": "Personalize the app icon background, used for superfocused apps.",
-        "description": "Onboarding checklist step description"
-    },
-    "checklist_preferences_themeSwitchLocation_name": {
-        "message": "Sunlight Theme Mode",
-        "description": "Onboarding checklist step title (theme follows sunrise/sunset)"
-    },
-    "checklist_preferences_themeSwitchLocation_description": {
-        "message": "Enable automatic theme switching based on sunrise and sunset times.",
-        "description": "Onboarding checklist step description"
-    },
-    "checklist_preferences_themeSwitchTime_name": {
-        "message": "Scheduled Theme Mode",
-        "description": "Onboarding checklist step title"
-    },
-    "checklist_preferences_themeSwitchTime_description": {
-        "message": "Set a time range for automatic theme switching.",
-        "description": "Onboarding checklist step description"
-    },
-    "checklist_preferences_contextOdooMenus_name": {
-        "message": "Context Menus",
-        "description": "Onboarding checklist step title (browser right-click menu)"
-    },
-    "checklist_preferences_contextOdooMenus_description": {
-        "message": "Set up some Odoo menus to use in the Joorney context menu.",
-        "description": "Onboarding checklist step description"
     },
     "checklist_technical_experimentalOption_name": {
         "message": "Experimental / Advanced",
@@ -969,85 +1815,163 @@
         "message": "Disable the previously enabled version.",
         "description": "Onboarding checklist step description"
     },
-    "checklist_defaultTitle": {
-        "message": "Discover Joorney",
-        "description": "Onboarding checklist: title before a tour is loaded"
-    },
-    "checklist_defaultDescription": {
-        "message": "Follow the steps below",
-        "description": "Onboarding checklist: description before a tour is loaded"
-    },
     "migration_title": {
-        "message": "Joorney Migration",
-        "description": "Migration page title (browser tab)"
-    },
-    "migration_select": {
-        "message": "Select your configuration to migrate",
-        "description": "Migration page: file selection heading"
-    },
-    "migration_or": {
-        "message": "or",
-        "description": "Migration page: between the file input and the \"Use current\" button"
-    },
-    "migration_useCurrent": {
-        "message": "Use current",
-        "description": "Migration page: button migrating the current configuration"
-    },
-    "migration_heading": {
-        "message": "Migration",
-        "description": "Migration page: heading of the migration summary"
+        "message": "Migrate configuration",
+        "description": "Migration page: title"
     },
     "migration_execute": {
-        "message": "Execute migration",
+        "message": "Run migration",
         "description": "Migration page: button running the migration"
     },
     "migration_download": {
-        "message": "Download new configuration",
-        "description": "Migration page: button downloading the migrated configuration"
+        "message": "Download migrated file",
+        "description": "Migration page: button downloading the migrated settings"
     },
-    "migration_error_lowerVersion": {
-        "message": "The configuration cannot be migrated to a lower version",
-        "description": "Migration page error"
+    "migration_subtitle": {
+        "message": "Bring settings saved by an older Joorney up to the current format.",
+        "description": "Migration page: subtitle"
     },
-    "migration_error_sameVersion": {
-        "message": "The configuration cannot be migrated to the same version",
-        "description": "Migration page error"
+    "migration_sourceTitle": {
+        "message": "Source",
+        "description": "Migration page: source section title"
     },
-    "optionsHosts_limitedFeatures": {
-        "message": "Limited Features",
-        "description": "Options hosts page: heading of the limited features"
+    "migration_sourceHelp": {
+        "message": "Choose which settings to migrate: the ones stored in this browser, or a file exported earlier.",
+        "description": "Migration page: source section help"
     },
-    "optionsHosts_features": {
-        "message": "Features",
-        "description": "Options hosts page: heading of the features"
+    "migration_current": {
+        "message": "Current settings",
+        "description": "Migration page: choice migrating the settings stored in this browser"
     },
-    "optionsHosts_whitelist": {
-        "message": "Whitelist",
-        "description": "Options hosts page: column of features disabled by default"
+    "migration_storedVersion": {
+        "message": "Stored v$version$",
+        "description": "Migration page: chip, configuration version of the stored settings",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "1"
+            }
+        }
     },
-    "optionsHosts_whitelistHelp": {
-        "message": "Feature disabled by default, unless listed and checked in the \"Origins\" section below",
-        "description": "Options hosts page: whitelist help"
+    "migration_drop": {
+        "message": "Drop a .json export here or",
+        "description": "Migration page: dropzone text, followed by the \"Choose file\" button"
     },
-    "optionsHosts_blacklist": {
-        "message": "Blacklist",
-        "description": "Options hosts page: column of features enabled by default"
+    "migration_stepsTitle": {
+        "message": "Steps",
+        "description": "Migration page: steps section title"
     },
-    "optionsHosts_blacklistHelp": {
-        "message": "Feature enabled by default, unless listed and checked in the \"Origins\" section below",
-        "description": "Options hosts page: blacklist help"
+    "migration_stepsHelp": {
+        "message": "Each step runs in order, from the version of your settings to the current one.",
+        "description": "Migration page: steps section help"
     },
-    "optionsHosts_disable": {
-        "message": "Disable",
-        "description": "Options hosts page: column of disabled features"
+    "migration_chainLabel": {
+        "message": "Migration chain from v$from$ to v$to$",
+        "description": "Migration page: accessible label of the version chain",
+        "placeholders": {
+            "from": {
+                "content": "$1",
+                "example": "0"
+            },
+            "to": {
+                "content": "$2",
+                "example": "2"
+            }
+        }
     },
-    "optionsHosts_originInput": {
-        "message": "Origin filter",
-        "description": "Options hosts page: accessible label of the new origin input"
+    "migration_version": {
+        "message": "v$version$",
+        "description": "Migration page: a configuration version in the chain",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "1"
+            }
+        }
     },
-    "optionsHosts_originsTitle": {
-        "message": "Odoo database origin",
-        "description": "Options hosts page: tooltip of the origins column"
+    "migration_stepLabel": {
+        "message": "v$from$ → v$to$",
+        "description": "Migration page: chip naming one migration step",
+        "placeholders": {
+            "from": {
+                "content": "$1",
+                "example": "0"
+            },
+            "to": {
+                "content": "$2",
+                "example": "1"
+            }
+        }
+    },
+    "migration_step_0": {
+        "message": "Allow/block mode moves from global to each feature.",
+        "description": "Migration page: what the migration from version 0 to 1 does"
+    },
+    "migration_step_1": {
+        "message": "Starring task effect becomes Starring priority effect.",
+        "description": "Migration page: what the migration from version 1 to 2 does"
+    },
+    "migration_running": {
+        "message": "Migrating…",
+        "description": "Migration page: button label while the migration runs"
+    },
+    "migration_backupHelp": {
+        "message": "Running replaces your stored settings with the migrated ones. Download a backup from Import / export first if you want to keep the old ones.",
+        "description": "Migration page: help under the run button"
+    },
+    "migration_done": {
+        "message": "Settings migrated to v$version$ and saved.",
+        "description": "Migration page: success note",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "2"
+            }
+        }
+    },
+    "migration_backToImportExport": {
+        "message": "Back to Import / export",
+        "description": "Migration page: link back to Import / export"
+    },
+    "migration_upToDate": {
+        "message": "Already up to date (v$version$), nothing to migrate.",
+        "description": "Migration page: the chosen settings already use the current version",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "2"
+            }
+        }
+    },
+    "migration_error_newer": {
+        "message": "These settings come from a newer Joorney (v$version$). Update the extension, then import them.",
+        "description": "Migration page: the chosen settings have a newer version",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "3"
+            }
+        }
+    },
+    "migration_error_failed": {
+        "message": "The migration could not be saved. Try again.",
+        "description": "Migration page: a migrator or a storage write failed"
+    },
+    "migration_confirm": {
+        "message": "Your current settings will be replaced by the migrated file.",
+        "description": "Migration page: confirmation before saving a migrated file"
+    },
+    "migration_error_refresh": {
+        "message": "Settings saved, but the page could not refresh. Reload it to see the result.",
+        "description": "Migration page: the settings were saved, then refreshing the page failed"
+    },
+    "optionsImportExport_fileMigrateLink": {
+        "message": "migrate it first",
+        "description": "Options import/export page: link to the migration, ends the sentence of the outdated file hint"
+    },
+    "optionsImportExport_migrateFile": {
+        "message": "Migrate a file",
+        "description": "Options import/export page: link to the migration page, settings up to date"
     },
     "optionsHosts_error_invalidRegex": {
         "message": "Invalid regular expression",
@@ -1057,91 +1981,125 @@
         "message": "Origin already added",
         "description": "Options hosts page: error when the origin already exists"
     },
-    "optionsPreferences_awesomeLoading": {
-        "message": "Awesome Loading",
-        "description": "Options preferences: section of the Awesome Loading features (large and small)"
-    },
     "optionsPreferences_imageUrl": {
         "message": "Image URL",
         "description": "Options preferences: image URL column / input"
     },
-    "optionsPreferences_addImage": {
-        "message": "Add image",
-        "description": "Options preferences: tooltip of the button adding a loading image"
-    },
     "optionsPreferences_deleteImage": {
         "message": "Delete image",
         "description": "Options preferences: tooltip of the button deleting a loading image"
-    },
-    "optionsPreferences_confirmRemoveImage": {
-        "message": "Are you sure you want to remove the image: $url$?",
-        "description": "Options preferences: confirmation before deleting a loading image",
-        "placeholders": {
-            "url": {
-                "content": "$1",
-                "example": "https://i.imgur.com/zTauRWm.gif"
-            }
-        }
     },
     "optionsPreferences_error_missingUrl": {
         "message": "Missing URL",
         "description": "Options preferences: error when adding an empty image URL"
     },
     "optionsPreferences_error_invalidUrl": {
-        "message": "Invalid URL",
+        "message": "Invalid URL: use a full https address",
         "description": "Options preferences: error when the image URL is invalid"
+    },
+    "optionsPreferences_error_syncQuota": {
+        "message": "Too large to sync: $size$ bytes, the limit is $limit$ bytes. Nothing was saved.",
+        "description": "Options feature page (Awesome Style, Awesome Loading): error, the value is bigger than one sync storage item allows",
+        "placeholders": {
+            "size": {
+                "content": "$1",
+                "example": "9120"
+            },
+            "limit": {
+                "content": "$2",
+                "example": "8192"
+            }
+        }
+    },
+    "optionsPreferences_error_save": {
+        "message": "Could not save: $error$",
+        "description": "Options feature page (Awesome Style, Awesome Loading): error, the browser storage refused the change",
+        "placeholders": {
+            "error": {
+                "content": "$1",
+                "example": "QUOTA_BYTES quota exceeded"
+            }
+        }
     },
     "optionsPreferences_saveShortcut": {
         "message": "Save (Ctrl+S)",
         "description": "Options preferences: Awesome Style save button"
     },
-    "optionsPreferences_lightImage": {
-        "message": "Light image URL for superfocus",
-        "description": "Options preferences (Unfocus App): background image in light theme"
-    },
     "optionsPreferences_lightImageAlt": {
-        "message": "Light superfocus background",
+        "message": "Light theme superfocus image",
         "description": "Options preferences (Unfocus App): alt text of the light image preview"
     },
-    "optionsPreferences_darkImage": {
-        "message": "Dark image URL for superfocus",
-        "description": "Options preferences (Unfocus App): background image in dark theme"
-    },
     "optionsPreferences_darkImageAlt": {
-        "message": "Dark superfocus background",
+        "message": "Dark theme superfocus image",
         "description": "Options preferences (Unfocus App): alt text of the dark image preview"
-    },
-    "optionsPreferences_superfocusCount": {
-        "message": "Superfocus count",
-        "description": "Options preferences (Unfocus App): column of superfocused apps count"
-    },
-    "optionsPreferences_unfocusCount": {
-        "message": "Unfocus count",
-        "description": "Options preferences (Unfocus App): column of hidden apps count"
-    },
-    "optionsPreferences_latLong": {
-        "message": "Latitude / Longitude",
-        "description": "Options preferences (Theme Switch): location column"
-    },
-    "optionsPreferences_darkModeRange": {
-        "message": "Dark mode: start / stop",
-        "description": "Options preferences (Theme Switch): dark mode hours column"
     },
     "optionsPreferences_getLocation": {
         "message": "Get current location",
         "description": "Options preferences (Theme Switch): tooltip of the location button"
     },
-    "optionsPreferences_deleteAll": {
-        "message": "Delete all",
-        "description": "Options preferences (Context Odoo Menus): button deleting every menu"
+    "optionsThemeSwitch_modeLabel": {
+        "message": "Mode",
+        "description": "Theme Switch: label of the mode choice"
     },
-    "optionsPreferences_menuName": {
-        "message": "Menu name",
-        "description": "Options preferences (Context Odoo Menus): column of menu paths"
+    "optionsThemeSwitch_modeSystem": {
+        "message": "System",
+        "description": "Theme Switch tile label"
     },
-    "optionsPreferences_menuNameTitle": {
-        "message": "Name of ir.ui.menu, unique",
-        "description": "Options preferences (Context Odoo Menus): tooltip of the menu column, keep ir.ui.menu"
+    "optionsThemeSwitch_modeSystemHelp": {
+        "message": "Follow the system colour scheme.",
+        "description": "Theme Switch settings: Follow the system colour scheme."
+    },
+    "optionsThemeSwitch_modeLight": {
+        "message": "Light",
+        "description": "Theme Switch settings: Light"
+    },
+    "optionsThemeSwitch_modeLightHelp": {
+        "message": "Always use the light theme.",
+        "description": "Theme Switch settings: Always use the light theme."
+    },
+    "optionsThemeSwitch_modeDark": {
+        "message": "Dark",
+        "description": "Theme Switch settings: Dark"
+    },
+    "optionsThemeSwitch_modeDarkHelp": {
+        "message": "Always use the dark theme.",
+        "description": "Theme Switch settings: Always use the dark theme."
+    },
+    "optionsThemeSwitch_modeLocation": {
+        "message": "Location",
+        "description": "Theme Switch settings: Location"
+    },
+    "optionsThemeSwitch_modeLocationHelp": {
+        "message": "Dark between sunset and sunrise.",
+        "description": "Theme Switch settings: Dark between sunset and sunrise."
+    },
+    "optionsThemeSwitch_modeTime": {
+        "message": "Time range",
+        "description": "Theme Switch settings: Time range"
+    },
+    "optionsThemeSwitch_modeTimeHelp": {
+        "message": "Dark between two times.",
+        "description": "Theme Switch settings: Dark between two times."
+    },
+    "optionsThemeSwitch_noSetting": {
+        "message": "No further setting for this mode.",
+        "description": "Theme Switch settings: No further setting for this mode."
+    },
+    "optionsThemeSwitch_latitude": {
+        "message": "Latitude",
+        "description": "Theme Switch settings: Latitude"
+    },
+    "optionsThemeSwitch_longitude": {
+        "message": "Longitude",
+        "description": "Theme Switch settings: Longitude"
+    },
+    "optionsThemeSwitch_darkStart": {
+        "message": "Dark from",
+        "description": "Theme Switch settings: Dark from"
+    },
+    "optionsThemeSwitch_darkStop": {
+        "message": "Dark until",
+        "description": "Theme Switch settings: Dark until"
     },
     "optionsVersions_versions": {
         "message": "Odoo versions",
@@ -1165,21 +2123,65 @@
         "message": "Compatibility",
         "description": "Options versions page: header of the feature compatibility table"
     },
-    "optionsVersions_yes": {
-        "message": "YES",
-        "description": "Options versions page: feature supported and version enabled (uppercase, short)"
+    "optionsVersions_subtitle": {
+        "message": "Choose the Odoo versions Joorney works on, and see which feature runs on which version.",
+        "description": "Options versions page: page subtitle"
     },
-    "optionsVersions_off": {
-        "message": "OFF",
-        "description": "Options versions page: feature supported but version disabled (uppercase, short)"
+    "optionsVersions_versionsHelp": {
+        "message": "Joorney only acts on databases running a selected version. Selected versions are saved as you click.",
+        "description": "Options versions page: help text of the Odoo versions card"
     },
-    "optionsVersions_no": {
-        "message": "NO",
-        "description": "Options versions page: feature not supported (uppercase, short)"
+    "optionsVersions_groupStable": {
+        "message": "Stable",
+        "description": "Options versions page: heading of the stable versions group (x.0)"
     },
-    "optionsNotifications_title": {
-        "message": "Mode & type",
-        "description": "Options notifications page: heading"
+    "optionsVersions_groupIntermediate": {
+        "message": "Intermediate (saas)",
+        "description": "Options versions page: heading of the intermediate versions group (saas)"
+    },
+    "optionsVersions_groupDev": {
+        "message": "Development",
+        "description": "Options versions page: heading of the development versions group, developer mode only"
+    },
+    "optionsVersions_devNote": {
+        "message": "Development versions are not part of the compatibility matrix below.",
+        "description": "Options versions page: note under the development versions"
+    },
+    "optionsVersions_compatibilityHelp": {
+        "message": "Each feature and the Odoo versions it supports. Columns of versions you did not select are greyed.",
+        "description": "Options versions page: help text of the compatibility card"
+    },
+    "optionsVersions_feature": {
+        "message": "Feature",
+        "description": "Options versions page: matrix header of the feature column"
+    },
+    "optionsVersions_matrixLabel": {
+        "message": "Compatibility matrix",
+        "description": "Options versions page: accessible name of the scrollable matrix"
+    },
+    "optionsVersions_supported": {
+        "message": "Supported",
+        "description": "Options versions page: screen reader text of a cell: feature supported, version selected"
+    },
+    "optionsVersions_supportedOff": {
+        "message": "Supported, version not selected",
+        "description": "Options versions page: screen reader text of a cell: feature supported, version not selected"
+    },
+    "optionsVersions_unsupported": {
+        "message": "Not supported",
+        "description": "Options versions page: screen reader text of a cell: feature not supported"
+    },
+    "optionsVersions_legendSupported": {
+        "message": "Supported",
+        "description": "Options versions page: legend: supported"
+    },
+    "optionsVersions_legendUnsupported": {
+        "message": "Not supported",
+        "description": "Options versions page: legend: not supported"
+    },
+    "optionsVersions_legendUnselected": {
+        "message": "Version not selected",
+        "description": "Options versions page: legend: greyed column"
     },
     "optionsNotifications_showMe": {
         "message": "Show me",
@@ -1198,8 +2200,8 @@
         "description": "Options notifications page: mode, notifications disabled"
     },
     "optionsNotifications_mode_disabledHint": {
-        "message": "(disable)",
-        "description": "Options notifications page: hint after \"Nowhere\""
+        "message": "Deactivated",
+        "description": "Options notifications page: hint under the Nowhere tile"
     },
     "optionsNotifications_mode_log": {
         "message": "Devtools console",
@@ -1277,10 +2279,6 @@
         "message": "Destroy sync storage",
         "description": "Options developers page: button clearing the synced storage"
     },
-    "optionsTechnical_experimental": {
-        "message": "Experimental",
-        "description": "Options developers page: heading"
-    },
     "optionsTechnical_developerMode": {
         "message": "Developer mode",
         "description": "Options developers page: switch label"
@@ -1314,7 +2312,7 @@
         "description": "Options developers page: switch help"
     },
     "optionsTechnical_fallbacks": {
-        "message": "Window actions fallback",
+        "message": "Window action fallbacks",
         "description": "Options developers page: heading"
     },
     "optionsTechnical_host": {
@@ -1329,29 +2327,27 @@
         "message": "Action model",
         "description": "Options developers page: fallback table column"
     },
-    "optionsTechnical_addFallback": {
-        "message": "Add fallback",
-        "description": "Options developers page: tooltip of the add button"
-    },
     "optionsTechnical_deleteFallback": {
-        "message": "Delete fallback",
-        "description": "Options developers page: tooltip of the delete button"
-    },
-    "optionsTechnical_deleteAllFallbacks": {
-        "message": "Delete all fallbacks",
-        "description": "Options developers page: tooltip of the delete button of an origin"
-    },
-    "optionsTechnical_confirmRemoveFallback": {
-        "message": "Are you sure you want to remove the path \"$path$\" for the origin \"$origin$\"?",
-        "description": "Options developers page: confirmation before deleting a fallback",
+        "message": "Delete fallback $path$",
+        "description": "Options developers page: accessible name of the delete button of a fallback",
         "placeholders": {
             "path": {
                 "content": "$1",
                 "example": "all-tasks"
-            },
-            "origin": {
-                "content": "$2",
-                "example": "https://www.odoo.com"
+            }
+        }
+    },
+    "optionsTechnical_deleteAllFallbacks": {
+        "message": "Delete all",
+        "description": "Options developers page: button removing every fallback of a host"
+    },
+    "optionsTechnical_confirmRemoveFallback": {
+        "message": "Remove $path$?",
+        "description": "Options developers page: inline confirmation before deleting a fallback",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "all-tasks"
             }
         }
     },
@@ -1376,6 +2372,16 @@
     "optionsTechnical_error_missingModel": {
         "message": "Missing model",
         "description": "Options developers page: fallback error"
+    },
+    "optionsTechnical_error_save": {
+        "message": "Could not save the fallback: $error$",
+        "description": "Options Developers page: error, the window action fallback could not be saved (storage quota or error)",
+        "placeholders": {
+            "error": {
+                "content": "$1",
+                "example": "QUOTA_BYTES_PER_ITEM quota exceeded"
+            }
+        }
     },
     "optionsTechnical_storage": {
         "message": "Storage",
@@ -1441,16 +2447,12 @@
         "message": "Sunrise / Sunset",
         "description": "Options developers page: storage section"
     },
-    "optionsTechnical_tipUse": {
-        "message": "Use",
-        "description": "Options developers page: tip, followed by a key combination"
-    },
     "optionsTechnical_tipSameLevel": {
-        "message": "to expand/collapse all elements at the same level",
+        "message": "expands or collapses all elements at the same level.",
         "description": "Options developers page: tip after [Ctrl/Cmd + Click]"
     },
     "optionsTechnical_tipChildren": {
-        "message": "to expand/collapse an element and all its children",
+        "message": "expands or collapses an element and all its children.",
         "description": "Options developers page: tip after [Shift + Click]"
     },
     "optionsTechnical_featuresState": {
@@ -1472,6 +2474,88 @@
     "optionsTechnical_localData": {
         "message": "Extension local data",
         "description": "Options developers page: JSON viewer heading"
+    },
+    "optionsTechnical_subtitle": {
+        "message": "Experimental flags and storage inspection, for people working on Joorney or on Odoo itself.",
+        "description": "Options developers page: subtitle"
+    },
+    "optionsTechnical_banner": {
+        "message": "Developer tools: visible because debug mode is on.",
+        "description": "Options developers page: grey banner"
+    },
+    "optionsTechnical_flags": {
+        "message": "Flags",
+        "description": "Options developers page: card title"
+    },
+    "optionsTechnical_flagsHelp": {
+        "message": "Experimental. These are saved with your synced settings.",
+        "description": "Options developers page: flags card help"
+    },
+    "optionsTechnical_fallbacksHelp": {
+        "message": "For each host, the Odoo action path (the URL part after /odoo/) and the model it opens, used when the action cannot be resolved.",
+        "description": "Options developers page: fallbacks card help"
+    },
+    "optionsTechnical_noFallbacks": {
+        "message": "No fallback yet. Add one above.",
+        "description": "Options developers page: empty fallback list"
+    },
+    "optionsTechnical_cancel": {
+        "message": "Cancel",
+        "description": "Options developers page: button cancelling an inline confirmation"
+    },
+    "optionsTechnical_confirm": {
+        "message": "Confirm",
+        "description": "Options developers page: button confirming a destructive action"
+    },
+    "optionsTechnical_storageHelp": {
+        "message": "What Joorney keeps in the browser, and how much of each quota it uses.",
+        "description": "Options developers page: storage card help"
+    },
+    "optionsTechnical_tab_sync": {
+        "message": "Sync",
+        "description": "Options developers page: storage tab"
+    },
+    "optionsTechnical_tab_local": {
+        "message": "Local",
+        "description": "Options developers page: storage tab"
+    },
+    "optionsTechnical_tab_onboarding": {
+        "message": "Onboarding",
+        "description": "Options developers page: storage tab"
+    },
+    "optionsTechnical_syncData": {
+        "message": "Sync data",
+        "description": "Options developers page: label of the switch between the sync views"
+    },
+    "optionsTechnical_swapUsage": {
+        "message": "Switch between total usage and usage by section",
+        "description": "Options developers page: tooltip of the usage bar switch"
+    },
+    "optionsTechnical_usageAria": {
+        "message": "$name$ usage: $percent$ percent",
+        "description": "Options developers page: accessible name of a usage bar",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "Sync storage"
+            },
+            "percent": {
+                "content": "$2",
+                "example": "12.5"
+            }
+        }
+    },
+    "optionsTechnical_danger": {
+        "message": "Danger zone",
+        "description": "Options developers page: card title"
+    },
+    "optionsTechnical_dangerLocked": {
+        "message": "Locked. Turn on Developer mode above to use these actions.",
+        "description": "Options developers page: danger zone note when the actions are not available"
+    },
+    "optionsTechnical_chaosDone": {
+        "message": "Done. The page will now reload.",
+        "description": "Options developers page: shown after a destructive action"
     },
     "ambient_category_computed": {
         "message": "Computed Events",
@@ -1529,6 +2613,26 @@
         "message": "None",
         "description": "Ambient options page: link in a category header that disables all effects of the category"
     },
+    "optionsAmbient_preview": {
+        "message": "Preview",
+        "description": "Ambient options page: text button that plays an effect on the preview"
+    },
+    "optionsAmbient_stop": {
+        "message": "Stop preview",
+        "description": "Ambient options page: button of the fullscreen preview bar that stops the running effect and closes the preview"
+    },
+    "optionsAmbient_light": {
+        "message": "Light",
+        "description": "Ambient options page: badge on the light side of the preview"
+    },
+    "optionsAmbient_dark": {
+        "message": "Dark",
+        "description": "Ambient options page: badge on the dark side of the preview"
+    },
+    "optionsFeature_settingsHelpThemeSwitch": {
+        "message": "Where and when the dark theme applies automatically: by location (sunrise and sunset) or by a time range. The theme mode itself is chosen in the popup.",
+        "description": "Options feature page: help of the Theme Switch settings card"
+    },
     "optionsAmbient_active": {
         "message": "active",
         "description": "Ambient options page: small badge next to the effect that is active today (short, lowercase)"
@@ -1541,13 +2645,9 @@
         "message": "Enable",
         "description": "Ambient options page: text of an effect toggle switch when it is on (very short, the switch is 75px wide)"
     },
-    "optionsAmbient_disable": {
-        "message": "Disable",
-        "description": "Ambient options page: text of an effect toggle switch when it is off (very short, the switch is 75px wide)"
-    },
     "optionsAmbient_playingInfo": {
         "message": "Ambient: \"$name$\" - Duration: $duration$ ms",
-        "description": "Ambient options page: line under the preview while an effect is played; name = effect name, duration = estimated duration in milliseconds",
+        "description": "Ambient options page: text of the fullscreen preview bar while an effect is played; name = effect name, duration = estimated duration in milliseconds",
         "placeholders": {
             "name": {
                 "content": "$1",
@@ -1558,5 +2658,1019 @@
                 "example": "3000"
             }
         }
+    },
+    "optionsHome_title": {
+        "message": "Hosts",
+        "description": "Options home page: title"
+    },
+    "optionsHome_subtitleSimple": {
+        "message": "Choose which features run on each host.",
+        "description": "Options home page: subtitle of the simple view"
+    },
+    "optionsHome_subtitleAdvanced": {
+        "message": "Advanced view: every host and feature at a glance.",
+        "description": "Options home page: subtitle of the advanced view"
+    },
+    "optionsHome_viewAdvanced": {
+        "message": "Advanced view",
+        "description": "Options home page: link switching to the advanced view"
+    },
+    "optionsHome_viewSimple": {
+        "message": "Simple view",
+        "description": "Options home page: link switching to the simple view"
+    },
+    "optionsHome_hosts": {
+        "message": "Hosts",
+        "description": "Options home page: heading of the host list"
+    },
+    "optionsHome_hostsOn": {
+        "message": "$count$ on",
+        "description": "Options home page: number of features on for a host (under its name)",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "3"
+            }
+        }
+    },
+    "optionsHome_addHost": {
+        "message": "Add a host",
+        "description": "Options home page: label of the new host field"
+    },
+    "optionsHome_addPlaceholder": {
+        "message": "https://... or regex://...",
+        "description": "Options home page: placeholder of the new host field"
+    },
+    "optionsHome_add": {
+        "message": "Add",
+        "description": "Options home page: add host button"
+    },
+    "optionsHome_regexChip": {
+        "message": "regex",
+        "description": "Options home page: chip of a regular expression host"
+    },
+    "optionsHome_removeHost": {
+        "message": "Remove $host$",
+        "description": "Options home page: accessible name of the remove host button",
+        "placeholders": {
+            "host": {
+                "content": "$1",
+                "example": "https://www.odoo.com"
+            }
+        }
+    },
+    "optionsHome_removeConfirm": {
+        "message": "Remove $host$ and its exceptions?",
+        "description": "Options home page: inline confirmation before removing a host",
+        "placeholders": {
+            "host": {
+                "content": "$1",
+                "example": "https://www.odoo.com"
+            }
+        }
+    },
+    "optionsHome_removeYes": {
+        "message": "Remove",
+        "description": "Options home page: confirm removing a host"
+    },
+    "optionsHome_removeCancel": {
+        "message": "Cancel",
+        "description": "Options home page: cancel removing a host"
+    },
+    "optionsHome_noHostSelected": {
+        "message": "No host selected",
+        "description": "Options home page: title when no host is selected"
+    },
+    "optionsHome_hostSubtitle": {
+        "message": "Choose which features run on this host",
+        "description": "Options home page: subtitle under the selected host"
+    },
+    "optionsHome_allOn": {
+        "message": "Turn all on here",
+        "description": "Options home page: turn the visible features on for the selected host"
+    },
+    "optionsHome_allOff": {
+        "message": "Turn all off here",
+        "description": "Options home page: turn the visible features off for the selected host"
+    },
+    "optionsHome_categories": {
+        "message": "Category filter",
+        "description": "Options home page: accessible name of the category pills"
+    },
+    "optionsHome_categoryAll": {
+        "message": "All",
+        "description": "Options home page: category pill showing every category"
+    },
+    "optionsHome_sectionCount": {
+        "message": "$on$ of $total$ on here",
+        "description": "Options home page: count under a category title",
+        "placeholders": {
+            "on": {
+                "content": "$1",
+                "example": "2"
+            },
+            "total": {
+                "content": "$2",
+                "example": "6"
+            }
+        }
+    },
+    "optionsHome_noFeatures": {
+        "message": "No feature in this category.",
+        "description": "Options home page: empty category"
+    },
+    "optionsHome_status_everywhereOn": {
+        "message": "On: follows its default (on)",
+        "description": "Options home page: card status, everywhere mode, host not listed"
+    },
+    "optionsHome_status_everywhereOff": {
+        "message": "Off here: an exception, it is on by default",
+        "description": "Options home page: card status, everywhere mode, host listed"
+    },
+    "optionsHome_status_listedOn": {
+        "message": "On here: an exception, it is off by default",
+        "description": "Options home page: card status, listed mode, host listed"
+    },
+    "optionsHome_status_listedOff": {
+        "message": "Off: follows its default (off)",
+        "description": "Options home page: card status, listed mode, host not listed"
+    },
+    "optionsHome_status_deactivated": {
+        "message": "Deactivated everywhere",
+        "description": "Options home page: card status of a deactivated feature"
+    },
+    "optionsHome_status_regexNote": {
+        "message": "Also on here through a regex entry",
+        "description": "Options home page: a regex entry still lists the feature on this host"
+    },
+    "optionsHome_activate": {
+        "message": "Activate",
+        "description": "Options home page: activate a deactivated feature"
+    },
+    "optionsHome_runbotGlobal": {
+        "message": "$feature$ globally",
+        "description": "Options home page: accessible name of the global switch of a runbot feature",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Auto Open"
+            }
+        }
+    },
+    "optionsHome_runsNowhere": {
+        "message": "Runs on no host",
+        "description": "Options home page: a runbot feature without origins"
+    },
+    "optionsHome_runbotBuilds": {
+        "message": "Runbot builds",
+        "description": "Options home page: chip of a runbot feature's regular expression origin"
+    },
+    "optionsHome_runbotBuildsNote": {
+        "message": "Runbot builds: any address matching",
+        "description": "Options home page: muted note under the runbot cards, followed by the regular expression"
+    },
+    "optionsHome_emptyTitle": {
+        "message": "Add your first host",
+        "description": "Options home page: empty state title"
+    },
+    "optionsHome_emptyText": {
+        "message": "A host is an Odoo address, like https://www.odoo.com. Features are set per host: pick which ones run there, or use regex://... to match many databases at once.",
+        "description": "Options home page: empty state explanation"
+    },
+    "optionsHome_hostCount": {
+        "message": "$hosts$ hosts x $features$ features",
+        "description": "Options home page: advanced view corner summary",
+        "placeholders": {
+            "hosts": {
+                "content": "$1",
+                "example": "4"
+            },
+            "features": {
+                "content": "$2",
+                "example": "13"
+            }
+        }
+    },
+    "optionsHome_matrixLabel": {
+        "message": "Features by host",
+        "description": "Options home page: accessible name of the matrix"
+    },
+    "optionsHome_modeButton": {
+        "message": "$feature$: $mode$. Change the default",
+        "description": "Options home page: accessible name of the default button of a column, it opens the default menu",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Theme Switch"
+            },
+            "mode": {
+                "content": "$2",
+                "example": "On by default"
+            }
+        }
+    },
+    "optionsHome_cellLabel": {
+        "message": "$feature$ on $host$",
+        "description": "Options home page: accessible name of a matrix cell",
+        "placeholders": {
+            "feature": {
+                "content": "$1",
+                "example": "Theme Switch"
+            },
+            "host": {
+                "content": "$2",
+                "example": "https://www.odoo.com"
+            }
+        }
+    },
+    "optionsHome_legendOn": {
+        "message": "On for this host",
+        "description": "Options home page: legend"
+    },
+    "optionsHome_legendOff": {
+        "message": "Off for this host",
+        "description": "Options home page: legend"
+    },
+    "optionsHome_legendException": {
+        "message": "Exception: differs from the column's default",
+        "description": "Options home page: advanced view legend, ringed dot"
+    },
+    "optionsHome_modeOnCount": {
+        "message": "On for $count$ of $total$ hosts",
+        "description": "Options home page: default menu, how many hosts the feature would run on with this default",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "3"
+            },
+            "total": {
+                "content": "$2",
+                "example": "4"
+            }
+        }
+    },
+    "optionsHome_modeOnNone": {
+        "message": "On for no host",
+        "description": "Options home page: default menu, the feature would run on no host"
+    },
+    "optionsHome_modeNewOn": {
+        "message": "New hosts: on",
+        "description": "Options home page: default menu, a host added later runs the feature"
+    },
+    "optionsHome_modeNewOff": {
+        "message": "New hosts: off",
+        "description": "Options home page: default menu, a host added later does not run the feature"
+    },
+    "optionsHome_modeFlip": {
+        "message": "Exceptions are kept when the default changes, so they flip.",
+        "description": "Options home page: default menu footer, shown when the feature has exceptions"
+    },
+    "optionsHome_addHint": {
+        "message": "A new host has no exception: it follows each column's default.",
+        "description": "Options home page: hint of the add row of the matrix"
+    },
+    "optionsHome_hostsHeader": {
+        "message": "Hosts",
+        "description": "Options home page: first column header of the matrix"
+    },
+    "optionsHome_setting_title": {
+        "message": "Advanced host view",
+        "description": "Settings page: title of the advanced host view switch"
+    },
+    "optionsHome_setting_text": {
+        "message": "Show Home as one grid of every host and every feature, for quick review and edits. Off: one dashboard per host.",
+        "description": "Settings page: help of the advanced host view switch"
+    },
+    "optionsFeature_breadcrumb": {
+        "message": "Breadcrumb",
+        "description": "Options feature page: accessible name of the breadcrumb"
+    },
+    "optionsFeature_notFound": {
+        "message": "Feature not found",
+        "description": "Options feature page: title when the feature id is unknown"
+    },
+    "optionsFeature_notFoundText": {
+        "message": "No feature matches this link.",
+        "description": "Options feature page: text when the feature id is unknown"
+    },
+    "optionsFeature_back": {
+        "message": "Back to all features",
+        "description": "Options feature page: link back to the Features page"
+    },
+    "optionsFeature_alsoPopup": {
+        "message": "Also in the popup",
+        "description": "Options feature page: chip of a feature that has options in the toolbar popup"
+    },
+    "optionsFeature_alsoPopupTitle": {
+        "message": "This feature also has quick options in the toolbar popup",
+        "description": "Options feature page: tooltip of the popup chip"
+    },
+    "optionsFeature_active": {
+        "message": "Active",
+        "description": "Options feature page: label of the switch when the feature is active"
+    },
+    "optionsFeature_activateMenu": {
+        "message": "Activating asks for its default",
+        "description": "Options feature page: accessible description of the switch while the feature is deactivated"
+    },
+    "optionsFeature_whereTitle": {
+        "message": "Where it runs",
+        "description": "Options feature page: title of the hosts card"
+    },
+    "optionsFeature_whereHelp": {
+        "message": "Choose on which Odoo hosts this feature is active.",
+        "description": "Options feature page: help of the hosts card"
+    },
+    "optionsFeature_limitedHelp": {
+        "message": "This feature only runs on these runbot hosts. They are fixed.",
+        "description": "Options feature page: help of the hosts card of a runbot feature"
+    },
+    "optionsFeature_deactivatedBanner": {
+        "message": "Deactivated: it runs nowhere",
+        "description": "Options feature page: banner of the hosts card when the feature is deactivated"
+    },
+    "optionsFeature_modeLabel": {
+        "message": "Where the feature runs",
+        "description": "Options feature page: accessible name of the two mode buttons"
+    },
+    "optionsFeature_hostsTitle": {
+        "message": "Exceptions",
+        "description": "Options feature page: title of the list of hosts"
+    },
+    "optionsFeature_noHosts": {
+        "message": "No exception: it follows the default on every host.",
+        "description": "Options feature page: empty list of hosts"
+    },
+    "optionsFeature_regexChip": {
+        "message": "regex",
+        "description": "Options feature page: chip next to a host given as a regular expression (short, lowercase)"
+    },
+    "optionsFeature_onHere": {
+        "message": "On here",
+        "description": "Options feature page: chip of a listed host in the \"only on listed hosts\" mode"
+    },
+    "optionsFeature_offHere": {
+        "message": "Off here",
+        "description": "Options feature page: chip of a listed host in the \"everywhere except listed hosts\" mode"
+    },
+    "optionsFeature_settings": {
+        "message": "Settings",
+        "description": "Options feature page: title of the settings card"
+    },
+    "optionsFeature_settingsHelp": {
+        "message": "Options of this feature, saved as you edit them.",
+        "description": "Options feature page: help of the settings card"
+    },
+    "optionsFeature_settingsMissing": {
+        "message": "This feature has settings, but this version of Joorney cannot show them yet.",
+        "description": "Options feature page: Settings card of a feature declaring settings whose block is not registered (developer mistake, should not happen in a release)"
+    },
+    "optionsFeature_sync": {
+        "message": "Last change syncs across your Chrome profile.",
+        "description": "Options feature page: footer note"
+    },
+    "optionsFeature_ambientSlider": {
+        "message": "Compare the light and dark themes",
+        "description": "Options feature page (Ambient): accessible name of the preview slider"
+    },
+    "optionsSettings_title": {
+        "message": "Settings",
+        "description": "Options Settings page: title"
+    },
+    "optionsSettings_subtitle": {
+        "message": "Extension-wide preferences.",
+        "description": "Options Settings page: subtitle"
+    },
+    "optionsSettings_hosts_title": {
+        "message": "Home page",
+        "description": "Options Settings page: title of the Home page card"
+    },
+    "optionsSettings_shortcut_title": {
+        "message": "Keyboard shortcut",
+        "description": "Options Settings page: title of the shortcut card"
+    },
+    "optionsSettings_shortcut_help": {
+        "message": "Shortcut to turn Joorney on or off temporarily (the extension's only declared command).",
+        "description": "Options Settings page: help of the shortcut card"
+    },
+    "optionsSettings_shortcut_unset": {
+        "message": "No shortcut set",
+        "description": "Options Settings page: the command has no key assigned"
+    },
+    "optionsSettings_shortcut_change": {
+        "message": "Change it there",
+        "description": "Options Settings page: next to the chrome://extensions/shortcuts address"
+    },
+    "optionsSettings_shortcut_copy": {
+        "message": "Copy chrome://extensions/shortcuts",
+        "description": "Options Settings page: copy button of the shortcuts address"
+    },
+    "optionsSettings_shortcut_copied": {
+        "message": "Copied. Paste it in the address bar.",
+        "description": "Options Settings page: after copying the shortcuts address"
+    },
+    "optionsAmbient_play": {
+        "message": "Play $name$",
+        "description": "Options feature page (Ambient): accessible name of the preview button",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "example": "Christmas"
+            }
+        }
+    },
+    "checklist_panelTitle": {
+        "message": "Get started with Joorney",
+        "description": "Onboarding checklist: title of the panel"
+    },
+    "checklist_panelSubtitle": {
+        "message": "Short tours, one per page. Do them in any order.",
+        "description": "Onboarding checklist: subtitle of the panel"
+    },
+    "checklist_progress": {
+        "message": "$done$ of $total$ done",
+        "description": "Onboarding checklist: number of finished tours, under the progress bar",
+        "placeholders": {
+            "done": {
+                "content": "$1",
+                "example": "2"
+            },
+            "total": {
+                "content": "$2",
+                "example": "6"
+            }
+        }
+    },
+    "checklist_hide": {
+        "message": "Hide checklist",
+        "description": "Onboarding checklist: button closing the panel"
+    },
+    "checklist_start": {
+        "message": "Start",
+        "description": "Onboarding checklist: button starting a tour that was not begun"
+    },
+    "checklist_resume": {
+        "message": "Resume",
+        "description": "Onboarding checklist: button resuming a tour that was begun"
+    },
+    "checklist_startTour": {
+        "message": "Start $tour$",
+        "description": "Onboarding checklist: accessible name of the start button of a tour",
+        "placeholders": {
+            "tour": {
+                "content": "$1",
+                "example": "Home: hosts"
+            }
+        }
+    },
+    "checklist_resumeTour": {
+        "message": "Resume $tour$",
+        "description": "Onboarding checklist: accessible name of the resume button of a tour",
+        "placeholders": {
+            "tour": {
+                "content": "$1",
+                "example": "Home: hosts"
+            }
+        }
+    },
+    "checklist_tourSteps": {
+        "message": "$count$ steps",
+        "description": "Onboarding checklist: number of steps of a tour, next to its description",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "5"
+            }
+        }
+    },
+    "checklist_tourStepsDone": {
+        "message": "$done$ of $total$ steps",
+        "description": "Onboarding checklist: steps done in a tour that was begun, next to its description",
+        "placeholders": {
+            "done": {
+                "content": "$1",
+                "example": "2"
+            },
+            "total": {
+                "content": "$2",
+                "example": "5"
+            }
+        }
+    },
+    "checklist_tourDone": {
+        "message": "Done",
+        "description": "Onboarding checklist: screen reader text of a finished tour"
+    },
+    "checklist_toggleSteps": {
+        "message": "Show the steps of $tour$",
+        "description": "Onboarding checklist: accessible name of the button expanding the steps of a tour",
+        "placeholders": {
+            "tour": {
+                "content": "$1",
+                "example": "Home: hosts"
+            }
+        }
+    },
+    "checklist_markAllDone": {
+        "message": "Mark all as done",
+        "description": "Onboarding checklist: button marking every step of the tour as done"
+    },
+    "checklist_guideStep": {
+        "message": "Step $current$ of $total$",
+        "description": "Onboarding checklist: position of the step in the guided walk",
+        "placeholders": {
+            "current": {
+                "content": "$1",
+                "example": "2"
+            },
+            "total": {
+                "content": "$2",
+                "example": "5"
+            }
+        }
+    },
+    "checklist_guideLabel": {
+        "message": "$tour$ tour, $step$",
+        "description": "Onboarding checklist: accessible name of the guided walk bubble",
+        "placeholders": {
+            "tour": {
+                "content": "$1",
+                "example": "Home: hosts"
+            },
+            "step": {
+                "content": "$2",
+                "example": "Add a host"
+            }
+        }
+    },
+    "checklist_guideBack": {
+        "message": "Back",
+        "description": "Onboarding checklist: guided walk: previous step"
+    },
+    "checklist_guideNext": {
+        "message": "Next",
+        "description": "Onboarding checklist: guided walk: next step"
+    },
+    "checklist_guideFinish": {
+        "message": "Finish",
+        "description": "Onboarding checklist: guided walk: last step button"
+    },
+    "checklist_guideSkip": {
+        "message": "Skip tour",
+        "description": "Onboarding checklist: guided walk: close it, the tour stays in progress"
+    },
+    "checklist_guideNoTarget": {
+        "message": "This part is not on the page right now. You can carry on with Next.",
+        "description": "Onboarding checklist: guided walk: note when the step target is not on the page"
+    },
+    "optionsHome_runbotName": {
+        "message": "Runbot",
+        "description": "Options home page: name of the pinned built-in Runbot row"
+    },
+    "optionsHome_builtIn": {
+        "message": "built-in",
+        "description": "Options home page: chip of the pinned Runbot row"
+    },
+    "optionsHome_exceptionOff": {
+        "message": "Off here: an exception, it is on by default. Click to follow the default.",
+        "description": "Options home page: tooltip of a listed host in Everywhere mode"
+    },
+    "optionsHome_exceptionOn": {
+        "message": "On here: an exception, it is off by default. Click to follow the default.",
+        "description": "Options home page: tooltip of a listed host in Only on listed hosts mode"
+    },
+    "optionsHome_followsEverywhere": {
+        "message": "Follows the default (on)",
+        "description": "Options home page: tooltip of an unlisted host in Everywhere mode"
+    },
+    "optionsHome_followsListed": {
+        "message": "Follows the default (off)",
+        "description": "Options home page: tooltip of an unlisted host in Only on listed hosts mode"
+    },
+    "optionsNotifications_subtitle": {
+        "message": "Mode and type of the notifications Joorney shows.",
+        "description": "Options notifications page: subtitle (followed by the reload hint)"
+    },
+    "optionsNotifications_display": {
+        "message": "Display",
+        "description": "Options notifications page: heading of the mode card"
+    },
+    "optionsNotifications_modeLabel": {
+        "message": "Notification mode",
+        "description": "Options notifications page: accessible name of the mode tiles group"
+    },
+    "optionsNotifications_mode_logHint": {
+        "message": "Written in the browser console",
+        "description": "Options notifications page: hint under the Devtools console tile"
+    },
+    "optionsNotifications_mode_uiHint": {
+        "message": "Compact toast, one line",
+        "description": "Options notifications page: hint under the Standard UI tile"
+    },
+    "optionsNotifications_mode_largeUiHint": {
+        "message": "Toast with the full message",
+        "description": "Options notifications page: hint under the Large UI tile"
+    },
+    "optionsNotifications_types": {
+        "message": "Types",
+        "description": "Options notifications page: heading of the types card"
+    },
+    "optionsNotifications_preview": {
+        "message": "Preview",
+        "description": "Options notifications page: button showing a sample notification of a type"
+    },
+    "optionsNotifications_previewType": {
+        "message": "Preview $type$",
+        "description": "Options notifications page: accessible name of the preview button of a type",
+        "placeholders": {
+            "type": {
+                "content": "$1",
+                "example": "Warning"
+            }
+        }
+    },
+    "optionsNotifications_close": {
+        "message": "Close",
+        "description": "Options notifications page: accessible name of the close button of a preview toast"
+    },
+    "optionsFeature_settingsHelpAmbient": {
+        "message": "Which ambients may play on the Odoo home menu, and a preview of each one.",
+        "description": "Options feature page: help of the Ambient settings card"
+    },
+    "optionsHome_hostsActive": {
+        "message": "$count$ active",
+        "description": "Options home page: number of active features for a host (under its name)",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "3"
+            }
+        }
+    },
+    "optionsHome_status_runbotOn": {
+        "message": "On: runs on runbot builds",
+        "description": "Options home page: tooltip of the switch of a runbot feature that is on"
+    },
+    "optionsAwl_group": {
+        "message": "Loader",
+        "description": "Options Awesome Loading: label of the group of loader tiles"
+    },
+    "optionsAwl_default": {
+        "message": "Default (Odoo spinner)",
+        "description": "Options Awesome Loading: tile that keeps the loading indicator of Odoo"
+    },
+    "optionsAwl_builtIn": {
+        "message": "Built-in",
+        "description": "Options Awesome Loading: chip of the loader shipped with Joorney"
+    },
+    "optionsAwl_inUse": {
+        "message": "In use",
+        "description": "Options Awesome Loading: chip of the selected loader"
+    },
+    "optionsAwl_deleteLabel": {
+        "message": "Delete image $url$",
+        "description": "Options Awesome Loading: accessible name of the delete button of an image",
+        "placeholders": {
+            "url": {
+                "content": "$1",
+                "example": "https://example.com/loader.gif"
+            }
+        }
+    },
+    "optionsAwl_confirmRemove": {
+        "message": "Remove this image?",
+        "description": "Options Awesome Loading: inline confirmation before deleting an image"
+    },
+    "optionsAwl_remove": {
+        "message": "Remove",
+        "description": "Options Awesome Loading: confirm the removal of an image"
+    },
+    "optionsAwl_removeLabel": {
+        "message": "Confirm removing $url$",
+        "description": "Options Awesome Loading: accessible name of the confirm removal button",
+        "placeholders": {
+            "url": {
+                "content": "$1",
+                "example": "https://example.com/loader.gif"
+            }
+        }
+    },
+    "optionsAwl_keep": {
+        "message": "Keep",
+        "description": "Options Awesome Loading: keep the image instead of removing it"
+    },
+    "optionsAwl_add": {
+        "message": "Add image URL",
+        "description": "Options Awesome Loading: tile that opens the field to add an image"
+    },
+    "optionsAwl_cancel": {
+        "message": "Cancel",
+        "description": "Options Awesome Loading: cancel adding an image"
+    },
+    "optionsAwl_errorDuplicate": {
+        "message": "This image is already in the list",
+        "description": "Options Awesome Loading: error when the image URL already exists"
+    },
+    "optionsFeature_settingsHelpAwesomeLoading": {
+        "message": "Pick the loader shown while Odoo loads. The popup offers the same choice.",
+        "description": "Options feature page: help of the Awesome Loading settings card"
+    },
+    "optionsNotifications_loggedHint": {
+        "message": "Written in the devtools console (F12).",
+        "description": "Options notifications page: hint after a preview in console mode"
+    },
+    "optionsNotifications_disabledHint": {
+        "message": "Notifications are deactivated: nothing is shown.",
+        "description": "Options notifications page: hint after a preview when notifications are deactivated"
+    },
+    "optionsTechnical_fallbackCountOne": {
+        "message": "1 fallback",
+        "description": "Options developers page: chip of a host with one fallback"
+    },
+    "optionsTechnical_fallbackCountMany": {
+        "message": "$count$ fallbacks",
+        "description": "Options developers page: chip of a host with several fallbacks",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "3"
+            }
+        }
+    },
+    "optionsTechnical_fallbackOpens": {
+        "message": "$path$ opens $model$",
+        "description": "Options developers page: accessible name of a fallback row",
+        "placeholders": {
+            "path": {
+                "content": "$1",
+                "example": "all-tasks"
+            },
+            "model": {
+                "content": "$2",
+                "example": "project.task"
+            }
+        }
+    },
+    "optionsTechnical_confirmRemoveHost": {
+        "message": "Delete all fallbacks of $origin$?",
+        "description": "Options developers page: inline confirmation before deleting a host fallbacks",
+        "placeholders": {
+            "origin": {
+                "content": "$1",
+                "example": "https://www.odoo.com"
+            }
+        }
+    },
+    "optionsTechnical_remove": {
+        "message": "Remove",
+        "description": "Options developers page: button confirming a removal inline"
+    },
+    "optionsTechnical_add": {
+        "message": "Add",
+        "description": "Options developers page: button adding a fallback"
+    },
+    "optionsFeature_settingsHelpUnfocusApp": {
+        "message": "Choose how unfocused apps behave, pick the image shown behind superfocused apps, and review which apps Joorney remembers for each Odoo host.",
+        "description": "Options feature page: help of the Unfocus App settings card"
+    },
+    "optionsFeature_settingsHelpContextOdooMenus": {
+        "message": "Each entry is the path of an Odoo menu: the menu names shown in Odoo, separated by /. Joorney finds the menu on the database you right-click on, so one path works on every version.",
+        "description": "Options feature page: help of the Context Odoo Menus settings card"
+    },
+    "optionsUnfocus_lightTitle": {
+        "message": "Light theme",
+        "description": "Options feature page (Unfocus App): title of the light theme image tile"
+    },
+    "optionsUnfocus_darkTitle": {
+        "message": "Dark theme",
+        "description": "Options feature page (Unfocus App): title of the dark theme image tile"
+    },
+    "optionsUnfocus_imageUrl": {
+        "message": "Image URL",
+        "description": "Options feature page (Unfocus App): label of the image URL field"
+    },
+    "optionsUnfocus_defaultImage": {
+        "message": "Default image",
+        "description": "Options feature page (Unfocus App): chip in the image tile header, the image is the default one"
+    },
+    "optionsUnfocus_customImage": {
+        "message": "Custom image",
+        "description": "Options feature page (Unfocus App): chip in the image tile header, the image is one the user picked"
+    },
+    "optionsUnfocus_resetImage": {
+        "message": "Use default",
+        "description": "Options feature page (Unfocus App): button next to the image URL field, restoring the default image"
+    },
+    "optionsUnfocus_resetLightTitle": {
+        "message": "Use the default light theme image",
+        "description": "Options feature page (Unfocus App): tooltip of the button restoring the default light image"
+    },
+    "optionsUnfocus_resetDarkTitle": {
+        "message": "Use the default dark theme image",
+        "description": "Options feature page (Unfocus App): tooltip of the button restoring the default dark image"
+    },
+    "optionsUnfocus_restored": {
+        "message": "Default image restored.",
+        "description": "Options feature page (Unfocus App): status under the image URL field after restoring the default image"
+    },
+    "optionsUnfocus_undo": {
+        "message": "Undo",
+        "description": "Options feature page (Unfocus App): button putting back the image URL replaced by the default one"
+    },
+    "optionsUnfocus_invalidImage": {
+        "message": "Not an image URL: use an https:// address ending in .jpg, .png, .gif, .svg...",
+        "description": "Options feature page (Unfocus App): error under an invalid image URL"
+    },
+    "optionsUnfocus_imageSaveError": {
+        "message": "Could not save the image: $error$",
+        "description": "Options feature page (Unfocus App): error under an image URL that is valid but could not be saved (storage quota or error)",
+        "placeholders": {
+            "error": {
+                "content": "$1",
+                "example": "QUOTA_BYTES_PER_ITEM quota exceeded"
+            }
+        }
+    },
+    "optionsUnfocus_hostsTitle": {
+        "message": "Remembered apps per host",
+        "description": "Options feature page (Unfocus App): sub-heading of the host list"
+    },
+    "optionsUnfocus_superfocused": {
+        "message": "$count$ superfocused",
+        "description": "Options feature page (Unfocus App): chip of the superfocused apps of a host",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "3"
+            }
+        }
+    },
+    "optionsUnfocus_unfocused": {
+        "message": "$count$ unfocused",
+        "description": "Options feature page (Unfocus App): chip of the unfocused apps of a host",
+        "placeholders": {
+            "count": {
+                "content": "$1",
+                "example": "3"
+            }
+        }
+    },
+    "optionsUnfocus_forgetHost": {
+        "message": "Forget the apps remembered for $origin$",
+        "description": "Options feature page (Unfocus App): accessible name of the forget button of a host",
+        "placeholders": {
+            "origin": {
+                "content": "$1",
+                "example": "https://www.odoo.com"
+            }
+        }
+    },
+    "optionsUnfocus_confirmForget": {
+        "message": "Forget the apps remembered for $origin$?",
+        "description": "Options feature page (Unfocus App): inline confirmation before forgetting a host, shown in place of the host row",
+        "placeholders": {
+            "origin": {
+                "content": "$1",
+                "example": "https://www.odoo.com"
+            }
+        }
+    },
+    "optionsUnfocus_forget": {
+        "message": "Forget",
+        "description": "Options feature page (Unfocus App): button confirming the removal of a host"
+    },
+    "optionsUnfocus_cancel": {
+        "message": "Cancel",
+        "description": "Options feature page (Unfocus App): button cancelling the inline confirmation"
+    },
+    "optionsUnfocus_empty": {
+        "message": "No app unfocused yet. Unfocus an app from the Odoo home menu to see it here.",
+        "description": "Options feature page (Unfocus App): empty host list"
+    },
+    "optionsUnfocus_errorSave": {
+        "message": "Could not save the remembered apps, they are shown as saved: $error$",
+        "description": "Options feature page (Unfocus App): error, a change to the remembered apps could not be saved (storage quota or error)",
+        "placeholders": {
+            "error": {
+                "content": "$1",
+                "example": "QUOTA_BYTES_PER_ITEM quota exceeded"
+            }
+        }
+    },
+    "optionsUnfocus_imageTitle": {
+        "message": "Superfocus image",
+        "description": "Options feature page (Unfocus App): sub-heading of the light and dark theme image tiles"
+    },
+    "optionsUnfocus_imageHelp": {
+        "message": "Painted behind superfocused apps. Joorney uses the one that matches the theme of the Odoo database.",
+        "description": "Options feature page (Unfocus App): help under the superfocus image sub-heading"
+    },
+    "optionsUnfocus_hostsHelp": {
+        "message": "Apps show up here once you star them on the home menu of an Odoo host. Open a host to see its apps, and set one back to Normal to forget it.",
+        "description": "Options feature page (Unfocus App): help under the host list sub-heading; 'Normal' is the label of optionsUnfocus_stateNormal"
+    },
+    "optionsUnfocus_stateUnfocused": {
+        "message": "Unfocused",
+        "description": "Options feature page (Unfocus App): mode of an app (button and group heading): dimmed on the home menu"
+    },
+    "optionsUnfocus_stateNormal": {
+        "message": "Normal",
+        "description": "Options feature page (Unfocus App): mode of an app (button): neither dimmed nor highlighted, the app is forgotten"
+    },
+    "optionsUnfocus_stateSuperfocused": {
+        "message": "Superfocused",
+        "description": "Options feature page (Unfocus App): mode of an app (button and group heading): image behind its icon"
+    },
+    "optionsUnfocus_focusOf": {
+        "message": "Focus of $app$",
+        "description": "Options feature page (Unfocus App): accessible name of the mode buttons of an app",
+        "placeholders": {
+            "app": {
+                "content": "$1",
+                "example": "Sales"
+            }
+        }
+    },
+    "optionsUnfocus_backToNormal": {
+        "message": "$app$ is back to normal.",
+        "description": "Options feature page (Unfocus App): line shown in place of an app set back to Normal, before Undo",
+        "placeholders": {
+            "app": {
+                "content": "$1",
+                "example": "Sales"
+            }
+        }
+    },
+    "optionsUnfocus_sharedHost": {
+        "message": "All hosts",
+        "description": "Options feature page (Unfocus App): name of the list shared by every host (Share between hosts)"
+    },
+    "optionsUnfocus_runbotHost": {
+        "message": "Runbot builds",
+        "description": "Options feature page (Unfocus App): name of the list used by every runbot build (https://*.runbotNNN.odoo.com)"
+    },
+    "optionsUnfocus_sharedChip": {
+        "message": "Shared",
+        "description": "Options feature page (Unfocus App): chip of the list shared by every host"
+    },
+    "optionsUnfocus_notUsedWhileSharing": {
+        "message": "Not used while sharing",
+        "description": "Options feature page (Unfocus App): chip of a host list while sharing between hosts is on"
+    },
+    "optionsUnfocus_usedOnlyWhileSharing": {
+        "message": "Used only while sharing",
+        "description": "Options feature page (Unfocus App): chip of the shared list (All hosts) while sharing between hosts is off"
+    },
+    "optionsUnfocus_sharingNote": {
+        "message": "Sharing is on: every host uses the shared list. The per-host lists are kept, not merged, and come back when sharing is turned off.",
+        "description": "Options feature page (Unfocus App): note above the host list while sharing between hosts is on"
+    },
+    "optionsFeature_settingsHelpPinMessage": {
+        "message": "Choose which messages you can pin, and whether records open with the pinned section shown.",
+        "description": "Options feature page: help of the Pin Message settings card"
+    },
+    "optionsFeature_behaviourTitle": {
+        "message": "Behaviour",
+        "description": "Options feature page: sub-heading of the switches also in the toolbar popup (Unfocus App, Pin Message)"
+    },
+    "optionsFeature_behaviourHelp": {
+        "message": "Also in the toolbar popup. Odoo tabs pick up a change on their next page load.",
+        "description": "Options feature page: help under the Behaviour sub-heading"
+    },
+    "optionsFeature_behaviourOff": {
+        "message": "This feature is deactivated. These settings apply once it is active.",
+        "description": "Options feature page: note above the Behaviour switches while the feature is deactivated"
+    },
+    "optionsUnfocus_reorder": {
+        "message": "Unfocused apps last",
+        "description": "Options feature page (Unfocus App): switch moving unfocused apps to the end of the home menu (popup: unfocusApp_popup_reorder)"
+    },
+    "optionsUnfocus_reorderHelp": {
+        "message": "On the home menu, unfocused apps move after all the others.",
+        "description": "Options feature page (Unfocus App): help of the reorder switch"
+    },
+    "optionsUnfocus_share": {
+        "message": "Share between hosts",
+        "description": "Options feature page (Unfocus App): switch sharing one app list between hosts (popup: unfocusApp_popup_share)"
+    },
+    "optionsUnfocus_shareHelp": {
+        "message": "Every Odoo host uses one shared list of apps. The per-host lists are kept, and come back when this is off.",
+        "description": "Options feature page (Unfocus App): help of the share switch"
+    },
+    "optionsPinMessage_selfAuthor": {
+        "message": "My messages only",
+        "description": "Options feature page (Pin Message): switch limiting pins to the current user (popup: pinMessage_popup_selfAuthor)"
+    },
+    "optionsPinMessage_selfAuthorHelp": {
+        "message": "The pin button shows on the messages you wrote, and the pinned section lists what you pinned. Off: pin any message and see everyone's pins.",
+        "description": "Options feature page (Pin Message): help of the 'My messages only' switch"
+    },
+    "optionsPinMessage_defaultShown": {
+        "message": "Open the pinned section on load",
+        "description": "Options feature page (Pin Message): switch showing the pinned section when a record opens (popup: pinMessage_popup_defaultShown)"
+    },
+    "optionsPinMessage_defaultShownHelp": {
+        "message": "Records open with the pinned messages already shown in the chatter.",
+        "description": "Options feature page (Pin Message): help of the 'Open the pinned section on load' switch"
     }
 }

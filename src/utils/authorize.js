@@ -17,17 +17,25 @@ export function isOdooWebsite(urlArg) {
     return /^(.+\.odoo\.com|localhost|127\.0\.0\.\d+)$/.test(url.hostname);
 }
 
+// Compiled once per entry: the options grid matches every host against every regex entry on each render
+const compiledOrigins = new Map();
+
+function compileOriginRegex(origin) {
+    if (!compiledOrigins.has(origin)) {
+        try {
+            compiledOrigins.set(origin, new RegExp(origin.replace(regexSchemePrefix, '')));
+        } catch (err) {
+            Console.warn(`Invalid origin regex '${origin}': ${err.message}`);
+            compiledOrigins.set(origin, undefined);
+        }
+    }
+    return compiledOrigins.get(origin);
+}
+
 export function getOriginsRegex(origins) {
     return origins
         .filter((o) => o.startsWith(regexSchemePrefix))
-        .map((o) => {
-            try {
-                return new RegExp(o.replace(regexSchemePrefix, ''));
-            } catch (err) {
-                Console.warn(`Invalid origin regex '${o}': ${err.message}`);
-                return undefined;
-            }
-        })
+        .map(compileOriginRegex)
         .filter(Boolean);
 }
 
@@ -82,14 +90,7 @@ export async function isAuthorizedLimitedFeature(featureName, limitedOrigins, ur
     const offs = await getWebsiteOff();
     if (offs.has(origin)) return false;
 
-    // Check URL
-    if (limitedOrigins.includes(origin)) return true;
-
-    // Check Regex
-    const activeRegex = getOriginsRegex(limitedOrigins);
-    const validRegex = activeRegex.some((r) => r.test(origin));
-
-    return validRegex;
+    return originMatches(limitedOrigins, origin);
 }
 
 async function authorizeFeature(featureName, origin) {
@@ -104,10 +105,7 @@ async function authorizeFeature(featureName, origin) {
 
     if (!configuration[`${featureName}Enabled`]) return false;
 
-    const activeOrigins = getActiveFeatureOrigins(configuration.originsFilterOrigins, featureName);
-    const activeRegex = getOriginsRegex(activeOrigins);
-
-    const originExist = activeOrigins.includes(origin) || activeRegex.some((r) => r.test(origin));
+    const originExist = isOriginListedForFeature(configuration.originsFilterOrigins, featureName, origin);
 
     const isWhitelistMode = configuration[`${featureName}WhitelistMode`];
     if (isWhitelistMode) {
@@ -119,6 +117,14 @@ async function authorizeFeature(featureName, origin) {
     }
 
     return false;
+}
+
+export function originMatches(origins, origin) {
+    return origins.includes(origin) || getOriginsRegex(origins).some((r) => r.test(origin));
+}
+
+export function isOriginListedForFeature(originsFilterOrigins, featureName, origin) {
+    return originMatches(getActiveFeatureOrigins(originsFilterOrigins ?? {}, featureName), origin);
 }
 
 function getActiveFeatureOrigins(originsFilterOrigins, featureName) {

@@ -2,6 +2,9 @@ export default {
     id: 'awesomeLoadingLarge',
     display_name: 'Awesome Loading Large',
     icon: 'progress_activity',
+    category: 'ui',
+    tags: ['loading', 'fun'],
+    video: '',
     trigger: {
         load: true,
         navigate: true,
@@ -14,8 +17,9 @@ export default {
     defaultSettings: {
         awesomeLoadingLargeEnabled: false,
         awesomeLoadingLargeWhitelistMode: false,
-        awesomeLoadingLargeImage: 'https://media.tenor.com/nBt6RZkFJh8AAAAi/never-gonna.gif',
+        awesomeLoadingLargeImage: 'joorney://loader',
         awesomeLoadingImages: [
+            'joorney://loader',
             'https://github.githubassets.com/images/mona-loading-dark.gif',
             'https://media.tenor.com/nBt6RZkFJh8AAAAi/never-gonna.gif',
             'https://static.wikia.nocookie.net/fbbc7304-c0ac-44dc-9ccd-a839ee627a9a/scale-to-width/370',

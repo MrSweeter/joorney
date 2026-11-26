@@ -2,7 +2,6 @@ import backgroundLoaders from 'virtual:joorney-features/background';
 import backgroundTriggerLoaders from 'virtual:joorney-features/background_trigger';
 import configurationLoaders from 'virtual:joorney-features/configuration';
 import contentLoaders from 'virtual:joorney-features/content';
-import optionLoaders from 'virtual:joorney-features/option';
 import optionCustomizationLoaders from 'virtual:joorney-features/option_customization';
 import popupLoaders from 'virtual:joorney-features/popup';
 import FeaturesState from 'virtual:joorney-features/state';
@@ -33,6 +32,9 @@ export const baseSettings = {
     languageMode: 'system',
     languageStatic: 'en',
 
+    // Home shows one table of every host and feature instead of one host at a time: heavier, so opt-in
+    optionsAdvancedHostView: false,
+
     supportedVersions: ['20.0'],
     supportedDevVersions: [],
 
@@ -44,6 +46,14 @@ export const baseSettings = {
 };
 
 export const extensionFeatureState = FeaturesState;
+
+export const defaultEnabledFeatures = [
+    'awesomeLoadingSmall',
+    'tooltipMetadata',
+    'contextOdooMenus',
+    'starringPriorityEffect',
+    'showMyBadge',
+];
 const activeFeaturesList = Object.keys(FeaturesState).filter((k) => !k.startsWith('__') && FeaturesState[k]);
 
 export let features = [];
@@ -85,10 +95,6 @@ export function importFeatureBackgroundTriggerFile(featureID) {
 
 export function importFeatureBackgroundFile(featureID) {
     return importFeatureFile(backgroundLoaders, featureID, 'background').then((f) => new f.default());
-}
-
-export function importFeatureOptionFile(featureID) {
-    return importFeatureFile(optionLoaders, featureID, 'option').then((f) => new f.default());
 }
 
 export function importFeatureCustomizationFile(featureID) {

@@ -54,7 +54,16 @@ function main() {
     }
     // src/utils/i18n.js featureName()
     for (const featureID of fs.readdirSync(path.join(root, 'src', 'features'))) {
-        used.set(`feature_${featureID}_name`, `src/features/${featureID}`);
+        const folder = `src/features/${featureID}`;
+        used.set(`feature_${featureID}_name`, folder);
+        used.set(`feature_${featureID}_description`, folder);
+        used.set(`feature_${featureID}_details`, folder);
+        // src/utils/i18n.js categoryName() / tagName(): ids are in the feature configuration
+        const configuration = read(`${folder}/configuration.js`);
+        const category = configuration.match(/^\s*category:\s*'(\w+)'/m)?.[1];
+        if (category) used.set(`category_${category}`, folder);
+        const tags = configuration.match(/^\s*tags:\s*\[([^\]]*)\]/m)?.[1] ?? '';
+        for (const tag of tags.matchAll(/'(\w+)'/g)) used.set(`tag_${tag[1]}`, folder);
     }
 
     const errors = [];

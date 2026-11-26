@@ -1,151 +1,73 @@
+<link href="./css/technical/index.css" rel="stylesheet">
 <link href="./css/technical/json.css" rel="stylesheet">
-<style>
-.tip-separator {
-    color: var(--joorney-secondary);
-}
-</style>
 
-<div id="joorney_chaos_mode" class="container d-none pt-5">
-    <h3 class="text-danger" data-i18n="optionsTechnical_chaosTitle">[Chaos Mode] What are you doing here? You should not use these buttons!!!</h3>
-    <button type="button" class="btn btn-danger d-none" id="joorney_chaos_destroy_local_storage" data-i18n="optionsTechnical_destroyLocal">Destroy local storage</button>
-    <button type="button" class="btn btn-danger d-none" id="joorney_chaos_destroy_sync_storage" data-i18n="optionsTechnical_destroySync">Destroy sync storage</button>
-</div>
+<div id="joorney-technical" class="joorney-page joorney-tech">
+    <h1 class="joorney-page-title" data-i18n="options_menu_developers">Developers</h1>
+    <p class="joorney-page-subtitle" data-i18n="optionsTechnical_subtitle">Experimental flags and storage inspection, for people working on Joorney or on Odoo itself.</p>
 
-<div class="container pt-5">
-    <h3 class="mb-3" data-i18n="optionsTechnical_experimental">Experimental</h3>
-    <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" id="joorney_experimentalDeveloperModeUI">
-        <label class="form-check-label" for="joorney_experimentalDeveloperModeUI" data-i18n="optionsTechnical_developerMode">Developer mode</label>
-        <p><small class="text-muted" data-i18n="optionsTechnical_developerModeHelp">Developer mode allows some Odoo/Joorney development flows (e.g. master branch)</small></p>
-    </div>
-
-    <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" id="joorney_experimentalSimulatedUI">
-        <label class="form-check-label" for="joorney_experimentalSimulatedUI" data-i18n="optionsTechnical_simulatedUi">Use simulated UI</label>
-        <p>
-            <small class="text-muted" data-i18n="optionsTechnical_simulatedUiHelp">Instead of reloading the page when assigning a task with the "Assign Me" feature, add simulated UI elements.</small>
-        </p>
-    </div>
-
-    <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" id="joorney_experimentalOmniboxFocusCurrentTab">
-        <label class="form-check-label" for="joorney_experimentalOmniboxFocusCurrentTab" data-i18n="optionsTechnical_omniboxCurrentTab">Omnibox: open in current tab</label>
-        <p><small class="text-muted" data-i18n="optionsTechnical_omniboxCurrentTabHelp">By default, the omnibox result opens in a new tab.</small></p>
-    </div>
-
-    <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" id="joorney_experimentalBase64CacheEncoding">
-        <label class="form-check-label" for="joorney_experimentalBase64CacheEncoding" data-i18n="optionsTechnical_base64Cache">Cache encoding: Base64</label>
-        <p><small class="text-muted" data-i18n="optionsTechnical_base64CacheHelp">Convert locally cached data to Base64 encoding.</small></p>
-    </div>
-</div>
-
-<div class="container pt-5">
-    <h3 data-i18n="optionsTechnical_fallbacks">Window actions fallback</h3>
-    <table id="joorney_window_action_fallback_table" class="table table-striped table-sm bg-light">
-        <thead class="shadow-2">
-            <tr>
-                <th data-i18n="optionsTechnical_host">Host</th>
-                <th data-i18n="optionsTechnical_actionPath">Action path</th>
-                <th data-i18n="optionsTechnical_actionModel">Action model</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody id="joorney_window_action_fallback_table_body">
-            <!-- DYNAMIC CONTENT -->
-        </tbody>
-        <tfoot>
-            <tr>
-                <td></td>
-            </tr>
-            <tr class="table-secondary">
-                <td class="p-1 joorney-valign-middle">
-                    <input type="text" class="form-control border border-0" id="joorney_window_action_fallback_new_origin" placeholder="https://www.odoo.com">
-                </td>
-                <td class="p-1 joorney-valign-middle">
-                    <input type="text" class="form-control border border-0" id="joorney_window_action_fallback_new_action_path" placeholder="all-tasks">
-                </td>
-                <td class="p-1 joorney-valign-middle">
-                    <input type="text" class="form-control border border-0" id="joorney_window_action_fallback_new_action_model" placeholder="project.task">
-                </td>
-                <td class="p-1 joorney-valign-middle">
-                    <button type="button" title="Add fallback" data-i18n-title="optionsTechnical_addFallback" id="joorney_window_action_fallback_new_path_save" class="btn btn-success btn-floating">
-                        <i class="joorney-icon joorney-icon-filled" data-icon="add" aria-hidden="true"></i>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td id="joorney_window_action_fallback_error_footer" class="text-danger"></td>
-            </tr>
-        </tfoot>
-    </table>
-</div>
-
-<div class="pt-5 px-5">
-    <h3 data-i18n="optionsTechnical_storage">Storage</h3>
-
-    <div>
-        <div class="d-flex align-items-center">
-            <div class="flex-fill me-3">
-                <div id="joorney-sync-storage-byteUsageTotal" class="progress" style="height: 16px; line-height: 16px;"></div>
-                <div id="joorney-sync-storage-byteUsageFeature" class="progress d-none" style="height: 16px; line-height: 16px;"></div>
-            </div>
-            <i id="joorney-sync-storage-progress-switch" class="joorney-icon joorney-icon-filled" data-icon="swap_horiz" aria-hidden="true"></i>
-        </div>
-        <small id="joorney-sync-storage-progress-label" class="text-muted"></small>
-    </div>
-
-    <div>
-        <div class="d-flex align-items-center">
-            <div class="flex-fill me-3">
-                <div id="joorney-local-storage-byteUsageTotal" class="progress" style="height: 16px; line-height: 16px;"></div>
-                <div id="joorney-local-storage-byteUsageFeature" class="progress d-none" style="height: 16px; line-height: 16px;"></div>
-            </div>
-            <i id="joorney-local-storage-progress-switch" class="joorney-icon joorney-icon-filled" data-icon="swap_horiz" aria-hidden="true"></i>
-        </div>
-        <small id="joorney-local-storage-progress-label" class="text-muted"></small>
-    </div>
-
-    <p class="text-center opacity-50 pt-5">
-        <small
-            ><span data-i18n="optionsTechnical_tipUse">Use</span> <strong>[Ctrl/Cmd + Click]</strong>
-            <span data-i18n="optionsTechnical_tipSameLevel">to expand/collapse all elements at the same level</span></small
-        > <strong class="tip-separator">|</strong>
-        <small
-            ><span data-i18n="optionsTechnical_tipUse">Use</span> <strong>[Shift + Click]</strong>
-            <span data-i18n="optionsTechnical_tipChildren">to expand/collapse an element and all its children</span></small
-        >
+    <p class="joorney-note">
+        <i class="joorney-icon" data-icon="terminal" aria-hidden="true"></i>
+        <span data-i18n="optionsTechnical_banner">Developer tools: visible because debug mode is on.</span>
     </p>
-    <div class="row mx-0">
-        <div class="col-3">
-            <div class="mb-3">
-                <h5 data-i18n="optionsTechnical_featuresState">Extension features state</h5>
-                <div id="joorney-extension-state"></div>
-            </div>
+
+    <section class="joorney-panel" aria-labelledby="joorney_tech_flags_title">
+        <h2 class="joorney-panel-title" id="joorney_tech_flags_title" data-i18n="optionsTechnical_flags">Flags</h2>
+        <p class="joorney-help" data-i18n="optionsTechnical_flagsHelp">Experimental. These are saved with your synced settings.</p>
+        <div id="joorney-tech-flags"></div>
+    </section>
+
+    <section class="joorney-panel" aria-labelledby="joorney_tech_fallbacks_title">
+        <h2 class="joorney-panel-title" id="joorney_tech_fallbacks_title" data-i18n="optionsTechnical_fallbacks">Window action fallbacks</h2>
+        <p class="joorney-help" data-i18n="optionsTechnical_fallbacksHelp">
+            For each host, the Odoo action path (the URL part after /odoo/) and the model it opens, used when the action cannot be resolved.
+        </p>
+        <div class="joorney-tech-form" id="joorney_window_action_fallback_form">
+            <label class="joorney-tech-field" for="joorney_window_action_fallback_new_origin">
+                <span data-i18n="optionsTechnical_host">Host</span>
+                <input type="text" class="joorney-input" id="joorney_window_action_fallback_new_origin" placeholder="https://www.odoo.com">
+            </label>
+            <label class="joorney-tech-field" for="joorney_window_action_fallback_new_action_path">
+                <span data-i18n="optionsTechnical_actionPath">Action path</span>
+                <input type="text" class="joorney-input" id="joorney_window_action_fallback_new_action_path" placeholder="all-tasks">
+            </label>
+            <label class="joorney-tech-field" for="joorney_window_action_fallback_new_action_model">
+                <span data-i18n="optionsTechnical_actionModel">Action model</span>
+                <input type="text" class="joorney-input" id="joorney_window_action_fallback_new_action_model" placeholder="project.task">
+            </label>
+            <button type="button" class="joorney-btn" id="joorney_window_action_fallback_new_path_save">
+                <i class="joorney-icon" data-icon="add" aria-hidden="true"></i>
+                <span data-i18n="optionsTechnical_add">Add</span>
+            </button>
         </div>
-        <div class="col-3">
-            <div class="mb-3">
-                <h5 data-i18n="optionsTechnical_onboarding">Extension onboarding</h5>
-                <div id="joorney-onboarding-progression"></div>
-            </div>
+        <p class="joorney-error joorney-tech-error" id="joorney_window_action_fallback_error_footer" role="alert" hidden></p>
+        <div class="joorney-tech-hosts" id="joorney_window_action_fallback_list">
+            <!-- DYNAMIC CONTENT -->
         </div>
-        <div class="col-6">
-            <div class="mb-3">
-                <h5 data-i18n="optionsTechnical_features">Extension features</h5>
-                <div id="joorney-extension-features"></div>
-            </div>
+    </section>
+
+    <section class="joorney-panel" aria-labelledby="joorney_tech_storage_title">
+        <h2 class="joorney-panel-title" id="joorney_tech_storage_title" data-i18n="optionsTechnical_storage">Storage</h2>
+        <p class="joorney-help" data-i18n="optionsTechnical_storageHelp">What Joorney keeps in the browser, and how much of each quota it uses.</p>
+
+        <div class="joorney-tech-tabs" role="tablist" aria-labelledby="joorney_tech_storage_title" id="joorney-tech-tabs"></div>
+
+        <div role="tabpanel" id="joorney-tech-panel" tabindex="-1">
+            <div id="joorney-tech-usage"></div>
+            <fieldset class="joorney-tech-views" id="joorney-tech-views" aria-label="Sync data" data-i18n-aria-label="optionsTechnical_syncData" hidden></fieldset>
+            <!-- biome-ignore lint/a11y/useHeadingContent: filled by the loader with the selected view -->
+            <h3 class="joorney-tech-viewtitle" id="joorney-tech-viewtitle"></h3>
+            <!-- biome-ignore lint/a11y/noNoninteractiveTabindex: a scrollable region must be reachable by keyboard -->
+            <section class="joorney-tech-json" id="joorney-tech-viewer" tabindex="0" aria-labelledby="joorney-tech-viewtitle"></section>
+            <p class="joorney-help joorney-tech-tip">
+                <strong>[Ctrl/Cmd + Click]</strong> <span data-i18n="optionsTechnical_tipSameLevel">expands or collapses all elements at the same level.</span>
+                <strong>[Shift + Click]</strong> <span data-i18n="optionsTechnical_tipChildren">expands or collapses an element and all its children.</span>
+            </p>
         </div>
-        <div class="col-6">
-            <div class="mb-3">
-                <h5 data-i18n="optionsTechnical_configuration">Extension configuration</h5>
-                <div id="joorney-storage-configuration"></div>
-            </div>
-        </div>
-        <div class="col-6">
-            <div class="mb-3">
-                <h5 data-i18n="optionsTechnical_localData">Extension local data</h5>
-                <div id="joorney-storage-local"></div>
-            </div>
-        </div>
-    </div>
+    </section>
+
+    <section class="joorney-panel joorney-tech-danger" aria-labelledby="joorney_tech_danger_title" id="joorney_chaos_mode" hidden>
+        <h2 class="joorney-panel-title" id="joorney_tech_danger_title" data-i18n="optionsTechnical_danger">Danger zone</h2>
+        <p class="joorney-help" id="joorney-tech-danger-help"></p>
+        <div id="joorney-tech-danger-actions"></div>
+    </section>
 </div>

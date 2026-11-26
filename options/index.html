@@ -11,92 +11,71 @@
         <!-- MDB -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.1/mdb.min.css" rel="stylesheet">
 
+        <link href="./css/ui/tokens.css" rel="stylesheet">
+        <link href="./css/ui/base.css" rel="stylesheet">
+        <link href="./css/ui/navbar.css" rel="stylesheet">
+        <link href="./css/ui/feature_card.css" rel="stylesheet">
+        <link href="./css/ui/modal.css" rel="stylesheet">
+        <link href="./css/ui/mode_menu.css" rel="stylesheet">
+        <link href="./css/ui/announce.css" rel="stylesheet">
         <link href="./index.css" rel="stylesheet">
         <link href="./checklist.css" rel="stylesheet">
         <script src="index.js"></script>
     </head>
     <body class="joorney-body-background d-flex flex-column">
-        <!-- Menu -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light" id="joorney-navig-menu">
-            <div class="container-fluid">
-                <div id="joorney-brand-debug" class="navbar-brand" title="Debug mode" data-i18n-title="options_debugMode">
-                    <img loading="lazy" src="/images/icon_128.png" class="mx-2" height="20" alt="Joorney logo" data-i18n-alt="options_logoAlt">
-                    <small data-i18n="options_title">Joorney Configuration</small>
-                </div>
-                <ul id="joorney-menu-items-container" class="navbar-nav"></ul>
-                <ul class="navbar-nav me-auto">
-                    <li id="open-extension-shortcut" class="joorney-menu-item nav-item nav-link" title="Keyboard shortcuts" data-i18n-title="options_keyboardShortcuts">
-                        <i class="joorney-icon" data-icon="keyboard" aria-hidden="true"></i>
-                    </li>
-                </ul>
-
-                <div class="d-flex align-items-center">
-                    <input type="file" accept=".json" class="form-control form-control-sm" id="joorney_import_storage_sync_file">
-                    <button type="button" class="btn" id="joorney_import_storage_sync" title="Import settings" data-i18n-title="options_importSettings">
-                        <i class="joorney-icon joorney-icon-filled" data-icon="cloud_upload" aria-hidden="true"></i>
-                    </button>
-                    <button type="button" class="btn" id="joorney_export_storage_sync" title="Export settings" data-i18n-title="options_exportSettings">
-                        <i class="joorney-icon joorney-icon-filled" data-icon="cloud_download" aria-hidden="true"></i>
-                    </button>
-                    <a class="btn btn-success d-none" id="joorney_migrate_configuration" href="./migration/index.html" target="_blank" data-i18n="options_migrate">MIGRATE</a>
-                </div>
-            </div>
+        <!-- Menu: options/src/layout.js -->
+        <nav class="joorney-nav" id="joorney-navig-menu" aria-label="Main menu" data-i18n-aria-label="options_menu_main">
+            <button type="button" id="joorney-brand-debug" class="joorney-nav-brand" title="Debug mode" data-i18n-title="options_debugMode">
+                <span class="joorney-nav-logo"><img loading="lazy" src="/images/icon_128.png" alt="Joorney logo" data-i18n-alt="options_logoAlt"></span>
+                <span>Joorney</span>
+            </button>
+            <ul id="joorney-menu-items-container" class="joorney-nav-links"></ul>
+            <span class="joorney-nav-spacer"></span>
+            <span id="joorney-manifest" class="joorney-nav-version"></span>
+            <button
+                type="button"
+                id="joorney_checklist_show_btn"
+                class="joorney-icon-btn joorney-nav-checklist"
+                title="Get started with Joorney"
+                aria-label="Get started with Joorney"
+                data-i18n-title="checklist_panelTitle"
+                data-i18n-aria-label="checklist_panelTitle"
+                aria-controls="joorney_checklist"
+                aria-expanded="false"
+            >
+                <i class="joorney-icon" data-icon="checklist" aria-hidden="true"></i>
+                <span class="joorney-nav-checklist-dot" aria-hidden="true"></span>
+            </button>
+            <button
+                type="button"
+                id="open-extension-shortcut"
+                class="joorney-icon-btn"
+                title="Keyboard shortcuts"
+                aria-label="Keyboard shortcuts"
+                data-i18n-title="options_keyboardShortcuts"
+                data-i18n-aria-label="options_keyboardShortcuts"
+            >
+                <i class="joorney-icon" data-icon="keyboard" aria-hidden="true"></i>
+            </button>
         </nav>
-        <div id="joorney-manifest"></div>
 
-        <!-- Announcement -->
-        <div class="d-none">
-            <div id="joorney-announcement" class="alert alert-info rounded mx-5 mt-3">
-                <button type="button" id="ja-close" class="btn-close small position-absolute top-0 end-0 mt-2 me-2 opacity-50 d-none"></button>
-                <p class="fw-bold mb-0 d-none"><span id="ja-version">[X.Y.Z]</span><span id="ja-title">Title</span></p>
-                <p id="ja-description" class="d-none mb-0">Description</p>
-            </div>
-        </div>
+        <!-- Announcement: rendered by options/index.js (loadAnnouncement) -->
+        <div id="joorney-announcement" class="joorney-announce-wrap" hidden></div>
 
         <!-- Content -->
         <div id="joorney-page-container" class="flex-fill"></div>
 
         <!-- Onboard -->
-        <div id="bubble" class="bubble opacity-0"><img class="w-100" src="/images/bubble.png" alt=""></div>
-        <button id="joorney_checklist_show_btn" class="d-none btn btn-floating" type="button" title="Show onboarding checklist" data-i18n-title="options_checklistShow">
-            <i class="joorney-icon joorney-icon-filled" data-icon="checklist" aria-hidden="true"></i>
-        </button>
-        <div id="joorney_checklist" class="onboarding-checklist overflow-hidden" style="max-height: 80%;">
-            <button id="joorney_checklist_hide_btn" class="btn btn-floating position-absolute top-0 end-0 shadow-0" type="button" title="Close" data-i18n-title="options_close">
-                <i class="joorney-icon joorney-icon-filled" data-icon="close" aria-hidden="true"></i>
-            </button>
-            <div class="justify-content-between d-flex flex-column">
-                <h3 class="m-0">
-                    <span id="joorney_checklist_tour_title" data-i18n="checklist_defaultTitle">Discover Joorney</span>
-                    <i id="joorney_checklist_tour_title_markall_done" class="joorney-icon joorney-icon-filled" data-icon="assignment" aria-hidden="true"></i>
-                </h3>
-                <h6 id="joorney_checklist_tour_description" class="text-muted" data-i18n="checklist_defaultDescription">Follow the steps below</h6>
+        <aside id="joorney_checklist" class="onboarding-checklist d-none" aria-labelledby="joorney_checklist_title">
+            <h2 id="joorney_checklist_title" class="joorney-cl-title" data-i18n="checklist_panelTitle">Get started with Joorney</h2>
+            <p class="joorney-cl-sub" data-i18n="checklist_panelSubtitle">Short tours, one per page. Do them in any order.</p>
+            <div class="joorney-cl-bar" role="progressbar" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0" aria-labelledby="joorney_checklist_progress_label">
+                <div id="joorney_checklist_progress" class="joorney-cl-barfill"></div>
             </div>
-            <div class="progress rounded" style="height: 8px;">
-                <div id="joorney_checklist_tour_progress" class="progress-bar rounded" role="progressbar" style="width: 25%;"></div>
-            </div>
-            <div id="joorney_checklist_congrats" class="card text-center mt-3 overflow-hidden" style="max-height: 0;">
-                <div class="card-body">
-                    <h4 class="card-title text-success" data-i18n="checklist_congratsTitle">Congratulations!</h4>
-                    <p class="card-text" data-i18n="checklist_congratsText">You've completed the onboarding checklist. Great job!</p>
-                    <div class="d-flex flex-column">
-                        <button type="button" id="joorney_checklist_congrats_primary" class="btn btn-success" data-i18n="checklist_restart">Restart</button>
-                        <button type="button" id="joorney_checklist_congrats_secondary" class="btn btn-tertiary text-decoration-underline" data-i18n="checklist_restart">Restart</button>
-                    </div>
-                </div>
-            </div>
-            <hr id="joorney_checklist_congrats_separator" class="d-none">
-            <div class="position-relative">
-                <div id="joorney_checklist_steps_list" class="mt-3">
-                    <!-- DYNAMIC CONTENT -->
-                </div>
-                <div
-                    id="joorney_checklist_congrats_blur"
-                    class="w-100 h-100 position-absolute top-0 start-0 d-none"
-                    style="background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 255));"
-                ></div>
-            </div>
-        </div>
+            <div id="joorney_checklist_progress_label" class="joorney-cl-barlabel"></div>
+            <div id="joorney_checklist_tours" class="joorney-cl-tours"><!-- DYNAMIC CONTENT --></div>
+            <button id="joorney_checklist_hide_btn" class="joorney-cl-hide" type="button" data-i18n="checklist_hide">Hide checklist</button>
+        </aside>
 
         <!-- Footer -->
         <footer class="text-center">
@@ -104,6 +83,11 @@
                 &copy; <span id="copyright-year">2023</span>
                 <span data-i18n="options_allRightsReserved">All rights reserved:</span>
                 <a id="copyright-link" href="https://github.com/MrSweeter/joorney">Joorney</a>
+            </div>
+            <div class="pb-2">
+                <button type="button" id="joorney-announce-restore" class="joorney-link-btn is-strong joorney-announce-restore" hidden>
+                    <i class="joorney-icon" data-icon="campaign" aria-hidden="true"></i><span data-i18n="options_announce_restore">Announcements</span>
+                </button>
             </div>
             <div><span data-i18n="options_poweredBySunrise">Theme Switch based on location is powered by</span> <a href="https://sunrisesunset.io/">SunriseSunset.io</a></div>
         </footer>

@@ -2,6 +2,9 @@ export default {
     id: 'assignMeTask',
     display_name: 'Assign Me Task',
     icon: 'person_add',
+    category: 'productivity',
+    tags: ['project'],
+    video: '',
     trigger: {
         load: true,
         navigate: true,

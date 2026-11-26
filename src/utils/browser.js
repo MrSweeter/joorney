@@ -9,6 +9,14 @@ export const Runtime = isFirefox() ? browser.runtime : chrome.runtime;
 export const StorageSync = isFirefox() ? browser.storage.sync : chrome.storage.sync;
 export const StorageLocal = isFirefox() ? browser.storage.local : chrome.storage.local;
 export const StorageSession = isFirefox() ? browser.storage.session : chrome.storage.session;
+
+// QUOTA_BYTES_PER_ITEM of the sync storage: a bigger value is refused by set()
+export const SYNC_ITEM_BYTES = StorageSync.QUOTA_BYTES_PER_ITEM ?? 8192;
+
+// Bytes a value takes in its sync item, counted like the quota: key + JSON value
+export function syncItemBytes(key, value) {
+    return new TextEncoder().encode(key + JSON.stringify(value)).length;
+}
 //export const Scripting = isFirefox() ? browser.scripting : chrome.scripting;
 export const WebNavigation = isFirefox() ? browser.webNavigation : chrome.webNavigation;
 export const Cookies = isFirefox() ? browser.cookies : chrome.cookies;

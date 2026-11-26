@@ -11,6 +11,7 @@ const LOCAL_DEFAULT = {
     joorney_date: '',
     joorneyLocalCacheCall: {},
     odooLanguages: {},
+    unfocusAppNames: {},
 };
 
 // Runbot builds each have their own origin: keep only the most recent ones
@@ -45,6 +46,13 @@ export async function closeAnnounce(announce) {
     await StorageLocal.set({ journey_announces });
 }
 
+// Un-close: the hash is removed (not set to false), so the storage stays as if it was never closed
+export async function reopenAnnounce(announce) {
+    const { journey_announces } = await StorageLocal.get({ journey_announces: LOCAL_DEFAULT.journey_announces });
+    delete journey_announces[announce.hash];
+    await StorageLocal.set({ journey_announces });
+}
+
 // Off website
 export async function getWebsiteOff() {
     const { offs } = await StorageLocal.get({ offs: LOCAL_DEFAULT.offs });
@@ -73,6 +81,21 @@ export async function setOdooLanguage(origin, lang) {
     const origins = Object.keys(odooLanguages);
     for (const old of origins.slice(0, Math.max(0, origins.length - MAX_ODOO_LANGUAGES))) delete odooLanguages[old];
     await setLocal({ odooLanguages });
+}
+
+// Unfocus App: app names seen on the Odoo home menus, by menu xmlid. The remembered apps (sync storage)
+// only keep the xmlid; local, as the names only label the options page and would eat the sync quota
+export async function getUnfocusAppNames() {
+    const { unfocusAppNames } = await StorageLocal.get({ unfocusAppNames: LOCAL_DEFAULT.unfocusAppNames });
+    return unfocusAppNames;
+}
+
+export async function addUnfocusAppNames(names) {
+    const unfocusAppNames = await getUnfocusAppNames();
+    const changed = Object.entries(names).filter(([xmlid, name]) => name && unfocusAppNames[xmlid] !== name);
+    if (!changed.length) return;
+    for (const [xmlid, name] of changed) unfocusAppNames[xmlid] = name;
+    await setLocal({ unfocusAppNames });
 }
 
 // Cache

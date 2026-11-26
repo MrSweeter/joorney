@@ -1,23 +1,155 @@
-.joorney-toast-mode-control.radio-control,
-.joorney-toast-mode-control.checkbox-control label {
-    background-color: whitesmoke;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+/*#region Display header: title left, the "Show me" preview and its status on the right */
+.joorney-toast-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+    margin-bottom: 4px;
 }
 
-.joorney-toast-mode-control input[type="radio"],
-.joorney-toast-mode-control input[type="checkbox"] {
-    display: none;
+.joorney-toast-head .joorney-panel-title {
+    flex: 1;
+    margin: 0;
+}
+/*#endregion */
+
+/*#region Display tiles: real radios, visually hidden, the label is the tile */
+.joorney-toast-tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 12px;
 }
 
-.joorney-toast-mode-control label {
-    width: 100%;
-    padding: 10px 20px;
+.joorney-toast-tile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px;
+    margin: 0;
+    font-size: 14px;
+    color: var(--joorney-text);
     cursor: pointer;
-    transition: background-color 0.3s;
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border-strong);
+    border-radius: var(--joorney-radius-card);
 }
 
-.joorney-toast-mode-control input[type="radio"]:checked + label,
-.joorney-toast-mode-control input[type="checkbox"]:checked + label {
-    background-color: var(--joorney-primary);
-    color: whitesmoke;
+.joorney-toast-tile:hover,
+.joorney-toast-tile:has(input:checked) {
+    border-color: var(--joorney-navy);
 }
+
+.joorney-toast-tile:has(input:checked) {
+    box-shadow: 0 0 0 2px var(--joorney-navy);
+}
+
+.joorney-toast-tile:has(input:focus-visible) {
+    outline: 2px solid var(--joorney-focus);
+    outline-offset: 2px;
+}
+
+.joorney-toast-tile input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    opacity: 0;
+}
+
+.joorney-toast-tile svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.joorney-toast-tile-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+}
+
+.joorney-toast-tile-label .joorney-icon {
+    font-size: 18px;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-toast-tile:has(input:checked) .joorney-toast-tile-label .joorney-icon {
+    color: var(--joorney-navy);
+}
+
+.joorney-toast-tile-hint {
+    font-size: 12px;
+    color: var(--joorney-text-muted);
+}
+/*#endregion */
+
+/*#region Types */
+.joorney-toast-type {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-top: 1px solid var(--joorney-border);
+}
+
+.joorney-toast-type:first-child {
+    border-top: 0;
+}
+
+.joorney-toast-dot {
+    flex: none;
+    width: 12px;
+    height: 12px;
+    background: var(--joorney-toast-color);
+    border-radius: 50%;
+}
+
+.joorney-toast-type-icon {
+    font-size: 20px;
+    color: var(--joorney-navy);
+}
+
+.joorney-toast-type-label {
+    flex: 1;
+    margin: 0;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.joorney-toast-preview {
+    height: 34px;
+}
+
+.joorney-toast-type[data-toast-type="info"] {
+    --joorney-toast-color: #2196f3;
+}
+
+.joorney-toast-type[data-toast-type="warning"] {
+    --joorney-toast-color: #ff9800;
+}
+
+.joorney-toast-type[data-toast-type="danger"] {
+    --joorney-toast-color: #f44336;
+}
+
+.joorney-toast-type[data-toast-type="success"] {
+    --joorney-toast-color: #4caf50;
+}
+/*#endregion */
+
+/*#region Previews: the real toast container, drawn on the page, with Material icons instead of Font Awesome */
+#joorney-toast-container .toast-icon .joorney-icon {
+    font-size: 24px;
+}
+
+#joorney-toast-container .toast-close .joorney-icon {
+    font-size: 16px;
+}
+
+.joorney-toast-hint {
+    margin: 0;
+}
+/*#endregion */

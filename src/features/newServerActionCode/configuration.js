@@ -2,6 +2,9 @@ export default {
     id: 'newServerActionCode',
     display_name: 'New Server Action Code',
     icon: 'code_blocks',
+    category: 'technical',
+    tags: ['debug'],
+    video: '',
     trigger: {
         load: true,
         navigate: true,

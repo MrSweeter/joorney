@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="-16 -16 192 192">
+<style>
+.orbit{transform-origin:80px 80px;animation:orbit 2.4s linear infinite}
+.dot{transform-box:fill-box;transform-origin:center;animation:pulse .6s cubic-bezier(.4,0,.6,1) infinite alternate}
+@keyframes orbit{to{transform:rotate(360deg)}}
+@keyframes pulse{to{transform:scale(1.3333)}}
+@keyframes fade{to{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.orbit{animation:none}.dot{animation:fade 1.2s ease-in-out infinite alternate}}
+</style>
+<circle cx="80" cy="80" r="40" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="13"/>
+<circle cx="80" cy="80" r="40" fill="none" stroke="#13213c" stroke-width="10"/>
+<circle cx="80" cy="80" r="70" fill="none" stroke="#8a93a6" stroke-width="2" stroke-dasharray="6 8"/>
+<g class="orbit">
+<circle class="dot" cx="80" cy="10" r="9" fill="#fca311" stroke="#fff" stroke-opacity=".6" stroke-width="1.5"/>
+</g>
+</svg>

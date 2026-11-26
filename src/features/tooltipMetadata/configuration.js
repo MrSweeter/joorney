@@ -2,6 +2,9 @@ export default {
     id: 'tooltipMetadata',
     display_name: 'Tooltip Metadata',
     icon: 'description',
+    category: 'technical',
+    tags: ['debug'],
+    video: '',
     trigger: {
         load: true,
         navigate: true,

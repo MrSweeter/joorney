@@ -10,6 +10,9 @@ export default {
     id: 'autoOpenRunbot',
     display_name: '[Runbot] Auto Open',
     icon: 'flight',
+    category: 'runbot',
+    tags: ['runbot'],
+    video: '',
     trigger: {
         load: true,
         navigate: true,

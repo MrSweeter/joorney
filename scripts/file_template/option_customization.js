@@ -7,7 +7,7 @@ export default class FEATURE_CLASS_NAMEOptionCustomizationFeature extends Option
     }
 
     async load() {
-        super.load();
+        await super.load();
         TODO('Complete empty generated method for option customization rendering');
     }
 }

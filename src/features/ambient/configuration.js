@@ -2,6 +2,9 @@ export default {
     id: 'ambient',
     display_name: 'Ambient',
     icon: 'landscape',
+    category: 'ui',
+    tags: ['fun', 'seasonal', 'homeMenu'],
+    video: '',
     trigger: {
         background: false,
         load: true,

@@ -1,0 +1,1719 @@
+/* Feature page: options/pages/feature (header, state card, settings card and the blocks of the features) */
+
+.joorney-feature {
+    max-width: 1080px;
+}
+
+.joorney-feature-crumbs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-feature-crumbs a {
+    color: var(--joorney-text);
+}
+
+.joorney-feature-crumbs [aria-current] {
+    color: var(--joorney-text);
+}
+
+/*#region Header */
+.joorney-feature-top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+}
+
+.joorney-feature-icon {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    color: var(--joorney-navy);
+    background: var(--joorney-state-everywhere-tint);
+    border-radius: 12px;
+}
+
+.joorney-feature-icon .joorney-icon {
+    font-size: 32px;
+}
+
+.joorney-feature-title {
+    flex: 1 1 320px;
+    min-width: 0;
+}
+
+.joorney-feature-title h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--joorney-text);
+}
+
+.joorney-feature-title .joorney-help {
+    margin: 2px 0 8px;
+}
+
+.joorney-feature-active {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* The big switch */
+.joorney-feature-active .joorney-switch {
+    width: 52px;
+    height: 28px;
+    border-radius: 14px;
+}
+
+.joorney-feature-active .joorney-switch::after {
+    top: 3px;
+    left: 3px;
+    width: 22px;
+    height: 22px;
+}
+
+.joorney-feature-active .joorney-switch[aria-checked="true"]::after {
+    left: 27px;
+}
+
+.joorney-feature-body {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding-top: 24px;
+    margin-top: 24px;
+    border-top: 1px solid var(--joorney-border);
+}
+
+.joorney-feature-video {
+    display: flex;
+    flex: 1 1 300px;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    max-width: 420px;
+    font-size: 14px;
+    color: #fff;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--joorney-navy);
+    border-radius: var(--joorney-radius-card);
+}
+
+.joorney-feature-video .joorney-icon {
+    font-size: 48px;
+}
+
+.joorney-feature-video video,
+.joorney-feature-video iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.joorney-feature-text {
+    flex: 1 1 300px;
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+.joorney-feature-text p {
+    margin: 0 0 12px;
+}
+/*#endregion */
+
+/*#region Where it runs */
+.joorney-panel.is-muted > :not(.joorney-panel-title, .joorney-help, .joorney-note) {
+    opacity: 0.55;
+}
+
+.joorney-feature-opts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.joorney-feature-opt {
+    display: flex;
+    flex: 1 1 280px;
+    flex-direction: column;
+    gap: 2px;
+    padding: 12px 16px;
+    font: inherit;
+    color: var(--joorney-text);
+    text-align: start;
+    cursor: pointer;
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-card);
+}
+
+.joorney-feature-opt b {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.joorney-feature-opt span {
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-feature-opt.is-selected {
+    padding: 11px 15px;
+    background: var(--joorney-ground);
+    border: 2px solid var(--joorney-navy);
+}
+
+.joorney-ts-opts .joorney-feature-opt {
+    flex-basis: 170px;
+}
+
+.joorney-ts-fields {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: flex-end;
+}
+
+.joorney-ts-field {
+    flex: 0 1 180px;
+}
+
+.joorney-ts-field .joorney-input {
+    width: 100%;
+}
+
+.joorney-feature-subtitle {
+    margin: 0 0 4px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.joorney-feature-hosts {
+    padding: 0;
+    margin: 0 0 16px;
+    list-style: none;
+}
+
+.joorney-feature-host {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    padding: 8px 0;
+    font-size: 14px;
+    border-top: 1px solid var(--joorney-border);
+}
+
+.joorney-feature-host.is-empty {
+    color: var(--joorney-text-muted);
+}
+
+.joorney-feature-origin {
+    flex: 1 1 240px;
+    min-width: 0;
+    word-break: break-all;
+}
+
+.joorney-feature-add {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: flex-end;
+    padding-top: 16px;
+    border-top: 1px solid var(--joorney-border);
+}
+
+.joorney-feature-addfield {
+    flex: 1 1 280px;
+}
+
+.joorney-feature-add .joorney-input {
+    box-sizing: border-box;
+    width: 100%;
+    height: 38px;
+}
+
+.joorney-feature-foot {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: space-between;
+    font-size: 14px;
+    color: var(--joorney-text-muted);
+}
+/*#endregion */
+
+/*#region Settings blocks */
+.joorney-fs-label {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 13px;
+    color: var(--joorney-text-muted);
+}
+
+/* Behaviour group: the switches also in the toolbar popup, see settings.js behaviourHTML */
+.joorney-settings-section {
+    margin: 0 0 12px;
+}
+
+.joorney-feature .joorney-settings-subtitle {
+    margin: 0 0 4px;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--joorney-text);
+}
+
+.joorney-behaviour {
+    overflow: hidden;
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-card);
+}
+
+/* The next sub-heading of the block (Unfocus App: the images) */
+.joorney-behaviour:not(:last-child) {
+    margin-bottom: 28px;
+}
+
+.joorney-behaviour-row {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    padding: 12px 16px;
+}
+
+.joorney-behaviour-row + .joorney-behaviour-row {
+    border-top: 1px solid var(--joorney-hover);
+}
+
+.joorney-behaviour-icon {
+    color: var(--joorney-text-soft);
+}
+
+.joorney-behaviour-icon .joorney-icon {
+    font-size: 18px;
+}
+
+.joorney-behaviour-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.joorney-behaviour-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--joorney-text);
+    cursor: pointer;
+}
+
+/* Shown while the feature is deactivated: the switches stay usable, to prepare it */
+.joorney-feature .joorney-behaviour-off {
+    display: none;
+    font-size: 13px;
+}
+
+.joorney-feature .is-inactive .joorney-behaviour-off {
+    display: flex;
+}
+
+.joorney-unfocus-tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+    gap: 16px;
+}
+
+.joorney-unfocus-tile {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+    min-width: 0;
+    padding: 16px;
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-card);
+}
+
+.joorney-feature .joorney-unfocus-tile h3,
+.joorney-feature .joorney-unfocus-subtitle {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--joorney-text);
+}
+
+.joorney-feature .joorney-unfocus-tile h3 {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.joorney-unfocus-tile h3 .joorney-icon {
+    font-size: 18px;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-feature .joorney-unfocus-tile .joorney-fs-label {
+    margin: 0 0 -2px;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--joorney-text);
+}
+
+/* Title, then the Default image / Custom image chip on the right */
+.joorney-unfocus-tile-head {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: space-between;
+    align-self: stretch;
+    min-height: 24px;
+}
+
+.joorney-chip.is-custom {
+    color: var(--joorney-state-everywhere-text);
+    background: var(--joorney-state-everywhere-tint);
+}
+
+/* A piece of the Odoo home menu: the image is the background of the app cell, drawn like
+src/features/unfocusApp/content.js does it (contain, center top) */
+.joorney-unfocus-thumb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
+    height: 168px;
+    overflow: hidden;
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-control);
+}
+
+.joorney-unfocus-thumb.is-light {
+    background: #f9fafb;
+}
+
+.joorney-unfocus-thumb.is-dark {
+    background: #262a36;
+}
+
+/* Size of a real app cell (icon and name), so the image keeps the size it has in Odoo */
+.joorney-unfocus-cell {
+    position: relative;
+    width: 140px;
+    height: 108px;
+}
+
+.joorney-unfocus-cell img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center top;
+}
+
+/* The URL field and, when the image is custom, the "Use default" button that resets it */
+.joorney-unfocus-field {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    align-self: stretch;
+}
+
+.joorney-feature .joorney-unfocus-tile .joorney-unfocus-input {
+    flex: 1 1 160px;
+    box-sizing: border-box;
+}
+
+.joorney-unfocus-field .joorney-btn {
+    flex: none;
+    gap: 6px;
+}
+
+.joorney-unfocus-field .joorney-icon {
+    font-size: 18px;
+}
+
+.joorney-feature .joorney-unfocus-tile .joorney-unfocus-input[aria-invalid="true"] {
+    border-color: #b3541e;
+    box-shadow: 0 0 0 1px #b3541e;
+}
+
+.joorney-feature .joorney-unfocus-restored {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    margin: 0;
+    font-size: 13px;
+    color: var(--joorney-text-soft);
+}
+
+.joorney-unfocus-restored .joorney-icon {
+    font-size: 18px;
+    color: var(--joorney-state-everywhere-text);
+}
+
+.joorney-unfocus-undo {
+    padding: 0 2px;
+    font: inherit;
+    font-weight: 500;
+    color: var(--joorney-focus);
+    text-decoration: underline;
+    cursor: pointer;
+    background: none;
+    border: 0;
+}
+
+/* Title and help of the image tiles and of the host list */
+.joorney-unfocus-section {
+    margin: 0 0 12px;
+}
+
+.joorney-unfocus-section ~ .joorney-unfocus-section {
+    margin-top: 28px;
+}
+
+.joorney-feature .joorney-unfocus-subtitle {
+    margin: 0 0 4px;
+}
+
+.joorney-feature .joorney-unfocus-note {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    padding: 10px 12px;
+    margin: 0 0 12px;
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--joorney-state-everywhere-text);
+    background: var(--joorney-state-everywhere-tint);
+    border-radius: var(--joorney-radius-control);
+}
+
+.joorney-unfocus-note .joorney-icon {
+    font-size: 18px;
+}
+
+.joorney-unfocus-hosts {
+    overflow: hidden;
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-card);
+}
+
+.joorney-unfocus-host {
+    border-top: 1px solid var(--joorney-border);
+}
+
+.joorney-unfocus-host:first-child {
+    border-top: 0;
+}
+
+/* Name (opens the host), count chips, forget button */
+.joorney-unfocus-hostrow {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    min-height: 44px;
+    padding: 4px 8px 4px 4px;
+}
+
+.joorney-unfocus-host.is-open > .joorney-unfocus-hostrow {
+    background: var(--joorney-surface-soft);
+    border-bottom: 1px solid var(--joorney-border);
+}
+
+.joorney-unfocus-disclosure {
+    flex: 1;
+    padding: 6px 8px;
+}
+
+.joorney-unfocus-disclosure:hover {
+    background: var(--joorney-hover);
+}
+
+.joorney-unfocus-disclosure .joorney-icon {
+    flex: none;
+    color: var(--joorney-text-muted);
+    transition: transform 0.15s;
+}
+
+.joorney-unfocus-disclosure[aria-expanded="false"] .joorney-icon {
+    transform: rotate(-90deg);
+}
+
+.joorney-unfocus-name {
+    min-width: 0;
+    font-size: 15px;
+    font-weight: 500;
+    overflow-wrap: anywhere;
+}
+
+/* Sharing on: the per-host lists are kept but not used */
+.joorney-unfocus-host.is-ignored .joorney-unfocus-name,
+.joorney-unfocus-host.is-ignored .joorney-chip:not(.is-ignored) {
+    opacity: 0.6;
+}
+
+.joorney-chip.is-superfocus,
+.joorney-chip.is-ignored {
+    color: var(--joorney-state-listed-text);
+    background: var(--joorney-state-listed-tint);
+}
+
+.joorney-chip.is-shared {
+    color: var(--joorney-state-everywhere-text);
+    background: var(--joorney-state-everywhere-tint);
+}
+
+.joorney-unfocus-host.is-confirm {
+    padding: 0;
+}
+
+/* The apps of an open host; 14px like the rest of the settings card text, as MDB sets the body to 16px */
+.joorney-unfocus-apps {
+    padding: 4px 12px 8px 44px;
+    font-size: 14px;
+}
+
+.joorney-unfocus-app {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    min-height: 36px;
+    padding: 2px 0 2px 6px;
+    border-top: 1px solid var(--joorney-hover);
+}
+
+.joorney-unfocus-app:first-child {
+    border-top: 0;
+}
+
+.joorney-unfocus-app.is-restored {
+    padding: 2px 10px;
+    margin: 2px 0;
+    background: var(--joorney-hover);
+    border: 0;
+    border-radius: var(--joorney-radius-control);
+}
+
+/* Name and xmlid on one line, the xmlid cut when the row is short */
+.joorney-unfocus-appname {
+    display: flex;
+    flex: 1;
+    gap: 10px;
+    align-items: baseline;
+    min-width: 0;
+}
+
+.joorney-unfocus-applabel {
+    flex: none;
+}
+
+.joorney-unfocus-appname code {
+    min-width: 0;
+    overflow: hidden;
+    font:
+        12px ui-monospace,
+        Menlo,
+        Consolas,
+        monospace;
+    color: var(--joorney-text-muted);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Unfocused / Normal / Superfocused, icon only (name in title and aria-label) */
+.joorney-unfocus-modes {
+    display: inline-flex;
+    flex: none;
+    overflow: hidden;
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border-strong);
+    border-radius: var(--joorney-radius-control);
+}
+
+.joorney-unfocus-modes button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 26px;
+    padding: 0;
+    color: var(--joorney-text-muted);
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    border-left: 1px solid var(--joorney-border-strong);
+}
+
+.joorney-unfocus-modes button:first-child {
+    border-left: 0;
+}
+
+.joorney-unfocus-modes button:hover {
+    background: var(--joorney-hover);
+}
+
+.joorney-unfocus-modes button[aria-checked="true"] {
+    color: var(--joorney-text);
+    background: #dfe3ea;
+}
+
+.joorney-unfocus-modes .joorney-icon {
+    font-size: 17px;
+}
+
+@media (max-width: 640px) {
+    .joorney-unfocus-hostrow {
+        flex-wrap: wrap;
+    }
+
+    .joorney-unfocus-disclosure {
+        flex-basis: 100%;
+    }
+
+    .joorney-unfocus-hostrow .joorney-chips {
+        flex: 1;
+        margin-left: 36px;
+    }
+
+    .joorney-unfocus-apps {
+        padding-left: 12px;
+    }
+
+    .joorney-unfocus-appname {
+        flex-direction: column;
+        gap: 0;
+        align-items: flex-start;
+    }
+
+    .joorney-unfocus-appname code {
+        max-width: 100%;
+    }
+}
+
+.joorney-unfocus-ask {
+    margin: 6px 12px;
+}
+
+#joorney_awe_style_container {
+    position: relative;
+}
+
+#joorney_awe_style_container .joorney-btn {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+}
+/*#endregion */
+
+/*#region Awesome Loading tiles */
+.joorney-awl-tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 12px;
+}
+
+.joorney-awl-tile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-card);
+}
+
+.joorney-awl-tile.is-selected {
+    border: 2px solid var(--joorney-navy);
+    box-shadow:
+        0 0 0 2px var(--joorney-surface),
+        0 0 0 4px var(--joorney-navy);
+}
+
+.joorney-awl-radio {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    padding: 10px;
+    font: inherit;
+    color: var(--joorney-text);
+    text-align: left;
+    cursor: pointer;
+    background: none;
+    border: 0;
+    border-radius: var(--joorney-radius-card);
+}
+
+.joorney-awl-tile.is-selected .joorney-awl-radio {
+    padding: 9px;
+}
+
+.joorney-awl-pv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background-color: var(--joorney-surface);
+    background-image:
+        linear-gradient(45deg, #e6e8ed 25%, transparent 25%, transparent 75%, #e6e8ed 75%),
+        linear-gradient(45deg, #e6e8ed 25%, transparent 25%, transparent 75%, #e6e8ed 75%);
+    background-position:
+        0 0,
+        8px 8px;
+    background-size: 16px 16px;
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-control);
+}
+
+.joorney-awl-pv img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+.joorney-awl-broken {
+    font-size: 40px;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-awl-name {
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    font-size: 13px;
+    font-weight: 500;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.joorney-awl-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    min-height: 22px;
+}
+
+.joorney-chip.is-selected {
+    color: #fff;
+    background: var(--joorney-navy);
+}
+
+.joorney-awl-ring {
+    flex: none;
+    width: 48px;
+    height: 48px;
+    background: var(--joorney-surface);
+    border: 5px solid #e3d5dd;
+    border-top-color: var(--joorney-odoo-primary);
+    border-radius: 50%;
+    animation: joorney-awl-spin 1s linear infinite;
+}
+
+@keyframes joorney-awl-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .joorney-awl-ring {
+        animation: none;
+    }
+}
+
+.joorney-awl-del {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    color: var(--joorney-text-muted);
+    cursor: pointer;
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-control);
+}
+
+.joorney-awl-del:hover {
+    color: var(--joorney-text);
+    background: var(--joorney-hover);
+}
+
+.joorney-awl-confirm {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    padding: 0 10px 10px;
+    font-size: 12px;
+}
+
+.joorney-awl-confirm > span {
+    flex: 1 1 100%;
+}
+
+.joorney-awl .joorney-btn.is-small {
+    height: 28px;
+    padding: 0 10px;
+    font-size: 12px;
+}
+
+.joorney-awl-add {
+    display: flex;
+}
+
+.joorney-awl-addbtn,
+.joorney-awl-addform {
+    width: 100%;
+    min-height: 196px;
+}
+
+.joorney-awl-addbtn {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--joorney-text);
+    text-align: center;
+    cursor: pointer;
+    background: var(--joorney-surface);
+    border: 1px dashed #8a93a6;
+    border-radius: var(--joorney-radius-card);
+}
+
+.joorney-awl-addbtn:hover {
+    background: var(--joorney-ground);
+}
+
+.joorney-awl-addbtn .joorney-icon {
+    font-size: 32px;
+}
+
+.joorney-awl-addform {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: center;
+    padding: 12px;
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-card);
+}
+
+.joorney-awl-addform .joorney-fs-label {
+    margin: 0;
+}
+
+.joorney-awl-input {
+    width: 100%;
+}
+
+/* The URL can wrap: the icon stays on the first line */
+.joorney-awl-error {
+    align-items: flex-start;
+}
+
+.joorney-awl-addactions {
+    display: flex;
+    gap: 6px;
+}
+/*#endregion */
+
+/*#region Ambient */
+.joorney-amb-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.joorney-amb-categoryhead {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: space-between;
+    margin: 16px 0 10px;
+}
+
+.joorney-amb-category:first-child .joorney-amb-categoryhead {
+    margin-top: 0;
+}
+
+.joorney-amb-categorytitle {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--joorney-text);
+}
+
+.joorney-amb-categoryactions {
+    display: flex;
+    flex: none;
+}
+
+.joorney-amb-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 12px;
+}
+
+.joorney-amb-tile {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px;
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-card);
+}
+
+/* Same outer size as the 1px border: no layout shift while previewing */
+.joorney-amb-tile.is-playing {
+    padding: 11px;
+    background: var(--joorney-ground);
+    border: 2px solid var(--joorney-switch-on);
+}
+
+.joorney-amb-tilehead {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.joorney-amb-icon {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+}
+
+.joorney-amb-icon.is-compute {
+    color: var(--joorney-state-listed-text);
+    background: var(--joorney-state-listed-tint);
+}
+
+.joorney-amb-icon.is-event {
+    color: var(--joorney-state-everywhere-text);
+    background: var(--joorney-state-everywhere-tint);
+}
+
+.joorney-amb-icon.is-yearly {
+    color: #8a4f7d;
+    background: color-mix(in srgb, #8a4f7d 16%, transparent);
+}
+
+.joorney-amb-tile:has([role="switch"][aria-checked="false"]) .joorney-amb-icon {
+    filter: grayscale(1);
+    opacity: 0.6;
+}
+
+.joorney-amb-name {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.joorney-amb-title {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+.joorney-amb-date {
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--joorney-text-muted);
+}
+
+/* Full viewport while an ambient plays, like on Odoo; same layer as the info modal (above the navbar) */
+.joorney-amb-stage {
+    position: fixed;
+    inset: 0;
+    z-index: 1050;
+    background: var(--joorney-navy);
+    opacity: 0;
+    transition: opacity 200ms ease;
+}
+
+.joorney-amb-stage.is-open {
+    opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .joorney-amb-stage {
+        transition: none;
+    }
+}
+
+.joorney-amb-stage .images-comparison,
+.joorney-amb-stage .themes-container {
+    height: 100%;
+}
+
+/* Any viewport ratio: crop from the top center, the screenshots have no navbar and the app grid is centered */
+.joorney-amb-stage .images-comparison img {
+    object-position: center top;
+}
+
+.joorney-amb-stage canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.joorney-amb-stagebar {
+    position: absolute;
+    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+    left: 50%;
+    z-index: 2;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    max-width: calc(100% - 32px);
+    padding: 8px 8px 8px 20px;
+    font-size: 14px;
+    color: #fff;
+    background: var(--joorney-navy);
+    border-radius: 999px;
+    box-shadow: var(--joorney-shadow-modal);
+    transform: translateX(-50%);
+}
+
+.joorney-amb-tag {
+    position: absolute;
+    top: calc(16px + env(safe-area-inset-top, 0px));
+    z-index: 1;
+    padding: 3px 10px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #fff;
+    pointer-events: none;
+    background: var(--joorney-navy);
+    border-radius: 12px;
+}
+
+.joorney-amb-tag.is-light {
+    left: 16px;
+}
+
+.joorney-amb-tag.is-dark {
+    right: 16px;
+}
+/*#endregion */
+
+/*#region Controls (their look is in ui/base.css, here only their place on the page) */
+.joorney-feature .joorney-input {
+    flex: 1;
+}
+
+.joorney-feature .joorney-feature-error {
+    margin: 6px 0 0;
+}
+/*#endregion */
+
+/*#region Context Odoo Menus */
+.joorney-cm-add {
+    padding: 16px;
+    margin-bottom: 20px;
+    background: var(--joorney-surface-soft);
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-card);
+}
+
+.joorney-cm-addrow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+.joorney-cm-addrow .joorney-input {
+    flex: 1 1 240px;
+    box-sizing: border-box;
+    height: 38px;
+}
+
+.joorney-feature .joorney-cm-hint {
+    margin: 6px 0 0;
+    font-size: 12px;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-cm-add .joorney-input[aria-invalid="true"],
+.joorney-cm-editfield .joorney-input[aria-invalid="true"] {
+    border-color: #b3541e;
+    box-shadow: 0 0 0 1px #b3541e;
+}
+
+.joorney-feature .joorney-cm-error {
+    margin: 6px 0 0;
+}
+
+/* Not overflow: hidden, the ⋮ menu of the last rows opens below the list */
+.joorney-cm-list {
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-card);
+}
+
+.joorney-cm-head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    min-height: 52px;
+    padding: 8px 12px 8px 16px;
+    background: var(--joorney-surface-soft);
+    border-bottom: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-card) var(--joorney-radius-card) 0 0;
+}
+
+.joorney-feature .joorney-cm-title {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--joorney-text);
+}
+
+.joorney-cm-filter {
+    position: relative;
+    flex: 1 1 200px;
+    max-width: 300px;
+    margin-left: auto;
+}
+
+.joorney-cm-filter .joorney-icon {
+    position: absolute;
+    top: 9px;
+    left: 10px;
+    font-size: 18px;
+    color: var(--joorney-text-muted);
+    pointer-events: none;
+}
+
+.joorney-cm-filter .joorney-input {
+    box-sizing: border-box;
+    width: 100%;
+    height: 36px;
+    padding-left: 34px;
+}
+
+.joorney-cm-headacts {
+    display: flex;
+}
+
+.joorney-cm-headacts .joorney-cm-ask {
+    padding: 4px 4px 4px 12px;
+}
+
+.joorney-cm-list .joorney-btn.is-small,
+.joorney-cm-empty .joorney-btn.is-small {
+    height: 32px;
+    padding: 0 12px;
+}
+
+.joorney-cm-list .joorney-btn .joorney-icon,
+.joorney-cm-empty .joorney-btn .joorney-icon {
+    font-size: 18px;
+}
+
+.joorney-feature .joorney-cm-note {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 8px 16px;
+    margin: 0;
+    font-size: 13px;
+    color: var(--joorney-text-soft);
+    background: var(--joorney-hover);
+}
+
+.joorney-cm-note .joorney-icon {
+    font-size: 18px;
+    color: var(--joorney-text-muted);
+}
+
+/* Section bands: amber = top level, blue = submenu; "where" is the path to these menus in the right-click menu */
+.joorney-cm-band {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    min-height: 40px;
+    padding: 8px 12px 8px 14px;
+    border-top: 1px solid var(--joorney-border);
+}
+
+.joorney-cm-band.is-top {
+    color: var(--joorney-warn-text);
+    background: var(--joorney-state-listed-tint);
+}
+
+.joorney-cm-band.is-sub {
+    color: var(--joorney-state-everywhere-text);
+    background: var(--joorney-state-everywhere-tint);
+}
+
+.joorney-cm-bandicon {
+    font-size: 20px;
+}
+
+.joorney-feature .joorney-cm-bandtitle {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: inherit;
+}
+
+.joorney-cm-band .joorney-chip {
+    background: var(--joorney-surface);
+}
+
+.joorney-cm-band.is-top .joorney-chip {
+    color: var(--joorney-state-listed-text);
+    border: 1px solid #f0d49a;
+}
+
+.joorney-cm-band.is-sub .joorney-chip {
+    color: var(--joorney-state-everywhere-text);
+    border: 1px solid #c3d1f2;
+}
+
+.joorney-cm-where {
+    margin-left: auto;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.joorney-cm-band.is-over,
+.joorney-cm-group.is-over {
+    box-shadow: inset 0 0 0 2px var(--joorney-focus);
+}
+
+.joorney-feature .joorney-cm-hintrow {
+    padding: 10px 16px 12px 46px;
+    margin: 0;
+    font-size: 13px;
+    color: var(--joorney-text-muted);
+}
+
+/* App groups of the submenu, and the switched off fold */
+.joorney-cm-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    width: 100%;
+    min-height: 38px;
+    padding: 0 12px 0 14px;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--joorney-text);
+    text-align: left;
+    cursor: pointer;
+    background: var(--joorney-surface);
+    border: 0;
+    border-top: 1px solid var(--joorney-hover);
+}
+
+.joorney-cm-band + .joorney-cm-group {
+    border-top: 0;
+}
+
+.joorney-cm-group:hover {
+    background: var(--joorney-ground);
+}
+
+.joorney-cm-chev {
+    font-size: 20px;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-cm-groupnames {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--joorney-text-muted);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Switched off: same place, parked look (gray well, dashed edge, muted rows) */
+.joorney-cm-group.joorney-cm-fold {
+    margin-top: 8px;
+    color: var(--joorney-text-soft);
+    background: var(--joorney-ground);
+    border-top: 1px dashed var(--joorney-border-strong);
+    border-radius: 0 0 var(--joorney-radius-card) var(--joorney-radius-card);
+}
+
+.joorney-cm-fold:hover {
+    background: var(--joorney-hover);
+}
+
+.joorney-cm-group.joorney-cm-fold.is-open {
+    border-radius: 0;
+}
+
+.joorney-cm-foldicon {
+    font-size: 20px;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-cm-fold .joorney-chip {
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border-strong);
+}
+
+/* Rows: grip, name and parent path, star, switch, ⋮ menu */
+.joorney-cm-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    min-height: 40px;
+    /* The path starts at 42px on every row: 10px + grip (24px) + gap (8px) when there is a grip */
+    padding: 0 8px 0 42px;
+    font-size: 14px;
+    background: var(--joorney-surface);
+    border-top: 1px solid var(--joorney-hover);
+}
+
+.joorney-cm-row.has-grip {
+    padding-left: 10px;
+}
+
+.joorney-cm-band + .joorney-cm-row {
+    border-top: 0;
+}
+
+.joorney-cm-row:last-child {
+    border-radius: 0 0 var(--joorney-radius-card) var(--joorney-radius-card);
+}
+
+/* Under its app group name (group: 14px + chevron 20px + gap 8px = 42px), one step further in */
+.joorney-cm-row.is-in {
+    padding-left: 58px;
+}
+
+.joorney-cm-row.is-off {
+    background: var(--joorney-ground);
+    border-top-color: #e2e5ea;
+}
+
+.joorney-cm-row.is-dragging {
+    opacity: 0.45;
+}
+
+.joorney-cm-row.is-over {
+    box-shadow: inset 0 2px 0 var(--joorney-focus);
+}
+
+.joorney-cm-grip {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 32px;
+    padding: 0;
+    color: #8c93a0;
+    cursor: grab;
+    background: none;
+    border: 0;
+    border-radius: 4px;
+}
+
+.joorney-cm-grip:hover {
+    color: var(--joorney-text-muted);
+    background: var(--joorney-hover);
+}
+
+.joorney-cm-grip .joorney-icon {
+    font-size: 20px;
+}
+
+/* Full path in reading order: gray parents, bold name; a long path wraps instead of being cut */
+.joorney-cm-text {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    gap: 2px;
+    align-items: center;
+    min-width: 0;
+    padding-block: 4px;
+    overflow-wrap: anywhere;
+}
+
+.joorney-cm-name {
+    font-weight: 500;
+}
+
+.joorney-cm-parent {
+    color: var(--joorney-text-muted);
+}
+
+.joorney-cm-sep {
+    font-size: 16px;
+    color: var(--joorney-border-strong);
+}
+
+.joorney-cm-row.is-off .joorney-cm-name {
+    font-weight: 400;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-cm-star.is-on {
+    color: var(--joorney-state-listed-text);
+}
+
+.joorney-cm-row .joorney-switch {
+    margin: 0 4px;
+}
+
+.joorney-cm-rel {
+    position: relative;
+    flex: none;
+}
+
+.joorney-cm-pop {
+    position: absolute;
+    top: 32px;
+    right: 0;
+    z-index: 5;
+    min-width: 200px;
+    padding: 4px 0;
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border-strong);
+    border-radius: var(--joorney-radius-control);
+    box-shadow: var(--joorney-shadow-pop);
+}
+
+.joorney-cm-pop button {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+    height: 36px;
+    padding: 0 14px;
+    font: inherit;
+    font-size: 14px;
+    color: var(--joorney-text);
+    text-align: left;
+    cursor: pointer;
+    background: none;
+    border: 0;
+}
+
+.joorney-cm-pop button:hover,
+.joorney-cm-pop button:focus-visible {
+    background: var(--joorney-hover);
+}
+
+.joorney-cm-pop .joorney-icon {
+    font-size: 18px;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-cm-pop .is-danger,
+.joorney-cm-pop .is-danger .joorney-icon {
+    color: var(--joorney-error-text);
+}
+
+.joorney-cm-row.is-edit {
+    flex-wrap: wrap;
+    padding-block: 6px;
+    background: var(--joorney-state-everywhere-tint);
+}
+
+.joorney-cm-editfield {
+    flex: 1 1 240px;
+    min-width: 0;
+}
+
+.joorney-cm-editfield .joorney-input {
+    box-sizing: border-box;
+    width: 100%;
+    height: 34px;
+}
+
+.joorney-cm-row.is-confirm {
+    padding: 0;
+}
+
+.joorney-cm-row .joorney-cm-ask {
+    margin: 6px 12px;
+}
+
+/* Narrow: the band path goes under its title */
+@media (max-width: 640px) {
+    .joorney-cm-where {
+        flex-basis: 100%;
+        margin-left: 28px;
+    }
+}
+
+.joorney-feature .joorney-cm-empty p {
+    margin: 0 0 10px;
+}
+
+/* Preview: a drawing of the browser right-click menu, built from the list like src/contextmenu/manager.js */
+.joorney-cm-preview {
+    padding: 16px;
+    margin-top: 20px;
+    background: var(--joorney-surface-soft);
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-card);
+}
+
+.joorney-cm-preview summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 10px;
+    min-height: 44px;
+    margin: -16px;
+    padding: 8px 16px;
+    cursor: pointer;
+    list-style: none;
+}
+
+.joorney-cm-preview summary::-webkit-details-marker {
+    display: none;
+}
+
+.joorney-cm-preview[open] summary {
+    margin-bottom: 0;
+}
+
+.joorney-cm-pchevron {
+    color: var(--joorney-text-muted);
+    transform: rotate(-90deg);
+    transition: transform 0.15s;
+}
+
+.joorney-cm-preview[open] .joorney-cm-pchevron {
+    transform: none;
+}
+
+.joorney-cm-ptitle {
+    font-weight: 600;
+}
+
+.joorney-cm-preview .joorney-help {
+    margin: 16px 0 14px;
+}
+
+.joorney-cm-cascade {
+    display: flex;
+    align-items: flex-start;
+    padding-bottom: 4px;
+    overflow-x: auto;
+}
+
+.joorney-cm-pmenu {
+    flex: none;
+    min-width: 200px;
+    padding: 6px 0;
+    font-size: 13px;
+    color: var(--joorney-text);
+    background: var(--joorney-surface);
+    border: 1px solid var(--joorney-border-strong);
+    border-radius: var(--joorney-radius-control);
+    box-shadow: var(--joorney-shadow-pop);
+}
+
+.joorney-cm-pmenu + .joorney-cm-pmenu {
+    margin-left: -4px;
+}
+
+.joorney-cm-pi {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    height: 28px;
+    padding: 0 12px;
+    white-space: nowrap;
+}
+
+.joorney-cm-pi.is-open {
+    background: var(--joorney-hover);
+}
+
+.joorney-cm-pi.is-dim {
+    color: var(--joorney-text-muted);
+}
+
+.joorney-cm-pi.is-skeleton span {
+    width: 72px;
+    height: 8px;
+    background: var(--joorney-hover);
+    border-radius: 4px;
+}
+
+.joorney-cm-psep {
+    height: 1px;
+    margin: 5px 0;
+    background: var(--joorney-border);
+}
+
+.joorney-cm-plogo {
+    flex: none;
+    width: 16px;
+    height: 16px;
+}
+
+.joorney-cm-parrow,
+.joorney-cm-pstar {
+    margin-left: auto;
+    font-size: 16px;
+}
+
+.joorney-cm-parrow {
+    color: var(--joorney-text-muted);
+}
+
+.joorney-cm-pstar {
+    color: var(--joorney-state-listed-text);
+}
+/*#endregion */

@@ -1,78 +1,456 @@
-#joorney_checklist_show_btn {
-    z-index: 100;
-    position: fixed;
-    top: 72px;
-    right: 12px;
+/* Onboarding: the "Get started" panel docked under the navbar button, and the guided walk. */
+/* Navbar launcher: pressed while the panel is open, a dot while tours remain */
+.joorney-nav-checklist {
+    position: relative;
 }
 
-#bubble {
-    z-index: 101;
-    position: fixed;
-    height: 32px;
-    width: 32px;
-    color: var(--joorney-secondary);
-    transition: opacity 1s ease;
-    animation: rotate 2s infinite linear;
-    background-color: rgba(255, 196, 0, 0.1);
-    border-radius: 16px;
-    pointer-events: none;
+.joorney-nav-checklist[aria-expanded="true"] {
+    color: var(--joorney-navy);
+    background: var(--joorney-hover);
 }
 
-.joorney_checklist_target_btn.active {
-    color: var(--joorney-secondary);
+.joorney-nav-checklist:focus-visible {
+    outline: 2px solid var(--joorney-focus);
+    outline-offset: 2px;
 }
 
-@keyframes rotate {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+.joorney-nav-checklist-dot {
+    display: none;
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--joorney-orange);
+    box-shadow: 0 0 0 2px var(--joorney-surface);
 }
 
+.joorney-nav-checklist.has-progress .joorney-nav-checklist-dot {
+    display: block;
+}
+
+/* Panel */
 .onboarding-checklist {
     z-index: 102;
     position: fixed;
-    left: 2000px;
-    max-width: 360px;
-    width: 360px;
-    background-color: rgba(255, 255, 255, 0.9);
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    top: 80px;
+    right: 16px;
+    width: 340px;
+    max-width: calc(100vw - 32px);
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
+    background-color: var(--joorney-surface);
+    color: var(--joorney-text);
+    border: 1px solid var(--joorney-border);
+    border-radius: var(--joorney-radius-card);
+    box-shadow: var(--joorney-shadow-modal);
     padding: 20px;
     box-sizing: border-box;
 }
 
-.onboarding-checklist h3 {
-    margin-top: 0;
+.onboarding-checklist [hidden] {
+    display: none !important;
+}
+
+.joorney-cl-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--joorney-text);
+}
+
+.joorney-cl-sub {
+    margin: 2px 0 14px;
+    font-size: 13px;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-cl-bar {
+    height: 8px;
+    border-radius: 4px;
+    background-color: var(--joorney-hover);
+    overflow: hidden;
+}
+
+.joorney-cl-barfill {
+    height: 8px;
+    width: 0;
+    border-radius: 4px;
+    background-color: var(--joorney-navy);
+    transition: width 0.25s ease;
+}
+
+.joorney-cl-barlabel {
+    margin: 6px 0 12px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--joorney-text);
+}
+
+.joorney-cl-tour {
+    margin-bottom: 4px;
+    border-radius: var(--joorney-radius-card);
+}
+
+.joorney-cl-tour.is-current {
+    background-color: var(--joorney-state-everywhere-tint);
+}
+
+.joorney-cl-tour-main {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+}
+
+.joorney-cl-tour-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: var(--joorney-hover);
+    color: var(--joorney-text-muted);
+}
+
+.joorney-cl-tour.is-current .joorney-cl-tour-icon {
+    background-color: var(--joorney-surface);
+    color: var(--joorney-navy);
+}
+
+.joorney-cl-tour.is-done .joorney-cl-tour-icon {
+    background-color: var(--joorney-navy);
+    color: #fff;
+}
+
+.joorney-cl-tour-toggle {
+    flex: 1;
+    gap: 4px;
+}
+
+.joorney-cl-tour-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.joorney-cl-tour-title {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--joorney-text);
+}
+
+.joorney-cl-tour-desc {
+    display: block;
+    margin-top: 1px;
+    font-size: 12px;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-cl-tour.is-current .joorney-cl-tour-desc {
+    color: var(--joorney-text-soft);
+}
+
+.joorney-cl-tour.is-done .joorney-cl-tour-title {
+    color: var(--joorney-text-muted);
+    font-weight: 400;
+}
+
+.joorney-cl-chevron {
+    flex: none;
+    color: var(--joorney-text-muted);
+    transition: transform 0.15s ease;
+}
+
+.joorney-cl-tour.is-open .joorney-cl-chevron {
+    transform: rotate(180deg);
+}
+
+.joorney-cl-start {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    flex: none;
+    height: 30px;
+    padding: 0 10px 0 6px;
+    border-radius: var(--joorney-radius-control);
+    border: 1px solid var(--joorney-navy);
+    background-color: var(--joorney-surface);
+    color: var(--joorney-navy);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.joorney-cl-start:hover {
+    background-color: var(--joorney-hover);
+}
+
+.joorney-cl-tour-toggle:focus-visible,
+.joorney-cl-start:focus-visible,
+.joorney-cl-hide:focus-visible,
+.joorney-cl-link:focus-visible {
+    outline: 2px solid var(--joorney-focus);
+    outline-offset: 2px;
+}
+
+.joorney-cl-hide {
+    display: block;
+    margin: 10px auto 0;
+    padding: 6px;
+    border: 0;
+    border-radius: var(--joorney-radius-control);
+    background: none;
+    color: var(--joorney-navy);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.joorney-cl-hide:hover {
+    background-color: var(--joorney-hover);
+}
+
+/* Steps of a tour (the expanded row) */
+.joorney-cl-steps {
+    padding: 0 10px 10px 50px;
+}
+
+.joorney-cl-tools {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.joorney-cl-link {
+    padding: 2px;
+    border: 0;
+    background: none;
+    color: var(--joorney-navy);
+    font-size: 12px;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .checklist-item {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 10px;
+    font-size: 13px;
 }
 
 .checklist-item input[type="checkbox"] {
-    margin-right: 10px;
+    flex: none;
+    margin: 3px 10px 0 0;
+    accent-color: var(--joorney-navy);
+}
+
+.checklist-item label p {
+    font-weight: 500;
+}
+
+.checklist-item small {
+    display: block;
+    color: var(--joorney-text-muted);
 }
 
 .checklist-item.locked {
-    color: #aaa;
+    opacity: 0.6;
+}
+
+/* Guided walk: the cut-out is a box whose huge shadow dims the page, so the target stays clickable */
+.joorney-guide-dim {
+    position: fixed;
+    inset: 0;
+    z-index: 110;
+    background-color: var(--joorney-backdrop);
+}
+
+.joorney-guide-spot {
+    position: fixed;
+    z-index: 110;
+    border-radius: 10px;
+    border: 2px solid var(--joorney-orange);
+    box-shadow: 0 0 0 9999px var(--joorney-backdrop);
+    pointer-events: none;
+    box-sizing: border-box;
+    transition:
+        left 0.25s,
+        top 0.25s,
+        width 0.25s,
+        height 0.25s;
+}
+
+.joorney-guide-bubble {
+    position: fixed;
+    z-index: 111;
+    width: 320px;
+    max-width: calc(100vw - 24px);
+    box-sizing: border-box;
+    padding: 16px;
+    border-radius: var(--joorney-radius-card);
+    background-color: var(--joorney-surface);
+    color: var(--joorney-text);
+    box-shadow: var(--joorney-shadow-modal);
+    transition:
+        left 0.25s,
+        top 0.25s;
+}
+
+.joorney-guide-bubble:focus-visible {
+    outline: none;
+}
+
+.joorney-guide-bubble.is-centered {
+    transition: none;
+}
+
+.joorney-guide-arrow {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: var(--joorney-surface);
+    transform: rotate(45deg);
+    display: none;
+}
+
+.joorney-guide-bubble[data-side] .joorney-guide-arrow {
+    display: block;
+}
+
+.joorney-guide-bubble[data-side="right"] .joorney-guide-arrow {
+    left: -6px;
+}
+
+.joorney-guide-bubble[data-side="left"] .joorney-guide-arrow {
+    right: -6px;
+}
+
+.joorney-guide-bubble[data-side="bottom"] .joorney-guide-arrow {
+    top: -6px;
+}
+
+.joorney-guide-bubble[data-side="top"] .joorney-guide-arrow {
+    bottom: -6px;
+}
+
+.joorney-guide-count {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--joorney-text-muted);
+}
+
+.joorney-guide-dots {
+    display: flex;
+    gap: 4px;
+}
+
+.joorney-guide-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--joorney-border-strong);
+}
+
+.joorney-guide-dot.is-on {
+    background-color: var(--joorney-navy);
+}
+
+.joorney-guide-title {
+    margin: 8px 0 4px;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--joorney-text);
+}
+
+.joorney-guide-text {
+    margin: 0 0 14px;
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--joorney-text-soft);
+}
+
+.joorney-guide-note {
+    margin: 0 0 14px;
+    padding: 8px 10px;
+    border-radius: var(--joorney-radius-control);
+    background-color: var(--joorney-hover);
+    font-size: 13px;
+    color: var(--joorney-text-soft);
+}
+
+.joorney-guide-foot {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.joorney-guide-btn {
+    height: 34px;
+    padding: 0 14px;
+    border-radius: var(--joorney-radius-control);
+    border: 1px solid var(--joorney-navy);
+    background-color: var(--joorney-navy);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.joorney-guide-btn:hover {
+    background-color: var(--joorney-navy-dark);
+}
+
+.joorney-guide-btn.is-ghost {
+    background-color: var(--joorney-surface);
+    color: var(--joorney-navy);
+}
+
+.joorney-guide-btn.is-ghost:hover {
+    background-color: var(--joorney-hover);
+}
+
+.joorney-guide-btn:disabled {
     opacity: 0.5;
+    cursor: not-allowed;
 }
 
-.checklist-item.locked .joorney_checklist_target_btn,
-input[disabled] + label .joorney_checklist_target_btn {
-    display: none;
+.joorney-guide-skip {
+    margin-left: auto;
+    padding: 6px;
+    border: 0;
+    border-radius: var(--joorney-radius-control);
+    background: transparent;
+    color: var(--joorney-navy);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
-.checklist-item.locked input[type="checkbox"] {
-    display: none;
+.joorney-guide-skip:hover {
+    background-color: var(--joorney-hover);
 }
 
-#joorney_checklist_congrats {
-    transition: max-height 0.5s ease;
+.joorney-guide-bubble button:focus-visible {
+    outline: 2px solid var(--joorney-focus);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .joorney-guide-spot,
+    .joorney-guide-bubble,
+    .joorney-cl-barfill,
+    .joorney-cl-chevron {
+        transition: none;
+    }
 }
