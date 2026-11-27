@@ -346,7 +346,6 @@ export default class UnfocusAppOptionCustomizationFeature extends OptionCustomiz
                 if (newState !== state) this.setAppState(origin, app, newState);
             };
         }
-        // Radio group keys: the arrows pick the previous or next mode
         element.querySelector('[role="radiogroup"]').onkeydown = (event) => {
             const step = { ArrowLeft: -1, ArrowUp: -1, ArrowRight: 1, ArrowDown: 1 }[event.key];
             if (!step) return;

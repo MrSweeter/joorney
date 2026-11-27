@@ -180,7 +180,6 @@ export default class ChecklistContent {
         const isComplete = await this.markDone(step);
         Checklist.panel?.refresh();
         if (isComplete) return;
-        // The guided walk goes on by itself
         Checklist.guide?.stepDone(step);
 
         this.loadNextStep(this.tour.steps[step.next]);

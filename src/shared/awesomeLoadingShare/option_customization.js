@@ -202,7 +202,6 @@ export default class AwesomeLoadingShareOptionCustomizationFeature extends Optio
             }
             return;
         }
-        // Radio group: the arrows move the focus and the selection
         const step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[event.key];
         if (!step || !event.target.matches('.joorney-awl-radio')) return;
         event.preventDefault();

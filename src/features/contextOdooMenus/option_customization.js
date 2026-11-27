@@ -569,7 +569,6 @@ export default class ContextOdooMenusOptionCustomizationFeature extends OptionCu
         `;
     }
 
-    // Parents in gray, the menu name (last segment) in bold
     pathHTML(segments) {
         return segments
             .map((segment, index) => {

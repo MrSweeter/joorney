@@ -43,7 +43,6 @@
     border-radius: var(--joorney-radius-card);
 }
 
-/* Pushes the clear button to the end of the row */
 .joorney-import-file-row .joorney-icon-btn {
     margin-left: auto;
 }

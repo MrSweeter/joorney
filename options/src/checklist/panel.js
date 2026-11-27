@@ -124,7 +124,6 @@ export default class ChecklistPanel {
             if (!row.querySelector('.joorney-cl-steps').hidden) this.renderSummary(row, store);
         }
 
-        // Subtle hint on the navbar button while tours remain
         Checklist.manager?.button.classList.toggle('has-progress', done < total);
 
         const pct = total > 0 ? Math.round((done / total) * 100) : 0;
