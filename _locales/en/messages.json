@@ -137,7 +137,7 @@
     },
     "popup_notForVersion": {
         "message": "Not for Odoo $version$",
-        "description": "Popup: chip on a feature that does not support the page's Odoo version",
+        "description": "Popup: heading of the folded section listing the features that do not support the page's Odoo version",
         "placeholders": {
             "version": {
                 "content": "$1",

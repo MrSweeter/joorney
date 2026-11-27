@@ -25,9 +25,10 @@ import { MESSAGE_ACTION } from '../src/utils/messaging.js';
  * options/src/ui/state.js and the popup re-renders on its STATE_CHANGE event.
  */
 
-// Per browser conveniences, not settings: which settings blocks and which categories are open (all start closed)
-const EXPANDED_KEY = 'joorney_popup_expanded';
+// Per browser convenience, not a setting: which categories are open (all start closed)
 const OPEN_CATEGORIES_KEY = 'joorney_popup_open_categories';
+// Folds like a category, its open state kept with theirs: no category id starts with "_"
+const UNSUPPORTED_SECTION = '_unsupported';
 
 window.onload = async () => {
     const [tab] = await Tabs.query({ active: true, currentWindow: true });
@@ -98,15 +99,12 @@ async function loadPopup(tab, origin, features, currentSettings, odoo) {
     // The Runbot features ignore host lists and run on their own hosts: only shown on one of them
     const runbot = features.filter((f) => f.limited && originMatches(f.limitedOrigins ?? [], origin));
     const byID = (id) => features.find((f) => f.id === id);
-    // A feature without a category must not add an empty section
-    const categories = [...new Set([...CATEGORY_ORDER, ...normal.map((f) => f.category)])].filter(
-        (c) => c && normal.some((f) => f.category === c)
-    );
 
     const view = {
         settings: await readStateSettings(features, currentSettings),
         host: origin,
-        expanded: readSet(EXPANDED_KEY),
+        // The settings blocks open on demand only: every popup starts with all of them closed
+        expanded: new Set(),
         openCategories: readSet(OPEN_CATEGORIES_KEY),
         // No Odoo session: only the Runbot features can run, the host ones stay behind "Show the features anyway"
         showAll: !odoo.known || odoo.isOdoo,
@@ -131,6 +129,14 @@ async function loadPopup(tab, origin, features, currentSettings, odoo) {
         feature.limited || !odoo.version || includeVersion(feature.supported_version ?? [], odoo.version, true);
     // What the counts tell: switched on here, and able to run on this page's Odoo
     const runs = (feature) => on(feature) && supported(feature) && (feature.limited || odoo.versionOn);
+    // Not for this page's Odoo: out of the categories, in one folded section at the end. Their switches still set
+    // the host, for the other versions it may run (localhost)
+    const fitting = normal.filter(supported);
+    const unsupported = normal.filter((f) => !supported(f));
+    // A feature without a category must not add an empty section
+    const categories = [...new Set([...CATEGORY_ORDER, ...fitting.map((f) => f.category)])].filter(
+        (c) => c && fitting.some((f) => f.category === c)
+    );
 
     //#region Settings blocks
     // Built once and moved into each render: the feature modules keep their nodes and listeners
@@ -184,7 +190,15 @@ async function loadPopup(tab, origin, features, currentSettings, odoo) {
             view.host === origin
                 ? ''
                 : `<span class="joorney-chip" title="${escapeHTML(t('popup_viaRegex', view.host))}">${escapeHTML(t('optionsHome_regexChip'))}</span>`;
-        info.innerHTML = `<span>${escapeHTML(t('optionsHome_hostsActive', `${count}`))}</span>${via}`;
+        // The bare version shows ("Odoo" goes without saying here), the full name is read and in the tooltip.
+        // Turned off on the Versions page: orange, as the toolbar badge on such a page
+        let versionChip = '';
+        if (odoo.isOdoo && odoo.version) {
+            const full = t('optionsUi_versionChip', odoo.version);
+            const title = odoo.versionOn ? full : t('popup_versionOff', odoo.version);
+            versionChip = `<span class="joorney-chip ${odoo.versionOn ? 'is-version' : 'is-warning'}" title="${escapeHTML(title)}"><span aria-hidden="true">${escapeHTML(odoo.version)}</span><span class="joorney-visually-hidden">${escapeHTML(full)}</span></span>`;
+        }
+        info.innerHTML = `${versionChip}<span>${escapeHTML(t('optionsHome_hostsActive', `${count}`))}</span>${via}`;
     }
 
     function settingsToggleHTML(feature) {
@@ -204,18 +218,16 @@ async function loadPopup(tab, origin, features, currentSettings, odoo) {
                 switchTitle: status,
                 muted: !on(feature),
                 category: false,
+                details: false,
                 info: false,
                 chips: settings,
             });
         }
         const deactivated = getFeatureState(view.settings, feature) === FEATURE_STATE.DEACTIVATED;
-        // Not for this page's Odoo: its switch still sets the host, for the other versions it may have
+        // Its section heading says it too, the switch's name must say it on its own
         const versionNote = supported(feature) ? '' : t('popup_notForVersion', odoo.version);
         const status = [hostStatus(view.settings, feature, view.host), versionNote].filter(Boolean).join('. ');
         const id = escapeHTML(feature.id);
-        const chips = versionNote
-            ? `<span class="joorney-chip joorney-popup-chip">${escapeHTML(versionNote)}</span>${settings}`
-            : settings;
         return featureCardHTML(feature, {
             switchOn: deactivated ? undefined : on(feature),
             switchLabel: `${featureName(feature)}: ${status}`,
@@ -226,8 +238,9 @@ async function loadPopup(tab, origin, features, currentSettings, odoo) {
                 : '',
             muted: deactivated || Boolean(versionNote),
             category: false,
+            details: false,
             info: false,
-            chips,
+            chips: settings,
         });
     }
 
@@ -238,8 +251,8 @@ async function loadPopup(tab, origin, features, currentSettings, odoo) {
 
     // A category folds (its count stays in the heading), the Runbot section does not: it is short and only shown
     // where it is wanted
-    function sectionHTML(title, list, { extra = '', category = undefined } = {}) {
-        const count = `<span class="joorney-popup-seccount">${escapeHTML(t('optionsHome_sectionCount', `${list.filter(runs).length}`, `${list.length}`))}</span>`;
+    function sectionHTML(title, list, { extra = '', category = undefined, counted = runs } = {}) {
+        const count = `<span class="joorney-popup-seccount">${escapeHTML(t('optionsHome_sectionCount', `${list.filter(counted).length}`, `${list.length}`))}</span>`;
         const items = list.map(itemHTML).join('');
         if (!category) {
             return `
@@ -273,14 +286,21 @@ async function loadPopup(tab, origin, features, currentSettings, odoo) {
             .map((category) =>
                 sectionHTML(
                     categoryName(category),
-                    normal.filter((f) => f.category === category),
+                    fitting.filter((f) => f.category === category),
                     { category }
                 )
             )
             .join('');
+        // None of them runs here: the count tells the switches, what the page gets on its other versions
+        const unsupportedSection = unsupported.length
+            ? sectionHTML(t('popup_notForVersion', odoo.version), unsupported, {
+                  category: UNSUPPORTED_SECTION,
+                  counted: on,
+              })
+            : '';
         if (!view.showAll) return `${runbotSection}${notOdooHTML()}`;
         // First: it is about the whole page, Runbot included
-        return `${versionOffHTML()}${runbotSection}${sections}`;
+        return `${versionOffHTML()}${runbotSection}${sections}${unsupportedSection}`;
     }
 
     function notOdooHTML() {
@@ -362,7 +382,6 @@ async function loadPopup(tab, origin, features, currentSettings, odoo) {
             const open = !view.expanded.has(id);
             if (open) view.expanded.add(id);
             else view.expanded.delete(id);
-            saveSet(EXPANDED_KEY, view.expanded);
             el.setAttribute('aria-expanded', `${open}`);
             frames.get(id).hidden = !open;
         },
@@ -391,7 +410,9 @@ async function loadPopup(tab, origin, features, currentSettings, odoo) {
         const el = event.target.closest('[data-action]');
         if (el && root.contains(el) && ACTIONS[el.dataset.action]) ACTIONS[el.dataset.action](el);
     });
+    // The popup keeps each card on one line: no expanded description
     bindFeatureCards(root, {
+        expandable: false,
         onSwitch: (id, value) => {
             const feature = byID(id);
             return feature.limited ? setFeatureActive(feature, value) : setHostFeature(view.host, feature, value);

@@ -127,6 +127,7 @@ export function featureCardHTML(feature, opts = {}) {
         muted = false,
         expanded = false,
         category = true,
+        details = true,
         info = true,
         href = featurePageURL(feature.id),
         classes = '',
@@ -173,7 +174,7 @@ export function featureCardHTML(feature, opts = {}) {
                     ${state ? stateBadgeHTML(state, { limited: feature.limited }) : ''}
                     ${featureChipsHTML(feature, { category, details: false })}
                     ${chips}
-                    <span class="joorney-fcard-more">${featureChipsHTML(feature, { category: false, details: true })}</span>
+                    ${details ? `<span class="joorney-fcard-more">${featureChipsHTML(feature, { category: false, details: true })}</span>` : ''}
                 </div>
             </div>
             <div class="joorney-fcard-side">${switchPart}${infoPart}</div>
@@ -201,7 +202,7 @@ export function setCardSwitch(card, on) {
 
 const INTERACTIVE = 'a, button, input, select, textarea, label, [data-grip]';
 
-export function bindFeatureCards(container, { onInfo, onSwitch } = {}) {
+export function bindFeatureCards(container, { onInfo, onSwitch, expandable = true } = {}) {
     const cardOf = (event) => {
         const card = event.target.closest(CARD_SELECTOR);
         return card && container.contains(card) ? card : null;
@@ -230,18 +231,18 @@ export function bindFeatureCards(container, { onInfo, onSwitch } = {}) {
             }
             return;
         }
-        if (event.target.closest(INTERACTIVE)) return;
+        if (!expandable || event.target.closest(INTERACTIVE)) return;
         toggleCardExpanded(card);
     };
 
     const onDoubleClick = (event) => {
         const card = cardOf(event);
-        if (!card || event.target.closest(INTERACTIVE)) return;
+        if (!expandable || !card || event.target.closest(INTERACTIVE)) return;
         toggleCardExpanded(card);
     };
 
     const onKeyDown = (event) => {
-        if (event.key !== 'Enter' && event.key !== ' ') return;
+        if (!expandable || (event.key !== 'Enter' && event.key !== ' ')) return;
         const card = cardOf(event);
         if (!card || event.target !== card) return;
         event.preventDefault();

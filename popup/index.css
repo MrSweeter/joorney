@@ -169,7 +169,7 @@ h2.joorney-popup-sechead {
     gap: 6px;
 }
 
-/* One line per card: the chips row only holds the settings button, the details show when the card is expanded */
+/* One line per card, never expanded: the chips row only holds the settings button */
 .joorney-popup-item .joorney-fcard {
     align-items: center;
     padding: 8px 10px;
@@ -179,13 +179,13 @@ h2.joorney-popup-sechead {
     margin-bottom: 0;
 }
 
-.joorney-popup-item .joorney-fcard-chips:not(:has(.joorney-popup-settings-btn, .joorney-popup-chip)) {
+.joorney-popup-item .joorney-fcard-chips:not(:has(.joorney-popup-settings-btn)) {
     display: none;
 }
 
-.joorney-popup-item .joorney-fcard.is-expanded .joorney-fcard-chips {
-    display: flex;
-    margin-top: 6px;
+.joorney-popup-item .joorney-fcard-chips {
+    align-items: center;
+    margin-top: 4px;
 }
 
 .joorney-popup-item:has(.joorney-popup-settings:not([hidden])) .joorney-fcard {
@@ -193,12 +193,6 @@ h2.joorney-popup-sechead {
     border-bottom-left-radius: 0;
 }
 /*#endregion */
-
-/* Not for the page's Odoo version */
-.joorney-popup-chip {
-    height: 22px;
-    margin-top: 4px;
-}
 
 .joorney-popup-note {
     margin-bottom: 12px;
@@ -220,7 +214,6 @@ h2.joorney-popup-sechead {
     gap: 4px;
     align-items: center;
     height: 22px;
-    margin-top: 4px;
     padding: 0 6px 0 4px;
     font: inherit;
     font-size: 12px;
