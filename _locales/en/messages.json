@@ -82,48 +82,88 @@
         "description": "Popup: tooltip of the button opening the options page"
     },
     "popup_invalidWebsite": {
-        "message": "This website is not compatible with Joorney extension",
+        "message": "Not available on this page",
         "description": "Popup: shown on non-web pages (chrome://, file://...)"
-    },
-    "popup_featureTitle": {
-        "message": "[Feature] $feature$",
-        "description": "Popup: tooltip of a feature toggle (global state)",
-        "placeholders": {
-            "feature": {
-                "content": "$1",
-                "example": "Pin Message"
-            }
-        }
-    },
-    "popup_featureOriginTitle": {
-        "message": "[Feature Origin] $feature$",
-        "description": "Popup: tooltip of a feature toggle for the current origin",
-        "placeholders": {
-            "feature": {
-                "content": "$1",
-                "example": "Pin Message"
-            }
-        }
-    },
-    "popup_originState": {
-        "message": "Origin state for:",
-        "description": "Popup: label before the current origin URL"
-    },
-    "popup_saveOrigin": {
-        "message": "Save this origin",
-        "description": "Popup: button saving the current origin"
-    },
-    "popup_saveOriginConfiguration": {
-        "message": "Save origin configuration",
-        "description": "Popup: tooltip of the button saving the origin configuration"
-    },
-    "popup_saveReload": {
-        "message": "Save & Reload",
-        "description": "Popup: button saving the origin configuration and reloading the tab"
     },
     "popup_loadingPreviewAlt": {
         "message": "Loading GIF preview",
         "description": "Alt text of the loading GIF preview image (popup, options)"
+    },
+    "popup_invalidHelp": {
+        "message": "Joorney runs on websites. Open an Odoo tab to choose which features run there.",
+        "description": "Popup: text shown on non-web pages (chrome://, file://...), under popup_invalidWebsite"
+    },
+    "popup_openOptions": {
+        "message": "Open the options",
+        "description": "Popup: button opening the options page, on non-web pages"
+    },
+    "popup_viaRegex": {
+        "message": "This host follows the saved entry $entry$",
+        "description": "Popup: tooltip of the regex chip, when the switches write to a saved regex entry matching the tab host",
+        "placeholders": {
+            "entry": {
+                "content": "$1",
+                "example": "regex://^https://.*\\.odoo\\.com$"
+            }
+        }
+    },
+    "popup_settings": {
+        "message": "Settings",
+        "description": "Popup: button opening the settings of a feature under its card"
+    },
+    "popup_settingsOff": {
+        "message": "Off on this host. These settings apply where it runs.",
+        "description": "Popup: note in the settings of a feature that does not run on the tab host"
+    },
+    "popup_reloadHelp": {
+        "message": "Odoo tabs pick up a change on their next page load.",
+        "description": "Popup: bar shown after a change, before the reload button"
+    },
+    "popup_reload": {
+        "message": "Reload tab",
+        "description": "Popup: button reloading the current tab to apply the changes"
+    },
+    "popup_notOdoo": {
+        "message": "No Odoo session on this page",
+        "description": "Popup: under the host name, on a website page without an Odoo session (not logged in, not Odoo)"
+    },
+    "popup_notOdooHelp": {
+        "message": "Joorney features run on Odoo pages where you are logged in.",
+        "description": "Popup: text on a page without an Odoo session, in place of the feature list"
+    },
+    "popup_showAnyway": {
+        "message": "Show the features anyway",
+        "description": "Popup: button showing the feature switches on a page without an Odoo session (e.g. a self-hosted login page)"
+    },
+    "popup_notForVersion": {
+        "message": "Not for Odoo $version$",
+        "description": "Popup: heading of the folded section listing the features that do not support the page's Odoo version",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "17.0"
+            }
+        }
+    },
+    "popup_versionOff": {
+        "message": "Odoo $version$ is turned off, so no feature runs here.",
+        "description": "Popup: note when the page's Odoo version is turned off on the options Versions page, followed by a link to it",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "17.0"
+            }
+        }
+    },
+    "popup_versionOffRunbot": {
+        "message": "Odoo $version$ is turned off, so only the Runbot features run here.",
+        "description": "Popup: note on a runbot build when the page's Odoo version is turned off on the options Versions page (the Runbot features still run), followed by a link to it",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "20.0"
+            }
+        }
     },
     "feature_adminDebugLoginRunbot_name": {
         "message": "[Runbot] Admin Debug Login",
@@ -428,22 +468,6 @@
     "themeSwitch_mode_time": {
         "message": "Dark mode based on configured time",
         "description": "Theme Switch mode: dark between the configured hours"
-    },
-    "unfocusApp_popup_reorder": {
-        "message": "Enable unfocus app reorder",
-        "description": "Popup: tooltip of the Unfocus App reorder switch"
-    },
-    "unfocusApp_popup_share": {
-        "message": "Enable unfocus app configuration share between hosts",
-        "description": "Popup: tooltip of the Unfocus App switch sharing the configuration between hosts"
-    },
-    "pinMessage_popup_selfAuthor": {
-        "message": "Manage pin for current user messages only?",
-        "description": "Popup: tooltip of the Pin Message switch limiting pins to the current user messages"
-    },
-    "pinMessage_popup_defaultShown": {
-        "message": "Show pinned message section on load?",
-        "description": "Popup: tooltip of the Pin Message switch opening the pinned section on load"
     },
     "contextMenu_openOptions": {
         "message": "Open options",
@@ -3643,7 +3667,7 @@
     },
     "optionsUnfocus_reorder": {
         "message": "Unfocused apps last",
-        "description": "Options feature page (Unfocus App): switch moving unfocused apps to the end of the home menu (popup: unfocusApp_popup_reorder)"
+        "description": "Options feature page (Unfocus App): switch moving unfocused apps to the end of the home menu (also in the popup)"
     },
     "optionsUnfocus_reorderHelp": {
         "message": "On the home menu, unfocused apps move after all the others.",
@@ -3651,7 +3675,7 @@
     },
     "optionsUnfocus_share": {
         "message": "Share between hosts",
-        "description": "Options feature page (Unfocus App): switch sharing one app list between hosts (popup: unfocusApp_popup_share)"
+        "description": "Options feature page (Unfocus App): switch sharing one app list between hosts (also in the popup)"
     },
     "optionsUnfocus_shareHelp": {
         "message": "Every Odoo host uses one shared list of apps. The per-host lists are kept, and come back when this is off.",
@@ -3659,7 +3683,7 @@
     },
     "optionsPinMessage_selfAuthor": {
         "message": "My messages only",
-        "description": "Options feature page (Pin Message): switch limiting pins to the current user (popup: pinMessage_popup_selfAuthor)"
+        "description": "Options feature page (Pin Message): switch limiting pins to the current user (also in the popup)"
     },
     "optionsPinMessage_selfAuthorHelp": {
         "message": "The pin button shows on the messages you wrote, and the pinned section lists what you pinned. Off: pin any message and see everyone's pins.",
@@ -3667,7 +3691,7 @@
     },
     "optionsPinMessage_defaultShown": {
         "message": "Open the pinned section on load",
-        "description": "Options feature page (Pin Message): switch showing the pinned section when a record opens (popup: pinMessage_popup_defaultShown)"
+        "description": "Options feature page (Pin Message): switch showing the pinned section when a record opens (also in the popup)"
     },
     "optionsPinMessage_defaultShownHelp": {
         "message": "Records open with the pinned messages already shown in the chatter.",

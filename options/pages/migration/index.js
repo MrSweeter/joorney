@@ -277,7 +277,6 @@ async function runMigration(configuration, fromVersion, toVersion) {
 }
 //#endregion
 
-// Options page, reached from Import / export (not in the navbar), see options/menu.js
 export const PAGE = {
     id: MIGRATION_PAGE_ID,
     tour: undefined,

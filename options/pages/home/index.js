@@ -683,7 +683,6 @@ export async function loadPage(features, currentSettings) {
     render();
 }
 
-// Options menu entry, see options/menu.js
 export const PAGE = {
     id: 'page-home',
     tour: 'tour_hostControls',

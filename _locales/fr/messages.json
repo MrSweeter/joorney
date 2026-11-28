@@ -63,40 +63,73 @@
         "message": "Options"
     },
     "popup_invalidWebsite": {
-        "message": "Ce site web n'est pas compatible avec l'extension Joorney"
-    },
-    "popup_featureTitle": {
-        "message": "[Fonctionnalité] $feature$",
-        "placeholders": {
-            "feature": {
-                "content": "$1",
-                "example": "Pin Message"
-            }
-        }
-    },
-    "popup_featureOriginTitle": {
-        "message": "[Fonctionnalité par origine] $feature$",
-        "placeholders": {
-            "feature": {
-                "content": "$1",
-                "example": "Pin Message"
-            }
-        }
-    },
-    "popup_originState": {
-        "message": "État de l'origine :"
-    },
-    "popup_saveOrigin": {
-        "message": "Enregistrer cette origine"
-    },
-    "popup_saveOriginConfiguration": {
-        "message": "Enregistrer la configuration de l'origine"
-    },
-    "popup_saveReload": {
-        "message": "Enregistrer et recharger"
+        "message": "Non disponible sur cette page"
     },
     "popup_loadingPreviewAlt": {
         "message": "Aperçu du GIF de chargement"
+    },
+    "popup_invalidHelp": {
+        "message": "Joorney fonctionne sur les sites web. Ouvrez un onglet Odoo pour choisir les fonctionnalités qui y tournent."
+    },
+    "popup_openOptions": {
+        "message": "Ouvrir les options"
+    },
+    "popup_viaRegex": {
+        "message": "Ce site suit l'entrée enregistrée $entry$",
+        "placeholders": {
+            "entry": {
+                "content": "$1",
+                "example": "regex://^https://.*\\.odoo\\.com$"
+            }
+        }
+    },
+    "popup_settings": {
+        "message": "Réglages"
+    },
+    "popup_settingsOff": {
+        "message": "Désactivée sur ce site. Ces réglages s'appliquent là où elle tourne."
+    },
+    "popup_reloadHelp": {
+        "message": "Les onglets Odoo prennent un changement en compte au prochain chargement."
+    },
+    "popup_reload": {
+        "message": "Recharger l'onglet"
+    },
+    "popup_notOdoo": {
+        "message": "Pas de session Odoo sur cette page"
+    },
+    "popup_notOdooHelp": {
+        "message": "Les fonctionnalités de Joorney tournent sur les pages Odoo où vous êtes connecté."
+    },
+    "popup_showAnyway": {
+        "message": "Afficher quand même les fonctionnalités"
+    },
+    "popup_notForVersion": {
+        "message": "Pas pour Odoo $version$",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "17.0"
+            }
+        }
+    },
+    "popup_versionOff": {
+        "message": "Odoo $version$ est désactivé, aucune fonctionnalité ne tourne ici.",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "17.0"
+            }
+        }
+    },
+    "popup_versionOffRunbot": {
+        "message": "Odoo $version$ est désactivé, seules les fonctionnalités Runbot tournent ici.",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "20.0"
+            }
+        }
     },
     "feature_adminDebugLoginRunbot_name": {
         "message": "[Runbot] Connexion admin (mode développeur)"
@@ -325,18 +358,6 @@
     },
     "themeSwitch_mode_time": {
         "message": "Mode sombre selon les heures configurées"
-    },
-    "unfocusApp_popup_reorder": {
-        "message": "Activer la réorganisation des applications masquées"
-    },
-    "unfocusApp_popup_share": {
-        "message": "Partager la configuration des applications masquées entre les hôtes"
-    },
-    "pinMessage_popup_selfAuthor": {
-        "message": "Épingler uniquement les messages de l'utilisateur actuel ?"
-    },
-    "pinMessage_popup_defaultShown": {
-        "message": "Afficher la section des messages épinglés au chargement ?"
     },
     "contextMenu_openOptions": {
         "message": "Ouvrir les options"

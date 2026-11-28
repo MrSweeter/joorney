@@ -148,7 +148,6 @@ async function loadMigrate() {
 }
 //#endregion
 
-// Options menu entry, see options/menu.js
 export const PAGE = {
     id: PAGE_ID,
     tour: undefined,

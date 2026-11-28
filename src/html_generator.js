@@ -1,6 +1,5 @@
 import JoorneyStyle from './html_generator.css';
-import { featureName, getLocaleTag, t } from './utils/i18n.js';
-import { iconHTML } from './utils/icons.js';
+import { getLocaleTag, t } from './utils/i18n.js';
 
 //#region Joorney injected style
 // Everything Joorney injects in Odoo pages (simulated data, copies, action buttons) shares this look.
@@ -72,36 +71,6 @@ export function stringToHTML(str) {
     const template = document.createElement('template');
     template.innerHTML = str.trim();
     return template.content.firstChild;
-}
-
-export function generateFeaturePopupToggleItem(feature) {
-    return stringToHTML(`
-		<label
-			title="${escapeHTML(t('popup_featureTitle', featureName(feature)))}"
-			for="${feature.id}Feature"
-			class="m-2 d-flex justify-content-center align-items-center"
-		>
-			<input id="${feature.id}Feature" type="checkbox" />
-			<div class="icon-wrapper ${feature.limited ? 'limited-feature' : ''}">
-				${iconHTML(feature.icon, { filled: true })}
-			</div>
-		</label>
-	`);
-}
-
-export function generateTabFeaturePopupToggleItem(feature) {
-    return stringToHTML(`
-		<label
-			title="${escapeHTML(t('popup_featureOriginTitle', featureName(feature)))}"
-			for="${feature.id}FeatureTab"
-			class=""
-		>
-			<input id="${feature.id}FeatureTab" type="checkbox" />
-			<div class="icon-wrapper-tab">
-				${iconHTML(feature.icon, { filled: true })}
-			</div>
-		</label>
-	`);
 }
 
 //#region Simulated data & copies

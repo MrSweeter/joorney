@@ -1,51 +1,63 @@
 import { PopupCustomizableFeature } from '../../generic/popup.js';
+import { escapeHTML } from '../../html_generator.js';
+import { StorageSync } from '../../utils/browser.js';
 import { t } from '../../utils/i18n.js';
 import { JOORNEY_LOADER, JOORNEY_LOADER_LABEL, resolveLoaderImage, withBuiltInLoader } from './loader.js';
 
+/**
+ * Loader image of Awesome Loading Large or Small: imageSetting is the storage key, also the POPUP_HAS_CHANGE key the
+ * content script reads (getImageFromNavigationMessage).
+ */
 export default class AwesomeLoadingSharePopupFeature extends PopupCustomizableFeature {
-    constructor(configuration) {
+    constructor(configuration, imageSetting) {
         super(configuration);
-        this.htmlID = '';
-        this.previewHtmlID = '';
+        this.imageSetting = imageSetting;
+        this.selected = '';
     }
 
-    async render(enabled) {
-        const awesomeLoadingImage = document.getElementById(this.htmlID);
-        const awesomeLoadingImagePreview = document.getElementById(this.previewHtmlID);
+    blockHTML() {
+        const id = `joorney_popup_${this.imageSetting}`;
+        return `
+            <div class="joorney-popup-field joorney-popup-loader">
+                <label class="joorney-popup-setting-label" for="${id}">${escapeHTML(t('optionsAwl_group'))}</label>
+                <select id="${id}" class="joorney-input" data-role="image"></select>
+                <img class="joorney-popup-loader-preview" data-role="preview" alt="${escapeHTML(t('popup_loadingPreviewAlt'))}" hidden>
+            </div>
+        `;
+    }
 
-        const { images, selected } = await this.getImagesConfiguration();
+    async render(_active) {
+        const select = this.container.querySelector('[data-role="image"]');
+        const { [this.imageSetting]: selected, awesomeLoadingImages } = await StorageSync.get({
+            [this.imageSetting]: '',
+            awesomeLoadingImages: [],
+        });
+        this.selected = selected;
 
-        awesomeLoadingImage.replaceChildren(new Option(t('common_default'), '', false, true));
-        awesomeLoadingImage.disabled = !enabled;
-        awesomeLoadingImagePreview.src = resolveLoaderImage(selected);
-        awesomeLoadingImagePreview.style.opacity = enabled ? 1 : 0.25;
-
-        for (const img of withBuiltInLoader(images)) {
-            const opt = document.createElement('option');
-            opt.textContent = img === JOORNEY_LOADER ? JOORNEY_LOADER_LABEL : img;
-            opt.value = img;
-            opt.selected = selected === img;
-            awesomeLoadingImage.appendChild(opt);
+        select.replaceChildren(new Option(t('common_default'), '', false, !selected));
+        for (const img of withBuiltInLoader(awesomeLoadingImages)) {
+            const label = img === JOORNEY_LOADER ? JOORNEY_LOADER_LABEL : img;
+            select.appendChild(new Option(label, img, false, selected === img));
         }
+        this.updatePreview(selected);
 
-        awesomeLoadingImage.onchange = async (e) => {
-            const value = e.target.value;
-            await this.saveSelectedImage(value);
-            const preview = document.getElementById(this.previewHtmlID);
-            preview.src = resolveLoaderImage(value);
-            this.notifyTabs({ image: value });
+        select.onchange = async () => {
+            this.selected = select.value;
+            this.updatePreview(this.selected);
+            await this.saveSettings({ [this.imageSetting]: this.selected });
+            if (this.active) this.notifyTab(this.getNotificationMessage({ checked: true }));
         };
-
-        this.notifyTabs({ image: enabled ? selected : false });
     }
 
-    getNotificationMessage(_data) {
-        return {};
+    // Default: the Odoo spinner, nothing to preview
+    updatePreview(image) {
+        const preview = this.container.querySelector('[data-role="preview"]');
+        preview.hidden = !image;
+        if (image) preview.src = resolveLoaderImage(image);
     }
 
-    async getImagesConfiguration() {
-        return { images: [], selected: '' };
+    // false removes the loader: the default is Odoo's own spinner
+    getNotificationMessage(data) {
+        return { [this.imageSetting]: (data.checked && this.selected) || false };
     }
-
-    async saveSelectedImage(_value) {}
 }
