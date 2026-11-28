@@ -4,7 +4,7 @@ import { hasUnknownKey } from '../utils/util';
 // Private
 const LOCAL_DEFAULT = {
     journey_announces: {},
-    offs: [],
+    offs: [], // Sites where Joorney is disabled: the key predates the wording, renaming it would need a migration
     ambient_dates: {},
     joorney_sunrise: 0,
     joorney_sunset: 23 * 60 + 59,
@@ -53,14 +53,18 @@ export async function reopenAnnounce(announce) {
     await StorageLocal.set({ journey_announces });
 }
 
-// Off website
-export async function getWebsiteOff() {
+// Sites where Joorney is disabled from the toolbar popup: no feature runs there (src/utils/authorize.js)
+export async function getDisabledWebsites() {
     const { offs } = await StorageLocal.get({ offs: LOCAL_DEFAULT.offs });
     return new Set(offs);
 }
 
-export async function updateWebsiteOff(origin, disabled) {
-    const offs = await getWebsiteOff();
+export async function isWebsiteDisabled(origin) {
+    return (await getDisabledWebsites()).has(origin);
+}
+
+export async function setWebsiteDisabled(origin, disabled) {
+    const offs = await getDisabledWebsites();
     if (disabled) offs.add(origin);
     else offs.delete(origin);
     await StorageLocal.set({ offs: Array.from(offs) });

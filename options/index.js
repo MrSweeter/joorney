@@ -9,7 +9,6 @@ import { PAGES } from './menu.js';
 import { PAGE as IMPORT_EXPORT_PAGE } from './pages/importexport/index.js';
 import { getNextTourID } from './src/checklist/index.js';
 import ChecklistManager from './src/checklist/manager.js';
-import { load as loadShortcut } from './src/keyboard_shortcut.js';
 import { loadManifest, loadMenus, navigate, parseRoute, setMenuBadge } from './src/layout.js';
 import { UI_EVENTS } from './src/ui/events.js';
 
@@ -25,7 +24,6 @@ async function onDOMContentLoaded() {
     await refreshSupportedVersions();
 
     await loadOptionMenus(announce?.closed ? undefined : announce);
-    loadShortcut();
     showMigrationBadge();
 
     const searchParams = new URLSearchParams(window.location.search);

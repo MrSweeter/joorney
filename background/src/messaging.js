@@ -5,8 +5,8 @@ import {
 } from '../../configuration.js';
 import { createContextMenu, updateContext } from '../../src/contextmenu/manager.js';
 import { MESSAGE_ACTION } from '../../src/utils/messaging.js';
-import { updateTabState } from './keyboard_shortcut.js';
 import { openRunbotAdminDebug } from './runbot.js';
+import { updateToolbarState } from './toolbar_state.js';
 
 export async function handleMessage(message, sender) {
     if (message.action) return handleAction(message, sender);
@@ -25,10 +25,6 @@ async function handleAction(message, sender) {
             callback = openRunbotAdminDebug(message, sender);
             break;
         }
-        case MESSAGE_ACTION.TO_BACKGROUND.UPDATE_EXT_STATUS: {
-            callback = updateTabState(message, sender);
-            break;
-        }
         case MESSAGE_ACTION.TO_BACKGROUND.RECREATE_MENU: {
             callback = createContextMenu('messaging');
             break;
@@ -40,6 +36,7 @@ async function handleAction(message, sender) {
         }
         case MESSAGE_ACTION.TO_BACKGROUND.TAB_LOADED: {
             if (!sender.tab) return undefined;
+            updateToolbarState(sender.tab, message.versionInfo);
             callback = updateContext(sender.tab.id);
             break;
         }

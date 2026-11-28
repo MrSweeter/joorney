@@ -7,13 +7,23 @@
         "message": "Improve your Odoo Journey! Makes your Odoo experience more enjoyable and productive by adding some cool features and effects.",
         "description": "Extension description (manifest, Chrome Web Store). Max 132 characters"
     },
-    "command_enableDisable": {
-        "message": "Turn extension features on or off on the current origin",
-        "description": "Keyboard shortcut description (chrome://extensions/shortcuts)"
+    "badge_disabledTitle": {
+        "message": "Joorney is disabled on this site: nothing runs here. Open the popup to enable it again",
+        "description": "Toolbar icon tooltip, with the red icon, on a site where Joorney is disabled from the popup power button"
     },
-    "badge_off": {
-        "message": "OFF",
-        "description": "Toolbar badge when Joorney is disabled on the current origin. Max ~4 characters"
+    "badge_versionOffTitle": {
+        "message": "Odoo $version$ is turned off in Joorney (Versions): the Odoo features do not run on this page",
+        "description": "Toolbar icon tooltip, with an orange '!' badge, on a page whose Odoo version is turned off on the options Versions page",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "20.0"
+            }
+        }
+    },
+    "badge_noSessionTitle": {
+        "message": "Joorney: no Odoo session on this page, nothing runs here",
+        "description": "Toolbar icon tooltip, with the grey icon, on a page without an Odoo session (not logged in, not Odoo) and no Runbot feature"
     },
     "language_title": {
         "message": "Language",
@@ -80,6 +90,30 @@
     "popup_options": {
         "message": "Options",
         "description": "Popup: tooltip of the button opening the options page"
+    },
+    "popup_disable": {
+        "message": "Disable Joorney on this site (reloads the page)",
+        "description": "Popup: tooltip of the header power button, turns every feature off on the current origin and reloads the tab"
+    },
+    "popup_disabled": {
+        "message": "Disabled on this site",
+        "description": "Popup: header line under the host name when Joorney is disabled on the site"
+    },
+    "popup_disabledHelp": {
+        "message": "Joorney is disabled on this site: no feature runs here. Other sites are not affected.",
+        "description": "Popup: text shown instead of the feature list on a disabled site"
+    },
+    "popup_enable": {
+        "message": "Enable again",
+        "description": "Popup: button enabling Joorney again on a disabled site, then reloading the tab"
+    },
+    "popup_enableReload": {
+        "message": "Enabling it again reloads the page.",
+        "description": "Popup: note under the \"Enable again\" button of a disabled site"
+    },
+    "popup_manageDisabled": {
+        "message": "See every site where Joorney is disabled",
+        "description": "Popup: link to the options Settings page, which lists the sites where Joorney is disabled"
     },
     "popup_invalidWebsite": {
         "message": "Not available on this page",
@@ -1051,10 +1085,6 @@
         "message": "Joorney logo",
         "description": "Alt text of the logo in the options header"
     },
-    "options_keyboardShortcuts": {
-        "message": "Keyboard shortcuts",
-        "description": "Options header: tooltip of the keyboard shortcuts button"
-    },
     "options_importSettings": {
         "message": "Import settings",
         "description": "Options header: tooltip of the import button"
@@ -1596,7 +1626,7 @@
         "description": "Onboarding checklist: tour title (Settings page)"
     },
     "checklist_tourSettings_description": {
-        "message": "Language, Home page and keyboard shortcut.",
+        "message": "Language, Home page and sites where Joorney is disabled.",
         "description": "Onboarding checklist: tour subtitle (Settings page)"
     },
     "checklist_home_addHost_name": {
@@ -1701,14 +1731,6 @@
     },
     "checklist_settings_hostsView_description": {
         "message": "Switch the Home page between the simple view and the advanced matrix.",
-        "description": "Onboarding checklist: step description"
-    },
-    "checklist_settings_shortcut_name": {
-        "message": "Keyboard shortcut",
-        "description": "Onboarding checklist: step title"
-    },
-    "checklist_settings_shortcut_description": {
-        "message": "See the shortcut that turns Joorney on or off, and copy the address where to change it.",
         "description": "Onboarding checklist: step description"
     },
     "checklist_tourVersions_title": {
@@ -2455,8 +2477,8 @@
         "message": "Cache",
         "description": "Options developers page: storage section"
     },
-    "optionsTechnical_storage_off": {
-        "message": "Extension off",
+    "optionsTechnical_storage_disabledSites": {
+        "message": "Sites where Joorney is disabled",
         "description": "Options developers page: storage section (temporary disable)"
     },
     "optionsTechnical_storage_announcement": {
@@ -3069,29 +3091,27 @@
         "message": "Home page",
         "description": "Options Settings page: title of the Home page card"
     },
-    "optionsSettings_shortcut_title": {
-        "message": "Keyboard shortcut",
-        "description": "Options Settings page: title of the shortcut card"
+    "optionsSettings_disabledSites_title": {
+        "message": "Sites where Joorney is disabled",
+        "description": "Options Settings page: title of the card listing the sites where Joorney is disabled from the popup"
     },
-    "optionsSettings_shortcut_help": {
-        "message": "Shortcut to turn Joorney on or off temporarily (the extension's only declared command).",
-        "description": "Options Settings page: help of the shortcut card"
+    "optionsSettings_disabledSites_help": {
+        "message": "Disabled from the power button of the toolbar popup: no feature runs there. Remove a site to enable Joorney again, its open tabs follow at their next page load.",
+        "description": "Options Settings page: help of the disabled sites card"
     },
-    "optionsSettings_shortcut_unset": {
-        "message": "No shortcut set",
-        "description": "Options Settings page: the command has no key assigned"
+    "optionsSettings_disabledSites_empty": {
+        "message": "Joorney is not disabled on any site.",
+        "description": "Options Settings page: disabled sites card, empty list"
     },
-    "optionsSettings_shortcut_change": {
-        "message": "Change it there",
-        "description": "Options Settings page: next to the chrome://extensions/shortcuts address"
-    },
-    "optionsSettings_shortcut_copy": {
-        "message": "Copy chrome://extensions/shortcuts",
-        "description": "Options Settings page: copy button of the shortcuts address"
-    },
-    "optionsSettings_shortcut_copied": {
-        "message": "Copied. Paste it in the address bar.",
-        "description": "Options Settings page: after copying the shortcuts address"
+    "optionsSettings_disabledSites_remove": {
+        "message": "Enable Joorney again for $origin$",
+        "description": "Options Settings page: tooltip of the remove button of a disabled site",
+        "placeholders": {
+            "origin": {
+                "content": "$1",
+                "example": "https://mydb.odoo.com"
+            }
+        }
     },
     "optionsAmbient_play": {
         "message": "Play $name$",
